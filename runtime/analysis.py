@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import math
 from collections import Counter
-from typing import Any, Dict, Iterable, List, Mapping, Sequence
-
+from collections.abc import Iterable, Mapping, Sequence
+from typing import Any
 
 FUNNEL_FIELDS = ("active", "quoted", "applied", "paid", "issued")
 RANDOMIZED_ASSIGNMENTS = {"randomized", "stratified_randomized", "cluster_randomized"}
@@ -27,12 +27,12 @@ def _rate(numerator: float, denominator: float) -> float:
     return round(numerator / denominator, 6) if denominator else 0.0
 
 
-def sanitize_rows(rows: Iterable[Mapping[str, Any]]) -> List[Dict[str, Any]]:
+def sanitize_rows(rows: Iterable[Mapping[str, Any]]) -> list[dict[str, Any]]:
     """Remove evaluator-only fields before data reaches an Agent or UI."""
     return [{key: value for key, value in row.items() if not key.startswith("_")} for row in rows]
 
 
-def aggregate_funnel(rows: Sequence[Mapping[str, Any]]) -> Dict[str, Any]:
+def aggregate_funnel(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     active = sum(int(row.get("active", 0) or 0) for row in rows)
     quoted = sum(int(row.get("quoted", 0) or 0) for row in rows)
     applied = sum(int(row.get("applied", 0) or 0) for row in rows)
@@ -55,7 +55,7 @@ def aggregate_funnel(rows: Sequence[Mapping[str, Any]]) -> Dict[str, Any]:
     }
 
 
-def _distribution(rows: Sequence[Mapping[str, Any]], field: str) -> Dict[str, int]:
+def _distribution(rows: Sequence[Mapping[str, Any]], field: str) -> dict[str, int]:
     counts = Counter(str(row.get(field, "<missing>")) for row in rows)
     return dict(sorted(counts.items()))
 
@@ -64,11 +64,11 @@ def _group_outcomes(
     rows: Sequence[Mapping[str, Any]],
     treatment_column: str,
     outcomes: Sequence[str],
-) -> Dict[str, Dict[str, float]]:
-    result: Dict[str, Dict[str, float]] = {}
+) -> dict[str, dict[str, float]]:
+    result: dict[str, dict[str, float]] = {}
     for arm in (0, 1):
         group = [row for row in rows if row.get(treatment_column) == arm]
-        values: Dict[str, float] = {"count": float(len(group))}
+        values: dict[str, float] = {"count": float(len(group))}
         for outcome in outcomes:
             values[outcome] = round(
                 sum(float(row.get(outcome, 0.0) or 0.0) for row in group) / len(group), 6
@@ -81,7 +81,7 @@ def extract_features(
     rows: Sequence[Mapping[str, Any]],
     metric_contract: Mapping[str, Any],
     experiment_metadata: Mapping[str, Any],
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Build auditable business, quality and experiment-design features."""
     identity = str(metric_contract.get("identity", "user_id"))
     treatment_column = str(experiment_metadata.get("treatment_column") or metric_contract.get("treatment") or "treatment")
@@ -130,12 +130,12 @@ def extract_features(
     }
 
 
-def _metric_contract_missing(metric_contract: Mapping[str, Any]) -> List[str]:
+def _metric_contract_missing(metric_contract: Mapping[str, Any]) -> list[str]:
     required = ("metric_id", "version", "identity", "funnel", "outcomes", "treatment", "window", "owner")
     return sorted(field for field in required if not metric_contract.get(field))
 
 
-def _power_screen(features: Mapping[str, Any], experiment_metadata: Mapping[str, Any]) -> Dict[str, Any]:
+def _power_screen(features: Mapping[str, Any], experiment_metadata: Mapping[str, Any]) -> dict[str, Any]:
     treatment = features["treatment"]
     groups = treatment["group_outcomes"]
     control = groups.get("0", {})
@@ -148,7 +148,7 @@ def _power_screen(features: Mapping[str, Any], experiment_metadata: Mapping[str,
     z_alpha = 1.96 if alpha == 0.05 else 1.96
     z_power = 0.84 if target_power == 0.80 else 0.84
     variance = max(baseline_rate * (1.0 - baseline_rate), 0.01)
-    required_per_arm = int(math.ceil(2.0 * (z_alpha + z_power) ** 2 * variance / max(mde ** 2, 1e-9)))
+    required_per_arm = math.ceil(2.0 * (z_alpha + z_power) ** 2 * variance / max(mde ** 2, 1e-9))
     actual_per_arm = min(int(control.get("count", 0)), int(treatment_group.get("count", 0)))
     return {
         "method": "two-arm binary normal approximation",
@@ -166,7 +166,7 @@ def causal_readiness(
     features: Mapping[str, Any],
     metric_contract: Mapping[str, Any],
     experiment_metadata: Mapping[str, Any],
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Grade evidence from observable contracts and metadata, never a case label."""
     contract_missing = _metric_contract_missing(metric_contract)
     quality = features["data_quality"]
@@ -240,11 +240,11 @@ def estimate_itt(
     rows: Sequence[Mapping[str, Any]],
     treatment_column: str = "treatment",
     outcomes: Sequence[str] = ("issued", "net_premium"),
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     groups = {arm: [row for row in rows if row.get(treatment_column) == arm] for arm in (0, 1)}
     if not groups[0] or not groups[1]:
         raise ValueError("ITT requires non-empty control and treatment groups")
-    output: Dict[str, Any] = {"estimator": "difference in means (ITT)", "confidence": 0.95}
+    output: dict[str, Any] = {"estimator": "difference in means (ITT)", "confidence": 0.95}
     for outcome in outcomes:
         means = {arm: sum(float(row.get(outcome, 0.0) or 0.0) for row in group) / len(group) for arm, group in groups.items()}
         variances = {
@@ -264,7 +264,7 @@ def estimate_itt(
     return output
 
 
-def build_claim(readiness: Mapping[str, Any]) -> Dict[str, Any]:
+def build_claim(readiness: Mapping[str, Any]) -> dict[str, Any]:
     if readiness["outcome"] == "CAUSAL_READY":
         return {
             "claim_id": "claim-001",
@@ -296,14 +296,14 @@ def build_claim(readiness: Mapping[str, Any]) -> Dict[str, Any]:
     }
 
 
-def evaluate_public_dataset(bundle: Mapping[str, Any]) -> Dict[str, Any]:
+def evaluate_public_dataset(bundle: Mapping[str, Any]) -> dict[str, Any]:
     """Public worker entry point. Hidden seeds and potential outcomes are not accepted."""
     rows = sanitize_rows(bundle.get("rows", []))
     metric_contract = dict(bundle.get("metric_contract", {}))
     experiment_metadata = dict(bundle.get("experiment_metadata", {}))
     features = extract_features(rows, metric_contract, experiment_metadata)
     readiness = causal_readiness(features, metric_contract, experiment_metadata)
-    result: Dict[str, Any] = {
+    result: dict[str, Any] = {
         "benchmark_id": bundle.get("benchmark_id"),
         "features": features,
         "causal_readiness": readiness,

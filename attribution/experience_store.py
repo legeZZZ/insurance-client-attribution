@@ -19,8 +19,9 @@ from __future__ import annotations
 
 import json
 import math
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Any, Dict, Mapping, Optional, Tuple
+from typing import Any
 
 DECAY = 0.5            # per-period decay of accumulated pseudo-counts
 CAP = 4000.0           # max pseudo-impressions a stored prior may carry
@@ -49,7 +50,7 @@ class FactorExperienceStore:
             }
 
     # ---- cross-period prior loading -------------------------------------
-    def prior(self, arm_key: str, max_total: Optional[float] = None) -> Optional[Tuple[float, float]]:
+    def prior(self, arm_key: str, max_total: float | None = None) -> tuple[float, float] | None:
         """Informative Beta prior for an arm, or None on cold start.
 
         `max_total` caps pseudo-impressions relative to the fresh data size
@@ -70,7 +71,7 @@ class FactorExperienceStore:
         return alpha, beta
 
     # ---- posterior write-back -------------------------------------------
-    def write_back(self, arm_key: str, shape: Tuple[float, float]) -> None:
+    def write_back(self, arm_key: str, shape: tuple[float, float]) -> None:
         """Accumulate a posterior Beta shape into the arm record.
 
         Old experience decays so the store tracks drift instead of
@@ -87,7 +88,7 @@ class FactorExperienceStore:
         self.data["arms"][arm_key] = {"alpha": float(alpha), "beta": float(beta)}
 
     # ---- segment predictions for the feedback loop ----------------------
-    def predict_segment(self, segment_id: str) -> Optional[float]:
+    def predict_segment(self, segment_id: str) -> float | None:
         if self.data["periods"] == 0:
             return None
         value = self.data["predictions"].get(segment_id)
@@ -97,7 +98,7 @@ class FactorExperienceStore:
         self.data["predictions"].update({k: float(v) for k, v in effects.items()})
 
     # ---- PID-controlled adaptive shrinkage (v6.1, expert consultation) --
-    def adapt_shrinkage(self, errors: Mapping[str, float]) -> Dict[str, float]:
+    def adapt_shrinkage(self, errors: Mapping[str, float]) -> dict[str, float]:
         """One PID step on log(nu) from one-step-ahead prediction errors.
 
         e = mean absolute error of last period's segment predictions.
@@ -125,7 +126,7 @@ class FactorExperienceStore:
 
     # ---- mismatch alarm --------------------------------------------------
     def arm_deviation(self, arm_key: str, fresh_rate: float,
-                      max_total: Optional[float] = None) -> Optional[float]:
+                      max_total: float | None = None) -> float | None:
         """|prior mean - fresh MLE| for an arm; None on cold start."""
         pr = self.prior(arm_key, max_total=max_total)
         if pr is None:
@@ -133,7 +134,7 @@ class FactorExperienceStore:
         return abs(pr[0] / sum(pr) - fresh_rate)
 
     @staticmethod
-    def mismatch_alarm(deviation: Optional[float]) -> bool:
+    def mismatch_alarm(deviation: float | None) -> bool:
         """True when the experience prior no longer matches fresh evidence:
         the registered factor structure is likely wrong (onset of mismatch).
         The honest downstream behavior is to flag, widen intervals, or refuse
@@ -150,7 +151,7 @@ class FactorExperienceStore:
                              encoding="utf-8")
 
     # ---- introspection ---------------------------------------------------
-    def summary(self) -> Dict[str, Any]:
+    def summary(self) -> dict[str, Any]:
         return {
             "periods": self.data["periods"],
             "arms": {k: round(v["alpha"] + v["beta"], 1) for k, v in self.data["arms"].items()},

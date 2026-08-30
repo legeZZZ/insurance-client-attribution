@@ -4,17 +4,18 @@ from __future__ import annotations
 
 import argparse
 import json
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Any, Dict, Optional, Sequence
+from typing import Any
 
-from .configuration import load_config, resolve_output_dir, validate_evidence_pack
-from .cases import public_case, run_case
 from .benchmark import run_benchmark
+from .cases import public_case, run_case
+from .configuration import load_config, resolve_output_dir, validate_evidence_pack
 from .dataset_catalog import load_dataset_catalog
 from .real_data import fetch_bank_marketing_csv, run_real_data_case
 
 
-def _read_json(path: Optional[str]) -> Optional[Dict[str, Any]]:
+def _read_json(path: str | None) -> dict[str, Any] | None:
     if not path:
         return None
     return json.loads(Path(path).read_text(encoding="utf-8"))
@@ -33,11 +34,11 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(argv: Optional[Sequence[str]] = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     config = load_config(args.config)
     output_dir = resolve_output_dir(config, args.output)
-    result: Dict[str, Any] = {}
+    result: dict[str, Any] = {}
 
     result["cases"] = {}
     for case in config["runtime"].get("cases", ["A", "B", "C"]):

@@ -9,7 +9,8 @@ from __future__ import annotations
 
 import math
 from collections import Counter
-from typing import Any, Dict, List, Mapping, Sequence
+from collections.abc import Mapping, Sequence
+from typing import Any
 
 from .bayes import moderation_scan
 from .spec import render_diff, runtime_diff, spec_diff
@@ -42,8 +43,8 @@ def mine_factors(
     discovery: bool = True,
     practical_threshold: float = 0.005,
     seed: int = 20260809,
-) -> Dict[str, Any]:
-    candidates: List[Dict[str, Any]] = []
+) -> dict[str, Any]:
+    candidates: list[dict[str, Any]] = []
 
     # 1) Change candidates from the three diffs.
     if spec_old is not None and spec_new is not None:

@@ -21,11 +21,11 @@ from __future__ import annotations
 
 import json
 import math
+from collections.abc import Mapping, Sequence
 from pathlib import Path
-from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
+from typing import Any
 
 import numpy as np
-
 
 # ---------------------------------------------------------------------------
 # Registries
@@ -56,7 +56,7 @@ def external_event_entry(event_id, start_day, end_day, kind, description):
 # Simulator (ground truth buried; engine only sees aggregates + registries)
 # ---------------------------------------------------------------------------
 
-def simulate_panel(seed: int = 20260809, n_days: int = 60) -> Dict[str, Any]:
+def simulate_panel(seed: int = 20260809, n_days: int = 60) -> dict[str, Any]:
     """Daily premium for a persistent control group and the treated population.
 
     True effects (per-day, additive on premium):
@@ -110,7 +110,7 @@ def simulate_panel(seed: int = 20260809, n_days: int = 60) -> Dict[str, Any]:
 # Attribution engine
 # ---------------------------------------------------------------------------
 
-def _shrink_total(experiments: Mapping[str, Mapping[str, float]]) -> Dict[str, float]:
+def _shrink_total(experiments: Mapping[str, Mapping[str, float]]) -> dict[str, float]:
     """Hierarchical (precision-weighted) aggregation of experiment ATTs."""
     if not experiments:
         return {"naive_total": 0.0, "shrunk_total": 0.0, "grand_mean": 0.0,
@@ -142,7 +142,7 @@ def attribute_baseline(
     experiments: Mapping[str, Mapping[str, float]],
     detection_threshold: float = 18.0,
     min_run: int = 3,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     c = np.asarray(control)
     t = np.asarray(treated)
     gap = t - c  # treated vs persistent baseline: no model assumptions
@@ -150,9 +150,9 @@ def attribute_baseline(
     # 1) Explained by registered changes with experiments.
     agg = _shrink_total(experiments)
     explained = np.zeros(len(days))
-    per_change_explained: Dict[str, np.ndarray] = {}
+    per_change_explained: dict[str, np.ndarray] = {}
     shrunk_map = dict(zip(experiments.keys(), agg["per_experiment_shrunk"]))
-    exp_by_change = {ch["change_id"]: ch.get("experiment_id") for ch in change_registry}
+    {ch["change_id"]: ch.get("experiment_id") for ch in change_registry}
     for ch in change_registry:
         exp_id = ch.get("experiment_id")
         effect = np.zeros(len(days))
@@ -165,7 +165,7 @@ def attribute_baseline(
 
     # 2) External factors: identified from the CONTROL group's own deviation.
     #    Fit control trend on non-event days, then measure event-window gaps.
-    ext_assoc: List[Dict[str, Any]] = []
+    ext_assoc: list[dict[str, Any]] = []
     external_explained = np.zeros(len(days))
     event_days = set()
     for ev in external_registry:
@@ -202,7 +202,7 @@ def attribute_baseline(
     smoothed[-1] = residual_after_ext[-1]
     n = len(days)
     step_threshold = max(detection_threshold * 1.2, 1.0)
-    candidates: List[Tuple[int, float]] = []
+    candidates: list[tuple[int, float]] = []
     half = 5
     for i in range(half, n - half):
         if days[i] in event_days:
@@ -213,7 +213,7 @@ def attribute_baseline(
         if score <= -step_threshold:
             candidates.append((i, score))
     # Merge adjacent candidates, keep the strongest step day.
-    alerts: List[Dict[str, Any]] = []
+    alerts: list[dict[str, Any]] = []
     for i, score in candidates:
         if alerts and days[i] - alerts[-1]["onset_day"] <= half:
             if score < alerts[-1]["step_score"]:
@@ -262,7 +262,7 @@ def attribute_baseline(
 # Validation harness
 # ---------------------------------------------------------------------------
 
-def run_validation(seeds: Sequence[int] = (11, 23, 37, 51, 67)) -> Dict[str, Any]:
+def run_validation(seeds: Sequence[int] = (11, 23, 37, 51, 67)) -> dict[str, Any]:
     per_seed = []
     for seed in seeds:
         panel = simulate_panel(seed=seed)

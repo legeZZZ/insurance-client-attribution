@@ -10,27 +10,28 @@ v3 behavior: the hidden benchmark and all v3 metrics stay untouched.
 from __future__ import annotations
 
 import sys
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Any, Dict, Mapping
+from typing import Any
 
 # attribution lives at the workspace root, one level above this bundle.
 _WORKSPACE_ROOT = Path(__file__).resolve().parents[3]
 if str(_WORKSPACE_ROOT) not in sys.path:
     sys.path.insert(0, str(_WORKSPACE_ROOT))
 
-from attribution.bayes import bundle_compare, estimate_hte  # noqa: E402
-from attribution.baseline_attribution import (  # noqa: E402
+from attribution.baseline_attribution import (
     attribute_baseline,
     change_registry_entry,
     external_event_entry,
     run_validation,
     simulate_panel,
 )
+from attribution.bayes import bundle_compare, estimate_hte
 
-from .analysis import evaluate_public_dataset, sanitize_rows  # noqa: E402
+from .analysis import evaluate_public_dataset, sanitize_rows
 
 
-def run_line_b_monthly_review(runtime_dir=None) -> Dict[str, Any]:
+def run_line_b_monthly_review(runtime_dir=None) -> dict[str, Any]:
     """Line B monthly review: baseline attribution + registries -> evidence pack.
 
     Produces a v3-style evidence pack JSON so the console / Evidence drawer
@@ -86,7 +87,7 @@ def evaluate_with_bayes(
     practical_threshold: float = 0.005,
     hte_segment_field: str | None = None,
     seed: int = 20260809,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """v3 evaluation + Bayesian decision layer for CAUSAL_READY datasets.
 
     - If the v3 gate is not CAUSAL_READY, the Bayesian layer refuses to
@@ -111,7 +112,7 @@ def evaluate_with_bayes(
     treatment = _binary_group(rows, treatment_column, "issued", 1)
     bundle_result = bundle_compare(
         control, treatment, practical_threshold=practical_threshold, seed=seed)
-    bayes_layer: Dict[str, Any] = {
+    bayes_layer: dict[str, Any] = {
         "status": "ACTIVE",
         "bundle_decision": bundle_result,
         "decision_rule": {

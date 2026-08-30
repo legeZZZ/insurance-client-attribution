@@ -8,11 +8,12 @@ causal_roles). Diffs produce candidate factors with a full provenance chain.
 from __future__ import annotations
 
 import json
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Any, Dict, List, Mapping, Optional
+from typing import Any
 
 
-def load_spec(path: str | Path) -> Dict[str, Any]:
+def load_spec(path: str | Path) -> dict[str, Any]:
     with open(path, "r", encoding="utf-8") as handle:
         spec = json.load(handle)
     if "component" not in spec or "props" not in spec:
@@ -29,7 +30,7 @@ def _factor_entry(
     component: str,
     causal_role: str,
     experimentability: float,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     return {
         "factor_id": factor_id,
         "source_type": source_type,
@@ -43,16 +44,16 @@ def _factor_entry(
     }
 
 
-def spec_diff(old: Mapping[str, Any], new: Mapping[str, Any]) -> List[Dict[str, Any]]:
+def spec_diff(old: Mapping[str, Any], new: Mapping[str, Any]) -> list[dict[str, Any]]:
     """Diff two Growth UI Specs into SPEC_DIFF candidate factors."""
     component = str(new.get("component", {}).get("name", "component")).lower()
     causal_roles = new.get("causal_roles", {})
-    role_of: Dict[str, str] = {}
+    role_of: dict[str, str] = {}
     for role, factor_ids in causal_roles.items():
         for factor_id in factor_ids:
             role_of[str(factor_id)] = role
 
-    factors: List[Dict[str, Any]] = []
+    factors: list[dict[str, Any]] = []
     old_props = old.get("props", {})
     new_props = new.get("props", {})
     for name in sorted(set(old_props) | set(new_props)):
@@ -80,13 +81,13 @@ def render_diff(
     old_snapshot: Mapping[str, Any],
     new_snapshot: Mapping[str, Any],
     component: str = "carousel",
-) -> List[Dict[str, Any]]:
+) -> list[dict[str, Any]]:
     """Diff two render snapshots (geometry/density metrics) into RENDER_DIFF factors.
 
     Snapshots map metric name -> float, e.g. text_area_ratio, contrast_ratio.
     A metric becomes a candidate when it changes by >= 10% relative or 0.02 absolute.
     """
-    factors: List[Dict[str, Any]] = []
+    factors: list[dict[str, Any]] = []
     for name in sorted(set(old_snapshot) | set(new_snapshot)):
         before = old_snapshot.get(name)
         after = new_snapshot.get(name)
@@ -113,13 +114,13 @@ def runtime_diff(
     treatment_metrics: Mapping[str, Any],
     component: str = "carousel",
     relative_threshold: float = 0.05,
-) -> List[Dict[str, Any]]:
+) -> list[dict[str, Any]]:
     """Diff runtime quality metrics between arms into RUNTIME_DIFF factors.
 
     Runtime factors are mediators/runtime_quality candidates and must never be
     mixed with visual style factors in one claim.
     """
-    factors: List[Dict[str, Any]] = []
+    factors: list[dict[str, Any]] = []
     for name in sorted(set(control_metrics) | set(treatment_metrics)):
         before = control_metrics.get(name)
         after = treatment_metrics.get(name)

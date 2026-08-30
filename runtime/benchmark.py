@@ -9,13 +9,13 @@ import os
 import subprocess
 import sys
 from collections import Counter
-from typing import Any, Dict, Iterable, List, Mapping, Sequence, Tuple
+from collections.abc import Iterable, Mapping, Sequence
+from typing import Any
 
-from .cases import case_experiment_metadata, default_metric_contract, generate_dataset
 from .analysis import sanitize_rows
+from .cases import case_experiment_metadata, default_metric_contract, generate_dataset
 
-
-SCENARIOS: Tuple[Tuple[str, str, str], ...] = (
+SCENARIOS: tuple[tuple[str, str, str], ...] = (
     ("observational_confounded", "A", "DESCRIPTIVE_ONLY"),
     ("missing_experiment_evidence", "B", "DATA_INSUFFICIENT"),
     ("randomized_experiment", "C", "CAUSAL_READY"),
@@ -26,9 +26,9 @@ def _opaque_id(family: str, seed: int) -> str:
     return "hb-" + hashlib.sha256((family + ":" + str(seed) + ":attribution-v1").encode("utf-8")).hexdigest()[:16]
 
 
-def _build_hidden_cases(seeds: Iterable[int], n: int) -> Tuple[List[Dict[str, Any]], Dict[str, Dict[str, Any]]]:
-    public_datasets: List[Dict[str, Any]] = []
-    oracle: Dict[str, Dict[str, Any]] = {}
+def _build_hidden_cases(seeds: Iterable[int], n: int) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
+    public_datasets: list[dict[str, Any]] = []
+    oracle: dict[str, dict[str, Any]] = {}
     for seed in seeds:
         for family, source_case, expected_outcome in SCENARIOS:
             rows, truth = generate_dataset(source_case, seed=seed, n=n)
@@ -47,7 +47,7 @@ def _build_hidden_cases(seeds: Iterable[int], n: int) -> Tuple[List[Dict[str, An
     return public_datasets, oracle
 
 
-def _run_isolated_worker(public_datasets: Sequence[Mapping[str, Any]]) -> List[Dict[str, Any]]:
+def _run_isolated_worker(public_datasets: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
     environment = dict(os.environ)
     completed = subprocess.run(
         [sys.executable, "-m", "runtime.worker"],
@@ -71,8 +71,8 @@ def _effect_metrics(
     outputs: Sequence[Mapping[str, Any]],
     oracle: Mapping[str, Mapping[str, Any]],
     outcome: str,
-) -> Dict[str, Any]:
-    errors: List[float] = []
+) -> dict[str, Any]:
+    errors: list[float] = []
     covered = 0
     for output in outputs:
         hidden = oracle[str(output["benchmark_id"])]
@@ -93,16 +93,16 @@ def _effect_metrics(
     }
 
 
-def run_benchmark(seeds: Sequence[int] = (101, 211, 307, 401, 503, 601, 701, 809), n: int = 1200) -> Dict[str, Any]:
+def run_benchmark(seeds: Sequence[int] = (101, 211, 307, 401, 503, 601, 701, 809), n: int = 1200) -> dict[str, Any]:
     """Generate after code freeze, evaluate in a subprocess, and score with parent-only truth."""
     public_datasets, oracle = _build_hidden_cases(seeds, n)
     outputs = _run_isolated_worker(public_datasets)
-    predictions: List[Tuple[str, str, str]] = []
+    predictions: list[tuple[str, str, str]] = []
     false_causal = 0
     noncausal_count = 0
     refusals_expected = 0
     refusals_correct = 0
-    failures: List[Dict[str, str]] = []
+    failures: list[dict[str, str]] = []
     for output in outputs:
         benchmark_id = str(output["benchmark_id"])
         hidden = oracle[benchmark_id]

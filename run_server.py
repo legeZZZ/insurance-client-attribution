@@ -14,7 +14,11 @@ from urllib.parse import parse_qs, urlparse
 PROJECT = Path(__file__).resolve().parent
 sys.path.insert(0, str(PROJECT))
 
-from runtime.configuration import load_config
+from attribution.agent_chat import handle_message, reset_session
+from attribution.scenario_reports import SCENARIOS, render_markdown, run_scenario
+from runtime.analysis import sanitize_rows
+from runtime.bayes_bridge import evaluate_with_bayes, run_line_b_monthly_review
+from runtime.benchmark import run_benchmark
 from runtime.cases import (
     case_experiment_metadata,
     default_metric_contract,
@@ -22,15 +26,9 @@ from runtime.cases import (
     public_case,
     run_case,
 )
-from runtime.analysis import sanitize_rows
-from runtime.benchmark import run_benchmark
+from runtime.configuration import load_config
 from runtime.dataset_catalog import load_dataset_catalog
 from runtime.real_data import run_real_data_case
-from runtime.bayes_bridge import evaluate_with_bayes, run_line_b_monthly_review
-
-from attribution.agent_chat import handle_message, reset_session
-from attribution.scenario_reports import SCENARIOS, render_markdown, run_scenario
-
 
 RUNTIME = PROJECT / "runtime_data"
 STATIC = PROJECT / "web" / "static"

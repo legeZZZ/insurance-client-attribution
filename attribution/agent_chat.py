@@ -20,7 +20,7 @@ from __future__ import annotations
 
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from .scenario_reports import SCENARIOS, run_scenario
 
@@ -43,7 +43,7 @@ _SCENARIO_ALIASES.update({str(i + 1): s["id"] for i, s in enumerate(SCENARIOS)})
 
 # In-memory session store: session_id -> state dict. Process-local by design;
 # conversations hold no user data, so nothing persists across restarts (8.4-3).
-_SESSIONS: Dict[str, Dict[str, Any]] = {}
+_SESSIONS: dict[str, dict[str, Any]] = {}
 
 
 def _catalog_text() -> str:
@@ -53,7 +53,7 @@ def _catalog_text() -> str:
     return "\n".join(lines)
 
 
-def _classify_intent(text: str) -> Optional[str]:
+def _classify_intent(text: str) -> str | None:
     """Rule-based intent classification. Swap for an LLM parser if desired;
     keep the rest of the state machine unchanged."""
     lowered = text.strip().lower()
@@ -83,10 +83,10 @@ def _plan_text(scenario_id: str) -> str:
 
 
 def handle_message(session_id: str, message: str,
-                   runtime_dir: Path | None = None) -> Dict[str, Any]:
+                   runtime_dir: Path | None = None) -> dict[str, Any]:
     """One chat turn. Returns {reply, stage, scenario?, report?, trace}."""
     state = _SESSIONS.setdefault(session_id, {"stage": "intent", "scenario": None})
-    trace: List[str] = [f"stage_in={state['stage']}"]
+    trace: list[str] = [f"stage_in={state['stage']}"]
     text = (message or "").strip()
 
     if state["stage"] == "confirm":

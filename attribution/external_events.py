@@ -18,9 +18,10 @@ Output:    outputs/external_event_mapping.json
 from __future__ import annotations
 
 import json
+from collections.abc import Mapping, Sequence
 from datetime import date
 from pathlib import Path
-from typing import Any, Dict, List, Mapping, Optional, Sequence
+from typing import Any
 
 import numpy as np
 
@@ -31,7 +32,7 @@ DAY0 = date(2024, 6, 1)
 # Curated sample: public events possibly relevant to insurance/mutual-aid
 # style CTR & premium panels. Dates from public announcements; kept as
 # demonstration data, not a production feed.
-PUBLIC_EVENT_TIMELINE: List[Dict[str, Any]] = [
+PUBLIC_EVENT_TIMELINE: list[dict[str, Any]] = [
     {"event_id": "promo_618_2024", "date": "2024-06-18",
      "kind": "seasonality", "desc": "618 电商大促分流用户注意力（公开日历事件）"},
     {"event_id": "lpr_2024_07", "date": "2024-07-22",
@@ -50,9 +51,9 @@ def _day_index(iso: str) -> int:
 
 def map_anomalies_to_events(
     alerts: Sequence[Mapping[str, Any]],
-    timeline: Optional[Sequence[Mapping[str, Any]]] = None,
+    timeline: Sequence[Mapping[str, Any]] | None = None,
     max_lag_days: int = 7,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Greedy lag-constrained matching between detected step days and events."""
     timeline = timeline if timeline is not None else PUBLIC_EVENT_TIMELINE
     events = [{**ev, "day": _day_index(ev["date"])} for ev in timeline]
@@ -95,7 +96,7 @@ def map_anomalies_to_events(
     }
 
 
-def _simulate_panel(seed: int = 20260811) -> Dict[str, Any]:
+def _simulate_panel(seed: int = 20260811) -> dict[str, Any]:
     """90-day panel: two public events lift/press the metric, plus one
     unregistered product change. Ground truth noted for verification."""
     rng = np.random.default_rng(seed)

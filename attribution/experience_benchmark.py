@@ -16,7 +16,7 @@ import json
 import math
 import tempfile
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any
 
 from .bayes import bundle_compare, estimate_hte
 from .experience_store import FactorExperienceStore
@@ -31,7 +31,7 @@ PRIOR_PSEUDO_N = 1000.0  # fixed prior strength: dominates sparse periods,
                         # negligible (~2%) once fresh data is rich
 
 
-def _segments_of(rows) -> List[Dict[str, Any]]:
+def _segments_of(rows) -> list[dict[str, Any]]:
     segments = []
     for value in (0, 1):
         subset = [r for r in rows if r["device_low_end"] == value]
@@ -56,7 +56,7 @@ def _segments_of(rows) -> List[Dict[str, Any]]:
 
 def _run_period(seed: int, mismatched: bool, traffic: float,
                 store: FactorExperienceStore | None,
-                out: Dict[str, Any]) -> Dict[str, Any]:
+                out: dict[str, Any]) -> dict[str, Any]:
     rows_all, truth = generate_bundle_stage(seed=seed, mismatched=mismatched)
     rows = sanitize(rows_all)
     estimation_rows = rows[len(rows) // 2:]
@@ -128,7 +128,7 @@ def _run_period(seed: int, mismatched: bool, traffic: float,
     return record
 
 
-def run_experience_ablation(store_path=None) -> Dict[str, Any]:
+def run_experience_ablation(store_path=None) -> dict[str, Any]:
     if store_path is None:
         store_path = Path(tempfile.gettempdir()) / "experience_store_ablation.json"
         Path(store_path).unlink(missing_ok=True)

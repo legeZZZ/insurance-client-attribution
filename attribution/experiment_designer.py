@@ -10,14 +10,15 @@ from __future__ import annotations
 
 import itertools
 import math
-from typing import Any, Dict, List, Mapping, Sequence
+from collections.abc import Mapping, Sequence
+from typing import Any
 
 
-def _full_factorial(k: int) -> List[List[int]]:
+def _full_factorial(k: int) -> list[list[int]]:
     return [list(bits) for bits in itertools.product((0, 1), repeat=k)]
 
 
-def _fractional_resolution_iv(k: int) -> List[List[int]]:
+def _fractional_resolution_iv(k: int) -> list[list[int]]:
     """2^(K-1) design: last factor = product (XOR) of the first K-1."""
     base = _full_factorial(k - 1)
     design = []
@@ -37,7 +38,7 @@ def design_experiment(
     engineering_cost: Mapping[str, float] | None = None,
     uncertainty: Mapping[str, float] | None = None,
     business_loss_weight: float = 1.0,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     if not factor_ids:
         raise ValueError("factor_ids must be non-empty")
     k = len(factor_ids)
@@ -97,13 +98,13 @@ def estimate_component_effects(
     factor_ids: Sequence[str],
     outcome_column: str = "clicked",
     practical_threshold: float = 0.005,
-) -> List[Dict[str, Any]]:
+) -> list[dict[str, Any]]:
     """Estimate main effects from a (fractional) factorial experiment.
 
     Effect of factor j = CTR(arms with bit 1) - CTR(arms with bit 0),
     which stays unbiased for main effects in a Resolution-IV design.
     """
-    results: List[Dict[str, Any]] = []
+    results: list[dict[str, Any]] = []
     for j, factor in enumerate(factor_ids):
         clicks = {0: 0, 1: 0}
         impressions = {0: 0, 1: 0}

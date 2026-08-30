@@ -4,10 +4,10 @@ from __future__ import annotations
 
 import json
 from importlib import resources
-from typing import Any, Dict
+from typing import Any
 
 
-def load_dataset_catalog() -> Dict[str, Any]:
+def load_dataset_catalog() -> dict[str, Any]:
     path = resources.files("runtime").joinpath("datasets/catalog.json")
     catalog = json.loads(path.read_text(encoding="utf-8"))
     required = {"dataset_id", "name", "official_url", "license", "license_status", "recommended_use", "limitations"}

@@ -17,10 +17,9 @@ regimes for the dual backtest required by the plan.
 from __future__ import annotations
 
 import math
-from typing import Any, Dict, List, Tuple
+from typing import Any
 
 import numpy as np
-
 
 TRUE_MODERATORS = ("device_low_end",)          # context factor with real moderation
 TRUE_COMPONENT_EFFECTS = {                     # per-component effects (used in factorial stage)
@@ -43,10 +42,10 @@ def generate_bundle_stage(
     bundle_logit_effect: float = -0.30,
     moderator_logit_effect: float = -1.20,
     mismatched: bool = False,
-) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Bundle A/B stage: all spec factors move together with T (confounded)."""
     rng = np.random.default_rng(seed)
-    rows: List[Dict[str, Any]] = []
+    rows: list[dict[str, Any]] = []
     clicks = {0: 0, 1: 0}
     impressions = {0: 0, 1: 0}
     for i in range(n):
@@ -106,12 +105,12 @@ def generate_bundle_stage(
 
 def generate_factorial_stage(
     seed: int,
-    arms: List[Dict[str, Any]],
+    arms: list[dict[str, Any]],
     base_ctr: float = BASE_CTR,
-) -> Dict[str, List[Dict[str, Any]]]:
+) -> dict[str, list[dict[str, Any]]]:
     """Execute a factorial design: each arm fixes its component levels."""
     rng = np.random.default_rng(seed + 7777)
-    arm_rows: Dict[str, List[Dict[str, Any]]] = {}
+    arm_rows: dict[str, list[dict[str, Any]]] = {}
     for arm in arms:
         code = arm["design_code"]
         rows = []
@@ -134,5 +133,5 @@ def generate_factorial_stage(
     return arm_rows
 
 
-def sanitize(rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+def sanitize(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return [{k: v for k, v in row.items() if not k.startswith("_")} for row in rows]

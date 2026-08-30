@@ -9,25 +9,20 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
-import shutil
 import sqlite3
-import subprocess
-import sys
-import time
 import uuid
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Sequence, Set
+from typing import Any
 
 
 def utc_now() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 def new_id(prefix: str) -> str:
-    return "%s_%s" % (prefix, uuid.uuid4().hex[:12])
+    return f"{prefix}_{uuid.uuid4().hex[:12]}"
 
 
 def canonical_json(value: Any) -> str:
@@ -42,10 +37,10 @@ def digest(value: Any) -> str:
 class AgentIdentity:
     agent_id: str
     role: str
-    allowed_states: List[str]
-    capabilities: List[str]
-    can_write: List[str]
-    can_call: List[str]
+    allowed_states: list[str]
+    capabilities: list[str]
+    can_write: list[str]
+    can_call: list[str]
 
 
 @dataclass
@@ -55,7 +50,7 @@ class Event:
     trace_id: str
     event_type: str
     actor: str
-    payload: Dict[str, Any]
+    payload: dict[str, Any]
     state_version: int
     created_at: str = field(default_factory=utc_now)
 
@@ -68,8 +63,8 @@ class Artifact:
     artifact_type: str
     schema_version: str
     producer: str
-    payload: Dict[str, Any]
-    evidence_refs: List[str]
+    payload: dict[str, Any]
+    evidence_refs: list[str]
     created_at: str = field(default_factory=utc_now)
 
 
@@ -91,21 +86,21 @@ class TaskRecord:
     task_id: str
     trace_id: str
     domain: str
-    input_payload: Dict[str, Any]
+    input_payload: dict[str, Any]
     state: str
     state_version: int = 0
     created_at: str = field(default_factory=utc_now)
     updated_at: str = field(default_factory=utc_now)
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
 class TeamTopology:
     team_id: str
     control_plane: str
-    nodes: List[str]
-    edges: List[Dict[str, Any]]
-    execution_semantics: Dict[str, Any]
+    nodes: list[str]
+    edges: list[dict[str, Any]]
+    execution_semantics: dict[str, Any]
 
 
 class StateTransitionError(RuntimeError):
@@ -127,7 +122,7 @@ class ApprovalError(RuntimeError):
 class AgentTeamsControlPlane:
     """Authoritative task state, team identities, events, artifacts and approvals."""
 
-    TRANSITIONS: Dict[str, Set[str]] = {
+    TRANSITIONS: dict[str, set[str]] = {
         "RECEIVED": {"FUSED", "INTENT_PARSED", "RECOVERING"},
         "FUSED": {"TRIAGED", "RECOVERING"},
         "TRIAGED": {"BOOTSTRAPPED", "AWAITING_APPROVAL", "NEEDS_HUMAN", "RECOVERING"},
@@ -163,57 +158,57 @@ class AgentTeamsControlPlane:
     }
 
     def __init__(self) -> None:
-        self.agents: Dict[str, AgentIdentity] = {}
-        self.skills: Dict[str, Dict[str, Any]] = {}
-        self.topologies: Dict[str, TeamTopology] = {}
-        self.tasks: Dict[str, TaskRecord] = {}
-        self.events: List[Event] = []
-        self.artifacts: Dict[str, Artifact] = {}
-        self.evidence: Dict[str, Evidence] = {}
-        self.approvals: Dict[str, Dict[str, Any]] = {}
+        self.agents: dict[str, AgentIdentity] = {}
+        self.skills: dict[str, dict[str, Any]] = {}
+        self.topologies: dict[str, TeamTopology] = {}
+        self.tasks: dict[str, TaskRecord] = {}
+        self.events: list[Event] = []
+        self.artifacts: dict[str, Artifact] = {}
+        self.evidence: dict[str, Evidence] = {}
+        self.approvals: dict[str, dict[str, Any]] = {}
 
     def register_agent(self, identity: AgentIdentity) -> None:
         if identity.agent_id in self.agents:
-            raise ValueError("duplicate agent identity: %s" % identity.agent_id)
+            raise ValueError(f"duplicate agent identity: {identity.agent_id}")
         self.agents[identity.agent_id] = identity
 
-    def register_skill(self, skill_id: str, manifest: Dict[str, Any]) -> None:
+    def register_skill(self, skill_id: str, manifest: dict[str, Any]) -> None:
         if skill_id in self.skills:
-            raise ValueError("duplicate skill: %s" % skill_id)
+            raise ValueError(f"duplicate skill: {skill_id}")
         self.skills[skill_id] = manifest
 
     def register_topology(self, topology: TeamTopology) -> None:
         unknown = [node for node in topology.nodes if node not in self.agents]
         if unknown:
-            raise ValueError("topology references unknown agents: %s" % ", ".join(unknown))
+            raise ValueError("topology references unknown agents: {}".format(", ".join(unknown)))
         self.topologies[topology.team_id] = topology
 
-    def create_task(self, task_id: str, domain: str, input_payload: Dict[str, Any], trace_id: Optional[str] = None) -> TaskRecord:
+    def create_task(self, task_id: str, domain: str, input_payload: dict[str, Any], trace_id: str | None = None) -> TaskRecord:
         if task_id in self.tasks:
-            raise ValueError("duplicate task: %s" % task_id)
+            raise ValueError(f"duplicate task: {task_id}")
         task = TaskRecord(task_id, trace_id or new_id("trace"), domain, input_payload, "RECEIVED")
         self.tasks[task_id] = task
         self._event(task, "TASK_CREATED", "control-plane", {"domain": domain, "input_digest": digest(input_payload)})
         return task
 
-    def _event(self, task: TaskRecord, event_type: str, actor: str, payload: Dict[str, Any]) -> Event:
+    def _event(self, task: TaskRecord, event_type: str, actor: str, payload: dict[str, Any]) -> Event:
         event = Event(new_id("evt"), task.task_id, task.trace_id, event_type, actor, payload, task.state_version)
         self.events.append(event)
         return event
 
-    def transition(self, task_id: str, target: str, actor: str, reason: str, metadata: Optional[Dict[str, Any]] = None, expected_state_version: Optional[int] = None) -> TaskRecord:
+    def transition(self, task_id: str, target: str, actor: str, reason: str, metadata: dict[str, Any] | None = None, expected_state_version: int | None = None) -> TaskRecord:
         task = self.tasks[task_id]
         if expected_state_version is not None and task.state_version != expected_state_version:
             raise ConcurrentStateError("expected state version %d, found %d" % (expected_state_version, task.state_version))
         allowed = self.TRANSITIONS.get(task.state, set())
         if target not in allowed:
-            raise StateTransitionError("%s -> %s is not allowed" % (task.state, target))
+            raise StateTransitionError(f"{task.state} -> {target} is not allowed")
         if actor not in {"control-plane", "AgentTeamsControlPlane"}:
             identity = self.agents.get(actor)
             if identity is None:
-                raise AuthorizationError("unknown transition actor: %s" % actor)
+                raise AuthorizationError(f"unknown transition actor: {actor}")
             if target not in identity.allowed_states:
-                raise AuthorizationError("%s cannot own target state %s" % (actor, target))
+                raise AuthorizationError(f"{actor} cannot own target state {target}")
         previous = task.state
         task.state = target
         task.state_version += 1
@@ -223,7 +218,7 @@ class AgentTeamsControlPlane:
         self._event(task, "STATE_TRANSITION", actor, {"from": previous, "to": target, "reason": reason, "metadata": metadata or {}})
         return task
 
-    def publish_artifact(self, task_id: str, artifact_type: str, producer: str, payload: Dict[str, Any], evidence_refs: Optional[List[str]] = None, schema_version: str = "1.0") -> Artifact:
+    def publish_artifact(self, task_id: str, artifact_type: str, producer: str, payload: dict[str, Any], evidence_refs: list[str] | None = None, schema_version: str = "1.0") -> Artifact:
         task = self.tasks[task_id]
         artifact = Artifact(new_id("art"), task_id, task.trace_id, artifact_type, schema_version, producer, payload, evidence_refs or [])
         self.artifacts[artifact.artifact_id] = artifact
@@ -237,7 +232,7 @@ class AgentTeamsControlPlane:
         self._event(task, "EVIDENCE_RECORDED", source, {"evidence_id": item.evidence_id, "kind": kind, "label": label, "content_digest": item.content_digest})
         return item
 
-    def request_approval(self, task_id: str, actor: str, scope: Dict[str, Any], expected_state: Optional[str] = None) -> str:
+    def request_approval(self, task_id: str, actor: str, scope: dict[str, Any], expected_state: str | None = None) -> str:
         task = self.tasks[task_id]
         approval_id = new_id("approval")
         scope_digest = digest(scope)
@@ -257,7 +252,7 @@ class AgentTeamsControlPlane:
         self._event(task, "APPROVAL_REQUESTED", actor, {"approval_id": approval_id, "scope": scope, "scope_digest": scope_digest, "expected_state": expected_state})
         return approval_id
 
-    def approve(self, approval_id: str, reviewer: str, decision: str = "APPROVED", note: str = "", decision_evidence: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def approve(self, approval_id: str, reviewer: str, decision: str = "APPROVED", note: str = "", decision_evidence: dict[str, Any] | None = None) -> dict[str, Any]:
         approval = self.approvals[approval_id]
         if approval["status"] != "PENDING":
             raise ApprovalError("approval is not pending")
@@ -265,7 +260,7 @@ class AgentTeamsControlPlane:
             raise ApprovalError("decision must be APPROVED or REJECTED")
         task = self.tasks[approval["task_id"]]
         if approval.get("expected_state") and task.state != approval["expected_state"]:
-            raise ApprovalError("approval expected task state %s, found %s" % (approval["expected_state"], task.state))
+            raise ApprovalError("approval expected task state {}, found {}".format(approval["expected_state"], task.state))
         evidence = dict(decision_evidence or {})
         evidence.setdefault("provider", "local-conformance")
         evidence.setdefault("reviewer_identity", reviewer)
@@ -279,14 +274,14 @@ class AgentTeamsControlPlane:
         self._event(task, "APPROVAL_DECIDED", reviewer, {"approval_id": approval_id, "decision": decision, "note": note, "scope_digest": approval["scope_digest"], "decision_evidence": evidence})
         return approval
 
-    def checkpoint_payload(self, task_id: str) -> Dict[str, Any]:
+    def checkpoint_payload(self, task_id: str) -> dict[str, Any]:
         task = self.tasks[task_id]
         return {"task": asdict(task), "events": [asdict(e) for e in self.events if e.task_id == task_id], "artifacts": [asdict(a) for a in self.artifacts.values() if a.task_id == task_id], "evidence": [asdict(e) for e in self.evidence.values() if e.task_id == task_id], "approvals": [a for a in self.approvals.values() if a["task_id"] == task_id]}
 
-    def trace(self, task_id: str) -> List[Dict[str, Any]]:
+    def trace(self, task_id: str) -> list[dict[str, Any]]:
         return [asdict(e) for e in self.events if e.task_id == task_id]
 
-    def evidence_pack(self, task_id: str) -> Dict[str, Any]:
+    def evidence_pack(self, task_id: str) -> dict[str, Any]:
         task = self.tasks[task_id]
         return {"task_id": task_id, "trace_id": task.trace_id, "domain": task.domain, "input_payload": task.input_payload, "state": task.state, "state_version": task.state_version, "artifacts": [asdict(a) for a in self.artifacts.values() if a.task_id == task_id], "evidence": [asdict(e) for e in self.evidence.values() if e.task_id == task_id], "approvals": [a for a in self.approvals.values() if a["task_id"] == task_id], "trace": self.trace(task_id), "topologies": [asdict(topology) for topology in self.topologies.values()]}
 
@@ -300,11 +295,11 @@ class SQLiteCheckpointProvider:
         with sqlite3.connect(str(self.path)) as conn:
             conn.execute("CREATE TABLE IF NOT EXISTS checkpoints (task_id TEXT PRIMARY KEY, state_version INTEGER NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL)")
 
-    def save(self, task_id: str, state_version: int, payload: Dict[str, Any]) -> None:
+    def save(self, task_id: str, state_version: int, payload: dict[str, Any]) -> None:
         with sqlite3.connect(str(self.path)) as conn:
             conn.execute("INSERT OR REPLACE INTO checkpoints(task_id, state_version, payload, updated_at) VALUES (?, ?, ?, ?)", (task_id, state_version, canonical_json(payload), utc_now()))
 
-    def load(self, task_id: str) -> Optional[Dict[str, Any]]:
+    def load(self, task_id: str) -> dict[str, Any] | None:
         with sqlite3.connect(str(self.path)) as conn:
             row = conn.execute("SELECT state_version, payload, updated_at FROM checkpoints WHERE task_id = ?", (task_id,)).fetchone()
         if not row:
@@ -320,7 +315,7 @@ class LocalEvidenceProvider:
     def path_for(self, task_id: str) -> Path:
         return self.root / (task_id + ".json")
 
-    def write_pack(self, task_id: str, pack: Dict[str, Any]) -> Path:
+    def write_pack(self, task_id: str, pack: dict[str, Any]) -> Path:
         path = self.path_for(task_id)
         pack["evidence_pack_path"] = str(path)
         pack["evidence_pack_relative_path"] = "evidence/" + path.name

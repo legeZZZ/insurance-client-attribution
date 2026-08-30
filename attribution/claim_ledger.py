@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Mapping, Optional
-
+from collections.abc import Mapping
+from typing import Any
 
 CLAIM_TYPES = (
     "ASSOCIATION_ONLY",
@@ -51,7 +51,7 @@ REFUSALS = (
 
 class ClaimLedger:
     def __init__(self) -> None:
-        self.claims: List[Dict[str, Any]] = []
+        self.claims: list[dict[str, Any]] = []
         self.state: str = "OBSERVED_ANOMALY"
         self._counter = 0
 
@@ -63,14 +63,14 @@ class ClaimLedger:
         self,
         claim_type: str,
         statement: str,
-        estimand: Optional[str] = None,
-        evidence_refs: Optional[List[str]] = None,
-        posterior_probability: Optional[float] = None,
-        credible_interval: Optional[List[float]] = None,
-        practical_threshold: Optional[float] = None,
-        assumptions: Optional[List[str]] = None,
+        estimand: str | None = None,
+        evidence_refs: list[str] | None = None,
+        posterior_probability: float | None = None,
+        credible_interval: list[float] | None = None,
+        practical_threshold: float | None = None,
+        assumptions: list[str] | None = None,
         selected_after_seeing_outcome: bool = False,
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         if claim_type not in CLAIM_TYPES:
             raise ValueError(f"unknown claim_type: {claim_type}")
         if selected_after_seeing_outcome and claim_type in (
@@ -112,5 +112,5 @@ class ClaimLedger:
         self.state = target
         return self.state
 
-    def render(self) -> Dict[str, Any]:
+    def render(self) -> dict[str, Any]:
         return {"state": self.state, "claims": self.claims}

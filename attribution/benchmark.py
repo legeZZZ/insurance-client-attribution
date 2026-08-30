@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import json
 import math
-from typing import Any, Dict, List
+from typing import Any
 
 from .bayes import bundle_compare, estimate_hte
 from .experiment_designer import design_experiment, estimate_component_effects
@@ -35,7 +35,7 @@ def _segment_predictive_brier(rows, fields=("device_low_end", "channel"), pseudo
     pooled = {arm: (sum(r["clicked"] for r in rows if r["treatment"] == arm),
                     sum(1 for r in rows if r["treatment"] == arm)) for arm in (0, 1)}
     pooled_rate = {a: (c[0] / max(c[1], 1)) for a, c in pooled.items()}
-    cells: Dict[Any, list] = {}
+    cells: dict[Any, list] = {}
     for r in rows:
         key = tuple(r.get(f) for f in fields) + (r["treatment"],)
         cells.setdefault(key, [0, 0])
@@ -52,7 +52,7 @@ def _split(rows, fraction=0.5):
     return rows[:midpoint], rows[midpoint:]
 
 
-def _run_single_seed(seed: int, mismatched: bool) -> Dict[str, Any]:
+def _run_single_seed(seed: int, mismatched: bool) -> dict[str, Any]:
     rows_all, truth = generate_bundle_stage(seed=seed, mismatched=mismatched)
     rows = sanitize(rows_all)
     discovery_rows, estimation_rows = _split(rows)
@@ -202,8 +202,8 @@ def _run_single_seed(seed: int, mismatched: bool) -> Dict[str, Any]:
     }
 
 
-def run_benchmark(seeds=(101, 211, 307, 401, 503), mismatched_seeds=(601, 701)) -> Dict[str, Any]:
-    results: List[Dict[str, Any]] = []
+def run_benchmark(seeds=(101, 211, 307, 401, 503), mismatched_seeds=(601, 701)) -> dict[str, Any]:
+    results: list[dict[str, Any]] = []
     for seed in seeds:
         results.append(_run_single_seed(seed, mismatched=False))
     for seed in mismatched_seeds:

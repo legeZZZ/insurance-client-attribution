@@ -8,12 +8,12 @@ import json
 import os
 import urllib.request
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
+from collections.abc import Mapping
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, DefaultDict, Dict, Iterable, List, Mapping, Optional, Tuple
+from typing import Any
 
 from .foundation import LocalEvidenceProvider
-
 
 DATASET_ID = "uci-bank-marketing"
 DATASET_NAME = "UCI Bank Marketing"
@@ -60,11 +60,11 @@ def _content_digest(value: Mapping[str, Any]) -> str:
     return hashlib.sha256(body.encode("utf-8")).hexdigest()
 
 
-def _is_missing(value: Optional[str]) -> bool:
+def _is_missing(value: str | None) -> bool:
     return value is None or value.strip().lower() in MISSING_MARKERS
 
 
-def _safe_float(value: Optional[str]) -> Optional[float]:
+def _safe_float(value: str | None) -> float | None:
     if _is_missing(value):
         return None
     try:
@@ -73,7 +73,7 @@ def _safe_float(value: Optional[str]) -> Optional[float]:
         return None
 
 
-def _segment_summary(values: Mapping[str, Tuple[int, int]]) -> List[Dict[str, Any]]:
+def _segment_summary(values: Mapping[str, tuple[int, int]]) -> list[dict[str, Any]]:
     rows = [
         {
             "value": value,
@@ -86,8 +86,8 @@ def _segment_summary(values: Mapping[str, Tuple[int, int]]) -> List[Dict[str, An
     return sorted(rows, key=lambda item: (-int(item["records"]), str(item["value"])))
 
 
-def _source_manifest(path: Path, digest: str) -> Dict[str, Any]:
-    modified = datetime.fromtimestamp(path.stat().st_mtime, timezone.utc).isoformat()
+def _source_manifest(path: Path, digest: str) -> dict[str, Any]:
+    modified = datetime.fromtimestamp(path.stat().st_mtime, UTC).isoformat()
     return {
         "dataset_id": DATASET_ID,
         "name": DATASET_NAME,
@@ -135,7 +135,7 @@ def fetch_bank_marketing_csv(destination: Path, force: bool = False) -> Path:
     return destination
 
 
-def _evidence(kind: str, label: str, content: Mapping[str, Any], index: int) -> Dict[str, Any]:
+def _evidence(kind: str, label: str, content: Mapping[str, Any], index: int) -> dict[str, Any]:
     digest = _content_digest(content)
     return {
         "evidence_id": "ev_real_%02d_%s" % (index, digest[:10]),
@@ -153,7 +153,7 @@ def _artifact(
     payload: Mapping[str, Any],
     evidence_ref: str,
     index: int,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     digest = _content_digest(payload)
     return {
         "artifact_id": "art_real_%02d_%s" % (index, digest[:10]),
@@ -165,22 +165,22 @@ def _artifact(
     }
 
 
-def analyze_bank_marketing_csv(path: Path, max_rows: Optional[int] = None) -> Dict[str, Any]:
+def analyze_bank_marketing_csv(path: Path, max_rows: int | None = None) -> dict[str, Any]:
     """Profile genuine historical rows without inventing an insurance funnel."""
     path = path.expanduser().resolve()
     if not path.is_file():
-        raise FileNotFoundError("UCI Bank Marketing CSV not found: %s" % path)
+        raise FileNotFoundError(f"UCI Bank Marketing CSV not found: {path}")
     digest = _sha256_file(path)
     if digest != EXPECTED_SHA256 and max_rows is None:
         raise ValueError("UCI Bank Marketing CSV failed pinned SHA-256 verification")
 
     missing_counts: Counter[str] = Counter()
     target_counts: Counter[str] = Counter()
-    numeric: Dict[str, Dict[str, float]] = {
+    numeric: dict[str, dict[str, float]] = {
         field: {"count": 0.0, "sum": 0.0, "min": float("inf"), "max": float("-inf")}
         for field in NUMERIC_FIELDS
     }
-    segments: Dict[str, DefaultDict[str, List[int]]] = {
+    segments: dict[str, defaultdict[str, list[int]]] = {
         field: defaultdict(lambda: [0, 0]) for field in SEGMENT_FIELDS
     }
     row_count = 0
@@ -189,7 +189,7 @@ def analyze_bank_marketing_csv(path: Path, max_rows: Optional[int] = None) -> Di
         fields = list(reader.fieldnames or [])
         missing_fields = sorted(set(REQUIRED_FIELDS) - set(fields))
         if missing_fields:
-            raise ValueError("UCI Bank Marketing CSV is missing fields: %s" % ", ".join(missing_fields))
+            raise ValueError("UCI Bank Marketing CSV is missing fields: {}".format(", ".join(missing_fields)))
         for row in reader:
             if max_rows is not None and row_count >= max_rows:
                 break
@@ -213,7 +213,7 @@ def analyze_bank_marketing_csv(path: Path, max_rows: Optional[int] = None) -> Di
                 segments[field][value][0] += 1
                 segments[field][value][1] += int(subscribed)
 
-    numeric_summary: Dict[str, Dict[str, Any]] = {}
+    numeric_summary: dict[str, dict[str, Any]] = {}
     for field, summary in numeric.items():
         count = int(summary["count"])
         numeric_summary[field] = {
@@ -331,7 +331,7 @@ def analyze_bank_marketing_csv(path: Path, max_rows: Optional[int] = None) -> Di
     }
 
 
-def run_real_data_case(base_dir: Path, csv_path: Path) -> Dict[str, Any]:
+def run_real_data_case(base_dir: Path, csv_path: Path) -> dict[str, Any]:
     pack = analyze_bank_marketing_csv(csv_path)
     LocalEvidenceProvider(base_dir / "evidence").write_pack(str(pack["task_id"]), pack)
     return pack

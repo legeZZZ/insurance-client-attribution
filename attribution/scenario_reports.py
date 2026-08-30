@@ -12,13 +12,14 @@ audit report. Wired into run_server.py:
 from __future__ import annotations
 
 import time
-from datetime import datetime, timezone
+from collections.abc import Callable
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Callable, Dict, List
+from typing import Any
 
 WORKSPACE = Path(__file__).resolve().parent.parent
 
-SCENARIOS: List[Dict[str, str]] = [
+SCENARIOS: list[dict[str, str]] = [
     {"id": "line_a", "title": "线 A · 组件归因全链路（异常→因子→实验→决策）",
      "est_seconds": "≈5s"},
     {"id": "line_b", "title": "线 B · 月度基线归因（注册变动+外部事件+未知桶）",
@@ -32,7 +33,7 @@ SCENARIOS: List[Dict[str, str]] = [
 ]
 
 
-def _scenario_line_a(runtime_dir: Path) -> Dict[str, Any]:
+def _scenario_line_a(runtime_dir: Path) -> dict[str, Any]:
     from .__main__ import run_demo
     demo = run_demo()
     return {
@@ -54,10 +55,13 @@ def _scenario_line_a(runtime_dir: Path) -> Dict[str, Any]:
     }
 
 
-def _scenario_line_b(runtime_dir: Path) -> Dict[str, Any]:
+def _scenario_line_b(runtime_dir: Path) -> dict[str, Any]:
     from .baseline_attribution import (
-        attribute_baseline, change_registry_entry, external_event_entry,
-        run_validation, simulate_panel,
+        attribute_baseline,
+        change_registry_entry,
+        external_event_entry,
+        run_validation,
+        simulate_panel,
     )
     panel = simulate_panel()
     registry = [
@@ -81,11 +85,13 @@ def _scenario_line_b(runtime_dir: Path) -> Dict[str, Any]:
     }
 
 
-def _scenario_external(runtime_dir: Path) -> Dict[str, Any]:
-    from .external_events import (
-        PUBLIC_EVENT_TIMELINE, _simulate_panel, map_anomalies_to_events,
-    )
+def _scenario_external(runtime_dir: Path) -> dict[str, Any]:
     from .baseline_attribution import attribute_baseline
+    from .external_events import (
+        PUBLIC_EVENT_TIMELINE,
+        _simulate_panel,
+        map_anomalies_to_events,
+    )
     panel = _simulate_panel()
     result = attribute_baseline(panel["days"], panel["control"], panel["treated"],
                                 [], [], {}, detection_threshold=12.0)
@@ -99,14 +105,17 @@ def _scenario_external(runtime_dir: Path) -> Dict[str, Any]:
     }
 
 
-def _scenario_bayes_case_a(runtime_dir: Path) -> Dict[str, Any]:
+def _scenario_bayes_case_a(runtime_dir: Path) -> dict[str, Any]:
     import sys
     if str(WORKSPACE) not in sys.path:
         sys.path.insert(0, str(WORKSPACE))
-    from runtime.cases import (  # noqa: E402
-        case_experiment_metadata, default_metric_contract, generate_dataset)
-    from runtime.analysis import sanitize_rows  # noqa: E402
-    from runtime.bayes_bridge import evaluate_with_bayes  # noqa: E402
+    from runtime.analysis import sanitize_rows
+    from runtime.bayes_bridge import evaluate_with_bayes
+    from runtime.cases import (
+        case_experiment_metadata,
+        default_metric_contract,
+        generate_dataset,
+    )
     rows, _truth = generate_dataset("A", seed=42, n=1200)
     bundle = {"rows": sanitize_rows(rows), "metric_contract": default_metric_contract(),
               "experiment_metadata": case_experiment_metadata("A")}
@@ -125,7 +134,7 @@ def _scenario_bayes_case_a(runtime_dir: Path) -> Dict[str, Any]:
     }
 
 
-def _scenario_experience(runtime_dir: Path) -> Dict[str, Any]:
+def _scenario_experience(runtime_dir: Path) -> dict[str, Any]:
     from .experience_benchmark import run_experience_ablation
     store_path = runtime_dir / "experience_store.json"
     store_path.unlink(missing_ok=True)  # console demo always starts cold
@@ -145,7 +154,7 @@ def _scenario_experience(runtime_dir: Path) -> Dict[str, Any]:
     }
 
 
-_RUNNERS: Dict[str, Callable[[Path], Dict[str, Any]]] = {
+_RUNNERS: dict[str, Callable[[Path], dict[str, Any]]] = {
     "line_a": _scenario_line_a,
     "line_b": _scenario_line_b,
     "external": _scenario_external,
@@ -154,7 +163,7 @@ _RUNNERS: Dict[str, Callable[[Path], Dict[str, Any]]] = {
 }
 
 
-def run_scenario(scenario_id: str, runtime_dir: Path | None = None) -> Dict[str, Any]:
+def run_scenario(scenario_id: str, runtime_dir: Path | None = None) -> dict[str, Any]:
     if scenario_id not in _RUNNERS:
         raise KeyError(f"unknown scenario: {scenario_id}")
     runtime_dir = runtime_dir or (WORKSPACE / "runtime_data")
@@ -165,14 +174,14 @@ def run_scenario(scenario_id: str, runtime_dir: Path | None = None) -> Dict[str,
     return {
         "scenario": scenario_id,
         "title": title,
-        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "runtime_seconds": round(time.time() - t0, 1),
         "real_run": True,
         **body,
     }
 
 
-def render_markdown(report: Dict[str, Any]) -> str:
+def render_markdown(report: dict[str, Any]) -> str:
     lines = [
         f"# 归因报告 · {report['title']}",
         "",
@@ -189,6 +198,6 @@ def render_markdown(report: Dict[str, Any]) -> str:
     lines += ["", "## 关键输出", "", "```json",
               __import__("json").dumps(report.get("key_outputs", {}), ensure_ascii=False, indent=2),
               "```", "", f"证据文件：`{report.get('evidence_pointer', '')}`", "",
-              "合规说明：本系统输出为经营决策支持，不构成投资建议；"
-              "证据不足时应拒答而非强行归因。"]
+              ("合规说明：本系统输出为经营决策支持，不构成投资建议；"
+              "证据不足时应拒答而非强行归因。")]
     return "\n".join(lines)

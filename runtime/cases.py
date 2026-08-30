@@ -5,9 +5,8 @@ from __future__ import annotations
 import math
 import random
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any
 
-from .foundation import AgentIdentity, AgentTeamsControlPlane, LocalEvidenceProvider, SQLiteCheckpointProvider, TeamTopology
 from .analysis import (
     aggregate_funnel,
     build_claim,
@@ -16,7 +15,13 @@ from .analysis import (
     extract_features,
     sanitize_rows,
 )
-
+from .foundation import (
+    AgentIdentity,
+    AgentTeamsControlPlane,
+    LocalEvidenceProvider,
+    SQLiteCheckpointProvider,
+    TeamTopology,
+)
 
 CASE_AGENTS = [
     ("intent", "Intent parsing", ["RECEIVED", "INTENT_PARSED"], ["parse business question"], ["AnalysisIntent"], ["MetricContractResolver"]),
@@ -75,15 +80,15 @@ def _rate(numerator: float, denominator: float) -> float:
     return round(numerator / denominator, 6) if denominator else 0.0
 
 
-def generate_dataset(case: str, seed: int = 42, n: int = 1200, baseline: bool = False) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
+def generate_dataset(case: str, seed: int = 42, n: int = 1200, baseline: bool = False) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Generate user-level observations and hidden structural truth.
 
     Rates use bounded logistic links. Case C exposes a randomized assignment;
     cases A and B intentionally use confounded observational assignment.
     """
     rng = random.Random(seed)
-    rows: List[Dict[str, Any]] = []
-    truth: Dict[str, Any] = {"case": case, "seed": seed, "assignment": "fixed-control" if baseline else "unknown"}
+    rows: list[dict[str, Any]] = []
+    truth: dict[str, Any] = {"case": case, "seed": seed, "assignment": "fixed-control" if baseline else "unknown"}
     for index in range(n):
         season = rng.choice([0.0, 0.05, -0.04, 0.08])
         user_quality = max(-2.0, min(2.0, rng.gauss(0.0, 0.9)))
@@ -141,11 +146,11 @@ def generate_dataset(case: str, seed: int = 42, n: int = 1200, baseline: bool = 
     return rows, truth
 
 
-def aggregate(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
+def aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
     return aggregate_funnel(rows)
 
 
-def log_chain_decomposition(baseline_metrics: Dict[str, Any], current_metrics: Dict[str, Any]) -> Dict[str, Any]:
+def log_chain_decomposition(baseline_metrics: dict[str, Any], current_metrics: dict[str, Any]) -> dict[str, Any]:
     factors = [("active", "活跃流量"), ("quote_rate", "报价率"), ("apply_rate", "投保率"), ("paid_rate", "支付率"), ("issue_rate", "出单率"), ("avg_premium", "件均保费")]
     contributions = []
     total_log_change = 0.0
@@ -160,15 +165,15 @@ def log_chain_decomposition(baseline_metrics: Dict[str, Any], current_metrics: D
     return {"method": "fixed-order log-chain decomposition", "baseline_premium": baseline_metrics["net_premium"], "current_premium": current_metrics["net_premium"], "total_log_change": round(total_log_change, 6), "interaction_policy": "multiplicative interaction is represented in log scale; no causal claim", "unexplained_residual": 0.0, "factors": contributions}
 
 
-def estimate_case_c(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
+def estimate_case_c(rows: list[dict[str, Any]]) -> dict[str, Any]:
     return estimate_itt(rows)
 
 
-def _claim(case: str, readiness: Dict[str, Any], decomposition: Dict[str, Any]) -> Dict[str, Any]:
+def _claim(case: str, readiness: dict[str, Any], decomposition: dict[str, Any]) -> dict[str, Any]:
     return build_claim(readiness)
 
 
-def default_metric_contract() -> Dict[str, Any]:
+def default_metric_contract() -> dict[str, Any]:
     return {
         "metric_id": "insurance-premium-v2",
         "version": "2026-07-31",
@@ -182,8 +187,8 @@ def default_metric_contract() -> Dict[str, Any]:
     }
 
 
-def case_experiment_metadata(case: str) -> Dict[str, Any]:
-    common: Dict[str, Any] = {
+def case_experiment_metadata(case: str) -> dict[str, Any]:
+    common: dict[str, Any] = {
         "treatment_column": "treatment",
         "window_closed": True,
         "outcome_complete": True,
@@ -235,16 +240,16 @@ def case_experiment_metadata(case: str) -> Dict[str, Any]:
     return common
 
 
-def run_case(base_dir: Path, case: str = "A") -> Dict[str, Any]:
+def run_case(base_dir: Path, case: str = "A") -> dict[str, Any]:
     if case not in {"A", "B", "C"}:
         raise ValueError("case must be A, B or C")
     control_plane = build_control_plane()
     checkpoint = SQLiteCheckpointProvider(base_dir / "checkpoints" / "attribution.sqlite3")
     evidence_provider = LocalEvidenceProvider(base_dir / "evidence")
-    task_id = "T2-case-%s" % case
+    task_id = f"T2-case-{case}"
     task = control_plane.create_task(task_id, "insurance-growth-attribution", {"case": case, "question": "DAU rose while premium declined; explain what is known and what should be tested."})
 
-    def move(target: str, actor: str, reason: str, metadata: Dict[str, Any] = None) -> None:
+    def move(target: str, actor: str, reason: str, metadata: dict[str, Any] | None = None) -> None:
         control_plane.transition(task_id, target, actor, reason, metadata)
         current = control_plane.tasks[task_id]
         checkpoint.save(task_id, current.state_version, control_plane.checkpoint_payload(task_id))
@@ -335,7 +340,7 @@ def run_case(base_dir: Path, case: str = "A") -> Dict[str, Any]:
     return pack
 
 
-def public_case(pack: Dict[str, Any]) -> Dict[str, Any]:
+def public_case(pack: dict[str, Any]) -> dict[str, Any]:
     """Remove hidden structural truth before exposing a case to the UI."""
     result = dict(pack)
     result.pop("truth", None)

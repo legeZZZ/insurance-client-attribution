@@ -12,15 +12,15 @@ minus the scipy dependency.
 from __future__ import annotations
 
 import math
-from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
+from collections.abc import Mapping, Sequence
+from typing import Any
 
 import numpy as np
-
 
 DEFAULT_DRAWS = 100_000
 
 
-def beta_posterior(clicks: float, impressions: float, prior: Tuple[float, float]) -> Tuple[float, float]:
+def beta_posterior(clicks: float, impressions: float, prior: tuple[float, float]) -> tuple[float, float]:
     if impressions < 0 or clicks < 0 or clicks > impressions:
         raise ValueError("invalid impressions/clicks")
     alpha, beta_ = prior
@@ -30,12 +30,12 @@ def beta_posterior(clicks: float, impressions: float, prior: Tuple[float, float]
 
 
 def _compare_draws(
-    control_shape: Tuple[float, float],
-    treatment_shape: Tuple[float, float],
+    control_shape: tuple[float, float],
+    treatment_shape: tuple[float, float],
     threshold: float,
     draws: int,
     rng: np.random.Generator,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     control_draws = rng.beta(*control_shape, size=draws)
     treatment_draws = rng.beta(*treatment_shape, size=draws)
     effects = treatment_draws - control_draws
@@ -68,11 +68,11 @@ def _compare_draws(
 def bundle_compare(
     control: Mapping[str, float],
     treatment: Mapping[str, float],
-    prior: Tuple[float, float] | Tuple[Tuple[float, float], Tuple[float, float]] = (1.0, 1.0),
+    prior: tuple[float, float] | tuple[tuple[float, float], tuple[float, float]] = (1.0, 1.0),
     practical_threshold: float = 0.0,
     draws: int = DEFAULT_DRAWS,
     seed: int = 20260809,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Beta-Binomial comparison of two arms on a Bernoulli outcome.
 
     `prior` may be a single (alpha, beta) applied to both arms, or a pair
@@ -133,15 +133,15 @@ def _student_t_cdf(t: float, df: float = 5.0) -> float:
 
 def estimate_hte(
     segments: Sequence[Mapping[str, Any]],
-    prior: Tuple[float, float] = (1.0, 1.0),
+    prior: tuple[float, float] = (1.0, 1.0),
     practical_threshold: float = 0.005,
     moderation_threshold: float = 0.005,
     draws: int = 50_000,
     seed: int = 20260809,
     discovery: bool = False,
-    shrinkage_strength: Optional[float] = None,
+    shrinkage_strength: float | None = None,
     likelihood: str = "gaussian",
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Hierarchical partial-pooling HTE across segments.
 
     Each segment supplies {"segment_id", "control": {clicks, impressions},
@@ -181,13 +181,13 @@ def estimate_hte(
     pooled_draws_t = rng.beta(*pooled_shape_t, size=draws)
     pooled_draws = pooled_draws_t - pooled_draws_c
 
-    results: List[Dict[str, Any]] = []
+    results: list[dict[str, Any]] = []
     for seg, n in zip(segments, sizes):
         shape_c = beta_posterior(seg["control"]["clicks"], seg["control"]["impressions"], prior)
         shape_t = beta_posterior(seg["treatment"]["clicks"], seg["treatment"]["impressions"], prior)
         raw_logit = _logit(shape_t[0] / sum(shape_t)) - _logit(shape_c[0] / sum(shape_c))
         weight = n / (n + shrinkage_strength)
-        shrunk_logit = weight * raw_logit + (1 - weight) * pooled_effect_logit
+        weight * raw_logit + (1 - weight) * pooled_effect_logit
 
         # Posterior draws for the raw segment effect (probability scale).
         draws_c = rng.beta(*shape_c, size=draws)
@@ -234,7 +234,7 @@ def estimate_hte(
 def estimate_hte_nested(
     segments: Sequence[Mapping[str, Any]],
     group_of,
-    prior: Tuple[float, float] = (1.0, 1.0),
+    prior: tuple[float, float] = (1.0, 1.0),
     practical_threshold: float = 0.005,
     moderation_threshold: float = 0.005,
     draws: int = 20_000,
@@ -242,7 +242,7 @@ def estimate_hte_nested(
     kappa_group: float = 1000.0,
     kappa_cell: float = 500.0,
     likelihood: str = "gaussian",
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Nested (two-level) partial pooling: cell -> factor-group marginal -> pooled.
 
     Flat pooling shrinks every cell toward the grand mean, which over-shrinks
@@ -274,11 +274,11 @@ def estimate_hte_nested(
     pooled_prob = rate(st0) - rate(sc0)
     scale = rate(sc0) * (1 - rate(sc0))
 
-    groups: Dict[Any, List[Mapping[str, Any]]] = {}
+    groups: dict[Any, list[Mapping[str, Any]]] = {}
     for s in segments:
         groups.setdefault(group_of(s), []).append(s)
-    group_shrunk_logit: Dict[Any, float] = {}
-    group_sizes: Dict[Any, int] = {}
+    group_shrunk_logit: dict[Any, float] = {}
+    group_sizes: dict[Any, int] = {}
     for g, members in groups.items():
         sc, st, n = agg(members)
         raw = _logit(rate(st)) - _logit(rate(sc))
@@ -286,7 +286,7 @@ def estimate_hte_nested(
         group_shrunk_logit[g] = w * raw + (1 - w) * pooled_logit
         group_sizes[g] = n
 
-    results: List[Dict[str, Any]] = []
+    results: list[dict[str, Any]] = []
     for seg in segments:
         g = group_of(seg)
         n = seg["control"]["impressions"] + seg["treatment"]["impressions"]
@@ -294,7 +294,7 @@ def estimate_hte_nested(
         st = beta_posterior(seg["treatment"]["clicks"], seg["treatment"]["impressions"], prior)
         raw_logit = _logit(rate(st)) - _logit(rate(sc))
         w = n / (n + kappa_cell)
-        nested_logit = w * raw_logit + (1 - w) * group_shrunk_logit[g]
+        w * raw_logit + (1 - w) * group_shrunk_logit[g]
 
         draws_c = rng.beta(*sc, size=draws)
         draws_t = rng.beta(*st, size=draws)
@@ -333,11 +333,11 @@ def moderation_scan(
     treatment_column: str,
     outcome_column: str,
     candidate_factors: Sequence[str],
-    prior: Tuple[float, float] = (1.0, 1.0),
+    prior: tuple[float, float] = (1.0, 1.0),
     practical_threshold: float = 0.005,
     seed: int = 20260809,
     discovery: bool = True,
-) -> List[Dict[str, Any]]:
+) -> list[dict[str, Any]]:
     """Scan T x Z moderation for candidate binary/categorical factors.
 
     For each factor value, estimate the within-level treatment effect and
@@ -351,7 +351,7 @@ def moderation_scan(
     pooled = bundle_compare(pooled_c, pooled_t, prior, practical_threshold, seed=seed)
     pooled_effect = pooled["effect_absolute"]
 
-    candidates: List[Dict[str, Any]] = []
+    candidates: list[dict[str, Any]] = []
     for factor in candidate_factors:
         values = sorted({str(r.get(factor, "<missing>")) for r in rows})
         for value in values:

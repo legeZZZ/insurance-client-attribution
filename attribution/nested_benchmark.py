@@ -19,7 +19,7 @@ import json
 import math
 import time
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any
 
 from .bayes import bundle_compare, estimate_hte, estimate_hte_nested
 from .calibration import BinnedCalibrator
@@ -33,10 +33,10 @@ SEEDS = [(1000 + 37 * i, False, EFFECTS[i % len(EFFECTS)]) for i in range(35)] +
         [(5000 + 53 * i, True, EFFECTS[i % len(EFFECTS)]) for i in range(15)]
 
 
-def _segments(rows) -> List[Dict[str, Any]]:
+def _segments(rows) -> list[dict[str, Any]]:
     """device x channel cells (true moderation lives at device level) +
     two spurious hash buckets."""
-    segs: List[Dict[str, Any]] = []
+    segs: list[dict[str, Any]] = []
     for device in (0, 1):
         for channel in ("organic", "paid", "social"):
             subset = [r for r in rows if r["device_low_end"] == device and r["channel"] == channel]
@@ -61,7 +61,7 @@ def _segments(rows) -> List[Dict[str, Any]]:
     return segs
 
 
-def _score(htelike, flag_key, mod_key, effect_key) -> Dict[str, Any]:
+def _score(htelike, flag_key, mod_key, effect_key) -> dict[str, Any]:
     hits = fp = 0
     mod_err = []
     for seg in htelike["segments"]:
@@ -82,9 +82,9 @@ def _score(htelike, flag_key, mod_key, effect_key) -> Dict[str, Any]:
     }
 
 
-def run_nested_ablation() -> Dict[str, Any]:
+def run_nested_ablation() -> dict[str, Any]:
     cal = BinnedCalibrator()
-    per_seed: List[Dict[str, Any]] = []
+    per_seed: list[dict[str, Any]] = []
     for seed, mismatched, effect in SEEDS:
         rows_all, truth = generate_bundle_stage(seed=seed, mismatched=mismatched,
                                                 bundle_logit_effect=effect)
@@ -106,7 +106,7 @@ def run_nested_ablation() -> Dict[str, Any]:
         # 95% interval coverage, Gaussian vs Student-t (expert consultation
         # 2026-08-15, 冈: HTE Gaussian under-covers, t repairs). Truth proxy:
         # full-data (100k) empirical cell effect, se ~0.0009 << interval width.
-        full_truth: Dict[str, float] = {}
+        full_truth: dict[str, float] = {}
         for s in segments:
             sid = s["segment_id"]
             if sid.startswith("device="):

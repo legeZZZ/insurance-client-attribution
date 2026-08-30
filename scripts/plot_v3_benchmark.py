@@ -1,10 +1,12 @@
-import json, sys
+import json
+import sys
 from pathlib import Path
+
 sys.path.insert(0, str(Path(sys.executable).parent.parent.parent))
-from daimon_runtime import setup_plot
+import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-import matplotlib.pyplot as plt
+from daimon_runtime import setup_plot
 
 sns.set_theme(style="whitegrid")
 setup_plot()
