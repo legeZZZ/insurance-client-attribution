@@ -12,8 +12,8 @@ from collections import Counter
 from collections.abc import Iterable, Mapping, Sequence
 from typing import Any
 
-from .cases import case_experiment_metadata, default_metric_contract, generate_dataset
 from .analysis import sanitize_rows
+from .cases import case_experiment_metadata, default_metric_contract, generate_dataset
 
 SCENARIOS: tuple[tuple[str, str, str], ...] = (
     ("observational_confounded", "A", "DESCRIPTIVE_ONLY"),

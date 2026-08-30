@@ -32,12 +32,12 @@ from attribution.baseline_attribution import (
 )
 from attribution.bayes import bundle_compare, estimate_hte
 
-from .experiment_integrity import require_integrity_pass
 from .analysis import (
     evaluate_public_dataset,
     prepare_analysis_rows,
     sanitize_rows,
 )
+from .experiment_integrity import require_integrity_pass
 
 
 def run_line_b_monthly_review(runtime_dir=None) -> dict[str, Any]:

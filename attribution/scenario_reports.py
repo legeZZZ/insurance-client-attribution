@@ -498,13 +498,14 @@ def _scenario_bayes_case_a(runtime_dir: Path) -> dict[str, Any]:
     src = WORKSPACE / "src"
     if str(src) not in sys.path:
         sys.path.insert(0, str(src))
+    from runtime.bayes_bridge import evaluate_with_bayes
+
+    from runtime.analysis import sanitize_rows
     from runtime.cases import (
         case_experiment_metadata,
         default_metric_contract,
         generate_dataset,
     )
-    from runtime.analysis import sanitize_rows
-    from runtime.attribution_bridge import evaluate_with_bayes
 
     rows, _truth = generate_dataset("A", seed=42, n=1200)
     bundle = {

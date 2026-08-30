@@ -8,9 +8,9 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
-from .configuration import load_config, resolve_output_dir, validate_evidence_pack
-from .cases import public_case, run_case
 from .benchmark import run_hidden_benchmark
+from .cases import public_case, run_case
+from .configuration import load_config, resolve_output_dir, validate_evidence_pack
 from .dataset_catalog import load_dataset_catalog
 from .real_data import fetch_bank_marketing_csv, run_real_data_case
 

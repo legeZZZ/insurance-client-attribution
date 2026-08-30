@@ -8,13 +8,6 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from .foundation import (
-    AgentIdentity,
-    AgentTeamsControlPlane,
-    LocalEvidenceProvider,
-    SQLiteCheckpointProvider,
-    TeamTopology,
-)
 from .analysis import (
     aggregate_funnel,
     build_claim,
@@ -22,6 +15,13 @@ from .analysis import (
     estimate_itt,
     extract_features,
     sanitize_rows,
+)
+from .foundation import (
+    AgentIdentity,
+    AgentTeamsControlPlane,
+    LocalEvidenceProvider,
+    SQLiteCheckpointProvider,
+    TeamTopology,
 )
 
 CASE_AGENTS = [
