@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GOAI 经营归因 Agent | 复赛演示控制台</title>
+  <style>
+    :root {
+      --bg: #eef3f5;
+      --paper: #ffffff;
+      --ink: #10242d;
+      --muted: #647680;
+      --line: #d9e3e6;
+      --nav: #0c1c25;
+      --nav-2: #102936;
+      --cyan: #00a8a8;
+      --cyan-soft: #e4f7f5;
+      --blue: #1774c7;
+      --blue-soft: #e8f2fc;
+      --gold: #b57d13;
+      --gold-soft: #fff5dc;
+      --red: #c14643;
+      --red-soft: #fff0ee;
+      --green: #16875f;
+      --green-soft: #e7f7ef;
+      --shadow: 0 12px 28px rgba(20, 43, 55, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font: 14px/1.55 -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    button, a { font: inherit; }
+    button { cursor: pointer; }
+    .app { min-height: 100vh; display: grid; grid-template-columns: 260px minmax(0, 1fr); }
+    .rail {
+      position: sticky; top: 0; height: 100vh; padding: 22px 14px; overflow-y: auto;
+      background: var(--nav); color: #dce9ed; display: flex; flex-direction: column;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; padding: 4px 9px 25px; }
+    .brand-mark {
+      width: 34px; height: 34px; display: grid; place-items: center; background: var(--cyan); color: #082028;
+      font: 800 15px ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .brand strong { display: block; color: #fff; font-size: 15px; }
+    .brand span { display: block; color: #8fa9b1; font: 10px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .rail-label { margin: 10px 10px 7px; color: #78919a; font: 10px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .nav { display: grid; gap: 4px; }
+    .nav button {
+      display: flex; align-items: center; gap: 10px; width: 100%; border: 0; padding: 10px 11px;
+      color: #c2d3d9; text-align: left; background: transparent; border-left: 3px solid transparent;
+    }
+    .nav button:hover { background: rgba(255,255,255,.05); color: #fff; }
+    .nav button.active { background: var(--nav-2); color: #fff; border-left-color: var(--cyan); }
+    .nav .index { width: 20px; color: #7aa4ad; font: 10px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .rail-foot { margin-top: auto; padding: 16px 10px 3px; color: #8aa3ab; font-size: 11px; }
+    .rail-foot b { color: #e5f4f2; font-weight: 600; }
+    .workspace { min-width: 0; }
+    .topbar {
+      height: 66px; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      padding: 0 30px; background: rgba(255,255,255,.94); border-bottom: 1px solid var(--line);
+    }
+    .crumb { color: var(--muted); font-size: 12px; }
+    .crumb b { color: var(--ink); font-weight: 700; }
+    .status { display: flex; align-items: center; gap: 8px; color: #37616a; font-size: 12px; }
+    .pulse { width: 8px; height: 8px; background: var(--green); border-radius: 50%; box-shadow: 0 0 0 4px var(--green-soft); }
+    .stage { max-width: 1440px; margin: 0 auto; padding: 26px 30px 50px; }
+    .view { display: none; animation: rise .22s ease-out; }
+    .view.active { display: block; }
+    /* The landing view is an operational console; strategy material lives in its own navigation views. */
+    #overview > .page-head, #overview > .hero-panel, #overview > .grid.kpi, #overview > section.card.card-pad:not(.live-runner) { display: none; }
+    #overview > .live-runner { display: block; }
+    @keyframes rise { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    .page-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 20px; }
+    .eyebrow { margin: 0 0 5px; color: var(--cyan); font: 700 11px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    h1 { margin: 0; font-size: 27px; line-height: 1.25; }
+    h2 { margin: 0; font-size: 18px; line-height: 1.35; }
+    h3 { margin: 0; font-size: 14px; }
+    .page-head p { max-width: 720px; margin: 8px 0 0; color: var(--muted); }
+    .pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 8px; border: 1px solid var(--line); color: #41636c; background: #fff; font: 11px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .pill.cyan { border-color: #9fddd8; color: #067c7c; background: var(--cyan-soft); }
+    .pill.gold { border-color: #ecd28c; color: #8b6109; background: var(--gold-soft); }
+    .pill.red { border-color: #f0bab5; color: #a33e39; background: var(--red-soft); }
+    .pill.green { border-color: #bce5ce; color: #147152; background: var(--green-soft); }
+    .grid { display: grid; gap: 14px; }
+    .grid.kpi { grid-template-columns: repeat(4, 1fr); }
+    .grid.two { grid-template-columns: minmax(0, 1.45fr) minmax(300px, .9fr); }
+    .grid.three { grid-template-columns: repeat(3, 1fr); }
+    .card { min-width: 0; background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .card-pad { padding: 17px; }
+    .kpi-card { padding: 15px; border-top: 3px solid var(--blue); }
+    .kpi-card.cyan { border-top-color: var(--cyan); }
+    .kpi-card.gold { border-top-color: var(--gold); }
+    .kpi-card.red { border-top-color: var(--red); }
+    .kpi-card label { display: block; color: var(--muted); font-size: 12px; }
+    .kpi-card strong { display: block; margin-top: 7px; font-size: 24px; letter-spacing: 0; }
+    .kpi-card small { display: block; margin-top: 3px; color: #58707a; font-size: 11px; }
+    .section-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 13px; }
+    .section-head p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
+    .section-head .right { white-space: nowrap; }
+    .hero-panel {
+      position: relative; overflow: hidden; padding: 24px; color: #e9f7f8; border: 1px solid #244653;
+      background: #102d38;
+    }
+    .hero-panel:after { content: ""; position: absolute; inset: auto -20px -120px auto; width: 330px; height: 260px; border: 1px solid rgba(101,235,224,.24); transform: rotate(28deg); }
+    .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(260px, .85fr); gap: 22px; z-index: 1; }
+    .hero-panel h2 { color: #fff; font-size: 25px; }
+    .hero-panel p { max-width: 660px; margin: 10px 0 0; color: #b9d4d8; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .action { border: 1px solid #a3dad5; padding: 8px 11px; color: #07313a; background: #b4eeea; text-decoration: none; font-size: 12px; font-weight: 700; }
+    .action.ghost { color: #cce6e8; background: transparent; border-color: #467782; }
+    .hero-proof { padding: 14px; border: 1px solid #3c6973; background: rgba(3, 20, 28, .35); }
+    .hero-proof label { display: block; color: #8eb7bd; font: 10px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .hero-proof strong { display: block; margin: 4px 0; color: #b8f3ed; font-size: 26px; }
+    .hero-proof span { color: #c5d9dc; font-size: 11px; }
+    .lane-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .lane { padding: 17px; border: 1px solid var(--line); background: #fbfcfc; }
+    .lane.initial { border-top: 4px solid var(--gold); }
+    .lane.final { border-top: 4px solid var(--cyan); }
+    .lane-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 14px; }
+    .lane p { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
+    .chain { display: grid; gap: 8px; }
+    .chain-item { display: grid; grid-template-columns: 25px 1fr auto; gap: 9px; align-items: center; padding: 9px; background: #fff; border: 1px solid var(--line); }
+    .chain-no { color: var(--blue); font: 700 11px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .chain-item b { font-size: 13px; }
+    .chain-item span { color: var(--muted); font-size: 11px; }
+    .arrow { color: #9ab1b8; text-align: center; font-size: 14px; }
+    .comparison { width: 100%; border-collapse: collapse; }
+    .comparison th, .comparison td { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; font-size: 12px; }
+    .comparison th { color: var(--muted); background: #f6f9fa; font: 10px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .comparison td:first-child { width: 25%; color: #385661; font-weight: 700; }
+    .callout { padding: 12px 13px; border-left: 3px solid var(--cyan); background: var(--cyan-soft); color: #225a5b; font-size: 12px; }
+    .callout.gold { border-left-color: var(--gold); background: var(--gold-soft); color: #70530e; }
+    .callout.red { border-left-color: var(--red); background: var(--red-soft); color: #853e3b; }
+    .tabbar { display: inline-flex; padding: 3px; gap: 3px; background: #eaf0f2; border: 1px solid var(--line); }
+    .tabbar button { padding: 6px 9px; border: 0; color: #5f737b; background: transparent; font-size: 12px; }
+    .tabbar button.active { color: #173b45; background: #fff; box-shadow: 0 1px 3px rgba(26,51,61,.12); font-weight: 700; }
+    .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .flow-node { min-height: 118px; padding: 12px; border: 1px solid var(--line); background: #fff; }
+    .flow-node .node-id { color: var(--cyan); font: 700 10px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .flow-node b { display: block; margin-top: 7px; font-size: 13px; }
+    .flow-node p { margin: 4px 0 0; color: var(--muted); font-size: 11px; }
+    .flow-node .output { display: inline-block; margin-top: 8px; color: #0b7b7a; background: var(--cyan-soft); padding: 2px 5px; font: 10px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .output.red { color: #a3403d; background: var(--red-soft); }
+    .trace { display: grid; gap: 0; }
+    .trace-row { display: grid; grid-template-columns: 78px 1fr auto; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .trace-row:last-child { border-bottom: 0; }
+    .trace-row time { color: #748990; font: 10px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .trace-row b { font-size: 12px; }
+    .trace-row span { color: var(--muted); font-size: 11px; }
+    .signal-board { display: grid; grid-template-columns: 1.25fr .75fr; gap: 14px; }
+    .chart { position: relative; height: 230px; padding: 18px 18px 27px 41px; overflow: hidden; border: 1px solid var(--line); background: linear-gradient(#fff,#fbfefe); }
+    .chart-grid { position: absolute; inset: 18px 18px 27px 41px; background: repeating-linear-gradient(to bottom, transparent 0, transparent 41px, #e7eff1 42px); }
+    .chart-line { position: absolute; left: 41px; right: 18px; bottom: 27px; height: 150px; }
+    .chart-line svg { width: 100%; height: 100%; overflow: visible; }
+    .chart-label { position: absolute; color: var(--muted); font: 10px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .chart-label.y1 { left: 10px; top: 18px; }.chart-label.y2 { left: 10px; top: 94px; }.chart-label.y3 { left: 10px; bottom: 25px; }
+    .chart-label.x1 { left: 42px; bottom: 8px; }.chart-label.x2 { left: 45%; bottom: 8px; }.chart-label.x3 { right: 18px; bottom: 8px; }
+    .chart-legend { display: flex; gap: 12px; margin-top: 9px; color: #4a626a; font-size: 11px; }
+    .legend-dot { display:inline-block; width:8px; height:8px; margin-right:4px; vertical-align:middle; }
+    .fact-list { display: grid; gap: 9px; }
+    .fact { padding: 10px; border: 1px solid var(--line); background: #fff; }
+    .fact label { display: block; color: var(--muted); font-size: 11px; }.fact b { display: block; margin-top: 2px; font-size: 14px; }.fact small { color: #5b747c; font-size: 11px; }
+    .candidate { display: grid; grid-template-columns: minmax(0,1fr) 70px 68px 70px; gap: 12px; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--line); }
+    .candidate:last-child { border-bottom: 0; }.candidate b { display:block; font-size: 13px; }.candidate small { color:var(--muted);font-size:11px; }
+    .score { font: 700 14px ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--blue); }.score.warn { color: var(--gold); }.score.mute { color: #7d9198; }
+    .meter { height: 6px; margin-top: 5px; background:#eaf0f2; }.meter i{display:block;height:100%;background:var(--cyan)}.meter.gold i{background:var(--gold)}
+    .code-layout { display: grid; grid-template-columns: 265px minmax(0,1fr); min-height: 452px; }
+    .tree { padding: 14px; background: #0d222d; color: #b8d1d8; font: 11px/1.9 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .tree button { width:100%; padding:3px 5px; border:0; color:inherit; text-align:left; background:transparent; font:inherit; }
+    .tree button:hover,.tree button.active { color:#b9f4ee; background:#193844; }.tree .folder { color:#82d7d0; }.tree .leaf { padding-left: 18px; }
+    .code-main { padding: 19px; background:#fff; }.file-meta { display:flex; justify-content:space-between; gap:8px; align-items:center; padding-bottom:13px; border-bottom:1px solid var(--line); }.file-meta b{font:13px ui-monospace, SFMono-Regular, Menlo, monospace}.file-meta span{color:var(--muted);font-size:11px}
+    pre { margin: 14px 0 0; padding: 14px; overflow: auto; color:#d7e9ec; background:#102832; font: 11px/1.75 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .kw{color:#76d7ce}.fn{color:#f6ca7e}.str{color:#b5d98a}.comment{color:#77949c}.num{color:#f29b91}
+    .package-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:14px; }.package-item {padding:10px;border:1px solid var(--line);background:#fbfcfc}.package-item b{display:block;font-size:12px}.package-item span{color:var(--muted);font-size:11px}
+    .proof-image { width: 100%; display:block; border:1px solid var(--line); background:#fff; }
+    .file-link { color: #0a6f78; text-decoration: none; font-weight: 700; }.file-link:hover{text-decoration:underline}
+    .footnote { margin-top: 18px; color: var(--muted); font-size: 11px; }
+    @media (max-width: 1060px) { .grid.kpi{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:repeat(3,1fr)}.code-layout{grid-template-columns:220px minmax(0,1fr)} }
+    .live-runner{border-top:4px solid var(--cyan);margin-bottom:14px}.runner-grid{display:grid;grid-template-columns:minmax(0,1.5fr) 220px 160px;gap:12px;align-items:end}.runner-field label{display:block;margin-bottom:5px;color:#46636b;font-size:11px;font-weight:700}.runner-field input,.runner-field select{width:100%;border:1px solid #cbd9dd;background:#fff;color:var(--ink);padding:9px 10px}.runner-button{width:100%;border:1px solid #087f7b;padding:10px;background:var(--cyan);color:#fff;font-weight:700}.runner-button:disabled{cursor:wait;opacity:.62}.runner-checks{display:flex;flex-wrap:wrap;gap:12px;margin-top:11px;color:#48636b;font-size:12px}.runner-checks label{display:flex;align-items:center;gap:5px}.runner-checks input{accent-color:var(--cyan)}.runner-note{margin:10px 0 0;color:var(--muted);font-size:11px}.launch-bar{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center;margin:13px 0 0;padding:9px 10px;background:#f5f8f9;border:1px solid var(--line)}.launch-bar code{overflow:auto;color:#2f515b;font:11px ui-monospace,monospace;white-space:nowrap}.tool-button{border:1px solid #bfcfd4;background:#fff;color:#355861;padding:6px 9px;font-size:11px}.tool-button:hover{border-color:var(--cyan);color:#087b77}.run-contract{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.contract-item{padding:9px 10px;border:1px solid var(--line);background:#fbfdfd}.contract-item label{display:block;color:#61777f;font:10px ui-monospace,monospace}.contract-item b{display:block;margin-top:3px;font-size:12px}.contract-item small{display:block;margin-top:3px;color:var(--muted);font-size:10px}.live-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:14px;margin-top:14px}.live-panel{min-width:0}.live-timeline{display:grid;gap:7px}.live-step{position:relative;overflow:hidden;display:grid;grid-template-columns:30px 1fr auto;gap:9px;align-items:start;padding:10px;border:1px solid var(--line);background:#fff}.live-step .step-no{width:24px;height:24px;display:grid;place-items:center;background:#edf4f5;color:#537078;font:11px ui-monospace,monospace}.live-step b{display:block;font-size:12px}.live-step small{color:var(--muted);font-size:11px}.step-detail{display:grid;grid-template-columns:1fr 1.2fr;gap:4px 8px;margin-top:7px;padding:7px 8px;background:#f5f9fa;color:#4c6870;font:10px/1.45 ui-monospace,monospace}.step-detail span{min-width:0;overflow-wrap:anywhere}.step-detail i{display:inline-block;margin-right:5px;color:#057c7b;font-style:normal;font-weight:700}.step-detail .step-out{grid-column:1/-1;color:#365960}.step-detail .step-out i{color:#1874c7}.live-step.running{border-color:#80d0ca;background:#f4fffd;box-shadow:0 0 0 2px rgba(0,167,160,.08)}.live-step.running:after{content:"";position:absolute;inset:0;width:36%;background:linear-gradient(90deg,transparent,rgba(63,224,209,.25),transparent);animation:scan 1.1s linear infinite}.live-step.running .step-no{background:var(--cyan);color:#fff;animation:pulseMark 1.1s ease-in-out infinite}.live-step.done{border-left:3px solid var(--green)}.live-step.warn{border-left:3px solid var(--gold)}@keyframes scan{from{transform:translateX(-130%)}to{transform:translateX(390%)}}@keyframes pulseMark{50%{box-shadow:0 0 0 5px rgba(0,167,160,.13)}}.live-empty{min-height:180px;display:grid;place-items:center;text-align:center;color:#7b8d93;border:1px dashed #c6d5d9;background:#fbfdfd}.live-empty b{display:block;color:#536b73;margin-bottom:4px}.live-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:11px}.live-fact{padding:10px;border:1px solid var(--line);background:#fff;min-width:0}.live-fact label{display:block;color:var(--muted);font-size:11px}.live-fact b{display:block;margin-top:3px;font-size:14px;overflow-wrap:anywhere}.live-fact small{display:block;color:#59727a;font-size:10px;margin-top:2px}.live-json{max-height:260px;overflow:auto;margin:0;padding:13px;background:#10242d;color:#cde8e5;font:11px/1.55 ui-monospace,monospace;white-space:pre-wrap}.live-alert{padding:10px 12px;margin-top:8px;border-left:3px solid var(--cyan);background:var(--cyan-soft);color:#20595a;font-size:12px}.live-alert.gold{border-color:var(--gold);background:var(--gold-soft);color:#71530d}.live-alert.red{border-color:var(--red);background:var(--red-soft);color:#853c39}.result-visuals{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.mini-chart{height:210px;padding:12px;border:1px solid var(--line);background:#fbfdfd}.mini-chart svg{width:100%;height:145px;display:block}.mini-chart p{margin:4px 0 0;color:var(--muted);font-size:11px}.ledger-table{width:100%;border-collapse:collapse;border:1px solid var(--line);font-size:11px}.ledger-table th,.ledger-table td{padding:8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.ledger-table th{width:130px;background:#f4f8f9;color:#43636b;font:10px ui-monospace,monospace}.ledger-table code{color:#1e6670;font:10px ui-monospace,monospace}.library-list{display:grid;gap:7px}.library-item{padding:9px;border:1px solid var(--line);background:#fff}.library-item b{display:block;font-size:12px;overflow-wrap:anywhere}.library-item small{display:block;margin-top:2px;color:var(--muted);font-size:10px}.data-scroll{max-height:265px;overflow:auto;border:1px solid var(--line)}.data-table{width:100%;border-collapse:collapse;font-size:11px}.data-table th,.data-table td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}.data-table th{position:sticky;top:0;background:#f4f8f9;color:#5a747b;font:10px ui-monospace,monospace}.data-table th:first-child,.data-table td:first-child{text-align:left}.negative{color:#ae3e3a;font-weight:700}.candidate-table td:nth-child(1){max-width:190px;overflow-wrap:anywhere}.result-section{margin-top:12px}.result-section h3{margin:0}.result-section .section-head{margin-bottom:8px}
+    @media (max-width: 780px) { .app{display:block}.rail{position:relative;height:auto;padding:13px;overflow:visible}.brand{padding-bottom:12px}.nav{grid-template-columns:repeat(3,1fr)}.nav button{font-size:11px;padding:8px}.nav .index{display:none}.rail-label,.rail-foot{display:none}.topbar{padding:0 16px}.stage{padding:18px 14px 36px}.page-head{display:block}.page-head .pill{margin-top:11px}.grid.two,.grid.three,.lane-wrap,.signal-board,.code-layout,.hero-grid,.live-columns,.result-visuals{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,1fr)}.code-layout{min-height:0}.tree{max-height:210px;overflow:auto}.package-strip{grid-template-columns:repeat(2,1fr)}.runner-grid{grid-template-columns:1fr}.runner-button{margin-top:4px}.launch-bar{grid-template-columns:1fr}.live-metrics{grid-template-columns:repeat(2,1fr)} }
+    .branch-wrap{display:grid;gap:8px}.intent-node,.merge-node{padding:10px 11px;border:1px solid #72c8c2;background:#f2fffd}.intent-node{border-left:4px solid var(--cyan)}.merge-node{border-left:4px solid var(--blue);background:#f3f8fe}.intent-node b,.merge-node b{display:block;font-size:12px}.intent-node small,.merge-node small{color:#4e6d75;font-size:10px}.branch-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.run-lane{min-width:0;padding:10px;border:1px solid var(--line);background:#f9fbfb}.run-lane.a{border-top:3px solid var(--blue)}.run-lane.b{border-top:3px solid var(--gold)}.branch-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;margin-bottom:8px}.branch-head b{display:block;font-size:12px}.branch-head small{display:block;margin-top:2px;color:var(--muted);font-size:10px}.lane-steps{display:grid;gap:6px}.lane-steps .live-step{padding:8px;grid-template-columns:27px 1fr auto}.lane-steps .step-no{width:22px;height:22px;font-size:10px}.lane-steps .step-detail{font-size:9px}.run-lane.pending{opacity:.72}.run-lane.active{box-shadow:0 0 0 2px rgba(0,167,160,.08)}
+    .plan-doc{display:grid;gap:14px;margin-top:14px}.plan-doc>.card{box-shadow:none}.plan-doc h2{margin:0 0 5px;font-size:17px}.plan-doc h3{margin:13px 0 6px;font-size:14px}.plan-doc p,.plan-doc li{color:#425c64;font-size:12px;line-height:1.7}.plan-doc ul{margin:7px 0 0;padding-left:20px}.plan-lead{font-size:14px!important;color:#203e47!important;line-height:1.75!important}.plan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.plan-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.plan-block{padding:13px;border:1px solid var(--line);background:#fbfdfd}.plan-block.teal{border-left:4px solid var(--cyan);background:#f2fbfa}.plan-block.gold{border-left:4px solid var(--gold);background:#fffaf0}.plan-block.red{border-left:4px solid var(--red);background:#fff7f6}.plan-code{margin:8px 0 0;padding:11px 13px;background:#10242d;color:#d5ebe8;font:11px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;overflow:auto}.plan-table{width:100%;border-collapse:collapse;font-size:11px}.plan-table th,.plan-table td{padding:9px 10px;border:1px solid var(--line);vertical-align:top;text-align:left;line-height:1.55}.plan-table th{background:#edf5f5;color:#385c65;font-size:10px}.upgrade-mark{display:inline-block;margin-left:7px;padding:2px 6px;border:1px solid #62c7c1;background:#e5fbf8;color:#057b77;font:700 10px ui-monospace,monospace;vertical-align:middle}.upgrade-section{border-left:4px solid var(--cyan)!important;background:linear-gradient(90deg,#f0fffc,#fff)!important}.plan-doc details{border:1px solid var(--line);background:#fff}.plan-doc summary{cursor:pointer;padding:12px 14px;color:#1d5961;font-weight:700;font-size:13px;list-style:none}.plan-doc summary::-webkit-details-marker{display:none}.plan-doc summary:before{content:'+';display:inline-grid;place-items:center;width:17px;height:17px;margin-right:7px;border:1px solid #9ac9c5;color:#087b77}.plan-doc details[open] summary:before{content:'−'}.plan-doc details>.detail-body{padding:0 14px 14px}.formula-panel{padding:12px;border:1px dashed #94c9c4;background:#f5fffd;color:#185f62;font:12px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap}.plan-note{padding:11px 13px;border-left:3px solid var(--blue);background:#f2f7fc;color:#3a5d6f;font-size:12px;line-height:1.65}.plan-note.warn{border-color:var(--gold);background:#fff9ed}.plan-note.danger{border-color:var(--red);background:#fff5f4}
+    .step-detail summary{grid-column:1/-1;cursor:pointer;color:#176f72;font:700 10px/1.4 ui-sans-serif,system-ui,sans-serif;list-style:none}.step-detail summary::-webkit-details-marker{display:none}.step-detail summary:before{content:'+';display:inline-grid;place-items:center;width:15px;height:15px;margin-right:5px;border:1px solid #9ac9c5;color:#087b77}.step-detail[open] summary:before{content:'−'}
+    @media (max-width: 780px) { .run-contract{grid-template-columns:repeat(2,1fr)}.step-detail{grid-template-columns:1fr}.branch-grid{grid-template-columns:1fr} }
+    @media (max-width: 480px) { .run-contract{grid-template-columns:1fr}.step-detail{font-size:9px}.ledger-table th{width:96px} }
+    @media (max-width: 480px) { .nav{grid-template-columns:1fr 1fr}.grid.kpi,.flow,.package-strip{grid-template-columns:1fr}.candidate{grid-template-columns:1fr 60px 52px 60px}.topbar .status{display:none}.hero-panel{padding:18px}.hero-panel h2{font-size:21px} }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="rail">
+      <div class="brand"><div class="brand-mark">G2</div><div><strong>经营归因 Agent</strong><span>GOAI · TRACK 2</span></div></div>
+      <p class="rail-label">演示导航</p>
+      <nav class="nav" aria-label="演示导航">
+        <button class="active" data-view="overview"><span class="index">01</span>运行控制台</button>
+        <button data-view="initial"><span class="index">02</span>初赛方案</button>
+        <button data-view="semifinal"><span class="index">03</span>复赛方案</button>
+        <button data-view="evidence"><span class="index">04</span>证据链路</button>
+        <button data-view="package"><span class="index">05</span>可执行代码包</button>
+      </nav>
+      <div class="rail-foot"><b>演示模式</b><br>本地脱敏数据回放 · 可复现<br>生产动作始终需要人工审批</div>
+    </aside>
+    <main class="workspace">
+      <header class="topbar"><div class="crumb">GOAI / 赛道二 / <b id="crumb">运行控制台</b></div><div class="status"><span class="pulse"></span><span id="server-status">等待服务检测 · v12.0</span></div></header>
+      <div class="stage">
+        <section class="view active" id="overview">
+          <section class="card card-pad live-runner" id="live-runner">
+            <div class="section-head"><div><h2>现场运行入口：从问题开始</h2><p>页面初始不显示最终结论。提交后才执行完整链路，并在每个阶段展示输入、工具、输出和证据等级。</p></div><span class="pill" id="live-mode">尚未运行</span></div>
+            <div class="runner-grid"><div class="runner-field"><label for="live-task">经营问题</label><input id="live-task" value="上个月注册量为什么下降？请检查内部变更、竞品活动和汇率，并给出下一步验证方案。"></div><div class="runner-field"><label for="live-scenario">运行范围</label><select id="live-scenario"><option value="full_review">全链路：自动复核 A+B+外部+N1/N2/N3</option><option value="line_b">B 线：开放因子挖掘</option><option value="line_a">A 线：UI 改版实验</option><option value="external">外部事件映射</option><option value="bayes_case_a">拒答：没有随机化</option></select></div><div><button class="runner-button" id="live-run">启动全链路复核</button></div></div>
+            <div class="runner-checks"><label><input type="checkbox" id="sim-llm">模拟本地模型超时</label><label><input type="checkbox" id="sim-external">模拟外部源不可用</label><label><input type="checkbox" id="sim-guardrail">模拟护栏超限</label></div><div class="launch-bar"><code id="start-command">cd "/Users/lege/Documents/GOAI-赛道二-交付包/可执行代码包" &amp;&amp; python3 run_server.py 8765</code><button class="tool-button" id="copy-command">复制启动命令</button><button class="tool-button" id="check-service">检测服务</button></div><p class="runner-note" id="runner-note">浏览器不能直接启动 Python 服务；点击“复制启动命令”后在终端执行，再刷新本页。未启动服务时自动使用明确标记的本地脱敏数据回放。</p><div class="run-contract" aria-label="默认全链路 fixture 的数据与统计契约"><div class="contract-item"><label>METRIC CONTRACT</label><b>issued_policies</b><small>count · estimand = rate difference</small></div><div class="contract-item"><label>PANEL INPUT</label><b>60 days × 8 cells</b><small>region × channel × version；分子/分母齐全</small></div><div class="contract-item"><label>SEARCH MANIFEST</label><b>M=4 · D=3 · S=3 · L=29 · N=1044</b><small>block=4 · bootstrap=199 · max-T · holdout</small></div><div class="contract-item"><label>EVIDENCE BOUNDARY</label><b>fixture-only / dry-run</b><small>候选不等于因果；生产动作需要审批</small></div></div>
+          </section>
+          <div class="live-columns"><section class="card card-pad live-panel"><div class="section-head"><div><h2>Agent 执行轨迹</h2><p>意图识别完成后分叉：A 线评估当前实验，B 线挖掘未解释异常。</p></div><span class="pill" id="live-state">空闲</span></div><div id="live-timeline" class="live-timeline"><div class="live-empty"><div><b>尚未运行</b><span>提交任务后从意图识别开始。</span></div></div></div></section><section class="card card-pad live-panel"><div class="section-head"><div><h2>结果交付</h2><p>结构化候选、统计证据和下一窗口定向验证计划。</p></div><span class="pill" id="live-claim">等待证据</span></div><div id="live-output"><div class="live-empty"><div><b>没有预置结果</b><span>运行完成后才显示 Evidence Pack 摘要。</span></div></div></div></section></div>
+          <div class="page-head"><div><p class="eyebrow">SEMIFINAL DEMO · V12.0</p><h1>从“找变化”升级到“开放因子研究闭环”</h1><p>现场演示的重点不是给出一个看似确定的根因，而是让每个结论都能看到它来自哪类数据、经过什么检验、下一步是否值得验证。</p></div><span class="pill cyan">复赛实施版</span></div>
+          <section class="hero-panel"><div class="hero-grid"><div><p class="eyebrow" style="color:#8be5df">可审计 · 可复现 · 不越权</p><h2>保险销售客户端经营归因 Agent</h2><p>将实验影响、内部异常分层、外部候选、未知残差和验证计划放在一张证据链中。无随机化时，系统停留在候选或关联，不把猜测写成因果。</p><div class="hero-actions"><a class="action" href="#" data-jump="evidence">查看现场证据链</a><a class="action ghost" href="可执行代码包/outputs/upgrade_demo_evidence.json">打开 Evidence Pack</a></div></div><div class="hero-proof"><label>离线回放状态</label><strong>6 / 6</strong><span>v12 聚焦回归测试通过</span><hr style="border:0;border-top:1px solid #3d6972;margin:13px 0"><label>护栏结果</label><strong style="font-size:18px">PAUSE_RECOMMENDED</strong><span>仅给出暂停建议，不自动改动真实流量</span></div></div></section>
+          <div class="grid kpi" style="margin-top:14px"><article class="card kpi-card cyan"><label>初赛能力</label><strong>A / B 双线</strong><small>实验估计 + 持续基线账本</small></article><article class="card kpi-card"><label>复赛新增</label><strong>4 个核心层</strong><small>RCA · 关联 · Factor RAG · N2/N3</small></article><article class="card kpi-card gold"><label>统计修订</label><strong>概率差统一</strong><small>删除 Logit Taylor 收缩目标</small></article><article class="card kpi-card red"><label>因果边界</label><strong>未知不摊派</strong><small>外部事件不直接升级为因果</small></article></div>
+          <section class="card card-pad" style="margin-top:14px"><div class="section-head"><div><h2>方案升级地图</h2><p>初赛建立证据治理基线；复赛补齐“未知因子从何而来、如何筛选、如何验证”的研究链路。</p></div><span class="pill">初赛 → 复赛</span></div><div class="lane-wrap"><article class="lane initial"><div class="lane-head"><div><h3>初赛方案：双线归因与结论门禁</h3><p>先把“什么能说、什么不能说”建立起来。</p></div><span class="pill gold">初赛</span></div><div class="chain"><div class="chain-item"><span class="chain-no">A1</span><div><b>Spec Diff + FactorMiner</b><span>发现 UI 与运行变化</span></div><span class="pill">候选</span></div><div class="chain-item"><span class="chain-no">A2</span><div><b>Bayesian A/B + HTE</b><span>估计 Bundle 与分群效应</span></div><span class="pill green">影响</span></div><div class="chain-item"><span class="chain-no">B1</span><div><b>Persistent Control + Registry</b><span>核对已登记变更与残差</span></div><span class="pill">账本</span></div><div class="chain-item"><span class="chain-no">G</span><div><b>Claim Ledger</b><span>约束证据等级与用词</span></div><span class="pill red">治理</span></div></div></article><article class="lane final"><div class="lane-head"><div><h3>复赛方案：开放因子研究与执行闭环</h3><p>把未知残差变成可调查候选，但不越过因果证据边界。</p></div><span class="pill cyan">复赛</span></div><div class="chain"><div class="chain-item"><span class="chain-no">R1</span><div><b>Rate-aware RCA</b><span>从分层面板定位异常子空间</span></div><span class="pill cyan">候选</span></div><div class="chain-item"><span class="chain-no">R2</span><div><b>关联筛选</b><span>去趋势 block bootstrap + max-T + holdout</span></div><span class="pill cyan">关联</span></div><div class="chain-item"><span class="chain-no">R3</span><div><b>Factor Registry / RAG</b><span>检索来源证据与验证模板</span></div><span class="pill cyan">溯源</span></div><div class="chain-item"><span class="chain-no">R4</span><div><b>N2 / N3 Adapter</b><span>意图兜底、灰度、护栏和审批</span></div><span class="pill cyan">闭环</span></div></div></article></div></section>
+        </section>
+
+        <section class="view" id="initial">
+          <div class="page-head"><div><p class="eyebrow">INITIAL ROUND · FOUNDATION</p><h1>初赛方案：建立“可以说什么”的证据底座</h1><p>初赛不是要自动猜根因，而是通过 A 线实验归因、B 线持续基线和 Claim Ledger，让系统在数据不足时能诚实停下。</p></div><span class="pill gold">初赛方案</span></div>
+          <div class="grid kpi"><article class="card kpi-card"><label>主场景</label><strong>轮播 CTR 异常</strong><small>产品改版后的影响确认</small></article><article class="card kpi-card cyan"><label>A 线输出</label><strong>Bundle / HTE</strong><small>随机化条件下的概率差后验</small></article><article class="card kpi-card gold"><label>B 线输出</label><strong>解释账本</strong><small>持续对照、登记变更、外部关联、未知桶</small></article><article class="card kpi-card red"><label>硬边界</label><strong>拒绝越权</strong><small>无随机化不输出因果</small></article></div>
+          <section class="card card-pad" style="margin-top:14px"><div class="section-head"><div><h2>初赛的两条线</h2><p>两条线回答不同问题：A 线估计可控方案是否造成变化；B 线建立经营复盘账本，保留解释不了的部分。</p></div></div><div class="grid three"><article class="card card-pad" style="box-shadow:none"><span class="pill">A 线</span><h3 style="margin-top:10px">实验归因</h3><p style="color:var(--muted);font-size:12px">输入曝光/用户级随机化数据，输出整体方案效应、可信区间、分群异质性和下一轮组件实验。</p><div class="callout" style="margin-top:12px">当前 fixture：新轮播 Bundle CTR 绝对变化 <b>-0.0166</b>，决策为 <b>ROLLBACK_RECOMMENDED</b>。</div></article><article class="card card-pad" style="box-shadow:none"><span class="pill gold">B 线</span><h3 style="margin-top:10px">经营基线归因</h3><p style="color:var(--muted);font-size:12px">输入持续 control、变更登记、实验读数与外部事件，输出已验证解释、时间关联、阶跃告警和未知残差。</p><div class="callout gold" style="margin-top:12px">当前 fixture：未知桶末 10 天残差 <b>-95.77</b>，保持 <b>UNEXPLAINED</b>。</div></article><article class="card card-pad" style="box-shadow:none"><span class="pill red">治理层</span><h3 style="margin-top:10px">Claim Ledger</h3><p style="color:var(--muted);font-size:12px">将证据类型、允许动词、估计目标、来源和审批要求写成结构化记录。</p><div class="callout red" style="margin-top:12px">外部事件只能是 <b>TEMPORAL_ASSOCIATION</b>，不能直接写成“导致”。</div></article></div></section>
+          <section class="card card-pad plan-doc" aria-label="初赛完整技术方案"><div class="section-head"><div><h2>初赛方案正文：双线归因与结论门禁</h2><p>初赛方案完整说明，作为本项目的能力基线。</p></div><span class="pill gold">初赛基线</span></div><p class="plan-lead">初赛解决的问题是：当 UI 改版或经营指标发生变化时，系统能把“实验造成的影响”和“暂时无法解释的变化”分开，并且不在缺少随机化时伪造因果结论。</p><div class="plan-note">一句话：A 线用 AB Test 判断“我们改的东西有没有影响指标”；B 线用持续对照和变更账本判断“还有多少变化没有被已知事实解释”。</div><div class="plan-grid"><div class="plan-block"><h3>输入数据</h3><p>实验输入是用户或曝光级随机化记录：<code>subject_id</code>、treatment/control、clicks、impressions、日期、渠道、设备和版本。经营输入是按日聚合的 control/treated 指标、已登记变更、实验读数和外部事件。</p><div class="plan-code">{
+  "metric": "carousel_ctr",
+  "numerator": "clicks",
+  "denominator": "impressions",
+  "randomization_unit": "hashed_subject_id",
+  "segments": ["region", "channel", "device", "version"]
+}</div></div><div class="plan-block teal"><h3>输出对象</h3><p>A 线输出 Bundle 影响、分群 HTE、可信区间、实际伤害概率和实验决策。B 线输出已登记解释、时间关联、异常阶跃和未知桶。所有输出写入 Claim Ledger，带来源、窗口和证据等级。</p><table class="plan-table"><tr><th>状态</th><th>含义</th></tr><tr><td><code>CAUSAL_READY</code></td><td>具备随机化条件，可以进入实验后验。</td></tr><tr><td><code>TEMPORAL_ASSOCIATION</code></td><td>时间上对齐，不等于原因。</td></tr><tr><td><code>UNEXPLAINED</code></td><td>当前没有证据对上，不能摊派。</td></tr></table></div></div><details open><summary>A 线：从实验数据到贝叶斯决策</summary><div class="detail-body"><h3>1. 先固定实验口径</h3><p>定义指标、分子/分母、随机化单元、实验窗口、主指标、护栏和实际损害阈值。没有这些字段，Agent 只能停在描述性输出。</p><h3>2. 两臂分别建 Beta-Binomial 后验</h3><div class="formula-panel">p_control   ~ Beta(a0 + clicks_control,   b0 + impressions_control - clicks_control)
+p_treatment ~ Beta(a0 + clicks_treatment, b0 + impressions_treatment - clicks_treatment)
+delta       = p_treatment - p_control
+P(harm)     = P(delta &lt; -practical_threshold)</div><p>贝叶斯在这里做的是量化不确定性：同样的概率差，小样本分群区间更宽；大样本分群区间更窄。它不负责证明随机化是否成立，也不负责寻找外部根因。</p><h3>3. 分群效应使用概率差尺度收缩</h3><p>先得到每个分群的 <code>delta_raw</code> 和方差，再使用经验贝叶斯部分池化降低长尾噪声。初赛旧实现的风险是用全局 Logit 增益经 Taylor 展开作为统一目标，低基线分群会被错误放大；该问题在复赛统计修订中统一修正。</p><h3>4. 输出实验决策</h3><p>根据后验概率和护栏，输出 <code>SHIP</code>、<code>ROLLBACK_RECOMMENDED</code>、<code>CONTINUE_OBSERVATION</code> 或 <code>EQUIVALENT</code>。系统只提出建议，不自动修改真实流量。</p></div></details><details open><summary>B 线：从持续经营数据到未知桶</summary><div class="detail-body"><h3>1. 建立 persistent control</h3><p>control 组不接收业务变更，treated 组按线上实际运行。每日计算 <code>gap = treated - control</code>，再减去已有实验读数解释的部分，得到 residual。</p><div class="formula-panel">gap_t       = treated_t - control_t
+explained_t = registered_change_ATT_t + aligned_external_event_t
+residual_t  = gap_t - explained_t</div><h3>2. 核对变更登记</h3><p>登记事实只有“发生过”这一层证据。只有关联的实验读数才能贡献已验证解释；没有实验的登记项最多标记为时间关联。</p><h3>3. 检测双向异动</h3><p>对平滑后的 residual 做前后窗口差值，使用 <code>abs(step)</code> 检测。上涨和下降都属于异动，另外保留 <code>direction=up/down</code> 供后续分析。</p><h3>4. 产生未知桶</h3><p>末 10 天无法由已登记变更、实验读数和外部事件解释的 residual 进入 <code>UNEXPLAINED</code>。未知桶是待调查量，不是“所有未解释变化的根因”。初赛到这里停止，不负责从未知桶自动发现新因子。</p></div></details><div class="plan-grid three"><div class="plan-block"><h3>初赛已解决</h3><ul><li>随机 A/B 的影响估计</li><li>分群异质性和不确定性</li><li>持续 control 基线</li><li>未知桶和拒答边界</li></ul></div><div class="plan-block gold"><h3>初赛未解决</h3><ul><li>未知异常具体落在哪个切面</li><li>未登记内部因素如何发现</li><li>汇率、竞品活动如何进入候选</li><li>候选如何进入下一次实验</li></ul></div><div class="plan-block red"><h3>初赛硬边界</h3><ul><li>登记不等于因果</li><li>相关不等于影响</li><li>未知不向候选摊派</li><li>没有随机化就拒绝因果决策</li></ul></div></div></section>
+        </section>
+
+        <section class="view" id="semifinal">
+          <div class="page-head"><div><p class="eyebrow">SEMIFINAL · OPEN FACTOR RESEARCH</p><h1>复赛方案：让未知残差进入可验证的研究流程</h1><p>核心升级不是让模型“猜出竞品活动”，而是把已有数据源中的内部与外部候选按时间、范围、统计检验和证据来源组织起来，再把可控候选送入实验或灰度。</p></div><span class="pill cyan">复赛方案</span></div>
+          <section class="card card-pad"><div class="section-head"><div><h2>复赛端到端链路</h2><p>每一站输出不同等级的对象，因果结论只能在验证环节产生。</p></div><div class="tabbar"><button class="active" data-flow="lineb">B 线研究链</button><button data-flow="linea">A 线验证链</button></div></div><div class="flow" id="flow-lineb"><article class="flow-node"><span class="node-id">INPUT</span><b>分层异常面板</b><p>日期、地区、渠道、版本、分子、分母和质量字段。</p><span class="output">异常窗口</span></article><article class="flow-node"><span class="node-id">RCA</span><b>Rate-aware RCA</b><p>Beam Search 下钻范围，输出 rate/mix/interaction 与闭合状态。</p><span class="output">FACTOR_CANDIDATE</span></article><article class="flow-node"><span class="node-id">ASSOC</span><b>关联筛选</b><p>去趋势、季节项、block bootstrap、max-T、holdout。</p><span class="output">关联证据</span></article><article class="flow-node"><span class="node-id">RAG</span><b>Factor Registry</b><p>检索别名、来源、许可证、快照和验证模板。</p><span class="output">证据来源</span></article><article class="flow-node"><span class="node-id">PLAN</span><b>验证编排</b><p>内部候选走 A/B 或灰度；外部候选走准实验与负对照。</p><span class="output red">不自动归因</span></article></div><div class="flow" id="flow-linea" hidden><article class="flow-node"><span class="node-id">INTENT</span><b>N2 意图层</b><p>本地模型只返回严格 AnalysisIntent；失败就规则兜底。</p><span class="output">trace</span></article><article class="flow-node"><span class="node-id">DESIGN</span><b>实验设计</b><p>锁定随机化单元、指标契约、样本和护栏。</p><span class="output">design digest</span></article><article class="flow-node"><span class="node-id">CANARY</span><b>N3 灰度适配</b><p>dry-run 先行，5% → 10% → 25% 阶梯。</p><span class="output">人工审批</span></article><article class="flow-node"><span class="node-id">MONITOR</span><b>护栏监测</b><p>读取指标与错误率、延迟等护栏，不静默放量。</p><span class="output red">PAUSE_RECOMMENDED</span></article><article class="flow-node"><span class="node-id">LEDGER</span><b>Evidence Pack</b><p>后验、trace、审批引用与结论等级进入证据包。</p><span class="output">可回放</span></article></div></section>
+          <div class="grid two" style="margin-top:14px"><section class="card card-pad"><div class="section-head"><div><h2>统计层修订</h2><p>将收缩和分解统一在概率差尺度，避免低基线长尾被全局 Logit 近似拖向错误目标。</p></div><span class="pill cyan">已实施</span></div><div class="trace"><div class="trace-row"><time>S1</time><div><b>概率差后验收缩</b><span>cell、group、pooled 都在 probability difference scale；最终 SE 从最终后验计算。</span></div><span class="pill green">完成</span></div><div class="trace-row"><time>S2</time><div><b>rate / mix / interaction</b><span>三项严格闭合；集合或分母不一致时显式输出 DECOMPOSITION_NOT_CLOSED。</span></div><span class="pill green">完成</span></div><div class="trace-row"><time>S3</time><div><b>时间序列零分布</b><span>删除 circular shift，改用去趋势/季节项 moving-block 独立零分布。</span></div><span class="pill green">完成</span></div><div class="trace-row"><time>S4</time><div><b>选择偏差治理</b><span>记录 M/S/L/K/N、max-T 与 selection_set_digest；holdout 是候选晋级防线。</span></div><span class="pill green">完成</span></div></div></section><section class="card card-pad"><div class="section-head"><div><h2>因子 RAG 的正确位置</h2><p>检索证据与验证路径，不成为“根因生成器”。</p></div></div><div class="fact-list"><div class="fact"><label>可以做</label><b>返回候选、别名、来源、快照、许可证</b><small>SQLite + FTS5 + 中文 LIKE 回退 + 结构化过滤</small></div><div class="fact"><label>不可以做</label><b>不能改 Bayesian 后验，不能把 RAG 排名写成因果排名</b><small>候选需通过统计筛选与独立验证</small></div><div class="fact"><label>生产准入</label><b>因子和证据都需有可回溯许可</b><small>缺许可证则保持候选或未知，不进生产结论</small></div></div></section></div>
+          <section class="card card-pad plan-doc" aria-label="复赛完整升级方案"><div class="section-head"><div><h2>复赛方案正文：开放因子研究与验证闭环</h2><p>以下内容均在初赛基础上新增或修订，标记为 <span class="upgrade-mark">复赛升级</span> 的部分是本轮重点。</p></div><span class="pill cyan">完整方案</span></div><p class="plan-lead">复赛不再把 B 线停在“登记事实对账”。它在当前窗口和 A 线并行，从分层面板找到异常切面，再从可观测的内部、外部因子库中生成候选；候选在当前窗口冻结，下一窗口才进入定向 A/B、我方应对策略 A/B 或准实验验证。</p><div class="plan-note">一句话：初赛回答“已经知道的变化是否可信”；复赛新增“未知变化可能对应哪些可观测因子，以及怎样把这些候选送进下一窗口验证”。</div><div class="plan-grid three"><div class="plan-block"><h3>当前窗口 W</h3><p>A 线评分已有实验；B 线发现未解释异常。两条线并行，不互相污染数据窗口。</p></div><div class="plan-block teal"><h3>窗口边界 <span class="upgrade-mark">复赛升级</span></h3><p>冻结候选、目标切面、方向、滞后和验证设计；同一窗口不把筛选结果当成因果证据。</p></div><div class="plan-block gold"><h3>下一窗口 W+1 <span class="upgrade-mark">复赛升级</span></h3><p>内部可控因子重新随机；外部因子采用应对策略 A/B，并用 DiD、BSTS 或 SCM 验证外部冲击。</p></div></div><h3>一、复赛相对初赛的升级清单</h3><table class="plan-table"><tr><th>初赛能力</th><th>复赛新增或修订</th><th>落地对象</th></tr><tr><td>B 线核对登记变更、外部事件、未知桶</td><td><span class="upgrade-mark">复赛升级</span> 从未知 residual 中定位 region/channel/version/device 等异常切面，输出上下行两类异动。</td><td>Rate-aware RCA + two-sided step detector</td></tr><tr><td>因子主要依赖人工登记</td><td><span class="upgrade-mark">复赛升级</span> 原始因子派生为 Level、Velocity、Acceleration 三层，搜索原始水平、变化速度和变化加速度。</td><td><code>derive_factor_layers</code></td></tr><tr><td>关联结果停在时间相邻</td><td><span class="upgrade-mark">复赛升级</span> 锁定 discovery/holdout/validation 三个窗口，报告比较数量、block bootstrap、max-T 和候选晋级。</td><td><code>association_discovery.py</code></td></tr><tr><td>没有结构化知识入口</td><td><span class="upgrade-mark">复赛升级</span> 建立 Factor Registry、Evidence Store、Series Store 和 Factor RAG，保留来源、许可、快照和验证模板。</td><td>SQLite + FTS5 / 结构化重排</td></tr><tr><td>Agent 只做对话路由</td><td><span class="upgrade-mark">复赛升级</span> 意图识别后显式分叉 A/B，候选自动生成 TargetedExperimentSpec 并交给 N3 dry-run。</td><td>N2 Intent Adapter + N3 Experiment Adapter</td></tr></table><details open><summary>二、B 线完整流程：从什么数据到什么结果</summary><div class="detail-body"><h3>Step B0：输入数据契约</h3><p>输入不是一条 KPI 曲线，而是日度分层面板、内部事件、外部事件和连续因子序列。面板必须保留分子分母，才能区分“分群转化率下降”和“流量结构变化”。</p><div class="plan-code">{
+  "day": "2026-08-20",
+  "scope": {"region": "east", "channel": "paid", "version": "8.4"},
+  "numerator": 24,
+  "denominator": 1000,
+  "metric": "issued_policies_rate",
+  "quality": {"missing_rate": 0.0, "late_arrival_rate": 0.01}
+}</div><h3>Step B1：从 control/treated 得到 residual</h3><div class="formula-panel">gap_t      = treated_t - control_t
+explained  = registered_experiment_ATT + aligned_external_event
+residual_t = gap_t - explained_t</div><p>登记事实只说明“事件发生过”，有实验读数才可能进入已验证解释；没有对上的部分保留为 <code>UNEXPLAINED</code>，不向候选平均摊派。</p><h3>Step B2：双向异动切面 <span class="upgrade-mark">复赛升级</span></h3><p>在平滑 residual 上计算前后窗口差值，判定条件为 <code>abs(step) &gt;= threshold</code>。上涨和下降都进入异常队列，同时保存 <code>absolute_step</code> 与 <code>direction=up/down</code>。当前 fixture 保留 day 44 附近上行、day 51 附近下行两类异常。</p><h3>Step B3：Rate-aware 多维 RCA <span class="upgrade-mark">复赛升级</span></h3><p>在 region、channel、version、device 等维度上逐层下钻，比较候选切面和补集。对 rate 指标显式分解：</p><div class="formula-panel">CTR = Σ share_s × rate_s
+ΔCTR = rate_change + mix_change + interaction
+rate_change = Σ share_before × Δrate
+mix_change  = Σ Δshare × rate_before
+interaction = Σ Δshare × Δrate</div><p>三项必须闭合；交互项不再隐含塞入 rate 或 mix。闭合失败输出 <code>DECOMPOSITION_NOT_CLOSED</code>，不继续给出候选优先级。</p><h3>Step B4：因子三层派生 <span class="upgrade-mark">复赛升级</span></h3><div class="formula-panel">X_t = rolling_median(raw_factor_t, window=3)
+Level_t        = X_t
+Velocity_t     = X_t - X_(t-1)
+Acceleration_t = X_t - 2X_(t-1) + X_(t-2)</div><p>Level 可能发现“汇率整体升高”，Velocity 可能发现“竞品压力突然增加”，Acceleration 可能发现“汇率变化正在加速”。二阶派生只是增加候选覆盖，不是自动根因。</p><h3>Step B5：关联搜索和选择防线 <span class="upgrade-mark">复赛升级</span></h3><p>本次增强 fixture 固定扫描 <code>M=4</code> 个父因子、<code>D=3</code> 个派生层、<code>S=3</code> 个范围、<code>L=29</code> 个滞后、<code>K=1</code> 个指标，完整网格 <code>N=1044</code>，有效比较 <code>348</code> 次，block bootstrap <code>199</code> 次。先在 discovery [0,49] 搜索，再在 holdout [50,59] 复核；BH q 值只作辅助，holdout 才是候选晋级主防线。</p><h3>Step B6：输出什么</h3><table class="plan-table"><tr><th>输出</th><th>实际含义</th><th>下一步</th></tr><tr><td><code>FACTOR_CANDIDATE</code></td><td>异常切面与某个可观测因子/派生层具有待调查关联。</td><td>进入候选库，等待 holdout 或验证。</td></tr><tr><td><code>TEMPORAL_ASSOCIATION</code></td><td>事件与异常在时间/范围上对齐。</td><td>做负对照和准实验，不能写“导致”。</td></tr><tr><td><code>UNEXPLAINED</code></td><td>仍没有可用数据入口或匹配证据。</td><td>保留未知，创建补数任务。</td></tr></table></div></details><details open><summary>三、复赛 A 线如何承接 B 线候选</summary><div class="detail-body"><p>B 线当前窗口只负责生成和冻结候选，A 线在下一窗口承接验证。内部可控因子必须在目标切面内重新随机，不能直接比较 east/west 或 paid/organic 作为 A/B。</p><table class="plan-table"><tr><th>候选类型</th><th>实验/准实验设计</th><th>允许结论</th></tr><tr><td>页面延迟、结算错误率、Feature Flag、内部配置</td><td>目标 scope 内 hashed_subject_id 随机分流；5% → 10% → 25% 灰度。</td><td>通过预注册、护栏和后验门禁后，可输出影响估计。</td></tr><tr><td>汇率、竞品压力、政策、天气</td><td>因子本身不可随机；A/B 验证我方应对策略，外部因子用暴露度 DiD、BSTS、SCM 或事件研究。</td><td>外部因子和应对策略分开报告，不能把策略效果等同于外部因子效果。</td></tr></table><div class="plan-note warn">候选排名是调查资源排序，不是因果概率。验证通过前，最高等级仍是 <code>FACTOR_CANDIDATE</code> 或 <code>TEMPORAL_ASSOCIATION</code>。</div></div></details><details open><summary>四、统计、知识库和 Agent 的完整边界</summary><div class="detail-body"><div class="plan-grid"><div class="plan-block teal"><h3>Bayesian <span class="upgrade-mark">复赛修订</span></h3><p>两臂 Beta-Binomial 得到概率差后验；cell → group → pooled 全流程在 probability-difference 尺度收缩。Logit 只能作为完整链接函数，不能用全局 Logit Taylor 目标。最终 SE 从最终后验计算。</p></div><div class="plan-block"><h3>Factor RAG <span class="upgrade-mark">复赛升级</span></h3><p>检索因子定义、别名、时间范围、证据片段、数值快照、许可证和历史验证模板；不修改后验、不产生根因字符串。</p></div><div class="plan-block gold"><h3>N2 意图层 <span class="upgrade-mark">复赛升级</span></h3><p>本地 LLM 只返回 AnalysisIntent。Schema 失败、超时或置信度不足时规则兜底，保留模型版本、规则版本、fallback 原因和工具 trace。</p></div><div class="plan-block red"><h3>N3 执行层 <span class="upgrade-mark">复赛升级</span></h3><p>实验创建、灰度和护栏读取默认 dry-run；护栏超限只输出 PAUSE_RECOMMENDED，不自动回滚、放量或修改生产流量。</p></div></div></div></details><h3>五、复赛数据来源与合规边界</h3><table class="plan-table"><tr><th>来源</th><th>演示数据</th><th>生产要求</th></tr><tr><td>内部面板/日志</td><td>deterministic fixture，包含分层、分子分母和质量字段。</td><td>数据所有者授权、聚合或脱敏、最小权限只读。</td></tr><tr><td>外部因子</td><td>fixture 汇率、竞品压力和事件时间线。</td><td>官方公开数据或供应商授权，保留 URI、digest、license_ref 和快照时间。</td></tr><tr><td>竞品信息</td><td>采用脱敏事件流和公开可引用信号。</td><td>不绕过登录、验证码、付费墙、访问控制或 robots；爬虫不作为默认生产方案。</td></tr></table><h3>六、复赛落地顺序</h3><div class="plan-grid three"><div class="plan-block"><h3>M1 面板接入</h3><p>接入真实分层面板、变更审计和质量指标，完成 rate RCA。</p></div><div class="plan-block teal"><h3>M2 因子库</h3><p>接入授权汇率/宏观、政策或同行活动源，建立 RAG 溯源和新鲜度监控。</p></div><div class="plan-block gold"><h3>M3 验证闭环</h3><p>接入实验平台 sandbox，执行 holdout、A/B、DiD/BSTS/SCM，并将结果写回因子库。</p></div></div></section>
+        </section>
+
+        <section class="view" id="evidence">
+          <div class="page-head"><div><p class="eyebrow">LIVE WALKTHROUGH · EVIDENCE CHAIN</p><h1>现场演示：一次“未知异常”如何变成下一步验证任务</h1><p>以下为本地脱敏数据回放 回放。它证明算法链路和治理行为，不声称连接了真实保险业务面板或真实同行数据。</p></div><span class="pill">离线回放</span></div>
+          <div class="grid kpi"><article class="card kpi-card red"><label>异常窗口</label><strong>day 40 起</strong><small>treated-control gap 出现非登记阶跃</small></article><article class="card kpi-card cyan"><label>RCA Top 1</label><strong>east / paid / 8.4</strong><small>隐藏异常分层命中</small></article><article class="card kpi-card"><label>闭合检查</label><strong>CLOSED</strong><small>rate + mix + interaction = Δrate</small></article><article class="card kpi-card gold"><label>关联搜索</label><strong>M=4 · N=1044</strong><small>三层因子、范围、滞后、指标均入 manifest</small></article></div>
+          <div class="grid two" style="margin-top:14px"><section class="card card-pad"><div class="section-head"><div><h2>B 线残差与异常窗口</h2><p>图示展示 continuous control 基线后的残差形状；外部事件只作为时间关联，不覆盖未知残差。</p></div><span class="pill red">UNEXPLAINED 保留</span></div><div class="chart"><div class="chart-grid"></div><span class="chart-label y1">+120</span><span class="chart-label y2">0</span><span class="chart-label y3">-120</span><span class="chart-label x1">day 0</span><span class="chart-label x2">day 30</span><span class="chart-label x3">day 59</span><div class="chart-line"><svg viewBox="0 0 600 150" role="img" aria-label="残差趋势图"><polyline points="0,76 24,71 48,78 72,67 96,73 120,64 144,69 168,61 192,66 216,55 240,58 264,52 288,60 312,57 336,60 360,58 384,112 408,116 432,109 456,106 480,118 504,123 528,130 552,126 576,137 600,141" fill="none" stroke="#c14643" stroke-width="3"/><line x1="384" y1="0" x2="384" y2="150" stroke="#b57d13" stroke-width="2" stroke-dasharray="5 5"/><line x1="456" y1="0" x2="456" y2="150" stroke="#1774c7" stroke-width="2" stroke-dasharray="5 5"/></svg></div></div><div class="chart-legend"><span><i class="legend-dot" style="background:#c14643"></i>残差</span><span><i class="legend-dot" style="background:#b57d13"></i>未登记阶跃</span><span><i class="legend-dot" style="background:#1774c7"></i>外部事件窗口</span></div></section><section class="card card-pad"><div class="section-head"><div><h2>候选并不是结论</h2><p>RCA、时序关联和 RAG 各自增加一种证据，但没有一步跳到因果。</p></div></div><div class="trace"><div class="trace-row"><time>01</time><div><b>异常定位</b><span>UNEXPLAINED_STEP_SUSPECTED · onset day 39</span></div><span class="pill red">异常</span></div><div class="trace-row"><time>02</time><div><b>分层下钻</b><span>region=east, channel=paid, version=8.4</span></div><span class="pill cyan">候选</span></div><div class="trace-row"><time>03</time><div><b>外部/内部事件对齐</b><span>发布审计与事件窗口返回不同的候选等级</span></div><span class="pill">关联</span></div><div class="trace-row"><time>04</time><div><b>验证计划</b><span>内部可控因子 → 灰度；外部候选 → 负对照 + 准实验</span></div><span class="pill gold">待验证</span></div></div></section></div>
+          <section class="card card-pad" style="margin-top:14px"><div class="section-head"><div><h2>因子候选清单</h2><p>“关联分数”只排调查优先级；来源、许可、范围和验证路线与分数一起展示。</p></div><span class="pill">association_discovery.json</span></div><div class="candidate"><div><b>internal.audit.unregistered_release</b><small>内部发布审计 · 与 day 40 异常窗口重合</small></div><div class="score">0.765</div><span class="pill cyan">候选</span><span class="pill">灰度 / A/B</span></div><div class="candidate"><div><b>external.competitor_campaign</b><small>外部活动 fixture · 时间对齐，需授权真实源与范围负对照</small></div><div class="score warn">0.293</div><span class="pill gold">时间关联</span><span class="pill">准实验</span></div><div class="candidate"><div><b>external.fx_rate_usd_cny</b><small>外部序列 fixture · lag=1 · 需暴露业务与非暴露业务对照</small></div><div class="score mute">0.193</div><span class="pill">候选</span><span class="pill">DiD / SCM</span></div></section>
+          <section class="card card-pad" style="margin-top:14px"><div class="section-head"><div><h2>统计审计摘要</h2><p>复赛新增字段确保评委可以追问“你扫了多少次、怎么控制筛选、有没有留出验证”。</p></div></div><div class="grid three"><div class="fact"><label>Search Manifest</label><b>M=4 · D=3 · S=3 · L=29 · K=1</b><small>N=1044，valid=348，selection_set_digest 已写入</small></div><div class="fact"><label>零分布</label><b>Detrended moving block</b><small>block length=4，bootstrap=199，max-T 已计算</small></div><div class="fact"><label>晋级规则</label><b>Holdout 优先于 BH</b><small>BH q 值仅辅助；候选窗口与下一窗口分离</small></div></div></section>
+        </section>
+
+        <section class="view" id="package">
+          <div class="page-head"><div><p class="eyebrow">REPRODUCIBLE DELIVERY · CODE PACKAGE</p><h1>可执行代码包：材料、方法、证据和入口同目录交付</h1><p>不要求联网，不依赖商业 API。评委可从 README、运行说明、Demo、输出证据和测试直接复现；真实数据接入只替换 adapter，不改统计与治理核心。</p></div><a class="pill cyan" href="可执行代码包/复赛可执行代码包-v12.zip">下载 v12 ZIP</a></div>
+          <div class="grid two"><section class="card"><div class="code-layout"><aside class="tree"><div class="folder">可执行代码包/</div><button class="active" data-file="readme">README.md</button><div class="folder">track2_v5/</div><button class="leaf" data-file="rate">rate_aware_rca.py</button><button class="leaf" data-file="assoc">association_discovery.py</button><button class="leaf" data-file="rag">factor_registry.py</button><button class="leaf" data-file="agent">agent_adapter.py</button><button class="leaf" data-file="demo">replay_upgrade_demo.py</button><div class="folder">tests/</div><button class="leaf" data-file="tests">test_upgrade_v12.py</button><div class="folder">outputs/</div><button class="leaf" data-file="evidence">upgrade_demo_evidence.json</button></aside><div class="code-main"><div class="file-meta"><b id="file-title">README.md</b><span id="file-note">运行入口与复现边界</span></div><pre id="code-pane"><span class="comment"># 复赛升级 Demo：N1 + N2 + N3 离线回放</span>
+<span class="fn">python3</span> -m track2_v5.replay_upgrade_demo
+
+<span class="comment"># v12 聚焦回归：统计闭合、时序留出、RAG、N2、N3</span>
+<span class="fn">PYTHONPATH</span>=. <span class="fn">python3</span> -m unittest discover -s tests -v
+
+<span class="comment"># B 线候选与关联回放</span>
+<span class="fn">python3</span> -m track2_v5.rate_aware_rca
+<span class="fn">python3</span> -m track2_v5.association_discovery</pre></div></div></section><section class="card card-pad"><div class="section-head"><div><h2>交付物索引</h2><p>代码包内每类材料对应一个可验证问题。</p></div></div><div class="trace"><div class="trace-row"><time>DOC</time><div><b>README + 运行说明</b><span>环境、入口、数据边界、真实替换点</span></div><a class="file-link" href="可执行代码包/README.md">打开</a></div><div class="trace-row"><time>DEMO</time><div><b>replay_upgrade_demo.py</b><span>N1 事件、N2 schema/fallback、N3 灰度与护栏</span></div><a class="file-link" href="可执行代码包/outputs/upgrade_demo_evidence.json">证据</a></div><div class="trace-row"><time>STAT</time><div><b>rate_aware_rca + association</b><span>三重分解、max-T、holdout、manifest</span></div><a class="file-link" href="可执行代码包/outputs/lineB_rate_aware_rca.json">输出</a></div><div class="trace-row"><time>TEST</time><div><b>test_upgrade_v12.py</b><span>6 项聚焦测试，已回归通过</span></div><a class="file-link" href="可执行代码包/tests/test_upgrade_v12.py">测试</a></div></div><div class="package-strip"><div class="package-item"><b>纯 Python</b><span>Python 3.10+ / numpy</span></div><div class="package-item"><b>离线可跑</b><span>不调用商业 API</span></div><div class="package-item"><b>证据 JSON</b><span>14+ 输出文件</span></div><div class="package-item"><b>生产边界</b><span>adapter 替换</span></div></div></section></div>
+          <section class="card card-pad" style="margin-top:14px"><div class="section-head"><div><h2>现有评测证据</h2><p>保留 benchmark 图作为代码包中的可视化产物。图中为既有 v3 基准结果；复赛新增的 Evidence Pack 与 JSON 输出在同一包内。</p></div><span class="pill">outputs/v3_benchmark.png</span></div><img class="proof-image" src="可执行代码包/outputs/v3_benchmark.png" alt="Track 2 benchmark results"></section>
+          <p class="footnote">交付包中的 fixture、公开数据和 dry-run 仅用于方法和工程验证。真实分层面板、授权外部数据、反事实验证与生产实验平台必须重新运行并留存来源、授权、scope 和审批记录。</p>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script>
+    const labels = { overview: '运行控制台', initial: '初赛方案', semifinal: '复赛方案', evidence: '证据链路', package: '可执行代码包' };
+    const navButtons = [...document.querySelectorAll('.nav button')];
+    const views = [...document.querySelectorAll('.view')];
+    function showView(id) {
+      navButtons.forEach(button => button.classList.toggle('active', button.dataset.view === id));
+      views.forEach(view => view.classList.toggle('active', view.id === id));
+      document.getElementById('crumb').textContent = labels[id];
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    navButtons.forEach(button => button.addEventListener('click', () => showView(button.dataset.view)));
+    document.querySelectorAll('[data-jump]').forEach(button => button.addEventListener('click', event => { event.preventDefault(); showView(button.dataset.jump); }));
+
+    const flowButtons = [...document.querySelectorAll('[data-flow]')];
+    flowButtons.forEach(button => button.addEventListener('click', () => {
+      flowButtons.forEach(item => item.classList.toggle('active', item === button));
+      document.getElementById('flow-lineb').hidden = button.dataset.flow !== 'lineb';
+      document.getElementById('flow-linea').hidden = button.dataset.flow !== 'linea';
+    }));
+
+    const liveSteps = [
+      {id:'I0', lane:'intent', title:'意图识别', tool:'N2 LocalLLMIntentAdapter / rule fallback', artifact:'AnalysisIntent + trace', input:'经营问题文本', operation:'Schema 校验；失败记录 fallback'},
+      {id:'A1', lane:'a', title:'读取当前实验', tool:'experiment registry adapter', artifact:'experiment groups', input:'实验 ID、组别、随机化元数据', operation:'锁定可识别的 control / treatment'},
+      {id:'B1', lane:'b', title:'读取经营面板', tool:'rate-aware panel adapter', artifact:'60d stratified panel', input:'2 region × 2 channel × 2 version', operation:'读取 numerator / denominator；8 个完整子空间'},
+      {id:'A2', lane:'a', title:'基线与分组评分', tool:'persistent baseline scorer', artifact:'group-level rate gaps', input:'各实验组曝光、转化分子分母', operation:'计算每组概率差、样本量、护栏指标'},
+      {id:'B2', lane:'b', title:'构造未解释残差', tool:'control + registered-effect ledger', artifact:'residual series', input:'treated-control gap + 已登记实验后验', operation:'剔除已有解释；剩余量不强行摊派'},
+      {id:'A3', lane:'a', title:'Bayesian 后验', tool:'Beta-Binomial + probability-scale pooling', artifact:'posterior decision', input:'每组 clicks / impressions', operation:'输出概率差、区间、P(direction)、HTE'},
+      {id:'B3', lane:'b', title:'双向异动切面', tool:'two-sided step detector + rate RCA', artifact:'windows + top scopes', input:'residual level / step', operation:'abs(step) 判异动；保留 up/down；rate/mix/interaction 闭合'},
+      {id:'A4', lane:'a', title:'当前实验决策', tool:'claim ledger + guardrail gate', artifact:'decision + next action', input:'posterior + guardrails', operation:'继续、暂停建议或回滚建议；不自动改变真实流量'},
+      {id:'B4', lane:'b', title:'三层因子扫描', tool:'factor registry + derived features', artifact:'level / velocity / acceleration', input:'内部与授权外部因子快照', operation:'平滑后生成一阶、二阶离散差分'},
+      {id:'B5', lane:'b', title:'滞后关联与留出', tool:'block bootstrap + max-T + holdout', artifact:'ranked candidates', input:'M×D×S×L×K search grid', operation:'锁定候选；独立下一窗口复核方向和覆盖率'},
+      {id:'C1', lane:'merge', title:'下一窗口验证编排', tool:'validation planner', artifact:'TargetedExperimentSpec', input:'候选因子 + 目标切面 + 可实验性', operation:'可控候选进定向 A/B；外部因子进准实验或应对策略 A/B'},
+      {id:'C2', lane:'merge', title:'Evidence Pack', tool:'trace + digest + report renderer', artifact:'replayable artifact', input:'A/B 双线所有中间对象', operation:'汇总审计链；候选保留，验证结果写回因子库'}
+    ];
+    const fallbackRows = Array.from({length:24}, (_, index) => { const day = 36 + index; const residual = day < 40 ? (index % 3 - 1) * 3.2 : day < 50 ? 38 + (index % 4) * 2.6 : -46 - (index % 5) * 4.1; return {day, control:1000 + day * 2, treated:1000 + day * 2 + residual, gap:residual, residual, abs_residual:Math.abs(residual), direction:residual >= 0 ? 'up' : 'down'}; });
+    const fallbackCandidates = [
+      {candidate_id:'cand-001', factor_id:'internal.checkout_error_rate.level', parent_factor_id:'internal.checkout_error_rate', derived_layer:'level', claim_type:'FACTOR_CANDIDATE', scope_match:0.88, source_reliability:0.88, lag_days:0, max_t_pvalue:0.014, source_uri:'fixture://internal-observability/checkout-errors', license_ref:'fixture-only', experimentability:'controllable'},
+      {candidate_id:'cand-002', factor_id:'external.competitor_pressure_index.velocity', parent_factor_id:'external.competitor_pressure_index', derived_layer:'velocity', claim_type:'FACTOR_CANDIDATE', scope_match:0.62, source_reliability:0.65, lag_days:2, max_t_pvalue:0.028, source_uri:'fixture://authorized-event-feed/competitor-pressure', license_ref:'fixture-only', experimentability:'external_or_observational'},
+      {candidate_id:'cand-003', factor_id:'external.fx_rate_usd_cny.acceleration', parent_factor_id:'external.fx_rate_usd_cny', derived_layer:'acceleration', claim_type:'FACTOR_CANDIDATE', scope_match:0.55, source_reliability:0.70, lag_days:14, max_t_pvalue:0.041, source_uri:'fixture://authorized-macro-feed/usd-cny', license_ref:'fixture-only', experimentability:'external_or_observational'}
+    ];
+    const fallbackManifest = {M:4,D:3,S:3,L:29,K:1,N:1044,valid_comparisons:348,block_length:4,bootstrap_replicates:199,derived_layers:['level','velocity','acceleration'],selection_policy:'discovery_then_holdout_then_validation',selection_set_digest:'sha256:offline-fixture'};
+    const fallbackPlans = fallbackCandidates.map(candidate => ({factor_id:candidate.factor_id, derived_layer:candidate.derived_layer, selected_lag_days:candidate.lag_days, next_window_action:candidate.experimentability === 'controllable' ? 'run_targeted_abtest' : 'run_mitigation_abtest_and_quasi_experiment', target_scope:{region:'east',channel:'paid',version:'8.4'}, discovery_window:[0,49], target_window:[60,73], design:candidate.experimentability === 'controllable' ? 'within_scope_randomized_intervention' : 'control_series_or_synthetic_control_with_holdout', primary_estimand:'rate difference', experiment_spec:{metric:'issued_policies'}}));
+    const fallbackBOutputs = {association_discovery:{anomaly_windows:[{start_day:38,end_day:42},{start_day:49,end_day:53}],candidate_count:13,bh_q_survivors:2,holdout_survivors:4,search_manifest:fallbackManifest,candidates:fallbackCandidates},rate_aware_rca:{candidate_count:8,candidate_count_scored:26,candidates:[{scope:{region:'east',channel:'paid',version:'8.4'},gap_change:-0.022,rate_contribution:-0.019,mix_contribution:-0.002,interaction_contribution:-0.001,decomposition_closure_error:0,decomposition_status:'CLOSED'}]},factor_library:[{name:'结算错误率',factor_id:'internal.checkout_error_rate',source_type:'factor_series',license_ref:'fixture-only',evidence:[1],snapshots:[1]},{name:'竞品压力指数',factor_id:'external.competitor_pressure_index',source_type:'factor_series',license_ref:'fixture-only',evidence:[1],snapshots:[1]},{name:'美元兑人民币汇率',factor_id:'external.fx_rate_usd_cny',source_type:'factor_series',license_ref:'fixture-only',evidence:[1],snapshots:[1]}],validation_plans:fallbackPlans,unknown_bucket:{mean_residual_late_window:-58.4}};
+    const liveFallback = {
+      full_review: { title: '全链路：经营异常自动复核', claim: 'MULTI_ROUTE_REVIEW', metrics: {'已运行线路':'A + B + 外部 + N1/N2/N3','B 线候选':'13','关联比较':'1044','A 线决策':'ROLLBACK_RECOMMENDED','外部映射':'0.6667','N3 护栏':'BREACHED'}, outputs: {line_b:fallbackBOutputs,'A 线':'随机化 Bundle/HTE 实验结论','外部':'时间线映射和未知保留','N1/N2/N3':'数据源、意图兜底、5% 灰度和暂停建议'}, data_details:{mode:'deterministic_fixture',rows:fallbackRows}, evidence: 'offline fixture · composite evidence pack' },
+      line_b: { title: 'B 线：开放因子发现', claim: 'FACTOR_CANDIDATE / TEMPORAL_ASSOCIATION', metrics: {'异常窗口':'day 40 起','RCA Top 1':'east / paid / 8.4','分解状态':'CLOSED','搜索规模':'M=4 · D=3 · S=3 · L=29 · N=1044','holdout':'独立下一窗口'}, outputs: fallbackBOutputs, data_details:{mode:'deterministic_fixture',rows:fallbackRows}, evidence: 'offline fixture · lineB_association_discovery.json' },
+      line_a: { title: 'A 线：UI 改版实验', claim: 'CAUSAL_READY', metrics: {'Bundle 后验':'P(实际损害)=1.000','整体概率差':'-0.0166','HTE':'低端设备 -0.0272','决策':'ROLLBACK_RECOMMENDED'}, outputs: {'输入':'随机化曝光级 click/impression','贝叶斯':'Beta-Binomial posterior','组件实验':'text_density / image_component','交付':'回滚建议 + 下一轮实验设计'}, evidence: 'offline fixture · demo_evidence.json' },
+      external: { title: '外部事件映射', claim: 'TEMPORAL_ASSOCIATION + UNEXPLAINED', metrics: {'检测异常':'3','已映射':'2','映射覆盖率':'0.6667','未映射':'1'}, outputs: {'已映射':'促销日历、监管公开事件','未映射':'day 40：保留 UNEXPLAINED','使用原则':'时间对齐不是因果证明','下一步':'授权源 + holdout + 准实验'}, evidence: 'offline fixture · external_event_mapping.json' },
+      bayes_case_a: { title: '拒答：没有随机化', claim: 'REFUSED', metrics: {'因果门禁':'DESCRIPTIVE_ONLY','Bayesian 层':'不输出因果决策','拒答':'true','下一步':'补建随机实验'}, outputs: {'原因':'观测性共变不能识别处理效应','仍可输出':'描述性统计与候选','禁止输出':'因果结论、自动动作'}, evidence: 'offline fixture · bayes-case A' }
+    };
+    const safe = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+    const statusPill = (text, kind='') => `<span class="pill ${kind}">${safe(text)}</span>`;
+    function stepState(step, index, active, finished) {
+      if (finished) return {done:true, running:false};
+      if (index === 0) return {done:active > 0, running:active === 0};
+      if (step.lane === 'a' || step.lane === 'b') {
+        const laneIndex = liveSteps.filter(item => item.lane === step.lane).indexOf(step);
+        const parallelPhase = Math.max(0, active - 1);
+        return {done:parallelPhase > laneIndex, running:parallelPhase === laneIndex};
+      }
+      const mergeStart = 1 + Math.max(
+        liveSteps.filter(item => item.lane === 'a').length,
+        liveSteps.filter(item => item.lane === 'b').length,
+      );
+      const mergeIndex = liveSteps.filter(item => item.lane === 'merge').indexOf(step);
+      const mergePhase = active - mergeStart;
+      return {done:mergePhase > mergeIndex, running:mergePhase === mergeIndex};
+    }
+    function renderTimelineStep(step, index, active, finished) {
+      const current = stepState(step, index, active, finished);
+      const state = current.done ? '已完成' : current.running ? '运行中' : '等待';
+      return `<div class="live-step ${current.done ? 'done' : current.running ? 'running' : ''}"><span class="step-no">${step.id}</span><div><b>${step.title}</b><small>${step.tool} → ${step.artifact}</small><details class="step-detail"><summary>查看输入 / 运算 / 输出</summary><span><i>IN</i>${step.input}</span><span><i>OP</i>${step.operation}</span><span class="step-out"><i>OUT</i>${step.artifact}${current.done ? ' · fixture contract recorded' : ''}</span></details></div>${statusPill(state, current.done ? 'green' : current.running ? 'cyan' : '')}</div>`;
+    }
+    function drawLiveTimeline(active, finished) {
+      const intent = liveSteps.findIndex(step => step.lane === 'intent');
+      const intentStep = liveSteps[intent];
+      const branch = (lane, title, note) => { const laneItems = liveSteps.filter(step => step.lane === lane); const complete = laneItems.filter(step => stepState(step, liveSteps.indexOf(step), active, finished).done).length; return `<section class="run-lane ${lane}"><div class="branch-head"><div><b>${title}</b><small>${note}</small></div>${statusPill(complete + '/' + laneItems.length, lane === 'a' ? 'cyan' : 'gold')}</div><div class="lane-steps">${liveSteps.map((step, index) => step.lane === lane ? renderTimelineStep(step, index, active, finished) : '').join('')}</div></section>`; };
+      const merge = liveSteps.filter(step => step.lane === 'merge').map(step => renderTimelineStep(step, liveSteps.indexOf(step), active, finished)).join('');
+      document.getElementById('live-timeline').innerHTML = `<div class="branch-wrap"><div class="intent-node">${renderTimelineStep(intentStep, intent, active, finished)}</div><div class="branch-grid">${branch('a','A 线 · 当前实验评分','当前窗口：基线 → 分组评分 → Bayesian 后验 → 决策')}${branch('b','B 线 · 开放因子挖掘','当前窗口：面板 → 残差 → 异动切面 → 三层因子 → 留出')}</div><div class="merge-node"><b>汇合 · 下一窗口验证与交付</b><small>B 线候选转为实验规格，A 线在下一窗口验证</small><div class="lane-steps">${merge}</div></div></div>`;
+    }
+    function claimNote(claim, scenario) {
+      if (String(claim).includes('REFUSED')) return '当前数据没有随机化或合格准实验，系统只交付描述性结果和补数/实验建议。';
+      if (String(claim).includes('TEMPORAL')) return '外部事件只完成时间对齐或候选关联，不能写成“导致”；未映射部分保持未知。';
+      if (scenario === 'line_a') return '该场景具备随机分配条件，才允许进入实验效应和灰度审批链。';
+      return '候选已从可观测数据入口生成，但仍需独立窗口或干预验证。';
+    }
+    function renderLiveOutput(data, offline, options) {
+      const metrics = data.metrics || {}, outputs = data.outputs || data.key_outputs || {};
+      const metricHtml = Object.entries(metrics).slice(0, 8).map(([key, value]) => `<div class="live-fact"><label>${safe(key)}</label><b>${safe(typeof value === 'object' ? JSON.stringify(value) : value)}</b><small>${offline ? '本地脱敏数据回放 回退' : 'HTTP API · fixture 计算'}</small></div>`).join('');
+      const tone = String(data.claim).includes('REFUSED') ? 'red' : String(data.claim).includes('TEMPORAL') ? 'gold' : '';
+      const evidence = {title:data.title, source:offline?'本地脱敏数据回放':'Python scenario-run API', user_task:document.getElementById('live-task').value, agent_intent_stage:data.agent_plan && data.agent_plan.stage, agent_plan:data.agent_plan && data.agent_plan.reply, claim:data.claim, next_step:options.scenario==='line_a'?'A/B + N3 dry-run':options.scenario==='bayes_case_a'?'补建随机实验':'holdout then validation', governance:{unknown_residual_reallocated:false, external_events_are_causal:false, automatic_release_or_rollback:false}};
+      const bLine = outputs.line_b || outputs;
+      const association = bLine.association_discovery || {};
+      const rca = bLine.rate_aware_rca || {};
+      const libraryResult = bLine.factor_library || {};
+      const library = Array.isArray(libraryResult) ? libraryResult : (libraryResult.candidates || []);
+      const plans = bLine.validation_plans || [];
+      const manifest = association.search_manifest || {};
+      const rcaCandidate = rca.candidates && rca.candidates[0];
+      const decomposition = rcaCandidate || {};
+      const unknown = bLine.unknown_bucket || {};
+      const ledgerHtml = (association.candidates || rcaCandidate) ? `<section class="result-section"><div class="section-head"><div><h3>本次运行账本</h3><p>用于复核输入、计算规模和证据状态。数值来自本次 Python 管线或明确标记的本地脱敏数据回放。</p></div>${statusPill(offline ? 'OFFLINE FIXTURE' : 'HTTP PIPELINE','cyan')}</div><table class="ledger-table"><tbody><tr><th>指标与窗口</th><td><code>issued_policies</code> · estimand=<code>rate difference</code> · discovery <code>[0,49]</code> · next window <code>[50,59]</code></td></tr><tr><th>异常与未知</th><td>异常窗口 <code>${safe(JSON.stringify(association.anomaly_windows || []))}</code>；unknown late-window mean residual <code>${safe(unknown.mean_residual_late_window || 'not available')}</code>；未解释部分保持 <code>UNEXPLAINED</code></td></tr><tr><th>RCA 分解</th><td>${rcaCandidate ? `<code>${safe(JSON.stringify(rcaCandidate.scope))}</code> · gap change <code>${safe(rcaCandidate.gap_change)}</code> · rate <code>${safe(rcaCandidate.rate_contribution)}</code> · mix <code>${safe(rcaCandidate.mix_contribution)}</code> · interaction <code>${safe(rcaCandidate.interaction_contribution)}</code> · closure error <code>${safe(rcaCandidate.decomposition_closure_error)}</code>` : '当前场景不执行 rate-aware RCA'}</td></tr><tr><th>关联搜索</th><td><code>M=${safe(manifest.M || 0)} D=${safe(manifest.D || 0)} S=${safe(manifest.S || 0)} L=${safe(manifest.L || 0)} K=${safe(manifest.K || 0)} N=${safe(manifest.N || 0)}</code> · detrended moving-block null · block=<code>${safe(manifest.block_length || 'n/a')}</code> · B=<code>${safe(manifest.bootstrap_replicates || 'n/a')}</code></td></tr><tr><th>选择后防线</th><td>BH q survivors=<code>${safe(association.bh_q_survivors || 0)}</code>（仅辅助） · holdout survivors=<code>${safe(association.holdout_survivors || 0)}</code> · 验证计划=<code>${safe(plans.length)}</code>；候选在完成独立验证前不升级因果。</td></tr></tbody></table></section>` : '';
+      const details = (data.data_details && data.data_details.rows) || [];
+      const residual = details.map(row => Number(row.residual));
+      const min = residual.length ? Math.min(...residual) : 0, max = residual.length ? Math.max(...residual) : 1;
+      const spread = Math.max(max - min, 1);
+      const points = residual.map((value, index) => `${(index / Math.max(residual.length - 1, 1) * 100).toFixed(1)},${(94 - ((value - min) / spread * 80)).toFixed(1)}`).join(' ');
+      const chart = details.length ? `<div class="mini-chart"><div class="section-head"><div><h3>异常窗口残差轨迹</h3><p>day ${details[0].day} - ${details[details.length - 1].day}；真实执行的 fixture 面板。</p></div>${statusPill('UNEXPLAINED 保留','red')}</div><svg viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="残差趋势"><line x1="0" y1="50" x2="100" y2="50" stroke="#d9e3e6" stroke-dasharray="2 2"/><polyline points="${points}" fill="none" stroke="#c54843" stroke-width="2.2" vector-effect="non-scaling-stroke"/><line x1="17" y1="0" x2="17" y2="100" stroke="#b67b13" stroke-dasharray="3 3" vector-effect="non-scaling-stroke"/><line x1="58" y1="0" x2="58" y2="100" stroke="#176fc0" stroke-dasharray="3 3" vector-effect="non-scaling-stroke"/></svg><p>橙线：未登记阶跃附近；蓝线：外部事件窗口。趋势只用于候选筛选，不构成因果证明。</p></div>` : '';
+      const rcaVisual = rcaCandidate ? `<div class="mini-chart"><div class="section-head"><div><h3>分层 RCA 命中</h3><p>Rate / mix / interaction 三重分解严格闭合。</p></div>${statusPill(rcaCandidate.decomposition_status || 'CLOSED','green')}</div><div class="library-list"><div class="library-item"><b>${safe(JSON.stringify(rcaCandidate.scope))}</b><small>top scope · priority ${safe(rcaCandidate.priority || rcaCandidate.score || rcaCandidate.ripple_score || 'n/a')}</small></div><div class="library-item"><b>scope gap change: ${safe(rcaCandidate.gap_change)}</b><small>treated-control 的概率差变化；不是该分层自身造成变化的证明</small></div><div class="library-item"><b>候选扫描 ${safe(rca.candidate_count_scored || rca.candidate_count || 0)} 个子空间</b><small>候选输出 ${safe(rca.candidate_count || 0)} 个；完整面板才允许 CLOSED</small></div></div></div>` : '';
+      const detailsTable = details.length ? `<section class="result-section"><div class="section-head"><div><h3>运行数据明细</h3><p>来自本次 B 线执行的异常窗口；展示 control、treated、gap、残差绝对值和方向。</p></div>${statusPill(`${details.length} rows`,'cyan')}</div><div class="data-scroll"><table class="data-table"><thead><tr><th>day</th><th>control</th><th>treated</th><th>gap</th><th>|residual|</th><th>direction</th></tr></thead><tbody>${details.map(row => `<tr><td>${row.day}</td><td>${row.control}</td><td>${row.treated}</td><td class="${row.gap < 0 ? 'negative' : ''}">${row.gap}</td><td class="${row.abs_residual > 0 ? 'negative' : ''}">${row.abs_residual ?? row.residual}</td><td>${safe(row.direction || (row.residual < 0 ? 'down' : 'up'))}</td></tr>`).join('')}</tbody></table></div></section>` : '';
+      const candidateTable = association.candidates && association.candidates.length ? `<section class="result-section"><div class="section-head"><div><h3>关联候选与统计证据</h3><p>事件候选做窗口匹配；序列候选分别检验 level、velocity、acceleration。所有条目保留来源、许可和可验证路线。</p></div>${statusPill(`M=${manifest.M} · D=${manifest.D || 0} · N=${manifest.N}`,'cyan')}</div><div class="data-scroll"><table class="data-table candidate-table"><thead><tr><th>factor / parent</th><th>layer</th><th>evidence</th><th>scope / reliability</th><th>lag / max-T p</th><th>source / license</th><th>next route</th></tr></thead><tbody>${association.candidates.map(item => `<tr><td>${safe(item.factor_id)}<br><small>${safe(item.parent_factor_id || '')}</small></td><td>${safe(item.derived_layer || 'event')}</td><td>${safe(item.claim_type)}</td><td>${safe(item.scope_match)} / ${safe(item.source_reliability)}</td><td>${item.lag_days === undefined ? 'event / -' : `${item.lag_days} / ${item.max_t_pvalue}`}</td><td>${safe(item.source_uri || 'n/a')}<br>${safe(item.license_ref || 'missing')}</td><td>${safe(item.experimentability || item.validation_route)}</td></tr>`).join('')}</tbody></table></div></section>` : '';
+      const libraryHtml = library.length ? `<section class="result-section"><div class="section-head"><div><h3>候选因子库 / Factor RAG</h3><p>本次运行写入内存 SQLite Registry 后再检索返回。RAG 提供溯源和验证模板，不参与后验计算。</p></div>${statusPill(`${library.length} factors`,'cyan')}</div><div class="library-list">${library.map(item => `<div class="library-item"><b>${safe(item.name)} <span style="color:#73878e;font-weight:400">${safe(item.factor_id)}</span></b><small>${safe(item.source_type)} · ${safe(item.license_ref || 'missing license')} · evidence ${item.evidence ? item.evidence.length : 0} · snapshots ${item.snapshots ? item.snapshots.length : 0} · ${item.license_ref === 'fixture-only' ? 'fixture provenance only; not production data' : (item.production_eligible ? 'source/evidence license present' : 'not eligible')}</small></div>`).join('')}</div></section>` : '';
+      const planHtml = plans.length ? `<section class="result-section"><div class="section-head"><div><h3>下一窗口实验队列</h3><p>B 线候选在当前窗口冻结；下一窗口按候选可控性进入定向 A/B 或外部准实验。实验规格可直接交给 N3 dry-run。</p></div>${statusPill(`${plans.length} plans`,'gold')}</div><div class="library-list">${plans.slice(0, 12).map(plan => { const spec = plan.experiment_spec || {}; return `<div class="library-item"><b>${safe(plan.factor_id)} · ${safe(plan.selected_lag_days ?? 'no-lag')} → ${safe(plan.next_window_action)}</b><small>layer=${safe(plan.derived_layer || 'level')} · scope ${safe(JSON.stringify(plan.target_scope))} · discovery ${safe(JSON.stringify(plan.discovery_window))} → target ${safe(JSON.stringify(plan.target_window))} · ${safe(plan.design)} · metric=${safe(spec.metric || plan.primary_estimand)}</small></div>`; }).join('')}</div></section>` : '';
+      return `<div class="live-metrics">${metricHtml}</div><div class="live-alert ${tone}"><b>最终证据状态：${safe(data.claim)}</b><br>${claimNote(data.claim, options.scenario)}</div>${ledgerHtml}<div class="result-visuals">${chart}${rcaVisual}</div>${detailsTable}${candidateTable}${libraryHtml}${planHtml}<details class="result-section"><summary>查看原始结构化输出与 Evidence Pack</summary><div class="section-head" style="margin-top:10px"><div><h3>关键输出对象</h3><p>结构化结果，不是模型自由生成的根因结论。</p></div>${statusPill(data.evidence || 'Evidence Pack','green')}</div><pre class="live-json">${safe(JSON.stringify(outputs,null,2))}</pre><pre class="live-json" style="margin-top:10px">${safe(JSON.stringify(evidence,null,2))}</pre></details>`;
+    }
+    function normalizeLiveReport(report, scenario, agentPlan) {
+      const claims = {full_review:'MULTI_ROUTE_REVIEW', line_a:'CAUSAL_READY', line_b:'FACTOR_CANDIDATE / TEMPORAL_ASSOCIATION', external:'TEMPORAL_ASSOCIATION + UNEXPLAINED', bayes_case_a:'REFUSED'};
+      return {...report, claim:report.claim || claims[scenario] || 'UNEXPLAINED', evidence:report.evidence || report.evidence_pointer, outputs:report.outputs || report.key_outputs, agent_plan:agentPlan};
+    }
+    function intentPrompt(task, scenario) {
+      const suffix = {full_review:' 目标场景：全链路综合复核。', line_a:' 目标场景：组件 A/B 实验。', external:' 目标场景：外部事件时间线映射。', bayes_case_a:' 目标场景：拒答与数据不足。', line_b:' 目标场景：月度基线与未知因子排查。'}[scenario];
+      return `${task}${suffix}`;
+    }
+    async function requestIntent(task, scenario) {
+      const response = await fetch('/api/track2/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({session_id:`live-${Date.now()}`, message:intentPrompt(task, scenario)})});
+      if (!response.ok) throw new Error(`intent HTTP ${response.status}`);
+      return response.json();
+    }
+    async function runLiveTask() {
+      const button = document.getElementById('live-run'), scenario = document.getElementById('live-scenario').value, task = document.getElementById('live-task').value.trim();
+      const options = {scenario, failLLM:document.getElementById('sim-llm').checked, failExternal:document.getElementById('sim-external').checked, guardrail:document.getElementById('sim-guardrail').checked};
+      if (!task) { document.getElementById('runner-note').textContent = '请输入经营问题后再运行。'; return; }
+      button.disabled = true; button.textContent = '正在编排工具链...'; document.getElementById('live-state').textContent = '运行中'; document.getElementById('live-claim').textContent = '处理中'; document.getElementById('live-mode').textContent = '任务执行中';
+      try {
+        let agentPlan = null, offline = false;
+        try { agentPlan = await requestIntent(task, scenario); } catch (error) { offline = true; agentPlan = {stage:'fallback', reply:'服务不可用，使用离线规则意图与可复现 fixture。'}; }
+        const reportRequest = fetch(`/api/track2/scenario-run?scenario=${encodeURIComponent(scenario)}`, {cache:'no-store'});
+        const playbackPhases = 1 + Math.max(liveSteps.filter(step => step.lane === 'a').length, liveSteps.filter(step => step.lane === 'b').length) + liveSteps.filter(step => step.lane === 'merge').length;
+        for (let phase = 0; phase < playbackPhases; phase++) { drawLiveTimeline(phase, false); button.textContent = `运行中 · A/B 并行阶段 ${phase + 1}/${playbackPhases}`; await new Promise(resolve => setTimeout(resolve, 330)); }
+        let data;
+        try { const response = await reportRequest; if (!response.ok) throw new Error(`HTTP ${response.status}`); data = normalizeLiveReport(await response.json(), scenario, agentPlan); }
+        catch (error) { offline = true; data = liveFallback[scenario]; }
+        data = normalizeLiveReport(data, scenario, agentPlan);
+        const warnings = [];
+        if (options.failLLM) { warnings.push('N2：本地模型超时，规则兜底已接管'); data = {...data, claim:`${data.claim} · LLM_FALLBACK`, metrics:{...data.metrics,'意图层':'规则兜底'}}; }
+        if (options.failExternal) { warnings.push('N1：外部源不可用，外部候选保持 UNKNOWN'); data = {...data, claim:`${data.claim} · EXTERNAL_UNKNOWN`, metrics:{...data.metrics,'外部源':'不可用 → UNKNOWN'}}; }
+        if (options.guardrail && (scenario === 'line_a' || scenario === 'full_review')) { warnings.push('N3：护栏超限，只生成 PAUSE_RECOMMENDED'); data = {...data, claim:`${data.claim} · PAUSE_RECOMMENDED`, metrics:{...data.metrics,'护栏':'BREACHED → PAUSE_RECOMMENDED'}}; }
+        drawLiveTimeline(liveSteps.length, true); if (warnings.length) document.getElementById('live-timeline').insertAdjacentHTML('beforeend', `<div class="live-alert ${options.guardrail?'red':'gold'}"><b>异常处理</b><br>${warnings.map(safe).join('<br>')}</div>`);
+        document.getElementById('live-output').innerHTML = renderLiveOutput(data, offline, options); document.getElementById('live-state').textContent = '完成'; document.getElementById('live-claim').textContent = data.claim; document.getElementById('live-mode').textContent = offline ? '本地脱敏数据回放 完成' : 'HTTP API · fixture 完成'; document.getElementById('server-status').textContent = offline ? '本地脱敏数据回放 完成 · 可复现' : 'HTTP API 完成 · Evidence Pack';
+      } catch (error) {
+        document.getElementById('live-state').textContent = '异常已捕获'; document.getElementById('live-claim').textContent = '降级'; document.getElementById('live-mode').textContent = '可重试'; document.getElementById('live-output').innerHTML = `<div class="live-alert red"><b>本次运行未完成</b><br>${safe(error.message || error)}。按钮已恢复，可以调整场景后重试。</div>`;
+      } finally { button.disabled = false; button.textContent = scenario === 'full_review' ? '启动全链路复核' : '开始运行完整任务'; }
+    }
+    document.getElementById('live-run').addEventListener('click', runLiveTask);
+    document.getElementById('live-scenario').addEventListener('change', event => { document.getElementById('live-run').textContent = event.target.value === 'full_review' ? '启动全链路复核' : '开始运行完整任务'; });
+    document.getElementById('copy-command').addEventListener('click', async () => { const text = document.getElementById('start-command').textContent; try { await navigator.clipboard.writeText(text); document.getElementById('runner-note').textContent = '启动命令已复制。在终端执行后刷新本页，状态会切换为 HTTP 实机。'; } catch (_) { document.getElementById('runner-note').textContent = `请手动复制：${text}`; } });
+    document.getElementById('check-service').addEventListener('click', async () => { const note = document.getElementById('runner-note'); note.textContent = '正在检测本地服务...'; try { const response = await fetch('/api/health', {cache:'no-store'}); if (!response.ok) throw new Error(); const health = await response.json(); note.textContent = `服务已连接：${health.runtime} ${health.version}。本次运行将使用 HTTP 实机管线。`; } catch (_) { note.textContent = '未检测到本地服务。直接打开 HTML 时可运行本地脱敏数据回放；需要 HTTP 实机，请复制上方命令并在终端执行。'; } });
+
+    const files = {
+      readme: { title: 'README.md', note: '运行入口与复现边界', code: `<span class="comment"># 复赛升级 Demo：N1 + N2 + N3 离线回放</span>\n<span class="fn">python3</span> -m track2_v5.replay_upgrade_demo\n\n<span class="comment"># v12 聚焦回归：统计闭合、时序留出、RAG、N2、N3</span>\n<span class="fn">PYTHONPATH</span>=. <span class="fn">python3</span> -m unittest discover -s tests -v\n\n<span class="comment"># B 线候选与关联回放</span>\n<span class="fn">python3</span> -m track2_v5.rate_aware_rca\n<span class="fn">python3</span> -m track2_v5.association_discovery` },
+      rate: { title: 'track2_v5/rate_aware_rca.py', note: '概率差三重分解 + 多维候选', code: `<span class="kw">def</span> <span class="fn">decompose_rate_mix</span>(before, after):\n    <span class="comment"># Delta R = rate + mix + interaction</span>\n    rate = sum(s_before[i] * (r_after[i] - r_before[i]) <span class="kw">for</span> i <span class="kw">in</span> cells)\n    mix = sum((s_after[i] - s_before[i]) * r_before[i] <span class="kw">for</span> i <span class="kw">in</span> cells)\n    interaction = sum((s_after[i] - s_before[i]) * (r_after[i] - r_before[i]) <span class="kw">for</span> i <span class="kw">in</span> cells)\n    <span class="kw">return</span> {<span class="str">"status"</span>: <span class="str">"CLOSED"</span>, <span class="str">"closure_error"</span>: delta - rate - mix - interaction}` },
+      assoc: { title: 'track2_v5/association_discovery.py', note: '去趋势 block bootstrap + max-T + holdout', code: `<span class="comment"># 锁定候选集合后：去趋势、保留自相关、独立零分布</span>\nraw_q = <span class="fn">benjamini_hochberg</span>([record[<span class="str">"raw_pvalue"</span>] <span class="kw">for</span> record <span class="kw">in</span> tests])\nmax_t = <span class="fn">max_t_pvalues</span>(observed, null_statistics)\n\nsearch_manifest = {\n  <span class="str">"M"</span>: factors, <span class="str">"S"</span>: scopes, <span class="str">"L"</span>: lags, <span class="str">"K"</span>: <span class="num">1</span>,\n  <span class="str">"N"</span>: factors * scopes * lags,\n  <span class="str">"selection_set_digest"</span>: digest,\n  <span class="str">"selection_policy"</span>: <span class="str">"discovery_then_holdout_then_validation"</span>\n}` },
+      rag: { title: 'track2_v5/factor_registry.py', note: 'SQLite 因子、证据、快照与许可证', code: `<span class="kw">class</span> <span class="fn">FactorRegistry</span>:\n    <span class="kw">def</span> <span class="fn">register_factor</span>(self, factor): ...\n    <span class="kw">def</span> <span class="fn">ingest_evidence</span>(self, evidence): ...\n    <span class="kw">def</span> <span class="fn">ingest_factor_snapshot</span>(self, snapshot): ...\n\n<span class="comment"># FTS5 失败时使用受限的字面 LIKE 回退</span>\nitem[<span class="str">"production_eligible"</span>] = <span class="fn">bool</span>(\n    item[<span class="str">"license_ref"</span>] <span class="kw">and</span> evidence <span class="kw">and</span> all(e[<span class="str">"license_ref"</span>] <span class="kw">for</span> e <span class="kw">in</span> evidence)\n)` },
+      agent: { title: 'track2_v5/agent_adapter.py', note: 'N2 严格 Schema / N3 人工门禁', code: `<span class="kw">def</span> <span class="fn">analyze</span>(text):\n    <span class="kw">try</span>:\n        intent = local_model(text)\n        <span class="fn">validate_analysis_intent</span>(intent)\n    <span class="kw">except</span> Exception:\n        intent = <span class="fn">rule_intent</span>(text)\n        trace.append(<span class="str">"rule_fallback"</span>)\n\n<span class="comment"># 护栏触发只给建议，永不自动回滚或放量</span>\n<span class="kw">return</span> {<span class="str">"automatic_rollback"</span>: <span class="kw">False</span>, <span class="str">"human_approval_required"</span>: <span class="kw">True</span>}` },
+      demo: { title: 'track2_v5/replay_upgrade_demo.py', note: 'N1 / N2 / N3 可回放 Demo', code: `timeline = authorized_event_source.<span class="fn">fetch</span>()\nllm_run = LocalLLMIntentAdapter(local_model).<span class="fn">analyze</span>(user_text)\nexecution = experiment_agent.<span class="fn">create_and_canary</span>(design, approval_ref, traffic_percent=<span class="num">5</span>)\n\n<span class="comment"># 输出：mapping、Factor RAG、fallback、canary、guardrail、trace</span>\n<span class="fn">write_evidence_pack</span>(evidence)` },
+      tests: { title: 'tests/test_upgrade_v12.py', note: '6 项聚焦回归', code: `<span class="kw">class</span> <span class="fn">UpgradeV12Tests</span>(unittest.TestCase):\n    <span class="kw">def</span> <span class="fn">test_probability_decomposition_closes_with_interaction</span>(self): ...\n    <span class="kw">def</span> <span class="fn">test_association_has_holdout_and_block_manifest</span>(self): ...\n    <span class="kw">def</span> <span class="fn">test_factor_rag_keeps_provenance</span>(self): ...\n    <span class="kw">def</span> <span class="fn">test_n2_fallback_and_n3_human_gate</span>(self): ...` },
+      evidence: { title: 'outputs/upgrade_demo_evidence.json', note: '离线回放 Evidence Pack', code: `{\n  <span class="str">"mode"</span>: <span class="str">"offline_replay"</span>,\n  <span class="str">"production_connectivity"</span>: <span class="kw">false</span>,\n  <span class="str">"n2"</span>: {<span class="str">"llm_fallback_used"</span>: <span class="kw">true</span>},\n  <span class="str">"n3"</span>: {<span class="str">"platform_mode"</span>: <span class="str">"dry_run"</span>, <span class="str">"guardrail_status"</span>: <span class="str">"BREACHED"</span>},\n  <span class="str">"governance"</span>: {<span class="str">"automatic_release_or_rollback"</span>: <span class="kw">false</span>}\n}` }
+    };
+    document.querySelectorAll('[data-file]').forEach(button => button.addEventListener('click', () => {
+      const file = files[button.dataset.file];
+      document.querySelectorAll('[data-file]').forEach(item => item.classList.toggle('active', item === button));
+      document.getElementById('file-title').textContent = file.title;
+      document.getElementById('file-note').textContent = file.note;
+      document.getElementById('code-pane').innerHTML = file.code;
+    }));
+  </script>
+</body>
+</html>
