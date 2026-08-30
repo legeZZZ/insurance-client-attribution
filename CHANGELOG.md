@@ -1,5 +1,140 @@
 # 变更日志
 
+## 2026-08-30 — P0 因果门禁与 Line B 归因修复
+
+### 修复范围
+
+本次修改覆盖因果就绪门禁、Line B 外部冲击归因、实验完整性检查、聊天确认、演示页 API、场景报告和文档。4 个 P0 问题均已修复并加入回归测试，同时修正了接口、schema 和告警字段一致性问题。
+
+### 1. 必要结果字段为 `NULL` 时错误通过 `CAUSAL_READY`
+
+**原问题：** 门禁只检查必要列是否存在，没有把必要结果字段中的空值纳入 `data_missing`。因此，列存在但部分出单或保费结果为 `NULL` 时，仍可能输出因果估计。
+
+**修复：**
+
+- `causal_readiness` 同时检查必要列的存在性和非空数量。
+- 任一必要结果字段存在空值时，将对应的 `non_null_<field>` 检查加入 `data_missing`。
+- 门禁按 fail-closed 处理：返回 `DATA_INSUFFICIENT`，不再生成因果估计。
+
+**修改文件：** `runtime/analysis.py`、`tests/test_regressions.py`。
+
+### 2. Line B 对共同外部冲击进行了二次扣减
+
+**原问题：** 处理组和对照组共同经历的冲击已经通过 `treated-control` 差分消除，旧实现又从差分残差中减去一次 control 侧冲击，可能人为放大、缩小甚至反转归因结果。
+
+**修复：**
+
+- 共同外部事件只作为 `TEMPORAL_ASSOCIATION` 展示，不自动分配为处理-对照 gap 的贡献。
+- 新增 `external_control_deviation`，用于描述 control 序列在事件附近的偏离，但不把它解释为差分效应。
+- 无法识别组间差异暴露时，事件的 `gap_contribution` 为 `null`，allocation policy 明确标记为不分配。
+- 删除语义已经失效的旧字段 `external_explained`，避免下游把全零占位值误解为外部事件不存在；外部事件观测统一读取 `external_control_deviation`。
+
+**行为变化：** Line B 的归因残差保持为处理组与对照组的差异。共同冲击可以作为解释上下文，但只有在未来存在可识别的组间差异暴露时，才能进入 gap allocation。
+
+**修改文件：** `attribution/baseline_attribution.py`、`tests/test_regressions.py`、`README.md`、`README.zh-CN.md`、`docs/methodology.md`。
+
+### 3. SRM 与分配稳定性按明细行而不是随机化单位计算
+
+**原问题：** 旧实现直接统计数据行数。同一客户、代理人或门店产生不同数量的曝光行时，高频单位会被重复计数。例如两组各有 90 个客户，但 A 组每位客户有 10 行、B 组每位客户只有 1 行，按行会错误得到 900:90，并触发虚假 SRM。分配稳定性也会把重复观测误当成新分配。
+
+**修复：**
+
+- SRM 改为按 `randomization_unit` 去重后统计分组数量。
+- 分配稳定性改为按“分配周期 + 随机化单位”去重后统计。
+- 同一随机化单位落入多个处理组时，显式报告分配不一致并使完整性检查失败。
+- 同一随机化单位跨越多个分配周期时，显式报告周期不一致。
+- 诊断新增 `counting_unit`、`raw_row_count` 和 `randomization_unit_count`，可直接核对明细行数与真实随机化单位数。
+
+**修改文件：** `runtime/experiment_integrity.py`、`tests/test_regressions.py`、`README.md`、`README.zh-CN.md`。
+
+### 4. 否定表达可能被误判为确认并执行
+
+**原问题：** 旧逻辑使用子串匹配，所以“`不好`”包含“`好`”、“`not ok`”包含“`ok`”，都可能触发已规划分析。
+
+**修复：**
+
+- 输入先进行 Unicode NFKC 规范化、大小写折叠和首尾标点清理。
+- 规范化后的整条指令必须与允许词完全相等，不再使用子串匹配。
+- 当前允许的完整确认指令为：`确认`、`执行`、`好`、`好的`、`可以`、`run`、`yes`、`ok`。
+- “`不好`”、“`不执行`”、“`not ok`”等表达不会触发执行；`OK！` 等规范化后完全匹配的指令仍能确认。
+
+**修改文件：** `attribution/agent_chat.py`、`tests/test_regressions.py`。
+
+### 5. Web 演示页、场景目录与体验场景 schema 不一致
+
+**原问题：**
+
+- Web 演示页仍调用废弃的 `/api/track2/chat` 和 `/api/track2/scenario-run`。
+- 前端缺少 `EXPERIENCE_ABLATION` 场景映射。
+- 聊天场景目录把场景数硬编码为 5，但实际已有 6 个场景。
+- 体验场景报告仍读取旧字段 `nu_trajectory`，与当前产物中的 `shrinkage_strength_trajectory` 不一致。
+- 文档中的场景耗时与当前实测不一致。
+
+**修复：**
+
+- 演示页统一改用 `/api/attribution/chat` 和 `/api/attribution/scenario-run`。
+- 补充体验消融场景的前端映射和意图提示。
+- 场景数量改为根据 `SCENARIOS` 动态生成。
+- 体验报告改为读取和返回 `shrinkage_strength_trajectory`。
+- 按真实运行更新耗时：完整审查约 10 秒、Line A 约 2 秒、Line B 约 8 秒、外部证据和贝叶斯案例小于 1 秒、体验消融约 20–30 秒。
+
+**修改文件：** `web/static/semifinal-demo.html`、`attribution/agent_chat.py`、`attribution/scenario_reports.py`、`tests/test_regressions.py`、`README.md`、`README.zh-CN.md`。
+
+### 6. Line B 合并告警的数值字段不一致
+
+**原问题：** 合并相邻告警时，`step_score` 会被取整，但 `absolute_step` 没有同步。同一个告警对象中的有符号值与绝对值可能互相矛盾，影响 UI 展示和下游排序。
+
+**修复：** 合并后统一更新 `step_score`，并由最终值重新计算 `absolute_step`。
+
+**修改文件：** `attribution/baseline_attribution.py`、`tests/test_regressions.py`。
+
+### 7. 文档职责与数字同步
+
+- `README.md` 和 `README.zh-CN.md` 只描述当前可运行功能、API、统计口径、输出字段和可复现实测结果；同步了 Line B 外部事件语义、随机化单位口径、告警日期、六个场景和运行时间。
+- `docs/methodology.md` 只定义方法目标、评价指标、输出语义和限制；明确 Line B 的逐实验 RMSE 是精度指标，而效应总和只是当次样本的汇总展示值。
+- 删除方法文档中类似评语或宣传语的表述，避免把单次 demo 数字写成普遍方法结论；同时删除不存在的 `outputs/chat_demo_evidence.json` 引用。
+- 审计发现、修复历史、兼容性变化和验证证据集中记录在本 CHANGELOG。
+
+### 文件级变更清单
+
+| 文件 | 具体变化 |
+|---|---|
+| `runtime/analysis.py` | 必要结果字段空值进入因果就绪门禁；缺失时 fail closed。 |
+| `runtime/experiment_integrity.py` | SRM 和稳定性按随机化单位计算；增加跨组、跨周期检查及计数诊断。 |
+| `attribution/baseline_attribution.py` | 移除共同冲击的二次扣减；增加外部 control 偏离字段；同步告警绝对值。 |
+| `attribution/agent_chat.py` | 确认指令改为规范化后的完整匹配；场景数动态生成。 |
+| `attribution/scenario_reports.py` | 体验场景切换到当前 trajectory schema；更新运行耗时。 |
+| `web/static/semifinal-demo.html` | 更新 Attribution API 路径；补齐体验消融场景映射。 |
+| `tests/test_regressions.py` | 增加 NULL 门禁、共同冲击、unit-level SRM、精确确认、告警一致性、前端 API 和体验 schema 测试。 |
+| `README.md` | 同步英文功能说明、API、统计口径、场景输出和实测数字。 |
+| `README.zh-CN.md` | 同步中文功能说明、API、统计口径、场景输出和实测数字。 |
+| `docs/methodology.md` | 重构方法定义与指标边界，移除评语式表述和失效引用。 |
+| `CHANGELOG.md` | 记录问题原因、修复方式、文件影响、兼容性和验证结果。 |
+
+### 输出与兼容性变化
+
+- Line B 新增 `external_control_deviation`；无法识别差异外部贡献时，事件的 `gap_contribution` 为 `null`。
+- Line B 删除旧字段 `external_explained`；外部事件观测统一由 `external_control_deviation` 表达。
+- 实验完整性诊断新增 `counting_unit`、`raw_row_count`、`randomization_unit_count`。
+- 体验场景统一使用 `shrinkage_strength_trajectory`，不再读取旧名称 `nu_trajectory`。
+- 因果门禁比旧版更严格：必要结果字段存在空值的数据会由可分析变为 `DATA_INSUFFICIENT`。这是预期的安全性变化。
+
+### 验证结果
+
+- `python -m unittest discover -s tests -v`：21/21 项通过。
+- `uv run --frozen ruff check .`：通过。
+- `ruff format --check`：53 个文件通过。
+- Python `compileall`：通过。
+- 6 个内置场景均完成真实运行，没有使用 mock fallback。
+- 3 个种子、9 个治理案例通过：门禁准确率 1.0、错误因果输出率 0、拒绝召回率 1.0。
+- README 指标交叉检查、HTTP 健康及场景接口 smoke test、JSON 非有限数检查均通过。
+- Line B 实测复现当前文档数字：naive RMSE 约 10.233，hierarchical RMSE 约 5.552；效应总和分别约 116.37 和 119.35。这些是不同评价量，不再把效应总和包装成“总量守恒误差”。
+
+### 当前边界
+
+- Student-t 路径仍是实验性能力：即使校准覆盖通过，生产效用门禁未通过时也不会标记为 production eligible。
+- 本地 demo server 和静态演示页用于验证与展示，不等同于生产部署配置。
+
 ## 两日改动的项目综合影响（2026-08-29—2026-08-30）
 
 ### 总体判断

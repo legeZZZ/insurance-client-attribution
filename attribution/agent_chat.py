@@ -19,6 +19,7 @@ Wired into run_server.py as POST /api/attribution/chat {session_id, message}.
 from __future__ import annotations
 
 import time
+import unicodedata
 from collections import OrderedDict
 from pathlib import Path
 from threading import RLock
@@ -84,6 +85,13 @@ _MAX_SESSIONS = 1_000
 _SESSION_LOCK = RLock()
 _SESSIONS: OrderedDict[str, dict[str, Any]] = OrderedDict()
 
+_CONFIRM_COMMANDS = {"确认", "执行", "好", "好的", "可以", "run", "yes", "ok"}
+
+
+def _normalized_command(text: str) -> str:
+    normalized = unicodedata.normalize("NFKC", text).strip().casefold()
+    return normalized.strip("。.!！?？")
+
 
 def _session_state(session_id: str) -> dict[str, Any]:
     state = _SESSIONS.get(session_id)
@@ -98,7 +106,7 @@ def _session_state(session_id: str) -> dict[str, Any]:
 
 
 def _catalog_text() -> str:
-    lines = ["我可以演示以下 5 条可验证链路（回复编号或关键词选择）："]
+    lines = [f"我可以演示以下 {len(SCENARIOS)} 条可验证链路（回复编号或关键词选择）："]
     for i, s in enumerate(SCENARIOS):
         lines.append(f"  {i + 1}. {s['title']}（{s['est_seconds']}）")
     return "\n".join(lines)
@@ -147,10 +155,7 @@ def handle_message(
         trace: list[str] = [f"stage_in={state['stage']}"]
 
         if state["stage"] == "confirm":
-            if any(
-                keyword in text.lower()
-                for keyword in ["确认", "执行", "好", "run", "yes", "ok"]
-            ):
+            if _normalized_command(text) in _CONFIRM_COMMANDS:
                 execute_sid = str(state["scenario"])
                 state["stage"] = "intent"
                 state["scenario"] = None

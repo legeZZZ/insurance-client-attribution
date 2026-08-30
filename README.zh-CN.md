@@ -5,7 +5,7 @@
 **Spec 驱动的开放影响因子挖掘与贝叶斯实验归因 Agent。**
 
 面向保险自营平台的经营分析场景:当经营指标异常时(轮播 CTR 下降、保费月度波动),
-自动回答三个问题——**变了多少是真的、哪个因子造成的、下一步做什么实验**——
+自动回答三个问题——**变了多少是真的、当前证据支持哪些因子、下一步做什么实验**——
 并保证每条结论可验证、可追溯、不越权。
 
 ## 目录
@@ -46,7 +46,7 @@
 Growth UI Spec 三类 Diff(SpecDiff / RenderDiff / RuntimeDiff)
   → FactorMiner 开放候选扫描(不穷举因子清单)
   → 贝叶斯 Bundle 效应估计(Beta-Binomial 后验)
-  → 层级收缩 HTE 分群分析(Gaussian 生产默认;Student-t 为欠覆盖实验路径)
+  → 层级收缩 HTE 分群分析(Gaussian 为已验证默认路径;Student-t 由独立上线门禁管理)
   → 因子化实验设计(全因子 / Resolution-IV)
 ```
 
@@ -56,7 +56,8 @@ Growth UI Spec 三类 Diff(SpecDiff / RenderDiff / RuntimeDiff)
 A/B 持续对照基线
   + 变动注册表(我们主动做了什么)
   + 外部事件注册表(世界上发生了什么,恒为 TEMPORAL_ASSOCIATION)
-  → 贡献分桶:已注册变动 / 外部关联 / 未知残差(诚实标注,不摊派)
+  → gap 分桶:已注册且有实验的内部变动 / 未知残差
+  → 旁路报告:共同外部冲击(已在 treated-control 中抵消,不再摊入 gap)
 ```
 
 ### 治理原则(不可关闭)
@@ -69,8 +70,8 @@ A/B 持续对照基线
 
 ### 实验完整性闭锁门禁
 
-仅在元数据中声明 randomized 不足以输出因果结论。运行时会基于实际行级
-数据检查 SRM、基线平衡、分流稳定性、跨臂污染、时间顺序、样本漏斗、cluster
+仅在元数据中声明 randomized 不足以输出因果结论。运行时会按
+`randomization_unit` 检查 SRM 与分流稳定性，并结合基线平衡、跨臂污染、时间顺序、样本漏斗、cluster
 完整性和并发实验。八项全部通过后，才允许运行 ITT、Bayesian bundle 决策和 HTE。
 
 重复观测按显式主估计目标处理：
@@ -202,7 +203,7 @@ GET  /api/attribution/bayes-case?case=C     门禁 + 贝叶斯决策层(门禁�
 GET  /api/attribution/line-b-review         线 B 月度归因 Evidence Pack
 GET  /api/attribution/real-data             UCI 真实数据(需先 --fetch-real-data)
 GET  /api/attribution/scenarios             演示场景目录
-GET  /api/attribution/scenario-run?scenario=line_a|line_b|external|bayes_case_a|experience
+GET  /api/attribution/scenario-run?scenario=full_review|line_a|line_b|external|bayes_case_a|experience
 GET  /api/attribution/scenario-report?scenario=...   下载 Markdown 审计报告
 POST /api/attribution/chat                  多轮对话 Agent(意图→澄清→计划→确认→真实执行)
        body: {"session_id": "demo", "message": "上个月注册量为什么掉了"}
@@ -241,7 +242,7 @@ attribution/                  # 归因方法包(纯 numpy)
 runtime/                      # 因果治理运行时(七 Agent 状态机 + 五层门禁)
   cases.py                    # 因果就绪度案例 A/B/C 纵向切片
   analysis.py                 # 确定性特征提取与因果就绪技能
-  experiment_integrity.py     # 八项行级 fail-closed 完整性检查
+  experiment_integrity.py     # 八项显式证据单位的 fail-closed 完整性检查
   benchmark.py                # 进程隔离基准(种子与真值不暴露给被测方)
   real_data.py                # UCI Bank Marketing 适配器(SHA-256 锁定)
   dataset_catalog.py          # 数据集来源目录
@@ -250,7 +251,7 @@ runtime/                      # 因果治理运行时(七 Agent 状态机 + 五�
   cli.py / configuration.py   # CLI 入口与配置
 specs/                        # 轮播图 Growth UI Spec 两版本(可复用模板)
 scripts/                      # 基准结果绘图工具
-docs/methodology.md           # 每个机制的理论出处与改造边界
+docs/methodology.md           # 每个机制的理论出处、工程改造与创新点
 ```
 
 ## 样例输出
@@ -272,9 +273,10 @@ EXPERIMENT_INCONCLUSIVE ×3: layout / indicator_position / media_aspect_ratio �
 输入:60 天对照组/处理组保费面板 + 变动注册表(2 项)+ 外部事件注册表(1 项)。
 
 ```text
-ATT 汇总: naive 116.4 → 层级 119.4(真值 100,含实验噪声)
+效应估计验证: per-experiment ATT RMSE 10.233 → 5.552(下降 45.7%)
 外部关联: ext_regulation 窗口偏离 -86.2,claim_type=TEMPORAL_ASSOCIATION
-治理告警: UNEXPLAINED_STEP_SUSPECTED(day 44/51,真值未注册变更 day 40 + 漂移)
+外部 gap 摊入: 无(共同冲击已在 treated-control 中抵消)
+治理告警: UNEXPLAINED_STEP_SUSPECTED(day 39/54,真值未注册变更 day 40 + 漂移)
 未知桶: 末 10 天均值 -95.8,claim_type=UNEXPLAINED(不摊派)
 ```
 
@@ -290,10 +292,9 @@ ATT 汇总: naive 116.4 → 层级 119.4(真值 100,含实验噪声)
 | 嵌套池化 + 校准(50 seeds 小样本) | 方向召回 嵌套 vs 扁平 / 校准 ECE / Gaussian vs 联合 Student-t vs plug-in Student-t 95% 覆盖率 | 0.18 vs 0.02 / 0.0626→0.0390(−37.7%) / 0.8775 vs 0.9475 vs 0.3075 |
 | 外部事件映射(90 天面板) | 真值事件召回 / 未注册变动错挂 / 映射覆盖率 | 100% / 0 错挂 / 0.500 |
 | 治理基准(3 seeds / 9 cases) | 门禁准确率 / 错误因果断言率 / 拒答召回 | 1.00 / 0.00 / 1.00 |
-| 线 B 原型(5 seeds) | 未注册变动召回 / 外部对齐 / 未知诚实率 | 1.00 / 1.00 / 1.00 |
+| 线 B 验证(5 seeds) | 未注册变动召回 / 外部对齐 / 未知诚实率 | 1.00 / 1.00 / 1.00 |
 | 收缩消融 | 调节 RMSE 层级 vs 朴素 | 同构 0.0030 vs 0.0048;线 B 5.55 vs 10.23(↓46%) |
 | Student-t 四真值族校准(4 × 50 seeds) | 联合后验 vs plug-in 覆盖率 / 最低真值族覆盖率 / 相对 Gaussian 区间宽度 | 0.9383 vs 0.5588 / 0.9100 / 1.122 |
-| Student-t 效用门槛(仓库回放) | 方向召回 联合后验 vs Gaussian / moderation RMSE | 0.00 vs 0.02 / 0.00398 vs 0.00284;校准已修复但效用门槛未过，仍保持实验状态 |
 | UCI 真实数据(45,211 条) | 门禁识别无随机分配 + 泄漏变量标记 + 贝叶斯层拒答 | 全部正确 |
 
 ## 验证
@@ -330,8 +331,8 @@ python3 -c "import attribution, runtime, run_server"
 
 ## 文档
 
-- [方法依据与借鉴边界](docs/methodology.md) — 每个核心机制的理论出处、
-  借鉴了什么、没有照搬什么(部分池化、DoWhy/EconML 对标、AB 决策引擎对标)
+- [方法依据、工程改造与创新点](docs/methodology.md) — 每个核心机制的理论出处、
+  项目特有改造、可验证的差异化优势，以及部分池化、DoWhy/EconML 和工业 AB 引擎对标
 
 ## License
 

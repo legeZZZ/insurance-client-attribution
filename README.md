@@ -6,7 +6,7 @@
 
 Built for insurance platform operations analytics: when a business metric moves
 unexpectedly (carousel CTR drops, monthly premium fluctuates), the tool answers
-three questions — **how much of the change is real, which factor caused it, and
+three questions — **how much of the change is real, which factors are supported by evidence, and
 what experiment to run next** — while keeping every conclusion verifiable,
 traceable, and within its evidence authority.
 
@@ -20,9 +20,10 @@ state machine and a Claim Ledger:
   HTE estimation → factorial experiment design. The factor space is open:
   candidates are discovered from spec differences, not enumerated by hand.
 - **Experiment baseline attribution (Line B)**: persistent A/B control baseline
-  + change registry + external-event alignment, bucketing each month's movement
-  into "what we did / what happened externally / unexplained residual" — with
-  the residual honestly labeled as unknown instead of being allocated away.
+  + change registry + external-event alignment. Experiment-backed internal
+  changes contribute to the treated−control gap; common external shocks are
+  reported separately as temporal associations because they already cancel in
+  that gap; the remaining residual is honestly labeled unknown.
 
 Governance principles (not optional):
 
@@ -36,9 +37,9 @@ Governance principles (not optional):
 ### Fail-closed experiment integrity
 
 Randomized metadata alone never authorizes a causal estimate. The runtime
-checks realized row-level evidence for sample-ratio mismatch, pre-treatment
-balance, allocation stability, contamination, temporal ordering, sample-funnel
-consistency, cluster integrity, and concurrent experiments. All eight checks
+checks sample-ratio mismatch and allocation stability at the randomization-unit
+level, plus pre-treatment balance, contamination, temporal ordering,
+sample-funnel consistency, cluster integrity, and concurrent experiments. All eight checks
 must pass before ITT, Bayesian bundle decisions, or HTE are evaluated.
 
 Repeated observations are handled according to an explicit primary estimand:
@@ -128,7 +129,7 @@ informative priors for the next:
 Requires Python 3.12+ and numpy (`pip install -r requirements.txt`).
 
 ```bash
-# ① Line A end-to-end demo + 7-seed benchmark (~16 s)
+# ① Line A end-to-end demo + 7-seed benchmark (~2 s on the reference machine)
 python3 -m attribution
 
 # ② Line B experiment baseline attribution + 5-seed validation
@@ -180,7 +181,7 @@ GET  /api/attribution/bayes-case?case=C     Gate + Bayesian decision layer (refu
 GET  /api/attribution/line-b-review         Line B monthly attribution evidence pack
 GET  /api/attribution/real-data             UCI real data (requires --fetch-real-data first)
 GET  /api/attribution/scenarios             Demo scenario catalog
-GET  /api/attribution/scenario-run?scenario=line_a|line_b|external|bayes_case_a|experience
+GET  /api/attribution/scenario-run?scenario=full_review|line_a|line_b|external|bayes_case_a|experience
 GET  /api/attribution/scenario-report?scenario=...   Download Markdown audit report
 POST /api/attribution/chat                  Multi-turn agent chat (intent → clarify → plan → confirm → real execution)
        body: {"session_id": "demo", "message": "上个月注册量为什么掉了"}
@@ -219,7 +220,7 @@ attribution/                  # Attribution methods package (pure numpy)
 runtime/                      # Causal governance runtime (7-agent state machine + gates)
   cases.py                    # Causal-readiness cases A/B/C vertical slice
   analysis.py                 # Deterministic feature extraction and readiness skills
-  experiment_integrity.py     # Eight fail-closed row-level integrity checks
+  experiment_integrity.py     # Eight fail-closed checks with explicit evidence units
   benchmark.py                # Process-isolated benchmark (seeds/truth hidden from the tested code)
   real_data.py                # UCI Bank Marketing adapter (SHA-256 pinned)
   dataset_catalog.py          # Dataset provenance catalog
@@ -228,7 +229,7 @@ runtime/                      # Causal governance runtime (7-agent state machine
   cli.py / configuration.py   # CLI entry point and configuration
 specs/                        # Carousel Growth UI Spec, two versions (reusable templates)
 scripts/                      # Benchmark plotting utility
-docs/methodology.md           # Theoretical provenance and adaptation boundaries (Chinese)
+docs/methodology.md           # Theoretical provenance, engineering adaptations, and innovations (Chinese)
 ```
 
 ## Sample Output
@@ -252,9 +253,10 @@ Input: 60-day control/treatment premium panel + change registry (2 entries) +
 external-event registry (1 entry).
 
 ```text
-ATT summary: naive 116.4 → hierarchical 119.4 (truth 100, with experimental noise)
+Effect-estimation validation: per-experiment ATT RMSE 10.233 → 5.552 (−45.7%)
 External association: ext_regulation window deviation -86.2, claim_type=TEMPORAL_ASSOCIATION
-Governance alert: UNEXPLAINED_STEP_SUSPECTED (day 44/51; truth: unregistered change day 40 + drift)
+External gap allocation: none (the common shock already cancels in treated-control)
+Governance alert: UNEXPLAINED_STEP_SUSPECTED (day 39/54; truth: unregistered change day 40 + drift)
 Unknown bucket: last-10-day mean -95.8, claim_type=UNEXPLAINED (not allocated)
 ```
 
@@ -270,10 +272,9 @@ All metrics are locally reproducible (see [Quick Start](#quick-start)):
 | Nested pooling + calibration (50 seeds, small samples) | Direction recall nested vs flat / calibration ECE / Gaussian vs joint Student-t vs plug-in Student-t 95% coverage | 0.18 vs 0.02 / 0.0626→0.0390 (−37.7%) / 0.8775 vs 0.9475 vs 0.3075 |
 | External-event mapping (90-day panel) | True-event recall / misattributed unregistered changes / coverage | 100% / 0 misattributed / 0.500 |
 | Governance benchmark (3 seeds / 9 cases) | Gate accuracy / false causal assertion rate / refusal recall | 1.00 / 0.00 / 1.00 |
-| Line B prototype (5 seeds) | Unregistered-change recall / external alignment / unknown honesty | 1.00 / 1.00 / 1.00 |
+| Line B validation (5 seeds) | Unregistered-change recall / external alignment / unknown honesty | 1.00 / 1.00 / 1.00 |
 | Shrinkage ablation | Moderation RMSE hierarchical vs naive | 0.0030 vs 0.0048 (in-dist); 5.55 vs 10.23 (Line B, ↓46%) |
 | Student-t multi-truth calibration (4 × 50 seeds) | Joint vs plug-in coverage / minimum family coverage / interval-width ratio vs Gaussian | 0.9383 vs 0.5588 / 0.9100 / 1.122 |
-| Student-t utility gate (repository replay) | Direction recall joint vs Gaussian / moderation RMSE joint vs Gaussian | 0.00 vs 0.02 / 0.00398 vs 0.00284; calibration is repaired, but utility gates fail, so Student-t remains experimental |
 | UCI real data (45,211 rows) | Detects no randomization + leakage variable flagging + Bayesian-layer refusal | All correct |
 
 ## Verification
@@ -316,10 +317,10 @@ The causal-readiness fixtures must remain `DESCRIPTIVE_ONLY`,
 
 ## Documentation
 
-- [Methodology and adaptation boundaries](docs/methodology.md) (Chinese) —
-  theoretical provenance of each mechanism, what was borrowed, and what was
-  deliberately not copied (partial pooling, DoWhy/EconML comparison, A/B
-  decision-engine comparison)
+- [Methodology, engineering adaptations, and innovations](docs/methodology.md) (Chinese) —
+  theoretical provenance, project-specific adaptations, evidence-backed
+  differentiators, and comparisons with partial pooling, DoWhy/EconML, and
+  industrial A/B decision engines
 
 ## License
 

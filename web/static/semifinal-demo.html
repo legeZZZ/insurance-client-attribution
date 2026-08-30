@@ -402,15 +402,15 @@ Acceleration_t = X_t - 2X_(t-1) + X_(t-2)</div><p>Level 可能发现“汇率整
       return `<div class="live-metrics">${metricHtml}</div><div class="live-alert ${tone}"><b>最终证据状态：${safe(data.claim)}</b><br>${claimNote(data.claim, options.scenario)}</div>${ledgerHtml}<div class="result-visuals">${chart}${rcaVisual}</div>${detailsTable}${candidateTable}${libraryHtml}${planHtml}<details class="result-section"><summary>查看原始结构化输出与 Evidence Pack</summary><div class="section-head" style="margin-top:10px"><div><h3>关键输出对象</h3><p>结构化结果，不是模型自由生成的根因结论。</p></div>${statusPill(data.evidence || 'Evidence Pack','green')}</div><pre class="live-json">${safe(JSON.stringify(outputs,null,2))}</pre><pre class="live-json" style="margin-top:10px">${safe(JSON.stringify(evidence,null,2))}</pre></details>`;
     }
     function normalizeLiveReport(report, scenario, agentPlan) {
-      const claims = {full_review:'MULTI_ROUTE_REVIEW', line_a:'CAUSAL_READY', line_b:'FACTOR_CANDIDATE / TEMPORAL_ASSOCIATION', external:'TEMPORAL_ASSOCIATION + UNEXPLAINED', bayes_case_a:'REFUSED'};
+      const claims = {full_review:'MULTI_ROUTE_REVIEW', line_a:'CAUSAL_READY', line_b:'FACTOR_CANDIDATE / TEMPORAL_ASSOCIATION', external:'TEMPORAL_ASSOCIATION + UNEXPLAINED', bayes_case_a:'REFUSED', experience:'EXPERIENCE_ABLATION'};
       return {...report, claim:report.claim || claims[scenario] || 'UNEXPLAINED', evidence:report.evidence || report.evidence_pointer, outputs:report.outputs || report.key_outputs, agent_plan:agentPlan};
     }
     function intentPrompt(task, scenario) {
-      const suffix = {full_review:' 目标场景：全链路综合复核。', line_a:' 目标场景：组件 A/B 实验。', external:' 目标场景：外部事件时间线映射。', bayes_case_a:' 目标场景：拒答与数据不足。', line_b:' 目标场景：月度基线与未知因子排查。'}[scenario];
+      const suffix = {full_review:' 目标场景：全链路综合复核。', line_a:' 目标场景：组件 A/B 实验。', external:' 目标场景：外部事件时间线映射。', bayes_case_a:' 目标场景：拒答与数据不足。', line_b:' 目标场景：月度基线与未知因子排查。', experience:' 目标场景：经验库跨期学习与错配报警。'}[scenario];
       return `${task}${suffix}`;
     }
     async function requestIntent(task, scenario) {
-      const response = await fetch('/api/track2/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({session_id:`live-${Date.now()}`, message:intentPrompt(task, scenario)})});
+      const response = await fetch('/api/attribution/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({session_id:`live-${Date.now()}`, message:intentPrompt(task, scenario)})});
       if (!response.ok) throw new Error(`intent HTTP ${response.status}`);
       return response.json();
     }
@@ -422,7 +422,7 @@ Acceleration_t = X_t - 2X_(t-1) + X_(t-2)</div><p>Level 可能发现“汇率整
       try {
         let agentPlan = null, offline = false;
         try { agentPlan = await requestIntent(task, scenario); } catch (error) { offline = true; agentPlan = {stage:'fallback', reply:'服务不可用，使用离线规则意图与可复现 fixture。'}; }
-        const reportRequest = fetch(`/api/track2/scenario-run?scenario=${encodeURIComponent(scenario)}`, {cache:'no-store'});
+        const reportRequest = fetch(`/api/attribution/scenario-run?scenario=${encodeURIComponent(scenario)}`, {cache:'no-store'});
         const playbackPhases = 1 + Math.max(liveSteps.filter(step => step.lane === 'a').length, liveSteps.filter(step => step.lane === 'b').length) + liveSteps.filter(step => step.lane === 'merge').length;
         for (let phase = 0; phase < playbackPhases; phase++) { drawLiveTimeline(phase, false); button.textContent = `运行中 · A/B 并行阶段 ${phase + 1}/${playbackPhases}`; await new Promise(resolve => setTimeout(resolve, 330)); }
         let data;

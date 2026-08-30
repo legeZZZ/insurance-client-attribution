@@ -5,14 +5,29 @@ import math
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
+from attribution.agent_chat import handle_message, reset_session
+from attribution.baseline_attribution import (
+    attribute_baseline,
+    change_registry_entry,
+    external_event_entry,
+    simulate_panel,
+)
 from attribution.bayes import estimate_hte
 from attribution.claim_ledger import ClaimLedger
 from attribution.experiment_designer import design_experiment
 from attribution.fdr import benjamini_hochberg
 from attribution.rate_aware_rca import decompose_rate_mix
+from attribution.scenario_reports import _scenario_experience
 from attribution.spec import spec_diff
 from run_server import bounded_float, bounded_int, valid_case
+from runtime.analysis import evaluate_public_dataset
+from runtime.cases import (
+    case_experiment_metadata,
+    default_metric_contract,
+    generate_dataset,
+)
 from runtime.dataset_catalog import load_dataset_catalog
 from runtime.experiment_integrity import experiment_integrity_report
 from runtime.foundation import LocalEvidenceProvider
@@ -130,6 +145,139 @@ class RegressionTests(unittest.TestCase):
                 draws=1_000,
                 student_t_nu_grid=[2.0, 5.0],
             )
+
+    def test_null_outcome_fields_fail_closed_before_causal_estimation(self) -> None:
+        rows, _ = generate_dataset("C", seed=42, n=1_200)
+        rows[0]["issued"] = None
+        rows[0]["net_premium"] = None
+        result = evaluate_public_dataset(
+            {
+                "rows": rows,
+                "metric_contract": default_metric_contract(),
+                "experiment_metadata": case_experiment_metadata("C"),
+            }
+        )
+        self.assertEqual(result["causal_readiness"]["outcome"], "DATA_INSUFFICIENT")
+        self.assertNotIn("estimate", result)
+        missing = result["causal_readiness"]["diagnostics"]["missing_evidence"]
+        self.assertIn("non_null_issued", missing)
+        self.assertIn("non_null_net_premium", missing)
+
+    def test_common_external_shock_is_not_subtracted_twice(self) -> None:
+        days = list(range(20))
+        control = [100.0] * 20
+        treated = [100.0] * 20
+        for index in range(8, 12):
+            control[index] -= 20.0
+            treated[index] -= 20.0
+        result = attribute_baseline(
+            days,
+            control,
+            treated,
+            [],
+            [external_event_entry("macro", 8, 11, "macro", "common shock")],
+            {},
+            detection_threshold=5.0,
+        )
+        self.assertEqual(result["series"]["gap"][8:12], [0.0] * 4)
+        self.assertNotIn("external_explained", result["series"])
+        self.assertEqual(result["series"]["residual"][8:12], [0.0] * 4)
+        self.assertEqual(
+            result["series"]["external_control_deviation"][8:12], [-20.0] * 4
+        )
+
+    def test_merged_line_b_alert_keeps_magnitude_fields_consistent(self) -> None:
+        panel = simulate_panel()
+        result = attribute_baseline(
+            panel["days"],
+            panel["control"],
+            panel["treated"],
+            [
+                change_registry_entry(
+                    "ranking", 15, "ranking", experiment_id="exp_ranking"
+                ),
+                change_registry_entry(
+                    "subsidy", 30, "subsidy", experiment_id="exp_subsidy"
+                ),
+            ],
+            [external_event_entry("regulation", 45, 49, "regulation", "event")],
+            panel["experiments"],
+        )
+        for alert in result["unregistered_alerts"]:
+            self.assertEqual(alert["absolute_step"], abs(alert["step_score"]))
+
+    def test_srm_and_stability_count_randomization_units_not_rows(self) -> None:
+        rows, _ = generate_dataset("C", seed=42, n=1_200)
+        control = [row for row in rows if row["assigned_treatment"] == 0][:90]
+        treatment = [row for row in rows if row["assigned_treatment"] == 1][:10]
+        repeated = control + [dict(row) for row in treatment for _ in range(9)]
+        for row in repeated:
+            row["assignment_period"] = "period-1"
+        report = experiment_integrity_report(
+            repeated, default_metric_contract(), case_experiment_metadata("C")
+        )
+        self.assertFalse(report["checks"]["srm"]["passed"])
+        self.assertEqual(report["checks"]["srm"]["observed"], {"0": 90, "1": 10})
+        stability = report["checks"]["allocation_stability"]
+        self.assertFalse(stability["passed"])
+        self.assertEqual(
+            stability["periods"]["period-1"]["arm_counts"], {"0": 90, "1": 10}
+        )
+        self.assertEqual(stability["randomization_unit_count"], 100)
+        self.assertEqual(stability["raw_row_count"], 180)
+
+    def test_confirmation_requires_a_complete_normalized_command(self) -> None:
+        session_id = "confirmation-regression"
+        reset_session(session_id)
+        self.assertEqual(handle_message(session_id, "line_a")["stage"], "confirm")
+        self.assertEqual(handle_message(session_id, "不好")["stage"], "clarify")
+
+        reset_session(session_id)
+        self.assertEqual(handle_message(session_id, "line_a")["stage"], "confirm")
+        with patch(
+            "attribution.agent_chat.run_scenario",
+            return_value={"metrics": {}, "evidence_pointer": "test"},
+        ) as runner:
+            result = handle_message(session_id, "ＯＫ！")
+        self.assertEqual(result["stage"], "done")
+        runner.assert_called_once()
+
+    def test_console_uses_current_api_contract_for_all_scenarios(self) -> None:
+        html = (
+            Path(__file__).resolve().parents[1]
+            / "web"
+            / "static"
+            / "semifinal-demo.html"
+        ).read_text(encoding="utf-8")
+        self.assertIn("/api/attribution/chat", html)
+        self.assertIn("/api/attribution/scenario-run", html)
+        self.assertNotIn("/api/track2/", html)
+        self.assertIn("experience:'EXPERIENCE_ABLATION'", html)
+        self.assertIn("经验库跨期学习与错配报警", html)
+
+    def test_experience_scenario_uses_current_trajectory_schema(self) -> None:
+        fixture = {
+            "static_baseline": {"ate_rmse_sparse": 0.2, "ate_rmse_rich": 0.1},
+            "adaptive_experience_store": {
+                "ate_rmse_sparse": 0.1,
+                "ate_rmse_rich": 0.2,
+                "mismatch_alarm": {"fired_periods": [601]},
+                "shrinkage_strength_trajectory": [500.0, 510.0],
+            },
+            "store_final": {},
+            "note": "fixture",
+        }
+        with (
+            tempfile.TemporaryDirectory() as directory,
+            patch(
+                "attribution.experience_benchmark.run_experience_ablation",
+                return_value=fixture,
+            ),
+        ):
+            result = _scenario_experience(Path(directory))
+        self.assertEqual(
+            result["metrics"]["shrinkage_strength_trajectory"], [500.0, 510.0]
+        )
 
 
 if __name__ == "__main__":

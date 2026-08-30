@@ -586,6 +586,11 @@ def causal_readiness(
     data_missing = list(quality["missing_row_fields"]) + list(
         quality["missing_experiment_fields"]
     )
+    data_missing.extend(
+        f"non_null_{field}"
+        for field, count in quality.get("null_counts", {}).items()
+        if int(count) > 0
+    )
     if quality.get("analysis_error"):
         data_missing.append("valid_randomization_unit_analysis")
     if quality.get("window_closed") is not True:

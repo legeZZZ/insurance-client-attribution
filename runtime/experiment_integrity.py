@@ -1,8 +1,9 @@
-"""Fail-closed, row-level experiment integrity checks.
+"""Fail-closed experiment integrity checks at the correct evidence unit.
 
-This module validates realized assignment and observation data. It does not
-accept a metadata assertion such as ``assignment_verified=True`` as a
-substitute for the checks below.
+Assignment checks such as SRM and allocation stability operate on unique
+randomization units; exposure, funnel and temporal checks retain row-level
+evidence. A metadata assertion such as ``assignment_verified=True`` is never
+accepted as a substitute for the realized checks below.
 """
 
 from __future__ import annotations
@@ -72,14 +73,27 @@ def _srm_check(
     rows: Sequence[Mapping[str, Any]], metadata: Mapping[str, Any]
 ) -> dict[str, Any]:
     column = str(metadata.get("assigned_arm_column") or "assigned_treatment")
-    missing = _missing_columns(rows, [column])
-    if missing:
+    unit_column = str(metadata.get("randomization_unit") or "")
+    missing = _missing_columns(rows, [column, unit_column] if unit_column else [column])
+    if missing or not unit_column:
         return _failure("SRM_NOT_EVALUABLE", missing_columns=missing)
     expected = _expected_allocation(metadata)
     observed = {arm: 0 for arm in expected}
     unexpected: dict[str, int] = defaultdict(int)
+    unit_arms: dict[str, set[str]] = defaultdict(set)
     for row in rows:
-        arm = _arm(row.get(column))
+        unit_arms[str(row.get(unit_column, ""))].add(_arm(row.get(column)))
+    inconsistent_units = sorted(
+        unit for unit, arms in unit_arms.items() if len(arms) != 1
+    )
+    if inconsistent_units:
+        return _failure(
+            "SRM_INCONSISTENT_UNIT_ASSIGNMENT",
+            randomization_unit=unit_column,
+            inconsistent_units=inconsistent_units,
+        )
+    for arms in unit_arms.values():
+        arm = next(iter(arms))
         if arm in observed:
             observed[arm] += 1
         else:
@@ -107,6 +121,10 @@ def _srm_check(
     alpha = float(metadata.get("srm_alpha", 0.001))
     passed = p_value >= alpha
     result = {
+        "counting_unit": "randomization_unit",
+        "randomization_unit": unit_column,
+        "raw_row_count": len(rows),
+        "randomization_unit_count": len(unit_arms),
         "observed": observed,
         "expected_counts": expected_counts,
         "chi_square": statistic,
@@ -244,14 +262,25 @@ def _allocation_stability_check(
     if missing or not unit_column:
         return _failure("ALLOCATION_STABILITY_NOT_EVALUABLE", missing_columns=missing)
     assignments: dict[str, set[str]] = defaultdict(set)
-    periods: dict[str, list[str]] = defaultdict(list)
+    assignment_periods: dict[str, set[str]] = defaultdict(set)
     for row in rows:
+        unit = str(row.get(unit_column))
         arm = _arm(row.get(arm_column))
-        assignments[str(row.get(unit_column))].add(arm)
-        periods[str(row.get(period_column))].append(arm)
+        assignments[unit].add(arm)
+        assignment_periods[unit].add(str(row.get(period_column)))
     reassigned_units = sorted(
         unit for unit, arms in assignments.items() if len(arms) > 1
     )
+    multi_period_units = sorted(
+        unit
+        for unit, unit_periods in assignment_periods.items()
+        if len(unit_periods) > 1
+    )
+    periods: dict[str, list[str]] = defaultdict(list)
+    for unit, arms in assignments.items():
+        if len(arms) == 1 and len(assignment_periods[unit]) == 1:
+            period = next(iter(assignment_periods[unit]))
+            periods[period].append(next(iter(arms)))
     expected = _expected_allocation(metadata)
     configured_tolerance = float(metadata.get("allocation_stability_tolerance", 0.10))
     minimum_period_size = int(metadata.get("allocation_stability_min_period_size", 30))
@@ -271,6 +300,7 @@ def _allocation_stability_check(
         passed = enough_rows and max(deviations.values()) <= tolerance
         period_diagnostics[period] = {
             "count": n,
+            "counting_unit": "randomization_unit",
             "arm_counts": counts,
             "max_share_deviation": max(deviations.values()),
             "tolerance": tolerance,
@@ -281,13 +311,18 @@ def _allocation_stability_check(
         if not passed:
             unstable_periods.append(period)
     details = {
+        "counting_unit": "randomization_unit",
+        "randomization_unit": unit_column,
+        "raw_row_count": len(rows),
+        "randomization_unit_count": len(assignments),
         "periods": period_diagnostics,
         "reassigned_units": reassigned_units,
+        "units_with_multiple_assignment_periods": multi_period_units,
         "unstable_periods": unstable_periods,
     }
     return (
         _success("ALLOCATION_STABILITY_PASS", **details)
-        if not reassigned_units and not unstable_periods
+        if not reassigned_units and not multi_period_units and not unstable_periods
         else _failure("ALLOCATION_INSTABILITY", **details)
     )
 

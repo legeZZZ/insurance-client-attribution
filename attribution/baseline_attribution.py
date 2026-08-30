@@ -225,7 +225,10 @@ def attribute_baseline(
     # 2) External factors: identified from the CONTROL group's own deviation.
     #    Fit control trend on non-event days, then measure event-window gaps.
     ext_assoc: list[dict[str, Any]] = []
-    external_explained = np.zeros(len(days))
+    # External events observed in the persistent control are reported as
+    # temporal associations. They are not subtracted from the treated-control
+    # gap: a shock shared by both groups has already cancelled in `gap = t-c`.
+    external_control_deviation = np.zeros(len(days))
     event_days = set()
     for ev in external_registry:
         event_days.update(range(ev["start_day"], ev["end_day"] + 1))
@@ -246,11 +249,16 @@ def attribute_baseline(
         }
         if abs(deviation) >= detection_threshold:
             assoc["alignment"] = "ALIGNED"
-            external_explained[window] += deviation
+            assoc["gap_contribution"] = None
+            assoc["allocation_policy"] = (
+                "reported_only; common control shock is not allocated into "
+                "the treated-control gap"
+            )
+            external_control_deviation[window] += deviation
         else:
             assoc["alignment"] = "NOT_DETECTED"
         ext_assoc.append(assoc)
-    residual_after_ext = residual - external_explained
+    residual_after_ext = residual
 
     # 3) Unregistered / miscalibrated change detection: two-sided STEP
     #    detection on the smoothed residual. Both upward and downward shifts
@@ -277,7 +285,8 @@ def attribute_baseline(
         if alerts and days[i] - alerts[-1]["onset_day"] <= half:
             if abs(score) > abs(alerts[-1]["step_score"]):
                 alerts[-1]["onset_day"] = int(days[i])
-                alerts[-1]["step_score"] = score
+                alerts[-1]["step_score"] = round(score, 2)
+                alerts[-1]["absolute_step"] = round(abs(score), 2)
                 alerts[-1]["direction"] = "up" if score > 0 else "down"
             continue
         alerts.append(
@@ -328,7 +337,9 @@ def attribute_baseline(
         "series": {
             "gap": [round(float(v), 2) for v in gap],
             "explained_registered": [round(float(v), 2) for v in explained],
-            "external_explained": [round(float(v), 2) for v in external_explained],
+            "external_control_deviation": [
+                round(float(v), 2) for v in external_control_deviation
+            ],
             "residual": [round(float(v), 2) for v in residual_after_ext],
         },
     }
