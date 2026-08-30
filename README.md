@@ -33,6 +33,21 @@ Governance principles (not optional):
 - Insufficient evidence means refusal (`REFUSED` / `DATA_INSUFFICIENT`), never
   a hallucinated answer
 
+### Fail-closed experiment integrity
+
+Randomized metadata alone never authorizes a causal estimate. The runtime
+checks realized row-level evidence for sample-ratio mismatch, pre-treatment
+balance, allocation stability, contamination, temporal ordering, sample-funnel
+consistency, cluster integrity, and concurrent experiments. All eight checks
+must pass before ITT, Bayesian bundle decisions, or HTE are evaluated.
+
+Repeated observations are handled according to an explicit primary estimand:
+
+- `user_level` aggregates repeated observations to the analysis unit for ITT
+- `exposure_level` keeps eligible exposures and uses CR1 cluster-robust errors
+- `triggered_user` is explicitly labeled post-assignment and non-ITT
+- cluster-randomized designs infer at the declared cluster level
+
 ## Architecture
 
 ### Seven-agent governance pipeline
@@ -80,8 +95,22 @@ Attribution posteriors are written back after each period and loaded as
 informative priors for the next:
 
 - Stale experience decays by 0.5 per period with an upper cap
-- PID feedback adaptively tunes the shrinkage strength ν
+- PID feedback adaptively tunes the legacy pseudo-impression
+  `shrinkage_strength`; this is separate from Student-t degrees of freedom `nu`
 - Prior–data mismatch alarms trigger automatic degradation to flat estimation
+
+### Statistical correctness upgrades
+
+- Rate/mix/interaction decomposition closes exactly and reports closure error
+- Student-t random effects are implemented in posterior and `tau` estimation;
+  `tau`, `nu`, and the actual posterior method are recorded in every result
+- Beam search ranks candidates by anomaly magnitude instead of field order
+- Factorial designs fail closed when the arm budget cannot preserve a valid
+  full or supported fractional design; component effects require full rank
+- Shared input validation rejects non-finite values, invalid counts, duplicate
+  segment IDs, invalid p-values, and unidentifiable experiment arms
+- BH/FDR correction, design diagnostics, power design, attrition inflation,
+  unequal allocation, and cluster design effects are reported explicitly
 
 ### Technical notes
 
@@ -96,7 +125,7 @@ informative priors for the next:
 
 ## Quick Start
 
-Requires Python 3.10+ and numpy (`pip install -r requirements.txt`).
+Requires Python 3.12+ and numpy (`pip install -r requirements.txt`).
 
 ```bash
 # ① Line A end-to-end demo + 7-seed benchmark (~16 s)
@@ -114,13 +143,22 @@ python3 -m attribution.nested_benchmark
 # ⑤ Public external-event timeline mapping + coverage stats
 python3 -m attribution.external_events
 
-# ⑥ Causal governance benchmark (process-isolated, 3 seeds / 9 cases)
+# ⑥ Multi-dimensional rate anomaly discovery with auditable beam search
+python3 -m attribution.rate_aware_rca
+
+# ⑦ Temporal association discovery from event and factor snapshots
+python3 -m attribution.association_discovery
+
+# ⑧ Causal governance benchmark (process-isolated, 3 seeds / 9 cases)
 python3 -m runtime --benchmark --benchmark-seeds 3
 
-# ⑦ Real public-data case (UCI Bank Marketing, CC BY 4.0, downloaded on first run)
+# ⑨ Print and validate the public dataset provenance catalog
+python3 -m runtime --datasets
+
+# ⑩ Real public-data case (UCI Bank Marketing, CC BY 4.0, downloaded on first run)
 python3 -m runtime --fetch-real-data
 
-# ⑧ Local console (REST API, default port 8765)
+# ⑪ Local console (REST API, default port 8765)
 python3 run_server.py 8765
 ```
 
@@ -153,7 +191,16 @@ attribution/                  # Attribution methods package (pure numpy)
   bayes.py                    # Beta-Binomial decisions, hierarchical HTE, moderation scan
   spec.py                     # Growth UI Spec + SpecDiff/RenderDiff/RuntimeDiff
   factor_miner.py             # Open candidate discovery
+  association_discovery.py    # Temporal event/factor association discovery
+  rate_aware_rca.py           # Rate/mix/interaction decomposition + beam search
+  input_validation.py         # Shared fail-fast statistical input contract
+  factor_registry.py          # Factor metadata and provenance registry
+  factor_store.py             # Persistent factor snapshots and experience
+  factor_retriever.py         # Time-safe candidate retrieval
+  fdr.py                      # Multiple-testing correction
   experiment_designer.py      # Full/Resolution-IV factorial designs + component effects
+  experiment_platform.py      # Approval-aware experiment platform adapter
+  validation_planner.py       # Evidence-aware validation plan generation
   claim_ledger.py             # Evidence-graded state machine and promotion gates
   insursim_carousel.py        # Explicit-DAG simulator (truth separated from oracle)
   benchmark.py                # Bayesian benchmark (in-distribution + mismatch, segment Brier)
@@ -168,6 +215,7 @@ attribution/                  # Attribution methods package (pure numpy)
 runtime/                      # Causal governance runtime (7-agent state machine + gates)
   cases.py                    # Causal-readiness cases A/B/C vertical slice
   analysis.py                 # Deterministic feature extraction and readiness skills
+  experiment_integrity.py     # Eight fail-closed row-level integrity checks
   benchmark.py                # Process-isolated benchmark (seeds/truth hidden from the tested code)
   real_data.py                # UCI Bank Marketing adapter (SHA-256 pinned)
   dataset_catalog.py          # Dataset provenance catalog
@@ -220,7 +268,22 @@ All metrics are locally reproducible (see [Quick Start](#quick-start)):
 | Governance benchmark (3 seeds / 9 cases) | Gate accuracy / false causal assertion rate / refusal recall | 1.00 / 0.00 / 1.00 |
 | Line B prototype (5 seeds) | Unregistered-change recall / external alignment / unknown honesty | 1.00 / 1.00 / 1.00 |
 | Shrinkage ablation | Moderation RMSE hierarchical vs naive | 0.0042 vs 0.0048 (in-dist); 5.55 vs 10.23 (Line B, ↓46%) |
+| Student-t replay (50 seeds) | Gaussian coverage / Student-t plug-in-`tau` coverage | 0.8775 / 0.3075; retained as a negative result, so Student-t is not the production default |
 | UCI real data (45,211 rows) | Detects no randomization + leakage variable flagging + Bayesian-layer refusal | All correct |
+
+## Verification
+
+The repository can be checked without writing generated artifacts into the
+working tree:
+
+```bash
+python3 -m runtime --datasets
+python3 -m runtime --benchmark --benchmark-seeds 1
+python3 -c "import attribution, runtime, run_server"
+```
+
+The causal-readiness fixtures must remain `DESCRIPTIVE_ONLY`,
+`DATA_INSUFFICIENT`, and `CAUSAL_READY` for cases A, B, and C respectively.
 
 ## Data Sources and Licensing
 

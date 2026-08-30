@@ -1,4 +1,4 @@
-"""Configuration loading for console and CLI execution."""
+"""Configuration loading for attribution bundle execution."""
 
 from __future__ import annotations
 
@@ -25,5 +25,7 @@ def validate_evidence_pack(pack: dict[str, Any], config: dict[str, Any]) -> None
         raise RuntimeError("evidence contract failed: trace is empty")
     if policy.get("require_artifacts") and not pack.get("artifacts"):
         raise RuntimeError("evidence contract failed: artifacts are empty")
-    if policy.get("require_digests") and any(not item.get("content_digest") for item in pack.get("evidence", [])):
+    if policy.get("require_digests") and any(
+        not item.get("content_digest") for item in pack.get("evidence", [])
+    ):
         raise RuntimeError("evidence contract failed: an evidence digest is missing")

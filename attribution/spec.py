@@ -64,16 +64,18 @@ def spec_diff(old: Mapping[str, Any], new: Mapping[str, Any]) -> list[dict[str, 
         prop_meta = new_props.get(name, {})
         experiment_meta = prop_meta.get("experiment", {})
         factor_id = experiment_meta.get("factor_id", f"{component}.{name}")
-        factors.append(_factor_entry(
-            factor_id=factor_id,
-            source_type="SPEC_DIFF",
-            source_path=f"props.{name}.default",
-            before=before,
-            after=after,
-            component=component,
-            causal_role=role_of.get(factor_id, "treatment_candidate"),
-            experimentability=1.0 if experiment_meta.get("randomizable") else 0.3,
-        ))
+        factors.append(
+            _factor_entry(
+                factor_id=factor_id,
+                source_type="SPEC_DIFF",
+                source_path=f"props.{name}.default",
+                before=before,
+                after=after,
+                component=component,
+                causal_role=role_of.get(factor_id, "treatment_candidate"),
+                experimentability=1.0 if experiment_meta.get("randomizable") else 0.3,
+            )
+        )
     return factors
 
 
@@ -96,16 +98,18 @@ def render_diff(
         delta = abs(after - before)
         if delta < 0.02 and (before == 0 or delta / abs(before) < 0.10):
             continue
-        factors.append(_factor_entry(
-            factor_id=f"{component}.{name}",
-            source_type="RENDER_DIFF",
-            source_path=f"render.{name}",
-            before=before,
-            after=after,
-            component=component,
-            causal_role="treatment_candidate",
-            experimentability=0.6,
-        ))
+        factors.append(
+            _factor_entry(
+                factor_id=f"{component}.{name}",
+                source_type="RENDER_DIFF",
+                source_path=f"render.{name}",
+                before=before,
+                after=after,
+                component=component,
+                causal_role="treatment_candidate",
+                experimentability=0.6,
+            )
+        )
     return factors
 
 
@@ -129,14 +133,16 @@ def runtime_diff(
         base = abs(before) if before else 1e-9
         if abs(after - before) / base < relative_threshold:
             continue
-        factors.append(_factor_entry(
-            factor_id=f"{component}.{name}",
-            source_type="RUNTIME_DIFF",
-            source_path=f"runtime.{name}",
-            before=before,
-            after=after,
-            component=component,
-            causal_role="runtime_quality",
-            experimentability=0.4,
-        ))
+        factors.append(
+            _factor_entry(
+                factor_id=f"{component}.{name}",
+                source_type="RUNTIME_DIFF",
+                source_path=f"runtime.{name}",
+                before=before,
+                after=after,
+                component=component,
+                causal_role="runtime_quality",
+                experimentability=0.4,
+            )
+        )
     return factors

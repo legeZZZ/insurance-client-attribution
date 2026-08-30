@@ -21,14 +21,14 @@ from typing import Any
 
 import numpy as np
 
-TRUE_MODERATORS = ("device_low_end",)          # context factor with real moderation
-TRUE_COMPONENT_EFFECTS = {                     # per-component effects (used in factorial stage)
+TRUE_MODERATORS = ("device_low_end",)  # context factor with real moderation
+TRUE_COMPONENT_EFFECTS = {  # per-component effects (used in factorial stage)
     "carousel.text_density": -0.020,
     "carousel.media_aspect_ratio": -0.004,
     "carousel.indicator_position": 0.0,
     "carousel.image_component": -0.012,
 }
-MEDIATOR_EFFECT = -0.30                        # load failure -> click logit penalty
+MEDIATOR_EFFECT = -0.30  # load failure -> click logit penalty
 BASE_CTR = 0.040
 
 
@@ -59,7 +59,9 @@ def generate_bundle_stage(
         logit += -0.3 * device_low_end + (0.15 if user_new_old == "new" else 0.0)
         logit += {"organic": 0.2, "paid": 0.0, "social": -0.1}[channel]
         if mismatched:
-            logit += 0.5 * math.sin(3.0 * (i % 100) / 100.0)  # unobserved nonlinear drift
+            logit += 0.5 * math.sin(
+                3.0 * (i % 100) / 100.0
+            )  # unobserved nonlinear drift
 
         # Bundle effect, amplified on low-end devices (true moderation).
         logit += t * (bundle_logit_effect + moderator_logit_effect * device_low_end)
@@ -76,20 +78,24 @@ def generate_bundle_stage(
         clicked = int(rng.random() < p)
         impressions[t] += 1
         clicks[t] += clicked
-        rows.append({
-            "impression_id": i,
-            "_oracle_clicked_potential": clicked,  # sanitized before Agent use
-            "_oracle_true_p": p,                   # god-model probability (benchmark floor only)
-            "treatment": t,
-            "clicked": clicked,
-            "device_low_end": device_low_end,
-            "user_new_old": user_new_old,
-            "channel": channel,
-            "placement": placement,
-            "image_load_failure": image_load_failure,
-            "render_latency_ms": float(120 + t * 80 * device_low_end + rng.normal(0, 20)),
-            "qualified_exposure": 1,
-        })
+        rows.append(
+            {
+                "impression_id": i,
+                "_oracle_clicked_potential": clicked,  # sanitized before Agent use
+                "_oracle_true_p": p,  # god-model probability (benchmark floor only)
+                "treatment": t,
+                "clicked": clicked,
+                "device_low_end": device_low_end,
+                "user_new_old": user_new_old,
+                "channel": channel,
+                "placement": placement,
+                "image_load_failure": image_load_failure,
+                "render_latency_ms": float(
+                    120 + t * 80 * device_low_end + rng.normal(0, 20)
+                ),
+                "qualified_exposure": 1,
+            }
+        )
 
     oracle_ctr = {arm: clicks[arm] / impressions[arm] for arm in (0, 1)}
     truth = {
@@ -116,19 +122,23 @@ def generate_factorial_stage(
         rows = []
         for i in range(arm["planned_impressions"]):
             device_low_end = int(rng.random() < 0.35)
-            logit = math.log(base_ctr / (1 - base_ctr)) - 0.3 * device_low_end
+            baseline_logit = math.log(base_ctr / (1 - base_ctr)) - 0.3 * device_low_end
+            baseline_probability = _sigmoid(baseline_logit)
+            component_delta = 0.0
             for factor, bit in code.items():
                 if bit:
                     effect = TRUE_COMPONENT_EFFECTS.get(factor, 0.0)
-                    # Component effects are given on the probability scale;
-                    # convert to logit via the derivative at base_ctr.
-                    logit += effect / (base_ctr * (1.0 - base_ctr))
-            p = _sigmoid(logit)
-            rows.append({
-                "treatment": 1,
-                "clicked": int(rng.random() < p),
-                "device_low_end": device_low_end,
-            })
+                    component_delta += effect
+            # Component effects are defined as probability differences. Keep
+            # the benchmark data-generating process on that same scale.
+            p = float(np.clip(baseline_probability + component_delta, 1e-6, 1.0 - 1e-6))
+            rows.append(
+                {
+                    "treatment": 1,
+                    "clicked": int(rng.random() < p),
+                    "device_low_end": device_low_end,
+                }
+            )
         arm_rows[arm["arm_id"]] = rows
     return arm_rows
 

@@ -21,7 +21,10 @@ def run_demo(seed: int = 20260809) -> dict:
     ledger = ClaimLedger()
 
     # 1. Anomaly observed; lock the metric contract (reference, not re-derived).
-    ledger.add_claim("ASSOCIATION_ONLY", "新轮播样式上线后 CTR 由 4.1% 降至 3.2%，与样式变更同时出现。")
+    ledger.add_claim(
+        "ASSOCIATION_ONLY",
+        "新轮播样式上线后 CTR 由 4.1% 降至 3.2%，与样式变更同时出现。",
+    )
 
     # 2. Spec diff + factor mining.
     spec_v1 = load_spec(SPECS_DIR / "carousel_spec_v1.json")
@@ -38,20 +41,27 @@ def run_demo(seed: int = 20260809) -> dict:
         treatment_column="treatment",
         outcome_column="clicked",
         context_fields=("device_low_end", "user_new_old", "channel", "placement"),
-        spec_old=spec_v1, spec_new=spec_v2,
+        spec_old=spec_v1,
+        spec_new=spec_v2,
         runtime_control={"media_load_success_rate": 0.98, "render_latency_ms": 120.0},
         runtime_treatment={"media_load_success_rate": 0.86, "render_latency_ms": 185.0},
         practical_threshold=0.005,
         seed=seed,
     )
-    ledger.add_claim("FACTOR_CANDIDATE", f"FactorMiner 输出 {mined['candidate_count']} 个候选因子。")
+    ledger.add_claim(
+        "FACTOR_CANDIDATE", f"FactorMiner 输出 {mined['candidate_count']} 个候选因子。"
+    )
     ledger.transition("FACTORS_DISCOVERED")
 
     # 3. Bundle A/B on the held-out estimation half.
-    control = {"clicks": sum(r["clicked"] for r in estimation_rows if r["treatment"] == 0),
-               "impressions": sum(1 for r in estimation_rows if r["treatment"] == 0)}
-    treatment = {"clicks": sum(r["clicked"] for r in estimation_rows if r["treatment"] == 1),
-                 "impressions": sum(1 for r in estimation_rows if r["treatment"] == 1)}
+    control = {
+        "clicks": sum(r["clicked"] for r in estimation_rows if r["treatment"] == 0),
+        "impressions": sum(1 for r in estimation_rows if r["treatment"] == 0),
+    }
+    treatment = {
+        "clicks": sum(r["clicked"] for r in estimation_rows if r["treatment"] == 1),
+        "impressions": sum(1 for r in estimation_rows if r["treatment"] == 1),
+    }
     bundle = bundle_compare(control, treatment, practical_threshold=0.005, seed=seed)
     ledger.add_claim(
         "BUNDLE_EFFECT",
@@ -68,13 +78,19 @@ def run_demo(seed: int = 20260809) -> dict:
     segments = []
     for value in (0, 1):
         subset = [r for r in estimation_rows if r["device_low_end"] == value]
-        segments.append({
-            "segment_id": f"device_low_end={value}",
-            "control": {"clicks": sum(r["clicked"] for r in subset if r["treatment"] == 0),
-                        "impressions": sum(1 for r in subset if r["treatment"] == 0)},
-            "treatment": {"clicks": sum(r["clicked"] for r in subset if r["treatment"] == 1),
-                          "impressions": sum(1 for r in subset if r["treatment"] == 1)},
-        })
+        segments.append(
+            {
+                "segment_id": f"device_low_end={value}",
+                "control": {
+                    "clicks": sum(r["clicked"] for r in subset if r["treatment"] == 0),
+                    "impressions": sum(1 for r in subset if r["treatment"] == 0),
+                },
+                "treatment": {
+                    "clicks": sum(r["clicked"] for r in subset if r["treatment"] == 1),
+                    "impressions": sum(1 for r in subset if r["treatment"] == 1),
+                },
+            }
+        )
     hte = estimate_hte(segments, practical_threshold=0.01, seed=seed, discovery=False)
     worst = min(hte["segments"], key=lambda s: s["effect_shrunk"])
     ledger.add_claim(
@@ -97,7 +113,9 @@ def run_demo(seed: int = 20260809) -> dict:
         "stable_randomization_unit": True,
     }
     for item in effects:
-        if item["significant"] and ledger.can_promote_to_component_effect(design_record):
+        if item["significant"] and ledger.can_promote_to_component_effect(
+            design_record
+        ):
             ledger.add_claim(
                 "COMPONENT_EFFECT",
                 f"独立随机化显示 {item['factor_id']} 的组件级效应为 {item['component_effect']:.4f}。",
@@ -118,7 +136,11 @@ def run_demo(seed: int = 20260809) -> dict:
         "oracle_bundle_ate": truth["oracle_bundle_ate"],
         "mined_top5": mined["candidates"][:5],
         "hte": hte,
-        "design": {"design_type": design["design_type"], "arm_count": design["arm_count"]},
+        "design": {
+            "design_type": design["design_type"],
+            "arm_count": design["arm_count"],
+            "design_diagnostics": design["design_diagnostics"],
+        },
         "component_effects": effects,
         "ledger": ledger.render(),
     }
@@ -129,20 +151,31 @@ def main() -> None:
     out_dir = Path(__file__).resolve().parent.parent / "outputs"
     out_dir.mkdir(exist_ok=True)
     (out_dir / "demo_evidence.json").write_text(
-        json.dumps(demo, ensure_ascii=False, indent=2), encoding="utf-8")
+        json.dumps(demo, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
     bench = run_benchmark()
     (out_dir / "benchmark_metrics.json").write_text(
-        json.dumps(bench, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(json.dumps({
-        "bundle_decision": demo["bundle"]["decision"],
-        "bundle_effect": demo["bundle"]["effect_absolute"],
-        "oracle_ate": demo["oracle_bundle_ate"],
-        "ledger_state": demo["ledger"]["state"],
-        "claim_types": [c["claim_type"] for c in demo["ledger"]["claims"]],
-        "benchmark_matched": bench["matched_regime"],
-        "benchmark_mismatched": bench["mismatched_regime"],
-        "evidence_files": [str(out_dir / "demo_evidence.json"), str(out_dir / "benchmark_metrics.json")],
-    }, ensure_ascii=False, indent=2))
+        json.dumps(bench, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    print(
+        json.dumps(
+            {
+                "bundle_decision": demo["bundle"]["decision"],
+                "bundle_effect": demo["bundle"]["effect_absolute"],
+                "oracle_ate": demo["oracle_bundle_ate"],
+                "ledger_state": demo["ledger"]["state"],
+                "claim_types": [c["claim_type"] for c in demo["ledger"]["claims"]],
+                "benchmark_matched": bench["matched_regime"],
+                "benchmark_mismatched": bench["mismatched_regime"],
+                "evidence_files": [
+                    str(out_dir / "demo_evidence.json"),
+                    str(out_dir / "benchmark_metrics.json"),
+                ],
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+    )
 
 
 if __name__ == "__main__":

@@ -61,39 +61,50 @@ def mine_factors(
             Counter(str(r.get(field, "<missing>")) for r in rows_current),
         )
         if drift >= 0.1:
-            candidates.append({
-                "factor_id": f"context.{field}",
-                "source_type": "DISTRIBUTION_DRIFT",
-                "source_path": field,
-                "psi": drift,
-                "component": "context",
-                "causal_role": "confounder_candidate",
-                "experimentability": 0.0,
-                "claim_type": "FACTOR_CANDIDATE",
-            })
+            candidates.append(
+                {
+                    "factor_id": f"context.{field}",
+                    "source_type": "DISTRIBUTION_DRIFT",
+                    "source_path": field,
+                    "psi": drift,
+                    "component": "context",
+                    "causal_role": "confounder_candidate",
+                    "experimentability": 0.0,
+                    "claim_type": "FACTOR_CANDIDATE",
+                }
+            )
 
     # 3) Interaction candidates: moderation scan on current rows.
     interactions = moderation_scan(
-        rows_current, treatment_column, outcome_column, context_fields,
-        practical_threshold=practical_threshold, seed=seed, discovery=discovery,
+        rows_current,
+        treatment_column,
+        outcome_column,
+        context_fields,
+        practical_threshold=practical_threshold,
+        seed=seed,
+        discovery=discovery,
     )
     for item in interactions:
         if abs(item["moderation"]) < practical_threshold:
             continue
-        candidates.append({
-            "factor_id": f"interaction.{item['factor_id']}={item['factor_value']}",
-            "source_type": "INTERACTION_SCAN",
-            "source_path": item["factor_id"],
-            "moderation": item["moderation"],
-            "probability_practical_harm": item["probability_practical_harm"],
-            "probability_practical_benefit": item.get("probability_practical_benefit", 0.0),
-            "impressions": item["impressions"],
-            "component": "context",
-            "causal_role": "moderator_candidate",
-            "experimentability": 0.0,
-            "association_score": abs(item["moderation_score"]),
-            "claim_type": "FACTOR_CANDIDATE",
-        })
+        candidates.append(
+            {
+                "factor_id": f"interaction.{item['factor_id']}={item['factor_value']}",
+                "source_type": "INTERACTION_SCAN",
+                "source_path": item["factor_id"],
+                "moderation": item["moderation"],
+                "probability_practical_harm": item["probability_practical_harm"],
+                "probability_practical_benefit": item.get(
+                    "probability_practical_benefit", 0.0
+                ),
+                "impressions": item["impressions"],
+                "component": "context",
+                "causal_role": "moderator_candidate",
+                "experimentability": 0.0,
+                "association_score": abs(item["moderation_score"]),
+                "claim_type": "FACTOR_CANDIDATE",
+            }
+        )
 
     # 4) Priority scoring: impact x evidence x experimentability / cost proxy.
     def priority(factor: Mapping[str, Any]) -> float:

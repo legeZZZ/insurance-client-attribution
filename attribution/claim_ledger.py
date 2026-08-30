@@ -74,7 +74,8 @@ class ClaimLedger:
         if claim_type not in CLAIM_TYPES:
             raise ValueError(f"unknown claim_type: {claim_type}")
         if selected_after_seeing_outcome and claim_type in (
-            "HETEROGENEOUS_TREATMENT_EFFECT", "COMPONENT_EFFECT",
+            "HETEROGENEOUS_TREATMENT_EFFECT",
+            "COMPONENT_EFFECT",
         ):
             # Selection-bias guard: discovered and estimated on the same data.
             claim_type = "EXPLORATORY_HETEROGENEITY"
@@ -97,12 +98,15 @@ class ClaimLedger:
 
     def can_promote_to_component_effect(self, design_record: Mapping[str, Any]) -> bool:
         """COMPONENT_EFFECT requires independent randomization of the factor."""
-        return all([
-            design_record.get("independent_randomization") is True,
-            design_record.get("assignment_provenance") in {"experiment_platform", "signed_config"},
-            design_record.get("design_code_traceable") is True,
-            design_record.get("stable_randomization_unit") is True,
-        ])
+        return all(
+            [
+                design_record.get("independent_randomization") is True,
+                design_record.get("assignment_provenance")
+                in {"experiment_platform", "signed_config"},
+                design_record.get("design_code_traceable") is True,
+                design_record.get("stable_randomization_unit") is True,
+            ]
+        )
 
     def transition(self, target: str) -> str:
         if target not in STATES:

@@ -18,6 +18,7 @@
 - [目录结构](#目录结构)
 - [样例输出](#样例输出)
 - [评测指标](#评测指标)
+- [验证](#验证)
 - [数据来源与授权](#数据来源与授权)
 - [合规边界](#合规边界)
 - [文档](#文档)
@@ -66,6 +67,19 @@ A/B 持续对照基线
 - 证据不足即拒答(`REFUSED` / `DATA_INSUFFICIENT`),不硬答
 - 每条结论带 claim_type、证据引用、后验不确定性;错误结论可撤回并留痕
 
+### 实验完整性闭锁门禁
+
+仅在元数据中声明 randomized 不足以输出因果结论。运行时会基于实际行级
+数据检查 SRM、基线平衡、分流稳定性、跨臂污染、时间顺序、样本漏斗、cluster
+完整性和并发实验。八项全部通过后，才允许运行 ITT、Bayesian bundle 决策和 HTE。
+
+重复观测按显式主估计目标处理：
+
+- `user_level`：先聚合到分析单元，再计算 ITT
+- `exposure_level`：保留合格曝光，使用 CR1 cluster-robust 标准误
+- `triggered_user`：明确标注为分配后条件估计，不属于 ITT
+- cluster 随机设计按声明的 cluster 层级推断
+
 ## 系统架构
 
 ### 七 Agent 治理流水线(因果治理运行时)
@@ -112,8 +126,18 @@ OBSERVED_ANOMALY → FACTORS_DISCOVERED → BUNDLE_EXPERIMENT_READY
 归因后验逐期写回经验库,下一期作为信息先验加载:
 
 - 旧经验按 0.5 衰减、上限封顶,防止陈旧先验主导
-- PID 反馈自适应调节收缩强度 ν
+- PID 反馈调节的是旧版伪曝光尺度 `shrinkage_strength`，与 Student-t
+  自由度 `nu` 是两个不同参数
 - 先验与新数据偏离超过阈值时触发错配报警,自动降级为扁平估计
+
+### 统计正确性升级
+
+- rate/mix/interaction 分解严格闭合，并报告 closure error
+- Student-t 真正进入随机效应后验和 `tau` 估计，输出显式记录 `tau`、`nu`和计算方法
+- beam search 按异常强度剪枝，不再依赖字段顺序
+- 实验臂不足以保持合法全因子/分数因子设计时直接拒绝，组件效应必须满秩可识别
+- 统一输入契约拒绝非有限值、非法计数、重复 segment ID、非法 p-value 和不可识别实验臂
+- 显式报告 BH/FDR、设计诊断、功效设计、流失膨胀、不等分流和 cluster design effect
 
 ### 技术特点
 
@@ -124,7 +148,7 @@ OBSERVED_ANOMALY → FACTORS_DISCOVERED → BUNDLE_EXPERIMENT_READY
 
 ## 快速开始
 
-环境要求:Python 3.10+,仅依赖 `numpy`(`pip install -r requirements.txt`)。
+环境要求:Python 3.12+,仅依赖 `numpy`(`pip install -r requirements.txt`)。
 
 ```bash
 # ① 线 A 端到端 demo + 7 seeds 基准(约 16 秒)
@@ -142,13 +166,22 @@ python3 -m attribution.nested_benchmark
 # ⑤ 公开外部事件时间线映射 + 覆盖率统计
 python3 -m attribution.external_events
 
-# ⑥ 因果治理基准(进程隔离,3 seeds / 9 cases)
+# ⑥ 多维 rate 异常候选生成与可审计 beam search
+python3 -m attribution.rate_aware_rca
+
+# ⑦ 基于事件和因子快照的时序关联发现
+python3 -m attribution.association_discovery
+
+# ⑧ 因果治理基准(进程隔离,3 seeds / 9 cases)
 python3 -m runtime --benchmark --benchmark-seeds 3
 
-# ⑦ UCI 真实公开数据案例(首次运行自动下载,CC BY 4.0)
+# ⑨ 输出并验证公开数据集来源目录
+python3 -m runtime --datasets
+
+# ⑩ UCI 真实公开数据案例(首次运行自动下载,CC BY 4.0)
 python3 -m runtime --fetch-real-data
 
-# ⑧ 本地控制台(REST API,默认端口 8765)
+# ⑪ 本地控制台(REST API,默认端口 8765)
 python3 run_server.py 8765
 ```
 
@@ -180,7 +213,16 @@ attribution/                  # 归因方法包(纯 numpy)
   bayes.py                    # Beta-Binomial 决策、层级 HTE、调节扫描
   spec.py                     # Growth UI Spec + SpecDiff/RenderDiff/RuntimeDiff
   factor_miner.py             # 开放候选发现
+  association_discovery.py    # 事件/因子快照时序关联发现
+  rate_aware_rca.py           # rate/mix/interaction 分解 + beam search
+  input_validation.py         # 共享 fail-fast 统计输入契约
+  factor_registry.py          # 因子元数据与来源注册
+  factor_store.py             # 因子快照与经验持久化
+  factor_retriever.py         # 时间安全的候选检索
+  fdr.py                      # 多重检验校正
   experiment_designer.py      # 全因子/Resolution-IV 因子设计 + 组件效应
+  experiment_platform.py      # 需审批的实验平台适配器
+  validation_planner.py       # 基于证据的验证计划
   claim_ledger.py             # 证据分级状态机与晋升门禁
   insursim_carousel.py        # 显式 DAG 仿真器(真值与 oracle 分离)
   benchmark.py                # 贝叶斯专项评测(同构+错配,含分群预测 Brier)
@@ -195,6 +237,7 @@ attribution/                  # 归因方法包(纯 numpy)
 runtime/                      # 因果治理运行时(七 Agent 状态机 + 五层门禁)
   cases.py                    # 因果就绪度案例 A/B/C 纵向切片
   analysis.py                 # 确定性特征提取与因果就绪技能
+  experiment_integrity.py     # 八项行级 fail-closed 完整性检查
   benchmark.py                # 进程隔离基准(种子与真值不暴露给被测方)
   real_data.py                # UCI Bank Marketing 适配器(SHA-256 锁定)
   dataset_catalog.py          # 数据集来源目录
@@ -245,7 +288,21 @@ ATT 汇总: naive 116.4 → 层级 119.4(真值 100,含实验噪声)
 | 治理基准(3 seeds / 9 cases) | 门禁准确率 / 错误因果断言率 / 拒答召回 | 1.00 / 0.00 / 1.00 |
 | 线 B 原型(5 seeds) | 未注册变动召回 / 外部对齐 / 未知诚实率 | 1.00 / 1.00 / 1.00 |
 | 收缩消融 | 调节 RMSE 层级 vs 朴素 | 同构 0.0042 vs 0.0048;线 B 5.55 vs 10.23(↓46%) |
+| Student-t 回放(50 seeds) | Gaussian 覆盖率 / Student-t plug-in-`tau` 覆盖率 | 0.8775 / 0.3075;作为负结果保留，Student-t 不设为生产默认 |
 | UCI 真实数据(45,211 条) | 门禁识别无随机分配 + 泄漏变量标记 + 贝叶斯层拒答 | 全部正确 |
+
+## 验证
+
+不向工作树写入生成证据时，可用以下命令验证安装与核心链路：
+
+```bash
+python3 -m runtime --datasets
+python3 -m runtime --benchmark --benchmark-seeds 1
+python3 -c "import attribution, runtime, run_server"
+```
+
+因果就绪 fixture 的 A、B、C 案例必须分别保持
+`DESCRIPTIVE_ONLY`、`DATA_INSUFFICIENT`和 `CAUSAL_READY`。
 
 ## 数据来源与授权
 

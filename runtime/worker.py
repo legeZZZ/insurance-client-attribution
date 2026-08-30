@@ -1,4 +1,4 @@
-"""Isolated public-data worker used by the process-separated benchmark."""
+"""Isolated public-data worker used by the attribution hidden benchmark."""
 
 from __future__ import annotations
 
@@ -14,7 +14,11 @@ def main() -> int:
     datasets = payload.get("datasets")
     if not isinstance(datasets, list):
         raise ValueError("payload.datasets must be a list")
-    json.dump({"results": [evaluate_public_dataset(bundle) for bundle in datasets]}, sys.stdout, ensure_ascii=False)
+    json.dump(
+        {"results": [evaluate_public_dataset(bundle) for bundle in datasets]},
+        sys.stdout,
+        ensure_ascii=False,
+    )
     return 0
 
 

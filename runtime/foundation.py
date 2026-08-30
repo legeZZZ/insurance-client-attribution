@@ -128,8 +128,20 @@ class AgentTeamsControlPlane:
         "TRIAGED": {"BOOTSTRAPPED", "AWAITING_APPROVAL", "NEEDS_HUMAN", "RECOVERING"},
         "BOOTSTRAPPED": {"LOCATED", "RETRYABLE_FAILURE", "NEEDS_HUMAN", "RECOVERING"},
         "LOCATED": {"PLANNED", "NEEDS_HUMAN", "RECOVERING"},
-        "PLANNED": {"AWAITING_APPROVAL", "BLOCKED_BY_POLICY", "NEEDS_HUMAN", "RECOVERING"},
-        "AWAITING_APPROVAL": {"PATCHED", "ACTION_DRAFTED", "MONITORING", "NEEDS_HUMAN", "BLOCKED_BY_POLICY", "RECOVERING"},
+        "PLANNED": {
+            "AWAITING_APPROVAL",
+            "BLOCKED_BY_POLICY",
+            "NEEDS_HUMAN",
+            "RECOVERING",
+        },
+        "AWAITING_APPROVAL": {
+            "PATCHED",
+            "ACTION_DRAFTED",
+            "MONITORING",
+            "NEEDS_HUMAN",
+            "BLOCKED_BY_POLICY",
+            "RECOVERING",
+        },
         "PATCHED": {"VERIFYING", "NEEDS_HUMAN", "RECOVERING"},
         "VERIFYING": {"RELEASE_READY", "PATCHED", "NEEDS_HUMAN", "RECOVERING"},
         "RELEASE_READY": {"POSTMORTEM", "CLOSED", "RECOVERING"},
@@ -138,21 +150,59 @@ class AgentTeamsControlPlane:
         "CLOSED": set(),
         "INTENT_PARSED": {"METRIC_CONFIRMED", "NEEDS_CLARIFICATION", "RECOVERING"},
         "METRIC_CONFIRMED": {"DATA_VALIDATED", "NEEDS_CLARIFICATION", "RECOVERING"},
-        "DATA_VALIDATED": {"DIAGNOSING", "DATA_INSUFFICIENT", "RETRYABLE_QUERY_FAILURE", "RECOVERING"},
+        "DATA_VALIDATED": {
+            "DIAGNOSING",
+            "DATA_INSUFFICIENT",
+            "RETRYABLE_QUERY_FAILURE",
+            "RECOVERING",
+        },
         "DIAGNOSING": {"EVIDENCE_GRADED", "DATA_INSUFFICIENT", "RECOVERING"},
         "EVIDENCE_GRADED": {"ACTION_DRAFTED", "DESCRIPTIVE_ONLY", "RECOVERING"},
         "DESCRIPTIVE_ONLY": {"ACTION_DRAFTED", "CLOSED", "RECOVERING"},
         "ACTION_DRAFTED": {"COMPLIANCE_REVIEWED", "BLOCKED_BY_GUARDRAIL", "RECOVERING"},
-        "COMPLIANCE_REVIEWED": {"AWAITING_APPROVAL", "BLOCKED_BY_GUARDRAIL", "RECOVERING"},
+        "COMPLIANCE_REVIEWED": {
+            "AWAITING_APPROVAL",
+            "BLOCKED_BY_GUARDRAIL",
+            "RECOVERING",
+        },
         "MONITORING": {"REVIEWED", "MONITORING_ALERT", "RECOVERING"},
         "REVIEWED": {"CLOSED", "RECOVERING"},
         "NEEDS_CLARIFICATION": {"METRIC_CONFIRMED", "CLOSED", "RECOVERING"},
-        "DATA_INSUFFICIENT": {"DESCRIPTIVE_ONLY", "NEEDS_HUMAN", "CLOSED", "RECOVERING"},
-        "RETRYABLE_QUERY_FAILURE": {"DATA_VALIDATED", "NEEDS_HUMAN", "CLOSED", "RECOVERING"},
+        "DATA_INSUFFICIENT": {
+            "DESCRIPTIVE_ONLY",
+            "NEEDS_HUMAN",
+            "CLOSED",
+            "RECOVERING",
+        },
+        "RETRYABLE_QUERY_FAILURE": {
+            "DATA_VALIDATED",
+            "NEEDS_HUMAN",
+            "CLOSED",
+            "RECOVERING",
+        },
         "BLOCKED_BY_GUARDRAIL": {"NEEDS_HUMAN", "CLOSED", "RECOVERING"},
         "BLOCKED_BY_POLICY": {"NEEDS_HUMAN", "CLOSED", "RECOVERING"},
-        "NEEDS_HUMAN": {"TRIAGED", "LOCATED", "PLANNED", "DATA_VALIDATED", "ACTION_DRAFTED", "CLOSED", "RECOVERING"},
-        "RECOVERING": {"TRIAGED", "BOOTSTRAPPED", "LOCATED", "PLANNED", "PATCHED", "VERIFYING", "DATA_VALIDATED", "DIAGNOSING", "CLOSED", "NEEDS_HUMAN"},
+        "NEEDS_HUMAN": {
+            "TRIAGED",
+            "LOCATED",
+            "PLANNED",
+            "DATA_VALIDATED",
+            "ACTION_DRAFTED",
+            "CLOSED",
+            "RECOVERING",
+        },
+        "RECOVERING": {
+            "TRIAGED",
+            "BOOTSTRAPPED",
+            "LOCATED",
+            "PLANNED",
+            "PATCHED",
+            "VERIFYING",
+            "DATA_VALIDATED",
+            "DIAGNOSING",
+            "CLOSED",
+            "NEEDS_HUMAN",
+        },
         "RETRYABLE_FAILURE": {"BOOTSTRAPPED", "PATCHED", "NEEDS_HUMAN", "RECOVERING"},
         "MONITORING_ALERT": {"MONITORING", "REVIEWED", "NEEDS_HUMAN", "RECOVERING"},
     }
@@ -180,26 +230,65 @@ class AgentTeamsControlPlane:
     def register_topology(self, topology: TeamTopology) -> None:
         unknown = [node for node in topology.nodes if node not in self.agents]
         if unknown:
-            raise ValueError("topology references unknown agents: {}".format(", ".join(unknown)))
+            raise ValueError(
+                "topology references unknown agents: {}".format(", ".join(unknown))
+            )
         self.topologies[topology.team_id] = topology
 
-    def create_task(self, task_id: str, domain: str, input_payload: dict[str, Any], trace_id: str | None = None) -> TaskRecord:
+    def create_task(
+        self,
+        task_id: str,
+        domain: str,
+        input_payload: dict[str, Any],
+        trace_id: str | None = None,
+    ) -> TaskRecord:
         if task_id in self.tasks:
             raise ValueError(f"duplicate task: {task_id}")
-        task = TaskRecord(task_id, trace_id or new_id("trace"), domain, input_payload, "RECEIVED")
+        task = TaskRecord(
+            task_id, trace_id or new_id("trace"), domain, input_payload, "RECEIVED"
+        )
         self.tasks[task_id] = task
-        self._event(task, "TASK_CREATED", "control-plane", {"domain": domain, "input_digest": digest(input_payload)})
+        self._event(
+            task,
+            "TASK_CREATED",
+            "control-plane",
+            {"domain": domain, "input_digest": digest(input_payload)},
+        )
         return task
 
-    def _event(self, task: TaskRecord, event_type: str, actor: str, payload: dict[str, Any]) -> Event:
-        event = Event(new_id("evt"), task.task_id, task.trace_id, event_type, actor, payload, task.state_version)
+    def _event(
+        self, task: TaskRecord, event_type: str, actor: str, payload: dict[str, Any]
+    ) -> Event:
+        event = Event(
+            new_id("evt"),
+            task.task_id,
+            task.trace_id,
+            event_type,
+            actor,
+            payload,
+            task.state_version,
+        )
         self.events.append(event)
         return event
 
-    def transition(self, task_id: str, target: str, actor: str, reason: str, metadata: dict[str, Any] | None = None, expected_state_version: int | None = None) -> TaskRecord:
+    def transition(
+        self,
+        task_id: str,
+        target: str,
+        actor: str,
+        reason: str,
+        metadata: dict[str, Any] | None = None,
+        expected_state_version: int | None = None,
+    ) -> TaskRecord:
         task = self.tasks[task_id]
-        if expected_state_version is not None and task.state_version != expected_state_version:
-            raise ConcurrentStateError("expected state version %d, found %d" % (expected_state_version, task.state_version))
+        if (
+            expected_state_version is not None
+            and task.state_version != expected_state_version
+        ):
+            raise ConcurrentStateError(
+                "expected state version %d, found %d"
+                % (expected_state_version, task.state_version)
+            )
         allowed = self.TRANSITIONS.get(task.state, set())
         if target not in allowed:
             raise StateTransitionError(f"{task.state} -> {target} is not allowed")
@@ -208,31 +297,96 @@ class AgentTeamsControlPlane:
             if identity is None:
                 raise AuthorizationError(f"unknown transition actor: {actor}")
             if target not in identity.allowed_states:
-                raise AuthorizationError(f"{actor} cannot own target state {target}")
+                raise AuthorizationError(
+                    f"{actor} cannot own target state {target}"
+                )
         previous = task.state
         task.state = target
         task.state_version += 1
         task.updated_at = utc_now()
         if metadata:
             task.metadata.update(metadata)
-        self._event(task, "STATE_TRANSITION", actor, {"from": previous, "to": target, "reason": reason, "metadata": metadata or {}})
+        self._event(
+            task,
+            "STATE_TRANSITION",
+            actor,
+            {
+                "from": previous,
+                "to": target,
+                "reason": reason,
+                "metadata": metadata or {},
+            },
+        )
         return task
 
-    def publish_artifact(self, task_id: str, artifact_type: str, producer: str, payload: dict[str, Any], evidence_refs: list[str] | None = None, schema_version: str = "1.0") -> Artifact:
+    def publish_artifact(
+        self,
+        task_id: str,
+        artifact_type: str,
+        producer: str,
+        payload: dict[str, Any],
+        evidence_refs: list[str] | None = None,
+        schema_version: str = "1.0",
+    ) -> Artifact:
         task = self.tasks[task_id]
-        artifact = Artifact(new_id("art"), task_id, task.trace_id, artifact_type, schema_version, producer, payload, evidence_refs or [])
+        artifact = Artifact(
+            new_id("art"),
+            task_id,
+            task.trace_id,
+            artifact_type,
+            schema_version,
+            producer,
+            payload,
+            evidence_refs or [],
+        )
         self.artifacts[artifact.artifact_id] = artifact
-        self._event(task, "ARTIFACT_PUBLISHED", producer, {"artifact_id": artifact.artifact_id, "artifact_type": artifact_type, "evidence_refs": artifact.evidence_refs})
+        self._event(
+            task,
+            "ARTIFACT_PUBLISHED",
+            producer,
+            {
+                "artifact_id": artifact.artifact_id,
+                "artifact_type": artifact_type,
+                "evidence_refs": artifact.evidence_refs,
+            },
+        )
         return artifact
 
-    def record_evidence(self, task_id: str, kind: str, label: str, source: str, content: Any) -> Evidence:
+    def record_evidence(
+        self, task_id: str, kind: str, label: str, source: str, content: Any
+    ) -> Evidence:
         task = self.tasks[task_id]
-        item = Evidence(new_id("ev"), task_id, task.trace_id, kind, label, source, content, digest(content))
+        item = Evidence(
+            new_id("ev"),
+            task_id,
+            task.trace_id,
+            kind,
+            label,
+            source,
+            content,
+            digest(content),
+        )
         self.evidence[item.evidence_id] = item
-        self._event(task, "EVIDENCE_RECORDED", source, {"evidence_id": item.evidence_id, "kind": kind, "label": label, "content_digest": item.content_digest})
+        self._event(
+            task,
+            "EVIDENCE_RECORDED",
+            source,
+            {
+                "evidence_id": item.evidence_id,
+                "kind": kind,
+                "label": label,
+                "content_digest": item.content_digest,
+            },
+        )
         return item
 
-    def request_approval(self, task_id: str, actor: str, scope: dict[str, Any], expected_state: str | None = None) -> str:
+    def request_approval(
+        self,
+        task_id: str,
+        actor: str,
+        scope: dict[str, Any],
+        expected_state: str | None = None,
+    ) -> str:
         task = self.tasks[task_id]
         approval_id = new_id("approval")
         scope_digest = digest(scope)
@@ -249,10 +403,27 @@ class AgentTeamsControlPlane:
             "status": "PENDING",
             "created_at": utc_now(),
         }
-        self._event(task, "APPROVAL_REQUESTED", actor, {"approval_id": approval_id, "scope": scope, "scope_digest": scope_digest, "expected_state": expected_state})
+        self._event(
+            task,
+            "APPROVAL_REQUESTED",
+            actor,
+            {
+                "approval_id": approval_id,
+                "scope": scope,
+                "scope_digest": scope_digest,
+                "expected_state": expected_state,
+            },
+        )
         return approval_id
 
-    def approve(self, approval_id: str, reviewer: str, decision: str = "APPROVED", note: str = "", decision_evidence: dict[str, Any] | None = None) -> dict[str, Any]:
+    def approve(
+        self,
+        approval_id: str,
+        reviewer: str,
+        decision: str = "APPROVED",
+        note: str = "",
+        decision_evidence: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         approval = self.approvals[approval_id]
         if approval["status"] != "PENDING":
             raise ApprovalError("approval is not pending")
@@ -260,7 +431,9 @@ class AgentTeamsControlPlane:
             raise ApprovalError("decision must be APPROVED or REJECTED")
         task = self.tasks[approval["task_id"]]
         if approval.get("expected_state") and task.state != approval["expected_state"]:
-            raise ApprovalError("approval expected task state {}, found {}".format(approval["expected_state"], task.state))
+            raise ApprovalError(
+                "approval expected task state {}, found {}".format(approval["expected_state"], task.state)
+            )
         evidence = dict(decision_evidence or {})
         evidence.setdefault("provider", "local-conformance")
         evidence.setdefault("reviewer_identity", reviewer)
@@ -269,21 +442,72 @@ class AgentTeamsControlPlane:
         if evidence["reviewer_identity"] != reviewer:
             raise ApprovalError("reviewer identity does not match the approval actor")
         if evidence["scope_digest"] != approval["scope_digest"]:
-            raise ApprovalError("approval scope digest does not match the requested scope")
-        approval.update({"status": decision, "reviewer": reviewer, "note": note, "decision_evidence": evidence, "decided_at": utc_now()})
-        self._event(task, "APPROVAL_DECIDED", reviewer, {"approval_id": approval_id, "decision": decision, "note": note, "scope_digest": approval["scope_digest"], "decision_evidence": evidence})
+            raise ApprovalError(
+                "approval scope digest does not match the requested scope"
+            )
+        approval.update(
+            {
+                "status": decision,
+                "reviewer": reviewer,
+                "note": note,
+                "decision_evidence": evidence,
+                "decided_at": utc_now(),
+            }
+        )
+        self._event(
+            task,
+            "APPROVAL_DECIDED",
+            reviewer,
+            {
+                "approval_id": approval_id,
+                "decision": decision,
+                "note": note,
+                "scope_digest": approval["scope_digest"],
+                "decision_evidence": evidence,
+            },
+        )
         return approval
 
     def checkpoint_payload(self, task_id: str) -> dict[str, Any]:
         task = self.tasks[task_id]
-        return {"task": asdict(task), "events": [asdict(e) for e in self.events if e.task_id == task_id], "artifacts": [asdict(a) for a in self.artifacts.values() if a.task_id == task_id], "evidence": [asdict(e) for e in self.evidence.values() if e.task_id == task_id], "approvals": [a for a in self.approvals.values() if a["task_id"] == task_id]}
+        return {
+            "task": asdict(task),
+            "events": [asdict(e) for e in self.events if e.task_id == task_id],
+            "artifacts": [
+                asdict(a) for a in self.artifacts.values() if a.task_id == task_id
+            ],
+            "evidence": [
+                asdict(e) for e in self.evidence.values() if e.task_id == task_id
+            ],
+            "approvals": [
+                a for a in self.approvals.values() if a["task_id"] == task_id
+            ],
+        }
 
     def trace(self, task_id: str) -> list[dict[str, Any]]:
         return [asdict(e) for e in self.events if e.task_id == task_id]
 
     def evidence_pack(self, task_id: str) -> dict[str, Any]:
         task = self.tasks[task_id]
-        return {"task_id": task_id, "trace_id": task.trace_id, "domain": task.domain, "input_payload": task.input_payload, "state": task.state, "state_version": task.state_version, "artifacts": [asdict(a) for a in self.artifacts.values() if a.task_id == task_id], "evidence": [asdict(e) for e in self.evidence.values() if e.task_id == task_id], "approvals": [a for a in self.approvals.values() if a["task_id"] == task_id], "trace": self.trace(task_id), "topologies": [asdict(topology) for topology in self.topologies.values()]}
+        return {
+            "task_id": task_id,
+            "trace_id": task.trace_id,
+            "domain": task.domain,
+            "input_payload": task.input_payload,
+            "state": task.state,
+            "state_version": task.state_version,
+            "artifacts": [
+                asdict(a) for a in self.artifacts.values() if a.task_id == task_id
+            ],
+            "evidence": [
+                asdict(e) for e in self.evidence.values() if e.task_id == task_id
+            ],
+            "approvals": [
+                a for a in self.approvals.values() if a["task_id"] == task_id
+            ],
+            "trace": self.trace(task_id),
+            "topologies": [asdict(topology) for topology in self.topologies.values()],
+        }
 
 
 class SQLiteCheckpointProvider:
@@ -293,18 +517,30 @@ class SQLiteCheckpointProvider:
         self.path = path
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with sqlite3.connect(str(self.path)) as conn:
-            conn.execute("CREATE TABLE IF NOT EXISTS checkpoints (task_id TEXT PRIMARY KEY, state_version INTEGER NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL)")
+            conn.execute(
+                "CREATE TABLE IF NOT EXISTS checkpoints (task_id TEXT PRIMARY KEY, state_version INTEGER NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL)"
+            )
 
     def save(self, task_id: str, state_version: int, payload: dict[str, Any]) -> None:
         with sqlite3.connect(str(self.path)) as conn:
-            conn.execute("INSERT OR REPLACE INTO checkpoints(task_id, state_version, payload, updated_at) VALUES (?, ?, ?, ?)", (task_id, state_version, canonical_json(payload), utc_now()))
+            conn.execute(
+                "INSERT OR REPLACE INTO checkpoints(task_id, state_version, payload, updated_at) VALUES (?, ?, ?, ?)",
+                (task_id, state_version, canonical_json(payload), utc_now()),
+            )
 
     def load(self, task_id: str) -> dict[str, Any] | None:
         with sqlite3.connect(str(self.path)) as conn:
-            row = conn.execute("SELECT state_version, payload, updated_at FROM checkpoints WHERE task_id = ?", (task_id,)).fetchone()
+            row = conn.execute(
+                "SELECT state_version, payload, updated_at FROM checkpoints WHERE task_id = ?",
+                (task_id,),
+            ).fetchone()
         if not row:
             return None
-        return {"state_version": row[0], "payload": json.loads(row[1]), "updated_at": row[2]}
+        return {
+            "state_version": row[0],
+            "payload": json.loads(row[1]),
+            "updated_at": row[2],
+        }
 
 
 class LocalEvidenceProvider:
@@ -319,5 +555,7 @@ class LocalEvidenceProvider:
         path = self.path_for(task_id)
         pack["evidence_pack_path"] = str(path)
         pack["evidence_pack_relative_path"] = "evidence/" + path.name
-        path.write_text(json.dumps(pack, ensure_ascii=False, indent=2), encoding="utf-8")
+        path.write_text(
+            json.dumps(pack, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
         return path

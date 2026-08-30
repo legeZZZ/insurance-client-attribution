@@ -23,13 +23,13 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-DECAY = 0.5            # per-period decay of accumulated pseudo-counts
-CAP = 4000.0           # max pseudo-impressions a stored prior may carry
+DECAY = 0.5  # per-period decay of accumulated pseudo-counts
+CAP = 4000.0  # max pseudo-impressions a stored prior may carry
 NU_MIN, NU_MAX = 100.0, 2000.0
-TARGET_ERR = 0.002     # tolerated one-step-ahead prediction error (prob scale)
+TARGET_ERR = 0.002  # tolerated one-step-ahead prediction error (prob scale)
 MISMATCH_THRESHOLD = 0.008  # prior-deviation alarm level (~4x TARGET_ERR):
-                            # fires on the onset period of structural drift,
-                            # before the decayed store has adapted to it
+# fires on the onset period of structural drift,
+# before the decayed store has adapted to it
 KP, KI, KD = 0.6, 0.15, 0.3
 
 
@@ -42,15 +42,17 @@ class FactorExperienceStore:
             self.data = {
                 "version": 1,
                 "periods": 0,
-                "arms": {},                # arm_key -> {alpha, beta}
-                "predictions": {},         # segment_id -> last shrunk effect
+                "arms": {},  # arm_key -> {alpha, beta}
+                "predictions": {},  # segment_id -> last shrunk effect
                 "shrinkage_strength": 500.0,
                 "_err_integral": 0.0,
                 "_err_prev": None,
             }
 
     # ---- cross-period prior loading -------------------------------------
-    def prior(self, arm_key: str, max_total: float | None = None) -> tuple[float, float] | None:
+    def prior(
+        self, arm_key: str, max_total: float | None = None
+    ) -> tuple[float, float] | None:
         """Informative Beta prior for an arm, or None on cold start.
 
         `max_total` caps pseudo-impressions relative to the fresh data size
@@ -116,17 +118,25 @@ class FactorExperienceStore:
         step = KP * err + KI * integral + KD * derivative
         nu = self.data["shrinkage_strength"] * math.exp(max(min(step, 0.7), -0.7))
         nu = min(max(nu, NU_MIN), NU_MAX)
-        self.data.update({
-            "shrinkage_strength": float(nu),
-            "_err_integral": float(integral),
-            "_err_prev": float(err),
-        })
-        return {"nu": float(nu), "mean_abs_error": float(e), "p": KP * err,
-                "i": KI * integral, "d": KD * derivative}
+        self.data.update(
+            {
+                "shrinkage_strength": float(nu),
+                "_err_integral": float(integral),
+                "_err_prev": float(err),
+            }
+        )
+        return {
+            "nu": float(nu),
+            "mean_abs_error": float(e),
+            "p": KP * err,
+            "i": KI * integral,
+            "d": KD * derivative,
+        }
 
     # ---- mismatch alarm --------------------------------------------------
-    def arm_deviation(self, arm_key: str, fresh_rate: float,
-                      max_total: float | None = None) -> float | None:
+    def arm_deviation(
+        self, arm_key: str, fresh_rate: float, max_total: float | None = None
+    ) -> float | None:
         """|prior mean - fresh MLE| for an arm; None on cold start."""
         pr = self.prior(arm_key, max_total=max_total)
         if pr is None:
@@ -147,14 +157,18 @@ class FactorExperienceStore:
 
     def save(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        self.path.write_text(json.dumps(self.data, ensure_ascii=False, indent=2),
-                             encoding="utf-8")
+        self.path.write_text(
+            json.dumps(self.data, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
 
     # ---- introspection ---------------------------------------------------
     def summary(self) -> dict[str, Any]:
         return {
             "periods": self.data["periods"],
-            "arms": {k: round(v["alpha"] + v["beta"], 1) for k, v in self.data["arms"].items()},
+            "arms": {
+                k: round(v["alpha"] + v["beta"], 1)
+                for k, v in self.data["arms"].items()
+            },
             "shrinkage_strength": round(self.data["shrinkage_strength"], 1),
             "tracked_segments": len(self.data["predictions"]),
         }
