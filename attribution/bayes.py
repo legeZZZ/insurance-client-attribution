@@ -216,13 +216,16 @@ def _student_t_marginal_loglikelihood(
     location: float,
     scale: float,
     nu: float,
+    grid_points: int = 1201,
 ) -> float:
     """Numerically integrate Normal(y|theta,se) * t(theta|mu,tau,nu)."""
     total = 0.0
     for mean, standard_error in zip(means, standard_errors):
         radius = 14.0 * max(scale, float(standard_error), 1e-6)
         grid = np.linspace(
-            min(location, mean) - radius, max(location, mean) + radius, 1201
+            min(location, mean) - radius,
+            max(location, mean) + radius,
+            grid_points,
         )
         log_likelihood = (
             -0.5 * ((mean - grid) / standard_error) ** 2
@@ -293,6 +296,216 @@ def _student_t_posterior_draws(
     return np.clip(sampled, -1.0, 1.0)
 
 
+def _weighted_quantile(
+    values: Sequence[float], weights: Sequence[float], probability: float
+) -> float:
+    order = np.argsort(np.asarray(values, dtype=float))
+    ordered_values = np.asarray(values, dtype=float)[order]
+    ordered_weights = np.asarray(weights, dtype=float)[order]
+    cumulative = np.cumsum(ordered_weights) / float(np.sum(ordered_weights))
+    return float(np.interp(probability, cumulative, ordered_values))
+
+
+def _student_t_hyperparameter_posterior(
+    means: Sequence[float],
+    standard_errors: Sequence[float],
+    pooled_mean: float,
+    pooled_se: float,
+    requested_nu: float,
+    nu_grid: Sequence[float] | None = None,
+) -> dict[str, Any]:
+    """Discrete joint posterior for Student-t location, scale and degrees of freedom.
+
+    A weakly informative half-normal prior is used for non-zero ``tau`` and a
+    separate 10% prior mass is retained at the zero-heterogeneity boundary.
+    The returned components are pruned only after normalization, retaining at
+    least 99.5% posterior mass when that fits within 64 components.
+    """
+    y = np.asarray(means, dtype=float)
+    se = np.maximum(np.asarray(standard_errors, dtype=float), 1e-9)
+    count = max(len(y), 1)
+    location_sd = max(float(pooled_se), float(np.median(se)) / math.sqrt(count), 5e-4)
+    location_z = np.linspace(-3.0, 3.0, 7)
+    locations = pooled_mean + location_z * location_sd
+    location_log_prior = -0.5 * location_z**2
+    location_log_prior -= float(
+        np.max(location_log_prior)
+        + math.log(
+            float(np.sum(np.exp(location_log_prior - np.max(location_log_prior))))
+        )
+    )
+
+    residual_scale = max(float(np.std(y)), float(np.median(se)), 1e-4)
+    tau_prior_scale = max(residual_scale, 2.0 * float(np.median(se)), 0.0025)
+    tau_low = max(tau_prior_scale / 50.0, 1e-5)
+    tau_upper = min(
+        max(
+            5.0 * tau_prior_scale,
+            2.0 * float(np.max(np.abs(y - pooled_mean))),
+            0.02,
+        ),
+        0.5,
+    )
+    tau_values = np.geomspace(tau_low, tau_upper, 18)
+    tau_widths = np.gradient(tau_values)
+    tau_log_prior = (
+        math.log(0.9)
+        + 0.5 * math.log(2.0 / math.pi)
+        - math.log(tau_prior_scale)
+        - 0.5 * (tau_values / tau_prior_scale) ** 2
+        + np.log(tau_widths)
+    )
+
+    degrees = sorted(
+        {float(value) for value in (nu_grid or (3.0, 4.0, 5.0, 8.0, 15.0, 30.0))}
+        | {float(requested_nu)}
+    )
+    if any(not math.isfinite(value) or value <= 2.0 for value in degrees):
+        raise ValueError("nu_grid values must be finite and greater than 2")
+    nu_log_prior = -math.log(len(degrees))
+
+    components: list[dict[str, float]] = []
+    for location, log_location_prior in zip(locations, location_log_prior):
+        zero_log_likelihood = float(
+            np.sum(
+                -0.5 * ((y - location) / se) ** 2
+                - np.log(se)
+                - 0.5 * math.log(2.0 * math.pi)
+            )
+        )
+        components.append(
+            {
+                "location": float(location),
+                "scale": 0.0,
+                "nu": float(requested_nu),
+                "log_weight": float(
+                    log_location_prior + math.log(0.1) + zero_log_likelihood
+                ),
+            }
+        )
+        for scale, log_tau_prior in zip(tau_values, tau_log_prior):
+            for degrees_of_freedom in degrees:
+                log_likelihood = _student_t_marginal_loglikelihood(
+                    y,
+                    se,
+                    float(location),
+                    float(scale),
+                    degrees_of_freedom,
+                    grid_points=401,
+                )
+                components.append(
+                    {
+                        "location": float(location),
+                        "scale": float(scale),
+                        "nu": degrees_of_freedom,
+                        "log_weight": float(
+                            log_location_prior
+                            + log_tau_prior
+                            + nu_log_prior
+                            + log_likelihood
+                        ),
+                    }
+                )
+
+    log_weights = np.asarray([item["log_weight"] for item in components])
+    weights = np.exp(log_weights - float(np.max(log_weights)))
+    weights /= float(np.sum(weights))
+    # Compress the categorical posterior with deterministic stratified
+    # resampling. Unlike top-k pruning this preserves both central mass and
+    # posterior tails, which are essential for calibrated intervals.
+    quadrature_size = min(128, len(components))
+    cumulative = np.cumsum(weights)
+    positions = (np.arange(quadrature_size, dtype=float) + 0.5) / quadrature_size
+    sampled_indexes = np.searchsorted(cumulative, positions)
+    retained_indexes, retained_counts = np.unique(sampled_indexes, return_counts=True)
+    retained_weights = retained_counts.astype(float) / quadrature_size
+    retained: list[dict[str, float]] = []
+    for index, weight in zip(retained_indexes, retained_weights):
+        item = dict(components[int(index)])
+        item.pop("log_weight")
+        item["weight"] = float(weight)
+        retained.append(item)
+
+    all_scales = [item["scale"] for item in components]
+    all_nu = [item["nu"] for item in components]
+    all_locations = [item["location"] for item in components]
+    return {
+        "components": retained,
+        "summary": {
+            "method": "joint_discrete_hyperparameter_posterior",
+            "location_prior": {
+                "distribution": "normal",
+                "center": float(pooled_mean),
+                "standard_deviation": float(location_sd),
+            },
+            "tau_prior": {
+                "distribution": "spike_at_zero_plus_half_normal",
+                "zero_mass": 0.1,
+                "half_normal_scale": float(tau_prior_scale),
+            },
+            "nu_grid": degrees,
+            "candidate_component_count": len(components),
+            "retained_component_count": len(retained),
+            "posterior_quadrature_size": quadrature_size,
+            "component_compression": "deterministic_stratified_resampling",
+            "retained_posterior_mass": 1.0,
+            "probability_tau_zero": float(
+                sum(
+                    weight
+                    for item, weight in zip(components, weights)
+                    if item["scale"] == 0.0
+                )
+            ),
+            "location_posterior_mean": float(np.sum(weights * all_locations)),
+            "tau_posterior_mean": float(np.sum(weights * all_scales)),
+            "tau_credible_interval_95": [
+                _weighted_quantile(all_scales, weights, 0.025),
+                _weighted_quantile(all_scales, weights, 0.975),
+            ],
+            "nu_posterior_mean": float(np.sum(weights * all_nu)),
+            "approximation": (
+                "deterministic grid integration; segment likelihood integrates "
+                "Normal(y|theta,se) * StudentT(theta|mu,tau,nu)"
+            ),
+            "required_assumption": (
+                "segment effect estimates are conditionally independent given "
+                "mu/tau/nu; overlapping segment definitions require a covariance-aware "
+                "extension before production use"
+            ),
+        },
+    }
+
+
+def _student_t_mixture_posterior_draws(
+    observed_mean: float,
+    observed_se: float,
+    components: Sequence[Mapping[str, float]],
+    draws: int,
+    rng: np.random.Generator,
+) -> np.ndarray:
+    weights = np.asarray([item["weight"] for item in components], dtype=float)
+    weights /= float(np.sum(weights))
+    counts = rng.multinomial(draws, weights)
+    batches: list[np.ndarray] = []
+    for component, count in zip(components, counts):
+        if count == 0:
+            continue
+        batches.append(
+            _student_t_posterior_draws(
+                observed_mean,
+                observed_se,
+                float(component["location"]),
+                float(component["scale"]),
+                float(component["nu"]),
+                int(count),
+                rng,
+            )
+        )
+    result = np.concatenate(batches)
+    rng.shuffle(result)
+    return result
+
+
 def _probability_scale_shrink(
     raw_draws: np.ndarray,
     target_draws: np.ndarray,
@@ -344,6 +557,8 @@ def estimate_hte(
     shrinkage_method: str = "normal_normal",
     nu: float = 4.0,
     tau: float | None = None,
+    student_t_hyperparameter_method: str = "grid_mixture",
+    student_t_nu_grid: Sequence[float] | None = None,
 ) -> dict[str, Any]:
     """Hierarchical HTE with probability-difference posterior shrinkage.
 
@@ -353,8 +568,10 @@ def estimate_hte(
     ``likelihood="student_t"``, the hierarchy is
     ``y_i | theta_i ~ Normal(theta_i, se_i)`` and
     ``theta_i ~ StudentT(nu, location=pooled_effect, scale=tau)``. Here tau is
-    the Student-t scale, not its standard deviation; when omitted it is fitted
-    by empirical-Bayes marginal likelihood.
+    the Student-t scale, not its standard deviation. When ``tau`` and the
+    legacy ``shrinkage_strength`` are both omitted, the default ``grid_mixture``
+    method propagates uncertainty in location, tau and nu. The old plug-in
+    empirical-Bayes method remains available only for replay comparison.
     """
     rng = np.random.default_rng(seed)
     input_validation = validate_hte_segments(segments)
@@ -370,6 +587,10 @@ def estimate_hte(
         raise ValueError("tau must be finite and non-negative")
     if likelihood == "student_t" and (not math.isfinite(nu) or nu <= 2):
         raise ValueError("nu must be finite and greater than 2")
+    if student_t_hyperparameter_method not in {"grid_mixture", "plug_in"}:
+        raise ValueError(
+            "student_t_hyperparameter_method must be grid_mixture or plug_in"
+        )
     if tau is not None and shrinkage_strength is not None:
         raise ValueError("tau and shrinkage_strength cannot both be specified")
 
@@ -400,6 +621,8 @@ def estimate_hte(
         raw_summaries[str(s["segment_id"])]["standard_error"] for s in segments
     ]
     pooled_mean = float(pooled_summary["mean"])
+    hyperparameter_posterior: dict[str, Any] | None = None
+    student_t_components: list[dict[str, float]] | None = None
     if likelihood == "gaussian":
         tau2 = (
             float(tau) ** 2
@@ -416,11 +639,36 @@ def estimate_hte(
         elif shrinkage_strength is not None:
             legacy_variance = _legacy_tau2(sizes, standard_errors, shrinkage_strength)
             tau_scale = math.sqrt(legacy_variance * (nu - 2.0) / nu)
-        else:
+        elif student_t_hyperparameter_method == "plug_in":
             tau_scale = _estimate_student_t_scale(
                 means, standard_errors, pooled_mean, nu
             )
-        random_effect_variance = tau_scale**2 * nu / (nu - 2.0)
+        else:
+            hyperparameter_posterior = _student_t_hyperparameter_posterior(
+                means,
+                standard_errors,
+                pooled_mean,
+                float(pooled_summary["standard_error"]),
+                nu,
+                student_t_nu_grid,
+            )
+            student_t_components = hyperparameter_posterior["components"]
+            summary = hyperparameter_posterior["summary"]
+            tau_scale = float(summary["tau_posterior_mean"])
+            nu = float(summary["nu_posterior_mean"])
+            pooled_mean = float(summary["location_posterior_mean"])
+        if student_t_components is None:
+            random_effect_variance = tau_scale**2 * nu / (nu - 2.0)
+        else:
+            random_effect_variance = float(
+                sum(
+                    component["weight"]
+                    * component["scale"] ** 2
+                    * component["nu"]
+                    / (component["nu"] - 2.0)
+                    for component in student_t_components
+                )
+            )
         tau2 = random_effect_variance
 
     results: list[dict[str, Any]] = []
@@ -428,15 +676,24 @@ def estimate_hte(
         sid = str(seg["segment_id"])
         raw_effects = raw_draws_by_id[sid]
         if likelihood == "student_t":
-            shrunk_draws = _student_t_posterior_draws(
-                raw_summaries[sid]["mean"],
-                raw_summaries[sid]["standard_error"],
-                pooled_mean,
-                tau_scale,
-                nu,
-                draws,
-                rng,
-            )
+            if student_t_components is None:
+                shrunk_draws = _student_t_posterior_draws(
+                    raw_summaries[sid]["mean"],
+                    raw_summaries[sid]["standard_error"],
+                    pooled_mean,
+                    tau_scale,
+                    nu,
+                    draws,
+                    rng,
+                )
+            else:
+                shrunk_draws = _student_t_mixture_posterior_draws(
+                    raw_summaries[sid]["mean"],
+                    raw_summaries[sid]["standard_error"],
+                    student_t_components,
+                    draws,
+                    rng,
+                )
             denominator = raw_summaries[sid]["mean"] - pooled_mean
             weight = (
                 (float(np.mean(shrunk_draws)) - pooled_mean) / denominator
@@ -486,7 +743,11 @@ def estimate_hte(
             }
         )
     return {
-        "model": "probability_scale_empirical_bayes_partial_pooling",
+        "model": (
+            "probability_scale_joint_hyperparameter_partial_pooling"
+            if likelihood == "student_t" and student_t_components is not None
+            else "probability_scale_empirical_bayes_partial_pooling"
+        ),
         "likelihood": "beta_binomial_posterior_draws",
         "random_effects_distribution": likelihood,
         "random_effects_parameters": {
@@ -495,6 +756,12 @@ def estimate_hte(
             "scale": float(tau_scale),
             "tau": float(tau_scale),
             "scale_equals_tau": True,
+            "parameter_interpretation": (
+                "posterior means across mixture components; the posterior is not "
+                "a single Student-t distribution"
+                if likelihood == "student_t" and student_t_components is not None
+                else "single random-effects distribution"
+            ),
         },
         "likelihood_requested": likelihood,
         "effect_scale": "probability_difference",
@@ -511,7 +778,10 @@ def estimate_hte(
         "tau2_probability_difference": float(tau2),
         "tau_scale_probability_difference": float(tau_scale),
         "tau_definition": (
-            "Student-t scale; SD=tau*sqrt(nu/(nu-2))"
+            "posterior mean of Student-t component scales; component SD is "
+            "tau*sqrt(nu/(nu-2))"
+            if likelihood == "student_t" and student_t_components is not None
+            else "Student-t scale; SD=tau*sqrt(nu/(nu-2))"
             if likelihood == "student_t"
             else "Gaussian random-effects standard deviation"
         ),
@@ -520,14 +790,43 @@ def estimate_hte(
             if tau is not None
             else "legacy_shrinkage_strength"
             if shrinkage_strength is not None
+            else "joint_hyperparameter_posterior"
+            if likelihood == "student_t"
+            and student_t_hyperparameter_method == "grid_mixture"
             else "empirical_bayes_marginal_likelihood"
             if likelihood == "student_t"
             else "der_simonian_laird"
         ),
         "random_effect_variance_probability_difference": float(random_effect_variance),
         "student_t_nu": float(nu) if likelihood == "student_t" else None,
+        "student_t_hyperparameter_method": (
+            student_t_hyperparameter_method if likelihood == "student_t" else None
+        ),
+        "student_t_hyperparameter_posterior": (
+            hyperparameter_posterior["summary"]
+            if hyperparameter_posterior is not None
+            else None
+        ),
+        "student_t_limitations": (
+            [
+                (
+                    "joint hyperparameter likelihood assumes conditionally independent "
+                    "segment effect estimates"
+                ),
+                (
+                    "overlapping segment definitions are validation-only until a "
+                    "covariance-aware likelihood is implemented"
+                ),
+            ]
+            if likelihood == "student_t"
+            and student_t_hyperparameter_method == "grid_mixture"
+            else []
+        ),
         "posterior_calculation": (
-            "normalized numerical posterior: Normal(y_i|theta_i,se_i) * "
+            "mixture posterior integrating p(mu,tau,nu|all segments) and "
+            "p(theta_i|y_i,mu,tau,nu)"
+            if likelihood == "student_t" and student_t_components is not None
+            else "normalized numerical posterior: Normal(y_i|theta_i,se_i) * "
             "StudentT(theta_i|mu,tau,nu)"
             if likelihood == "student_t"
             else "normal-normal empirical-Bayes update"

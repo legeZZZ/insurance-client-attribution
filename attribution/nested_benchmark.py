@@ -145,6 +145,16 @@ def run_nested_ablation() -> dict[str, Any]:
             likelihood="student_t",
             nu=5.0,
         )
+        flat_student_t_plugin = estimate_hte(
+            segments,
+            practical_threshold=0.01,
+            moderation_threshold=0.005,
+            seed=seed,
+            draws=20_000,
+            likelihood="student_t",
+            nu=5.0,
+            student_t_hyperparameter_method="plug_in",
+        )
         nested = estimate_hte_nested(
             segments, group_of=lambda s: s["device"], seed=seed
         )
@@ -166,16 +176,24 @@ def run_nested_ablation() -> dict[str, Any]:
             rc = [r["clicked"] for r in sub if r["treatment"] == 0]
             rt = [r["clicked"] for r in sub if r["treatment"] == 1]
             full_truth[sid] = sum(rt) / len(rt) - sum(rc) / len(rc)
-        cov_g = cov_t = 0
+        cov_g = cov_t = cov_t_plugin = 0
         student_by_id = {
             segment["segment_id"]: segment for segment in flat_student_t["segments"]
+        }
+        student_plugin_by_id = {
+            segment["segment_id"]: segment
+            for segment in flat_student_t_plugin["segments"]
         }
         for seg in flat["segments"]:
             lo_g, hi_g = seg["credible_interval_95"]
             lo_t, hi_t = student_by_id[seg["segment_id"]]["credible_interval_95"]
+            lo_t_plugin, hi_t_plugin = student_plugin_by_id[seg["segment_id"]][
+                "credible_interval_95"
+            ]
             tv = full_truth[seg["segment_id"]]
             cov_g += lo_g <= tv <= hi_g
             cov_t += lo_t <= tv <= hi_t
+            cov_t_plugin += lo_t_plugin <= tv <= hi_t_plugin
         n_seg = len(flat["segments"])
 
         # Calibration target: per-segment moderation tail probabilities.
@@ -215,9 +233,23 @@ def run_nested_ablation() -> dict[str, Any]:
                 "moderation_shrunk",
                 "effect_shrunk",
             ),
+            "student_t_plugin": _score(
+                flat_student_t_plugin,
+                "prob_moderation_worse_shrunk",
+                "moderation_shrunk",
+                "effect_shrunk",
+            ),
             "student_t_tau": flat_student_t["tau_scale_probability_difference"],
+            "student_t_plugin_tau": flat_student_t_plugin[
+                "tau_scale_probability_difference"
+            ],
+            "student_t_probability_tau_zero": flat_student_t[
+                "student_t_hyperparameter_posterior"
+            ]["probability_tau_zero"],
+            "student_t_nu_posterior": flat_student_t["student_t_nu"],
             "coverage_gaussian_95": cov_g / n_seg,
             "coverage_student_t_95": cov_t / n_seg,
+            "coverage_student_t_plugin_95": cov_t_plugin / n_seg,
             "seg_pairs_raw": seg_pairs_raw,
             "seg_pairs_calibrated": seg_pairs_cal,
         }
@@ -236,6 +268,23 @@ def run_nested_ablation() -> dict[str, Any]:
 
     raw_pairs = [xy for r in per_seed for xy in r["seg_pairs_raw"]]
     cal_pairs = [xy for r in per_seed for xy in r["seg_pairs_calibrated"]]
+    student_coverage = mean([r["coverage_student_t_95"] for r in per_seed])
+    plugin_coverage = mean([r["coverage_student_t_plugin_95"] for r in per_seed])
+    student_summary = agg(None, "student_t")
+    flat_summary = agg(None, "flat")
+    student_release_gates = {
+        "coverage_0_93_to_0_97": 0.93 <= student_coverage <= 0.97,
+        "coverage_improves_plugin_by_at_least_0_20": student_coverage
+        >= plugin_coverage + 0.20,
+        "false_positives_no_worse_than_gaussian": student_summary[
+            "false_positives_total"
+        ]
+        <= flat_summary["false_positives_total"],
+        "moderation_rmse_no_worse_than_gaussian": student_summary["moderation_rmse"]
+        <= flat_summary["moderation_rmse"],
+        "direction_recall_no_worse_than_gaussian": student_summary["direction_recall"]
+        >= flat_summary["direction_recall"],
+    }
     out = {
         "ablation": "nested_pooling_and_calibration_50seeds",
         "seeds": len(SEEDS),
@@ -244,22 +293,42 @@ def run_nested_ablation() -> dict[str, Any]:
         "decision_accuracy_small_sample": mean(
             [r["decision_correct"] for r in per_seed]
         ),
-        "flat_pooling": agg(None, "flat"),
+        "flat_pooling": flat_summary,
         "nested_pooling": agg(None, "nested"),
         "student_t_pooling": {
-            **agg(None, "student_t"),
-            "nu": 5.0,
+            **student_summary,
+            "requested_nu": 5.0,
+            "mean_nu_posterior": mean([r["student_t_nu_posterior"] for r in per_seed]),
             "mean_tau_scale": mean([r["student_t_tau"] for r in per_seed]),
+            "mean_probability_tau_zero": mean(
+                [r["student_t_probability_tau_zero"] for r in per_seed]
+            ),
+            "hyperparameter_method": "joint_grid_mixture",
+        },
+        "student_t_plugin_pooling": {
+            **agg(None, "student_t_plugin"),
+            "nu": 5.0,
+            "mean_tau_scale": mean([r["student_t_plugin_tau"] for r in per_seed]),
+            "hyperparameter_method": "empirical_bayes_plugin",
         },
         "hte_interval_coverage": {
             "gaussian_95": mean([r["coverage_gaussian_95"] for r in per_seed]),
-            "student_t_95": mean([r["coverage_student_t_95"] for r in per_seed]),
+            "student_t_95": student_coverage,
+            "student_t_plugin_95": plugin_coverage,
             "note": (
                 "coverage vs full-data (100k) empirical cell effects; both "
-                "intervals come from their actual random-effects posteriors, "
-                "with Student-t nu=5"
+                "Student-t paths use their actual random-effects posteriors; "
+                "student_t_95 propagates mu/tau/nu uncertainty while "
+                "student_t_plugin_95 retains the historical fixed-nu plug-in-tau path"
             ),
         },
+        "student_t_release_gates": student_release_gates,
+        "student_t_production_eligible": all(student_release_gates.values()),
+        "student_t_deployment_policy": (
+            "eligible for guarded candidate review"
+            if all(student_release_gates.values())
+            else "experimental_only; Gaussian remains production default"
+        ),
         "calibration": {
             "target": "per-segment prob_moderation_worse (true moderation on device=1 cells)",
             "ece_raw": round(BinnedCalibrator.ece(raw_pairs), 5),

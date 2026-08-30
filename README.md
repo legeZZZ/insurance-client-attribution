@@ -140,6 +140,9 @@ python3 -m attribution.experience_benchmark
 # ④ Nested shrinkage + calibration ablation, 50 seeds (~90 s)
 python3 -m attribution.nested_benchmark
 
+# ④b Student-t calibration across four truth families (~65 s)
+python3 -m attribution.student_t_calibration_benchmark
+
 # ⑤ Public external-event timeline mapping + coverage stats
 python3 -m attribution.external_events
 
@@ -209,6 +212,7 @@ attribution/                  # Attribution methods package (pure numpy)
   experience_benchmark.py     # Cross-period ablation (7-period traffic ramp)
   calibration.py              # Binned calibration layer (out-of-sample reliability mapping)
   nested_benchmark.py         # Nested pooling + calibration ablation, 50 seeds
+  student_t_calibration_benchmark.py # Four-truth-family Student-t release gates
   external_events.py          # Public external-event timeline + mapping coverage
   scenario_reports.py         # Console scenario runner + audit report rendering
   agent_chat.py               # Multi-turn chat agent: Plan-and-Execute state machine
@@ -263,12 +267,13 @@ All metrics are locally reproducible (see [Quick Start](#quick-start)):
 | Simulated-truth backtest (5 seeds) | Recall@5 / ATE RMSE / CrI coverage / decision accuracy / HTE direction / factor recovery | 1.00 / 0.001 / 1.00 / 1.00 / 1.00 / 0.90 |
 | Mismatch backtest (2 seeds) | Decision accuracy / factor recovery / Brier | 1.00 / 0.75 / 0.0445 (near the Bernoulli variance floor) |
 | Experience-store ablation (7-period ramp) | Cold-start ATE RMSE / decision consistency / mismatch alarm | ↓10.9% / no regression / precise trigger, no false alarms |
-| Nested pooling + calibration (50 seeds, small samples) | Direction recall nested vs flat / calibration ECE / Gaussian vs Student-t 95% coverage | 0.18 vs 0.02 / 0.0626→0.0390 (−37.7%) / 0.8775 vs 0.3075 |
+| Nested pooling + calibration (50 seeds, small samples) | Direction recall nested vs flat / calibration ECE / Gaussian vs joint Student-t vs plug-in Student-t 95% coverage | 0.18 vs 0.02 / 0.0626→0.0390 (−37.7%) / 0.8775 vs 0.9475 vs 0.3075 |
 | External-event mapping (90-day panel) | True-event recall / misattributed unregistered changes / coverage | 100% / 0 misattributed / 0.500 |
 | Governance benchmark (3 seeds / 9 cases) | Gate accuracy / false causal assertion rate / refusal recall | 1.00 / 0.00 / 1.00 |
 | Line B prototype (5 seeds) | Unregistered-change recall / external alignment / unknown honesty | 1.00 / 1.00 / 1.00 |
 | Shrinkage ablation | Moderation RMSE hierarchical vs naive | 0.0030 vs 0.0048 (in-dist); 5.55 vs 10.23 (Line B, ↓46%) |
-| Student-t replay (50 seeds) | Gaussian coverage / Student-t plug-in-`tau` coverage | 0.8775 / 0.3075; retained as a negative result, so Student-t is not the production default |
+| Student-t multi-truth calibration (4 × 50 seeds) | Joint vs plug-in coverage / minimum family coverage / interval-width ratio vs Gaussian | 0.9383 vs 0.5588 / 0.9100 / 1.122 |
+| Student-t utility gate (repository replay) | Direction recall joint vs Gaussian / moderation RMSE joint vs Gaussian | 0.00 vs 0.02 / 0.00398 vs 0.00284; calibration is repaired, but utility gates fail, so Student-t remains experimental |
 | UCI real data (45,211 rows) | Detects no randomization + leakage variable flagging + Bayesian-layer refusal | All correct |
 
 ## Verification

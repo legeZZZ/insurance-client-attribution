@@ -163,6 +163,9 @@ python3 -m attribution.experience_benchmark
 # ④ 多因子嵌套收缩 + 校准层 50 seeds 消融(约 90 秒)
 python3 -m attribution.nested_benchmark
 
+# ④b Student-t 四真值族校准基准(约 65 秒)
+python3 -m attribution.student_t_calibration_benchmark
+
 # ⑤ 公开外部事件时间线映射 + 覆盖率统计
 python3 -m attribution.external_events
 
@@ -231,6 +234,7 @@ attribution/                  # 归因方法包(纯 numpy)
   experience_benchmark.py     # 经验库跨期消融(流量爬坡 7 期)
   calibration.py              # 分箱校准层(样本外可靠性映射)
   nested_benchmark.py         # 嵌套池化 + 校准 50 seeds 消融
+  student_t_calibration_benchmark.py # Student-t 四真值族上线门槛
   external_events.py          # 公开外部事件时间线 + 映射覆盖率
   scenario_reports.py         # 控制台场景运行 + 审计报告渲染
   agent_chat.py               # 多轮对话 Agent:Plan-and-Execute 状态机
@@ -283,12 +287,13 @@ ATT 汇总: naive 116.4 → 层级 119.4(真值 100,含实验噪声)
 | 仿真真值回测(5 seeds) | Recall@5 / ATE RMSE / CrI 覆盖率 / 决策准确率 / HTE 方向 / 因子还原 | 1.00 / 0.001 / 1.00 / 1.00 / 1.00 / 0.90 |
 | 错配回测(2 seeds) | 决策准确率 / 因子还原 / Brier | 1.00 / 0.75 / 0.0445(接近 Bernoulli 方差下界) |
 | 经验库跨期消融(7 期流量爬坡) | 冷启动期 ATE RMSE / 决策一致性 / 错配报警 | ↓10.9% / 无回退 / 精确触发无误报 |
-| 嵌套池化 + 校准(50 seeds 小样本) | 方向召回 嵌套 vs 扁平 / 校准 ECE / Gaussian vs Student-t 95% 覆盖率 | 0.18 vs 0.02 / 0.0626→0.0390(−37.7%) / 0.8775 vs 0.3075 |
+| 嵌套池化 + 校准(50 seeds 小样本) | 方向召回 嵌套 vs 扁平 / 校准 ECE / Gaussian vs 联合 Student-t vs plug-in Student-t 95% 覆盖率 | 0.18 vs 0.02 / 0.0626→0.0390(−37.7%) / 0.8775 vs 0.9475 vs 0.3075 |
 | 外部事件映射(90 天面板) | 真值事件召回 / 未注册变动错挂 / 映射覆盖率 | 100% / 0 错挂 / 0.500 |
 | 治理基准(3 seeds / 9 cases) | 门禁准确率 / 错误因果断言率 / 拒答召回 | 1.00 / 0.00 / 1.00 |
 | 线 B 原型(5 seeds) | 未注册变动召回 / 外部对齐 / 未知诚实率 | 1.00 / 1.00 / 1.00 |
 | 收缩消融 | 调节 RMSE 层级 vs 朴素 | 同构 0.0030 vs 0.0048;线 B 5.55 vs 10.23(↓46%) |
-| Student-t 回放(50 seeds) | Gaussian 覆盖率 / Student-t plug-in-`tau` 覆盖率 | 0.8775 / 0.3075;作为负结果保留，Student-t 不设为生产默认 |
+| Student-t 四真值族校准(4 × 50 seeds) | 联合后验 vs plug-in 覆盖率 / 最低真值族覆盖率 / 相对 Gaussian 区间宽度 | 0.9383 vs 0.5588 / 0.9100 / 1.122 |
+| Student-t 效用门槛(仓库回放) | 方向召回 联合后验 vs Gaussian / moderation RMSE | 0.00 vs 0.02 / 0.00398 vs 0.00284;校准已修复但效用门槛未过，仍保持实验状态 |
 | UCI 真实数据(45,211 条) | 门禁识别无随机分配 + 泄漏变量标记 + 贝叶斯层拒答 | 全部正确 |
 
 ## 验证
