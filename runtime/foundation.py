@@ -10,11 +10,12 @@ from __future__ import annotations
 import hashlib
 import json
 import sqlite3
+import tempfile
 import uuid
 from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, ClassVar
 
 
 def utc_now() -> str:
@@ -122,7 +123,7 @@ class ApprovalError(RuntimeError):
 class AgentTeamsControlPlane:
     """Authoritative task state, team identities, events, artifacts and approvals."""
 
-    TRANSITIONS: dict[str, set[str]] = {
+    TRANSITIONS: ClassVar[dict[str, set[str]]] = {
         "RECEIVED": {"FUSED", "INTENT_PARSED", "RECOVERING"},
         "FUSED": {"TRIAGED", "RECOVERING"},
         "TRIAGED": {"BOOTSTRAPPED", "AWAITING_APPROVAL", "NEEDS_HUMAN", "RECOVERING"},
@@ -286,8 +287,8 @@ class AgentTeamsControlPlane:
             and task.state_version != expected_state_version
         ):
             raise ConcurrentStateError(
-                "expected state version %d, found %d"
-                % (expected_state_version, task.state_version)
+                f"expected state version {expected_state_version}, "
+                f"found {task.state_version}"
             )
         allowed = self.TRANSITIONS.get(task.state, set())
         if target not in allowed:
@@ -297,9 +298,7 @@ class AgentTeamsControlPlane:
             if identity is None:
                 raise AuthorizationError(f"unknown transition actor: {actor}")
             if target not in identity.allowed_states:
-                raise AuthorizationError(
-                    f"{actor} cannot own target state {target}"
-                )
+                raise AuthorizationError(f"{actor} cannot own target state {target}")
         previous = task.state
         task.state = target
         task.state_version += 1
@@ -432,7 +431,9 @@ class AgentTeamsControlPlane:
         task = self.tasks[approval["task_id"]]
         if approval.get("expected_state") and task.state != approval["expected_state"]:
             raise ApprovalError(
-                "approval expected task state {}, found {}".format(approval["expected_state"], task.state)
+                "approval expected task state {}, found {}".format(
+                    approval["expected_state"], task.state
+                )
             )
         evidence = dict(decision_evidence or {})
         evidence.setdefault("provider", "local-conformance")
@@ -555,7 +556,17 @@ class LocalEvidenceProvider:
         path = self.path_for(task_id)
         pack["evidence_pack_path"] = str(path)
         pack["evidence_pack_relative_path"] = "evidence/" + path.name
-        path.write_text(
-            json.dumps(pack, ensure_ascii=False, indent=2), encoding="utf-8"
-        )
+        body = json.dumps(pack, ensure_ascii=False, indent=2)
+        temporary: Path | None = None
+        try:
+            with tempfile.NamedTemporaryFile(
+                "w", encoding="utf-8", dir=path.parent, delete=False
+            ) as handle:
+                handle.write(body)
+                handle.flush()
+                temporary = Path(handle.name)
+            temporary.replace(path)
+        finally:
+            if temporary is not None and temporary.exists():
+                temporary.unlink()
         return path

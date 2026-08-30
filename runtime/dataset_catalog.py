@@ -8,9 +8,7 @@ from typing import Any
 
 
 def load_dataset_catalog() -> dict[str, Any]:
-    path = resources.files("runtime").joinpath(
-        "datasets/catalog.json"
-    )
+    path = resources.files("runtime").joinpath("datasets/catalog.json")
     catalog = json.loads(path.read_text(encoding="utf-8"))
     required = {
         "dataset_id",

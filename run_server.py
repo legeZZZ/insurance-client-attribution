@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import mimetypes
 import sys
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -35,6 +36,35 @@ from runtime.real_data import run_real_data_case
 
 RUNTIME = PROJECT / "runtime_data"
 STATIC = PROJECT / "web" / "static"
+MAX_REQUEST_BODY = 64 * 1024
+VALID_CASES = {"A", "B", "C"}
+
+
+def bounded_int(value: str, *, minimum: int, maximum: int, name: str) -> int:
+    try:
+        parsed = int(value)
+    except ValueError as exc:
+        raise ValueError(f"{name} must be an integer") from exc
+    if not minimum <= parsed <= maximum:
+        raise ValueError(f"{name} must be between {minimum} and {maximum}")
+    return parsed
+
+
+def bounded_float(value: str, *, minimum: float, maximum: float, name: str) -> float:
+    try:
+        parsed = float(value)
+    except ValueError as exc:
+        raise ValueError(f"{name} must be a number") from exc
+    if not math.isfinite(parsed) or not minimum <= parsed <= maximum:
+        raise ValueError(f"{name} must be between {minimum} and {maximum}")
+    return parsed
+
+
+def valid_case(value: str) -> str:
+    case = value.upper()
+    if case not in VALID_CASES:
+        raise ValueError(f"case must be one of {', '.join(sorted(VALID_CASES))}")
+    return case
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -102,11 +132,24 @@ class Handler(BaseHTTPRequestHandler):
             )
             return
         if parsed.path == "/api/attribution/case":
-            case = query.get("case", ["A"])[0].upper()
+            try:
+                case = valid_case(query.get("case", ["A"])[0])
+            except ValueError as exc:
+                self.send_json({"error": str(exc)}, status=400)
+                return
             self.send_json(public_case(run_case(RUNTIME, case)))
             return
         if parsed.path == "/api/attribution/benchmark":
-            seed_count = max(1, min(20, int(query.get("seeds", ["8"])[0])))
+            try:
+                seed_count = bounded_int(
+                    query.get("seeds", ["8"])[0],
+                    minimum=1,
+                    maximum=20,
+                    name="seeds",
+                )
+            except ValueError as exc:
+                self.send_json({"error": str(exc)}, status=400)
+                return
             seeds = tuple(100 + index * 101 for index in range(seed_count))
             self.send_json(run_hidden_benchmark(seeds=seeds))
             return
@@ -129,8 +172,17 @@ class Handler(BaseHTTPRequestHandler):
             return
         if parsed.path == "/api/attribution/bayes-case":
             # v3 gate + v5 Bayesian decision layer (refuses when the gate fails).
-            case = query.get("case", ["C"])[0].upper()
-            threshold = float(query.get("threshold", ["0.01"])[0])
+            try:
+                case = valid_case(query.get("case", ["C"])[0])
+                threshold = bounded_float(
+                    query.get("threshold", ["0.01"])[0],
+                    minimum=0.0,
+                    maximum=1.0,
+                    name="threshold",
+                )
+            except ValueError as exc:
+                self.send_json({"error": str(exc)}, status=400)
+                return
             rows, _truth = generate_dataset(case, seed=42, n=1200)
             bundle = {
                 "rows": sanitize_rows(rows),
@@ -166,18 +218,38 @@ class Handler(BaseHTTPRequestHandler):
             except KeyError as exc:
                 self.send_json({"error": str(exc)}, status=404)
                 return
-            self.send_download(render_markdown(report), f"attribution_report_{scenario}.md")
+            self.send_download(
+                render_markdown(report), f"attribution_report_{scenario}.md"
+            )
             return
         self.serve_static(parsed.path)
 
     def do_POST(self) -> None:
         parsed = urlparse(self.path)
         if parsed.path == "/api/attribution/chat":
-            length = int(self.headers.get("Content-Length", "0"))
+            raw_length = self.headers.get("Content-Length", "0")
+            try:
+                length = bounded_int(
+                    raw_length,
+                    minimum=1,
+                    maximum=MAX_REQUEST_BODY,
+                    name="Content-Length",
+                )
+            except ValueError as exc:
+                status = (
+                    413
+                    if raw_length.isdigit() and int(raw_length) > MAX_REQUEST_BODY
+                    else 400
+                )
+                self.send_json({"error": str(exc)}, status=status)
+                return
             try:
                 payload = json.loads(self.rfile.read(length) or b"{}")
-            except json.JSONDecodeError:
+            except (json.JSONDecodeError, UnicodeDecodeError):
                 self.send_json({"error": "invalid JSON body"}, status=400)
+                return
+            if not isinstance(payload, dict):
+                self.send_json({"error": "JSON body must be an object"}, status=400)
                 return
             session_id = str(payload.get("session_id") or "default")
             message = str(payload.get("message") or "")
@@ -206,7 +278,7 @@ def main() -> None:
     host = args.host or config["server"]["host"]
     port = args.port if args.port is not None else int(config["server"]["port"])
     server = ThreadingHTTPServer((host, port), Handler)
-    print("GOAI attribution Console: http://%s:%d" % (host, port), flush=True)
+    print(f"GOAI attribution Console: http://{host}:{port}", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

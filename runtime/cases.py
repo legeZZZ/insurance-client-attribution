@@ -499,7 +499,9 @@ def run_case(base_dir: Path, case: str = "A") -> dict[str, Any]:
     if case not in {"A", "B", "C"}:
         raise ValueError("case must be A, B or C")
     control_plane = build_control_plane()
-    checkpoint = SQLiteCheckpointProvider(base_dir / "checkpoints" / "attribution.sqlite3")
+    checkpoint = SQLiteCheckpointProvider(
+        base_dir / "checkpoints" / "attribution.sqlite3"
+    )
     evidence_provider = LocalEvidenceProvider(base_dir / "evidence")
     task_id = f"T2-case-{case}"
     task = control_plane.create_task(

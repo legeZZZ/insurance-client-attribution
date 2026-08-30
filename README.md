@@ -250,7 +250,7 @@ external-event registry (1 entry).
 ```text
 ATT summary: naive 116.4 → hierarchical 119.4 (truth 100, with experimental noise)
 External association: ext_regulation window deviation -86.2, claim_type=TEMPORAL_ASSOCIATION
-Governance alert: UNEXPLAINED_STEP_SUSPECTED (day 39/51; truth: unregistered change day 40 + drift)
+Governance alert: UNEXPLAINED_STEP_SUSPECTED (day 44/51; truth: unregistered change day 40 + drift)
 Unknown bucket: last-10-day mean -95.8, claim_type=UNEXPLAINED (not allocated)
 ```
 
@@ -260,14 +260,14 @@ All metrics are locally reproducible (see [Quick Start](#quick-start)):
 
 | Evaluation | Metric | Result |
 |---|---|---|
-| Simulated-truth backtest (5 seeds) | Recall@5 / ATE RMSE / CrI coverage / decision accuracy / HTE direction / factor recovery | 1.00 / 0.001 / 1.00 / 1.00 / 1.00 / 1.00 |
-| Mismatch backtest (2 seeds) | Decision & recovery / Brier | 1.00 held / 0.032→0.044 (near the Bernoulli variance floor) |
+| Simulated-truth backtest (5 seeds) | Recall@5 / ATE RMSE / CrI coverage / decision accuracy / HTE direction / factor recovery | 1.00 / 0.001 / 1.00 / 1.00 / 1.00 / 0.90 |
+| Mismatch backtest (2 seeds) | Decision accuracy / factor recovery / Brier | 1.00 / 0.75 / 0.0445 (near the Bernoulli variance floor) |
 | Experience-store ablation (7-period ramp) | Cold-start ATE RMSE / decision consistency / mismatch alarm | ↓10.9% / no regression / precise trigger, no false alarms |
-| Nested pooling + calibration (50 seeds, small samples) | Direction recall nested vs flat / calibration ECE / HTE 95% CI coverage | 0.78 vs 0.16 / 0.155→0.038 (−76%) / 77.8%→87.8% |
-| External-event mapping (90-day panel) | True-event recall / misattributed unregistered changes / coverage | 100% / 0 misattributed / 0.667 |
+| Nested pooling + calibration (50 seeds, small samples) | Direction recall nested vs flat / calibration ECE / Gaussian vs Student-t 95% coverage | 0.18 vs 0.02 / 0.0626→0.0390 (−37.7%) / 0.8775 vs 0.3075 |
+| External-event mapping (90-day panel) | True-event recall / misattributed unregistered changes / coverage | 100% / 0 misattributed / 0.500 |
 | Governance benchmark (3 seeds / 9 cases) | Gate accuracy / false causal assertion rate / refusal recall | 1.00 / 0.00 / 1.00 |
 | Line B prototype (5 seeds) | Unregistered-change recall / external alignment / unknown honesty | 1.00 / 1.00 / 1.00 |
-| Shrinkage ablation | Moderation RMSE hierarchical vs naive | 0.0042 vs 0.0048 (in-dist); 5.55 vs 10.23 (Line B, ↓46%) |
+| Shrinkage ablation | Moderation RMSE hierarchical vs naive | 0.0030 vs 0.0048 (in-dist); 5.55 vs 10.23 (Line B, ↓46%) |
 | Student-t replay (50 seeds) | Gaussian coverage / Student-t plug-in-`tau` coverage | 0.8775 / 0.3075; retained as a negative result, so Student-t is not the production default |
 | UCI real data (45,211 rows) | Detects no randomization + leakage variable flagging + Bayesian-layer refusal | All correct |
 
@@ -279,6 +279,8 @@ working tree:
 ```bash
 python3 -m runtime --datasets
 python3 -m runtime --benchmark --benchmark-seeds 1
+python3 -m unittest discover -s tests -v
+ruff check . && ruff format --check .
 python3 -c "import attribution, runtime, run_server"
 ```
 

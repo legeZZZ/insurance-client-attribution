@@ -19,7 +19,9 @@ Wired into run_server.py as POST /api/attribution/chat {session_id, message}.
 from __future__ import annotations
 
 import time
+from collections import OrderedDict
 from pathlib import Path
+from threading import RLock
 from typing import Any
 
 from .scenario_reports import SCENARIOS, run_scenario
@@ -77,7 +79,22 @@ _SCENARIO_ALIASES.update({str(i + 1): s["id"] for i, s in enumerate(SCENARIOS)})
 
 # In-memory session store: session_id -> state dict. Process-local by design;
 # conversations hold no user data, so nothing persists across restarts (8.4-3).
-_SESSIONS: dict[str, dict[str, Any]] = {}
+# The cap prevents arbitrary client-provided session IDs from growing memory forever.
+_MAX_SESSIONS = 1_000
+_SESSION_LOCK = RLock()
+_SESSIONS: OrderedDict[str, dict[str, Any]] = OrderedDict()
+
+
+def _session_state(session_id: str) -> dict[str, Any]:
+    state = _SESSIONS.get(session_id)
+    if state is None:
+        if len(_SESSIONS) >= _MAX_SESSIONS:
+            _SESSIONS.popitem(last=False)
+        state = {"stage": "intent", "scenario": None}
+        _SESSIONS[session_id] = state
+    else:
+        _SESSIONS.move_to_end(session_id)
+    return state
 
 
 def _catalog_text() -> str:
@@ -123,59 +140,67 @@ def handle_message(
     session_id: str, message: str, runtime_dir: Path | None = None
 ) -> dict[str, Any]:
     """One chat turn. Returns {reply, stage, scenario?, report?, trace}."""
-    state = _SESSIONS.setdefault(session_id, {"stage": "intent", "scenario": None})
-    trace: list[str] = [f"stage_in={state['stage']}"]
     text = (message or "").strip()
+    execute_sid: str | None = None
+    with _SESSION_LOCK:
+        state = _session_state(session_id)
+        trace: list[str] = [f"stage_in={state['stage']}"]
 
-    if state["stage"] == "confirm":
-        if any(k in text.lower() for k in ["确认", "执行", "好", "run", "yes", "ok"]):
-            sid = state["scenario"]
-            state["stage"] = "intent"
-            state["scenario"] = None
-            started = time.time()
-            report = run_scenario(sid, runtime_dir)
-            elapsed = round(time.time() - started, 2)
-            trace.append(f"executed={sid} in {elapsed}s")
-            metrics = ", ".join(
-                f"{k}={v}" for k, v in list(report["metrics"].items())[:6]
-            )
-            reply = (
-                f"✅ 已真实执行完毕（{elapsed}s，非预置输出）。\n"
-                f"关键指标：{metrics}\n"
-                f"完整审计报告：GET /api/attribution/scenario-report?scenario={sid}\n"
-                f"证据指针：{report.get('evidence_pointer', 'outputs/')}\n\n"
-                + _catalog_text()
-            )
+        if state["stage"] == "confirm":
+            if any(
+                keyword in text.lower()
+                for keyword in ["确认", "执行", "好", "run", "yes", "ok"]
+            ):
+                execute_sid = str(state["scenario"])
+                state["stage"] = "intent"
+                state["scenario"] = None
+            else:
+                # Not a confirmation: re-classify as a new intent.
+                state["stage"] = "intent"
+                state["scenario"] = None
+
+        if execute_sid is None:
+            sid = _classify_intent(text)
+            if sid is None:
+                trace.append("intent=ambiguous -> clarify")
+                return {
+                    "reply": ("我没有完全理解您的目标场景。\n" + _catalog_text()),
+                    "stage": "clarify",
+                    "trace": trace,
+                }
+
+            state["scenario"] = sid
+            state["stage"] = "confirm"
+            trace.append(f"intent={sid} -> confirm")
             return {
-                "reply": reply,
-                "stage": "done",
+                "reply": _plan_text(sid),
+                "stage": "confirm",
                 "scenario": sid,
-                "report": report,
                 "trace": trace,
             }
-        # Not a confirmation: re-classify as a new intent.
-        state["stage"] = "intent"
-        state["scenario"] = None
 
-    sid = _classify_intent(text)
-    if sid is None:
-        trace.append("intent=ambiguous -> clarify")
-        return {
-            "reply": ("我没有完全理解您的目标场景。\n" + _catalog_text()),
-            "stage": "clarify",
-            "trace": trace,
-        }
-
-    state["scenario"] = sid
-    state["stage"] = "confirm"
-    trace.append(f"intent={sid} -> confirm")
+    started = time.time()
+    report = run_scenario(execute_sid, runtime_dir)
+    elapsed = round(time.time() - started, 2)
+    trace.append(f"executed={execute_sid} in {elapsed}s")
+    metrics = ", ".join(
+        f"{key}={value}" for key, value in list(report["metrics"].items())[:6]
+    )
+    reply = (
+        f"✅ 已真实执行完毕（{elapsed}s，非预置输出）。\n"
+        f"关键指标：{metrics}\n"
+        f"完整审计报告：GET /api/attribution/scenario-report?scenario={execute_sid}\n"
+        f"证据指针：{report.get('evidence_pointer', 'outputs/')}\n\n" + _catalog_text()
+    )
     return {
-        "reply": _plan_text(sid),
-        "stage": "confirm",
-        "scenario": sid,
+        "reply": reply,
+        "stage": "done",
+        "scenario": execute_sid,
+        "report": report,
         "trace": trace,
     }
 
 
 def reset_session(session_id: str) -> None:
-    _SESSIONS.pop(session_id, None)
+    with _SESSION_LOCK:
+        _SESSIONS.pop(session_id, None)

@@ -46,7 +46,7 @@
 Growth UI Spec 三类 Diff(SpecDiff / RenderDiff / RuntimeDiff)
   → FactorMiner 开放候选扫描(不穷举因子清单)
   → 贝叶斯 Bundle 效应估计(Beta-Binomial 后验)
-  → 层级收缩 HTE 分群分析(Student-t 后验,小分群防误报)
+  → 层级收缩 HTE 分群分析(Gaussian 生产默认;Student-t 为欠覆盖实验路径)
   → 因子化实验设计(全因子 / Resolution-IV)
 ```
 
@@ -270,7 +270,7 @@ EXPERIMENT_INCONCLUSIVE ×3: layout / indicator_position / media_aspect_ratio �
 ```text
 ATT 汇总: naive 116.4 → 层级 119.4(真值 100,含实验噪声)
 外部关联: ext_regulation 窗口偏离 -86.2,claim_type=TEMPORAL_ASSOCIATION
-治理告警: UNEXPLAINED_STEP_SUSPECTED(day 39/51,真值未注册变更 day 40 + 漂移)
+治理告警: UNEXPLAINED_STEP_SUSPECTED(day 44/51,真值未注册变更 day 40 + 漂移)
 未知桶: 末 10 天均值 -95.8,claim_type=UNEXPLAINED(不摊派)
 ```
 
@@ -280,14 +280,14 @@ ATT 汇总: naive 116.4 → 层级 119.4(真值 100,含实验噪声)
 
 | 评测 | 指标 | 结果 |
 |---|---|---|
-| 仿真真值回测(5 seeds) | Recall@5 / ATE RMSE / CrI 覆盖率 / 决策准确率 / HTE 方向 / 因子还原 | 1.00 / 0.001 / 1.00 / 1.00 / 1.00 / 1.00 |
-| 错配回测(2 seeds) | 决策与因子还原 / Brier | 保持 1.00 / 0.032→0.044(接近 Bernoulli 方差下界) |
+| 仿真真值回测(5 seeds) | Recall@5 / ATE RMSE / CrI 覆盖率 / 决策准确率 / HTE 方向 / 因子还原 | 1.00 / 0.001 / 1.00 / 1.00 / 1.00 / 0.90 |
+| 错配回测(2 seeds) | 决策准确率 / 因子还原 / Brier | 1.00 / 0.75 / 0.0445(接近 Bernoulli 方差下界) |
 | 经验库跨期消融(7 期流量爬坡) | 冷启动期 ATE RMSE / 决策一致性 / 错配报警 | ↓10.9% / 无回退 / 精确触发无误报 |
-| 嵌套池化 + 校准(50 seeds 小样本) | 方向召回 嵌套 vs 扁平 / 校准 ECE / HTE 95% 区间覆盖率 | 0.78 vs 0.16 / 0.155→0.038(−76%) / 77.8%→87.8% |
-| 外部事件映射(90 天面板) | 真值事件召回 / 未注册变动错挂 / 映射覆盖率 | 100% / 0 错挂 / 0.667 |
+| 嵌套池化 + 校准(50 seeds 小样本) | 方向召回 嵌套 vs 扁平 / 校准 ECE / Gaussian vs Student-t 95% 覆盖率 | 0.18 vs 0.02 / 0.0626→0.0390(−37.7%) / 0.8775 vs 0.3075 |
+| 外部事件映射(90 天面板) | 真值事件召回 / 未注册变动错挂 / 映射覆盖率 | 100% / 0 错挂 / 0.500 |
 | 治理基准(3 seeds / 9 cases) | 门禁准确率 / 错误因果断言率 / 拒答召回 | 1.00 / 0.00 / 1.00 |
 | 线 B 原型(5 seeds) | 未注册变动召回 / 外部对齐 / 未知诚实率 | 1.00 / 1.00 / 1.00 |
-| 收缩消融 | 调节 RMSE 层级 vs 朴素 | 同构 0.0042 vs 0.0048;线 B 5.55 vs 10.23(↓46%) |
+| 收缩消融 | 调节 RMSE 层级 vs 朴素 | 同构 0.0030 vs 0.0048;线 B 5.55 vs 10.23(↓46%) |
 | Student-t 回放(50 seeds) | Gaussian 覆盖率 / Student-t plug-in-`tau` 覆盖率 | 0.8775 / 0.3075;作为负结果保留，Student-t 不设为生产默认 |
 | UCI 真实数据(45,211 条) | 门禁识别无随机分配 + 泄漏变量标记 + 贝叶斯层拒答 | 全部正确 |
 
@@ -298,6 +298,8 @@ ATT 汇总: naive 116.4 → 层级 119.4(真值 100,含实验噪声)
 ```bash
 python3 -m runtime --datasets
 python3 -m runtime --benchmark --benchmark-seeds 1
+python3 -m unittest discover -s tests -v
+ruff check . && ruff format --check .
 python3 -c "import attribution, runtime, run_server"
 ```
 

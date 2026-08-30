@@ -149,7 +149,7 @@ def _evidence(
 ) -> dict[str, Any]:
     digest = _content_digest(content)
     return {
-        "evidence_id": "ev_real_%02d_%s" % (index, digest[:10]),
+        "evidence_id": f"ev_real_{index:02d}_{digest[:10]}",
         "kind": kind,
         "label": label,
         "content": dict(content),
@@ -167,7 +167,7 @@ def _artifact(
 ) -> dict[str, Any]:
     digest = _content_digest(payload)
     return {
-        "artifact_id": "art_real_%02d_%s" % (index, digest[:10]),
+        "artifact_id": f"art_real_{index:02d}_{digest[:10]}",
         "artifact_type": artifact_type,
         "schema_version": "1.0",
         "producer": producer,
@@ -203,7 +203,9 @@ def analyze_bank_marketing_csv(
         missing_fields = sorted(set(REQUIRED_FIELDS) - set(fields))
         if missing_fields:
             raise ValueError(
-                "UCI Bank Marketing CSV is missing fields: {}".format(", ".join(missing_fields))
+                "UCI Bank Marketing CSV is missing fields: {}".format(
+                    ", ".join(missing_fields)
+                )
             )
         for row in reader:
             if max_rows is not None and row_count >= max_rows:
@@ -327,10 +329,10 @@ def analyze_bank_marketing_csv(
             "生成个人营销名单",
         ],
         "statement": (
-            "UCI 的 %d 条真实银行营销记录中，定期存款订阅率为 %.2f%%。"
-            "该数据没有随机处理分配，且 duration 属于结果后变量，因此只能报告历史相关性，不能声称因果。"
-        )
-        % (row_count, profile["subscription_rate"] * 100.0),
+            f"UCI 的 {row_count} 条真实银行营销记录中，定期存款订阅率为 "
+            f"{profile['subscription_rate'] * 100.0:.2f}%。该数据没有随机处理分配，"
+            "且 duration 属于结果后变量，因此只能报告历史相关性，不能声称因果。"
+        ),
     }
 
     evidence = [

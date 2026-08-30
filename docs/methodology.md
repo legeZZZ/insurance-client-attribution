@@ -27,8 +27,10 @@
 - Modrák et al. (2023) / Säilynoja et al. (2026)：SBC 在实现层的落地检查清单。
 
 **我们借鉴了什么**：全部验证均为"模拟真值已知 → 管线盲跑 → 对比真值"的 SBC 式闭环——
-主基准 20 seeds（Recall@5=1.00、ATE RMSE=0.0010）、50 seeds 嵌套消融（方向召回 0.78 vs 0.16）、
-校准对比（ECE 0.155→0.038，覆盖率 77.8%→87.8%）。所有结果可一键复现。
+主基准 7 seeds（5 个 matched + 2 个 mismatched，Recall@5=1.00、ATE RMSE=0.0010）、
+50 seeds 嵌套消融（方向召回 0.18 vs 0.02）和校准对比（ECE 0.0626→0.0390）。
+区间覆盖率必须单独解读：Gaussian 为 0.8775，当前 Student-t plug-in-`tau` 路径仅为 0.3075，
+是明确的负结果。所有结果可一键复现。
 
 **没有照搬的部分**：经典 SBC 检验后验 rank 均匀性；我们面向的是决策场景，改为检验**决策级指标**（召回、RMSE、拒答正确率、报警 onset 精度），对评审更直观。
 
@@ -68,8 +70,9 @@
 ## 6. 因果推断开源生态对标
 
 - DoWhy（Microsoft）：因果假设显式建模 + refutation 检验——我们的因果门禁（DESCRIPTIVE_ONLY / REFUSED）与之同思路，但面向 AB 实验场景做了轻量化。
-- EconML / CausalML：异质效应（HTE）估计——我们的 `estimate_hte_nested` 做嵌套分组的 HTE，
-  并用 Student-t 后验替代高斯以提升覆盖率（77.8%→87.8%），这是对标准库在小样本金融场景失效点的针对性修补。
+- EconML / CausalML：异质效应（HTE）估计——我们的 `estimate_hte_nested` 做嵌套分组的 HTE。
+  Student-t 随机效应目前只在 `estimate_hte` 中实现；50-seed 回放显示 plug-in-`tau` 会严重欠覆盖，
+  因而它仅保留为实验路径，不替代生产默认的 Gaussian 路径。
 
 **边界声明**：未直接使用上述库，原因是（a）依赖体积与本地化部署要求冲突；（b）它们不内置"证据不足即拒答"的门禁语义——这正是金融合规场景的核心要求。
 

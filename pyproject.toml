@@ -1,7 +1,7 @@
 [project]
 name = "insurance-client-attribution"
 version = "0.1.0"
-description = "Add your description here"
+description = "Evidence-governed Bayesian attribution for insurance sales analytics"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
