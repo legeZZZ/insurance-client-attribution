@@ -8,6 +8,8 @@ accepted as a substitute for the realized checks below.
 
 from __future__ import annotations
 
+import hashlib
+import json
 import math
 from collections import defaultdict
 from collections.abc import Mapping, Sequence
@@ -39,6 +41,53 @@ def _missing_columns(
 ) -> list[str]:
     available = set().union(*(row.keys() for row in rows)) if rows else set()
     return sorted(set(columns) - available)
+
+
+def _is_missing(value: Any) -> bool:
+    return value is None or (isinstance(value, str) and not value.strip())
+
+
+def _missing_value_counts(
+    rows: Sequence[Mapping[str, Any]], columns: Sequence[str]
+) -> dict[str, int]:
+    return {
+        column: sum(
+            1 for row in rows if column not in row or _is_missing(row.get(column))
+        )
+        for column in columns
+        if any(column not in row or _is_missing(row.get(column)) for row in rows)
+    }
+
+
+def _binary_flag(value: Any) -> bool | None:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        number = float(value)
+        if math.isfinite(number) and number in {0.0, 1.0}:
+            return bool(number)
+    return None
+
+
+def _canonical_digest(value: Any) -> str:
+    payload = json.dumps(
+        value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), default=str
+    )
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def _rows_digest(rows: Sequence[Mapping[str, Any]]) -> str:
+    canonical_rows = sorted(
+        json.dumps(
+            dict(row),
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+            default=str,
+        )
+        for row in rows
+    )
+    return _canonical_digest(canonical_rows)
 
 
 def _arm(value: Any) -> str:
@@ -77,6 +126,9 @@ def _srm_check(
     missing = _missing_columns(rows, [column, unit_column] if unit_column else [column])
     if missing or not unit_column:
         return _failure("SRM_NOT_EVALUABLE", missing_columns=missing)
+    missing_values = _missing_value_counts(rows, [column, unit_column])
+    if missing_values:
+        return _failure("SRM_NOT_EVALUABLE", missing_value_counts=missing_values)
     expected = _expected_allocation(metadata)
     observed = {arm: 0 for arm in expected}
     unexpected: dict[str, int] = defaultdict(int)
@@ -161,14 +213,18 @@ def _balance_check(
     rows: Sequence[Mapping[str, Any]], metadata: Mapping[str, Any]
 ) -> dict[str, Any]:
     arm_column = str(metadata.get("assigned_arm_column") or "assigned_treatment")
+    unit_column = str(metadata.get("randomization_unit") or "")
     covariates = [str(value) for value in metadata.get("baseline_covariates", [])]
     if not covariates:
         return _failure(
             "BALANCE_NOT_EVALUABLE", missing_configuration=["baseline_covariates"]
         )
-    missing = _missing_columns(rows, [arm_column, *covariates])
-    if missing:
+    missing = _missing_columns(rows, [arm_column, unit_column, *covariates])
+    if missing or not unit_column:
         return _failure("BALANCE_NOT_EVALUABLE", missing_columns=missing)
+    missing_values = _missing_value_counts(rows, [arm_column, unit_column, *covariates])
+    if missing_values:
+        return _failure("BALANCE_NOT_EVALUABLE", missing_value_counts=missing_values)
     expected = list(_expected_allocation(metadata))
     control_arm, treatment_arm = expected[0], expected[1]
     threshold = float(metadata.get("balance_smd_threshold", 0.10))
@@ -177,10 +233,47 @@ def _balance_check(
     )
     diagnostics: dict[str, Any] = {}
     failures: list[str] = []
+    unit_rows: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
+    for row in rows:
+        unit_rows[str(row[unit_column])].append(row)
+    inconsistent_assignments: list[str] = []
+    inconsistent_covariates: dict[str, list[str]] = defaultdict(list)
+    unit_records: list[dict[str, Any]] = []
+    for unit, observations in unit_rows.items():
+        arms = {_arm(row[arm_column]) for row in observations}
+        if len(arms) != 1:
+            inconsistent_assignments.append(unit)
+            continue
+        record: dict[str, Any] = {arm_column: next(iter(arms))}
+        for covariate in covariates:
+            values = {
+                json.dumps(
+                    row[covariate],
+                    ensure_ascii=False,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                    default=str,
+                )
+                for row in observations
+            }
+            if len(values) != 1:
+                inconsistent_covariates[covariate].append(unit)
+            else:
+                record[covariate] = observations[0][covariate]
+        unit_records.append(record)
+    if inconsistent_assignments or inconsistent_covariates:
+        return _failure(
+            "BALANCE_INCONSISTENT_RANDOMIZATION_UNIT",
+            randomization_unit=unit_column,
+            inconsistent_assignment_units=sorted(inconsistent_assignments),
+            inconsistent_covariate_units={
+                key: sorted(value) for key, value in inconsistent_covariates.items()
+            },
+        )
     for covariate in covariates:
         by_arm = {
             arm: [
-                row.get(covariate) for row in rows if _arm(row.get(arm_column)) == arm
+                row[covariate] for row in unit_records if _arm(row[arm_column]) == arm
             ]
             for arm in (control_arm, treatment_arm)
         }
@@ -240,6 +333,10 @@ def _balance_check(
         if abs(smd) > threshold:
             failures.append(covariate)
     details = {
+        "counting_unit": "randomization_unit",
+        "randomization_unit": unit_column,
+        "raw_row_count": len(rows),
+        "randomization_unit_count": len(unit_rows),
         "threshold_absolute_smd": threshold,
         "threshold_categorical_proportion_difference": proportion_threshold,
         "covariates": diagnostics,
@@ -261,6 +358,14 @@ def _allocation_stability_check(
     missing = _missing_columns(rows, [arm_column, unit_column, period_column])
     if missing or not unit_column:
         return _failure("ALLOCATION_STABILITY_NOT_EVALUABLE", missing_columns=missing)
+    missing_values = _missing_value_counts(
+        rows, [arm_column, unit_column, period_column]
+    )
+    if missing_values:
+        return _failure(
+            "ALLOCATION_STABILITY_NOT_EVALUABLE",
+            missing_value_counts=missing_values,
+        )
     assignments: dict[str, set[str]] = defaultdict(set)
     assignment_periods: dict[str, set[str]] = defaultdict(set)
     for row in rows:
@@ -336,7 +441,17 @@ def _contamination_check(
     missing = _missing_columns(rows, [assigned_column, exposed_column, exposure_column])
     if missing:
         return _failure("CONTAMINATION_NOT_EVALUABLE", missing_columns=missing)
-    exposed_rows = [row for row in rows if bool(row.get(exposure_column))]
+    missing_values = _missing_value_counts(rows, [assigned_column, exposed_column])
+    invalid_flags = sum(_binary_flag(row.get(exposure_column)) is None for row in rows)
+    if missing_values or invalid_flags:
+        return _failure(
+            "CONTAMINATION_NOT_EVALUABLE",
+            missing_value_counts=missing_values,
+            invalid_binary_value_counts={exposure_column: invalid_flags}
+            if invalid_flags
+            else {},
+        )
+    exposed_rows = [row for row in rows if _binary_flag(row.get(exposure_column))]
     contaminated = [
         row
         for row in exposed_rows
@@ -413,6 +528,19 @@ def _sample_funnel_check(
     )
     if missing:
         return _failure("SAMPLE_FUNNEL_NOT_EVALUABLE", missing_columns=missing)
+    missing_values = _missing_value_counts(rows, [arm_column])
+    flag_columns = [exposure_column, triggered_column, outcome_column]
+    invalid_flags = {
+        column: sum(_binary_flag(row.get(column)) is None for row in rows)
+        for column in flag_columns
+    }
+    invalid_flags = {key: value for key, value in invalid_flags.items() if value}
+    if missing_values or invalid_flags:
+        return _failure(
+            "SAMPLE_FUNNEL_NOT_EVALUABLE",
+            missing_value_counts=missing_values,
+            invalid_binary_value_counts=invalid_flags,
+        )
     expected = _expected_allocation(metadata)
     funnel: dict[str, Any] = {}
     valid = True
@@ -421,9 +549,11 @@ def _sample_funnel_check(
     for arm in expected:
         group = [row for row in rows if _arm(row.get(arm_column)) == arm]
         assigned = len(group)
-        exposed = sum(bool(row.get(exposure_column)) for row in group)
-        triggered = sum(bool(row.get(triggered_column)) for row in group)
-        outcomes = sum(bool(row.get(outcome_column)) for row in group)
+        exposed = sum(_binary_flag(row.get(exposure_column)) is True for row in group)
+        triggered = sum(
+            _binary_flag(row.get(triggered_column)) is True for row in group
+        )
+        outcomes = sum(_binary_flag(row.get(outcome_column)) is True for row in group)
         monotone = assigned >= exposed >= triggered and assigned >= outcomes
         valid = valid and assigned > 0 and monotone
         exposure_rate = exposed / assigned if assigned else 0.0
@@ -476,6 +606,11 @@ def _cluster_integrity_check(
     missing = _missing_columns(rows, required)
     if missing or not unit_column or not analysis_unit:
         return _failure("CLUSTER_INTEGRITY_NOT_EVALUABLE", missing_columns=missing)
+    missing_values = _missing_value_counts(rows, required)
+    if missing_values:
+        return _failure(
+            "CLUSTER_INTEGRITY_NOT_EVALUABLE", missing_value_counts=missing_values
+        )
     unit_arms: dict[str, set[str]] = defaultdict(set)
     cluster_arms: dict[str, set[str]] = defaultdict(set)
     for row in rows:
@@ -608,10 +743,21 @@ def experiment_integrity_report(
         "failed_checks": failed,
         "reason_codes": [checks[name]["reason_code"] for name in failed],
         "checks": checks,
+        "input_fingerprints": {
+            "rows_sha256": _rows_digest(rows),
+            "metric_contract_sha256": _canonical_digest(dict(metric_contract)),
+            "experiment_metadata_sha256": _canonical_digest(dict(experiment_metadata)),
+        },
     }
 
 
-def require_integrity_pass(report: Mapping[str, Any] | None) -> None:
+def require_integrity_pass(
+    report: Mapping[str, Any] | None,
+    *,
+    rows: Sequence[Mapping[str, Any]] | None = None,
+    metric_contract: Mapping[str, Any] | None = None,
+    experiment_metadata: Mapping[str, Any] | None = None,
+) -> None:
     """Refuse causal estimation unless a complete generated report passed."""
     if not report:
         raise PermissionError(
@@ -631,3 +777,24 @@ def require_integrity_pass(report: Mapping[str, Any] | None) -> None:
     ):
         failed = report.get("failed_checks", [])
         raise PermissionError(f"Experiment Integrity Gate did not pass: {failed}")
+    fingerprints = report.get("input_fingerprints")
+    if not isinstance(fingerprints, Mapping):
+        raise PermissionError("Experiment Integrity Report has no input fingerprints")
+    expected = {
+        "rows_sha256": _rows_digest(rows) if rows is not None else None,
+        "metric_contract_sha256": _canonical_digest(dict(metric_contract))
+        if metric_contract is not None
+        else None,
+        "experiment_metadata_sha256": _canonical_digest(dict(experiment_metadata))
+        if experiment_metadata is not None
+        else None,
+    }
+    mismatches = [
+        name
+        for name, digest in expected.items()
+        if digest is not None and fingerprints.get(name) != digest
+    ]
+    if mismatches:
+        raise PermissionError(
+            "Experiment Integrity Report input mismatch: " + ", ".join(mismatches)
+        )

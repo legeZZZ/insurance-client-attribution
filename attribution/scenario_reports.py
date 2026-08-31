@@ -552,7 +552,9 @@ def _scenario_experience(runtime_dir: Path) -> dict[str, Any]:
             "mismatch_alarm_fired": result["adaptive_experience_store"][
                 "mismatch_alarm"
             ]["fired_periods"],
-            "nu_trajectory": result["adaptive_experience_store"]["nu_trajectory"],
+            "shrinkage_strength_trajectory": result["adaptive_experience_store"][
+                "shrinkage_strength_trajectory"
+            ],
         },
         "key_outputs": {"store_final": result["store_final"], "note": result["note"]},
         "evidence_pointer": "outputs/experience_ablation.json",

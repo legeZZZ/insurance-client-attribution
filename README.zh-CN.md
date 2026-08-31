@@ -152,7 +152,7 @@ OBSERVED_ANOMALY → FACTORS_DISCOVERED → BUNDLE_EXPERIMENT_READY
 环境要求:Python 3.12+,仅依赖 `numpy`(`pip install -r requirements.txt`)。
 
 ```bash
-# ① 线 A 端到端 demo + 7 seeds 基准(约 16 秒)
+# ① 线 A 端到端 demo + 7 seeds 基准（约 2 秒）
 python3 -m attribution
 
 # ② 线 B 实验基线归因 + 5 seeds 验证

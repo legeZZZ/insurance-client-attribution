@@ -4,7 +4,7 @@
 
 ### 修复范围
 
-本次修改覆盖因果就绪门禁、Line B 外部冲击归因、实验完整性检查、聊天确认、演示页 API、场景报告和文档。4 个 P0 问题均已修复并加入回归测试，同时修正了接口、schema 和告警字段一致性问题。
+本次修改覆盖因果就绪门禁、Line B 外部冲击归因、实验完整性检查、聊天确认、演示页 API、场景报告和文档。除最初确认的 4 个 P0 外，最终审查继续修复了完整性门禁空值/类型绕过、基线平衡重复行加权、完整性报告跨数据复用、评委页面失效入口和根 CLI 占位入口，并加入回归测试。
 
 ### 1. 必要结果字段为 `NULL` 时错误通过 `CAUSAL_READY`
 
@@ -95,12 +95,63 @@
 - 删除方法文档中类似评语或宣传语的表述，避免把单次 demo 数字写成普遍方法结论；同时删除不存在的 `outputs/chat_demo_evidence.json` 引用。
 - 审计发现、修复历史、兼容性变化和验证证据集中记录在本 CHANGELOG。
 
+### 8. 完整性检查对空值和伪布尔值 fail-open
+
+**原问题：** 完整性检查只确认某个字段曾在任意一行出现，没有逐行检查关键值。基线协变量、分配周期或随机化单位为 `NULL` 时可能被字符串化后参与计算；`"false"`、`"yes"` 等字符串又会被 Python 的 `bool()` 当成真值，导致漏斗或污染检查错误通过。
+
+**修复：**
+
+- SRM、基线平衡、分配稳定性和 cluster integrity 对随机化单位、处理组、周期及所需协变量逐行执行非空检查。
+- contamination 和 sample funnel 只接受布尔值或数值 `0/1`；空值、字符串布尔和其他数值均返回 `NOT_EVALUABLE` 并阻断因果估计。
+- 诊断输出增加 `missing_value_counts` 和 `invalid_binary_value_counts`，可以定位具体字段及坏值数量。
+
+**修改文件：** `runtime/experiment_integrity.py`、`tests/test_regressions.py`。
+
+### 9. 基线平衡被重复明细行改变
+
+**原问题：** SRM 和稳定性已改为按随机化单位，但 pre-treatment balance 仍按明细行计算。同一客户产生更多曝光行时，其基线特征会被重复加权，可能凭空制造或掩盖组间不平衡。
+
+**修复：**
+
+- 基线平衡改为每个 `randomization_unit` 只贡献一条记录。
+- 同一随机化单位若跨处理组，或重复行中的任一基线协变量不一致，门禁显式失败，不再任取一行。
+- 平衡诊断增加 `counting_unit`、`raw_row_count` 和 `randomization_unit_count`。
+
+**修改文件：** `runtime/experiment_integrity.py`、`tests/test_regressions.py`。
+
+### 10. 通过的完整性报告可被复用于另一批数据
+
+**原问题：** `estimate_itt` 只检查报告状态为 PASS，没有证明报告就是由当前待估计数据和契约生成。调用方可以把一份干净实验的 PASS 报告传给另一批数据，从而绕过门禁。
+
+**修复：**
+
+- 完整性报告写入 rows、metric contract 和 experiment metadata 的 SHA-256 指纹；行指纹对输入顺序不敏感，但保留重复行数量。
+- `estimate_itt` 在估计前核对当前 rows；调用方提供契约或元数据时同时核对对应指纹。
+- Bayesian bridge 也在进入后验决策前核对三类输入；任一不匹配均抛出 `PermissionError`，不输出估计。
+
+**修改文件：** `runtime/experiment_integrity.py`、`runtime/analysis.py`、`runtime/bayes_bridge.py`、`runtime/cases.py`、`tests/test_regressions.py`。
+
+### 11. 评委页面与实际仓库脱节，根入口仍为 Hello
+
+**原问题：** 演示页包含开发者绝对路径、旧包名 `track2_v5`、不存在的 ZIP/图片/测试文件和 404 链接，且展示的测试数、Python 版本、候选数、外部映射率和告警日期已经过期；仓库根 `main.py` 仍只打印 Hello。
+
+**修复：**
+
+- 启动命令改为仓库根目录可直接运行的 `python3 run_server.py 8765`，证据链接改为当前 Attribution API。
+- 页面代码树、命令、测试文件、Python 版本和 fallback 数字与当前仓库及真实场景报告同步；删除不存在的 ZIP/benchmark 图片链接。
+- 当前聊天意图能力明确描述为确定性规则，并保留可选本地模型 adapter 的边界，避免把 adapter 演示写成默认在线能力。
+- `main.py` 改为真正转发到 runtime CLI；中文 README 的 Line A 实测耗时同步为约 2 秒。
+
+**修改文件：** `web/static/semifinal-demo.html`、`main.py`、`README.zh-CN.md`、`docs/完整方法与统计讲解.md`、`tests/test_regressions.py`。
+
 ### 文件级变更清单
 
 | 文件 | 具体变化 |
 |---|---|
 | `runtime/analysis.py` | 必要结果字段空值进入因果就绪门禁；缺失时 fail closed。 |
 | `runtime/experiment_integrity.py` | SRM 和稳定性按随机化单位计算；增加跨组、跨周期检查及计数诊断。 |
+| `runtime/bayes_bridge.py` | 贝叶斯决策前校验完整性报告与当前数据、契约、元数据的输入指纹。 |
+| `runtime/cases.py` | 内置案例估计显式传入当前 metric contract 和 experiment metadata，执行完整指纹校验。 |
 | `attribution/baseline_attribution.py` | 移除共同冲击的二次扣减；增加外部 control 偏离字段；同步告警绝对值。 |
 | `attribution/agent_chat.py` | 确认指令改为规范化后的完整匹配；场景数动态生成。 |
 | `attribution/scenario_reports.py` | 体验场景切换到当前 trajectory schema；更新运行耗时。 |
@@ -110,20 +161,24 @@
 | `README.zh-CN.md` | 同步中文功能说明、API、统计口径、场景输出和实测数字。 |
 | `docs/methodology.md` | 重构方法定义与指标边界，移除评语式表述和失效引用。 |
 | `CHANGELOG.md` | 记录问题原因、修复方式、文件影响、兼容性和验证结果。 |
+ |
+|  |
 
 ### 输出与兼容性变化
 
 - Line B 新增 `external_control_deviation`；无法识别差异外部贡献时，事件的 `gap_contribution` 为 `null`。
 - Line B 删除旧字段 `external_explained`；外部事件观测统一由 `external_control_deviation` 表达。
 - 实验完整性诊断新增 `counting_unit`、`raw_row_count`、`randomization_unit_count`。
+- 完整性报告新增 `input_fingerprints`，旧的无指纹 PASS 报告不能再授权新的因果估计。
+- 基线平衡也按随机化单位计数；关键空值和非 `0/1` 布尔字段会使完整性检查 fail closed。
 - 体验场景统一使用 `shrinkage_strength_trajectory`，不再读取旧名称 `nu_trajectory`。
 - 因果门禁比旧版更严格：必要结果字段存在空值的数据会由可分析变为 `DATA_INSUFFICIENT`。这是预期的安全性变化。
 
 ### 验证结果
 
-- `python -m unittest discover -s tests -v`：21/21 项通过。
+- `python -m unittest discover -s tests -v`：24/24 项通过。
 - `uv run --frozen ruff check .`：通过。
-- `ruff format --check`：53 个文件通过。
+- `ruff format --check`：54 个文件通过。
 - Python `compileall`：通过。
 - 6 个内置场景均完成真实运行，没有使用 mock fallback。
 - 3 个种子、9 个治理案例通过：门禁准确率 1.0、错误因果输出率 0、拒绝召回率 1.0。

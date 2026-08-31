@@ -22,7 +22,7 @@ from attribution.rate_aware_rca import decompose_rate_mix
 from attribution.scenario_reports import _scenario_experience
 from attribution.spec import spec_diff
 from run_server import bounded_float, bounded_int, valid_case
-from runtime.analysis import evaluate_public_dataset
+from runtime.analysis import estimate_itt, evaluate_public_dataset
 from runtime.cases import (
     case_experiment_metadata,
     default_metric_contract,
@@ -226,6 +226,63 @@ class RegressionTests(unittest.TestCase):
         self.assertEqual(stability["randomization_unit_count"], 100)
         self.assertEqual(stability["raw_row_count"], 180)
 
+    def test_integrity_rejects_null_and_non_binary_gate_values(self) -> None:
+        rows, _ = generate_dataset("C", seed=42, n=1_200)
+        metadata = case_experiment_metadata("C")
+        contract = default_metric_contract()
+
+        for column in metadata["baseline_covariates"]:
+            broken = [dict(row) for row in rows]
+            broken[0][column] = None
+            report = experiment_integrity_report(broken, contract, metadata)
+            with self.subTest(column=column):
+                self.assertFalse(report["checks"]["pre_treatment_balance"]["passed"])
+
+        for column, value in (
+            ("outcome_observed", None),
+            ("triggered", "false"),
+            ("exposed", "yes"),
+            ("assignment_period", None),
+        ):
+            broken = [dict(row) for row in rows]
+            broken[0][column] = value
+            report = experiment_integrity_report(broken, contract, metadata)
+            with self.subTest(column=column):
+                self.assertFalse(report["passed"])
+
+    def test_balance_counts_each_randomization_unit_once(self) -> None:
+        rows, _ = generate_dataset("C", seed=42, n=1_200)
+        metadata = case_experiment_metadata("C")
+        contract = default_metric_contract()
+        original = experiment_integrity_report(rows, contract, metadata)["checks"][
+            "pre_treatment_balance"
+        ]
+        treatment = [row for row in rows if row["assigned_treatment"] == 1][:100]
+        repeated = rows + [dict(row) for row in treatment for _ in range(10)]
+        balance = experiment_integrity_report(repeated, contract, metadata)["checks"][
+            "pre_treatment_balance"
+        ]
+        self.assertEqual(balance["passed"], original["passed"])
+        self.assertEqual(balance["covariates"], original["covariates"])
+        self.assertEqual(balance["randomization_unit_count"], 1_200)
+        self.assertEqual(balance["raw_row_count"], 2_200)
+
+    def test_integrity_report_is_bound_to_estimated_rows(self) -> None:
+        rows, _ = generate_dataset("C", seed=42, n=1_200)
+        metadata = case_experiment_metadata("C")
+        contract = default_metric_contract()
+        report = experiment_integrity_report(rows, contract, metadata)
+        self.assertTrue(report["passed"])
+        altered = [dict(row) for row in rows]
+        altered[0]["issued"] = 1 - int(altered[0]["issued"])
+        with self.assertRaisesRegex(PermissionError, "rows_sha256"):
+            estimate_itt(
+                altered,
+                integrity_report=report,
+                metric_contract=contract,
+                experiment_metadata=metadata,
+            )
+
     def test_confirmation_requires_a_complete_normalized_command(self) -> None:
         session_id = "confirmation-regression"
         reset_session(session_id)
@@ -252,6 +309,10 @@ class RegressionTests(unittest.TestCase):
         self.assertIn("/api/attribution/chat", html)
         self.assertIn("/api/attribution/scenario-run", html)
         self.assertNotIn("/api/track2/", html)
+        self.assertNotIn("/Users/lege", html)
+        self.assertNotIn("可执行代码包/", html)
+        self.assertNotIn("track2_v5", html)
+        self.assertNotIn("test_upgrade_v12", html)
         self.assertIn("experience:'EXPERIENCE_ABLATION'", html)
         self.assertIn("经验库跨期学习与错配报警", html)
 

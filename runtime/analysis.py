@@ -735,7 +735,8 @@ def estimate_itt(
     metric_contract: Mapping[str, Any] | None = None,
     experiment_metadata: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    require_integrity_pass(integrity_report)
+    supplied_contract = metric_contract is not None
+    supplied_metadata = experiment_metadata is not None
     contract = dict(metric_contract or {})
     metadata = dict(experiment_metadata or {})
     if not metadata:
@@ -751,6 +752,12 @@ def estimate_itt(
             "primary_estimand": cluster_check.get("primary_estimand") or "user_level",
         }
         contract = {"outcomes": list(outcomes)}
+    require_integrity_pass(
+        integrity_report,
+        rows=rows,
+        metric_contract=contract if supplied_contract else None,
+        experiment_metadata=metadata if supplied_metadata else None,
+    )
     analysis_rows, analysis = prepare_analysis_rows(rows, contract, metadata, outcomes)
     groups = {
         arm: [row for row in analysis_rows if row.get(treatment_column) == arm]

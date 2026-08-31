@@ -181,12 +181,16 @@ def evaluate_with_bayes(
         }
         return result
 
-    integrity_report = base["experiment_integrity"]
-    require_integrity_pass(integrity_report)
-
     rows = sanitize_rows(bundle.get("rows", []))
     metric_contract = dict(bundle.get("metric_contract", {}))
     experiment_metadata = dict(bundle.get("experiment_metadata", {}))
+    integrity_report = base["experiment_integrity"]
+    require_integrity_pass(
+        integrity_report,
+        rows=rows,
+        metric_contract=metric_contract,
+        experiment_metadata=experiment_metadata,
+    )
     treatment_column = str(experiment_metadata.get("treatment_column") or "treatment")
     rows, analysis = prepare_analysis_rows(
         rows, metric_contract, experiment_metadata, ("issued",)

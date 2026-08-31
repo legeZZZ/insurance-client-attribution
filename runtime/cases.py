@@ -379,9 +379,20 @@ def log_chain_decomposition(
 
 
 def estimate_case_c(
-    rows: list[dict[str, Any]], integrity_report: Mapping[str, Any]
+    rows: list[dict[str, Any]],
+    integrity_report: Mapping[str, Any],
+    metric_contract: Mapping[str, Any],
+    experiment_metadata: Mapping[str, Any],
 ) -> dict[str, Any]:
-    return estimate_itt(rows, integrity_report=integrity_report)
+    return estimate_itt(
+        rows,
+        treatment_column=str(
+            experiment_metadata.get("treatment_column") or "treatment"
+        ),
+        integrity_report=integrity_report,
+        metric_contract=metric_contract,
+        experiment_metadata=experiment_metadata,
+    )
 
 
 def _claim(
@@ -723,7 +734,12 @@ def run_case(base_dir: Path, case: str = "A") -> dict[str, Any]:
             approval_id, "human-reviewer", "APPROVED", "synthetic demo only"
         )
         move("MONITORING", "monitor_review", "approved experiment enters monitoring")
-        estimate = estimate_case_c(rows, feature_set["experiment_integrity"])
+        estimate = estimate_case_c(
+            rows,
+            feature_set["experiment_integrity"],
+            metric_contract,
+            experiment_metadata,
+        )
         monitor_ev = evidence(
             "monitoring",
             "ITT estimate and confidence intervals",
@@ -822,7 +838,12 @@ def run_case(base_dir: Path, case: str = "A") -> dict[str, Any]:
         }
     )
     if readiness["outcome"] == "CAUSAL_READY":
-        pack["estimate"] = estimate_case_c(rows, feature_set["experiment_integrity"])
+        pack["estimate"] = estimate_case_c(
+            rows,
+            feature_set["experiment_integrity"],
+            metric_contract,
+            experiment_metadata,
+        )
     pack_path = evidence_provider.write_pack(task_id, pack)
     pack["evidence_pack_path"] = str(pack_path)
     return pack
