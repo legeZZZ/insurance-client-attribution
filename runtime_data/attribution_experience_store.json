@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "periods": 7,
+  "arms": {
+    "bundle.control": {
+      "alpha": 232.59768142292833,
+      "beta": 3767.4023185770716
+    },
+    "bundle.treatment": {
+      "alpha": 140.07951030981204,
+      "beta": 3859.920489690188
+    }
+  },
+  "predictions": {
+    "device_low_end=0": -0.014362267703699721,
+    "device_low_end=1": -0.037841514186632154,
+    "hash_bucket_3": -0.022979218606392522,
+    "hash_bucket_11": -0.01042105922193958
+  },
+  "shrinkage_strength": 521.5475588757524,
+  "_err_integral": 0.03628356018462754,
+  "_err_prev": 0.004686511866103329
+}

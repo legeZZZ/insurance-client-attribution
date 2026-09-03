@@ -1,0 +1,20 @@
+{
+  "version": "0.1.0",
+  "runtime": {
+    "output_dir": "runtime_data",
+    "cases": [
+      "A",
+      "B",
+      "C"
+    ]
+  },
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8765
+  },
+  "evidence": {
+    "require_trace": true,
+    "require_artifacts": true,
+    "require_digests": true
+  }
+}

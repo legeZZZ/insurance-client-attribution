@@ -1,0 +1,55 @@
+{
+  "endpoint": "POST /api/track2/chat",
+  "turns": [
+    {
+      "user": "上个月注册量为什么掉了",
+      "stage": "confirm",
+      "scenario": "line_b",
+      "reply_head": "执行计划：线 B · 月度基线归因（注册变动+外部事件+未知桶）\n流程：面板模拟 → 变更注册表匹配 → 外部事件对齐 → 残差未知桶 → 滞后窗检验\n预计耗时：≈4s，全程本地运行、不出网。\n确认执行请回复「确认」或「执行」；换一条链路请",
+      "trace": [
+        "stage_in=intent",
+        "intent=line_b -> confirm"
+      ]
+    },
+    {
+      "user": "确认",
+      "stage": "done",
+      "scenario": "line_b",
+      "reply_head": "✅ 已真实执行完毕（0.06s，非预置输出）。\n关键指标：unregistered_change_recall=1.0, external_alignment_accuracy=1.0, unknown_label_honesty=1.0,",
+      "trace": [
+        "stage_in=confirm",
+        "executed=line_b in 0.06s"
+      ]
+    },
+    {
+      "user": "演示一下拒答",
+      "stage": "confirm",
+      "scenario": "bayes_case_a",
+      "reply_head": "执行计划：拒答演示 · 欠定场景 REFUSED（案例 A）\n流程：欠定场景构造 → 证据充分性检验 → REFUSED 拒答 → 补数据建议\n预计耗时：≈3s，全程本地运行、不出网。\n确认执行请回复「确认」或「执行」；换一条链路请直接说明",
+      "trace": [
+        "stage_in=intent",
+        "intent=bayes_case_a -> confirm"
+      ]
+    },
+    {
+      "user": "执行",
+      "stage": "done",
+      "scenario": "bayes_case_a",
+      "reply_head": "✅ 已真实执行完毕（0.02s，非预置输出）。\n关键指标：causal_readiness=DESCRIPTIVE_ONLY, refused=True, bayes_layer_decision=None, refusal_note=案例",
+      "trace": [
+        "stage_in=confirm",
+        "executed=bayes_case_a in 0.02s"
+      ]
+    },
+    {
+      "user": "讲个故事吧",
+      "stage": "clarify",
+      "scenario": null,
+      "reply_head": "我没有完全理解您的目标场景。\n我可以演示以下 5 条可验证链路（回复编号或关键词选择）：\n  1. 线 A · 组件归因全链路（异常→因子→实验→决策）（≈5s）\n  2. 线 B · 月度基线归因（注册变动+外部事件+未知桶）（≈4s）\n",
+      "trace": [
+        "stage_in=intent",
+        "intent=ambiguous -> clarify"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>赛道二方案说明 | GOAI 控制塔</title>
+  <style>
+    :root{
+      --bg:#f4f1ea;--panel:#fbfaf7;--ink:#18252b;--muted:#66737a;--line:#d9ded9;
+      --teal:#176b63;--teal-soft:#dceee9;--blue:#2f5d92;--blue-soft:#e1ebf6;
+      --gold:#9a7127;--gold-soft:#f6ebd0;--coral:#b55042;--coral-soft:#f5dfdb;
+      --shadow:0 12px 30px rgba(24,37,43,.06);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    a{color:inherit}
+    .shell{max-width:1320px;margin:0 auto;padding:28px 28px 56px}
+    .topbar{display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--ink);color:#fff}
+    .mark{display:grid;place-items:center;width:38px;height:38px;background:var(--teal);font-weight:800}
+    .eyebrow{margin:0;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+    .topbar .eyebrow{color:#b7cfe0}
+    .topbar h1,.hero h2,.section h3,.card h4{margin:0}
+    .topbar h1{font-size:20px}
+    .hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:16px;margin:24px 0}
+    .hero-main,.hero-side,.card,.table-card{background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow)}
+    .hero-main,.hero-side,.card,.table-card{padding:20px}
+    .hero h2{font-size:42px;line-height:1.08;max-width:880px;margin-top:8px}
+    .hero p{margin:12px 0 0;color:#4d5d64}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+    .chip{padding:6px 10px;font-size:12px;font-weight:700;border-radius:999px}
+    .chip.teal{background:var(--teal-soft);color:var(--teal)}
+    .chip.blue{background:var(--blue-soft);color:var(--blue)}
+    .chip.gold{background:var(--gold-soft);color:var(--gold)}
+    .chip.coral{background:var(--coral-soft);color:var(--coral)}
+    .hero-side{display:flex;flex-direction:column;justify-content:space-between}
+    .hero-side strong{display:block;font-size:30px;line-height:1.15;margin:8px 0}
+    .hero-side small{color:var(--muted)}
+    .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .section{margin-top:28px}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:12px}
+    .section-head p{margin:0;color:var(--muted)}
+    .section h3{font-size:24px}
+    .card h4{font-size:15px;margin-bottom:8px}
+    .card p{margin:0;color:#4d5d64}
+    .steps{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
+    .step{padding:14px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);min-height:160px}
+    .step .num{font:11px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--blue)}
+    .step h4{margin:6px 0 8px;font-size:14px}
+    .step p{margin:0;color:#4d5d64;font-size:12px}
+    .table-card{overflow:auto}
+    table{width:100%;border-collapse:collapse;min-width:900px}
+    th,td{padding:10px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:13px}
+    th{background:#eef2f5;color:var(--muted);font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+    tr:last-child td{border-bottom:0}
+    .note{padding:14px 16px;border-left:4px solid var(--blue);background:var(--blue-soft);color:#244864}
+    .warn{border-color:var(--coral);background:var(--coral-soft);color:#743a31}
+    .muted{color:var(--muted)}
+    pre{margin:0;overflow:auto;padding:16px;background:#20313d;color:#d9ebf3;font:12px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace}
+    .progress{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+    .progress .card{min-height:170px}
+    ul{margin:10px 0 0;padding-left:18px}
+    li{margin:6px 0}
+    .footer{margin-top:28px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+    @media (max-width:1100px){
+      .hero,.grid-2,.grid-3,.progress{grid-template-columns:1fr}
+      .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media (max-width:720px){
+      .shell{padding:16px 14px 34px}
+      .topbar{padding:14px 16px}
+      .hero h2{font-size:30px}
+      .steps{grid-template-columns:1fr}
+      table{min-width:760px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="mark">02</div>
+    <div>
+      <p class="eyebrow">GOAI / Track 2 / Insurance Growth Attribution</p>
+      <h1>赛道二方案说明</h1>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-main">
+        <p class="eyebrow">方案定位</p>
+        <h2>让保险经营归因先证明“有资格下结论”</h2>
+        <p>这套方案不是自动生成增长结论，而是把业务问题、指标口径、数据质量、结构分解、因果门禁、实验草稿和监测回流串成一条可审计的 AgentTeams 控制塔。目标是先把“能不能下结论”证明清楚，再决定“结论是什么”。</p>
+        <div class="chips">
+          <span class="chip teal">7 Agent</span>
+          <span class="chip blue">13 Skill</span>
+          <span class="chip gold">五层因果门禁</span>
+          <span class="chip coral">Claim Ledger</span>
+        </div>
+      </div>
+      <aside class="hero-side">
+        <div>
+          <p class="eyebrow">当前已经证明</p>
+          <strong>会算<br>会判断<br>会拒答</strong>
+        </div>
+        <small>公开 A/B/C 可复现，真实数据已接入，下一步是授权影子数据和业务评审。</small>
+      </aside>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">核心链路</p>
+          <h3>从问题到可审计结论</h3>
+        </div>
+      </div>
+      <div class="steps">
+        <article class="step"><span class="num">01 / INTENT</span><h4>问题标准化</h4><p>把“DAU 上升、保费下降”变成可执行的问题、范围和单位。</p></article>
+        <article class="step"><span class="num">02 / CONTRACT</span><h4>指标契约</h4><p>锁定指标版本、owner、窗口、漏斗定义和结果口径。</p></article>
+        <article class="step"><span class="num">03 / DATA</span><h4>只读校验</h4><p>做 schema、缺失、泄漏和权限检查，先把风险挡住。</p></article>
+        <article class="step"><span class="num">04 / DIAGNOSE</span><h4>结构分解</h4><p>把流量、渠道、产品和人群拆成候选贡献，不急着说因果。</p></article>
+        <article class="step"><span class="num">05 / GATE</span><h4>因果就绪</h4><p>检查语义、数据、设计、统计和治理五层门禁。</p></article>
+        <article class="step"><span class="num">06 / ACTION</span><h4>实验草稿</h4><p>只有通过门禁才生成实验草稿、护栏和停止规则。</p></article>
+        <article class="step"><span class="num">07 / REVIEW</span><h4>监测回流</h4><p>监测结果、复盘假设，并把规则回流成版本化资产。</p></article>
+      </div>
+    </section>
+
+    <section class="section grid-2">
+      <div class="card">
+        <p class="eyebrow">Agent 组织</p>
+        <h4>7 个 Agent 分工</h4>
+        <ul>
+          <li><strong>intent</strong>：接收并标准化业务问题。</li>
+          <li><strong>metric_contract</strong>：确认指标口径和版本。</li>
+          <li><strong>data_acquisition</strong>：只读获取、画像与质量检查。</li>
+          <li><strong>diagnostic</strong>：漏斗、产品结构、渠道和分群分解。</li>
+          <li><strong>causal_evidence</strong>：因果门禁、Claim Ledger、合规约束。</li>
+          <li><strong>experiment_planner</strong>：实验草稿、护栏和停止规则。</li>
+          <li><strong>monitor_review</strong>：监测、复盘和 Playbook 回流。</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow">Skill 组织</p>
+        <h4>13 个版本化 Skill</h4>
+        <p>能力被拆成口径与数据、经营分析、因果与实验、治理与交付四组，分别对应 MetricContractResolver、SchemaProfiler、DataQualityGate、ReadOnlyQueryPlanner、FunnelDecomposer、ProductMixDecomposer、SegmentProfiler、EventAligner、CausalReadinessCheck、ExperimentPlanner、ExperimentMonitor、ClaimPolicyGuard 和 WeeklyBriefComposer。</p>
+      </div>
+    </section>
+
+    <section class="section grid-2">
+      <div class="card">
+        <p class="eyebrow">当前进展</p>
+        <h4>已经完成</h4>
+        <ul>
+          <li>赛道二控制台已收口成中文专用首屏。</li>
+          <li>公开案例 A/B/C 已跑通，REAL 真实数据入口已接入。</li>
+          <li>隐藏基准已完成，3 seed / 9 cases 的门禁结果可复现。</li>
+          <li>UCI Bank Marketing 45,211 条记录已完成来源校验、缺失审计和泄漏阻断。</li>
+          <li>CLI、HTTP API、Evidence Pack、Checkpoint、Console 和文档已串起来。</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow">当前缺口</p>
+        <h4>还没闭环</h4>
+        <ul>
+          <li>授权的保险影子数据。</li>
+          <li>保险业务专家评审。</li>
+          <li>真实只读 SQL Provider。</li>
+          <li>真实实验与生产增量验证。</li>
+          <li>更完整的故障矩阵和场景扩展。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">真实数据格式</p>
+          <h3>我期望你给我的数据长什么样</h3>
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>先说结论：</strong>如果你要支撑 <strong>DESCRIPTIVE_ONLY</strong>，给我聚合表也可以；如果你要支撑 <strong>CAUSAL_READY</strong>，我需要<strong>行级、可追踪、带时间窗口和处理分配信息</strong>的数据。
+      </div>
+
+      <div class="grid-2" style="margin-top:14px">
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr><th colspan="4">A. 公开基线 / UCI Bank Marketing 当前已接入格式</th></tr>
+              <tr><th>字段</th><th>类型</th><th>是否必需</th><th>说明</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>age</td><td>int</td><td>是</td><td>年龄</td></tr>
+              <tr><td>job</td><td>string</td><td>是</td><td>职业</td></tr>
+              <tr><td>marital</td><td>string</td><td>是</td><td>婚姻状态</td></tr>
+              <tr><td>education</td><td>string</td><td>是</td><td>教育水平</td></tr>
+              <tr><td>default</td><td>string/bool</td><td>是</td><td>是否信用违约</td></tr>
+              <tr><td>balance</td><td>number</td><td>是</td><td>账户余额</td></tr>
+              <tr><td>housing</td><td>string/bool</td><td>是</td><td>是否房贷</td></tr>
+              <tr><td>loan</td><td>string/bool</td><td>是</td><td>是否个人贷款</td></tr>
+              <tr><td>contact</td><td>string</td><td>是</td><td>联系渠道</td></tr>
+              <tr><td>day_of_week</td><td>string</td><td>是</td><td>联系星期</td></tr>
+              <tr><td>month</td><td>string</td><td>是</td><td>联系月份</td></tr>
+              <tr><td>duration</td><td>number</td><td>有但受限</td><td>后验字段，不能用于呼叫前决策</td></tr>
+              <tr><td>campaign</td><td>int</td><td>是</td><td>本次活动联系次数</td></tr>
+              <tr><td>pdays</td><td>int</td><td>是</td><td>前次联系间隔</td></tr>
+              <tr><td>previous</td><td>int</td><td>是</td><td>历史联系次数</td></tr>
+              <tr><td>poutcome</td><td>string</td><td>是</td><td>前次活动结果</td></tr>
+              <tr><td>y</td><td>label</td><td>是</td><td>订阅结果，目标变量</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr><th colspan="4">B. 保险正式接入 / 我希望你提供的真实数据格式</th></tr>
+              <tr><th>字段</th><th>类型</th><th>是否必需</th><th>说明</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>schema_version</td><td>string</td><td>是</td><td>数据契约版本</td></tr>
+              <tr><td>record_id</td><td>string</td><td>是</td><td>唯一记录 ID</td></tr>
+              <tr><td>subject_id_hash</td><td>string</td><td>是</td><td>脱敏后的主体 ID</td></tr>
+              <tr><td>event_time</td><td>ISO8601</td><td>是</td><td>事件发生时间</td></tr>
+              <tr><td>window_start / window_end</td><td>ISO8601</td><td>是</td><td>分析窗口</td></tr>
+              <tr><td>channel</td><td>string</td><td>是</td><td>渠道/触点</td></tr>
+              <tr><td>campaign_id</td><td>string</td><td>建议</td><td>活动标识</td></tr>
+              <tr><td>product_code</td><td>string</td><td>建议</td><td>产品标识</td></tr>
+              <tr><td>segment</td><td>string</td><td>建议</td><td>人群/地域/客群分层</td></tr>
+              <tr><td>treatment_group</td><td>0/1</td><td>因果必需</td><td>处理组标识</td></tr>
+              <tr><td>control_group</td><td>0/1</td><td>因果必需</td><td>对照组标识</td></tr>
+              <tr><td>assignment_method</td><td>string</td><td>因果必需</td><td>randomized / observational / stratified_randomized</td></tr>
+              <tr><td>assignment_provenance</td><td>string</td><td>因果必需</td><td>experiment_platform / signed_config / event_log</td></tr>
+              <tr><td>assignment_verified</td><td>bool</td><td>因果必需</td><td>是否经过验证</td></tr>
+              <tr><td>active / quoted / applied / paid / issued</td><td>0/1</td><td>建议</td><td>漏斗状态</td></tr>
+              <tr><td>gross_premium</td><td>number</td><td>建议</td><td>总保费</td></tr>
+              <tr><td>refund</td><td>number</td><td>建议</td><td>退款</td></tr>
+              <tr><td>cancel</td><td>number</td><td>建议</td><td>撤单</td></tr>
+              <tr><td>net_premium</td><td>number</td><td>建议</td><td>净保费</td></tr>
+              <tr><td>source_system</td><td>string</td><td>是</td><td>来源系统</td></tr>
+              <tr><td>snapshot_date</td><td>date</td><td>是</td><td>抽取日期</td></tr>
+              <tr><td>authorization_id</td><td>string</td><td>是</td><td>授权/审批编号</td></tr>
+              <tr><td>data_owner</td><td>string</td><td>是</td><td>数据 owner</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:14px">
+        <div class="card">
+          <h4>推荐的数据文件形态</h4>
+          <p><strong>首选：</strong>CSV / Parquet / JSONL，<strong>一行一条观测</strong>。这样可以直接进入数据画像、分解和因果门禁。</p>
+          <p style="margin-top:10px"><strong>如果只有聚合表：</strong>也可以，但只能做描述性分析，不能给因果结论。</p>
+        </div>
+        <div class="card">
+          <h4>必须排除的字段</h4>
+          <p>PII、自由文本、未来结果、事后字段、行动后字段、以及所有会泄漏结论的信息。对于呼叫前预测，像 UCI 的 <code>duration</code> 这种后验字段必须屏蔽。</p>
+        </div>
+      </div>
+
+      <div class="table-card" style="margin-top:14px">
+        <table>
+          <thead>
+            <tr><th colspan="5">最小可用 JSON 结构示例</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="5">
+<pre>{
+  "schema_version": "1.0",
+  "record_id": "r_20260802_000001",
+  "subject_id_hash": "sha256:xxxxxxxx",
+  "event_time": "2026-08-02T10:12:33+08:00",
+  "window_start": "2026-08-01T00:00:00+08:00",
+  "window_end": "2026-08-02T23:59:59+08:00",
+  "channel": "app_push",
+  "campaign_id": "cmp_202608",
+  "product_code": "prod_life_001",
+  "segment": "new_customer",
+  "treatment_group": 1,
+  "control_group": 0,
+  "assignment_method": "randomized",
+  "assignment_provenance": "experiment_platform",
+  "assignment_verified": true,
+  "funnel": { "active": 1, "quoted": 1, "applied": 0, "paid": 0, "issued": 0 },
+  "outcome": { "gross_premium": 0, "refund": 0, "cancel": 0, "net_premium": 0 },
+  "covariates": {
+    "age_band": "30-39",
+    "region": "east",
+    "device": "ios"
+  },
+  "governance": {
+    "source_system": "crm",
+    "snapshot_date": "2026-08-02",
+    "authorization_id": "auth_20260802_001",
+    "data_owner": "growth-ops"
+  }
+}</pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note warn" style="margin-top:14px">
+        <strong>如果没有 treatment / control / provenance / window_closed 这些信息，</strong>我会自动把结果降级成 <strong>DESCRIPTIVE_ONLY</strong>，不把相关说成因果。
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">源码整理</p>
+          <h3>这份方案对应的源码层</h3>
+        </div>
+      </div>
+      <div class="progress">
+        <div class="card"><h4>控制层</h4><p>foundation.py、track2.py、cli.py、run_server.py。负责状态机、控制平面、证据和对外入口。</p></div>
+        <div class="card"><h4>分析层</h4><p>track2_analysis.py、track2_real_data.py、track2_benchmark.py、track2_worker.py。负责分解、真实数据、隐藏基准和隔离 worker。</p></div>
+        <div class="card"><h4>展示层</h4><p>web/static/index.html、app.js、styles.css、track2-plan.html。负责控制台与方案页。</p></div>
+        <div class="card"><h4>生态层</h4><p>packages/、deploy/agentteams/、runtime_data/。负责 Skill、原生集成和证据输出。</p></div>
+        <div class="card"><h4>数据层</h4><p>datasets/track2_catalog.json、docs/track2-dataset-research.md、docs/track2-real-data.md。负责数据选择、限制和真实数据记录。</p></div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <strong>结论：</strong>这版 HTML 适合拿去做方案展示和评审说明。当前代码已证明系统“能算、能判断、能拒答、能回放”，下一步要补的是授权保险影子数据、业务评审和真实实验。
+    </div>
+  </main>
+</body>
+</html>

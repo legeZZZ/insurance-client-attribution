@@ -1,0 +1,113 @@
+{
+  "sweep": "shrinkage strength nu annealing on log grid 50..2000, two-sided metric",
+  "seeds": {
+    "matched": [
+      101,
+      211,
+      307,
+      401,
+      503
+    ],
+    "mismatched": [
+      601,
+      701
+    ]
+  },
+  "metric_note": "moderation RMSE 对全部单元计算，真值 = 全量 10 万样本经验单元效应 − 大盘池化效应；true_cell 行为真实调节单元 device_low_end=1 单列。单侧（仅伪分群）指标会退化：ν 越大噪声压得越狠但真信号也被抹掉，双侧指标才暴露偏差-方差权衡。",
+  "grid": [
+    {
+      "nu": 50,
+      "moderation_rmse_all_cells": 0.003422,
+      "moderation_rmse_true_cell": 0.001327,
+      "false_positives_total": 0,
+      "true_moderator_hits": "7/7"
+    },
+    {
+      "nu": 100,
+      "moderation_rmse_all_cells": 0.003344,
+      "moderation_rmse_true_cell": 0.001321,
+      "false_positives_total": 0,
+      "true_moderator_hits": "7/7"
+    },
+    {
+      "nu": 200,
+      "moderation_rmse_all_cells": 0.003203,
+      "moderation_rmse_true_cell": 0.00131,
+      "false_positives_total": 0,
+      "true_moderator_hits": "7/7"
+    },
+    {
+      "nu": 300,
+      "moderation_rmse_all_cells": 0.003083,
+      "moderation_rmse_true_cell": 0.0013,
+      "false_positives_total": 0,
+      "true_moderator_hits": "7/7"
+    },
+    {
+      "nu": 400,
+      "moderation_rmse_all_cells": 0.00298,
+      "moderation_rmse_true_cell": 0.001291,
+      "false_positives_total": 0,
+      "true_moderator_hits": "7/7"
+    },
+    {
+      "nu": 500,
+      "moderation_rmse_all_cells": 0.002894,
+      "moderation_rmse_true_cell": 0.001283,
+      "false_positives_total": 0,
+      "true_moderator_hits": "7/7"
+    },
+    {
+      "nu": 600,
+      "moderation_rmse_all_cells": 0.002821,
+      "moderation_rmse_true_cell": 0.001277,
+      "false_positives_total": 0,
+      "true_moderator_hits": "7/7"
+    },
+    {
+      "nu": 800,
+      "moderation_rmse_all_cells": 0.002711,
+      "moderation_rmse_true_cell": 0.001266,
+      "false_positives_total": 0,
+      "true_moderator_hits": "7/7"
+    },
+    {
+      "nu": 1000,
+      "moderation_rmse_all_cells": 0.00264,
+      "moderation_rmse_true_cell": 0.001259,
+      "false_positives_total": 0,
+      "true_moderator_hits": "7/7"
+    },
+    {
+      "nu": 1400,
+      "moderation_rmse_all_cells": 0.002581,
+      "moderation_rmse_true_cell": 0.001257,
+      "false_positives_total": 0,
+      "true_moderator_hits": "7/7"
+    },
+    {
+      "nu": 2000,
+      "moderation_rmse_all_cells": 0.002614,
+      "moderation_rmse_true_cell": 0.001277,
+      "false_positives_total": 0,
+      "true_moderator_hits": "7/7"
+    }
+  ],
+  "optimum": {
+    "nu": 1400,
+    "moderation_rmse_all_cells": 0.002581,
+    "moderation_rmse_true_cell": 0.001257,
+    "false_positives_total": 0,
+    "true_moderator_hits": "7/7"
+  },
+  "default_500": {
+    "nu": 500,
+    "moderation_rmse_all_cells": 0.002894,
+    "moderation_rmse_true_cell": 0.001283,
+    "false_positives_total": 0,
+    "true_moderator_hits": "7/7"
+  },
+  "default_vs_optimum_gap_pct": 12.1,
+  "default_within_5pct_of_optimum": false,
+  "conclusion": "双侧指标下存在内点最优 ν=1400（全单元 RMSE 0.002581），默认 ν=500 对应 0.002894，差距 12.1%。曲线平坦（500→2000 区间 RMSE 变化 <15%），且全网格上方向检出 7/7、伪分群 FP=0，决策类指标对 ν 不敏感；保留偏保守的 500（少收缩、多信分群数据），线上漂移由 PID 以 500 为中心自适应修正（nu_annealing_sweep.json + offline_pid_ablation.json + experience_ablation.json 三份证据互锁）。注：2026-08-15 团队复盘曾给出最优约 578，差异来自指标口径（单侧 vs 双侧），两套数字在同一平坦区内。"
+}

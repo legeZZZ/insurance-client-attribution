@@ -1,0 +1,215 @@
+{
+  "task_id": "T2-lineB-monthly-review",
+  "domain": "insurance-growth-attribution",
+  "schema_version": "1.0",
+  "view": "monthly_baseline_attribution",
+  "baseline_definition": "persistent control group, no model assumptions",
+  "change_registry": [
+    {
+      "change_id": "chg_ranking",
+      "start_day": 15,
+      "scope": "search_ranking",
+      "experiment_id": "exp_ranking",
+      "owner": "growth",
+      "registered": true
+    },
+    {
+      "change_id": "chg_subsidy",
+      "start_day": 30,
+      "scope": "subsidy_push",
+      "experiment_id": "exp_subsidy",
+      "owner": "growth",
+      "registered": true
+    }
+  ],
+  "external_factor_registry": [
+    {
+      "event_id": "ext_regulation",
+      "start_day": 45,
+      "end_day": 49,
+      "kind": "regulation",
+      "description": "监管新规发布"
+    }
+  ],
+  "att_aggregation": {
+    "naive_total": 116.37,
+    "hierarchical_total": 119.35,
+    "tau2": 98.0285
+  },
+  "external_associations": [
+    {
+      "event_id": "ext_regulation",
+      "kind": "regulation",
+      "window_deviation": -86.23,
+      "claim_type": "TEMPORAL_ASSOCIATION",
+      "note": "外生事件不可随机化；仅报告与指标的共同变化，不作因果断言。",
+      "alignment": "ALIGNED"
+    }
+  ],
+  "unregistered_alerts": [
+    {
+      "alert": "UNEXPLAINED_STEP_SUSPECTED",
+      "onset_day": 39,
+      "step_score": -42.796779169555535,
+      "note": "未注册变更，或已注册变动的线上效果与实验 ATT 不一致（解释赤字）。"
+    },
+    {
+      "alert": "UNEXPLAINED_STEP_SUSPECTED",
+      "onset_day": 51,
+      "step_score": -89.1938709636525,
+      "note": "未注册变更，或已注册变动的线上效果与实验 ATT 不一致（解释赤字）。"
+    }
+  ],
+  "unknown_bucket": {
+    "window_start_day": 50,
+    "mean_residual_late_window": -95.77,
+    "claim_type": "UNEXPLAINED",
+    "policy": "残差不建模、不摊派、不假装分解。"
+  },
+  "association_discovery": {
+    "model": "line_b_association_factor_discovery",
+    "claim_policy": "association_only_until_randomized_or_quasi_experimental_validation",
+    "candidate_generation": "source adapters enumerate observable internal and authorized external snapshots; ranking does not invent unobserved factor names.",
+    "anomaly_windows": [
+      {
+        "start_day": 37,
+        "end_day": 41
+      },
+      {
+        "start_day": 49,
+        "end_day": 53
+      }
+    ],
+    "candidate_count": 3,
+    "event_candidate_coverage": 1.0,
+    "candidates": [
+      {
+        "factor_id": "internal.audit.unregistered_release",
+        "source_type": "internal_event",
+        "kind": "release_audit",
+        "scope": null,
+        "source_uri": null,
+        "content_digest": null,
+        "license_ref": null,
+        "start_day": 40,
+        "end_day": 40,
+        "matched_window": {
+          "start_day": 37,
+          "end_day": 41
+        },
+        "distance_days": 0,
+        "alignment_score": 1.0,
+        "window_residual_mean": -68.3,
+        "scope_match": 0.85,
+        "source_reliability": 0.9,
+        "association_score": 0.765,
+        "claim_type": "FACTOR_CANDIDATE",
+        "evidence_level": "FACTOR_CANDIDATE",
+        "validation_route": "line_a_or_gray_release"
+      },
+      {
+        "factor_id": "external.competitor_campaign",
+        "source_type": "external_event",
+        "kind": "competitor_marketing",
+        "scope": null,
+        "source_uri": null,
+        "content_digest": null,
+        "license_ref": null,
+        "start_day": 51,
+        "end_day": 54,
+        "matched_window": {
+          "start_day": 49,
+          "end_day": 53
+        },
+        "distance_days": 0,
+        "alignment_score": 0.75,
+        "window_residual_mean": -85.31,
+        "scope_match": 0.6,
+        "source_reliability": 0.65,
+        "association_score": 0.2925,
+        "claim_type": "TEMPORAL_ASSOCIATION",
+        "evidence_level": "TEMPORAL_ASSOCIATION",
+        "validation_route": "stratified_quasi_experiment"
+      },
+      {
+        "factor_id": "external.fx_rate_usd_cny",
+        "source_type": "factor_series",
+        "kind": "macro",
+        "scope": null,
+        "correlation": -0.767647366315748,
+        "lag_days": 1,
+        "coverage": 0.9833333333333333,
+        "permutation_pvalue": 0.019230769230769232,
+        "scope_match": 0.45,
+        "source_reliability": 0.7,
+        "source_uri": null,
+        "content_digest": null,
+        "license_ref": null,
+        "association_score": 0.237159,
+        "claim_type": "FACTOR_CANDIDATE",
+        "evidence_level": "FACTOR_CANDIDATE",
+        "validation_route": "stratified_quasi_experiment"
+      }
+    ]
+  },
+  "association_input_policy": "fixture feeds demonstrate the adapter contract; production requires authorized internal/external sources with source and scope provenance.",
+  "claim_types_used": [
+    "BUNDLE_EFFECT",
+    "TEMPORAL_ASSOCIATION",
+    "UNEXPLAINED"
+  ],
+  "governance_note": "外部因子恒为时序关联；残差标未知不摊派；未注册变更触发治理告警。",
+  "validation": {
+    "benchmark_version": "track2-lineB-baseline-1",
+    "seeds": 5,
+    "metrics": {
+      "unregistered_change_recall": 1.0,
+      "external_alignment_accuracy": 1.0,
+      "unknown_label_honesty": 1.0,
+      "att_per_experiment_rmse_naive": 10.233,
+      "att_per_experiment_rmse_hierarchical": 5.552
+    },
+    "per_seed": [
+      {
+        "seed": 11,
+        "unregistered_detected": true,
+        "external_aligned": true,
+        "unknown_mean": -69.07,
+        "unknown_truth": -73.0,
+        "unknown_honest": true
+      },
+      {
+        "seed": 23,
+        "unregistered_detected": true,
+        "external_aligned": true,
+        "unknown_mean": -99.88,
+        "unknown_truth": -73.0,
+        "unknown_honest": true
+      },
+      {
+        "seed": 37,
+        "unregistered_detected": true,
+        "external_aligned": true,
+        "unknown_mean": -49.18,
+        "unknown_truth": -73.0,
+        "unknown_honest": true
+      },
+      {
+        "seed": 51,
+        "unregistered_detected": true,
+        "external_aligned": true,
+        "unknown_mean": -68.63,
+        "unknown_truth": -73.0,
+        "unknown_honest": true
+      },
+      {
+        "seed": 67,
+        "unregistered_detected": true,
+        "external_aligned": true,
+        "unknown_mean": -107.0,
+        "unknown_truth": -73.0,
+        "unknown_honest": true
+      }
+    ]
+  }
+}

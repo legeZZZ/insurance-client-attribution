@@ -1,0 +1,994 @@
+{
+  "bundle": {
+    "effect_absolute": -0.021556633692281016,
+    "effect_relative": -0.506074845105787,
+    "probability_harm": 1.0,
+    "probability_practical_harm": 1.0,
+    "probability_practical_benefit": 0.0,
+    "probability_practically_equivalent": 0.0,
+    "credible_interval_95": [
+      -0.024631439819631226,
+      -0.01850254767680482
+    ],
+    "decision": "ROLLBACK_RECOMMENDED",
+    "model": "beta_binomial",
+    "evidence_level": "BUNDLE_EFFECT",
+    "prior": {
+      "control": [
+        1.0,
+        1.0
+      ],
+      "treatment": [
+        1.0,
+        1.0
+      ]
+    },
+    "arm_shapes": {
+      "control": [
+        1073.0,
+        24114.0
+      ],
+      "treatment": [
+        522.0,
+        24295.0
+      ]
+    },
+    "draws": 100000,
+    "input_validation": {
+      "status": "PASS",
+      "component": "bundle_compare",
+      "used_sample_count": 50000,
+      "excluded_sample_count": 0,
+      "exclusion_reasons": [],
+      "checks_performed": [
+        "finite",
+        "count_range"
+      ]
+    }
+  },
+  "oracle_bundle_ate": -0.02194844830333879,
+  "mined_top5": [
+    {
+      "factor_id": "carousel.image_component",
+      "source_type": "SPEC_DIFF",
+      "source_path": "props.image_component.default",
+      "before": "legacy",
+      "after": "v2",
+      "component": "carousel",
+      "causal_role": "treatment_candidate",
+      "experimentability": 1.0,
+      "claim_type": "FACTOR_CANDIDATE",
+      "priority": 1.08
+    },
+    {
+      "factor_id": "carousel.indicator_position",
+      "source_type": "SPEC_DIFF",
+      "source_path": "props.indicator_position.default",
+      "before": "outside_bottom",
+      "after": "inside_bottom",
+      "component": "carousel",
+      "causal_role": "treatment",
+      "experimentability": 1.0,
+      "claim_type": "FACTOR_CANDIDATE",
+      "priority": 1.08
+    },
+    {
+      "factor_id": "carousel.layout",
+      "source_type": "SPEC_DIFF",
+      "source_path": "props.layout.default",
+      "before": "below_media",
+      "after": "overlay",
+      "component": "carousel",
+      "causal_role": "treatment",
+      "experimentability": 1.0,
+      "claim_type": "FACTOR_CANDIDATE",
+      "priority": 1.08
+    },
+    {
+      "factor_id": "carousel.media_aspect_ratio",
+      "source_type": "SPEC_DIFF",
+      "source_path": "props.media_aspect_ratio.default",
+      "before": "16:9",
+      "after": "4:3",
+      "component": "carousel",
+      "causal_role": "treatment",
+      "experimentability": 1.0,
+      "claim_type": "FACTOR_CANDIDATE",
+      "priority": 1.08
+    },
+    {
+      "factor_id": "carousel.text_density",
+      "source_type": "SPEC_DIFF",
+      "source_path": "props.text_density.default",
+      "before": "medium",
+      "after": "high",
+      "component": "carousel",
+      "causal_role": "treatment",
+      "experimentability": 1.0,
+      "claim_type": "FACTOR_CANDIDATE",
+      "priority": 1.08
+    }
+  ],
+  "hte": {
+    "model": "probability_scale_empirical_bayes_partial_pooling",
+    "likelihood": "beta_binomial_posterior_draws",
+    "random_effects_distribution": "gaussian",
+    "random_effects_parameters": {
+      "location": -0.02157238217275504,
+      "nu": null,
+      "scale": 0.010780900074858804,
+      "tau": 0.010780900074858804,
+      "scale_equals_tau": true,
+      "parameter_interpretation": "single random-effects distribution"
+    },
+    "likelihood_requested": "gaussian",
+    "effect_scale": "probability_difference",
+    "logit_taylor_target_used": false,
+    "shrinkage_weight_definition": "tau2_variance / (tau2_variance + raw_effect_variance)",
+    "standard_error_definition": "sqrt(final_posterior_effect_variance)",
+    "pooled_effect": -0.02157238217275504,
+    "pooled_standard_error": 0.0015631363733567781,
+    "pooled_credible_interval_95": [
+      -0.024652981367048576,
+      -0.01853780042189033
+    ],
+    "tau2_probability_difference": 0.00011622780642409056,
+    "tau_scale_probability_difference": 0.010780900074858804,
+    "tau_definition": "Gaussian random-effects standard deviation",
+    "tau_source": "der_simonian_laird",
+    "random_effect_variance_probability_difference": 0.00011622780642409056,
+    "student_t_nu": null,
+    "student_t_hyperparameter_method": null,
+    "student_t_hyperparameter_posterior": null,
+    "student_t_limitations": [],
+    "posterior_calculation": "normal-normal empirical-Bayes update",
+    "shrinkage_strength_legacy": null,
+    "shrinkage_method": "normal_normal",
+    "discovery_mode": false,
+    "segments": [
+      {
+        "segment_id": "device_low_end=0",
+        "impressions": 32542,
+        "effect_raw": -0.016268236024010802,
+        "effect_shrunk": -0.016461135084367973,
+        "standard_error_raw": 0.0020943855781608953,
+        "standard_error_shrunk": 0.002056734766771827,
+        "shrinkage_weight": 0.9636324009656398,
+        "probability_practical_harm": 0.9986,
+        "probability_practical_benefit": 0.0,
+        "shrunk_probability_practical_harm": 0.99898,
+        "shrunk_probability_practical_benefit": 0.0,
+        "moderation_raw": 0.005304146148744239,
+        "moderation_shrunk": 0.005111247088387064,
+        "prob_moderation_worse_raw": 8e-05,
+        "prob_moderation_worse_shrunk": 0.0001,
+        "credible_interval_raw_95": [
+          -0.020361491506390637,
+          -0.012144428839628466
+        ],
+        "credible_interval_95": [
+          -0.020480806031148747,
+          -0.012411461664142098
+        ],
+        "evidence_level": "HETEROGENEOUS_TREATMENT_EFFECT"
+      },
+      {
+        "segment_id": "device_low_end=1",
+        "impressions": 17458,
+        "effect_raw": -0.03180541538104728,
+        "effect_shrunk": -0.03141894318397262,
+        "standard_error_raw": 0.0021358554666763003,
+        "standard_error_shrunk": 0.002095966294408311,
+        "shrinkage_weight": 0.9622328796156469,
+        "probability_practical_harm": 1.0,
+        "probability_practical_benefit": 0.0,
+        "shrunk_probability_practical_harm": 1.0,
+        "shrunk_probability_practical_benefit": 0.0,
+        "moderation_raw": -0.010233033208292238,
+        "moderation_shrunk": -0.009846561011217586,
+        "prob_moderation_worse_raw": 0.97756,
+        "prob_moderation_worse_shrunk": 0.96908,
+        "credible_interval_raw_95": [
+          -0.03610667693834141,
+          -0.027704818461841238
+        ],
+        "credible_interval_95": [
+          -0.03563987451016943,
+          -0.027394928889135986
+        ],
+        "evidence_level": "HETEROGENEOUS_TREATMENT_EFFECT"
+      }
+    ],
+    "input_validation": {
+      "status": "PASS",
+      "component": "hte_segments",
+      "used_sample_count": 50000,
+      "excluded_sample_count": 0,
+      "exclusion_reasons": [],
+      "checks_performed": [
+        "finite",
+        "count_range",
+        "non_empty",
+        "unique_segment_id"
+      ]
+    }
+  },
+  "high_dimensional_hte": {
+    "model": "crossfit_overlap_ridge_cate",
+    "aggregate_model_dependency": "beta_binomial_bundle_gate",
+    "evidence_level": "EXPLORATORY_HDIM_HTE",
+    "identification": "randomized_assignment_required; subgroup selection remains exploratory unless pre-registered",
+    "effect_scale": "probability_difference",
+    "transformed_outcome": "Y * (T - p) / (p * (1-p))",
+    "pooled_effect": -0.021569653154206725,
+    "observed_propensity": 0.4963,
+    "propensity_used": 0.4963,
+    "crossfit_folds": 5,
+    "ridge_alpha": 25.0,
+    "rows": 50000,
+    "feature_columns": [
+      "device_low_end",
+      "user_new_old",
+      "channel",
+      "placement",
+      "session_depth",
+      "prior_quote_count",
+      "quote_complexity_score",
+      "price_sensitivity_score",
+      "coverage_need_score",
+      "lead_quality_score",
+      "network_quality_score",
+      "market_pressure_index",
+      "ad_auction_pressure_index",
+      "competitor_quote_speed_index",
+      "fx_rate_pressure_index",
+      "regulatory_attention_index",
+      "quote_form_step_count",
+      "baseline_latency_risk",
+      "premium_index"
+    ],
+    "continuous_features": [
+      "session_depth",
+      "prior_quote_count",
+      "quote_complexity_score",
+      "price_sensitivity_score",
+      "coverage_need_score",
+      "lead_quality_score",
+      "network_quality_score",
+      "market_pressure_index",
+      "ad_auction_pressure_index",
+      "competitor_quote_speed_index",
+      "fx_rate_pressure_index",
+      "regulatory_attention_index",
+      "quote_form_step_count",
+      "baseline_latency_risk",
+      "premium_index"
+    ],
+    "diagnostics": {
+      "raw_feature_count": 19,
+      "continuous_feature_count": 15,
+      "basis_feature_count": 45,
+      "interaction_feature_count": 36,
+      "design_matrix_columns": 91,
+      "overlapping_subgroup_count": 7,
+      "total_subgroup_memberships": 75902,
+      "rows_in_any_subgroup": 31547,
+      "rows_with_multiple_subgroups": 21385,
+      "residual_standard_error": 0.3551342906271728
+    },
+    "folds": [
+      {
+        "fold": 1,
+        "train_rows": 40000,
+        "test_rows": 10000
+      },
+      {
+        "fold": 2,
+        "train_rows": 40000,
+        "test_rows": 10000
+      },
+      {
+        "fold": 3,
+        "train_rows": 40000,
+        "test_rows": 10000
+      },
+      {
+        "fold": 4,
+        "train_rows": 40000,
+        "test_rows": 10000
+      },
+      {
+        "fold": 5,
+        "train_rows": 40000,
+        "test_rows": 10000
+      }
+    ],
+    "top_moderators": [
+      {
+        "term": "ad_auction_pressure_index:high",
+        "source_feature": "ad_auction_pressure_index",
+        "feature_type": "continuous",
+        "basis": "positive_hinge",
+        "coefficient": -0.018424052223814238,
+        "importance": 0.018424052223814238,
+        "direction": "amplifies_harm"
+      },
+      {
+        "term": "device_low_end=1 × prior_quote_count:high",
+        "source_feature": "device_low_end+prior_quote_count",
+        "feature_type": "interaction",
+        "basis": "pairwise",
+        "coefficient": 0.012645997213820518,
+        "importance": 0.012645997213820518,
+        "direction": "reduces_harm"
+      },
+      {
+        "term": "device_low_end=0 × prior_quote_count:high",
+        "source_feature": "device_low_end+prior_quote_count",
+        "feature_type": "interaction",
+        "basis": "pairwise",
+        "coefficient": -0.011911430167023906,
+        "importance": 0.011911430167023906,
+        "direction": "amplifies_harm"
+      },
+      {
+        "term": "competitor_quote_speed_index:high",
+        "source_feature": "competitor_quote_speed_index",
+        "feature_type": "continuous",
+        "basis": "positive_hinge",
+        "coefficient": 0.011002386062952698,
+        "importance": 0.011002386062952698,
+        "direction": "reduces_harm"
+      },
+      {
+        "term": "ad_auction_pressure_index",
+        "source_feature": "ad_auction_pressure_index",
+        "feature_type": "continuous",
+        "basis": "standardized",
+        "coefficient": 0.010943857068218706,
+        "importance": 0.010943857068218706,
+        "direction": "reduces_harm"
+      },
+      {
+        "term": "device_low_end=0 × quote_complexity_score:high",
+        "source_feature": "device_low_end+quote_complexity_score",
+        "feature_type": "interaction",
+        "basis": "pairwise",
+        "coefficient": 0.010245590881666647,
+        "importance": 0.010245590881666647,
+        "direction": "reduces_harm"
+      },
+      {
+        "term": "quote_form_step_count:high",
+        "source_feature": "quote_form_step_count",
+        "feature_type": "continuous",
+        "basis": "positive_hinge",
+        "coefficient": 0.010194550232503671,
+        "importance": 0.010194550232503671,
+        "direction": "reduces_harm"
+      },
+      {
+        "term": "competitor_quote_speed_index",
+        "source_feature": "competitor_quote_speed_index",
+        "feature_type": "continuous",
+        "basis": "standardized",
+        "coefficient": -0.010060323136829398,
+        "importance": 0.010060323136829398,
+        "direction": "amplifies_harm"
+      },
+      {
+        "term": "device_low_end=0 × prior_quote_count",
+        "source_feature": "device_low_end+prior_quote_count",
+        "feature_type": "interaction",
+        "basis": "pairwise",
+        "coefficient": 0.009863276626639631,
+        "importance": 0.009863276626639631,
+        "direction": "reduces_harm"
+      },
+      {
+        "term": "device_low_end=1 × session_depth:high",
+        "source_feature": "device_low_end+session_depth",
+        "feature_type": "interaction",
+        "basis": "pairwise",
+        "coefficient": -0.0094585956706752,
+        "importance": 0.0094585956706752,
+        "direction": "amplifies_harm"
+      },
+      {
+        "term": "device_low_end=1 × prior_quote_count",
+        "source_feature": "device_low_end+prior_quote_count",
+        "feature_type": "interaction",
+        "basis": "pairwise",
+        "coefficient": -0.009179197459992256,
+        "importance": 0.009179197459992256,
+        "direction": "amplifies_harm"
+      },
+      {
+        "term": "device_low_end=1 × quote_complexity_score:high",
+        "source_feature": "device_low_end+quote_complexity_score",
+        "feature_type": "interaction",
+        "basis": "pairwise",
+        "coefficient": -0.009153902119775322,
+        "importance": 0.009153902119775322,
+        "direction": "amplifies_harm"
+      }
+    ],
+    "subgroups": [
+      {
+        "subgroup_id": "low_end_device",
+        "label": "低端设备",
+        "condition": {
+          "device_low_end": 1
+        },
+        "rows": 17458,
+        "effective_rows_after_overlap": 5590.68,
+        "overlap_rows": 15809,
+        "raw_cate": -0.03228636310502298,
+        "effect_shrunk": -0.030944821714776263,
+        "standard_error": 0.00018833129079644896,
+        "credible_interval_95": [
+          -0.031313951044737304,
+          -0.030575692384815223
+        ],
+        "probability_practical_harm": 1.0,
+        "evidence_level": "EXPLORATORY_HDIM_HTE"
+      },
+      {
+        "subgroup_id": "weak_network_high_complexity",
+        "label": "弱网络 × 高复杂报价",
+        "condition": {
+          "network_quality_score": {
+            "max": 0.58
+          },
+          "quote_complexity_score": {
+            "min": 0.6
+          }
+        },
+        "rows": 10188,
+        "effective_rows_after_overlap": 2858.82,
+        "overlap_rows": 9932,
+        "raw_cate": -0.03219786546028132,
+        "effect_shrunk": -0.02987401263251671,
+        "standard_error": 0.00026578311169233936,
+        "credible_interval_95": [
+          -0.030394947531433698,
+          -0.029353077733599724
+        ],
+        "probability_practical_harm": 1.0,
+        "evidence_level": "EXPLORATORY_HDIM_HTE"
+      },
+      {
+        "subgroup_id": "complex_quote_path",
+        "label": "报价复杂 × 表单步骤多",
+        "condition": {
+          "quote_complexity_score": {
+            "min": 0.62
+          },
+          "quote_form_step_count": {
+            "min": 6
+          }
+        },
+        "rows": 15212,
+        "effective_rows_after_overlap": 4508.44,
+        "overlap_rows": 14838,
+        "raw_cate": -0.02937391107750401,
+        "effect_shrunk": -0.028197783864090005,
+        "standard_error": 0.00024694118309126804,
+        "credible_interval_95": [
+          -0.02868178858294889,
+          -0.02771377914523112
+        ],
+        "probability_practical_harm": 1.0,
+        "evidence_level": "EXPLORATORY_HDIM_HTE"
+      },
+      {
+        "subgroup_id": "price_sensitive_new_users",
+        "label": "新客 × 价格敏感",
+        "condition": {
+          "user_new_old": "new",
+          "price_sensitivity_score": {
+            "min": 0.58
+          }
+        },
+        "rows": 12173,
+        "effective_rows_after_overlap": 4796.77,
+        "overlap_rows": 8368,
+        "raw_cate": -0.025834004359111717,
+        "effect_shrunk": -0.02522446014158866,
+        "standard_error": 0.00021626936775632165,
+        "credible_interval_95": [
+          -0.025648348102391052,
+          -0.02480057218078627
+        ],
+        "probability_practical_harm": 1.0,
+        "evidence_level": "EXPLORATORY_HDIM_HTE"
+      },
+      {
+        "subgroup_id": "external_pressure_combo",
+        "label": "外部压力 × 内部摩擦组合",
+        "condition": {
+          "competitor_quote_speed_index": {
+            "min": 0.46
+          },
+          "quote_form_step_count": {
+            "min": 6
+          }
+        },
+        "rows": 5298,
+        "effective_rows_after_overlap": 1316.98,
+        "overlap_rows": 5298,
+        "raw_cate": -0.02730459024945431,
+        "effect_shrunk": -0.02513737623014649,
+        "standard_error": 0.00047112788419270414,
+        "credible_interval_95": [
+          -0.02606078688316419,
+          -0.024213965577128793
+        ],
+        "probability_practical_harm": 1.0,
+        "evidence_level": "EXPLORATORY_HDIM_HTE"
+      },
+      {
+        "subgroup_id": "paid_market_pressure",
+        "label": "付费渠道 × 竞价/竞品压力高",
+        "condition": {
+          "channel": "paid",
+          "market_pressure_index": {
+            "min": 0.55
+          }
+        },
+        "rows": 5903,
+        "effective_rows_after_overlap": 2091.56,
+        "overlap_rows": 4423,
+        "raw_cate": -0.02600100366439949,
+        "effect_shrunk": -0.024774994527287163,
+        "standard_error": 0.0003223290950621119,
+        "credible_interval_95": [
+          -0.025406759553608903,
+          -0.024143229500965424
+        ],
+        "probability_practical_harm": 1.0,
+        "evidence_level": "EXPLORATORY_HDIM_HTE"
+      },
+      {
+        "subgroup_id": "regulatory_price_attention",
+        "label": "监管关注 × 价格敏感",
+        "condition": {
+          "regulatory_attention_index": {
+            "min": 0.22
+          },
+          "price_sensitivity_score": {
+            "min": 0.56
+          }
+        },
+        "rows": 9670,
+        "effective_rows_after_overlap": 3683.92,
+        "overlap_rows": 7072,
+        "raw_cate": -0.025153032989615968,
+        "effect_shrunk": -0.024513702914575494,
+        "standard_error": 0.0002570212349510203,
+        "credible_interval_95": [
+          -0.025017464535079494,
+          -0.024009941294071493
+        ],
+        "probability_practical_harm": 1.0,
+        "evidence_level": "EXPLORATORY_HDIM_HTE"
+      }
+    ],
+    "individual_cate_preview": [
+      {
+        "row": 22625,
+        "cate": -0.2344224472851865,
+        "memberships": 4
+      },
+      {
+        "row": 6539,
+        "cate": -0.11992835245777646,
+        "memberships": 3
+      },
+      {
+        "row": 12663,
+        "cate": -0.11638931715574426,
+        "memberships": 4
+      },
+      {
+        "row": 915,
+        "cate": -0.10828582047166806,
+        "memberships": 2
+      },
+      {
+        "row": 6632,
+        "cate": -0.10070995574325166,
+        "memberships": 5
+      },
+      {
+        "row": 33965,
+        "cate": -0.09980620839348196,
+        "memberships": 1
+      },
+      {
+        "row": 16349,
+        "cate": -0.09798722031170974,
+        "memberships": 1
+      },
+      {
+        "row": 23355,
+        "cate": -0.09654820075103544,
+        "memberships": 3
+      },
+      {
+        "row": 40306,
+        "cate": -0.09250059614813923,
+        "memberships": 2
+      },
+      {
+        "row": 7721,
+        "cate": -0.09032910886330248,
+        "memberships": 2
+      }
+    ]
+  },
+  "design": {
+    "design_type": "fractional_factorial_resolution_iv",
+    "arm_count": 16,
+    "design_diagnostics": {
+      "model_columns": [
+        "intercept",
+        "carousel.image_component",
+        "carousel.indicator_position",
+        "carousel.layout",
+        "carousel.media_aspect_ratio",
+        "carousel.text_density"
+      ],
+      "rank": 6,
+      "full_column_rank": true,
+      "factor_balance": {
+        "carousel.image_component": {
+          "level_0": 8,
+          "level_1": 8
+        },
+        "carousel.indicator_position": {
+          "level_0": 8,
+          "level_1": 8
+        },
+        "carousel.layout": {
+          "level_0": 8,
+          "level_1": 8
+        },
+        "carousel.media_aspect_ratio": {
+          "level_0": 8,
+          "level_1": 8
+        },
+        "carousel.text_density": {
+          "level_0": 8,
+          "level_1": 8
+        }
+      },
+      "factor_correlation_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "condition_number": 1.0000000000000007,
+      "main_effect_aliases": []
+    }
+  },
+  "component_effects": [
+    {
+      "factor_id": "carousel.image_component",
+      "ctr_level_0": 0.024825,
+      "ctr_level_1": 0.0135,
+      "component_effect": -0.011325,
+      "standard_error": 0.054084,
+      "standard_error_scale": "log_odds_ratio",
+      "log_odds_ratio": -0.624116,
+      "analysis_model": "aggregated_binomial_logistic_glm_full_design_matrix",
+      "design_matrix_rank": 6,
+      "significant": true,
+      "evidence_level": "COMPONENT_EFFECT"
+    },
+    {
+      "factor_id": "carousel.indicator_position",
+      "ctr_level_0": 0.018725,
+      "ctr_level_1": 0.0196,
+      "component_effect": 0.00087,
+      "standard_error": 0.051798,
+      "standard_error_scale": "log_odds_ratio",
+      "log_odds_ratio": 0.046676,
+      "analysis_model": "aggregated_binomial_logistic_glm_full_design_matrix",
+      "design_matrix_rank": 6,
+      "significant": false,
+      "evidence_level": "EXPERIMENT_INCONCLUSIVE"
+    },
+    {
+      "factor_id": "carousel.layout",
+      "ctr_level_0": 0.018975,
+      "ctr_level_1": 0.01935,
+      "component_effect": 0.000364,
+      "standard_error": 0.051787,
+      "standard_error_scale": "log_odds_ratio",
+      "log_odds_ratio": 0.019504,
+      "analysis_model": "aggregated_binomial_logistic_glm_full_design_matrix",
+      "design_matrix_rank": 6,
+      "significant": false,
+      "evidence_level": "EXPERIMENT_INCONCLUSIVE"
+    },
+    {
+      "factor_id": "carousel.media_aspect_ratio",
+      "ctr_level_0": 0.02115,
+      "ctr_level_1": 0.017175,
+      "component_effect": -0.003974,
+      "standard_error": 0.052047,
+      "standard_error_scale": "log_odds_ratio",
+      "log_odds_ratio": -0.213789,
+      "analysis_model": "aggregated_binomial_logistic_glm_full_design_matrix",
+      "design_matrix_rank": 6,
+      "significant": false,
+      "evidence_level": "EXPERIMENT_INCONCLUSIVE"
+    },
+    {
+      "factor_id": "carousel.text_density",
+      "ctr_level_0": 0.0292,
+      "ctr_level_1": 0.009125,
+      "component_effect": -0.020075,
+      "standard_error": 0.060434,
+      "standard_error_scale": "log_odds_ratio",
+      "log_odds_ratio": -1.185712,
+      "analysis_model": "aggregated_binomial_logistic_glm_full_design_matrix",
+      "design_matrix_rank": 6,
+      "significant": true,
+      "evidence_level": "COMPONENT_EFFECT"
+    }
+  ],
+  "ledger": {
+    "state": "DECISION_READY",
+    "claims": [
+      {
+        "claim_id": "claim-001",
+        "claim_type": "ASSOCIATION_ONLY",
+        "statement": "新轮播样式上线后 CTR 由 4.1% 降至 3.2%，与样式变更同时出现。",
+        "estimand": null,
+        "evidence_refs": [],
+        "posterior_probability": null,
+        "credible_interval": null,
+        "practical_threshold": null,
+        "assumptions": [],
+        "allowed_verbs": [
+          "观察到",
+          "同时出现",
+          "对应"
+        ],
+        "prohibited_verbs": [
+          "导致",
+          "根因是",
+          "证明"
+        ],
+        "selected_after_seeing_outcome": false
+      },
+      {
+        "claim_id": "claim-002",
+        "claim_type": "FACTOR_CANDIDATE",
+        "statement": "FactorMiner 输出 9 个候选因子。",
+        "estimand": null,
+        "evidence_refs": [],
+        "posterior_probability": null,
+        "credible_interval": null,
+        "practical_threshold": null,
+        "assumptions": [],
+        "allowed_verbs": [
+          "发现候选",
+          "值得验证"
+        ],
+        "prohibited_verbs": [
+          "导致",
+          "根因是",
+          "证明"
+        ],
+        "selected_after_seeing_outcome": false
+      },
+      {
+        "claim_id": "claim-003",
+        "claim_type": "BUNDLE_EFFECT",
+        "statement": "新轮播整套样式在本实验中使 CTR 变化 -0.0216（P(实际损害)=1.000）。",
+        "estimand": "ITT on qualified CTR",
+        "evidence_refs": [],
+        "posterior_probability": 1.0,
+        "credible_interval": [
+          -0.024631439819631226,
+          -0.01850254767680482
+        ],
+        "practical_threshold": 0.005,
+        "assumptions": [],
+        "allowed_verbs": [
+          "在本实验中提升",
+          "在本实验中降低",
+          "估计"
+        ],
+        "prohibited_verbs": [
+          "导致",
+          "根因是",
+          "证明"
+        ],
+        "selected_after_seeing_outcome": false
+      },
+      {
+        "claim_id": "claim-004",
+        "claim_type": "HETEROGENEOUS_TREATMENT_EFFECT",
+        "statement": "低端设备分群负向效应最大（收缩后 -0.0314）。",
+        "estimand": "HTE by device_low_end",
+        "evidence_refs": [],
+        "posterior_probability": null,
+        "credible_interval": null,
+        "practical_threshold": null,
+        "assumptions": [],
+        "allowed_verbs": [
+          "在该分群中放大",
+          "在该分群中缓解"
+        ],
+        "prohibited_verbs": [
+          "导致",
+          "根因是",
+          "证明"
+        ],
+        "selected_after_seeing_outcome": false
+      },
+      {
+        "claim_id": "claim-005",
+        "claim_type": "EXPLORATORY_HETEROGENEITY",
+        "statement": "高维重叠 HTE 显示 低端设备 的 CATE 更差（重叠校正后 -0.0309）。",
+        "estimand": "cross-fit CATE over pre-treatment continuous/categorical features",
+        "evidence_refs": [],
+        "posterior_probability": null,
+        "credible_interval": null,
+        "practical_threshold": null,
+        "assumptions": [],
+        "allowed_verbs": [
+          "探索性提示",
+          "未经独立确认"
+        ],
+        "prohibited_verbs": [
+          "导致",
+          "根因是",
+          "证明"
+        ],
+        "selected_after_seeing_outcome": true
+      },
+      {
+        "claim_id": "claim-006",
+        "claim_type": "COMPONENT_EFFECT",
+        "statement": "独立随机化显示 carousel.image_component 的组件级效应为 -0.0113。",
+        "estimand": "Component ATE",
+        "evidence_refs": [],
+        "posterior_probability": null,
+        "credible_interval": null,
+        "practical_threshold": null,
+        "assumptions": [],
+        "allowed_verbs": [
+          "独立随机化显示",
+          "组件级效应"
+        ],
+        "prohibited_verbs": [
+          "导致",
+          "根因是",
+          "证明"
+        ],
+        "selected_after_seeing_outcome": false
+      },
+      {
+        "claim_id": "claim-007",
+        "claim_type": "EXPERIMENT_INCONCLUSIVE",
+        "statement": "carousel.indicator_position 未达到组件级证据标准。",
+        "estimand": null,
+        "evidence_refs": [],
+        "posterior_probability": null,
+        "credible_interval": null,
+        "practical_threshold": null,
+        "assumptions": [],
+        "allowed_verbs": [
+          "证据不足",
+          "需要更多数据"
+        ],
+        "prohibited_verbs": [
+          "导致",
+          "根因是",
+          "证明"
+        ],
+        "selected_after_seeing_outcome": false
+      },
+      {
+        "claim_id": "claim-008",
+        "claim_type": "EXPERIMENT_INCONCLUSIVE",
+        "statement": "carousel.layout 未达到组件级证据标准。",
+        "estimand": null,
+        "evidence_refs": [],
+        "posterior_probability": null,
+        "credible_interval": null,
+        "practical_threshold": null,
+        "assumptions": [],
+        "allowed_verbs": [
+          "证据不足",
+          "需要更多数据"
+        ],
+        "prohibited_verbs": [
+          "导致",
+          "根因是",
+          "证明"
+        ],
+        "selected_after_seeing_outcome": false
+      },
+      {
+        "claim_id": "claim-009",
+        "claim_type": "EXPERIMENT_INCONCLUSIVE",
+        "statement": "carousel.media_aspect_ratio 未达到组件级证据标准。",
+        "estimand": null,
+        "evidence_refs": [],
+        "posterior_probability": null,
+        "credible_interval": null,
+        "practical_threshold": null,
+        "assumptions": [],
+        "allowed_verbs": [
+          "证据不足",
+          "需要更多数据"
+        ],
+        "prohibited_verbs": [
+          "导致",
+          "根因是",
+          "证明"
+        ],
+        "selected_after_seeing_outcome": false
+      },
+      {
+        "claim_id": "claim-010",
+        "claim_type": "COMPONENT_EFFECT",
+        "statement": "独立随机化显示 carousel.text_density 的组件级效应为 -0.0201。",
+        "estimand": "Component ATE",
+        "evidence_refs": [],
+        "posterior_probability": null,
+        "credible_interval": null,
+        "practical_threshold": null,
+        "assumptions": [],
+        "allowed_verbs": [
+          "独立随机化显示",
+          "组件级效应"
+        ],
+        "prohibited_verbs": [
+          "导致",
+          "根因是",
+          "证明"
+        ],
+        "selected_after_seeing_outcome": false
+      }
+    ]
+  }
+}

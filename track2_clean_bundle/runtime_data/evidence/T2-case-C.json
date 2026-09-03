@@ -1,0 +1,3258 @@
+{
+  "task_id": "T2-case-C",
+  "trace_id": "trace_c40ff0d0a7b8",
+  "domain": "insurance-growth-attribution",
+  "input_payload": {
+    "case": "C",
+    "question": "DAU rose while premium declined; explain what is known and what should be tested."
+  },
+  "state": "CLOSED",
+  "state_version": 11,
+  "artifacts": [
+    {
+      "artifact_id": "art_c9181cfbe1f5",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "artifact_type": "AnalysisIntent",
+      "schema_version": "1.0",
+      "producer": "intent",
+      "payload": {
+        "question": "DAU rose while premium declined; explain what is known and what should be tested.",
+        "target": "premium growth and conversion",
+        "unit": "user_id"
+      },
+      "evidence_refs": [
+        "ev_7dce01f2be47"
+      ],
+      "created_at": "2026-08-11T15:05:29.280751+00:00"
+    },
+    {
+      "artifact_id": "art_21bca8301569",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "artifact_type": "MetricContract",
+      "schema_version": "1.0",
+      "producer": "metric_contract",
+      "payload": {
+        "metric_id": "insurance-premium-v2",
+        "version": "2026-07-31",
+        "identity": "user_id",
+        "funnel": [
+          "active",
+          "quoted",
+          "applied",
+          "paid",
+          "issued"
+        ],
+        "outcomes": [
+          "issued",
+          "net_premium"
+        ],
+        "treatment": "treatment",
+        "premium": "net premium after refund and cancellation",
+        "window": "7d",
+        "owner": "growth-analytics"
+      },
+      "evidence_refs": [
+        "ev_7dce01f2be47"
+      ],
+      "created_at": "2026-08-11T15:05:29.281596+00:00"
+    },
+    {
+      "artifact_id": "art_1b4b596b0957",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "artifact_type": "DataQualityReport",
+      "schema_version": "1.0",
+      "producer": "data_acquisition",
+      "payload": {
+        "freshness": "simulated-current",
+        "privacy": "aggregated-demo-only",
+        "missing_row_fields": [],
+        "missing_experiment_fields": [],
+        "null_counts": {
+          "active": 0,
+          "applied": 0,
+          "issued": 0,
+          "net_premium": 0,
+          "paid": 0,
+          "quoted": 0,
+          "treatment": 0,
+          "user_id": 0
+        },
+        "duplicate_count": 0,
+        "duplicate_rate": 0.0,
+        "window_closed": true,
+        "outcome_complete": true,
+        "missing_fields": []
+      },
+      "evidence_refs": [
+        "ev_13574c41e245"
+      ],
+      "created_at": "2026-08-11T15:05:29.282553+00:00"
+    },
+    {
+      "artifact_id": "art_d9b00193ba28",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "artifact_type": "FeatureSet",
+      "schema_version": "1.0",
+      "producer": "diagnostic",
+      "payload": {
+        "schema_version": "1.0",
+        "row_count": 1200,
+        "observation_unit": "user_id",
+        "available_fields": [
+          "active",
+          "applied",
+          "assignment",
+          "cancel",
+          "channel",
+          "channel_quality",
+          "gross_premium",
+          "issued",
+          "net_premium",
+          "paid",
+          "product_mix",
+          "quoted",
+          "refund",
+          "season",
+          "treatment",
+          "user_id",
+          "user_quality"
+        ],
+        "funnel": {
+          "active": 1200,
+          "quoted": 493,
+          "applied": 212,
+          "paid": 118,
+          "issued": 66,
+          "net_premium": 61470.68,
+          "quote_rate": 0.410833,
+          "apply_rate": 0.43002,
+          "paid_rate": 0.556604,
+          "issue_rate": 0.559322,
+          "issued_user_rate": 0.055,
+          "avg_premium": 931.37
+        },
+        "segments": {
+          "channel_distribution": {
+            "new": 348,
+            "owned": 852
+          },
+          "assignment_distribution": {
+            "randomized": 1200
+          },
+          "average_product_mix": 0.409175
+        },
+        "treatment": {
+          "column": "treatment",
+          "group_counts": {
+            "0": 590,
+            "1": 610
+          },
+          "group_outcomes": {
+            "0": {
+              "count": 590.0,
+              "issued": 0.033898,
+              "net_premium": 32.033322
+            },
+            "1": {
+              "count": 610.0,
+              "issued": 0.07541,
+              "net_premium": 69.788557
+            }
+          }
+        },
+        "data_quality": {
+          "missing_row_fields": [],
+          "missing_experiment_fields": [],
+          "null_counts": {
+            "active": 0,
+            "applied": 0,
+            "issued": 0,
+            "net_premium": 0,
+            "paid": 0,
+            "quoted": 0,
+            "treatment": 0,
+            "user_id": 0
+          },
+          "duplicate_count": 0,
+          "duplicate_rate": 0.0,
+          "window_closed": true,
+          "outcome_complete": true
+        }
+      },
+      "evidence_refs": [
+        "ev_13574c41e245",
+        "ev_fe29ff2875a4"
+      ],
+      "created_at": "2026-08-11T15:05:29.282636+00:00"
+    },
+    {
+      "artifact_id": "art_bdec8568a41c",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "artifact_type": "AttributionCandidateSet",
+      "schema_version": "1.0",
+      "producer": "diagnostic",
+      "payload": {
+        "metrics": {
+          "active": 1200,
+          "quoted": 493,
+          "applied": 212,
+          "paid": 118,
+          "issued": 66,
+          "net_premium": 61470.68,
+          "quote_rate": 0.410833,
+          "apply_rate": 0.43002,
+          "paid_rate": 0.556604,
+          "issue_rate": 0.559322,
+          "issued_user_rate": 0.055,
+          "avg_premium": 931.37
+        },
+        "features": {
+          "channel_distribution": {
+            "new": 348,
+            "owned": 852
+          },
+          "assignment_distribution": {
+            "randomized": 1200
+          },
+          "average_product_mix": 0.409175
+        },
+        "decomposition": {
+          "method": "fixed-order log-chain decomposition",
+          "baseline_premium": 51502.87,
+          "current_premium": 61470.68,
+          "total_log_change": 0.176915,
+          "interaction_policy": "multiplicative interaction is represented in log scale; no causal claim",
+          "unexplained_residual": 0.0,
+          "factors": [
+            {
+              "key": "active",
+              "label": "活跃流量",
+              "before": 1200,
+              "after": 1200,
+              "log_change": 0.0,
+              "share": 0.0
+            },
+            {
+              "key": "quote_rate",
+              "label": "报价率",
+              "before": 0.395833,
+              "after": 0.410833,
+              "log_change": 0.037194,
+              "share": 0.210237
+            },
+            {
+              "key": "apply_rate",
+              "label": "投保率",
+              "before": 0.418947,
+              "after": 0.43002,
+              "log_change": 0.026087,
+              "share": 0.147455
+            },
+            {
+              "key": "paid_rate",
+              "label": "支付率",
+              "before": 0.497487,
+              "after": 0.556604,
+              "log_change": 0.112285,
+              "share": 0.634684
+            },
+            {
+              "key": "issue_rate",
+              "label": "出单率",
+              "before": 0.555556,
+              "after": 0.559322,
+              "log_change": 0.006756,
+              "share": 0.038188
+            },
+            {
+              "key": "avg_premium",
+              "label": "件均保费",
+              "before": 936.42,
+              "after": 931.37,
+              "log_change": -0.005407,
+              "share": -0.030563
+            }
+          ]
+        },
+        "interpretation": "structural contribution only"
+      },
+      "evidence_refs": [
+        "ev_fe29ff2875a4",
+        "ev_6624a0b51b76"
+      ],
+      "created_at": "2026-08-11T15:05:29.283980+00:00"
+    },
+    {
+      "artifact_id": "art_45464eccbc6e",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "artifact_type": "EvidenceReport",
+      "schema_version": "1.0",
+      "producer": "causal_evidence",
+      "payload": {
+        "outcome": "CAUSAL_READY",
+        "estimand": "ITT on issued and net_premium",
+        "observation_unit": "user_id",
+        "attribution_window": "7d",
+        "identification_strategy": "randomized",
+        "assumptions": [
+          "stable metric contract",
+          "no cross-unit interference",
+          "complete outcome window"
+        ],
+        "diagnostics": {
+          "sample_size": 1200,
+          "group_counts": {
+            "0": 590,
+            "1": 610
+          },
+          "contract_missing_fields": [],
+          "missing_evidence": [],
+          "design_checks": {
+            "randomized_assignment": true,
+            "assignment_verified": true,
+            "trusted_assignment_provenance": true,
+            "both_arms_present": true,
+            "randomization_unit_matches": true
+          },
+          "power": {
+            "method": "two-arm binary normal approximation",
+            "alpha": 0.05,
+            "target_power": 0.8,
+            "minimum_detectable_effect": 0.05,
+            "baseline_rate": 0.033898,
+            "required_per_arm": 206,
+            "actual_min_arm": 590,
+            "passed": true
+          },
+          "governance_checks": {
+            "approval_required": true,
+            "guardrails_defined": true,
+            "stop_rule_defined": true,
+            "production_auto_action_disabled": true
+          }
+        },
+        "gates": [
+          {
+            "name": "semantic",
+            "passed": true,
+            "reason_code": "SEMANTIC_DEFINED"
+          },
+          {
+            "name": "data",
+            "passed": true,
+            "reason_code": "DATA_COMPLETE"
+          },
+          {
+            "name": "design",
+            "passed": true,
+            "reason_code": "RANDOM_ASSIGNMENT_VERIFIED"
+          },
+          {
+            "name": "statistics",
+            "passed": true,
+            "reason_code": "POWER_SCREEN_PASS"
+          },
+          {
+            "name": "governance",
+            "passed": true,
+            "reason_code": "GOVERNANCE_READY"
+          }
+        ],
+        "evidence_level": "L3",
+        "reason_codes": [],
+        "allowed_claim_type": "causal_effect"
+      },
+      "evidence_refs": [
+        "ev_13574c41e245",
+        "ev_fe29ff2875a4",
+        "ev_30f5861b9ecc"
+      ],
+      "created_at": "2026-08-11T15:05:29.284966+00:00"
+    },
+    {
+      "artifact_id": "art_e3524654a58c",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "artifact_type": "ClaimLedger",
+      "schema_version": "1.0",
+      "producer": "causal_evidence",
+      "payload": {
+        "claim_id": "claim-001",
+        "claim_type": "causal_effect",
+        "evidence_level": "L3",
+        "allowed_verbs": [
+          "估计",
+          "在本实验中提升"
+        ],
+        "prohibited_actions": [
+          "未经审批上线排序"
+        ],
+        "uncertainty": "95% CI attached",
+        "statement": "经验证的随机分配满足因果门禁，可报告本实验中的 ITT 估计与置信区间。"
+      },
+      "evidence_refs": [
+        "ev_62a932a846ae"
+      ],
+      "created_at": "2026-08-11T15:05:29.284991+00:00"
+    },
+    {
+      "artifact_id": "art_b7b0f0711267",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "artifact_type": "ExperimentSpec",
+      "schema_version": "1.0",
+      "producer": "experiment_planner",
+      "payload": {
+        "experiment_id": "randomized-ranking-C",
+        "treatment": "new ranking",
+        "unit": "user_id",
+        "randomization": "randomized",
+        "primary_metric": "issued",
+        "guardrails": [
+          "refund_rate",
+          "cancel_rate",
+          "privacy_policy"
+        ],
+        "stop_rule": "guardrail breach or final observation window",
+        "approval": "required"
+      },
+      "evidence_refs": [
+        "ev_8c8a89050c8b"
+      ],
+      "created_at": "2026-08-11T15:05:29.285011+00:00"
+    },
+    {
+      "artifact_id": "art_e6b8e938eb82",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "artifact_type": "MonitoringReport",
+      "schema_version": "1.0",
+      "producer": "monitor_review",
+      "payload": {
+        "estimator": "difference in means (ITT)",
+        "confidence": 0.95,
+        "issued": {
+          "control_mean": 0.033898,
+          "treatment_mean": 0.07541,
+          "estimate": 0.041512,
+          "standard_error": 0.013042,
+          "ci95": [
+            0.01595,
+            0.067074
+          ]
+        },
+        "net_premium": {
+          "control_mean": 32.033322,
+          "treatment_mean": 69.788557,
+          "estimate": 37.755235,
+          "standard_error": 12.171586,
+          "ci95": [
+            13.898926,
+            61.611545
+          ]
+        }
+      },
+      "evidence_refs": [
+        "ev_dad17e87694f"
+      ],
+      "created_at": "2026-08-11T15:05:29.290620+00:00"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ev_7dce01f2be47",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "kind": "metric-contract",
+      "label": "versioned insurance metric contract",
+      "source": "metric_contract",
+      "content": {
+        "metric_id": "insurance-premium-v2",
+        "version": "2026-07-31",
+        "identity": "user_id",
+        "funnel": [
+          "active",
+          "quoted",
+          "applied",
+          "paid",
+          "issued"
+        ],
+        "outcomes": [
+          "issued",
+          "net_premium"
+        ],
+        "treatment": "treatment",
+        "premium": "net premium after refund and cancellation",
+        "window": "7d",
+        "owner": "growth-analytics"
+      },
+      "content_digest": "f47f20217866aec0ea4115eed50075569a128d5af3c49d1745ad46ca3d817cba",
+      "created_at": "2026-08-11T15:05:29.279742+00:00"
+    },
+    {
+      "evidence_id": "ev_13574c41e245",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "kind": "data-quality",
+      "label": "schema and data quality report",
+      "source": "data_acquisition",
+      "content": {
+        "freshness": "simulated-current",
+        "privacy": "aggregated-demo-only",
+        "missing_row_fields": [],
+        "missing_experiment_fields": [],
+        "null_counts": {
+          "active": 0,
+          "applied": 0,
+          "issued": 0,
+          "net_premium": 0,
+          "paid": 0,
+          "quoted": 0,
+          "treatment": 0,
+          "user_id": 0
+        },
+        "duplicate_count": 0,
+        "duplicate_rate": 0.0,
+        "window_closed": true,
+        "outcome_complete": true,
+        "missing_fields": []
+      },
+      "content_digest": "c444ebea24c9fa1faceba0bfcf7a014e477f556db3a92147c280a01988492dc2",
+      "created_at": "2026-08-11T15:05:29.281663+00:00"
+    },
+    {
+      "evidence_id": "ev_fe29ff2875a4",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "kind": "feature-set",
+      "label": "deterministic funnel, segment and treatment features",
+      "source": "diagnostic",
+      "content": {
+        "schema_version": "1.0",
+        "row_count": 1200,
+        "observation_unit": "user_id",
+        "available_fields": [
+          "active",
+          "applied",
+          "assignment",
+          "cancel",
+          "channel",
+          "channel_quality",
+          "gross_premium",
+          "issued",
+          "net_premium",
+          "paid",
+          "product_mix",
+          "quoted",
+          "refund",
+          "season",
+          "treatment",
+          "user_id",
+          "user_quality"
+        ],
+        "funnel": {
+          "active": 1200,
+          "quoted": 493,
+          "applied": 212,
+          "paid": 118,
+          "issued": 66,
+          "net_premium": 61470.68,
+          "quote_rate": 0.410833,
+          "apply_rate": 0.43002,
+          "paid_rate": 0.556604,
+          "issue_rate": 0.559322,
+          "issued_user_rate": 0.055,
+          "avg_premium": 931.37
+        },
+        "segments": {
+          "channel_distribution": {
+            "new": 348,
+            "owned": 852
+          },
+          "assignment_distribution": {
+            "randomized": 1200
+          },
+          "average_product_mix": 0.409175
+        },
+        "treatment": {
+          "column": "treatment",
+          "group_counts": {
+            "0": 590,
+            "1": 610
+          },
+          "group_outcomes": {
+            "0": {
+              "count": 590.0,
+              "issued": 0.033898,
+              "net_premium": 32.033322
+            },
+            "1": {
+              "count": 610.0,
+              "issued": 0.07541,
+              "net_premium": 69.788557
+            }
+          }
+        },
+        "data_quality": {
+          "missing_row_fields": [],
+          "missing_experiment_fields": [],
+          "null_counts": {
+            "active": 0,
+            "applied": 0,
+            "issued": 0,
+            "net_premium": 0,
+            "paid": 0,
+            "quoted": 0,
+            "treatment": 0,
+            "user_id": 0
+          },
+          "duplicate_count": 0,
+          "duplicate_rate": 0.0,
+          "window_closed": true,
+          "outcome_complete": true
+        }
+      },
+      "content_digest": "f74aa04e1c9fb23a15fe5576c63940b62552662e8d49b3cd445d4db256c93208",
+      "created_at": "2026-08-11T15:05:29.282598+00:00"
+    },
+    {
+      "evidence_id": "ev_6624a0b51b76",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "kind": "analysis",
+      "label": "fixed-order log-chain decomposition",
+      "source": "diagnostic",
+      "content": {
+        "method": "fixed-order log-chain decomposition",
+        "baseline_premium": 51502.87,
+        "current_premium": 61470.68,
+        "total_log_change": 0.176915,
+        "interaction_policy": "multiplicative interaction is represented in log scale; no causal claim",
+        "unexplained_residual": 0.0,
+        "factors": [
+          {
+            "key": "active",
+            "label": "活跃流量",
+            "before": 1200,
+            "after": 1200,
+            "log_change": 0.0,
+            "share": 0.0
+          },
+          {
+            "key": "quote_rate",
+            "label": "报价率",
+            "before": 0.395833,
+            "after": 0.410833,
+            "log_change": 0.037194,
+            "share": 0.210237
+          },
+          {
+            "key": "apply_rate",
+            "label": "投保率",
+            "before": 0.418947,
+            "after": 0.43002,
+            "log_change": 0.026087,
+            "share": 0.147455
+          },
+          {
+            "key": "paid_rate",
+            "label": "支付率",
+            "before": 0.497487,
+            "after": 0.556604,
+            "log_change": 0.112285,
+            "share": 0.634684
+          },
+          {
+            "key": "issue_rate",
+            "label": "出单率",
+            "before": 0.555556,
+            "after": 0.559322,
+            "log_change": 0.006756,
+            "share": 0.038188
+          },
+          {
+            "key": "avg_premium",
+            "label": "件均保费",
+            "before": 936.42,
+            "after": 931.37,
+            "log_change": -0.005407,
+            "share": -0.030563
+          }
+        ]
+      },
+      "content_digest": "5e06f53273f9c550da6578fc2954a96858a270ccb88234593b3fd399545d3175",
+      "created_at": "2026-08-11T15:05:29.283969+00:00"
+    },
+    {
+      "evidence_id": "ev_30f5861b9ecc",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "kind": "causal-readiness",
+      "label": "metadata-derived five-layer readiness check",
+      "source": "causal_evidence",
+      "content": {
+        "outcome": "CAUSAL_READY",
+        "estimand": "ITT on issued and net_premium",
+        "observation_unit": "user_id",
+        "attribution_window": "7d",
+        "identification_strategy": "randomized",
+        "assumptions": [
+          "stable metric contract",
+          "no cross-unit interference",
+          "complete outcome window"
+        ],
+        "diagnostics": {
+          "sample_size": 1200,
+          "group_counts": {
+            "0": 590,
+            "1": 610
+          },
+          "contract_missing_fields": [],
+          "missing_evidence": [],
+          "design_checks": {
+            "randomized_assignment": true,
+            "assignment_verified": true,
+            "trusted_assignment_provenance": true,
+            "both_arms_present": true,
+            "randomization_unit_matches": true
+          },
+          "power": {
+            "method": "two-arm binary normal approximation",
+            "alpha": 0.05,
+            "target_power": 0.8,
+            "minimum_detectable_effect": 0.05,
+            "baseline_rate": 0.033898,
+            "required_per_arm": 206,
+            "actual_min_arm": 590,
+            "passed": true
+          },
+          "governance_checks": {
+            "approval_required": true,
+            "guardrails_defined": true,
+            "stop_rule_defined": true,
+            "production_auto_action_disabled": true
+          }
+        },
+        "gates": [
+          {
+            "name": "semantic",
+            "passed": true,
+            "reason_code": "SEMANTIC_DEFINED"
+          },
+          {
+            "name": "data",
+            "passed": true,
+            "reason_code": "DATA_COMPLETE"
+          },
+          {
+            "name": "design",
+            "passed": true,
+            "reason_code": "RANDOM_ASSIGNMENT_VERIFIED"
+          },
+          {
+            "name": "statistics",
+            "passed": true,
+            "reason_code": "POWER_SCREEN_PASS"
+          },
+          {
+            "name": "governance",
+            "passed": true,
+            "reason_code": "GOVERNANCE_READY"
+          }
+        ],
+        "evidence_level": "L3",
+        "reason_codes": [],
+        "allowed_claim_type": "causal_effect"
+      },
+      "content_digest": "46e30e09fea921648b638b12744ccfe9b463f00316295b3b4bf3a282f6675599",
+      "created_at": "2026-08-11T15:05:29.284956+00:00"
+    },
+    {
+      "evidence_id": "ev_62a932a846ae",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "kind": "claim-ledger",
+      "label": "structured claim and prohibited actions",
+      "source": "causal_evidence",
+      "content": {
+        "claim_id": "claim-001",
+        "claim_type": "causal_effect",
+        "evidence_level": "L3",
+        "allowed_verbs": [
+          "估计",
+          "在本实验中提升"
+        ],
+        "prohibited_actions": [
+          "未经审批上线排序"
+        ],
+        "uncertainty": "95% CI attached",
+        "statement": "经验证的随机分配满足因果门禁，可报告本实验中的 ITT 估计与置信区间。"
+      },
+      "content_digest": "a0b2c0340e2c102a6307ecde661ee6f6217df17a2d05c677befd081ebe060dc8",
+      "created_at": "2026-08-11T15:05:29.284983+00:00"
+    },
+    {
+      "evidence_id": "ev_8c8a89050c8b",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "kind": "experiment",
+      "label": "bounded experiment draft",
+      "source": "experiment_planner",
+      "content": {
+        "experiment_id": "randomized-ranking-C",
+        "treatment": "new ranking",
+        "unit": "user_id",
+        "randomization": "randomized",
+        "primary_metric": "issued",
+        "guardrails": [
+          "refund_rate",
+          "cancel_rate",
+          "privacy_policy"
+        ],
+        "stop_rule": "guardrail breach or final observation window",
+        "approval": "required"
+      },
+      "content_digest": "96f3d4f710cdd1954aaea6a7a7c2e86cfd4afbb495bc529a26b76cea033ebd27",
+      "created_at": "2026-08-11T15:05:29.285003+00:00"
+    },
+    {
+      "evidence_id": "ev_dad17e87694f",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "kind": "monitoring",
+      "label": "ITT estimate and confidence intervals",
+      "source": "monitor_review",
+      "content": {
+        "estimator": "difference in means (ITT)",
+        "confidence": 0.95,
+        "issued": {
+          "control_mean": 0.033898,
+          "treatment_mean": 0.07541,
+          "estimate": 0.041512,
+          "standard_error": 0.013042,
+          "ci95": [
+            0.01595,
+            0.067074
+          ]
+        },
+        "net_premium": {
+          "control_mean": 32.033322,
+          "treatment_mean": 69.788557,
+          "estimate": 37.755235,
+          "standard_error": 12.171586,
+          "ci95": [
+            13.898926,
+            61.611545
+          ]
+        }
+      },
+      "content_digest": "03805c21171378a379b05516d9ab97c7f60ed3e3760e4a8e8d38cd7465858f1b",
+      "created_at": "2026-08-11T15:05:29.290586+00:00"
+    }
+  ],
+  "approvals": [
+    {
+      "approval_id": "approval_2c79b6a7e66b",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "requested_by": "experiment_planner",
+      "scope": {
+        "experiment_id": "randomized-ranking-C",
+        "scope": "synthetic dataset only"
+      },
+      "scope_digest": "ce60f74da01f89dbdadf236dcef88e6e17419b975a1711d54544d04cc9518f34",
+      "requested_state": "COMPLIANCE_REVIEWED",
+      "requested_state_version": 7,
+      "expected_state": null,
+      "status": "APPROVED",
+      "created_at": "2026-08-11T15:05:29.287342+00:00",
+      "reviewer": "human-reviewer",
+      "note": "synthetic demo only",
+      "decision_evidence": {
+        "provider": "local-conformance",
+        "reviewer_identity": "human-reviewer",
+        "scope_digest": "ce60f74da01f89dbdadf236dcef88e6e17419b975a1711d54544d04cc9518f34",
+        "event_id": "approval_evt_26a7551d39ec"
+      },
+      "decided_at": "2026-08-11T15:05:29.288625+00:00"
+    }
+  ],
+  "trace": [
+    {
+      "event_id": "evt_c57586d1851b",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "TASK_CREATED",
+      "actor": "control-plane",
+      "payload": {
+        "domain": "insurance-growth-attribution",
+        "input_digest": "f98e0b8c39caf8a668b53f74ce084ffa1178cc56bf5bf5f2d75e0784278347fc"
+      },
+      "state_version": 0,
+      "created_at": "2026-08-11T15:05:29.261078+00:00"
+    },
+    {
+      "event_id": "evt_e9b1d073577c",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "EVIDENCE_RECORDED",
+      "actor": "metric_contract",
+      "payload": {
+        "evidence_id": "ev_7dce01f2be47",
+        "kind": "metric-contract",
+        "label": "versioned insurance metric contract",
+        "content_digest": "f47f20217866aec0ea4115eed50075569a128d5af3c49d1745ad46ca3d817cba"
+      },
+      "state_version": 0,
+      "created_at": "2026-08-11T15:05:29.279754+00:00"
+    },
+    {
+      "event_id": "evt_9a094f083a4d",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "STATE_TRANSITION",
+      "actor": "intent",
+      "payload": {
+        "from": "RECEIVED",
+        "to": "INTENT_PARSED",
+        "reason": "business question normalized",
+        "metadata": {
+          "evidence_ref": "ev_7dce01f2be47"
+        }
+      },
+      "state_version": 1,
+      "created_at": "2026-08-11T15:05:29.279763+00:00"
+    },
+    {
+      "event_id": "evt_10147369e2ea",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "ARTIFACT_PUBLISHED",
+      "actor": "intent",
+      "payload": {
+        "artifact_id": "art_c9181cfbe1f5",
+        "artifact_type": "AnalysisIntent",
+        "evidence_refs": [
+          "ev_7dce01f2be47"
+        ]
+      },
+      "state_version": 1,
+      "created_at": "2026-08-11T15:05:29.280779+00:00"
+    },
+    {
+      "event_id": "evt_768165c653e0",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "STATE_TRANSITION",
+      "actor": "metric_contract",
+      "payload": {
+        "from": "INTENT_PARSED",
+        "to": "METRIC_CONFIRMED",
+        "reason": "metric version accepted",
+        "metadata": {}
+      },
+      "state_version": 2,
+      "created_at": "2026-08-11T15:05:29.280790+00:00"
+    },
+    {
+      "event_id": "evt_6d06092af8d9",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "ARTIFACT_PUBLISHED",
+      "actor": "metric_contract",
+      "payload": {
+        "artifact_id": "art_21bca8301569",
+        "artifact_type": "MetricContract",
+        "evidence_refs": [
+          "ev_7dce01f2be47"
+        ]
+      },
+      "state_version": 2,
+      "created_at": "2026-08-11T15:05:29.281604+00:00"
+    },
+    {
+      "event_id": "evt_de76684150c9",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "EVIDENCE_RECORDED",
+      "actor": "data_acquisition",
+      "payload": {
+        "evidence_id": "ev_13574c41e245",
+        "kind": "data-quality",
+        "label": "schema and data quality report",
+        "content_digest": "c444ebea24c9fa1faceba0bfcf7a014e477f556db3a92147c280a01988492dc2"
+      },
+      "state_version": 2,
+      "created_at": "2026-08-11T15:05:29.281678+00:00"
+    },
+    {
+      "event_id": "evt_f40442a1e21a",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "STATE_TRANSITION",
+      "actor": "data_acquisition",
+      "payload": {
+        "from": "METRIC_CONFIRMED",
+        "to": "DATA_VALIDATED",
+        "reason": "read-only dataset passed schema checks",
+        "metadata": {
+          "evidence_ref": "ev_13574c41e245"
+        }
+      },
+      "state_version": 3,
+      "created_at": "2026-08-11T15:05:29.281711+00:00"
+    },
+    {
+      "event_id": "evt_4d395e7be0e8",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "ARTIFACT_PUBLISHED",
+      "actor": "data_acquisition",
+      "payload": {
+        "artifact_id": "art_1b4b596b0957",
+        "artifact_type": "DataQualityReport",
+        "evidence_refs": [
+          "ev_13574c41e245"
+        ]
+      },
+      "state_version": 3,
+      "created_at": "2026-08-11T15:05:29.282559+00:00"
+    },
+    {
+      "event_id": "evt_8225cd4537ad",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "EVIDENCE_RECORDED",
+      "actor": "diagnostic",
+      "payload": {
+        "evidence_id": "ev_fe29ff2875a4",
+        "kind": "feature-set",
+        "label": "deterministic funnel, segment and treatment features",
+        "content_digest": "f74aa04e1c9fb23a15fe5576c63940b62552662e8d49b3cd445d4db256c93208"
+      },
+      "state_version": 3,
+      "created_at": "2026-08-11T15:05:29.282603+00:00"
+    },
+    {
+      "event_id": "evt_6e47c5feb05d",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "ARTIFACT_PUBLISHED",
+      "actor": "diagnostic",
+      "payload": {
+        "artifact_id": "art_d9b00193ba28",
+        "artifact_type": "FeatureSet",
+        "evidence_refs": [
+          "ev_13574c41e245",
+          "ev_fe29ff2875a4"
+        ]
+      },
+      "state_version": 3,
+      "created_at": "2026-08-11T15:05:29.282641+00:00"
+    },
+    {
+      "event_id": "evt_3308f8ae18ee",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "STATE_TRANSITION",
+      "actor": "diagnostic",
+      "payload": {
+        "from": "DATA_VALIDATED",
+        "to": "DIAGNOSING",
+        "reason": "funnel and product structure decomposition is available",
+        "metadata": {}
+      },
+      "state_version": 4,
+      "created_at": "2026-08-11T15:05:29.282650+00:00"
+    },
+    {
+      "event_id": "evt_13c0c8ff2e6a",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "EVIDENCE_RECORDED",
+      "actor": "diagnostic",
+      "payload": {
+        "evidence_id": "ev_6624a0b51b76",
+        "kind": "analysis",
+        "label": "fixed-order log-chain decomposition",
+        "content_digest": "5e06f53273f9c550da6578fc2954a96858a270ccb88234593b3fd399545d3175"
+      },
+      "state_version": 4,
+      "created_at": "2026-08-11T15:05:29.283976+00:00"
+    },
+    {
+      "event_id": "evt_b3eed6553fe7",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "ARTIFACT_PUBLISHED",
+      "actor": "diagnostic",
+      "payload": {
+        "artifact_id": "art_bdec8568a41c",
+        "artifact_type": "AttributionCandidateSet",
+        "evidence_refs": [
+          "ev_fe29ff2875a4",
+          "ev_6624a0b51b76"
+        ]
+      },
+      "state_version": 4,
+      "created_at": "2026-08-11T15:05:29.283983+00:00"
+    },
+    {
+      "event_id": "evt_20f8d0bd9e1f",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "STATE_TRANSITION",
+      "actor": "causal_evidence",
+      "payload": {
+        "from": "DIAGNOSING",
+        "to": "EVIDENCE_GRADED",
+        "reason": "candidate causes are separated from causal claims",
+        "metadata": {}
+      },
+      "state_version": 5,
+      "created_at": "2026-08-11T15:05:29.283989+00:00"
+    },
+    {
+      "event_id": "evt_9de90f866dcb",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "EVIDENCE_RECORDED",
+      "actor": "causal_evidence",
+      "payload": {
+        "evidence_id": "ev_30f5861b9ecc",
+        "kind": "causal-readiness",
+        "label": "metadata-derived five-layer readiness check",
+        "content_digest": "46e30e09fea921648b638b12744ccfe9b463f00316295b3b4bf3a282f6675599"
+      },
+      "state_version": 5,
+      "created_at": "2026-08-11T15:05:29.284962+00:00"
+    },
+    {
+      "event_id": "evt_f9a42a72283d",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "ARTIFACT_PUBLISHED",
+      "actor": "causal_evidence",
+      "payload": {
+        "artifact_id": "art_45464eccbc6e",
+        "artifact_type": "EvidenceReport",
+        "evidence_refs": [
+          "ev_13574c41e245",
+          "ev_fe29ff2875a4",
+          "ev_30f5861b9ecc"
+        ]
+      },
+      "state_version": 5,
+      "created_at": "2026-08-11T15:05:29.284970+00:00"
+    },
+    {
+      "event_id": "evt_6cc3ac996597",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "EVIDENCE_RECORDED",
+      "actor": "causal_evidence",
+      "payload": {
+        "evidence_id": "ev_62a932a846ae",
+        "kind": "claim-ledger",
+        "label": "structured claim and prohibited actions",
+        "content_digest": "a0b2c0340e2c102a6307ecde661ee6f6217df17a2d05c677befd081ebe060dc8"
+      },
+      "state_version": 5,
+      "created_at": "2026-08-11T15:05:29.284987+00:00"
+    },
+    {
+      "event_id": "evt_47b66aa65e93",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "ARTIFACT_PUBLISHED",
+      "actor": "causal_evidence",
+      "payload": {
+        "artifact_id": "art_e3524654a58c",
+        "artifact_type": "ClaimLedger",
+        "evidence_refs": [
+          "ev_62a932a846ae"
+        ]
+      },
+      "state_version": 5,
+      "created_at": "2026-08-11T15:05:29.284994+00:00"
+    },
+    {
+      "event_id": "evt_84c07866984d",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "EVIDENCE_RECORDED",
+      "actor": "experiment_planner",
+      "payload": {
+        "evidence_id": "ev_8c8a89050c8b",
+        "kind": "experiment",
+        "label": "bounded experiment draft",
+        "content_digest": "96f3d4f710cdd1954aaea6a7a7c2e86cfd4afbb495bc529a26b76cea033ebd27"
+      },
+      "state_version": 5,
+      "created_at": "2026-08-11T15:05:29.285007+00:00"
+    },
+    {
+      "event_id": "evt_b860be717893",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "ARTIFACT_PUBLISHED",
+      "actor": "experiment_planner",
+      "payload": {
+        "artifact_id": "art_b7b0f0711267",
+        "artifact_type": "ExperimentSpec",
+        "evidence_refs": [
+          "ev_8c8a89050c8b"
+        ]
+      },
+      "state_version": 5,
+      "created_at": "2026-08-11T15:05:29.285014+00:00"
+    },
+    {
+      "event_id": "evt_43469d37634f",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "STATE_TRANSITION",
+      "actor": "experiment_planner",
+      "payload": {
+        "from": "EVIDENCE_GRADED",
+        "to": "ACTION_DRAFTED",
+        "reason": "causal-ready evidence permits an experiment draft",
+        "metadata": {}
+      },
+      "state_version": 6,
+      "created_at": "2026-08-11T15:05:29.285020+00:00"
+    },
+    {
+      "event_id": "evt_8dcacbd3e8fc",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "STATE_TRANSITION",
+      "actor": "causal_evidence",
+      "payload": {
+        "from": "ACTION_DRAFTED",
+        "to": "COMPLIANCE_REVIEWED",
+        "reason": "claim and privacy guardrails pass",
+        "metadata": {}
+      },
+      "state_version": 7,
+      "created_at": "2026-08-11T15:05:29.286231+00:00"
+    },
+    {
+      "event_id": "evt_af305792f964",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "APPROVAL_REQUESTED",
+      "actor": "experiment_planner",
+      "payload": {
+        "approval_id": "approval_2c79b6a7e66b",
+        "scope": {
+          "experiment_id": "randomized-ranking-C",
+          "scope": "synthetic dataset only"
+        },
+        "scope_digest": "ce60f74da01f89dbdadf236dcef88e6e17419b975a1711d54544d04cc9518f34",
+        "expected_state": null
+      },
+      "state_version": 7,
+      "created_at": "2026-08-11T15:05:29.287347+00:00"
+    },
+    {
+      "event_id": "evt_73f633926812",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "STATE_TRANSITION",
+      "actor": "experiment_planner",
+      "payload": {
+        "from": "COMPLIANCE_REVIEWED",
+        "to": "AWAITING_APPROVAL",
+        "reason": "experiment requires explicit human approval",
+        "metadata": {
+          "approval_id": "approval_2c79b6a7e66b"
+        }
+      },
+      "state_version": 8,
+      "created_at": "2026-08-11T15:05:29.287354+00:00"
+    },
+    {
+      "event_id": "evt_16cac2cc8553",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "APPROVAL_DECIDED",
+      "actor": "human-reviewer",
+      "payload": {
+        "approval_id": "approval_2c79b6a7e66b",
+        "decision": "APPROVED",
+        "note": "synthetic demo only",
+        "scope_digest": "ce60f74da01f89dbdadf236dcef88e6e17419b975a1711d54544d04cc9518f34",
+        "decision_evidence": {
+          "provider": "local-conformance",
+          "reviewer_identity": "human-reviewer",
+          "scope_digest": "ce60f74da01f89dbdadf236dcef88e6e17419b975a1711d54544d04cc9518f34",
+          "event_id": "approval_evt_26a7551d39ec"
+        }
+      },
+      "state_version": 8,
+      "created_at": "2026-08-11T15:05:29.288631+00:00"
+    },
+    {
+      "event_id": "evt_c00aec79b9b4",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "STATE_TRANSITION",
+      "actor": "monitor_review",
+      "payload": {
+        "from": "AWAITING_APPROVAL",
+        "to": "MONITORING",
+        "reason": "approved experiment enters monitoring",
+        "metadata": {}
+      },
+      "state_version": 9,
+      "created_at": "2026-08-11T15:05:29.288638+00:00"
+    },
+    {
+      "event_id": "evt_5c94d1b29612",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "EVIDENCE_RECORDED",
+      "actor": "monitor_review",
+      "payload": {
+        "evidence_id": "ev_dad17e87694f",
+        "kind": "monitoring",
+        "label": "ITT estimate and confidence intervals",
+        "content_digest": "03805c21171378a379b05516d9ab97c7f60ed3e3760e4a8e8d38cd7465858f1b"
+      },
+      "state_version": 9,
+      "created_at": "2026-08-11T15:05:29.290596+00:00"
+    },
+    {
+      "event_id": "evt_1649a0779155",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "ARTIFACT_PUBLISHED",
+      "actor": "monitor_review",
+      "payload": {
+        "artifact_id": "art_e6b8e938eb82",
+        "artifact_type": "MonitoringReport",
+        "evidence_refs": [
+          "ev_dad17e87694f"
+        ]
+      },
+      "state_version": 9,
+      "created_at": "2026-08-11T15:05:29.290630+00:00"
+    },
+    {
+      "event_id": "evt_8060c77c00c1",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "STATE_TRANSITION",
+      "actor": "monitor_review",
+      "payload": {
+        "from": "MONITORING",
+        "to": "REVIEWED",
+        "reason": "monitoring report completed",
+        "metadata": {}
+      },
+      "state_version": 10,
+      "created_at": "2026-08-11T15:05:29.290640+00:00"
+    },
+    {
+      "event_id": "evt_22e19c982e73",
+      "task_id": "T2-case-C",
+      "trace_id": "trace_c40ff0d0a7b8",
+      "event_type": "STATE_TRANSITION",
+      "actor": "monitor_review",
+      "payload": {
+        "from": "REVIEWED",
+        "to": "CLOSED",
+        "reason": "evidence pack finalized",
+        "metadata": {}
+      },
+      "state_version": 11,
+      "created_at": "2026-08-11T15:05:29.292353+00:00"
+    }
+  ],
+  "topologies": [
+    {
+      "team_id": "insurance-growth-team",
+      "control_plane": "AgentTeamsControlPlane",
+      "nodes": [
+        "intent",
+        "metric_contract",
+        "data_acquisition",
+        "diagnostic",
+        "causal_evidence",
+        "experiment_planner",
+        "monitor_review"
+      ],
+      "edges": [
+        {
+          "from": "intent",
+          "to": "metric_contract",
+          "mode": "sequential"
+        },
+        {
+          "from": "metric_contract",
+          "to": "data_acquisition",
+          "mode": "contract-gated"
+        },
+        {
+          "from": "data_acquisition",
+          "to": "diagnostic",
+          "mode": "read-only"
+        },
+        {
+          "from": "diagnostic",
+          "to": "causal_evidence",
+          "mode": "fan-in",
+          "input": "funnel+mix+segment artifacts"
+        },
+        {
+          "from": "causal_evidence",
+          "to": "experiment_planner",
+          "mode": "evidence-gated"
+        },
+        {
+          "from": "experiment_planner",
+          "to": "monitor_review",
+          "mode": "approval-gated"
+        }
+      ],
+      "execution_semantics": {
+        "fan_out": [
+          "diagnostic -> funnel, product_mix, segment, event_alignment skills"
+        ],
+        "fan_in": "causal_evidence consumes typed diagnostic artifacts",
+        "conflict_policy": "ClaimPolicyGuard is deterministic and can block model output"
+      }
+    }
+  ],
+  "track": "track2",
+  "case": "C",
+  "agents": [
+    "intent",
+    "metric_contract",
+    "data_acquisition",
+    "diagnostic",
+    "causal_evidence",
+    "experiment_planner",
+    "monitor_review"
+  ],
+  "skills": [
+    "MetricContractResolver",
+    "SchemaProfiler",
+    "DataQualityGate",
+    "ReadOnlyQueryPlanner",
+    "FunnelDecomposer",
+    "ProductMixDecomposer",
+    "SegmentProfiler",
+    "EventAligner",
+    "CausalReadinessCheck",
+    "ExperimentPlanner",
+    "ExperimentMonitor",
+    "ClaimPolicyGuard",
+    "WeeklyBriefComposer"
+  ],
+  "metric_contract": {
+    "metric_id": "insurance-premium-v2",
+    "version": "2026-07-31",
+    "identity": "user_id",
+    "funnel": [
+      "active",
+      "quoted",
+      "applied",
+      "paid",
+      "issued"
+    ],
+    "outcomes": [
+      "issued",
+      "net_premium"
+    ],
+    "treatment": "treatment",
+    "premium": "net premium after refund and cancellation",
+    "window": "7d",
+    "owner": "growth-analytics"
+  },
+  "experiment_metadata": {
+    "treatment_column": "treatment",
+    "window_closed": true,
+    "outcome_complete": true,
+    "minimum_detectable_effect": 0.05,
+    "alpha": 0.05,
+    "target_power": 0.8,
+    "approval_required": true,
+    "guardrails": [
+      "refund_rate",
+      "cancel_rate",
+      "privacy_policy"
+    ],
+    "stop_rule": "guardrail breach or final observation window",
+    "production_auto_action": false,
+    "experiment_id": "randomized-ranking-C",
+    "activity_config": "ranking-v2-randomized",
+    "assignment_method": "randomized",
+    "assignment_provenance": "experiment_platform",
+    "assignment_verified": true,
+    "randomization_unit": "user_id",
+    "control_group": 0,
+    "treatment_group": 1
+  },
+  "feature_set": {
+    "schema_version": "1.0",
+    "row_count": 1200,
+    "observation_unit": "user_id",
+    "available_fields": [
+      "active",
+      "applied",
+      "assignment",
+      "cancel",
+      "channel",
+      "channel_quality",
+      "gross_premium",
+      "issued",
+      "net_premium",
+      "paid",
+      "product_mix",
+      "quoted",
+      "refund",
+      "season",
+      "treatment",
+      "user_id",
+      "user_quality"
+    ],
+    "funnel": {
+      "active": 1200,
+      "quoted": 493,
+      "applied": 212,
+      "paid": 118,
+      "issued": 66,
+      "net_premium": 61470.68,
+      "quote_rate": 0.410833,
+      "apply_rate": 0.43002,
+      "paid_rate": 0.556604,
+      "issue_rate": 0.559322,
+      "issued_user_rate": 0.055,
+      "avg_premium": 931.37
+    },
+    "segments": {
+      "channel_distribution": {
+        "new": 348,
+        "owned": 852
+      },
+      "assignment_distribution": {
+        "randomized": 1200
+      },
+      "average_product_mix": 0.409175
+    },
+    "treatment": {
+      "column": "treatment",
+      "group_counts": {
+        "0": 590,
+        "1": 610
+      },
+      "group_outcomes": {
+        "0": {
+          "count": 590.0,
+          "issued": 0.033898,
+          "net_premium": 32.033322
+        },
+        "1": {
+          "count": 610.0,
+          "issued": 0.07541,
+          "net_premium": 69.788557
+        }
+      }
+    },
+    "data_quality": {
+      "missing_row_fields": [],
+      "missing_experiment_fields": [],
+      "null_counts": {
+        "active": 0,
+        "applied": 0,
+        "issued": 0,
+        "net_premium": 0,
+        "paid": 0,
+        "quoted": 0,
+        "treatment": 0,
+        "user_id": 0
+      },
+      "duplicate_count": 0,
+      "duplicate_rate": 0.0,
+      "window_closed": true,
+      "outcome_complete": true
+    }
+  },
+  "metrics": {
+    "baseline": {
+      "active": 1200,
+      "quoted": 475,
+      "applied": 199,
+      "paid": 99,
+      "issued": 55,
+      "net_premium": 51502.87,
+      "quote_rate": 0.395833,
+      "apply_rate": 0.418947,
+      "paid_rate": 0.497487,
+      "issue_rate": 0.555556,
+      "issued_user_rate": 0.045833,
+      "avg_premium": 936.42
+    },
+    "current": {
+      "active": 1200,
+      "quoted": 493,
+      "applied": 212,
+      "paid": 118,
+      "issued": 66,
+      "net_premium": 61470.68,
+      "quote_rate": 0.410833,
+      "apply_rate": 0.43002,
+      "paid_rate": 0.556604,
+      "issue_rate": 0.559322,
+      "issued_user_rate": 0.055,
+      "avg_premium": 931.37
+    }
+  },
+  "decomposition": {
+    "method": "fixed-order log-chain decomposition",
+    "baseline_premium": 51502.87,
+    "current_premium": 61470.68,
+    "total_log_change": 0.176915,
+    "interaction_policy": "multiplicative interaction is represented in log scale; no causal claim",
+    "unexplained_residual": 0.0,
+    "factors": [
+      {
+        "key": "active",
+        "label": "活跃流量",
+        "before": 1200,
+        "after": 1200,
+        "log_change": 0.0,
+        "share": 0.0
+      },
+      {
+        "key": "quote_rate",
+        "label": "报价率",
+        "before": 0.395833,
+        "after": 0.410833,
+        "log_change": 0.037194,
+        "share": 0.210237
+      },
+      {
+        "key": "apply_rate",
+        "label": "投保率",
+        "before": 0.418947,
+        "after": 0.43002,
+        "log_change": 0.026087,
+        "share": 0.147455
+      },
+      {
+        "key": "paid_rate",
+        "label": "支付率",
+        "before": 0.497487,
+        "after": 0.556604,
+        "log_change": 0.112285,
+        "share": 0.634684
+      },
+      {
+        "key": "issue_rate",
+        "label": "出单率",
+        "before": 0.555556,
+        "after": 0.559322,
+        "log_change": 0.006756,
+        "share": 0.038188
+      },
+      {
+        "key": "avg_premium",
+        "label": "件均保费",
+        "before": 936.42,
+        "after": 931.37,
+        "log_change": -0.005407,
+        "share": -0.030563
+      }
+    ]
+  },
+  "causal_readiness": {
+    "outcome": "CAUSAL_READY",
+    "estimand": "ITT on issued and net_premium",
+    "observation_unit": "user_id",
+    "attribution_window": "7d",
+    "identification_strategy": "randomized",
+    "assumptions": [
+      "stable metric contract",
+      "no cross-unit interference",
+      "complete outcome window"
+    ],
+    "diagnostics": {
+      "sample_size": 1200,
+      "group_counts": {
+        "0": 590,
+        "1": 610
+      },
+      "contract_missing_fields": [],
+      "missing_evidence": [],
+      "design_checks": {
+        "randomized_assignment": true,
+        "assignment_verified": true,
+        "trusted_assignment_provenance": true,
+        "both_arms_present": true,
+        "randomization_unit_matches": true
+      },
+      "power": {
+        "method": "two-arm binary normal approximation",
+        "alpha": 0.05,
+        "target_power": 0.8,
+        "minimum_detectable_effect": 0.05,
+        "baseline_rate": 0.033898,
+        "required_per_arm": 206,
+        "actual_min_arm": 590,
+        "passed": true
+      },
+      "governance_checks": {
+        "approval_required": true,
+        "guardrails_defined": true,
+        "stop_rule_defined": true,
+        "production_auto_action_disabled": true
+      }
+    },
+    "gates": [
+      {
+        "name": "semantic",
+        "passed": true,
+        "reason_code": "SEMANTIC_DEFINED"
+      },
+      {
+        "name": "data",
+        "passed": true,
+        "reason_code": "DATA_COMPLETE"
+      },
+      {
+        "name": "design",
+        "passed": true,
+        "reason_code": "RANDOM_ASSIGNMENT_VERIFIED"
+      },
+      {
+        "name": "statistics",
+        "passed": true,
+        "reason_code": "POWER_SCREEN_PASS"
+      },
+      {
+        "name": "governance",
+        "passed": true,
+        "reason_code": "GOVERNANCE_READY"
+      }
+    ],
+    "evidence_level": "L3",
+    "reason_codes": [],
+    "allowed_claim_type": "causal_effect"
+  },
+  "claim": {
+    "claim_id": "claim-001",
+    "claim_type": "causal_effect",
+    "evidence_level": "L3",
+    "allowed_verbs": [
+      "估计",
+      "在本实验中提升"
+    ],
+    "prohibited_actions": [
+      "未经审批上线排序"
+    ],
+    "uncertainty": "95% CI attached",
+    "statement": "经验证的随机分配满足因果门禁，可报告本实验中的 ITT 估计与置信区间。"
+  },
+  "sample": [
+    {
+      "user_id": "u0000",
+      "active": 1,
+      "season": -0.04,
+      "channel": "owned",
+      "channel_quality": -0.0922,
+      "user_quality": 0.2129,
+      "product_mix": 0.4984,
+      "treatment": 1,
+      "assignment": "randomized",
+      "quoted": 1,
+      "applied": 1,
+      "paid": 0,
+      "issued": 0,
+      "gross_premium": 0.0,
+      "refund": 0.0,
+      "cancel": 0.0,
+      "net_premium": 0.0
+    },
+    {
+      "user_id": "u0001",
+      "active": 1,
+      "season": -0.04,
+      "channel": "owned",
+      "channel_quality": -0.647,
+      "user_quality": -1.2299,
+      "product_mix": 0.3326,
+      "treatment": 0,
+      "assignment": "randomized",
+      "quoted": 0,
+      "applied": 0,
+      "paid": 0,
+      "issued": 0,
+      "gross_premium": 0.0,
+      "refund": 0.0,
+      "cancel": 0.0,
+      "net_premium": 0.0
+    },
+    {
+      "user_id": "u0002",
+      "active": 1,
+      "season": -0.04,
+      "channel": "owned",
+      "channel_quality": -0.0223,
+      "user_quality": -0.1351,
+      "product_mix": 0.3556,
+      "treatment": 1,
+      "assignment": "randomized",
+      "quoted": 1,
+      "applied": 1,
+      "paid": 1,
+      "issued": 0,
+      "gross_premium": 0.0,
+      "refund": 0.0,
+      "cancel": 0.0,
+      "net_premium": 0.0
+    }
+  ],
+  "truth": {
+    "case": "C",
+    "seed": 84,
+    "assignment": "randomized",
+    "estimand": "ATE/ITT on issued and net_premium under randomized assignment",
+    "treatment_effect_logit": 0.28,
+    "oracle_ate": {
+      "issued": 0.015,
+      "net_premium": 13.858433
+    }
+  },
+  "checkpoint": {
+    "state_version": 11,
+    "payload": {
+      "approvals": [
+        {
+          "approval_id": "approval_2c79b6a7e66b",
+          "created_at": "2026-08-11T15:05:29.287342+00:00",
+          "decided_at": "2026-08-11T15:05:29.288625+00:00",
+          "decision_evidence": {
+            "event_id": "approval_evt_26a7551d39ec",
+            "provider": "local-conformance",
+            "reviewer_identity": "human-reviewer",
+            "scope_digest": "ce60f74da01f89dbdadf236dcef88e6e17419b975a1711d54544d04cc9518f34"
+          },
+          "expected_state": null,
+          "note": "synthetic demo only",
+          "requested_by": "experiment_planner",
+          "requested_state": "COMPLIANCE_REVIEWED",
+          "requested_state_version": 7,
+          "reviewer": "human-reviewer",
+          "scope": {
+            "experiment_id": "randomized-ranking-C",
+            "scope": "synthetic dataset only"
+          },
+          "scope_digest": "ce60f74da01f89dbdadf236dcef88e6e17419b975a1711d54544d04cc9518f34",
+          "status": "APPROVED",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        }
+      ],
+      "artifacts": [
+        {
+          "artifact_id": "art_c9181cfbe1f5",
+          "artifact_type": "AnalysisIntent",
+          "created_at": "2026-08-11T15:05:29.280751+00:00",
+          "evidence_refs": [
+            "ev_7dce01f2be47"
+          ],
+          "payload": {
+            "question": "DAU rose while premium declined; explain what is known and what should be tested.",
+            "target": "premium growth and conversion",
+            "unit": "user_id"
+          },
+          "producer": "intent",
+          "schema_version": "1.0",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "artifact_id": "art_21bca8301569",
+          "artifact_type": "MetricContract",
+          "created_at": "2026-08-11T15:05:29.281596+00:00",
+          "evidence_refs": [
+            "ev_7dce01f2be47"
+          ],
+          "payload": {
+            "funnel": [
+              "active",
+              "quoted",
+              "applied",
+              "paid",
+              "issued"
+            ],
+            "identity": "user_id",
+            "metric_id": "insurance-premium-v2",
+            "outcomes": [
+              "issued",
+              "net_premium"
+            ],
+            "owner": "growth-analytics",
+            "premium": "net premium after refund and cancellation",
+            "treatment": "treatment",
+            "version": "2026-07-31",
+            "window": "7d"
+          },
+          "producer": "metric_contract",
+          "schema_version": "1.0",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "artifact_id": "art_1b4b596b0957",
+          "artifact_type": "DataQualityReport",
+          "created_at": "2026-08-11T15:05:29.282553+00:00",
+          "evidence_refs": [
+            "ev_13574c41e245"
+          ],
+          "payload": {
+            "duplicate_count": 0,
+            "duplicate_rate": 0.0,
+            "freshness": "simulated-current",
+            "missing_experiment_fields": [],
+            "missing_fields": [],
+            "missing_row_fields": [],
+            "null_counts": {
+              "active": 0,
+              "applied": 0,
+              "issued": 0,
+              "net_premium": 0,
+              "paid": 0,
+              "quoted": 0,
+              "treatment": 0,
+              "user_id": 0
+            },
+            "outcome_complete": true,
+            "privacy": "aggregated-demo-only",
+            "window_closed": true
+          },
+          "producer": "data_acquisition",
+          "schema_version": "1.0",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "artifact_id": "art_d9b00193ba28",
+          "artifact_type": "FeatureSet",
+          "created_at": "2026-08-11T15:05:29.282636+00:00",
+          "evidence_refs": [
+            "ev_13574c41e245",
+            "ev_fe29ff2875a4"
+          ],
+          "payload": {
+            "available_fields": [
+              "active",
+              "applied",
+              "assignment",
+              "cancel",
+              "channel",
+              "channel_quality",
+              "gross_premium",
+              "issued",
+              "net_premium",
+              "paid",
+              "product_mix",
+              "quoted",
+              "refund",
+              "season",
+              "treatment",
+              "user_id",
+              "user_quality"
+            ],
+            "data_quality": {
+              "duplicate_count": 0,
+              "duplicate_rate": 0.0,
+              "missing_experiment_fields": [],
+              "missing_row_fields": [],
+              "null_counts": {
+                "active": 0,
+                "applied": 0,
+                "issued": 0,
+                "net_premium": 0,
+                "paid": 0,
+                "quoted": 0,
+                "treatment": 0,
+                "user_id": 0
+              },
+              "outcome_complete": true,
+              "window_closed": true
+            },
+            "funnel": {
+              "active": 1200,
+              "applied": 212,
+              "apply_rate": 0.43002,
+              "avg_premium": 931.37,
+              "issue_rate": 0.559322,
+              "issued": 66,
+              "issued_user_rate": 0.055,
+              "net_premium": 61470.68,
+              "paid": 118,
+              "paid_rate": 0.556604,
+              "quote_rate": 0.410833,
+              "quoted": 493
+            },
+            "observation_unit": "user_id",
+            "row_count": 1200,
+            "schema_version": "1.0",
+            "segments": {
+              "assignment_distribution": {
+                "randomized": 1200
+              },
+              "average_product_mix": 0.409175,
+              "channel_distribution": {
+                "new": 348,
+                "owned": 852
+              }
+            },
+            "treatment": {
+              "column": "treatment",
+              "group_counts": {
+                "0": 590,
+                "1": 610
+              },
+              "group_outcomes": {
+                "0": {
+                  "count": 590.0,
+                  "issued": 0.033898,
+                  "net_premium": 32.033322
+                },
+                "1": {
+                  "count": 610.0,
+                  "issued": 0.07541,
+                  "net_premium": 69.788557
+                }
+              }
+            }
+          },
+          "producer": "diagnostic",
+          "schema_version": "1.0",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "artifact_id": "art_bdec8568a41c",
+          "artifact_type": "AttributionCandidateSet",
+          "created_at": "2026-08-11T15:05:29.283980+00:00",
+          "evidence_refs": [
+            "ev_fe29ff2875a4",
+            "ev_6624a0b51b76"
+          ],
+          "payload": {
+            "decomposition": {
+              "baseline_premium": 51502.87,
+              "current_premium": 61470.68,
+              "factors": [
+                {
+                  "after": 1200,
+                  "before": 1200,
+                  "key": "active",
+                  "label": "活跃流量",
+                  "log_change": 0.0,
+                  "share": 0.0
+                },
+                {
+                  "after": 0.410833,
+                  "before": 0.395833,
+                  "key": "quote_rate",
+                  "label": "报价率",
+                  "log_change": 0.037194,
+                  "share": 0.210237
+                },
+                {
+                  "after": 0.43002,
+                  "before": 0.418947,
+                  "key": "apply_rate",
+                  "label": "投保率",
+                  "log_change": 0.026087,
+                  "share": 0.147455
+                },
+                {
+                  "after": 0.556604,
+                  "before": 0.497487,
+                  "key": "paid_rate",
+                  "label": "支付率",
+                  "log_change": 0.112285,
+                  "share": 0.634684
+                },
+                {
+                  "after": 0.559322,
+                  "before": 0.555556,
+                  "key": "issue_rate",
+                  "label": "出单率",
+                  "log_change": 0.006756,
+                  "share": 0.038188
+                },
+                {
+                  "after": 931.37,
+                  "before": 936.42,
+                  "key": "avg_premium",
+                  "label": "件均保费",
+                  "log_change": -0.005407,
+                  "share": -0.030563
+                }
+              ],
+              "interaction_policy": "multiplicative interaction is represented in log scale; no causal claim",
+              "method": "fixed-order log-chain decomposition",
+              "total_log_change": 0.176915,
+              "unexplained_residual": 0.0
+            },
+            "features": {
+              "assignment_distribution": {
+                "randomized": 1200
+              },
+              "average_product_mix": 0.409175,
+              "channel_distribution": {
+                "new": 348,
+                "owned": 852
+              }
+            },
+            "interpretation": "structural contribution only",
+            "metrics": {
+              "active": 1200,
+              "applied": 212,
+              "apply_rate": 0.43002,
+              "avg_premium": 931.37,
+              "issue_rate": 0.559322,
+              "issued": 66,
+              "issued_user_rate": 0.055,
+              "net_premium": 61470.68,
+              "paid": 118,
+              "paid_rate": 0.556604,
+              "quote_rate": 0.410833,
+              "quoted": 493
+            }
+          },
+          "producer": "diagnostic",
+          "schema_version": "1.0",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "artifact_id": "art_45464eccbc6e",
+          "artifact_type": "EvidenceReport",
+          "created_at": "2026-08-11T15:05:29.284966+00:00",
+          "evidence_refs": [
+            "ev_13574c41e245",
+            "ev_fe29ff2875a4",
+            "ev_30f5861b9ecc"
+          ],
+          "payload": {
+            "allowed_claim_type": "causal_effect",
+            "assumptions": [
+              "stable metric contract",
+              "no cross-unit interference",
+              "complete outcome window"
+            ],
+            "attribution_window": "7d",
+            "diagnostics": {
+              "contract_missing_fields": [],
+              "design_checks": {
+                "assignment_verified": true,
+                "both_arms_present": true,
+                "randomization_unit_matches": true,
+                "randomized_assignment": true,
+                "trusted_assignment_provenance": true
+              },
+              "governance_checks": {
+                "approval_required": true,
+                "guardrails_defined": true,
+                "production_auto_action_disabled": true,
+                "stop_rule_defined": true
+              },
+              "group_counts": {
+                "0": 590,
+                "1": 610
+              },
+              "missing_evidence": [],
+              "power": {
+                "actual_min_arm": 590,
+                "alpha": 0.05,
+                "baseline_rate": 0.033898,
+                "method": "two-arm binary normal approximation",
+                "minimum_detectable_effect": 0.05,
+                "passed": true,
+                "required_per_arm": 206,
+                "target_power": 0.8
+              },
+              "sample_size": 1200
+            },
+            "estimand": "ITT on issued and net_premium",
+            "evidence_level": "L3",
+            "gates": [
+              {
+                "name": "semantic",
+                "passed": true,
+                "reason_code": "SEMANTIC_DEFINED"
+              },
+              {
+                "name": "data",
+                "passed": true,
+                "reason_code": "DATA_COMPLETE"
+              },
+              {
+                "name": "design",
+                "passed": true,
+                "reason_code": "RANDOM_ASSIGNMENT_VERIFIED"
+              },
+              {
+                "name": "statistics",
+                "passed": true,
+                "reason_code": "POWER_SCREEN_PASS"
+              },
+              {
+                "name": "governance",
+                "passed": true,
+                "reason_code": "GOVERNANCE_READY"
+              }
+            ],
+            "identification_strategy": "randomized",
+            "observation_unit": "user_id",
+            "outcome": "CAUSAL_READY",
+            "reason_codes": []
+          },
+          "producer": "causal_evidence",
+          "schema_version": "1.0",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "artifact_id": "art_e3524654a58c",
+          "artifact_type": "ClaimLedger",
+          "created_at": "2026-08-11T15:05:29.284991+00:00",
+          "evidence_refs": [
+            "ev_62a932a846ae"
+          ],
+          "payload": {
+            "allowed_verbs": [
+              "估计",
+              "在本实验中提升"
+            ],
+            "claim_id": "claim-001",
+            "claim_type": "causal_effect",
+            "evidence_level": "L3",
+            "prohibited_actions": [
+              "未经审批上线排序"
+            ],
+            "statement": "经验证的随机分配满足因果门禁，可报告本实验中的 ITT 估计与置信区间。",
+            "uncertainty": "95% CI attached"
+          },
+          "producer": "causal_evidence",
+          "schema_version": "1.0",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "artifact_id": "art_b7b0f0711267",
+          "artifact_type": "ExperimentSpec",
+          "created_at": "2026-08-11T15:05:29.285011+00:00",
+          "evidence_refs": [
+            "ev_8c8a89050c8b"
+          ],
+          "payload": {
+            "approval": "required",
+            "experiment_id": "randomized-ranking-C",
+            "guardrails": [
+              "refund_rate",
+              "cancel_rate",
+              "privacy_policy"
+            ],
+            "primary_metric": "issued",
+            "randomization": "randomized",
+            "stop_rule": "guardrail breach or final observation window",
+            "treatment": "new ranking",
+            "unit": "user_id"
+          },
+          "producer": "experiment_planner",
+          "schema_version": "1.0",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "artifact_id": "art_e6b8e938eb82",
+          "artifact_type": "MonitoringReport",
+          "created_at": "2026-08-11T15:05:29.290620+00:00",
+          "evidence_refs": [
+            "ev_dad17e87694f"
+          ],
+          "payload": {
+            "confidence": 0.95,
+            "estimator": "difference in means (ITT)",
+            "issued": {
+              "ci95": [
+                0.01595,
+                0.067074
+              ],
+              "control_mean": 0.033898,
+              "estimate": 0.041512,
+              "standard_error": 0.013042,
+              "treatment_mean": 0.07541
+            },
+            "net_premium": {
+              "ci95": [
+                13.898926,
+                61.611545
+              ],
+              "control_mean": 32.033322,
+              "estimate": 37.755235,
+              "standard_error": 12.171586,
+              "treatment_mean": 69.788557
+            }
+          },
+          "producer": "monitor_review",
+          "schema_version": "1.0",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        }
+      ],
+      "events": [
+        {
+          "actor": "control-plane",
+          "created_at": "2026-08-11T15:05:29.261078+00:00",
+          "event_id": "evt_c57586d1851b",
+          "event_type": "TASK_CREATED",
+          "payload": {
+            "domain": "insurance-growth-attribution",
+            "input_digest": "f98e0b8c39caf8a668b53f74ce084ffa1178cc56bf5bf5f2d75e0784278347fc"
+          },
+          "state_version": 0,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "metric_contract",
+          "created_at": "2026-08-11T15:05:29.279754+00:00",
+          "event_id": "evt_e9b1d073577c",
+          "event_type": "EVIDENCE_RECORDED",
+          "payload": {
+            "content_digest": "f47f20217866aec0ea4115eed50075569a128d5af3c49d1745ad46ca3d817cba",
+            "evidence_id": "ev_7dce01f2be47",
+            "kind": "metric-contract",
+            "label": "versioned insurance metric contract"
+          },
+          "state_version": 0,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "intent",
+          "created_at": "2026-08-11T15:05:29.279763+00:00",
+          "event_id": "evt_9a094f083a4d",
+          "event_type": "STATE_TRANSITION",
+          "payload": {
+            "from": "RECEIVED",
+            "metadata": {
+              "evidence_ref": "ev_7dce01f2be47"
+            },
+            "reason": "business question normalized",
+            "to": "INTENT_PARSED"
+          },
+          "state_version": 1,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "intent",
+          "created_at": "2026-08-11T15:05:29.280779+00:00",
+          "event_id": "evt_10147369e2ea",
+          "event_type": "ARTIFACT_PUBLISHED",
+          "payload": {
+            "artifact_id": "art_c9181cfbe1f5",
+            "artifact_type": "AnalysisIntent",
+            "evidence_refs": [
+              "ev_7dce01f2be47"
+            ]
+          },
+          "state_version": 1,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "metric_contract",
+          "created_at": "2026-08-11T15:05:29.280790+00:00",
+          "event_id": "evt_768165c653e0",
+          "event_type": "STATE_TRANSITION",
+          "payload": {
+            "from": "INTENT_PARSED",
+            "metadata": {},
+            "reason": "metric version accepted",
+            "to": "METRIC_CONFIRMED"
+          },
+          "state_version": 2,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "metric_contract",
+          "created_at": "2026-08-11T15:05:29.281604+00:00",
+          "event_id": "evt_6d06092af8d9",
+          "event_type": "ARTIFACT_PUBLISHED",
+          "payload": {
+            "artifact_id": "art_21bca8301569",
+            "artifact_type": "MetricContract",
+            "evidence_refs": [
+              "ev_7dce01f2be47"
+            ]
+          },
+          "state_version": 2,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "data_acquisition",
+          "created_at": "2026-08-11T15:05:29.281678+00:00",
+          "event_id": "evt_de76684150c9",
+          "event_type": "EVIDENCE_RECORDED",
+          "payload": {
+            "content_digest": "c444ebea24c9fa1faceba0bfcf7a014e477f556db3a92147c280a01988492dc2",
+            "evidence_id": "ev_13574c41e245",
+            "kind": "data-quality",
+            "label": "schema and data quality report"
+          },
+          "state_version": 2,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "data_acquisition",
+          "created_at": "2026-08-11T15:05:29.281711+00:00",
+          "event_id": "evt_f40442a1e21a",
+          "event_type": "STATE_TRANSITION",
+          "payload": {
+            "from": "METRIC_CONFIRMED",
+            "metadata": {
+              "evidence_ref": "ev_13574c41e245"
+            },
+            "reason": "read-only dataset passed schema checks",
+            "to": "DATA_VALIDATED"
+          },
+          "state_version": 3,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "data_acquisition",
+          "created_at": "2026-08-11T15:05:29.282559+00:00",
+          "event_id": "evt_4d395e7be0e8",
+          "event_type": "ARTIFACT_PUBLISHED",
+          "payload": {
+            "artifact_id": "art_1b4b596b0957",
+            "artifact_type": "DataQualityReport",
+            "evidence_refs": [
+              "ev_13574c41e245"
+            ]
+          },
+          "state_version": 3,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "diagnostic",
+          "created_at": "2026-08-11T15:05:29.282603+00:00",
+          "event_id": "evt_8225cd4537ad",
+          "event_type": "EVIDENCE_RECORDED",
+          "payload": {
+            "content_digest": "f74aa04e1c9fb23a15fe5576c63940b62552662e8d49b3cd445d4db256c93208",
+            "evidence_id": "ev_fe29ff2875a4",
+            "kind": "feature-set",
+            "label": "deterministic funnel, segment and treatment features"
+          },
+          "state_version": 3,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "diagnostic",
+          "created_at": "2026-08-11T15:05:29.282641+00:00",
+          "event_id": "evt_6e47c5feb05d",
+          "event_type": "ARTIFACT_PUBLISHED",
+          "payload": {
+            "artifact_id": "art_d9b00193ba28",
+            "artifact_type": "FeatureSet",
+            "evidence_refs": [
+              "ev_13574c41e245",
+              "ev_fe29ff2875a4"
+            ]
+          },
+          "state_version": 3,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "diagnostic",
+          "created_at": "2026-08-11T15:05:29.282650+00:00",
+          "event_id": "evt_3308f8ae18ee",
+          "event_type": "STATE_TRANSITION",
+          "payload": {
+            "from": "DATA_VALIDATED",
+            "metadata": {},
+            "reason": "funnel and product structure decomposition is available",
+            "to": "DIAGNOSING"
+          },
+          "state_version": 4,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "diagnostic",
+          "created_at": "2026-08-11T15:05:29.283976+00:00",
+          "event_id": "evt_13c0c8ff2e6a",
+          "event_type": "EVIDENCE_RECORDED",
+          "payload": {
+            "content_digest": "5e06f53273f9c550da6578fc2954a96858a270ccb88234593b3fd399545d3175",
+            "evidence_id": "ev_6624a0b51b76",
+            "kind": "analysis",
+            "label": "fixed-order log-chain decomposition"
+          },
+          "state_version": 4,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "diagnostic",
+          "created_at": "2026-08-11T15:05:29.283983+00:00",
+          "event_id": "evt_b3eed6553fe7",
+          "event_type": "ARTIFACT_PUBLISHED",
+          "payload": {
+            "artifact_id": "art_bdec8568a41c",
+            "artifact_type": "AttributionCandidateSet",
+            "evidence_refs": [
+              "ev_fe29ff2875a4",
+              "ev_6624a0b51b76"
+            ]
+          },
+          "state_version": 4,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "causal_evidence",
+          "created_at": "2026-08-11T15:05:29.283989+00:00",
+          "event_id": "evt_20f8d0bd9e1f",
+          "event_type": "STATE_TRANSITION",
+          "payload": {
+            "from": "DIAGNOSING",
+            "metadata": {},
+            "reason": "candidate causes are separated from causal claims",
+            "to": "EVIDENCE_GRADED"
+          },
+          "state_version": 5,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "causal_evidence",
+          "created_at": "2026-08-11T15:05:29.284962+00:00",
+          "event_id": "evt_9de90f866dcb",
+          "event_type": "EVIDENCE_RECORDED",
+          "payload": {
+            "content_digest": "46e30e09fea921648b638b12744ccfe9b463f00316295b3b4bf3a282f6675599",
+            "evidence_id": "ev_30f5861b9ecc",
+            "kind": "causal-readiness",
+            "label": "metadata-derived five-layer readiness check"
+          },
+          "state_version": 5,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "causal_evidence",
+          "created_at": "2026-08-11T15:05:29.284970+00:00",
+          "event_id": "evt_f9a42a72283d",
+          "event_type": "ARTIFACT_PUBLISHED",
+          "payload": {
+            "artifact_id": "art_45464eccbc6e",
+            "artifact_type": "EvidenceReport",
+            "evidence_refs": [
+              "ev_13574c41e245",
+              "ev_fe29ff2875a4",
+              "ev_30f5861b9ecc"
+            ]
+          },
+          "state_version": 5,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "causal_evidence",
+          "created_at": "2026-08-11T15:05:29.284987+00:00",
+          "event_id": "evt_6cc3ac996597",
+          "event_type": "EVIDENCE_RECORDED",
+          "payload": {
+            "content_digest": "a0b2c0340e2c102a6307ecde661ee6f6217df17a2d05c677befd081ebe060dc8",
+            "evidence_id": "ev_62a932a846ae",
+            "kind": "claim-ledger",
+            "label": "structured claim and prohibited actions"
+          },
+          "state_version": 5,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "causal_evidence",
+          "created_at": "2026-08-11T15:05:29.284994+00:00",
+          "event_id": "evt_47b66aa65e93",
+          "event_type": "ARTIFACT_PUBLISHED",
+          "payload": {
+            "artifact_id": "art_e3524654a58c",
+            "artifact_type": "ClaimLedger",
+            "evidence_refs": [
+              "ev_62a932a846ae"
+            ]
+          },
+          "state_version": 5,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "experiment_planner",
+          "created_at": "2026-08-11T15:05:29.285007+00:00",
+          "event_id": "evt_84c07866984d",
+          "event_type": "EVIDENCE_RECORDED",
+          "payload": {
+            "content_digest": "96f3d4f710cdd1954aaea6a7a7c2e86cfd4afbb495bc529a26b76cea033ebd27",
+            "evidence_id": "ev_8c8a89050c8b",
+            "kind": "experiment",
+            "label": "bounded experiment draft"
+          },
+          "state_version": 5,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "experiment_planner",
+          "created_at": "2026-08-11T15:05:29.285014+00:00",
+          "event_id": "evt_b860be717893",
+          "event_type": "ARTIFACT_PUBLISHED",
+          "payload": {
+            "artifact_id": "art_b7b0f0711267",
+            "artifact_type": "ExperimentSpec",
+            "evidence_refs": [
+              "ev_8c8a89050c8b"
+            ]
+          },
+          "state_version": 5,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "experiment_planner",
+          "created_at": "2026-08-11T15:05:29.285020+00:00",
+          "event_id": "evt_43469d37634f",
+          "event_type": "STATE_TRANSITION",
+          "payload": {
+            "from": "EVIDENCE_GRADED",
+            "metadata": {},
+            "reason": "causal-ready evidence permits an experiment draft",
+            "to": "ACTION_DRAFTED"
+          },
+          "state_version": 6,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "causal_evidence",
+          "created_at": "2026-08-11T15:05:29.286231+00:00",
+          "event_id": "evt_8dcacbd3e8fc",
+          "event_type": "STATE_TRANSITION",
+          "payload": {
+            "from": "ACTION_DRAFTED",
+            "metadata": {},
+            "reason": "claim and privacy guardrails pass",
+            "to": "COMPLIANCE_REVIEWED"
+          },
+          "state_version": 7,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "experiment_planner",
+          "created_at": "2026-08-11T15:05:29.287347+00:00",
+          "event_id": "evt_af305792f964",
+          "event_type": "APPROVAL_REQUESTED",
+          "payload": {
+            "approval_id": "approval_2c79b6a7e66b",
+            "expected_state": null,
+            "scope": {
+              "experiment_id": "randomized-ranking-C",
+              "scope": "synthetic dataset only"
+            },
+            "scope_digest": "ce60f74da01f89dbdadf236dcef88e6e17419b975a1711d54544d04cc9518f34"
+          },
+          "state_version": 7,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "experiment_planner",
+          "created_at": "2026-08-11T15:05:29.287354+00:00",
+          "event_id": "evt_73f633926812",
+          "event_type": "STATE_TRANSITION",
+          "payload": {
+            "from": "COMPLIANCE_REVIEWED",
+            "metadata": {
+              "approval_id": "approval_2c79b6a7e66b"
+            },
+            "reason": "experiment requires explicit human approval",
+            "to": "AWAITING_APPROVAL"
+          },
+          "state_version": 8,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "human-reviewer",
+          "created_at": "2026-08-11T15:05:29.288631+00:00",
+          "event_id": "evt_16cac2cc8553",
+          "event_type": "APPROVAL_DECIDED",
+          "payload": {
+            "approval_id": "approval_2c79b6a7e66b",
+            "decision": "APPROVED",
+            "decision_evidence": {
+              "event_id": "approval_evt_26a7551d39ec",
+              "provider": "local-conformance",
+              "reviewer_identity": "human-reviewer",
+              "scope_digest": "ce60f74da01f89dbdadf236dcef88e6e17419b975a1711d54544d04cc9518f34"
+            },
+            "note": "synthetic demo only",
+            "scope_digest": "ce60f74da01f89dbdadf236dcef88e6e17419b975a1711d54544d04cc9518f34"
+          },
+          "state_version": 8,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "monitor_review",
+          "created_at": "2026-08-11T15:05:29.288638+00:00",
+          "event_id": "evt_c00aec79b9b4",
+          "event_type": "STATE_TRANSITION",
+          "payload": {
+            "from": "AWAITING_APPROVAL",
+            "metadata": {},
+            "reason": "approved experiment enters monitoring",
+            "to": "MONITORING"
+          },
+          "state_version": 9,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "monitor_review",
+          "created_at": "2026-08-11T15:05:29.290596+00:00",
+          "event_id": "evt_5c94d1b29612",
+          "event_type": "EVIDENCE_RECORDED",
+          "payload": {
+            "content_digest": "03805c21171378a379b05516d9ab97c7f60ed3e3760e4a8e8d38cd7465858f1b",
+            "evidence_id": "ev_dad17e87694f",
+            "kind": "monitoring",
+            "label": "ITT estimate and confidence intervals"
+          },
+          "state_version": 9,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "monitor_review",
+          "created_at": "2026-08-11T15:05:29.290630+00:00",
+          "event_id": "evt_1649a0779155",
+          "event_type": "ARTIFACT_PUBLISHED",
+          "payload": {
+            "artifact_id": "art_e6b8e938eb82",
+            "artifact_type": "MonitoringReport",
+            "evidence_refs": [
+              "ev_dad17e87694f"
+            ]
+          },
+          "state_version": 9,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "monitor_review",
+          "created_at": "2026-08-11T15:05:29.290640+00:00",
+          "event_id": "evt_8060c77c00c1",
+          "event_type": "STATE_TRANSITION",
+          "payload": {
+            "from": "MONITORING",
+            "metadata": {},
+            "reason": "monitoring report completed",
+            "to": "REVIEWED"
+          },
+          "state_version": 10,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "actor": "monitor_review",
+          "created_at": "2026-08-11T15:05:29.292353+00:00",
+          "event_id": "evt_22e19c982e73",
+          "event_type": "STATE_TRANSITION",
+          "payload": {
+            "from": "REVIEWED",
+            "metadata": {},
+            "reason": "evidence pack finalized",
+            "to": "CLOSED"
+          },
+          "state_version": 11,
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        }
+      ],
+      "evidence": [
+        {
+          "content": {
+            "funnel": [
+              "active",
+              "quoted",
+              "applied",
+              "paid",
+              "issued"
+            ],
+            "identity": "user_id",
+            "metric_id": "insurance-premium-v2",
+            "outcomes": [
+              "issued",
+              "net_premium"
+            ],
+            "owner": "growth-analytics",
+            "premium": "net premium after refund and cancellation",
+            "treatment": "treatment",
+            "version": "2026-07-31",
+            "window": "7d"
+          },
+          "content_digest": "f47f20217866aec0ea4115eed50075569a128d5af3c49d1745ad46ca3d817cba",
+          "created_at": "2026-08-11T15:05:29.279742+00:00",
+          "evidence_id": "ev_7dce01f2be47",
+          "kind": "metric-contract",
+          "label": "versioned insurance metric contract",
+          "source": "metric_contract",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "content": {
+            "duplicate_count": 0,
+            "duplicate_rate": 0.0,
+            "freshness": "simulated-current",
+            "missing_experiment_fields": [],
+            "missing_fields": [],
+            "missing_row_fields": [],
+            "null_counts": {
+              "active": 0,
+              "applied": 0,
+              "issued": 0,
+              "net_premium": 0,
+              "paid": 0,
+              "quoted": 0,
+              "treatment": 0,
+              "user_id": 0
+            },
+            "outcome_complete": true,
+            "privacy": "aggregated-demo-only",
+            "window_closed": true
+          },
+          "content_digest": "c444ebea24c9fa1faceba0bfcf7a014e477f556db3a92147c280a01988492dc2",
+          "created_at": "2026-08-11T15:05:29.281663+00:00",
+          "evidence_id": "ev_13574c41e245",
+          "kind": "data-quality",
+          "label": "schema and data quality report",
+          "source": "data_acquisition",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "content": {
+            "available_fields": [
+              "active",
+              "applied",
+              "assignment",
+              "cancel",
+              "channel",
+              "channel_quality",
+              "gross_premium",
+              "issued",
+              "net_premium",
+              "paid",
+              "product_mix",
+              "quoted",
+              "refund",
+              "season",
+              "treatment",
+              "user_id",
+              "user_quality"
+            ],
+            "data_quality": {
+              "duplicate_count": 0,
+              "duplicate_rate": 0.0,
+              "missing_experiment_fields": [],
+              "missing_row_fields": [],
+              "null_counts": {
+                "active": 0,
+                "applied": 0,
+                "issued": 0,
+                "net_premium": 0,
+                "paid": 0,
+                "quoted": 0,
+                "treatment": 0,
+                "user_id": 0
+              },
+              "outcome_complete": true,
+              "window_closed": true
+            },
+            "funnel": {
+              "active": 1200,
+              "applied": 212,
+              "apply_rate": 0.43002,
+              "avg_premium": 931.37,
+              "issue_rate": 0.559322,
+              "issued": 66,
+              "issued_user_rate": 0.055,
+              "net_premium": 61470.68,
+              "paid": 118,
+              "paid_rate": 0.556604,
+              "quote_rate": 0.410833,
+              "quoted": 493
+            },
+            "observation_unit": "user_id",
+            "row_count": 1200,
+            "schema_version": "1.0",
+            "segments": {
+              "assignment_distribution": {
+                "randomized": 1200
+              },
+              "average_product_mix": 0.409175,
+              "channel_distribution": {
+                "new": 348,
+                "owned": 852
+              }
+            },
+            "treatment": {
+              "column": "treatment",
+              "group_counts": {
+                "0": 590,
+                "1": 610
+              },
+              "group_outcomes": {
+                "0": {
+                  "count": 590.0,
+                  "issued": 0.033898,
+                  "net_premium": 32.033322
+                },
+                "1": {
+                  "count": 610.0,
+                  "issued": 0.07541,
+                  "net_premium": 69.788557
+                }
+              }
+            }
+          },
+          "content_digest": "f74aa04e1c9fb23a15fe5576c63940b62552662e8d49b3cd445d4db256c93208",
+          "created_at": "2026-08-11T15:05:29.282598+00:00",
+          "evidence_id": "ev_fe29ff2875a4",
+          "kind": "feature-set",
+          "label": "deterministic funnel, segment and treatment features",
+          "source": "diagnostic",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "content": {
+            "baseline_premium": 51502.87,
+            "current_premium": 61470.68,
+            "factors": [
+              {
+                "after": 1200,
+                "before": 1200,
+                "key": "active",
+                "label": "活跃流量",
+                "log_change": 0.0,
+                "share": 0.0
+              },
+              {
+                "after": 0.410833,
+                "before": 0.395833,
+                "key": "quote_rate",
+                "label": "报价率",
+                "log_change": 0.037194,
+                "share": 0.210237
+              },
+              {
+                "after": 0.43002,
+                "before": 0.418947,
+                "key": "apply_rate",
+                "label": "投保率",
+                "log_change": 0.026087,
+                "share": 0.147455
+              },
+              {
+                "after": 0.556604,
+                "before": 0.497487,
+                "key": "paid_rate",
+                "label": "支付率",
+                "log_change": 0.112285,
+                "share": 0.634684
+              },
+              {
+                "after": 0.559322,
+                "before": 0.555556,
+                "key": "issue_rate",
+                "label": "出单率",
+                "log_change": 0.006756,
+                "share": 0.038188
+              },
+              {
+                "after": 931.37,
+                "before": 936.42,
+                "key": "avg_premium",
+                "label": "件均保费",
+                "log_change": -0.005407,
+                "share": -0.030563
+              }
+            ],
+            "interaction_policy": "multiplicative interaction is represented in log scale; no causal claim",
+            "method": "fixed-order log-chain decomposition",
+            "total_log_change": 0.176915,
+            "unexplained_residual": 0.0
+          },
+          "content_digest": "5e06f53273f9c550da6578fc2954a96858a270ccb88234593b3fd399545d3175",
+          "created_at": "2026-08-11T15:05:29.283969+00:00",
+          "evidence_id": "ev_6624a0b51b76",
+          "kind": "analysis",
+          "label": "fixed-order log-chain decomposition",
+          "source": "diagnostic",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "content": {
+            "allowed_claim_type": "causal_effect",
+            "assumptions": [
+              "stable metric contract",
+              "no cross-unit interference",
+              "complete outcome window"
+            ],
+            "attribution_window": "7d",
+            "diagnostics": {
+              "contract_missing_fields": [],
+              "design_checks": {
+                "assignment_verified": true,
+                "both_arms_present": true,
+                "randomization_unit_matches": true,
+                "randomized_assignment": true,
+                "trusted_assignment_provenance": true
+              },
+              "governance_checks": {
+                "approval_required": true,
+                "guardrails_defined": true,
+                "production_auto_action_disabled": true,
+                "stop_rule_defined": true
+              },
+              "group_counts": {
+                "0": 590,
+                "1": 610
+              },
+              "missing_evidence": [],
+              "power": {
+                "actual_min_arm": 590,
+                "alpha": 0.05,
+                "baseline_rate": 0.033898,
+                "method": "two-arm binary normal approximation",
+                "minimum_detectable_effect": 0.05,
+                "passed": true,
+                "required_per_arm": 206,
+                "target_power": 0.8
+              },
+              "sample_size": 1200
+            },
+            "estimand": "ITT on issued and net_premium",
+            "evidence_level": "L3",
+            "gates": [
+              {
+                "name": "semantic",
+                "passed": true,
+                "reason_code": "SEMANTIC_DEFINED"
+              },
+              {
+                "name": "data",
+                "passed": true,
+                "reason_code": "DATA_COMPLETE"
+              },
+              {
+                "name": "design",
+                "passed": true,
+                "reason_code": "RANDOM_ASSIGNMENT_VERIFIED"
+              },
+              {
+                "name": "statistics",
+                "passed": true,
+                "reason_code": "POWER_SCREEN_PASS"
+              },
+              {
+                "name": "governance",
+                "passed": true,
+                "reason_code": "GOVERNANCE_READY"
+              }
+            ],
+            "identification_strategy": "randomized",
+            "observation_unit": "user_id",
+            "outcome": "CAUSAL_READY",
+            "reason_codes": []
+          },
+          "content_digest": "46e30e09fea921648b638b12744ccfe9b463f00316295b3b4bf3a282f6675599",
+          "created_at": "2026-08-11T15:05:29.284956+00:00",
+          "evidence_id": "ev_30f5861b9ecc",
+          "kind": "causal-readiness",
+          "label": "metadata-derived five-layer readiness check",
+          "source": "causal_evidence",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "content": {
+            "allowed_verbs": [
+              "估计",
+              "在本实验中提升"
+            ],
+            "claim_id": "claim-001",
+            "claim_type": "causal_effect",
+            "evidence_level": "L3",
+            "prohibited_actions": [
+              "未经审批上线排序"
+            ],
+            "statement": "经验证的随机分配满足因果门禁，可报告本实验中的 ITT 估计与置信区间。",
+            "uncertainty": "95% CI attached"
+          },
+          "content_digest": "a0b2c0340e2c102a6307ecde661ee6f6217df17a2d05c677befd081ebe060dc8",
+          "created_at": "2026-08-11T15:05:29.284983+00:00",
+          "evidence_id": "ev_62a932a846ae",
+          "kind": "claim-ledger",
+          "label": "structured claim and prohibited actions",
+          "source": "causal_evidence",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "content": {
+            "approval": "required",
+            "experiment_id": "randomized-ranking-C",
+            "guardrails": [
+              "refund_rate",
+              "cancel_rate",
+              "privacy_policy"
+            ],
+            "primary_metric": "issued",
+            "randomization": "randomized",
+            "stop_rule": "guardrail breach or final observation window",
+            "treatment": "new ranking",
+            "unit": "user_id"
+          },
+          "content_digest": "96f3d4f710cdd1954aaea6a7a7c2e86cfd4afbb495bc529a26b76cea033ebd27",
+          "created_at": "2026-08-11T15:05:29.285003+00:00",
+          "evidence_id": "ev_8c8a89050c8b",
+          "kind": "experiment",
+          "label": "bounded experiment draft",
+          "source": "experiment_planner",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        },
+        {
+          "content": {
+            "confidence": 0.95,
+            "estimator": "difference in means (ITT)",
+            "issued": {
+              "ci95": [
+                0.01595,
+                0.067074
+              ],
+              "control_mean": 0.033898,
+              "estimate": 0.041512,
+              "standard_error": 0.013042,
+              "treatment_mean": 0.07541
+            },
+            "net_premium": {
+              "ci95": [
+                13.898926,
+                61.611545
+              ],
+              "control_mean": 32.033322,
+              "estimate": 37.755235,
+              "standard_error": 12.171586,
+              "treatment_mean": 69.788557
+            }
+          },
+          "content_digest": "03805c21171378a379b05516d9ab97c7f60ed3e3760e4a8e8d38cd7465858f1b",
+          "created_at": "2026-08-11T15:05:29.290586+00:00",
+          "evidence_id": "ev_dad17e87694f",
+          "kind": "monitoring",
+          "label": "ITT estimate and confidence intervals",
+          "source": "monitor_review",
+          "task_id": "T2-case-C",
+          "trace_id": "trace_c40ff0d0a7b8"
+        }
+      ],
+      "task": {
+        "created_at": "2026-08-11T15:05:29.261062+00:00",
+        "domain": "insurance-growth-attribution",
+        "input_payload": {
+          "case": "C",
+          "question": "DAU rose while premium declined; explain what is known and what should be tested."
+        },
+        "metadata": {
+          "approval_id": "approval_2c79b6a7e66b",
+          "evidence_ref": "ev_13574c41e245"
+        },
+        "state": "CLOSED",
+        "state_version": 11,
+        "task_id": "T2-case-C",
+        "trace_id": "trace_c40ff0d0a7b8",
+        "updated_at": "2026-08-11T15:05:29.292340+00:00"
+      }
+    },
+    "updated_at": "2026-08-11T15:05:29.293012+00:00"
+  },
+  "summary": {
+    "final_state": "CLOSED",
+    "claim_type": "causal_effect",
+    "evidence_level": "L3",
+    "causal_outcome": "CAUSAL_READY"
+  },
+  "estimate": {
+    "estimator": "difference in means (ITT)",
+    "confidence": 0.95,
+    "issued": {
+      "control_mean": 0.033898,
+      "treatment_mean": 0.07541,
+      "estimate": 0.041512,
+      "standard_error": 0.013042,
+      "ci95": [
+        0.01595,
+        0.067074
+      ]
+    },
+    "net_premium": {
+      "control_mean": 32.033322,
+      "treatment_mean": 69.788557,
+      "estimate": 37.755235,
+      "standard_error": 12.171586,
+      "ci95": [
+        13.898926,
+        61.611545
+      ]
+    }
+  },
+  "evidence_pack_path": "runtime_data/evidence/T2-case-C.json",
+  "evidence_pack_relative_path": "evidence/T2-case-C.json"
+}

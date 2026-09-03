@@ -1,0 +1,507 @@
+{
+  "model": "rate_aware_squeeze_style_beam_search",
+  "metric_type": "ratio_of_counts",
+  "dimensions": [
+    "channel",
+    "region",
+    "version"
+  ],
+  "baseline_window": [
+    0,
+    39
+  ],
+  "current_window": [
+    40,
+    59
+  ],
+  "overall_change": {
+    "treatment_rate_change": -0.0028001527954081076,
+    "control_rate_change": 2.6498612468207894e-05,
+    "gap_change": -0.0028266514078763155,
+    "treatment_decomposition": {
+      "status": "CLOSED",
+      "closed": true,
+      "reason": null,
+      "rate": -0.002764893353180502,
+      "mix": -1.527107192263285e-05,
+      "interaction": -1.998837030497584e-05,
+      "delta": -0.0028001527954081076,
+      "closure_error": 2.8697476252975695e-18,
+      "share_sum_before": 1.0,
+      "share_sum_after": 1.0,
+      "rate_by_cell": {
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": -8.172722867552023e-06,
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": 3.6823251932054314e-06,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": -0.0027621861452853647,
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.3'))": 8.246247483391596e-06,
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.3'))": -5.366892955916519e-06,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 1.520582201365803e-05,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.4'))": -3.2154474556495304e-07,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": -1.5980442016358864e-05
+      },
+      "mix_by_cell": {
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": -0.00016217767100756752,
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": -9.202677316910367e-06,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": 4.2392799579977055e-05,
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.3'))": -2.9821453294303302e-05,
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.3'))": 9.06210111322652e-06,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 5.138615683631181e-05,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.4'))": 7.634358121064958e-05,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": 6.746090955983358e-06
+      },
+      "interaction_by_cell": {
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": 2.101731628609543e-07,
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": -5.466981221985462e-09,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": -2.025967508148206e-05,
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.3'))": -3.9330942403005225e-08,
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.3'))": -7.794410689198802e-09,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 1.3669010032967963e-07,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.4'))": -4.2729843615530434e-09,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": -1.8693168008671554e-08
+      },
+      "basis": "probability_difference; rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate"
+    },
+    "control_decomposition": {
+      "status": "CLOSED",
+      "closed": true,
+      "reason": null,
+      "rate": 4.1968867557947955e-05,
+      "mix": -1.5572466169001475e-05,
+      "interaction": 1.0221107926153772e-07,
+      "delta": 2.6498612468200955e-05,
+      "closure_error": -7.06307687490859e-18,
+      "share_sum_before": 1.0,
+      "share_sum_after": 1.0,
+      "rate_by_cell": {
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": -8.767484796018292e-07,
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": 6.966024891256489e-06,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": -5.47241112205095e-07,
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.3'))": 9.148010195960756e-06,
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.3'))": 6.579675939122688e-06,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 1.0638747421737857e-05,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.4'))": 1.7074643431437621e-06,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": 8.352934358533326e-06
+      },
+      "mix_by_cell": {
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": -0.00014268045603231167,
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": -8.11945531952583e-06,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": 3.6785409514787994e-05,
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.3'))": -2.628100678447734e-05,
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.3'))": 7.956404993666598e-06,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 4.468485447419568e-05,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.4'))": 6.622626509217587e-05,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": 5.855517892487204e-06
+      },
+      "interaction_by_cell": {
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": 2.2546830961691892e-08,
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": -1.0342141248864424e-08,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": -4.013823305655126e-09,
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.3'))": -4.363195051374509e-08,
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.3'))": 9.55575169704573e-09,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 9.563517520810647e-08,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.4'))": 2.2690367473875972e-08,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": 9.7708689890823e-09
+      },
+      "basis": "probability_difference; rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate"
+    }
+  },
+  "candidate_count_scored": 26,
+  "candidate_count": 8,
+  "input_validation": {
+    "status": "PASS",
+    "component": "rate_panel",
+    "used_sample_count": 947604,
+    "excluded_sample_count": 0,
+    "exclusion_reasons": [],
+    "checks_performed": [
+      "finite",
+      "count_range",
+      "unique_day_cell",
+      "ordered_non_overlapping_windows",
+      "common_cell_universe"
+    ]
+  },
+  "candidates": [
+    {
+      "scope": {
+        "version": "8.4",
+        "region": "east",
+        "channel": "paid"
+      },
+      "depth": 3,
+      "baseline_days": [
+        0,
+        39
+      ],
+      "current_days": [
+        40,
+        59
+      ],
+      "baseline_gap": 0.006090164762963708,
+      "current_gap": -0.015909430951074756,
+      "gap_change": -0.021999595714038464,
+      "treatment_rate_before": 0.04604265642373395,
+      "treatment_rate_after": 0.02403870131165528,
+      "control_rate_before": 0.039952491660770244,
+      "control_rate_after": 0.039948132262730036,
+      "treatment_rate_change": -0.02200395511207867,
+      "control_rate_change": -4.359398040207352e-06,
+      "rate_contribution": -0.0027621861452853647,
+      "mix_contribution": 4.2392799579977055e-05,
+      "interaction_contribution": -2.025967508148206e-05,
+      "treatment_share_before": 0.12553134794249388,
+      "treatment_share_after": 0.12645207673776218,
+      "candidate_contribution_change": -0.0027400530207868697,
+      "candidate_closure_error": 0.0,
+      "decomposition_status": "CLOSED",
+      "decomposition_closure_error": 9.815417792782832e-18,
+      "decomposition_basis": "rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate",
+      "coverage": 0.12645207673776218,
+      "scope_focus": 0.8735479232622378,
+      "isolation": 0.9953457358161009,
+      "stability": 1.0,
+      "complement_gap_change": -5.131538287034276e-05,
+      "baseline_impressions": 39572,
+      "current_impressions": 20051,
+      "priority": 0.002640077125968194,
+      "claim_type": "FACTOR_CANDIDATE",
+      "evidence_level": "FACTOR_CANDIDATE",
+      "note": "该结果定位异常分层，不证明分层因素造成了指标变化。",
+      "beam_score": 0.021999595714038464
+    },
+    {
+      "scope": {
+        "version": "8.4",
+        "channel": "paid"
+      },
+      "depth": 2,
+      "baseline_days": [
+        0,
+        39
+      ],
+      "current_days": [
+        40,
+        59
+      ],
+      "baseline_gap": 0.006097560975609755,
+      "current_gap": -0.004914188784673722,
+      "gap_change": -0.011011749760283476,
+      "treatment_rate_before": 0.046054966786674104,
+      "treatment_rate_after": 0.03504789463181002,
+      "control_rate_before": 0.03995740581106435,
+      "control_rate_after": 0.03996208341648374,
+      "treatment_rate_change": -0.011007072154864087,
+      "control_rate_change": 4.677605419389774e-06,
+      "rate_contribution": -0.002754386808182754,
+      "mix_contribution": 0.0001187271794343369,
+      "interaction_contribution": -2.8375628557729684e-05,
+      "treatment_share_before": 0.25023791698917636,
+      "treatment_share_after": 0.2528158621646507,
+      "candidate_contribution_change": -0.0026640352573061472,
+      "candidate_closure_error": -8.673617379884035e-19,
+      "decomposition_status": "CLOSED",
+      "decomposition_closure_error": -1.1008040182516887e-17,
+      "decomposition_basis": "rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate",
+      "coverage": 0.2528158621646507,
+      "scope_focus": 0.7471841378353493,
+      "isolation": 0.9896118115856315,
+      "stability": 1.0,
+      "complement_gap_change": -5.749469852138478e-05,
+      "baseline_impressions": 78884,
+      "current_impressions": 40088,
+      "priority": 0.002521552751011502,
+      "claim_type": "FACTOR_CANDIDATE",
+      "evidence_level": "FACTOR_CANDIDATE",
+      "note": "该结果定位异常分层，不证明分层因素造成了指标变化。",
+      "beam_score": 0.011011749760283476
+    },
+    {
+      "scope": {
+        "region": "east",
+        "channel": "paid"
+      },
+      "depth": 2,
+      "baseline_days": [
+        0,
+        39
+      ],
+      "current_days": [
+        40,
+        59
+      ],
+      "baseline_gap": 0.006044137440637941,
+      "current_gap": -0.004982847985577285,
+      "gap_change": -0.011026985426215226,
+      "treatment_rate_before": 0.046016710262335885,
+      "treatment_rate_after": 0.03503017252172171,
+      "control_rate_before": 0.039972572821697944,
+      "control_rate_after": 0.040013020507299,
+      "treatment_rate_change": -0.010986537740614172,
+      "control_rate_change": 4.0447685601054106e-05,
+      "rate_contribution": -0.0027447175869010155,
+      "mix_contribution": 9.378434578402891e-05,
+      "interaction_contribution": -2.2391110719585372e-05,
+      "treatment_share_before": 0.24982552754127066,
+      "treatment_share_after": 0.2518635773116557,
+      "candidate_contribution_change": -0.0026733243518365715,
+      "candidate_closure_error": 4.336808689942018e-19,
+      "decomposition_status": "CLOSED",
+      "decomposition_closure_error": -4.9907181252223376e-18,
+      "decomposition_basis": "rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate",
+      "coverage": 0.2518635773116557,
+      "scope_focus": 0.7481364226883442,
+      "isolation": 0.988092692988186,
+      "stability": 1.0,
+      "complement_gap_change": -6.604405385515072e-05,
+      "baseline_impressions": 78754,
+      "current_impressions": 39937,
+      "priority": 0.0024857278660730562,
+      "claim_type": "FACTOR_CANDIDATE",
+      "evidence_level": "FACTOR_CANDIDATE",
+      "note": "该结果定位异常分层，不证明分层因素造成了指标变化。",
+      "beam_score": 0.011026985426215226
+    },
+    {
+      "scope": {
+        "version": "8.4",
+        "region": "east"
+      },
+      "depth": 2,
+      "baseline_days": [
+        0,
+        39
+      ],
+      "current_days": [
+        40,
+        59
+      ],
+      "baseline_gap": 0.005983003696505472,
+      "current_gap": -0.005136598262621174,
+      "gap_change": -0.011119601959126646,
+      "treatment_rate_before": 0.04796565171550881,
+      "treatment_rate_after": 0.03686264635528138,
+      "control_rate_before": 0.04198264801900334,
+      "control_rate_after": 0.041999244617902554,
+      "treatment_rate_change": -0.01110300536022743,
+      "control_rate_change": 1.659659889921561e-05,
+      "rate_contribution": -0.0027727223127218463,
+      "mix_contribution": 3.5319069378994844e-05,
+      "interaction_contribution": -8.175596548945264e-06,
+      "treatment_share_before": 0.24972718851907777,
+      "treatment_share_after": 0.25046352938208694,
+      "candidate_contribution_change": -0.002745578839891797,
+      "candidate_closure_error": -4.336808689942018e-19,
+      "decomposition_status": "CLOSED",
+      "decomposition_closure_error": 4.445228907190568e-18,
+      "decomposition_basis": "rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate",
+      "coverage": 0.25046352938208694,
+      "scope_focus": 0.7495364706179131,
+      "isolation": 0.9900773997369653,
+      "stability": 1.0,
+      "complement_gap_change": -5.544275078901706e-05,
+      "baseline_impressions": 78723,
+      "current_impressions": 39715,
+      "priority": 0.0024513148094412567,
+      "claim_type": "FACTOR_CANDIDATE",
+      "evidence_level": "FACTOR_CANDIDATE",
+      "note": "该结果定位异常分层，不证明分层因素造成了指标变化。",
+      "beam_score": 0.011119601959126646
+    },
+    {
+      "scope": {
+        "channel": "paid"
+      },
+      "depth": 1,
+      "baseline_days": [
+        0,
+        39
+      ],
+      "current_days": [
+        40,
+        59
+      ],
+      "baseline_gap": 0.006067606849541121,
+      "current_gap": 0.0005008639903834114,
+      "gap_change": -0.00556674285915771,
+      "treatment_rate_before": 0.0460338415059851,
+      "treatment_rate_after": 0.0405073752222584,
+      "control_rate_before": 0.03996623465644398,
+      "control_rate_after": 0.040006511231874986,
+      "treatment_rate_change": -0.005526466283726703,
+      "control_rate_change": 4.027657543100721e-05,
+      "rate_contribution": -0.002762181269688144,
+      "mix_contribution": 0.00017685327025106465,
+      "interaction_contribution": -2.1231633147154186e-05,
+      "treatment_share_before": 0.4998096664086589,
+      "treatment_share_after": 0.5036514763568483,
+      "candidate_contribution_change": -0.002606559632584233,
+      "candidate_closure_error": 4.336808689942018e-19,
+      "decomposition_status": "CLOSED",
+      "decomposition_closure_error": 5.6954495373379155e-18,
+      "decomposition_basis": "rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate",
+      "coverage": 0.5036514763568483,
+      "scope_focus": 0.49634852364315174,
+      "isolation": 0.9832843820288509,
+      "stability": 0.05,
+      "complement_gap_change": -4.691790437139076e-05,
+      "baseline_impressions": 157558,
+      "current_impressions": 79862,
+      "priority": 0.0011530491659589195,
+      "claim_type": "FACTOR_CANDIDATE",
+      "evidence_level": "FACTOR_CANDIDATE",
+      "note": "该结果定位异常分层，不证明分层因素造成了指标变化。",
+      "beam_score": 0.00556674285915771
+    },
+    {
+      "scope": {
+        "region": "east"
+      },
+      "depth": 1,
+      "baseline_days": [
+        0,
+        39
+      ],
+      "current_days": [
+        40,
+        59
+      ],
+      "baseline_gap": 0.006016548688888464,
+      "current_gap": 0.000440739434846113,
+      "gap_change": -0.005575809254042351,
+      "treatment_rate_before": 0.047986109786113604,
+      "treatment_rate_after": 0.04244950385332191,
+      "control_rate_before": 0.04196956109722514,
+      "control_rate_after": 0.0420087644184758,
+      "treatment_rate_change": -0.005536605932791691,
+      "control_rate_change": 3.920332125065956e-05,
+      "rate_contribution": -0.0027615410696450785,
+      "mix_contribution": 9.764446714611482e-05,
+      "interaction_contribution": -1.1266154695913879e-05,
+      "treatment_share_before": 0.4987786927888947,
+      "treatment_share_after": 0.5008135413644792,
+      "candidate_contribution_change": -0.002675162757194878,
+      "candidate_closure_error": -4.336808689942018e-19,
+      "decomposition_status": "CLOSED",
+      "decomposition_closure_error": -1.0740377771184528e-18,
+      "decomposition_basis": "rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate",
+      "coverage": 0.5008135413644792,
+      "scope_focus": 0.4991864586355208,
+      "isolation": 0.9757376732830575,
+      "stability": 0.0,
+      "complement_gap_change": -6.847169422453253e-05,
+      "baseline_impressions": 157233,
+      "current_impressions": 79412,
+      "priority": 0.0010627844393857112,
+      "claim_type": "FACTOR_CANDIDATE",
+      "evidence_level": "FACTOR_CANDIDATE",
+      "note": "该结果定位异常分层，不证明分层因素造成了指标变化。",
+      "beam_score": 0.005575809254042351
+    },
+    {
+      "scope": {
+        "version": "8.4"
+      },
+      "depth": 1,
+      "baseline_days": [
+        0,
+        39
+      ],
+      "current_days": [
+        40,
+        59
+      ],
+      "baseline_gap": 0.0060214235913037956,
+      "current_gap": 0.0004291574629220543,
+      "gap_change": -0.005592266128381741,
+      "treatment_rate_before": 0.04801293021486975,
+      "treatment_rate_after": 0.04241085515935626,
+      "control_rate_before": 0.041991506623565954,
+      "control_rate_after": 0.04198169769643421,
+      "treatment_rate_change": -0.005602075055513488,
+      "control_rate_change": -9.808927131746414e-06,
+      "rate_contribution": -0.002803738727519582,
+      "mix_contribution": -4.071288678911365e-05,
+      "interaction_contribution": 4.750317185361083e-06,
+      "treatment_share_before": 0.5004821784313974,
+      "treatment_share_after": 0.49963422171209465,
+      "candidate_contribution_change": -0.002839701297123333,
+      "candidate_closure_error": 1.3010426069826053e-18,
+      "decomposition_status": "CLOSED",
+      "decomposition_closure_error": 8.30431101488116e-18,
+      "decomposition_basis": "rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate",
+      "coverage": 0.49963422171209465,
+      "scope_focus": 0.5003657782879054,
+      "isolation": 0.9769895746686772,
+      "stability": 0.0,
+      "complement_gap_change": -6.508907473706804e-05,
+      "baseline_impressions": 157770,
+      "current_impressions": 79225,
+      "priority": 0.0010564155179406845,
+      "claim_type": "FACTOR_CANDIDATE",
+      "evidence_level": "FACTOR_CANDIDATE",
+      "note": "该结果定位异常分层，不证明分层因素造成了指标变化。",
+      "beam_score": 0.005592266128381741
+    },
+    {
+      "scope": {
+        "region": "west",
+        "channel": "organic"
+      },
+      "depth": 2,
+      "baseline_days": [
+        0,
+        39
+      ],
+      "current_days": [
+        40,
+        59
+      ],
+      "baseline_gap": 0.005972297630020579,
+      "current_gap": 0.005939483545336362,
+      "gap_change": -3.281408468421704e-05,
+      "treatment_rate_before": 0.04998800489905175,
+      "treatment_rate_after": 0.04998852889444034,
+      "control_rate_before": 0.044015707269031173,
+      "control_rate_after": 0.04404904534910398,
+      "treatment_rate_change": 5.239953885863291e-07,
+      "control_rate_change": 3.3338080072803367e-05,
+      "rate_contribution": 1.3164711765359502e-07,
+      "mix_contribution": -0.00019188439316994034,
+      "interaction_contribution": -2.0114132853628285e-09,
+      "treatment_share_before": 0.25123716834371707,
+      "treatment_share_after": 0.2473985595903283,
+      "candidate_contribution_change": -0.00019175475746557175,
+      "candidate_closure_error": 3.5236570605778894e-19,
+      "decomposition_status": "CLOSED",
+      "decomposition_closure_error": -4.9907181252223376e-18,
+      "decomposition_basis": "rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate",
+      "coverage": 0.2473985595903283,
+      "scope_focus": 0.7526014404096717,
+      "isolation": 0.9826298752419477,
+      "stability": 0.0,
+      "complement_gap_change": -0.0037454068712712493,
+      "baseline_impressions": 79199,
+      "current_impressions": 39229,
+      "priority": 8.340208006952119e-05,
+      "claim_type": "FACTOR_CANDIDATE",
+      "evidence_level": "FACTOR_CANDIDATE",
+      "note": "该结果定位异常分层，不证明分层因素造成了指标变化。",
+      "beam_score": 3.281408468421704e-05
+    }
+  ],
+  "claim_policy": "candidate_only_until_randomized_or_quasi_experimental_validation",
+  "limitations": [
+    "候选名称来自输入面板维度，算法不能命名不存在数据入口的外部因素。",
+    "rate/mix/interaction 是概率尺度上的闭合描述性分解，不是因果贡献。",
+    "多维搜索使用 beam_width 和 min_impressions，需在留出窗口评估召回与假阳性。"
+  ],
+  "truth_for_offline_evaluation": {
+    "affected_scope": {
+      "region": "east",
+      "channel": "paid",
+      "version": "8.4"
+    },
+    "onset_day": 40,
+    "direction": "negative"
+  }
+}

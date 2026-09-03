@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: insurance-client-attribution
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python run_server.py $PORT --host 0.0.0.0
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.5
+      - key: HOST
+        value: 0.0.0.0

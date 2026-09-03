@@ -1,0 +1,17 @@
+{
+  "dataset": "UCI Bank Marketing (45211 real records, CC BY 4.0, doi:10.24432/C5K306)",
+  "v3_gate": "DESCRIPTIVE_ONLY (no randomized assignment; duration is post-outcome leakage)",
+  "bayes_layer_status": "REFUSED for causal decision",
+  "associational_posterior": {
+    "comparison": "contact=cellular vs contact=telephone, subscription rate",
+    "cellular_rate": 0.1492,
+    "telephone_rate": 0.1342,
+    "posterior_effect": 0.014758260026812794,
+    "credible_interval_95": [
+      0.0014381429356716438,
+      0.02760994017006478
+    ],
+    "claim_type": "ASSOCIATION_ONLY",
+    "warning": "contact 方式不是随机分配的，该后验只描述历史相关，不能解释为因果效应"
+  }
+}

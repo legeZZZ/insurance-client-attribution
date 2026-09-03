@@ -1,0 +1,35 @@
+[
+  {
+    "event_id": "ext_regulation",
+    "source_type": "authorized_external_event",
+    "kind": "regulation",
+    "start_day": 45,
+    "end_day": 49,
+    "scope": {"industry": ["insurance"], "region": ["CN"]},
+    "source_uri": "deidentified://authorized-event-feed/regulation",
+    "license_ref": "competition-deidentified",
+    "claim_type": "TEMPORAL_ASSOCIATION"
+  },
+  {
+    "event_id": "internal.audit.unregistered_release",
+    "source_type": "internal_event",
+    "kind": "release_audit",
+    "start_day": 40,
+    "end_day": 40,
+    "scope": {"region": ["east"], "channel": ["paid"], "version": ["8.4"]},
+    "source_uri": "deidentified://internal-release-audit/day-40",
+    "license_ref": "competition-deidentified",
+    "claim_type": "FACTOR_CANDIDATE"
+  },
+  {
+    "event_id": "external.competitor_campaign",
+    "source_type": "authorized_external_event",
+    "kind": "competitor_marketing",
+    "start_day": 51,
+    "end_day": 54,
+    "scope": {"channel": ["paid"]},
+    "source_uri": "deidentified://authorized-event-feed/competitor-campaign",
+    "license_ref": "competition-deidentified",
+    "claim_type": "TEMPORAL_ASSOCIATION"
+  }
+]

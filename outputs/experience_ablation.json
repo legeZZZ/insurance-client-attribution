@@ -1,0 +1,248 @@
+{
+  "ablation": "experience_store_cross_period",
+  "periods": 7,
+  "traffic_ramp": [
+    0.05,
+    0.1,
+    0.2,
+    0.5,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "note": "sparse periods (traffic<1) test cold-start; rich periods test no-harm",
+  "static_baseline": {
+    "ate_rmse_sparse": 0.004509,
+    "ate_rmse_rich": 0.000491,
+    "moderation_rmse_spurious": 0.006958,
+    "decisions": [
+      "ROLLBACK_RECOMMENDED",
+      "ROLLBACK_RECOMMENDED",
+      "ROLLBACK_RECOMMENDED",
+      "ROLLBACK_RECOMMENDED",
+      "ROLLBACK_RECOMMENDED",
+      "ROLLBACK_RECOMMENDED",
+      "ROLLBACK_RECOMMENDED"
+    ]
+  },
+  "adaptive_experience_store": {
+    "ate_rmse_sparse": 0.004019,
+    "ate_rmse_rich": 0.000642,
+    "moderation_rmse_spurious": 0.006932,
+    "decisions": [
+      "ROLLBACK_RECOMMENDED",
+      "ROLLBACK_RECOMMENDED",
+      "ROLLBACK_RECOMMENDED",
+      "ROLLBACK_RECOMMENDED",
+      "ROLLBACK_RECOMMENDED",
+      "ROLLBACK_RECOMMENDED",
+      "ROLLBACK_RECOMMENDED"
+    ],
+    "mismatch_alarm": {
+      "fired_periods": [
+        601
+      ],
+      "true_mismatch_seeds": [
+        601,
+        701
+      ],
+      "deviation_by_period": [
+        {
+          "seed": 101,
+          "mismatched": false,
+          "deviation": null
+        },
+        {
+          "seed": 211,
+          "mismatched": false,
+          "deviation": 0.00564
+        },
+        {
+          "seed": 307,
+          "mismatched": false,
+          "deviation": 0.00274
+        },
+        {
+          "seed": 401,
+          "mismatched": false,
+          "deviation": 0.00163
+        },
+        {
+          "seed": 503,
+          "mismatched": false,
+          "deviation": 0.00213
+        },
+        {
+          "seed": 601,
+          "mismatched": true,
+          "deviation": 0.01313
+        },
+        {
+          "seed": 701,
+          "mismatched": true,
+          "deviation": 0.00169
+        }
+      ],
+      "note": "alarm semantics: fires at mismatch onset; the decayed store then adapts, so later mismatched periods may not fire"
+    },
+    "nu_trajectory": [
+      500.0,
+      500.0,
+      502.7,
+      507.1,
+      511.0,
+      512.4,
+      517.5
+    ],
+    "prior_pseudo_impressions": [
+      2.0,
+      2000.0,
+      2000.0,
+      2000.0,
+      2000.0,
+      2000.0,
+      2000.0
+    ]
+  },
+  "per_period_adaptive": [
+    {
+      "period_seed": 101,
+      "mismatched": false,
+      "traffic": 0.05,
+      "ate_error": -0.007231502094705734,
+      "moderation_rmse_spurious": 0.003787609183777702,
+      "decision": "ROLLBACK_RECOMMENDED",
+      "shrinkage_strength": 500.0,
+      "prior_deviation": null,
+      "mismatch_alarm": false,
+      "prior_pseudo_impressions": 2.0,
+      "pid": {
+        "nu": 500.0,
+        "skipped": true
+      }
+    },
+    {
+      "period_seed": 211,
+      "mismatched": false,
+      "traffic": 0.1,
+      "ate_error": 0.0003648110800523255,
+      "moderation_rmse_spurious": 0.005339821579550804,
+      "decision": "ROLLBACK_RECOMMENDED",
+      "shrinkage_strength": 500.0,
+      "prior_deviation": 0.00564402390677742,
+      "mismatch_alarm": false,
+      "prior_pseudo_impressions": 2000.0,
+      "pid": {
+        "nu": 502.6965321943323,
+        "mean_abs_error": 0.009171431856471544,
+        "p": 0.004302859113882926,
+        "i": 0.0010757147784707314,
+        "d": 0.0
+      }
+    },
+    {
+      "period_seed": 307,
+      "mismatched": false,
+      "traffic": 0.2,
+      "ate_error": 0.0030901565444900105,
+      "moderation_rmse_spurious": 0.011756991070855705,
+      "decision": "ROLLBACK_RECOMMENDED",
+      "shrinkage_strength": 502.6965321943323,
+      "prior_deviation": 0.002739961712578889,
+      "mismatch_alarm": false,
+      "prior_pseudo_impressions": 2000.0000000000002,
+      "pid": {
+        "nu": 507.095664795175,
+        "mean_abs_error": 0.011322586871142543,
+        "p": 0.005593552122685526,
+        "i": 0.002474102809142113,
+        "d": 0.0006453465044012997
+      }
+    },
+    {
+      "period_seed": 401,
+      "mismatched": false,
+      "traffic": 0.5,
+      "ate_error": 0.0016214566511256155,
+      "moderation_rmse_spurious": 0.003926303633013881,
+      "decision": "ROLLBACK_RECOMMENDED",
+      "shrinkage_strength": 507.095664795175,
+      "prior_deviation": 0.0016255282970136804,
+      "mismatch_alarm": false,
+      "prior_pseudo_impressions": 2000.0,
+      "pid": {
+        "nu": 511.02716735380125,
+        "mean_abs_error": 0.009662622255095444,
+        "p": 0.004597573353057266,
+        "i": 0.0036234961474064294,
+        "d": -0.0004979893848141296
+      }
+    },
+    {
+      "period_seed": 503,
+      "mismatched": false,
+      "traffic": 1.0,
+      "ate_error": 0.0006973886100726558,
+      "moderation_rmse_spurious": 0.00793660585747682,
+      "decision": "ROLLBACK_RECOMMENDED",
+      "shrinkage_strength": 511.02716735380125,
+      "prior_deviation": 0.0021270855285673695,
+      "mismatch_alarm": false,
+      "prior_pseudo_impressions": 2000.0,
+      "pid": {
+        "nu": 512.3813190607239,
+        "mean_abs_error": 0.003258712660717975,
+        "p": 0.000755227596430785,
+        "i": 0.003812303046514126,
+        "d": -0.0019211728783132404
+      }
+    },
+    {
+      "period_seed": 601,
+      "mismatched": true,
+      "traffic": 1.0,
+      "ate_error": 0.000630240938953204,
+      "moderation_rmse_spurious": 0.0027090319075675677,
+      "decision": "ROLLBACK_RECOMMENDED",
+      "shrinkage_strength": 512.3813190607239,
+      "prior_deviation": 0.013126106508924896,
+      "mismatch_alarm": true,
+      "prior_pseudo_impressions": 2000.0,
+      "pid": {
+        "nu": 517.4922660972339,
+        "mean_abs_error": 0.008181694675096707,
+        "p": 0.0037090168050580245,
+        "i": 0.004739557247778632,
+        "d": 0.0014768946043136196
+      }
+    },
+    {
+      "period_seed": 701,
+      "mismatched": true,
+      "traffic": 1.0,
+      "ate_error": -0.0005931350760388643,
+      "moderation_rmse_spurious": 0.00833823107211251,
+      "decision": "ROLLBACK_RECOMMENDED",
+      "shrinkage_strength": 517.4922660972339,
+      "prior_deviation": 0.0016923428259879615,
+      "mismatch_alarm": false,
+      "prior_pseudo_impressions": 2000.0,
+      "pid": {
+        "nu": 521.5475588757524,
+        "mean_abs_error": 0.006686511866103329,
+        "p": 0.002811907119661997,
+        "i": 0.0054425340276941315,
+        "d": -0.00044855484269801357
+      }
+    }
+  ],
+  "store_final": {
+    "periods": 7,
+    "arms": {
+      "bundle.control": 4000.0,
+      "bundle.treatment": 4000.0
+    },
+    "shrinkage_strength": 521.5,
+    "tracked_segments": 4
+  }
+}

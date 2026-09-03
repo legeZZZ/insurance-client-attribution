@@ -1,0 +1,279 @@
+{
+  "benchmark_id": null,
+  "features": {
+    "schema_version": "1.0",
+    "row_count": 1200,
+    "observation_unit": "user_id",
+    "available_fields": [
+      "active",
+      "applied",
+      "assignment",
+      "cancel",
+      "channel",
+      "channel_quality",
+      "gross_premium",
+      "issued",
+      "net_premium",
+      "paid",
+      "product_mix",
+      "quoted",
+      "refund",
+      "season",
+      "treatment",
+      "user_id",
+      "user_quality"
+    ],
+    "funnel": {
+      "active": 1200,
+      "quoted": 490,
+      "applied": 217,
+      "paid": 112,
+      "issued": 65,
+      "net_premium": 60720.67,
+      "quote_rate": 0.408333,
+      "apply_rate": 0.442857,
+      "paid_rate": 0.516129,
+      "issue_rate": 0.580357,
+      "issued_user_rate": 0.054167,
+      "avg_premium": 934.16
+    },
+    "segments": {
+      "channel_distribution": {
+        "new": 379,
+        "owned": 821
+      },
+      "assignment_distribution": {
+        "randomized": 1200
+      },
+      "average_product_mix": 0.412189
+    },
+    "treatment": {
+      "column": "treatment",
+      "group_counts": {
+        "0": 610,
+        "1": 590
+      },
+      "group_outcomes": {
+        "0": {
+          "count": 610.0,
+          "issued": 0.045902,
+          "net_premium": 42.47123
+        },
+        "1": {
+          "count": 590.0,
+          "issued": 0.062712,
+          "net_premium": 59.005458
+        }
+      }
+    },
+    "data_quality": {
+      "missing_row_fields": [],
+      "missing_experiment_fields": [],
+      "null_counts": {
+        "active": 0,
+        "applied": 0,
+        "issued": 0,
+        "net_premium": 0,
+        "paid": 0,
+        "quoted": 0,
+        "treatment": 0,
+        "user_id": 0
+      },
+      "duplicate_count": 0,
+      "duplicate_rate": 0.0,
+      "window_closed": true,
+      "outcome_complete": true
+    }
+  },
+  "causal_readiness": {
+    "outcome": "CAUSAL_READY",
+    "estimand": "ITT on issued and net_premium",
+    "observation_unit": "user_id",
+    "attribution_window": "7d",
+    "identification_strategy": "randomized",
+    "assumptions": [
+      "stable metric contract",
+      "no cross-unit interference",
+      "complete outcome window"
+    ],
+    "diagnostics": {
+      "sample_size": 1200,
+      "group_counts": {
+        "0": 610,
+        "1": 590
+      },
+      "contract_missing_fields": [],
+      "missing_evidence": [],
+      "design_checks": {
+        "randomized_assignment": true,
+        "assignment_verified": true,
+        "trusted_assignment_provenance": true,
+        "both_arms_present": true,
+        "randomization_unit_matches": true
+      },
+      "power": {
+        "method": "two-arm binary normal approximation",
+        "alpha": 0.05,
+        "target_power": 0.8,
+        "minimum_detectable_effect": 0.05,
+        "baseline_rate": 0.045902,
+        "required_per_arm": 275,
+        "actual_min_arm": 590,
+        "passed": true
+      },
+      "governance_checks": {
+        "approval_required": true,
+        "guardrails_defined": true,
+        "stop_rule_defined": true,
+        "production_auto_action_disabled": true
+      }
+    },
+    "gates": [
+      {
+        "name": "semantic",
+        "passed": true,
+        "reason_code": "SEMANTIC_DEFINED"
+      },
+      {
+        "name": "data",
+        "passed": true,
+        "reason_code": "DATA_COMPLETE"
+      },
+      {
+        "name": "design",
+        "passed": true,
+        "reason_code": "RANDOM_ASSIGNMENT_VERIFIED"
+      },
+      {
+        "name": "statistics",
+        "passed": true,
+        "reason_code": "POWER_SCREEN_PASS"
+      },
+      {
+        "name": "governance",
+        "passed": true,
+        "reason_code": "GOVERNANCE_READY"
+      }
+    ],
+    "evidence_level": "L3",
+    "reason_codes": [],
+    "allowed_claim_type": "causal_effect"
+  },
+  "claim": {
+    "claim_id": "claim-001",
+    "claim_type": "causal_effect",
+    "evidence_level": "L3",
+    "allowed_verbs": [
+      "估计",
+      "在本实验中提升"
+    ],
+    "prohibited_actions": [
+      "未经审批上线排序"
+    ],
+    "uncertainty": "95% CI attached",
+    "statement": "经验证的随机分配满足因果门禁，可报告本实验中的 ITT 估计与置信区间。"
+  },
+  "estimate": {
+    "estimator": "difference in means (ITT)",
+    "confidence": 0.95,
+    "issued": {
+      "control_mean": 0.045902,
+      "treatment_mean": 0.062712,
+      "estimate": 0.01681,
+      "standard_error": 0.013104,
+      "ci95": [
+        -0.008873,
+        0.042493
+      ]
+    },
+    "net_premium": {
+      "control_mean": 42.47123,
+      "treatment_mean": 59.005458,
+      "estimate": 16.534228,
+      "standard_error": 12.274953,
+      "ci95": [
+        -7.524679,
+        40.593136
+      ]
+    }
+  },
+  "bayes_layer": {
+    "status": "ACTIVE",
+    "bundle_decision": {
+      "effect_absolute": 0.01679911711993671,
+      "effect_relative": 0.3547110567280675,
+      "probability_harm": 0.10018,
+      "probability_practical_harm": 0.02079,
+      "probability_practical_benefit": 0.6963,
+      "probability_practically_equivalent": 0.28291,
+      "credible_interval_95": [
+        -0.009003667886786066,
+        0.04309361856054388
+      ],
+      "decision": "CONTINUE_DATA_COLLECTION",
+      "model": "beta_binomial",
+      "evidence_level": "BUNDLE_EFFECT",
+      "prior": {
+        "alpha": 1.0,
+        "beta": 1.0
+      },
+      "draws": 100000
+    },
+    "decision_rule": {
+      "rollback": "P(effect < -delta) >= 0.95",
+      "ship": "P(effect > delta) >= 0.95",
+      "equivalent": "P(|effect| <= delta) >= 0.90",
+      "delta": 0.01
+    },
+    "hte": {
+      "model": "hierarchical_beta_binomial_partial_pooling",
+      "pooled_effect_logit": 0.3213128293431202,
+      "shrinkage_strength": 500.0,
+      "discovery_mode": false,
+      "segments": [
+        {
+          "segment_id": "channel=new",
+          "impressions": 379,
+          "effect_raw": 0.018089232544708417,
+          "effect_shrunk": 0.01604992679742767,
+          "standard_error_raw": 0.025095228193104054,
+          "standard_error_shrunk": 0.010820354363124502,
+          "shrinkage_weight": 0.4311717861205916,
+          "probability_practical_harm": 0.12752,
+          "probability_practical_benefit": 0.6244,
+          "shrunk_probability_practical_harm": 0.008031236262684316,
+          "moderation_raw": 0.0012856642705519096,
+          "moderation_shrunk": -0.0007536414767288363,
+          "prob_moderation_worse_raw": 0.41386,
+          "prob_moderation_worse_shrunk": 0.3473659310144287,
+          "credible_interval_95": [
+            -0.03079024731296794,
+            0.06795102344649281
+          ],
+          "evidence_level": "HETEROGENEOUS_TREATMENT_EFFECT"
+        },
+        {
+          "segment_id": "channel=owned",
+          "impressions": 821,
+          "effect_raw": 0.01620039251625538,
+          "effect_shrunk": 0.015558356378758591,
+          "standard_error_raw": 0.015617843290574796,
+          "standard_error_shrunk": 0.009706471870977978,
+          "shrinkage_weight": 0.6214988644965935,
+          "probability_practical_harm": 0.04452,
+          "probability_practical_benefit": 0.65558,
+          "shrunk_probability_practical_harm": 0.004230156824462483,
+          "moderation_raw": -0.0006031757579011282,
+          "moderation_shrunk": -0.0012452118953979168,
+          "prob_moderation_worse_raw": 0.4167,
+          "prob_moderation_worse_shrunk": 0.3494397519755285,
+          "credible_interval_95": [
+            -0.014218916168739087,
+            0.04744732176409515
+          ],
+          "evidence_level": "HETEROGENEOUS_TREATMENT_EFFECT"
+        }
+      ]
+    }
+  }
+}

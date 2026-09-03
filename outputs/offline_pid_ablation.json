@@ -1,0 +1,325 @@
+{
+  "ablation": "offline single-round: fixed shrinkage strength vs PID-adaptive strength vs PID + Student-t random effects",
+  "parameter_definitions": {
+    "pid_nu_legacy_label": "legacy pseudo-impression shrinkage strength; this is not the Student-t degrees of freedom",
+    "student_t_nu": 4.0,
+    "student_t_scale": "tau; SD=tau*sqrt(nu/(nu-2))",
+    "tau_handling": "legacy shrinkage variance converted to Student-t scale because this ablation intentionally compares the historical PID control"
+  },
+  "seeds": {
+    "matched": [
+      101,
+      211,
+      307,
+      401,
+      503
+    ],
+    "mismatched": [
+      601,
+      701
+    ]
+  },
+  "shrinkage_strength_trajectory": [
+    {
+      "seed": 101,
+      "shrinkage_strength_before": 500.0,
+      "shrinkage_strength_after": 499.53
+    },
+    {
+      "seed": 211,
+      "shrinkage_strength_before": 500.0,
+      "shrinkage_strength_after": 500.0
+    },
+    {
+      "seed": 307,
+      "shrinkage_strength_before": 500.0,
+      "shrinkage_strength_after": 500.41
+    },
+    {
+      "seed": 401,
+      "shrinkage_strength_before": 500.0,
+      "shrinkage_strength_after": 500.59
+    },
+    {
+      "seed": 503,
+      "shrinkage_strength_before": 500.0,
+      "shrinkage_strength_after": 500.88
+    },
+    {
+      "seed": 601,
+      "shrinkage_strength_before": 500.0,
+      "shrinkage_strength_after": 499.76
+    },
+    {
+      "seed": 701,
+      "shrinkage_strength_before": 500.0,
+      "shrinkage_strength_after": 501.13
+    }
+  ],
+  "summary_means": {
+    "fixed_v500_gaussian": {
+      "direction_hit": 1.0,
+      "false_positives": 0.0,
+      "moderation_rmse": 0.004496,
+      "mean_interval_width": 0.015058,
+      "shrinkage_strength_used": 500.0,
+      "tau_scale_used": 0.016671,
+      "random_effect_variance": 0.00028,
+      "brier": 0.035655,
+      "brier_adaptive": 0.035409,
+      "decision_correct": 1.0
+    },
+    "pid_adaptive_gaussian": {
+      "direction_hit": 1.0,
+      "false_positives": 0.0,
+      "moderation_rmse": 0.004496,
+      "mean_interval_width": 0.015058,
+      "shrinkage_strength_used": 500.328571,
+      "tau_scale_used": 0.016666,
+      "random_effect_variance": 0.000279,
+      "brier": 0.035655,
+      "brier_adaptive": 0.035409,
+      "decision_correct": 1.0
+    },
+    "pid_adaptive_student_t": {
+      "direction_hit": 1.0,
+      "false_positives": 0.0,
+      "moderation_rmse": 0.004108,
+      "mean_interval_width": 0.014442,
+      "shrinkage_strength_used": 500.328571,
+      "tau_scale_used": 0.011784,
+      "random_effect_variance": 0.000279,
+      "brier": 0.035655,
+      "brier_adaptive": 0.035409,
+      "decision_correct": 1.0
+    }
+  },
+  "offline_metrics_equivalent_fixed_vs_pid": true,
+  "per_seed": [
+    {
+      "seed": 101,
+      "mismatched": false,
+      "brier": 0.03223,
+      "fixed": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.002736,
+        "mean_interval_width": 0.014421,
+        "shrinkage_strength_used": 500.0,
+        "tau_scale_used": 0.01590917,
+        "random_effect_variance": 0.0002531017
+      },
+      "pid": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.002736,
+        "mean_interval_width": 0.014422,
+        "shrinkage_strength_used": 499.5,
+        "tau_scale_used": 0.01591669,
+        "random_effect_variance": 0.0002533412
+      },
+      "pid_t": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.002628,
+        "mean_interval_width": 0.013727,
+        "shrinkage_strength_used": 499.5,
+        "tau_scale_used": 0.0112548,
+        "random_effect_variance": 0.0002533412
+      }
+    },
+    {
+      "seed": 211,
+      "mismatched": false,
+      "brier": 0.03193,
+      "fixed": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.003786,
+        "mean_interval_width": 0.013983,
+        "shrinkage_strength_used": 500.0,
+        "tau_scale_used": 0.01530221,
+        "random_effect_variance": 0.0002341576
+      },
+      "pid": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.003786,
+        "mean_interval_width": 0.013983,
+        "shrinkage_strength_used": 500.0,
+        "tau_scale_used": 0.01530216,
+        "random_effect_variance": 0.0002341562
+      },
+      "pid_t": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.003482,
+        "mean_interval_width": 0.013399,
+        "shrinkage_strength_used": 500.0,
+        "tau_scale_used": 0.01082026,
+        "random_effect_variance": 0.0002341562
+      }
+    },
+    {
+      "seed": 307,
+      "mismatched": false,
+      "brier": 0.03286,
+      "fixed": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.00439,
+        "mean_interval_width": 0.014759,
+        "shrinkage_strength_used": 500.0,
+        "tau_scale_used": 0.0164012,
+        "random_effect_variance": 0.0002689995
+      },
+      "pid": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.004389,
+        "mean_interval_width": 0.014759,
+        "shrinkage_strength_used": 500.4,
+        "tau_scale_used": 0.01639449,
+        "random_effect_variance": 0.0002687793
+      },
+      "pid_t": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.003912,
+        "mean_interval_width": 0.014149,
+        "shrinkage_strength_used": 500.4,
+        "tau_scale_used": 0.01159265,
+        "random_effect_variance": 0.0002687793
+      }
+    },
+    {
+      "seed": 401,
+      "mismatched": false,
+      "brier": 0.03101,
+      "fixed": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.004615,
+        "mean_interval_width": 0.013886,
+        "shrinkage_strength_used": 500.0,
+        "tau_scale_used": 0.01564287,
+        "random_effect_variance": 0.0002446993
+      },
+      "pid": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.004615,
+        "mean_interval_width": 0.013886,
+        "shrinkage_strength_used": 500.6,
+        "tau_scale_used": 0.01563372,
+        "random_effect_variance": 0.0002444132
+      },
+      "pid_t": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.004139,
+        "mean_interval_width": 0.013447,
+        "shrinkage_strength_used": 500.6,
+        "tau_scale_used": 0.01105471,
+        "random_effect_variance": 0.0002444132
+      }
+    },
+    {
+      "seed": 503,
+      "mismatched": false,
+      "brier": 0.0326,
+      "fixed": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.005734,
+        "mean_interval_width": 0.014629,
+        "shrinkage_strength_used": 500.0,
+        "tau_scale_used": 0.01619244,
+        "random_effect_variance": 0.000262195
+      },
+      "pid": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.005733,
+        "mean_interval_width": 0.014628,
+        "shrinkage_strength_used": 500.9,
+        "tau_scale_used": 0.01617819,
+        "random_effect_variance": 0.0002617339
+      },
+      "pid_t": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.005188,
+        "mean_interval_width": 0.014059,
+        "shrinkage_strength_used": 500.9,
+        "tau_scale_used": 0.01143971,
+        "random_effect_variance": 0.0002617339
+      }
+    },
+    {
+      "seed": 601,
+      "mismatched": true,
+      "brier": 0.04439,
+      "fixed": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.004223,
+        "mean_interval_width": 0.016951,
+        "shrinkage_strength_used": 500.0,
+        "tau_scale_used": 0.01882097,
+        "random_effect_variance": 0.0003542288
+      },
+      "pid": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.004223,
+        "mean_interval_width": 0.016952,
+        "shrinkage_strength_used": 499.8,
+        "tau_scale_used": 0.01882557,
+        "random_effect_variance": 0.0003544021
+      },
+      "pid_t": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.003995,
+        "mean_interval_width": 0.016116,
+        "shrinkage_strength_used": 499.8,
+        "tau_scale_used": 0.01331169,
+        "random_effect_variance": 0.0003544021
+      }
+    },
+    {
+      "seed": 701,
+      "mismatched": true,
+      "brier": 0.04456,
+      "fixed": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.005991,
+        "mean_interval_width": 0.016777,
+        "shrinkage_strength_used": 500.0,
+        "tau_scale_used": 0.0184301,
+        "random_effect_variance": 0.0003396687
+      },
+      "pid": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.005989,
+        "mean_interval_width": 0.016775,
+        "shrinkage_strength_used": 501.1,
+        "tau_scale_used": 0.01840932,
+        "random_effect_variance": 0.0003389029
+      },
+      "pid_t": {
+        "direction_hit": 1,
+        "false_positives": 0,
+        "moderation_rmse": 0.005413,
+        "mean_interval_width": 0.016197,
+        "shrinkage_strength_used": 501.1,
+        "tau_scale_used": 0.01301735,
+        "random_effect_variance": 0.0003389029
+      }
+    }
+  ],
+  "conclusion": "离线单轮评估下，PID 控制的旧 shrinkage strength 只从约 500 小幅变化到 501；Gaussian 固定值与 PID 路径的决策和误差基本一致。真实 Student-t 随机效应路径的平均 moderation RMSE 为 0.004108，Gaussian PID 为 0.004496；平均区间宽度分别为 0.014442 和 0.015058。因此 Student-t 已经实际进入点估计和区间计算，不能再沿用旧版“与 Gaussian 完全相同”的结论。"
+}

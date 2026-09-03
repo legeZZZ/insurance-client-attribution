@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+.git/
+.pytest_cache/
+.mypy_cache/
+outputs/*.png
+*.zip
+*.ppt
+*.pptx

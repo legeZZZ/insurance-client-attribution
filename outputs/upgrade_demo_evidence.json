@@ -1,0 +1,323 @@
+{
+  "schema_version": "upgrade-replay-1.0",
+  "generated_at": "2026-08-30T19:17:46+00:00",
+  "mode": "competition_deidentified",
+  "adapter_profile": "authorized_adapter_compatible",
+  "n1": {
+    "source_id": "authorized.deidentified-events",
+    "source_contract_valid": true,
+    "events_ingested": 2,
+    "mapping": {
+      "mapped": [
+        {
+          "onset_day": 17,
+          "event_id": "promo_618_2024",
+          "kind": "seasonality",
+          "desc": "促销季公开日历事件",
+          "lag_days": 0,
+          "claim_type": "TEMPORAL_ASSOCIATION",
+          "note": "时间对齐的外生事件线索；不作因果断言。"
+        },
+        {
+          "onset_day": 62,
+          "event_id": "reg_baoxing_heyi",
+          "kind": "regulation",
+          "desc": "监管政策公开事件",
+          "lag_days": 0,
+          "claim_type": "TEMPORAL_ASSOCIATION",
+          "note": "时间对齐的外生事件线索；不作因果断言。"
+        }
+      ],
+      "unmapped": [
+        {
+          "onset_day": 40,
+          "alert_id": "a-40"
+        },
+        {
+          "onset_day": 78,
+          "alert_id": "a-78"
+        }
+      ],
+      "unused_events": [],
+      "coverage": {
+        "detected_anomalies": 4,
+        "mapped": 2,
+        "mapping_coverage": 0.5,
+        "timeline_utilization": 1.0,
+        "unmapped_policy": "未映射异常保持 UNEXPLAINED，不强行挂靠事件。"
+      }
+    },
+    "mapping_coverage": 0.5,
+    "unmapped_policy": "UNEXPLAINED",
+    "factor_rag": {
+      "retrieval": {
+        "query": "竞品",
+        "candidate_count": 1,
+        "candidates": [
+          {
+            "factor_id": "external.competitor_campaign",
+            "name": "竞品营销活动",
+            "description": "授权或公开来源中观察到的竞品投放/促销活动",
+            "source_type": "authorized_external",
+            "scope": {},
+            "aliases": [
+              "竞品",
+              "同行活动",
+              "competitor campaign"
+            ],
+            "status": "active",
+            "license_ref": "competition-deidentified",
+            "valid_from": null,
+            "valid_to": null,
+            "metadata": {
+              "kind": "competitor_marketing"
+            },
+            "updated_at": "2026-08-30T19:17:46+00:00",
+            "evidence": [
+              {
+                "evidence_id": "sha256:705f04c6cefeb8de",
+                "factor_id": "external.competitor_campaign",
+                "evidence_type": "public_event_snapshot",
+                "source_uri": "deidentified://authorized-event-feed/promo_618_2024",
+                "observed_at": "2024-06-18",
+                "excerpt": "公开营销活动快照（演示数据）",
+                "content_digest": null,
+                "license_ref": "competition-deidentified",
+                "metadata": {},
+                "created_at": "2026-08-30T19:17:46+00:00"
+              }
+            ],
+            "snapshots": [],
+            "production_eligible": true,
+            "eligibility_reason": "source_and_evidence_license_present",
+            "retrieval_basis": "structured_filter+fts5+provenance"
+          }
+        ],
+        "claim_policy": "retrieval supplies candidates and evidence only; no causal conclusion"
+      },
+      "validation_plan": {
+        "plan_id": "validation:external.competitor_campaign",
+        "factor_id": "external.competitor_campaign",
+        "route": "holdout_then_quasi_experiment",
+        "design": "lagged_association_as_screen_only_then_intervention",
+        "metric_contract": {
+          "name": "issued_policies",
+          "unit": "count",
+          "estimand": "rate difference"
+        },
+        "discovery_window": [
+          0,
+          59
+        ],
+        "holdout_window": [
+          60,
+          89
+        ],
+        "selected_lag_days": null,
+        "target_scope": {
+          "scope_id": "global"
+        },
+        "target_window": [
+          90,
+          103
+        ],
+        "experimentability": "external_or_observational",
+        "next_window_action": "holdout_then_quasi_experiment",
+        "experiment_spec": null,
+        "primary_estimand": "rate difference",
+        "gates": [
+          "候选必须来自授权数据入口并保留 content_digest/license_ref。",
+          "先在 holdout 复核方向、滞后和覆盖率，再进入验证实验。",
+          "无随机化时只允许 ASSOCIATION_ONLY/FACTOR_CANDIDATE；外部因子 A/B 只验证我方应对策略。",
+          "验证数据不能与候选搜索窗口复用。"
+        ],
+        "expected_outputs": [
+          "holdout_survives",
+          "effect_estimate",
+          "interval_or_posterior",
+          "assumptions",
+          "claim_type",
+          "evidence_refs"
+        ],
+        "claim_type_before_validation": "FACTOR_CANDIDATE",
+        "causal_claim_allowed": false
+      }
+    }
+  },
+  "n2": {
+    "intent": {
+      "intent": "line_b_monthly_review",
+      "metric": "issued_policies",
+      "requested_action": "explain_and_design_experiment",
+      "confidence": 0.94
+    },
+    "llm_fallback_used": true,
+    "trace_complete": true,
+    "statistics_and_governance_owned_by": "deterministic_pipeline"
+  },
+  "n3": {
+    "platform_mode": "dry_run",
+    "experiment": {
+      "experiment_id": "exp-001",
+      "status": "CREATED",
+      "platform_mode": "dry_run",
+      "assignment_provenance": "dry_run_experiment_platform",
+      "stable_randomization_unit": "hashed_subject_id",
+      "approval_ref": "approval-demo-001",
+      "design_digest": "sha256:a04d284bde73d2da",
+      "traffic_percent": 0
+    },
+    "canary": {
+      "experiment_id": "exp-001",
+      "status": "RUNNING",
+      "platform_mode": "dry_run",
+      "assignment_provenance": "dry_run_experiment_platform",
+      "stable_randomization_unit": "hashed_subject_id",
+      "approval_ref": "approval-demo-001",
+      "design_digest": "sha256:a04d284bde73d2da",
+      "traffic_percent": 5,
+      "side_effect": "none_dry_run"
+    },
+    "posterior": {
+      "effect_absolute": -0.0034956602549678045,
+      "effect_relative": -0.13930063304160106,
+      "probability_harm": 0.95031,
+      "probability_practical_harm": 0.24029,
+      "probability_practical_benefit": 3e-05,
+      "probability_practically_equivalent": 0.75968,
+      "credible_interval_95": [
+        -0.007646740326655965,
+        0.0006630690124778715
+      ],
+      "decision": "CONTINUE_DATA_COLLECTION",
+      "model": "beta_binomial",
+      "evidence_level": "BUNDLE_EFFECT",
+      "prior": {
+        "control": [
+          1.0,
+          1.0
+        ],
+        "treatment": [
+          1.0,
+          1.0
+        ]
+      },
+      "arm_shapes": {
+        "control": [
+          251.0,
+          9751.0
+        ],
+        "treatment": [
+          216.0,
+          9786.0
+        ]
+      },
+      "draws": 100000,
+      "input_validation": {
+        "status": "PASS",
+        "component": "bundle_compare",
+        "used_sample_count": 20000,
+        "excluded_sample_count": 0,
+        "exclusion_reasons": [],
+        "checks_performed": [
+          "finite",
+          "count_range"
+        ]
+      }
+    },
+    "guardrails": {
+      "error_rate": {
+        "value": 0.021,
+        "limit": 0.01
+      },
+      "latency_p95_ms": {
+        "value": 180,
+        "limit": 250
+      }
+    },
+    "guardrail_status": "BREACHED",
+    "recommended_action": "PAUSE_RECOMMENDED",
+    "requires_human_approval": true
+  },
+  "governance": {
+    "refused_without_randomization": true,
+    "external_events_are_causal": false,
+    "automatic_release_or_rollback": false,
+    "unknown_residual_reallocated": false
+  },
+  "trace": [
+    {
+      "trace_id": "upgrade-replay-20260824-001",
+      "stage": "n1",
+      "event": "event_ingest",
+      "status": "ok",
+      "at": "2026-08-30T19:17:46+00:00",
+      "source_id": "authorized.deidentified-events",
+      "count": 2,
+      "output_digest": "sha256:2b251e97a7489fe0"
+    },
+    {
+      "trace_id": "upgrade-replay-20260824-001",
+      "stage": "n1",
+      "event": "event_mapping",
+      "status": "ok",
+      "at": "2026-08-30T19:17:46+00:00",
+      "mapping_coverage": 0.5,
+      "unmapped_policy": "UNEXPLAINED"
+    },
+    {
+      "trace_id": "upgrade-replay-20260824-001",
+      "stage": "n1",
+      "event": "factor_rag_retrieval",
+      "status": "ok",
+      "at": "2026-08-30T19:17:46+00:00",
+      "candidate_count": 1,
+      "retrieval_basis": "structured_filter+fts5+provenance"
+    },
+    {
+      "trace_id": "upgrade-replay-20260824-001",
+      "stage": "n2",
+      "event": "local_llm_intent",
+      "status": "ok",
+      "at": "2026-08-30T19:17:46+00:00",
+      "provider": "local-open-source-adapter",
+      "output_digest": "sha256:319ac5daa451da18",
+      "latency_seconds": 0.000127
+    },
+    {
+      "trace_id": "upgrade-replay-20260824-001",
+      "stage": "n2",
+      "event": "rule_fallback",
+      "status": "degraded",
+      "at": "2026-08-30T19:17:46+00:00",
+      "reason": "local model timeout",
+      "output_digest": "sha256:cbb71b09f0edd5e2"
+    },
+    {
+      "trace_id": "upgrade-replay-20260824-001",
+      "stage": "n3",
+      "event": "experiment_created",
+      "status": "ok",
+      "at": "2026-08-30T19:17:46+00:00",
+      "experiment_id": "exp-001",
+      "approval_ref": "approval-demo-001"
+    },
+    {
+      "trace_id": "upgrade-replay-20260824-001",
+      "stage": "n3",
+      "event": "canary_started",
+      "status": "ok",
+      "at": "2026-08-30T19:17:46+00:00",
+      "traffic_percent": 5
+    },
+    {
+      "trace_id": "upgrade-replay-20260824-001",
+      "stage": "n3",
+      "event": "guardrail_evaluated",
+      "status": "breached",
+      "at": "2026-08-30T19:17:46+00:00",
+      "decision": "PAUSE_RECOMMENDED"
+    }
+  ],
+  "runtime_seconds": 0.018
+}

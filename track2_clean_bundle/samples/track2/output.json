@@ -1,0 +1,15 @@
+{
+  "track": "track2",
+  "expected_cases": {
+    "A": {"final_state": "CLOSED", "causal_outcome": "DESCRIPTIVE_ONLY", "claim_type": "descriptive_only"},
+    "B": {"final_state": "CLOSED", "causal_outcome": "DATA_INSUFFICIENT", "claim_type": "descriptive_only"},
+    "C": {"final_state": "CLOSED", "causal_outcome": "CAUSAL_READY", "claim_type": "causal_effect"}
+  },
+  "evidence_requirements": [
+    "MetricContract",
+    "DataQualityReport",
+    "EvidenceReport",
+    "ClaimLedger",
+    "MonitoringReport"
+  ]
+}

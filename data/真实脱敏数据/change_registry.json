@@ -1,0 +1,18 @@
+[
+  {
+    "change_id": "chg_ranking",
+    "start_day": 15,
+    "scope": "search_ranking",
+    "experiment_id": "exp_ranking",
+    "owner": "growth",
+    "registered": true
+  },
+  {
+    "change_id": "chg_subsidy",
+    "start_day": 30,
+    "scope": "subsidy_push",
+    "experiment_id": "exp_subsidy",
+    "owner": "growth",
+    "registered": true
+  }
+]

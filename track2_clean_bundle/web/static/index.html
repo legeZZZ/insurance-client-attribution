@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>赛道二控制台 | GOAI 控制塔</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark" aria-hidden="true">02</div>
+    <div>
+      <p class="eyebrow">GOAI / 赛道二 / 保险增长归因</p>
+      <h1>赛道二控制台</h1>
+    </div>
+    <div class="top-status"><span class="status-dot"></span><span id="runtime-status">本地运行时</span></div>
+  </header>
+
+  <main class="shell">
+    <section class="command-bar">
+      <div>
+        <p class="eyebrow">保险增长归因</p>
+        <h2>赛道二案例运行与证据面板</h2>
+      </div>
+      <div class="commands">
+        <label>案例
+          <select id="case">
+            <option value="A">A / 描述性降级</option>
+            <option value="B">B / 数据不足拒答</option>
+            <option value="C">C / 随机实验</option>
+            <option value="REAL">真实数据 / UCI 银行营销历史</option>
+          </select>
+        </label>
+        <button class="primary-action" id="run-button"><span aria-hidden="true">▶</span> 运行案例</button>
+      </div>
+    </section>
+
+    <div class="workspace-grid">
+      <aside class="rail">
+        <section class="panel panel-tight">
+          <div class="panel-heading"><span>运行状态</span><span id="run-state" class="state-pill">空闲</span></div>
+          <dl class="facts">
+            <div><dt>任务</dt><dd id="task-id">-</dd></div>
+            <div><dt>追踪</dt><dd id="trace-id">-</dd></div>
+            <div><dt>状态版本</dt><dd id="state-version">-</dd></div>
+            <div><dt>证据数</dt><dd id="evidence-count">-</dd></div>
+          </dl>
+        </section>
+        <section class="panel panel-tight">
+          <div class="panel-heading"><span>团队</span><span id="agent-count">- 个 Agent</span></div>
+          <div id="agent-list" class="tag-list"></div>
+          <div id="topology-list" class="topology-list"></div>
+        </section>
+        <section class="panel panel-tight">
+          <div class="panel-heading"><span>技能</span><span id="skill-count">- 个 Skill</span></div>
+          <div id="skill-list" class="tag-list"></div>
+        </section>
+      </aside>
+
+      <section class="main-column">
+        <section class="panel state-panel">
+          <div class="panel-heading"><span>状态 / 追踪</span><span id="provider-label">-</span></div>
+          <div id="state-timeline" class="state-timeline"></div>
+        </section>
+        <section class="panel metrics-panel" id="metrics-panel">
+          <div class="panel-heading"><span>运行指标</span><span id="evidence-level" class="level-label">-</span></div>
+          <div id="metrics" class="metric-grid"></div>
+        </section>
+        <section class="panel claim-panel" id="claim-panel">
+          <div class="panel-heading"><span>声明台账</span><span id="claim-type">-</span></div>
+          <div id="claim-content" class="claim-content"></div>
+        </section>
+      </section>
+
+      <aside class="rail evidence-rail">
+        <section class="panel panel-tight">
+          <div class="panel-heading"><span>产物</span><span id="artifact-count">-</span></div>
+          <div id="artifact-list" class="artifact-list"></div>
+        </section>
+        <section class="panel panel-tight evidence-panel">
+          <div class="panel-heading"><span>证据</span><span class="digest-mark">SHA-256 摘要</span></div>
+          <div id="evidence-list" class="evidence-list"></div>
+        </section>
+      </aside>
+    </div>
+  </main>
+  <script src="bootstrap-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

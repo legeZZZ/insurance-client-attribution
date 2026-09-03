@@ -1,0 +1,100 @@
+{
+  "catalog_version": "2026-08-01",
+  "principle": "Use official source terms. A GitHub repository license does not relicense mirrored data.",
+  "datasets": [
+    {
+      "dataset_id": "uci-bank-marketing",
+      "name": "UCI Bank Marketing",
+      "official_url": "https://archive.ics.uci.edu/dataset/222/bank+marketing",
+      "domain": "financial product telemarketing",
+      "records": 45211,
+      "features": 16,
+      "license": "CC BY 4.0",
+      "license_status": "verified on official UCI page",
+      "redistribution": "allowed with attribution",
+      "integration_status": "downloaded, SHA-256 verified and analyzed",
+      "adapter": "runtime.real_data",
+      "verified_sha256": "94a5cb4b7d461dab12f7f6123723054911fbdd28d84a2c4ec92378af019be686",
+      "verified_rows": 45211,
+      "recommended_use": ["conversion feature adapter", "candidate ranking baseline", "time-leakage evaluation"],
+      "causal_evidence": false,
+      "limitations": ["not randomized", "call duration is post-treatment leakage for pre-call prediction", "banking rather than insurance"]
+    },
+    {
+      "dataset_id": "uci-online-retail-ii",
+      "name": "UCI Online Retail II",
+      "official_url": "https://archive.ics.uci.edu/dataset/502/online+retail+ii",
+      "domain": "online retail transactions",
+      "records": 1067371,
+      "features": 8,
+      "license": "CC BY 4.0",
+      "license_status": "verified on official UCI page",
+      "redistribution": "allowed with attribution",
+      "recommended_use": ["transaction and cancellation adapter", "metric-contract regression", "large-table query evaluation"],
+      "causal_evidence": false,
+      "limitations": ["transaction-only data", "no exposure or treatment assignment", "retail revenue is only a premium analogue"]
+    },
+    {
+      "dataset_id": "criteo-uplift",
+      "name": "Criteo Uplift Prediction Dataset",
+      "official_url": "https://ailab.criteo.com/criteo-uplift-prediction-dataset/",
+      "domain": "advertising incrementality experiments",
+      "records": 25000000,
+      "features": 11,
+      "license": "CC BY-NC-SA 4.0",
+      "license_status": "verified on Criteo AI Lab page",
+      "redistribution": "non-commercial and share-alike restrictions; do not bundle without review",
+      "recommended_use": ["randomized causal-readiness benchmark", "ITT and uplift estimator evaluation", "confidence-interval calibration"],
+      "causal_evidence": true,
+      "limitations": ["anonymous projected features", "advertising rather than insurance", "large download", "non-commercial restriction"]
+    },
+    {
+      "dataset_id": "retailrocket-ecommerce",
+      "name": "Retailrocket Recommender System Dataset",
+      "official_url": "https://www.kaggle.com/datasets/retailrocket/ecommerce-dataset",
+      "domain": "e-commerce behavior funnel",
+      "records": 2756101,
+      "features": null,
+      "license": "CC BY-NC-SA 4.0",
+      "license_status": "verified in Kaggle dataset metadata",
+      "redistribution": "non-commercial and share-alike restrictions; download requires Kaggle access",
+      "recommended_use": ["view-addtocart-transaction funnel adapter", "event alignment", "schema and temporal perturbation tests"],
+      "causal_evidence": false,
+      "limitations": ["no randomized treatment", "hashed item properties", "visitor history covers 4.5 months", "non-commercial restriction"]
+    },
+    {
+      "dataset_id": "olist-brazilian-ecommerce",
+      "name": "Olist Brazilian E-Commerce Public Dataset",
+      "official_url": "https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce",
+      "domain": "marketplace orders and sellers",
+      "records": 100000,
+      "features": null,
+      "license": "CC BY-NC-SA 4.0",
+      "license_status": "verified in Kaggle dataset metadata",
+      "redistribution": "non-commercial and share-alike restrictions; download requires Kaggle access",
+      "recommended_use": ["multi-table sales schema adapter", "seller and product mix decomposition", "payment and delivery quality features"],
+      "causal_evidence": false,
+      "limitations": ["orders from 2016-2018", "no impression funnel", "no randomized treatment", "non-commercial restriction"]
+    },
+    {
+      "dataset_id": "coil2000",
+      "name": "Insurance Company Benchmark (CoIL 2000)",
+      "official_url": "https://archive.ics.uci.edu/dataset/125/insurance+company+benchmark+coil+2000",
+      "domain": "insurance cross-sell and product ownership",
+      "records": 9000,
+      "features": 86,
+      "license": "CONFLICT: UCI page says CC BY 4.0; archive documentation restricts use to non-commercial research and education",
+      "license_status": "conflict verified; archive terms treated as controlling until permission is obtained",
+      "redistribution": "blocked for this project pending rights review or owner permission",
+      "recommended_use": ["local insurance schema study only", "cross-sell feature taxonomy only"],
+      "causal_evidence": false,
+      "limitations": ["no funnel timestamps", "no treatment assignment", "target is mobile-home policy ownership", "license conflict"]
+    }
+  ],
+  "recommended_stack": {
+    "open_cc_by_baseline": ["uci-bank-marketing", "uci-online-retail-ii"],
+    "restricted_private_benchmark": ["criteo-uplift", "retailrocket-ecommerce", "olist-brazilian-ecommerce"],
+    "blocked_pending_review": ["coil2000"],
+    "required_final_evidence": ["authorized aggregate insurance shadow data", "approved randomized insurance experiment metadata"]
+  }
+}

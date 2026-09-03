@@ -1,0 +1,126 @@
+{
+  "scenario": "90-day panel, 2 public events + 1 unregistered change (competition deidentified)",
+  "detected_alerts": [
+    {
+      "alert": "UNEXPLAINED_STEP_SUSPECTED",
+      "onset_day": 17,
+      "step_score": -27.044636712681484,
+      "absolute_step": 18.4,
+      "direction": "down",
+      "note": "未注册变更，或已注册变动的线上效果与实验 ATT 不一致（解释赤字）；上涨和下降均检测。"
+    },
+    {
+      "alert": "UNEXPLAINED_STEP_SUSPECTED",
+      "onset_day": 24,
+      "step_score": 23.123039806072487,
+      "absolute_step": 21.93,
+      "direction": "up",
+      "note": "未注册变更，或已注册变动的线上效果与实验 ATT 不一致（解释赤字）；上涨和下降均检测。"
+    },
+    {
+      "alert": "UNEXPLAINED_STEP_SUSPECTED",
+      "onset_day": 40,
+      "step_score": -27.000514480538826,
+      "absolute_step": 16.74,
+      "direction": "down",
+      "note": "未注册变更，或已注册变动的线上效果与实验 ATT 不一致（解释赤字）；上涨和下降均检测。"
+    },
+    {
+      "alert": "UNEXPLAINED_STEP_SUSPECTED",
+      "onset_day": 62,
+      "step_score": -29.204886139111764,
+      "absolute_step": 15.22,
+      "direction": "down",
+      "note": "未注册变更，或已注册变动的线上效果与实验 ATT 不一致（解释赤字）；上涨和下降均检测。"
+    }
+  ],
+  "timeline": [
+    {
+      "event_id": "promo_618_2024",
+      "date": "2024-06-18",
+      "kind": "seasonality",
+      "desc": "618 电商大促分流用户注意力（公开日历事件）"
+    },
+    {
+      "event_id": "lpr_2024_07",
+      "date": "2024-07-22",
+      "kind": "macro_rate",
+      "desc": "LPR 一年期/五年期各下调 10bp（公开发布）"
+    },
+    {
+      "event_id": "reg_baoxing_heyi",
+      "date": "2024-08-02",
+      "kind": "regulation",
+      "desc": "银保渠道费用规范持续执行（报行合一，公开政策）"
+    },
+    {
+      "event_id": "school_season_2024_09",
+      "date": "2024-09-01",
+      "kind": "seasonality",
+      "desc": "开学季（周期性公开日历事件）"
+    }
+  ],
+  "mapping": {
+    "mapped": [
+      {
+        "onset_day": 17,
+        "event_id": "promo_618_2024",
+        "kind": "seasonality",
+        "desc": "618 电商大促分流用户注意力（公开日历事件）",
+        "lag_days": 0,
+        "claim_type": "TEMPORAL_ASSOCIATION",
+        "note": "时间对齐的外生事件线索；不作因果断言。"
+      },
+      {
+        "onset_day": 62,
+        "event_id": "reg_baoxing_heyi",
+        "kind": "regulation",
+        "desc": "银保渠道费用规范持续执行（报行合一，公开政策）",
+        "lag_days": 0,
+        "claim_type": "TEMPORAL_ASSOCIATION",
+        "note": "时间对齐的外生事件线索；不作因果断言。"
+      }
+    ],
+    "unmapped": [
+      {
+        "alert": "UNEXPLAINED_STEP_SUSPECTED",
+        "onset_day": 24,
+        "step_score": 23.123039806072487,
+        "absolute_step": 21.93,
+        "direction": "up",
+        "note": "未注册变更，或已注册变动的线上效果与实验 ATT 不一致（解释赤字）；上涨和下降均检测。"
+      },
+      {
+        "alert": "UNEXPLAINED_STEP_SUSPECTED",
+        "onset_day": 40,
+        "step_score": -27.000514480538826,
+        "absolute_step": 16.74,
+        "direction": "down",
+        "note": "未注册变更，或已注册变动的线上效果与实验 ATT 不一致（解释赤字）；上涨和下降均检测。"
+      }
+    ],
+    "unused_events": [
+      "lpr_2024_07",
+      "school_season_2024_09"
+    ],
+    "coverage": {
+      "detected_anomalies": 4,
+      "mapped": 2,
+      "mapping_coverage": 0.5,
+      "timeline_utilization": 0.5,
+      "unmapped_policy": "未映射异常保持 UNEXPLAINED，不强行挂靠事件。"
+    }
+  },
+  "verification": {
+    "truth_events_recalled": [
+      "promo_618_2024",
+      "reg_baoxing_heyi"
+    ],
+    "truth_events_total": [
+      "promo_618_2024",
+      "reg_baoxing_heyi"
+    ],
+    "unregistered_change_correctly_unmapped": true,
+    "note": "未注册产品变动不应挂靠任何公开事件——保持 UNEXPLAINED 为正确行为。"
+  }
+}

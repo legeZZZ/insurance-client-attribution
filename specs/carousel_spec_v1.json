@@ -1,0 +1,33 @@
+{
+  "spec_version": "growth-ui-spec/0.1",
+  "component": {"name": "Carousel", "version": "2026.07"},
+  "props": {
+    "layout": {"type": "string", "enum": ["overlay", "below_media", "split"], "default": "below_media",
+      "experiment": {"randomizable": true, "factor_id": "carousel.layout"}},
+    "media_aspect_ratio": {"type": "string", "enum": ["16:9", "4:3", "1:1"], "default": "16:9",
+      "experiment": {"randomizable": true, "factor_id": "carousel.media_aspect_ratio"}},
+    "text_density": {"type": "string", "enum": ["low", "medium", "high"], "default": "medium",
+      "experiment": {"randomizable": true, "factor_id": "carousel.text_density"}},
+    "indicator_position": {"type": "string", "enum": ["inside_bottom", "outside_bottom", "hidden"], "default": "outside_bottom",
+      "experiment": {"randomizable": true, "factor_id": "carousel.indicator_position"}},
+    "image_component": {"type": "string", "enum": ["legacy", "v2"], "default": "legacy",
+      "experiment": {"randomizable": true, "factor_id": "carousel.image_component"}}
+  },
+  "telemetry": {
+    "exposure_event": "carousel_impression",
+    "click_event": "carousel_click",
+    "fields": ["spec_version", "variant_id", "device_type", "render_latency_ms", "image_load_time_ms"]
+  },
+  "experiment": {
+    "randomization_unit": "user",
+    "primary_metric": "carousel.qualified_ctr",
+    "guardrails": ["carousel.render_success_rate", "carousel.media_load_success_rate", "page.latency"],
+    "pre_treatment_covariates": ["device_type", "channel", "placement", "user_new_old"],
+    "never_adjust_for": ["post_click_dwell_time"]
+  },
+  "causal_roles": {
+    "treatment": ["carousel.layout", "carousel.media_aspect_ratio", "carousel.text_density", "carousel.indicator_position"],
+    "runtime_quality": ["carousel.render_latency_ms", "carousel.image_load_time_ms", "carousel.media_load_success_rate"],
+    "outcome": ["carousel.qualified_ctr"]
+  }
+}
