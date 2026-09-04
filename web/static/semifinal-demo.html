@@ -178,10 +178,46 @@
     .package-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:14px; }.package-item {padding:10px;border:1px solid var(--line);background:#fbfcfc}.package-item b{display:block;font-size:12px}.package-item span{color:var(--muted);font-size:11px}
     .proof-image { width: 100%; display:block; border:1px solid var(--line); background:#fff; }
     .file-link { color: #0a6f78; text-decoration: none; font-weight: 700; }.file-link:hover{text-decoration:underline}
+    .evidence-open { display:inline-flex; align-items:center; gap:7px; border:1px solid #62c7c1; padding:7px 10px; color:#057b77; background:#e9fbf8; font-weight:700; cursor:pointer; transition:transform .18s ease,box-shadow .18s ease,background .18s ease; }
+    .evidence-open:hover { transform:translateY(-1px); background:#d8f7f2; box-shadow:0 5px 14px rgba(0,132,126,.14); }
+    .evidence-open:focus-visible { outline:3px solid rgba(0,168,168,.22); outline-offset:2px; }
+    .evidence-open .evidence-icon { width:18px; height:18px; display:grid; place-items:center; border:1px solid currentColor; font:12px ui-monospace,monospace; }
+    .evidence-modal { position:fixed; inset:0; z-index:50; display:none; align-items:center; justify-content:center; padding:20px; background:rgba(6,22,30,.68); backdrop-filter:blur(5px); }
+    .evidence-modal.open { display:flex; animation:evidenceFade .18s ease-out; }
+    .evidence-dialog { width:min(760px,100%); max-height:min(760px,calc(100vh - 40px)); overflow:auto; border:1px solid #4aa9a5; background:#f7fbfb; box-shadow:0 22px 70px rgba(0,0,0,.34); }
+    .evidence-dialog-head { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; padding:18px 20px; color:#eafffb; background:#09232e; border-bottom:1px solid #2d626b; }
+    .evidence-dialog-head p { margin:4px 0 0; color:#a9c9ce; font-size:11px; }
+    .evidence-dialog-head h2 { font-size:18px; }
+    .evidence-close { width:30px; height:30px; border:1px solid #57858b; color:#d8f5f2; background:transparent; font-size:20px; line-height:1; cursor:pointer; }
+    .evidence-close:hover { color:#fff; border-color:#8be5df; background:rgba(255,255,255,.08); }
+    .evidence-loading { display:grid; place-items:center; min-height:270px; padding:30px; text-align:center; color:#55717a; }
+    .evidence-spinner { width:30px; height:30px; margin-bottom:12px; border:3px solid #cce5e3; border-top-color:var(--cyan); border-radius:50%; animation:evidenceSpin .8s linear infinite; }
+    .evidence-body { padding:18px 20px 20px; }
+    .evidence-status { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; border-left:4px solid var(--cyan); background:#e5f8f5; color:#245d60; }
+    .evidence-status strong { color:#0a6f78; font-size:15px; }
+    .evidence-status small { color:#5b7a80; font-size:10px; }
+    .evidence-kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:12px; }
+    .evidence-kpi { min-width:0; padding:10px; border:1px solid var(--line); background:#fff; }
+    .evidence-kpi label { display:block; color:var(--muted); font-size:10px; }
+    .evidence-kpi b { display:block; margin-top:4px; color:#173d47; font-size:16px; overflow-wrap:anywhere; }
+    .evidence-kpi small { display:block; margin-top:3px; color:#688087; font-size:10px; }
+    .evidence-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+    .evidence-block { padding:12px; border:1px solid var(--line); background:#fff; }
+    .evidence-block h3 { color:#275761; font-size:12px; }
+    .evidence-block p { margin:5px 0 0; color:#5e777e; font-size:11px; line-height:1.6; }
+    .evidence-block strong { color:#173d47; }
+    .evidence-boundary { margin-top:12px; padding:11px 12px; border-left:3px solid var(--gold); background:var(--gold-soft); color:#71530d; font-size:11px; line-height:1.6; }
+    .evidence-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; padding-top:13px; border-top:1px solid var(--line); }
+    .evidence-action { display:inline-flex; align-items:center; gap:6px; padding:8px 10px; border:1px solid #b8d0d4; color:#315b65; background:#fff; text-decoration:none; font-size:11px; font-weight:700; }
+    .evidence-action.primary { border-color:#62c7c1; color:#057b77; background:#e9fbf8; }
+    .evidence-action:hover { border-color:var(--cyan); color:#057b77; }
+    .evidence-error { padding:20px; color:#853c39; background:var(--red-soft); border-left:3px solid var(--red); }
+    @keyframes evidenceFade { from { opacity:0; } to { opacity:1; } }
+    @keyframes evidenceSpin { to { transform:rotate(360deg); } }
     .footnote { margin-top: 18px; color: var(--muted); font-size: 11px; }
     @media (max-width: 1060px) { .grid.kpi{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:repeat(3,1fr)}.code-layout{grid-template-columns:220px minmax(0,1fr)} }
     .live-runner{border-top:4px solid var(--cyan);margin-bottom:14px}.runner-grid{display:grid;grid-template-columns:minmax(0,1.5fr) 220px 160px;gap:12px;align-items:end}.runner-field label{display:block;margin-bottom:5px;color:#46636b;font-size:11px;font-weight:700}.runner-field input,.runner-field select{width:100%;border:1px solid #cbd9dd;background:#fff;color:var(--ink);padding:9px 10px}.runner-button{width:100%;border:1px solid #087f7b;padding:10px;background:var(--cyan);color:#fff;font-weight:700}.runner-button:disabled{cursor:wait;opacity:.62}.runner-checks{display:flex;flex-wrap:wrap;gap:12px;margin-top:11px;color:#48636b;font-size:12px}.runner-checks label{display:flex;align-items:center;gap:5px}.runner-checks input{accent-color:var(--cyan)}.runner-note{margin:10px 0 0;color:var(--muted);font-size:11px}.launch-bar{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center;margin:13px 0 0;padding:9px 10px;background:#f5f8f9;border:1px solid var(--line)}.launch-bar code{overflow:auto;color:#2f515b;font:11px ui-monospace,monospace;white-space:nowrap}.tool-button{border:1px solid #bfcfd4;background:#fff;color:#355861;padding:6px 9px;font-size:11px}.tool-button:hover{border-color:var(--cyan);color:#087b77}.run-contract{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.contract-item{padding:9px 10px;border:1px solid var(--line);background:#fbfdfd}.contract-item label{display:block;color:#61777f;font:10px ui-monospace,monospace}.contract-item b{display:block;margin-top:3px;font-size:12px}.contract-item small{display:block;margin-top:3px;color:var(--muted);font-size:10px}.live-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:14px;margin-top:14px}.live-panel{min-width:0}.live-timeline{display:grid;gap:7px}.live-step{position:relative;overflow:hidden;display:grid;grid-template-columns:30px 1fr auto;gap:9px;align-items:start;padding:10px;border:1px solid var(--line);background:#fff}.live-step .step-no{width:24px;height:24px;display:grid;place-items:center;background:#edf4f5;color:#537078;font:11px ui-monospace,monospace}.live-step b{display:block;font-size:12px}.live-step small{color:var(--muted);font-size:11px}.step-detail{display:grid;grid-template-columns:1fr 1.2fr;gap:4px 8px;margin-top:7px;padding:7px 8px;background:#f5f9fa;color:#4c6870;font:10px/1.45 ui-monospace,monospace}.step-detail span{min-width:0;overflow-wrap:anywhere}.step-detail i{display:inline-block;margin-right:5px;color:#057c7b;font-style:normal;font-weight:700}.step-detail .step-out{grid-column:1/-1;color:#365960}.step-detail .step-out i{color:#1874c7}.live-step.running{border-color:#80d0ca;background:#f4fffd;box-shadow:0 0 0 2px rgba(0,167,160,.08)}.live-step.running:after{content:"";position:absolute;inset:0;width:36%;background:linear-gradient(90deg,transparent,rgba(63,224,209,.25),transparent);animation:scan 1.1s linear infinite}.live-step.running .step-no{background:var(--cyan);color:#fff;animation:pulseMark 1.1s ease-in-out infinite}.live-step.done{border-left:3px solid var(--green)}.live-step.warn{border-left:3px solid var(--gold)}@keyframes scan{from{transform:translateX(-130%)}to{transform:translateX(390%)}}@keyframes pulseMark{50%{box-shadow:0 0 0 5px rgba(0,167,160,.13)}}.live-empty{min-height:180px;display:grid;place-items:center;text-align:center;color:#7b8d93;border:1px dashed #c6d5d9;background:#fbfdfd}.live-empty b{display:block;color:#536b73;margin-bottom:4px}.live-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:11px}.live-fact{padding:10px;border:1px solid var(--line);background:#fff;min-width:0}.live-fact label{display:block;color:var(--muted);font-size:11px}.live-fact b{display:block;margin-top:3px;font-size:14px;overflow-wrap:anywhere}.live-fact small{display:block;color:#59727a;font-size:10px;margin-top:2px}.live-json{max-height:260px;overflow:auto;margin:0;padding:13px;background:#10242d;color:#cde8e5;font:11px/1.55 ui-monospace,monospace;white-space:pre-wrap}.live-alert{padding:10px 12px;margin-top:8px;border-left:3px solid var(--cyan);background:var(--cyan-soft);color:#20595a;font-size:12px}.live-alert.gold{border-color:var(--gold);background:var(--gold-soft);color:#71530d}.live-alert.red{border-color:var(--red);background:var(--red-soft);color:#853c39}.result-visuals{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.mini-chart{height:210px;padding:12px;border:1px solid var(--line);background:#fbfdfd}.mini-chart svg{width:100%;height:145px;display:block}.mini-chart p{margin:4px 0 0;color:var(--muted);font-size:11px}.ledger-table{width:100%;border-collapse:collapse;border:1px solid var(--line);font-size:11px}.ledger-table th,.ledger-table td{padding:8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.ledger-table th{width:130px;background:#f4f8f9;color:#43636b;font:10px ui-monospace,monospace}.ledger-table code{color:#1e6670;font:10px ui-monospace,monospace}.library-list{display:grid;gap:7px}.library-item{padding:9px;border:1px solid var(--line);background:#fff}.library-item b{display:block;font-size:12px;overflow-wrap:anywhere}.library-item small{display:block;margin-top:2px;color:var(--muted);font-size:10px}.data-scroll{max-height:265px;overflow:auto;border:1px solid var(--line)}.data-table{width:100%;border-collapse:collapse;font-size:11px}.data-table th,.data-table td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}.data-table th{position:sticky;top:0;background:#f4f8f9;color:#5a747b;font:10px ui-monospace,monospace}.data-table th:first-child,.data-table td:first-child{text-align:left}.negative{color:#ae3e3a;font-weight:700}.candidate-table td:nth-child(1){max-width:190px;overflow-wrap:anywhere}.result-section{margin-top:12px}.result-section h3{margin:0}.result-section .section-head{margin-bottom:8px}
-    @media (max-width: 780px) { .app{display:block}.rail{position:relative;height:auto;padding:13px;overflow:visible}.brand{padding-bottom:12px}.nav{grid-template-columns:repeat(3,1fr)}.nav button{font-size:11px;padding:8px}.nav .index{display:none}.rail-label,.rail-foot{display:none}.topbar{padding:0 16px}.stage{padding:18px 14px 36px}.page-head{display:block}.page-head .pill{margin-top:11px}.grid.two,.grid.three,.lane-wrap,.signal-board,.code-layout,.hero-grid,.live-columns,.result-visuals{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,1fr)}.code-layout{min-height:0}.tree{max-height:210px;overflow:auto}.package-strip{grid-template-columns:repeat(2,1fr)}.runner-grid{grid-template-columns:1fr}.runner-button{margin-top:4px}.launch-bar{grid-template-columns:1fr}.live-metrics{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width: 780px) { .app{display:block}.rail{position:relative;height:auto;padding:13px;overflow:visible}.brand{padding-bottom:12px}.nav{grid-template-columns:repeat(3,1fr)}.nav button{font-size:11px;padding:8px}.nav .index{display:none}.rail-label,.rail-foot{display:none}.topbar{padding:0 16px}.stage{padding:18px 14px 36px}.page-head{display:block}.page-head .pill{margin-top:11px}.grid.two,.grid.three,.lane-wrap,.signal-board,.code-layout,.hero-grid,.live-columns,.result-visuals,.evidence-grid{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,1fr)}.code-layout{min-height:0}.tree{max-height:210px;overflow:auto}.package-strip{grid-template-columns:repeat(2,1fr)}.runner-grid{grid-template-columns:1fr}.runner-button{margin-top:4px}.launch-bar{grid-template-columns:1fr}.live-metrics,.evidence-kpis{grid-template-columns:repeat(2,1fr)} }
     .branch-wrap{display:grid;gap:8px}.intent-node,.merge-node{padding:10px 11px;border:1px solid #72c8c2;background:#f2fffd}.intent-node{border-left:4px solid var(--cyan)}.merge-node{border-left:4px solid var(--blue);background:#f3f8fe}.intent-node b,.merge-node b{display:block;font-size:12px}.intent-node small,.merge-node small{color:#4e6d75;font-size:10px}.branch-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.run-lane{min-width:0;padding:10px;border:1px solid var(--line);background:#f9fbfb}.run-lane.a{border-top:3px solid var(--blue)}.run-lane.b{border-top:3px solid var(--gold)}.branch-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;margin-bottom:8px}.branch-head b{display:block;font-size:12px}.branch-head small{display:block;margin-top:2px;color:var(--muted);font-size:10px}.lane-steps{display:grid;gap:6px}.lane-steps .live-step{padding:8px;grid-template-columns:27px 1fr auto}.lane-steps .step-no{width:22px;height:22px;font-size:10px}.lane-steps .step-detail{font-size:9px}.run-lane.pending{opacity:.72}.run-lane.active{box-shadow:0 0 0 2px rgba(0,167,160,.08)}
     .plan-doc{display:grid;gap:14px;margin-top:14px}.plan-doc>.card{box-shadow:none}.plan-doc h2{margin:0 0 5px;font-size:17px}.plan-doc h3{margin:13px 0 6px;font-size:14px}.plan-doc p,.plan-doc li{color:#425c64;font-size:12px;line-height:1.7}.plan-doc ul{margin:7px 0 0;padding-left:20px}.plan-lead{font-size:14px!important;color:#203e47!important;line-height:1.75!important}.plan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.plan-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.plan-block{padding:13px;border:1px solid var(--line);background:#fbfdfd}.plan-block.teal{border-left:4px solid var(--cyan);background:#f2fbfa}.plan-block.gold{border-left:4px solid var(--gold);background:#fffaf0}.plan-block.red{border-left:4px solid var(--red);background:#fff7f6}.plan-code{margin:8px 0 0;padding:11px 13px;background:#10242d;color:#d5ebe8;font:11px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;overflow:auto}.plan-table{width:100%;border-collapse:collapse;font-size:11px}.plan-table th,.plan-table td{padding:9px 10px;border:1px solid var(--line);vertical-align:top;text-align:left;line-height:1.55}.plan-table th{background:#edf5f5;color:#385c65;font-size:10px}.upgrade-mark{display:inline-block;margin-left:7px;padding:2px 6px;border:1px solid #62c7c1;background:#e5fbf8;color:#057b77;font:700 10px ui-monospace,monospace;vertical-align:middle}.upgrade-section{border-left:4px solid var(--cyan)!important;background:linear-gradient(90deg,#f0fffc,#fff)!important}.plan-doc details{border:1px solid var(--line);background:#fff}.plan-doc summary{cursor:pointer;padding:12px 14px;color:#1d5961;font-weight:700;font-size:13px;list-style:none}.plan-doc summary::-webkit-details-marker{display:none}.plan-doc summary:before{content:'+';display:inline-grid;place-items:center;width:17px;height:17px;margin-right:7px;border:1px solid #9ac9c5;color:#087b77}.plan-doc details[open] summary:before{content:'−'}.plan-doc details>.detail-body{padding:0 14px 14px}.formula-panel{padding:12px;border:1px dashed #94c9c4;background:#f5fffd;color:#185f62;font:12px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap}.plan-note{padding:11px 13px;border-left:3px solid var(--blue);background:#f2f7fc;color:#3a5d6f;font-size:12px;line-height:1.65}.plan-note.warn{border-color:var(--gold);background:#fff9ed}.plan-note.danger{border-color:var(--red);background:#fff5f4}
     .step-detail summary{grid-column:1/-1;cursor:pointer;color:#176f72;font:700 10px/1.4 ui-sans-serif,system-ui,sans-serif;list-style:none}.step-detail summary::-webkit-details-marker{display:none}.step-detail summary:before{content:'+';display:inline-grid;place-items:center;width:15px;height:15px;margin-right:5px;border:1px solid #9ac9c5;color:#087b77}.step-detail[open] summary:before{content:'−'}
@@ -416,11 +452,22 @@ Acceleration_t = X_t - 2X_(t-1) + X_(t-2)</div><p>每个父因子都可以被展
 <span class="comment"># B 线候选与关联回放</span>
 <span class="fn">python3</span> -m rate_aware_rca
 <span class="fn">python3</span> -m association_discovery</pre></div></div></section><section class="card card-pad"><div class="section-head"><div><h2>交付物索引</h2><p>代码包内每类材料对应一个可验证问题。</p></div></div><div class="trace"><div class="trace-row"><time>DOC</time><div><b>README + 运行说明</b><span>环境、入口、数据边界、真实替换点</span></div><span class="pill">README.md</span></div><div class="trace-row"><time>DEMO</time><div><b>replay_upgrade_demo.py</b><span>N1 事件、N2 schema/fallback、N3 灰度与护栏</span></div><a class="file-link" href="/api/track2/scenario-report?scenario=full_review">证据</a></div><div class="trace-row"><time>STAT</time><div><b>rate_aware_rca + association</b><span>三重分解、max-T、holdout、manifest</span></div><a class="file-link" href="/api/track2/scenario-report?scenario=line_b">输出</a></div><div class="trace-row"><time>TEST</time><div><b>test_regressions.py + focused-upgrade-tests</b><span>31 项仓库回归，已通过</span></div><span class="pill green">31 / 31</span></div></div><div class="package-strip"><div class="package-item"><b>纯 Python</b><span>Python 3.9+（推荐 Python 3.12） / numpy</span></div><div class="package-item"><b>离线可跑</b><span>不调用商业 API</span></div><div class="package-item"><b>证据 JSON</b><span>按场景生成</span></div><div class="package-item"><b>生产边界</b><span>adapter 替换</span></div></div></section></div>
-          <section class="card card-pad" style="margin-top:14px"><div class="section-head"><div><h2>现有评测证据</h2><p>现场服务通过当前 API 返回结构化 Evidence Pack；离线模式明确标记为 deterministic fixture，不把回放结果冒充生产证据。</p></div><a class="pill cyan" href="/api/track2/scenario-report?scenario=full_review">打开当前证据</a></div></section>
+          <section class="card card-pad" style="margin-top:14px"><div class="section-head"><div><h2>现有评测证据</h2><p>现场服务通过当前 API 返回结构化 Evidence Pack；离线模式明确标记为 deterministic fixture，不把回放结果冒充生产证据。</p></div><button class="evidence-open" id="open-current-evidence" type="button"><span class="evidence-icon">↗</span>打开当前证据</button></div></section>
           <p class="footnote">交付包中的 fixture、公开数据和 dry-run 仅用于方法和工程验证。真实分层面板、授权外部数据、反事实验证与生产实验平台必须重新运行并留存来源、授权、scope 和审批记录。</p>
         </section>
       </div>
     </main>
+  </div>
+  <div class="evidence-modal" id="evidence-modal" role="dialog" aria-modal="true" aria-labelledby="evidence-modal-title">
+    <div class="evidence-dialog">
+      <div class="evidence-dialog-head">
+        <div><h2 id="evidence-modal-title">当前 Evidence Pack</h2><p id="evidence-modal-subtitle">正在读取全链路复核结果</p></div>
+        <button class="evidence-close" id="close-evidence-modal" type="button" aria-label="关闭证据窗口">×</button>
+      </div>
+      <div class="evidence-body" id="evidence-modal-body">
+        <div class="evidence-loading"><div><div class="evidence-spinner"></div><b>正在唤醒证据服务…</b><p>免费实例首次访问可能需要几秒钟。</p></div></div>
+      </div>
+    </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <script>
@@ -594,6 +641,89 @@ Acceleration_t = X_t - 2X_(t-1) + X_(t-2)</div><p>每个父因子都可以被展
     };
     const safe = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
     const statusPill = (text, kind='') => `<span class="pill ${kind}">${safe(text)}</span>`;
+    const evidenceModal = document.getElementById('evidence-modal');
+    const evidenceModalBody = document.getElementById('evidence-modal-body');
+    const evidenceModalSubtitle = document.getElementById('evidence-modal-subtitle');
+    function evidenceData(report, offline = false) {
+      const outputs = report.outputs || report.key_outputs || {};
+      const lineB = outputs.line_b || outputs;
+      const lineA = outputs.line_a || {};
+      const funnel = lineA.a_line_funnel || outputs.a_line_funnel || {};
+      const association = lineB.association_discovery || {};
+      const rca = lineB.rate_aware_rca || {};
+      const topScope = rca.candidates?.[0]?.scope || {};
+      const unknown = lineB.unknown_bucket || {};
+      const candidates = association.candidates || [];
+      const library = lineB.factor_library || [];
+      const arms = funnel.arms || [];
+      const ctr = arms.length >= 2 ? `${((Number(arms[0].ctr) || 0) * 100).toFixed(2)}% → ${((Number(arms[1].ctr) || 0) * 100).toFixed(2)}%` : '—';
+      const scopeText = Object.entries(topScope).map(([key, value]) => `${key}=${value}`).join(' · ') || 'east · paid · 8.4';
+      return {
+        title: report.title || '全链路：经营异常自动复核',
+        claim: report.claim || 'MULTI_ROUTE_REVIEW',
+        mode: offline ? '本地脱敏回放' : 'HTTP 实机管线',
+        window: (association.anomaly_windows || []).map(item => `day ${item.start_day}–${item.end_day}`).join(' / ') || 'day 37–41 / 52–56',
+        scope: scopeText,
+        candidates: association.candidate_count ?? candidates.length ?? '—',
+        factorCount: Array.isArray(library) ? library.length : (library.candidates || []).length,
+        holdout: association.holdout_survivors ?? 0,
+        unknown: unknown.mean_residual_late_window ?? unknown.mean_residual ?? '—',
+        ctr,
+        decision: report.metrics?.['A 线决策'] || report.metrics?.['决策'] || outputs.bundle_decision || '人工复核',
+        funnelStatus: funnel.evidence_level || 'CAUSAL_READY',
+        next: association.holdout_survivors > 0 ? '冻结候选，进入下一窗口独立验证' : '保留未知残差，补充证据后再验证',
+        generatedAt: new Date().toLocaleTimeString('zh-CN', {hour12:false})
+      };
+    }
+    function renderEvidenceModal(report, offline = false) {
+      const data = evidenceData(report, offline);
+      evidenceModalSubtitle.textContent = `${data.mode} · ${data.generatedAt} · 可复核摘要`;
+      evidenceModalBody.innerHTML = `
+        <div class="evidence-status"><div><strong>${safe(data.claim)}</strong><small> · ${safe(data.mode)}</small></div><span>${statusPill('证据已生成','green')}</span></div>
+        <div class="evidence-kpis">
+          <div class="evidence-kpi"><label>异常窗口</label><b>${safe(data.window)}</b><small>B 线残差检测</small></div>
+          <div class="evidence-kpi"><label>重点分层</label><b>${safe(data.scope)}</b><small>Rate-aware RCA Top 1</small></div>
+          <div class="evidence-kpi"><label>候选因子</label><b>${safe(data.candidates)}</b><small>搜索结果 · 未直接升级因果</small></div>
+          <div class="evidence-kpi"><label>因子库</label><b>${safe(data.factorCount)} 个</b><small>可追溯 Registry 条目</small></div>
+        </div>
+        <div class="evidence-grid">
+          <div class="evidence-block"><h3>A 线实验结果</h3><p>Control → Treatment CTR：<strong>${safe(data.ctr)}</strong></p><p>实验状态：<strong>${safe(data.funnelStatus)}</strong></p><p>当前决策：<strong>${safe(data.decision)}</strong></p></div>
+          <div class="evidence-block"><h3>B 线候选结果</h3><p>留出窗口存活候选：<strong>${safe(data.holdout)}</strong></p><p>末窗未知残差：<strong>${safe(data.unknown)}</strong></p><p>重点范围：<strong>${safe(data.scope)}</strong></p></div>
+        </div>
+        <div class="evidence-boundary"><strong>证据边界：</strong>当前结果把内部变化、外部信号、A/B 实验和未知残差放在同一条链路中。候选只代表关联或待验证假设；${safe(data.next)}。</div>
+        <div class="evidence-actions">
+          <a class="evidence-action primary" href="/api/track2/scenario-run?scenario=full_review" target="_blank" rel="noopener">↗ 打开原始 JSON</a>
+          <a class="evidence-action" href="/api/track2/scenario-report?scenario=full_review" target="_blank" rel="noopener">↓ 下载 Markdown 报告</a>
+          <button class="evidence-action" id="refresh-current-evidence" type="button">↻ 重新读取</button>
+        </div>`;
+      document.getElementById('refresh-current-evidence')?.addEventListener('click', loadCurrentEvidence);
+    }
+    async function loadCurrentEvidence() {
+      evidenceModal.classList.add('open');
+      evidenceModal.setAttribute('aria-hidden', 'false');
+      evidenceModalBody.innerHTML = '<div class="evidence-loading"><div><div class="evidence-spinner"></div><b>正在读取全链路证据…</b><p>免费实例唤醒时可能需要几秒钟。</p></div></div>';
+      evidenceModalSubtitle.textContent = '正在请求 /api/track2/scenario-run?scenario=full_review';
+      try {
+        const response = await fetch('/api/track2/scenario-run?scenario=full_review', {cache:'no-store'});
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        renderEvidenceModal(await response.json(), false);
+      } catch (error) {
+        const fallback = liveFallback.full_review;
+        renderEvidenceModal({...fallback, outputs: fallback.outputs, metrics: {...fallback.metrics, '回退原因': 'HTTP 服务唤醒或暂时不可用'}}, true);
+        evidenceModalSubtitle.textContent = `本地脱敏回放 · ${error.message || 'HTTP 服务暂不可用'}`;
+      }
+    }
+    document.getElementById('open-current-evidence')?.addEventListener('click', loadCurrentEvidence);
+    document.getElementById('close-evidence-modal')?.addEventListener('click', () => {
+      evidenceModal.classList.remove('open');
+      evidenceModal.setAttribute('aria-hidden', 'true');
+    });
+    evidenceModal?.addEventListener('click', event => {
+      if (event.target === evidenceModal) document.getElementById('close-evidence-modal')?.click();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && evidenceModal?.classList.contains('open')) document.getElementById('close-evidence-modal')?.click();
+    });
     function stepState(step, index, active, finished) {
       if (finished) return {done:true, running:false};
       if (index === 0) return {done:active > 0, running:active === 0};
