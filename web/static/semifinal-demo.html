@@ -701,16 +701,20 @@ Acceleration_t = X_t - 2X_(t-1) + X_(t-2)</div><p>每个父因子都可以被展
     async function loadCurrentEvidence() {
       evidenceModal.classList.add('open');
       evidenceModal.setAttribute('aria-hidden', 'false');
-      evidenceModalBody.innerHTML = '<div class="evidence-loading"><div><div class="evidence-spinner"></div><b>正在读取全链路证据…</b><p>免费实例唤醒时可能需要几秒钟。</p></div></div>';
-      evidenceModalSubtitle.textContent = '正在请求 /api/track2/scenario-run?scenario=full_review';
+      renderEvidenceModal(liveFallback.full_review, true);
+      evidenceModalSubtitle.textContent = '可复现摘要已就绪 · 正在后台校验 HTTP 全链路结果';
       try {
-        const response = await fetch('/api/track2/scenario-run?scenario=full_review', {cache:'no-store'});
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 15000);
+        const response = await fetch('/api/track2/scenario-run?scenario=full_review', {
+          cache:'no-store',
+          signal:controller.signal
+        });
+        window.clearTimeout(timeout);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         renderEvidenceModal(await response.json(), false);
       } catch (error) {
-        const fallback = liveFallback.full_review;
-        renderEvidenceModal({...fallback, outputs: fallback.outputs, metrics: {...fallback.metrics, '回退原因': 'HTTP 服务唤醒或暂时不可用'}}, true);
-        evidenceModalSubtitle.textContent = `本地脱敏回放 · ${error.message || 'HTTP 服务暂不可用'}`;
+        evidenceModalSubtitle.textContent = `可复现摘要已展示 · HTTP 更新将在下次读取时重试（${error.name === 'AbortError' ? '响应超过 15 秒' : (error.message || '服务暂不可用')}）`;
       }
     }
     document.getElementById('open-current-evidence')?.addEventListener('click', loadCurrentEvidence);
