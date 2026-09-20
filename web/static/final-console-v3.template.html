@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GOAI 经营归因 Agent | 决赛控制台 v3</title>
+<title>GOAI 经营归因 Agent | 业务闭环控制台 v5</title>
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <style>
 /* 设计令牌逐字复刻 semifinal-demo.html */
@@ -235,19 +235,20 @@ table.full th{background:#f4f8f9;font-weight:600;white-space:nowrap}
 
 @media (max-width:1100px){.library-grid{grid-template-columns:repeat(2,1fr)}.cc-kpis{grid-template-columns:repeat(3,1fr)}.cc-main,.cc-lower,.two-col{grid-template-columns:1fr}.cc-flow{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:780px){.app{grid-template-columns:1fr}.rail{position:static;height:auto}.rail nav{display:flex;flex-wrap:wrap}.library-grid{grid-template-columns:1fr}}
+/*__WORKSPACE_CSS__*/
 </style>
 </head>
 <body>
 <div class="app">
   <aside class="rail">
-    <div class="brand"><b>经营归因 Agent</b><span>决赛控制台 · v3.0</span></div>
+    <div class="brand"><b>经营归因 Agent</b><span>业务闭环工作台 · v5.0</span></div>
     <nav id="rail-nav">
-      <a data-view="overview" class="active"><span class="idx">01</span>归因总控</a>
-      <a data-view="alerts"><span class="idx">02</span>风险预警<span class="nav-badge red" id="nb-alerts" style="display:none"></span></a>
-      <a data-view="todo"><span class="idx">03</span>待办看板<span class="nav-badge gold" id="nb-todo" style="display:none"></span></a>
-      <a data-view="library"><span class="idx">04</span>因子库</a>
-      <a data-view="manage"><span class="idx">05</span>因子管理</a>
-      <a data-view="evolution"><span class="idx">06</span>自进化与证据</a>
+      <a data-view="overview" class="active"><span class="idx">01</span>总控</a>
+      <a data-view="lab"><span class="idx">02</span>因子实验室</a>
+      <a data-view="alerts"><span class="idx">03</span>风险预警<span class="nav-badge red" id="nb-alerts" style="display:none"></span></a>
+      <a data-view="todo"><span class="idx">04</span>人工审核任务<span class="nav-badge gold" id="nb-todo" style="display:none"></span></a>
+      <a data-view="library"><span class="idx">05</span>因子库</a>
+      <a data-view="evolution"><span class="idx">06</span>技能版本管理</a>
       <a data-view="syslog"><span class="idx">07</span>系统日志</a>
     </nav>
     <div class="foot" id="rail-foot">本地脱敏数据回放 · 可复现</div>
@@ -264,10 +265,17 @@ table.full th{background:#f4f8f9;font-weight:600;white-space:nowrap}
     <div id="offline-strip">当前为离线回放：数据是真实管线输出快照；页面内操作仅本地留痕（浏览器 localStorage + 页内台账），<b>未提交治理层</b>。要真实执行（审批落库、反馈持久化、审计日志），在代码包目录执行 <code>.venv/bin/python tools/seed_console_v2.py</code> 后 <code>npm run dev</code>。</div>
     <main class="stage">
       <section class="view active" id="view-overview"></section>
-      <section class="view" id="view-alerts"></section>
+      <section class="view" id="view-lab">
+        <div id="view-lab-exp"></div>
+        <div id="view-investigation" style="margin-top:16px"></div>
+        <div id="view-evidencepack" style="margin-top:16px"></div>
+      </section>
+      <section class="view" id="view-alerts">
+        <div id="alerts-main"></div>
+        <div id="view-dream" style="margin-top:16px"></div>
+      </section>
       <section class="view" id="view-todo"></section>
       <section class="view" id="view-library"></section>
-      <section class="view" id="view-manage"></section>
       <section class="view" id="view-evolution"></section>
       <section class="view" id="view-syslog"></section>
     </main>
@@ -286,19 +294,14 @@ let D = null;                   // 归一化数据
 let CURRENT = 'overview';
 let globeApi = null;
 
-const ENDPOINTS = ['overview','factors','watchlist','alerts','conflicts','skills','evidence','factors/ledger','feedback/queue'];
+const ENDPOINTS = ['overview','factors','watchlist','alerts','conflicts','skills','evidence','factors/ledger','feedback/queue','workspace'];
 
 async function fetchAll(){
-  const keys = ['overview','factors','watchlist','alerts','conflicts','skills','evidence','ledger','queue'];
-  const res = await Promise.all(ENDPOINTS.map(e=>fetch('/api/v2/'+e,{cache:'no-store'}).then(r=>r.json())));
+  const keys = ['overview','factors','watchlist','alerts','conflicts','skills','evidence','ledger','queue','workspace'];
+  const res = await Promise.all(ENDPOINTS.map(e=>fetch('/api/v2/'+e,{cache:'no-store',signal:typeof AbortSignal.timeout==='function'?AbortSignal.timeout(15000):undefined}).then(r=>{if(!r.ok)throw new Error('API '+r.status);return r.json()})));
   const out = {}; keys.forEach((k,i)=>out[k]=res[i]);
-  out.bline_candidates = [];
-  try{ const ac = new AbortController(); const tm = setTimeout(()=>ac.abort(), 15000);
-       const r = await fetch('/api/track2/scenario-run?scenario=line_b',{cache:'no-store', signal:ac.signal});
-       clearTimeout(tm); const j = await r.json();
-       const cands = (((j||{}).key_outputs||{}).association_discovery||{}).candidates || [];
-       out.bline_candidates = cands.slice().sort((a,b)=>Math.abs(b.alignment_score||b.association_score||0)-Math.abs(a.alignment_score||a.association_score||0)).slice(0,40)
-         .map(c=>({factor_id:c.factor_id, derived_feature_id:c.derived_feature_id||c.factor_id+(c.start_day!=null?'@'+c.start_day:''), derived_layer:c.derived_layer, kind:c.kind==='internal_event'||c.kind==='release_audit'?'internal':'external', claim_type:c.claim_type||'TEMPORAL_ASSOCIATION', association_score:c.alignment_score||c.association_score||0, lag_days:c.distance_days, license_ref:c.license_ref})); }catch(e){}
+  const previous = (out.workspace?.artifacts||[]).find(a=>a.id==='line_b')?.data;
+  out.bline_candidates = (previous?.key_outputs?.association_discovery?.candidates||[]).slice(0,40).map(c=>({factor_id:c.factor_id, derived_feature_id:c.derived_feature_id||c.factor_id+(c.start_day!=null?'@'+c.start_day:''), derived_layer:c.derived_layer, kind:c.factor_id.startsWith('internal.')?'internal':'external', claim_type:c.claim_type||'TEMPORAL_ASSOCIATION', association_score:c.alignment_score||c.association_score||0, lag_days:c.lag_days??c.distance_days, license_ref:c.license_ref}));
   return out;
 }
 
@@ -352,7 +355,7 @@ function normalize(raw){
       layer:c.derived_layer, alerted:false });
   });
   // 本地离线新增的因子
-  ledger().filter(e=>e.type==='factor_create').forEach(e=>{
+  (MODE==='service'?[]:ledger()).filter(e=>e.type==='factor_create').forEach(e=>{
     if(seen.has(e.factor.factor_id)) return; seen.add(e.factor.factor_id);
     cards.push({ fid:e.factor.factor_id, name:e.factor.name, route:'internal', status:'candidate',
       claim:'OPERATOR_ENTRY', strength:null, lag:null, src:'operator-entry(本地)',
@@ -360,12 +363,13 @@ function normalize(raw){
   });
   // 离线停用状态
   const localStatus = {};
-  ledger().filter(e=>e.type==='factor_status').forEach(e=>localStatus[e.factor_id]=e.status);
+  (MODE==='service'?[]:ledger()).filter(e=>e.type==='factor_status').forEach(e=>localStatus[e.factor_id]=e.status);
   cards.forEach(c=>{ if(localStatus[c.fid]) c.status = localStatus[c.fid]==='disabled'?'disabled':c.status; });
 
-  return { alerts, factors, wl, skills, releases, conflicts, cards,
+  return { workspace:raw.workspace||{}, alerts, factors, wl, skills, releases, conflicts, cards,
            evidence: raw.evidence||{}, overview: raw.overview||{},
            metrics: (raw.overview&&raw.overview.metrics)||[],
+           bline_candidates: bline,
            queue: (raw.queue&&raw.queue.queue)||[], recent:(raw.queue&&raw.queue.recent)||[],
            versions:(raw.ledger&&raw.ledger.ledger)||[],
            skillsSuiteRef: (raw.skills&&raw.skills.demo_suite_ref)||'' };
@@ -373,21 +377,22 @@ function normalize(raw){
 
 /* 待办装配：四类节点 */
 function buildTodos(){
-  const done = new Set(ledger().filter(e=>e.type==='todo_done').map(e=>e.key));
+  const done = new Set(MODE==='service'?[]:ledger().filter(e=>e.type==='todo_done').map(e=>e.key));
+  const reviewed = new Set((D.recent||[]).filter(e=>e.kind==='candidate_review').map(e=>e.payload.factor_id));
   const t = {1:[],2:[],3:[],4:[]};
-  D.wl.forEach(w=>{ if(w.claim_type!=='FACTOR_CANDIDATE' && !w.feedback_label)
+  D.wl.forEach(w=>{ if(w.claim_type!=='FACTOR_CANDIDATE' && !w.feedback_label && !reviewed.has(w.factor_id))
     t[1].push({key:'cand-'+w.alert_id, title:w.factor_id+' · lag '+w.lag,
       meta:'相关 '+pct(w.correlation)+' · '+w.claim_type+' · 校正p '+(w.adjusted_pvalue??'—'), data:w}); });
   D.conflicts.forEach(c=>{ if(c.status==='open')
     t[2].push({key:'conf-'+c.id, title:c.title, meta:c.lines.join('/')+' 线 · '+c.status, data:c}); });
   D.skills.forEach(s=>{
     const st = s.trust_state;
-    if(st==='validated' || (s.validated && st!=='published' && st!=='approved'))
+    if(!s.execution_eligible && (st==='validated' || s.validated))
       t[3].push({key:'skill-'+s.name, title:'技能 '+s.name+' v'+s.version+' 已验证，待审批发布', meta:'trust: '+st, data:s});
     else if(st==='provisional')
       t[3].push({key:'skill-'+s.name, title:'技能 '+s.name+' v'+s.version+' 提案待评审', meta:'trust: provisional', data:s});
   });
-  const localAlert = new Set(ledger().filter(e=>e.type==='alert_action').map(e=>e.alert_id));
+  const localAlert = new Set(MODE==='service'?[]:ledger().filter(e=>e.type==='alert_action').map(e=>e.alert_id));
   D.alerts.forEach(a=>{ if(a.state.status==='open' && !localAlert.has(a.alert_id))
     t[4].push({key:'fb-'+a.alert_id, title:'预警「'+a.title+'」待标注价值', meta:a.level==='high'?'高风险':'关注', data:a}); });
   [1,2,3,4].forEach(k=>{ t[k]=t[k].filter(x=>!done.has(x.key)); });
@@ -398,11 +403,13 @@ function buildTodos(){
 async function act(endpoint, body, offlineEntry, doneMsg){
   body.request_id = rid();
   if(MODE==='service'){
+    try {
     const r = await fetch('/api/v2/'+endpoint, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
     const j = await r.json();
     if(!r.ok || j.error){ toast(j.error||'操作被拒绝', true); return false; }
     toast(j.note||doneMsg||'已提交治理层');
     await reload(); return true;
+    }catch(e){toast('操作未完成：'+e.message,true);return false;}
   }
   pushLedger({...offlineEntry, request_id:body.request_id, operator:body.operator});
   toast((doneMsg||'已记录')+'（离线：未提交治理层）');
@@ -416,13 +423,15 @@ async function reload(){
 }
 
 /* ================= 导航与全局预警条 ================= */
-const VIEW_NAMES = {overview:'归因总控', alerts:'风险预警', todo:'待办看板', library:'因子库', manage:'因子管理', evolution:'自进化与证据', syslog:'系统日志'};
+const VIEW_NAMES = {overview:'总控', lab:'因子实验室', alerts:'风险预警', todo:'人工审核任务', library:'因子库', evolution:'技能版本管理', syslog:'系统日志'};
 function showView(name){
   CURRENT = name;
-  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active', v.id==='view-'+name));
+  document.querySelectorAll('main.stage > .view').forEach(v=>v.classList.toggle('active', v.id==='view-'+name));
+  
   document.querySelectorAll('#rail-nav a').forEach(a=>a.classList.toggle('active', a.dataset.view===name));
   document.getElementById('crumb').textContent = '/ '+VIEW_NAMES[name];
   if(location.hash !== '#'+name) history.replaceState(null,'','#'+name);
+  if(name==='lab' && !document.getElementById('globe-stage') && typeof renderNetwork==='function') renderNetwork();
   window.scrollTo(0,0);
 }
 document.querySelectorAll('#rail-nav a').forEach(a=>a.addEventListener('click', ()=>showView(a.dataset.view)));
@@ -463,8 +472,8 @@ function zhName(fid){
   if(card && /[一-龥]/.test(card.name)) return card.name;
   return '未登记因子·'+base.split('.').pop()+layer;
 }
-function renderOverview(){
-  const el = document.getElementById('view-overview');
+function renderNetwork(){
+  const el = document.getElementById('view-network');
   const open = D.alerts.filter(a=>a.state.status==='open');
   const high = open.filter(a=>a.level==='high').length;
   const todos = tAll(buildTodos()).length;
@@ -496,7 +505,7 @@ function renderOverview(){
         <div class="note-card green"><b>已验证</b>${esc((D.cards.find(c=>c.status==='verified')||{}).name||'—')} · 独立窗口确认，进入因子库绿环</div>
         <div class="note-card gold"><b>未知量保留</b>未解释残差桶保留，不强行归因（UNEXPLAINED 是证据状态，不是失败）</div>
         <div class="note-card cyan"><b>建议动作</b>${esc((D.alerts.find(a=>a.state.status==='open')||{}).suggestion||'当前无待处置建议')}</div>
-        <div class="note-card"><b>口径</b>统计口径与负结果见「06 自进化与证据」</div>
+        <div class="note-card"><b>口径</b>统计口径与负结果见「技能与自进化」</div>
       </div>
     </div>
     <div class="cc-foot">EVIDENCE BOUNDARY · 无随机化证据只输出关联级结论 · 反馈不自动晋升任何结论</div>
@@ -574,6 +583,13 @@ function globeData(){
   }));
   nodes.push({id:'unknown', label:'未解释残差', kind:'unknown', idx:nodes.length});
   edges.push({a:'metric:'+metrics[0].id, b:'unknown', metric:metrics[0].id, style:'temporal'});
+  /* 异动实验进行中：只显现已检验的因子节点，关联关系随链路推进逐步出现 */
+  if(window._expReveal){
+    const R = window._expReveal;
+    const e2 = edges.filter(e=>R.has(e.b));
+    const keep = new Set(); e2.forEach(e=>{keep.add(e.a);keep.add(e.b);});
+    return {nodes:nodes.filter(n=>n.kind==='metric'||keep.has(n.id)), edges:e2};
+  }
   return {nodes, edges};
 }
 const NODE_COLOR = {metric:0x57e4d0, internal:0x5da7ff, external:0x9c8cff, unknown:0xffb765, verified:0x73ff9f, alerted:0xff7772};
@@ -787,7 +803,7 @@ function focusFactor(fid){
 let ALERT_FILTER = 'all';
 const STATUS_ZH = {open:'待确认', confirmed:'已确认·待处置', adopted:'处置中', closed:'已闭环', dismissed:'误报'};
 function renderAlerts(){
-  const el = document.getElementById('view-alerts');
+  const el = document.getElementById('alerts-main');
   const chips = [['all','全部'],['high','⚠ 高风险'],['watch','关注'],['doing','处置中'],['done','已闭环/误报']];
   let list = D.alerts.slice();
   if(ALERT_FILTER==='high') list=list.filter(a=>a.level==='high');
@@ -909,11 +925,11 @@ function openTodo(station, key){
     evidence = `<div class="evidence-box"><b>统计证据</b><br>因子 <span class="mono">${esc(w.factor_id)}</span> · lag ${w.lag}<br>
       关联强度 ${pct(w.correlation)} · 校正后 p ${w.adjusted_pvalue??'—'}<br>证伪状态：${esc(w.falsification_status||'—')}<br>
       下一步：${esc(w.next_step||'独立窗口继续确认')}</div>`;
-    form = `<label>业务事实核验结论</label>
+    form = `<label>核验依据（事件时间、来源与范围）</label><textarea id="candidate-note" placeholder="说明确认或否决的依据"></textarea><label>业务事实核验结论</label>
       <div class="ops"><button class="btn" onclick="todoCandidate('${esc(it.key)}','${esc(w.factor_id)}','confirm')">确认（业务事实成立）</button>
       <button class="btn danger" onclick="todoCandidate('${esc(it.key)}','${esc(w.factor_id)}','deny')">否决</button></div>
       <label>或补充新业务事实（联动因子管理）</label>
-      <button class="btn ghost" onclick="closeDrawer();showView('manage')">去 05 因子管理补录 →</button>`;
+      <button class="btn ghost" onclick="closeDrawer();showView('manage')">去因子管理补录 →</button>`;
   } else if(station===2){
     const c = it.data;
     evidence = `<div class="evidence-box"><b>冲突明细</b><br>${esc(c.detail)}</div>`;
@@ -926,13 +942,14 @@ function openTodo(station, key){
     evidence = `<div class="evidence-box"><b>技能验证摘要</b><br>名称 <span class="mono">${esc(sk.name)} v${sk.version}</span><br>
       信任状态：${esc(sk.trust_state)} · 规则 ${sk.rules} 条<br>评审 ${sk.review_passed?'✓ 通过':'— 未评审'} · 验证 ${sk.validated?'✓ 通过':'— 未验证'}<br>
       声明上限：${esc(sk.claim_ceiling||'—')}</div>`;
-    const canApprove = sk.validated && sk.trust_state!=='published';
+    const canApprove = sk.validated && !sk.execution_eligible && !sk.approval_ref;
     form = `<label>灰度比例（批准时限定范围）</label>
-      <select id="sk-frac"><option value="0.05">5% 灰度</option><option value="0.1">10% 灰度</option><option value="0.2">20% 灰度</option></select>
+      <select id="sk-frac"><option value="0.05">5% 灰度</option><option value="0.1">10% 灰度</option></select>
       <div class="ops">
-      ${sk.trust_state==='provisional'?`<button class="btn" onclick="todoSkill('${esc(sk.name)}',${sk.version},'review')">通过评审</button>`:''}
-      ${canApprove?`<button class="btn" onclick="todoSkill('${esc(sk.name)}',${sk.version},'approve')">批准发布</button>`:''}
-      <button class="btn warn" onclick="toast('已要求重放验证套件（演示态）');markLocalDone('${esc(it.key)}')">要求重放</button></div>`;
+      ${!sk.review_passed?`<button class="btn" onclick="todoSkill('${esc(sk.name)}',${sk.version},'review')">运行独立评审</button>`:''}
+      ${canApprove?`<button class="btn" onclick="todoSkill('${esc(sk.name)}',${sk.version},'approve')">签署发布审批</button>`:''}
+      ${sk.approval_ref&&!sk.execution_eligible?`<button class="btn" onclick="todoSkill('${esc(sk.name)}',${sk.version},'publish')">按审批凭证灰度发布</button>`:''}
+      ${sk.review_passed&&!sk.validated?`<button class="btn warn" onclick="todoSkill('${esc(sk.name)}',${sk.version},'validate')">执行冻结套件验证</button>`:''}</div>`;
   } else {
     const a = it.data;
     evidence = `<div class="evidence-box"><b>信号卡</b><br>${esc(a.title)}<br>${esc(a.basis)}</div>`;
@@ -952,11 +969,11 @@ function openTodo(station, key){
   document.getElementById('drawer-mask').onclick = closeDrawer;
 }
 function closeDrawer(){ document.getElementById('drawer').classList.remove('open'); document.getElementById('drawer-mask').classList.remove('open'); }
-function markLocalDone(key){ pushLedger({type:'todo_done', key}); closeDrawer(); reload(); }
+function markLocalDone(key){ if(MODE!=='service')pushLedger({type:'todo_done', key}); closeDrawer(); reload(); }
 async function todoCandidate(key, fid, verdict){
   let op; try{ op=operator(); }catch(e){ return; }
   const ok = await act('feedback', {kind:'candidate_review', operator:op,
-    payload:{factor_id:fid, label:verdict==='confirm'?'useful':'false_positive', operator:op, source_kind:'console_candidate'}},
+    payload:{factor_id:fid, decision:verdict==='confirm'?'confirmed':'rejected', operator:op, note:(document.getElementById('candidate-note')?.value||'').trim(), current_window:0}},
     {type:'todo_done', key}, verdict==='confirm'?'候选已确认，进入下一窗口验证队列':'候选已否决');
   if(ok!==false) markLocalDone(key);
 }
@@ -972,9 +989,10 @@ async function todoSkill(name, version, action){
   let op; try{ op=operator(); }catch(e){ return; }
   const frac = parseFloat((document.getElementById('sk-frac')||{}).value||0.05);
   if(MODE==='service'){
-    const suite = D.skillsSuiteRef || '';
-    const body = action==='review' ? {action:'review', name, version, operator:op}
-      : {action:'approve', name, version, operator:op, suite_ref:suite};
+    const sk=D.skills.find(s=>s.name===name&&s.version===version);
+    const suite = sk?.lifecycle?.validation?.suite_ref || D.skillsSuiteRef || '';
+    const body = {action, name, version, operator:op, suite_ref:suite};
+    if(action==='publish'){body.approval_ref=sk?.approval_ref;body.fraction=frac;}
     const ok = await act('skills/action', body, null, '技能治理动作已执行');
     if(ok){ closeDrawer(); }
     return;
@@ -1026,7 +1044,9 @@ function renderLibrary(){
       </div>
       ${c.strength!=null?`<div class="strength"><i style="width:${Math.min(100,Math.abs(c.strength)*100)}%"></i></div><div class="sl"><span>关联强度</span><span>${pct(c.strength)}</span></div>`:'<div class="sl" style="margin-top:12px"><span>本窗口未检出关联</span><span>—</span></div>'}
       <div class="sl"><span>${esc(c.claim)}</span><span>${c.lag!=null?'lag '+c.lag:''}</span></div>
-    </div>`).join('')||'<div class="card" style="color:var(--muted)">该过滤条件下暂无因子</div>'}</div>`;
+    </div>`).join('')||'<div class="card" style="color:var(--muted)">该过滤条件下暂无因子</div>'}</div>
+  <div id="view-manage" style="margin-top:16px"></div>`;
+  renderManage();
 }
 
 /* ================= 05 因子管理 ================= */
@@ -1087,23 +1107,23 @@ async function factorToggle(fid, action){
     action==='disable'?'已停用':'已启用');
 }
 
-/* ================= 06 自进化与证据 ================= */
+/* ================= 技能与自进化 ================= */
 const TRUST_STAGES = ['provisional','reviewed','validated','approved','published'];
 const TRUST_ZH = {provisional:'提案', reviewed:'已评审', validated:'已验证', approved:'已审批', published:'已发布'};
 function trustStageIndex(s){
-  if(s.trust_state==='published') return 4;
-  if(s.trust_state==='approved') return 3;
+  if(s.execution_eligible || s.trust_state==='published') return 4;
+  if(s.approval_ref || s.trust_state==='approved') return 3;
   if(s.validated || s.trust_state==='validated') return 2;
   if(s.review_passed || s.trust_state==='reviewed') return 1;
   return 0;
 }
 
-/* ================= 07 系统日志 ================= */
+/* ================= 11 系统日志 ================= */
 function renderSyslog(){
   const el = document.getElementById('view-syslog');
   el.innerHTML = `
   <div class="card"><h3>系统日志 · 方案版本演进（v1.0 初赛 → v2.0 复赛 → v3.0 决赛）</h3>
-    <div style="font-size:12.5px;color:var(--muted)">每一版只把上一版验证过的能力带进来；本页为各版本核心方案实现与升级日志的完整整合。v1.0 / v2.0 的交互演示见 <a href="semifinal-demo.html" target="_blank" style="color:var(--blue)">复赛全流程演示页 ↗</a>；v3.0 完整方案见 <a href="plan-review.html" target="_blank" style="color:var(--blue)">深度方案评审工作台 v17.1 ↗</a>（04 因子库视图顶部亦可内嵌浏览）。</div>
+    <div style="font-size:12.5px;color:var(--muted)">每一版只把上一版验证过的能力带进来；本页为各版本核心方案实现与升级日志的完整整合。v1.0 / v2.0 的交互演示见 <a href="semifinal-demo.html" target="_blank" style="color:var(--blue)">复赛全流程演示页 ↗</a>；v3.0 完整方案见 <a href="plan-review.html" target="_blank" style="color:var(--blue)">深度方案评审工作台 v17.1 ↗</a>（06 因子库视图顶部亦可内嵌浏览）。</div>
   </div>
 
   <div class="card">
@@ -1185,7 +1205,7 @@ function renderSyslog(){
         </ul>
       </div>
     </div>
-    <div style="font-size:12px;color:var(--muted);margin-top:8px">验收基线：阶段 A–F + 第16章 16.1–16.4 全部完成；全量回归 257/257（本机，含 Linux 非 root 禁网容器复验）、第16章 CLI 验收 19/19；统计负结果（图方向共识功效 0、稀疏 knockoff 功效 0、错设协方差 FDP≈0.562）如实保留于 06 自进化与证据视图。</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:8px">验收基线：阶段 A–F + 第16章 16.1–16.4 全部完成；全量回归 257/257（本机，含 Linux 非 root 禁网容器复验）、第16章 CLI 验收 19/19；统计负结果（图方向共识功效 0、稀疏 knockoff 功效 0、错设协方差 FDP≈0.562）如实保留于 08 技能与自进化视图。</div>
   </div>`;
 }
 
@@ -1196,7 +1216,7 @@ function renderEvolution(){
   const localSkill = ledger().filter(e=>e.type==='skill_action');
   el.innerHTML = `
   <div class="card"><h3>自进化 · 技能治理时间线</h3>
-    <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px">技能从运行轨迹中提炼，沿「提案 → 评审 → 验证 → 审批 → 发布」逐级晋升；每一步都要过门禁，发布台（03 待办看板 ③）是人工审批入口。</div>
+    <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px">技能从运行轨迹中提炼，沿「提案 → 评审 → 验证 → 审批 → 发布」逐级晋升；每一步都要过门禁，发布台（人工协作台 · 发布审批）是人工审批入口。</div>
     ${D.skills.map(s=>{ const idx=trustStageIndex(s); const local = localSkill.find(e=>e.name===s.name); return `
     <div class="skill-card"><div class="head"><b>${esc(s.name)}</b><span class="mono" style="color:var(--muted)">v${s.version}</span>
       <span class="pill ${idx>=2?'green':'gold'}">${TRUST_ZH[Object.keys(TRUST_ZH)[idx]]||s.trust_state}${local?' · 本地操作已留痕':''}</span>
@@ -1231,13 +1251,15 @@ function renderEvolution(){
   </div>`;
 }
 
+/*__WORKSPACE_JS__*/
+
 /* ================= 启动 ================= */
 function renderAll(){
-  renderStrip(); renderOverview(); renderAlerts(); renderTodo(); renderLibrary(); renderManage(); renderEvolution(); renderSyslog();
+  renderStrip(); renderOverview(); renderAlerts(); renderTodo(); renderLibrary(); renderManage(); renderEvolution(); renderSyslog(); renderWorkspace();
   const off = document.getElementById('offline-strip');
   off.classList.toggle('show', MODE!=='service');
   const badge = document.getElementById('mode-badge');
-  if(MODE==='service'){ badge.className='mode-badge online'; badge.textContent='HTTP API · 实机管线'; document.getElementById('rail-foot').textContent='HTTP 实机 · 操作落治理层'; }
+  if(MODE==='service'){ badge.className='mode-badge online'; badge.textContent='已连接 · 历史证据 / 实时治理'; document.getElementById('rail-foot').textContent='HTTP 实机 · 操作落治理层'; }
   else { badge.className='mode-badge offline'; badge.textContent='本地脱敏数据回放'; document.getElementById('rail-foot').textContent='本地脱敏数据回放 · 可复现'; }
 }
 (async function boot(){
@@ -1245,12 +1267,13 @@ function renderAll(){
   inp.value = localStorage.getItem(LS_OPERATOR)||'';
   inp.addEventListener('change', ()=>localStorage.setItem(LS_OPERATOR, inp.value.trim()));
   if(location.protocol!=='file:'){
-    try{ const raw = await fetchAll(); if(raw && raw.overview && !raw.overview.error){ D=normalize(raw); MODE='service'; } }catch(e){}
+    try{ const raw = await fetchAll(); if(raw && raw.overview && !raw.overview.error){ MODE='service'; D=normalize(raw); } }catch(e){ console.warn('Service unavailable; using evidence snapshot:',e.message); }
   }
-  if(!D){ D = normalize(INLINE||{}); MODE='offline'; }
+  if(!D){ MODE='offline'; D = normalize(INLINE||{}); }
   const hash = location.hash.replace('#','');
+  const alias={investigation:'lab',dream:'lab',evidencepack:'lab',network:'overview',manage:'library'};
   renderAll();
-  if(VIEW_NAMES[hash]) showView(hash);
+  showView(VIEW_NAMES[hash]?hash:(alias[hash]||'overview'));
 })();
 </script>
 </body>
