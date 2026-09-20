@@ -122,7 +122,7 @@ def mine_factors(
             before, after = factor.get("before"), factor.get("after")
             try:
                 impact = min(abs(float(after) - float(before)), 1.0)
-            except TypeError, ValueError:
+            except (TypeError, ValueError):
                 impact = 0.8  # categorical change
             evidence = 0.9
         experimentability = float(factor.get("experimentability", 0.0))

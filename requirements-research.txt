@@ -1,0 +1,9 @@
+# 研究/评测扩展依赖（本地复现阶段E-F评测、PCMCI 因果发现、GCM、因果森林时使用）
+# HTTP 服务与演示控制台不依赖本文件。
+-r requirements.txt
+tigramite==5.2.10.1
+scipy>=1.18.1
+scikit-learn>=1.9.1
+numba>=0.67.0
+dowhy==0.14
+econml==0.17.0

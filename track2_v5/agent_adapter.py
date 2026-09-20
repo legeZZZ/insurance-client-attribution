@@ -56,7 +56,7 @@ def validate_analysis_intent(
             errors.append("invalid:confidence_range")
         if confidence < min_confidence:
             errors.append("low:confidence")
-    except TypeError, ValueError:
+    except (TypeError, ValueError):
         errors.append("invalid:confidence")
     return {
         "valid": not errors,

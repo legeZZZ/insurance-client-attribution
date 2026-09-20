@@ -331,7 +331,7 @@ class SkillStore:
                 ] == _digest(entry["rules"])
             finally:
                 registry.close()
-        except OSError, ValueError, KeyError:
+        except (OSError, ValueError, KeyError):
             return False
 
     def validate_candidate(

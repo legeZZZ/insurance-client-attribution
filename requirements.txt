@@ -1,9 +1,6 @@
+# HTTP 服务（run_server.py / 控制台）运行所需的最小依赖。
+# 服务链路全部为标准库 + numpy 懒加载；Render 等云平台部署只需本文件。
 numpy>=1.24
-tigramite==5.2.10.1
-scipy>=1.18.1
-scikit-learn>=1.9.1
-numba>=0.67.0
 
-dowhy==0.14
-
-econml==0.17.0
+# 深度分析扩展（PCMCI 因果发现 / DoWhy GCM / EconML 因果森林）为懒加载，
+# 仅在本地跑阶段E-F评测与反事实引擎时需要，见 requirements-research.txt。
