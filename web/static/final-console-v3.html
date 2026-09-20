@@ -200,6 +200,10 @@ input,select,textarea{font:inherit}
 .library-card .strength i{display:block;height:100%;background:var(--cyan)}
 .library-card .sl{font-size:10.5px;color:var(--muted);margin-top:4px;display:flex;justify-content:space-between;font-family:ui-monospace,Menlo,monospace}
 .library-card.alerted{border-left-color:var(--red)}
+.plan-two{display:grid;grid-template-columns:1fr 1fr;gap:14px 22px}
+.log-list{margin:6px 0 12px;padding-left:18px;font-size:12.5px;color:var(--ink);line-height:1.65}
+.log-list li{margin-bottom:5px}
+@media (max-width:1100px){.plan-two{grid-template-columns:1fr}}
 .plan-panel{margin-bottom:12px}
 .plan-frame{width:100%;height:72vh;border:1px solid var(--line);border-radius:10px;background:#fff;display:block}
 .library-card.alerted:before{content:"⚠";position:absolute;top:8px;right:26px;color:var(--red);font-size:13px}
@@ -244,6 +248,7 @@ table.full th{background:#f4f8f9;font-weight:600;white-space:nowrap}
       <a data-view="library"><span class="idx">04</span>因子库</a>
       <a data-view="manage"><span class="idx">05</span>因子管理</a>
       <a data-view="evolution"><span class="idx">06</span>自进化与证据</a>
+      <a data-view="syslog"><span class="idx">07</span>系统日志</a>
     </nav>
     <div class="foot" id="rail-foot">本地脱敏数据回放 · 可复现</div>
   </aside>
@@ -264,6 +269,7 @@ table.full th{background:#f4f8f9;font-weight:600;white-space:nowrap}
       <section class="view" id="view-library"></section>
       <section class="view" id="view-manage"></section>
       <section class="view" id="view-evolution"></section>
+      <section class="view" id="view-syslog"></section>
     </main>
   </div>
 </div>
@@ -410,7 +416,7 @@ async function reload(){
 }
 
 /* ================= 导航与全局预警条 ================= */
-const VIEW_NAMES = {overview:'归因总控', alerts:'风险预警', todo:'待办看板', library:'因子库', manage:'因子管理', evolution:'自进化与证据'};
+const VIEW_NAMES = {overview:'归因总控', alerts:'风险预警', todo:'待办看板', library:'因子库', manage:'因子管理', evolution:'自进化与证据', syslog:'系统日志'};
 function showView(name){
   CURRENT = name;
   document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active', v.id==='view-'+name));
@@ -1091,6 +1097,98 @@ function trustStageIndex(s){
   if(s.review_passed || s.trust_state==='reviewed') return 1;
   return 0;
 }
+
+/* ================= 07 系统日志 ================= */
+function renderSyslog(){
+  const el = document.getElementById('view-syslog');
+  el.innerHTML = `
+  <div class="card"><h3>系统日志 · 方案版本演进（v1.0 初赛 → v2.0 复赛 → v3.0 决赛）</h3>
+    <div style="font-size:12.5px;color:var(--muted)">每一版只把上一版验证过的能力带进来；本页为各版本核心方案实现与升级日志的完整整合。v1.0 / v2.0 的交互演示见 <a href="semifinal-demo.html" target="_blank" style="color:var(--blue)">复赛全流程演示页 ↗</a>；v3.0 完整方案见 <a href="plan-review.html" target="_blank" style="color:var(--blue)">深度方案评审工作台 v17.1 ↗</a>（04 因子库视图顶部亦可内嵌浏览）。</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="pill blue" style="font-size:12px">v1.0</span> 初赛基线 · 双线归因与结论门禁</h3>
+    <div style="font-size:12.5px;color:var(--muted);margin:6px 0 10px">解决的问题：当 UI 改版或经营指标变化时，把「实验造成的影响」和「暂时无法解释的变化」分开，并且不在缺少随机化时伪造因果结论。</div>
+    <div class="plan-two">
+      <div>
+        <b style="font-size:12.5px">A 线 · 实验验证</b>
+        <ul class="log-list">
+          <li>用户/曝光级随机化记录（subject_id、treatment/control、转化与曝光、渠道设备版本）进入统一输入契约：计数、概率、时间窗、segment ID 全部做 finite/range/uniqueness 校验。</li>
+          <li>贝叶斯 Student-t 后验：从 plug-in τ 升级为 μ/τ/ν 联合网格混合，修复严重欠覆盖；非法功效配置 fail-closed 而非套用默认公式。</li>
+          <li>实验完整性八项检查（SRM、平衡、稳定分流、污染、时间顺序、漏斗、cluster、并发实验）全部通过才允许因果估计——元数据不再足以授权结论。</li>
+        </ul>
+      </div>
+      <div>
+        <b style="font-size:12.5px">B 线 · 持续对照与变更账本</b>
+        <ul class="log-list">
+          <li>rate/mix/interaction 三元分解，修正 interaction 重复计入，候选级 closure 字段保证描述性贡献严格闭合。</li>
+          <li>Beam search 按 |gap_change| 剪枝，小预算下不再稳定漏掉高异常交叉切面。</li>
+          <li>变更账本 + 外部事件对齐：解释不了的部分输出 UNEXPLAINED 并创建补数任务，不强行归因。</li>
+        </ul>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-top:8px">验收基线：9 个治理案例 causal gate accuracy 1.00、错误因果断言 0、拒答召回 1.00；Line A matched Recall@5 1.00、ATE RMSE 0.001、95% 覆盖 1.00（因子恢复 matched 0.90 / mismatched 0.75 如实记录）；Line B 层级汇总 per-experiment ATT RMSE 由 10.233 降至 5.552（−45.7%），unknown honesty 1.00。</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="pill gold" style="font-size:12px">v2.0</span> 复赛升级 · 研究/验证端到端双链</h3>
+    <div style="font-size:12.5px;color:var(--muted);margin:6px 0 10px">升级主题：把「发现候选」和「验证候选」拆成两条链，每一站输出不同等级对象，因果结论只能在验证环节产生。</div>
+    <div class="plan-two">
+      <div>
+        <b style="font-size:12.5px">B 线研究链（发现）</b>
+        <ul class="log-list">
+          <li>分层异常面板 → Rate-aware RCA 下钻 → 关联筛选 → Factor Registry → 验证编排，五站 JSON 交接。</li>
+          <li>因子派生网格：父因子 × 3 种派生视图（水平/一阶/二阶加速度）× 范围 × 滞后；二阶派生只增加候选覆盖，不是自动根因。</li>
+          <li>max-T 联合零分布：同一批 block bootstrap 重排对所有候选同时生效，避免高维网格下逐因子零分布偏松；discovery 窗搜索、holdout 窗复核，BH q 仅辅助，holdout 是晋级主防线。</li>
+          <li>输出四档：FACTOR_CANDIDATE / TEMPORAL_ASSOCIATION / CAUSAL_EVIDENCE / UNEXPLAINED——候选排名是调查资源排序，不是因果概率。</li>
+        </ul>
+      </div>
+      <div>
+        <b style="font-size:12.5px">A 线验证链（确认）</b>
+        <ul class="log-list">
+          <li>N2 意图层确定性规则生成 AnalysisIntent → 实验设计锁定随机化单元与指标契约 → N3 灰度 dry-run 先行、5%→10%→25% 阶梯放量 → 护栏监测 → 可回放 Evidence Pack。</li>
+          <li>内部可控因子必须在目标切面内重新随机；外部不可随机因子用暴露度 DiD/BSTS/SCM 或事件研究，外部因子与我方应对策略分开报告。</li>
+          <li>六契约 1.0 落地（Metric/Factor/Test/Identification 等），原子假设键贯穿发现与确认，重复假设拒绝、识别失败不输出数值效应。</li>
+        </ul>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-top:8px">验收基线：演示网格 M=37 父因子 × D=3 × S=32 × L=29，有效比较 3219 次、block bootstrap 49 次；全流程端到端可由 semifinal 演示页一次 scenario-run 驱动复现。</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="pill green" style="font-size:12px">v3.0</span> 决赛方案 · 可信归因 Agent（当前版本）</h3>
+    <div style="font-size:12.5px;color:var(--muted);margin:6px 0 10px">升级主题：从「统计流水线」进化为「Agent 编排 + 统计裁判 + 人工门禁」三层权限的可信系统——Agent 负责提出和编排调查，统计程序负责证据判决，人负责不可观测事实与高风险动作。完整方案见深度方案评审工作台 v17.1。</div>
+    <div class="plan-two">
+      <div>
+        <b style="font-size:12.5px">Agent 编排层（提议权）</b>
+        <ul class="log-list">
+          <li>状态重建：异动进入后重建 hypotheses / facts / open questions schema，只有新证据改变状态才开下一轮，无净进展主动 STOP（loop_controller / hypothesis_registry / claim_ledger）。</li>
+          <li>六动作 Planner：ADD / SYNTHESIZE / ADJUST / CHANGE / QUANTIFY / STOP，动作 schema、预算、轮次、能力白名单校验。</li>
+          <li>受限 Subagent：fresh context、JSON ledger 交接，阶段与版本不匹配拒收（agent_orchestrator / stage_worker）。</li>
+        </ul>
+        <b style="font-size:12.5px">统计裁判层（判决权）</b>
+        <ul class="log-list">
+          <li>证据状态机：DESCRIPTIVE_FACT → CANDIDATE → IDENTIFIED → EFFECT，结论只能被证据移动，LLM 无结论写入权。</li>
+          <li>识别门 + 发布门：max-T、holdout、暴露平衡、对照污染不满足即拒答，并交付「为什么不可识别 + 补什么数据」（identification / publication / contracts）。</li>
+        </ul>
+      </div>
+      <div>
+        <b style="font-size:12.5px">C 线风险预演（「做梦」）</b>
+        <ul class="log-list">
+          <li>常驻扫描器在因子 × 指标 × 滞后空间巡逻，猎手提候选、证伪者优先推翻；证伪不了才进 WATCHLIST，不直接输出因果结论（watchlist_scan / scan_service）。</li>
+          <li>人工注册因子经 scan_factor_bridge 按 as-of / 下一窗物化快照自动入网格，同窗不回填、缺值不补零、总检验预算不变。</li>
+        </ul>
+        <b style="font-size:12.5px">RSI 递归自进化 + 人在回路</b>
+        <ul class="log-list">
+          <li>G0–G6 治理链：双源轨迹捕获 → RSI 提炼方法补丁 → 独立进程并行分析师审查 → 冻结 holdout 配对验证 → 人工审批 ≤10% 灰度 → 可按作用域暂停/一键回滚；只学「怎么查」，不改统计核心与旧结论（skill_governance / skill_analyst / skill_replay）。</li>
+          <li>HITL 账本：确认/否决/补充三类操作幂等留痕，补充事件下一窗登记，人工确认不晋级统计结论（feedback_service / human_feedback / cognitive_loop）。</li>
+        </ul>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-top:8px">验收基线：阶段 A–F + 第16章 16.1–16.4 全部完成；全量回归 257/257（本机，含 Linux 非 root 禁网容器复验）、第16章 CLI 验收 19/19；统计负结果（图方向共识功效 0、稀疏 knockoff 功效 0、错设协方差 FDP≈0.562）如实保留于 06 自进化与证据视图。</div>
+  </div>`;
+}
+
 function renderEvolution(){
   const el = document.getElementById('view-evolution');
   const ev = D.evidence||{};
@@ -1135,7 +1233,7 @@ function renderEvolution(){
 
 /* ================= 启动 ================= */
 function renderAll(){
-  renderStrip(); renderOverview(); renderAlerts(); renderTodo(); renderLibrary(); renderManage(); renderEvolution();
+  renderStrip(); renderOverview(); renderAlerts(); renderTodo(); renderLibrary(); renderManage(); renderEvolution(); renderSyslog();
   const off = document.getElementById('offline-strip');
   off.classList.toggle('show', MODE!=='service');
   const badge = document.getElementById('mode-badge');
