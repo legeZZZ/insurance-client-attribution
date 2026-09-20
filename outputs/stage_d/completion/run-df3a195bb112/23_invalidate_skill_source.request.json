@@ -1,0 +1,11 @@
+{
+  "operation": "investigation",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/governance.db",
+    "action": "invalidate",
+    "parameters": {
+      "ref": "sha256:58e95b477106dba00b23182be42f8fddb5a5190334389e0bb35cefc204022a16",
+      "reason": "fixture:source correction"
+    }
+  }
+}

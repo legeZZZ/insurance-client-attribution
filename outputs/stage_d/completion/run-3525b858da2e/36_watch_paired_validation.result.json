@@ -1,0 +1,278 @@
+{
+  "decision": "CRYSTALLIZE",
+  "suite_ref": "sha256:4a5d3914472b8b29a6374b126115d946deea028f8c6ab57414c5ca666261a3b2",
+  "spec_digest": "sha256:6fe323b9e1aed48ee64ec370152eda38f68c5b22159b31495c938dad229c8f01",
+  "passed": true,
+  "paired_gain": 1.0,
+  "critical_failures": [],
+  "pairs": [
+    {
+      "task_id": "watch_suite-40",
+      "data_ref": "sha256:ca555d88dfdddd908291afc968c631caecd6be8772920421e7a4be6a836afda9",
+      "critical": true,
+      "base": {
+        "operation": null,
+        "score": 0,
+        "replay": null
+      },
+      "candidate": {
+        "operation": "scan_window",
+        "score": 1,
+        "replay": {
+          "execution_status": "COMPLETED",
+          "binding": {
+            "task_id": "watch_suite-40",
+            "data_ref": "sha256:ca555d88dfdddd908291afc968c631caecd6be8772920421e7a4be6a836afda9",
+            "skill_ref": "sha256:6fe323b9e1aed48ee64ec370152eda38f68c5b22159b31495c938dad229c8f01"
+          },
+          "operation": "scan_window",
+          "input_digest": "sha256:99f1820d89b20fe316e4fa3ec40bb6706defbd77fe51cf6fe374f22910e085f5",
+          "result": {
+            "passed": true,
+            "claim_type": "WATCHLIST",
+            "scan": {
+              "claim_type": "WATCHLIST",
+              "watchlist": [
+                {
+                  "factor_id": "driver",
+                  "parent_factor_id": "driver",
+                  "scope_id": "global",
+                  "metric_id": "metric",
+                  "lag": 2,
+                  "effect_shape": "persistent",
+                  "correlation": 0.9848477422848995,
+                  "coverage": 0.975,
+                  "n_pairs": 78,
+                  "kind": "internal_event",
+                  "score": 0.9602265487277769,
+                  "budget_multiplier": 1.0,
+                  "falsification": {
+                    "placebo": {
+                      "correlation": 0.07614238309325633,
+                      "coverage": 0.9696969696969697,
+                      "n_pairs": 64,
+                      "kill": false,
+                      "insufficient_data": false,
+                      "applicable": true,
+                      "status": "TESTED"
+                    },
+                    "lead_lag_reversal": {
+                      "correlation": 0.12999425707241355,
+                      "kill": false,
+                      "skipped": false,
+                      "applicable": true
+                    },
+                    "split_half": {
+                      "first": 0.9835927578820409,
+                      "second": 0.9850651451039395,
+                      "kill": false,
+                      "applicable": true,
+                      "status": "TESTED"
+                    },
+                    "negative_controls": []
+                  },
+                  "falsification_status": "SURVIVED_EXPLORATORY",
+                  "claim_type": "WATCHLIST",
+                  "grade": "REVIEW",
+                  "alert_id": "sha256:f3aec6c0a3f08b7e6b2b8acaefc693df1902c710116579a0be17125dbd89c339",
+                  "window_id": "sha256:5d06d014df1e50a11ac50019f6fee8251620ab94280072bb7497148c98d5f842",
+                  "discovery_window": [
+                    4000,
+                    4079
+                  ],
+                  "next_step": "仅下一独立窗口确认可晋级；人工标签只进入验证队列"
+                }
+              ],
+              "deferred": [],
+              "killed": [],
+              "killed_count": 0,
+              "manifest": {
+                "M": 1,
+                "S": 1,
+                "K": 1,
+                "L": 1,
+                "grid_size": 1,
+                "tested": 1,
+                "test_budget": 15,
+                "budget": 2,
+                "attempts": [
+                  {
+                    "factor_id": "driver",
+                    "parent_factor_id": "driver",
+                    "scope_id": "global",
+                    "metric_id": "metric",
+                    "lag": 2,
+                    "effect_shape": "persistent",
+                    "correlation": 0.9848477422848995,
+                    "coverage": 0.975,
+                    "n_pairs": 78
+                  }
+                ],
+                "truncated": false,
+                "selection_policy": "registered_order_with_feedback_priority",
+                "inference": "exploratory_only",
+                "total_tests_spent": 5,
+                "total_test_budget": 30
+              },
+              "policy": "exploratory_only_no_cross_time_error_control_claim",
+              "data_digest": "sha256:5afddfca3a5ff6eb0a5cae35f3a1dd8495ba60b56f7415bb85ddbcf322e984dd"
+            }
+          },
+          "pid": 8313,
+          "guardrails": {
+            "no_code_execution": true,
+            "no_traffic_mutation": true,
+            "fresh_evidence_only": true,
+            "no_causal_without_identification": true
+          },
+          "digest": "sha256:80765cff9abbf57e9d9128327eb18391d33eb3cf69f9c90c8e691843d53514de",
+          "cost": {
+            "input_bytes": 4714,
+            "output_bytes": 2562,
+            "elapsed_seconds": 0.08369883399973332,
+            "model_tokens": 0
+          },
+          "worker_digest": "sha256:9bd9f169f94b3da7e7ff791f4e9a350329d7f687df9fae0333949f71e7bd4808"
+        }
+      }
+    },
+    {
+      "task_id": "watch_suite-41",
+      "data_ref": "sha256:79cc4003b59763b7d619b8e024dc24af1ed1451018e0bc02f22ef64a88547708",
+      "critical": true,
+      "base": {
+        "operation": null,
+        "score": 0,
+        "replay": null
+      },
+      "candidate": {
+        "operation": "scan_window",
+        "score": 1,
+        "replay": {
+          "execution_status": "COMPLETED",
+          "binding": {
+            "task_id": "watch_suite-41",
+            "data_ref": "sha256:79cc4003b59763b7d619b8e024dc24af1ed1451018e0bc02f22ef64a88547708",
+            "skill_ref": "sha256:6fe323b9e1aed48ee64ec370152eda38f68c5b22159b31495c938dad229c8f01"
+          },
+          "operation": "scan_window",
+          "input_digest": "sha256:07f98d5910e6f73c1ebe2284294163e3b777d9494de53ebda7f34f3537539429",
+          "result": {
+            "passed": true,
+            "claim_type": "WATCHLIST",
+            "scan": {
+              "claim_type": "WATCHLIST",
+              "watchlist": [
+                {
+                  "factor_id": "driver",
+                  "parent_factor_id": "driver",
+                  "scope_id": "global",
+                  "metric_id": "metric",
+                  "lag": 2,
+                  "effect_shape": "persistent",
+                  "correlation": 0.9851495857056691,
+                  "coverage": 0.975,
+                  "n_pairs": 78,
+                  "kind": "internal_event",
+                  "score": 0.9605208460630273,
+                  "budget_multiplier": 1.0,
+                  "falsification": {
+                    "placebo": {
+                      "correlation": 0.05059875072461377,
+                      "coverage": 0.9696969696969697,
+                      "n_pairs": 64,
+                      "kill": false,
+                      "insufficient_data": false,
+                      "applicable": true,
+                      "status": "TESTED"
+                    },
+                    "lead_lag_reversal": {
+                      "correlation": 0.08572358469224514,
+                      "kill": false,
+                      "skipped": false,
+                      "applicable": true
+                    },
+                    "split_half": {
+                      "first": 0.9873044551459976,
+                      "second": 0.982200850844276,
+                      "kill": false,
+                      "applicable": true,
+                      "status": "TESTED"
+                    },
+                    "negative_controls": []
+                  },
+                  "falsification_status": "SURVIVED_EXPLORATORY",
+                  "claim_type": "WATCHLIST",
+                  "grade": "REVIEW",
+                  "alert_id": "sha256:b47f6db259ab2bfc34a417761ca29b23323c77a8fb5ea0c572a9912d209d6a6d",
+                  "window_id": "sha256:5ee60acd50fc70a14210c0ebb9126de08890745ae40944b6f05296d350b5b18b",
+                  "discovery_window": [
+                    4100,
+                    4179
+                  ],
+                  "next_step": "仅下一独立窗口确认可晋级；人工标签只进入验证队列"
+                }
+              ],
+              "deferred": [],
+              "killed": [],
+              "killed_count": 0,
+              "manifest": {
+                "M": 1,
+                "S": 1,
+                "K": 1,
+                "L": 1,
+                "grid_size": 1,
+                "tested": 1,
+                "test_budget": 15,
+                "budget": 2,
+                "attempts": [
+                  {
+                    "factor_id": "driver",
+                    "parent_factor_id": "driver",
+                    "scope_id": "global",
+                    "metric_id": "metric",
+                    "lag": 2,
+                    "effect_shape": "persistent",
+                    "correlation": 0.9851495857056691,
+                    "coverage": 0.975,
+                    "n_pairs": 78
+                  }
+                ],
+                "truncated": false,
+                "selection_policy": "registered_order_with_feedback_priority",
+                "inference": "exploratory_only",
+                "total_tests_spent": 5,
+                "total_test_budget": 30
+              },
+              "policy": "exploratory_only_no_cross_time_error_control_claim",
+              "data_digest": "sha256:eb6bd78ef8ac27cc180274f1203024796f088f9b816df4b8a7e4bb4ef8fff936"
+            }
+          },
+          "pid": 8314,
+          "guardrails": {
+            "no_code_execution": true,
+            "no_traffic_mutation": true,
+            "fresh_evidence_only": true,
+            "no_causal_without_identification": true
+          },
+          "digest": "sha256:4eeb6802b14cf00d0063b0a2fd23530ac2fb3eff0311dee108fea2db61568544",
+          "cost": {
+            "input_bytes": 4735,
+            "output_bytes": 2561,
+            "elapsed_seconds": 0.08459429200047452,
+            "model_tokens": 0
+          },
+          "worker_digest": "sha256:736204546fae3b58f7004fe0b0e9c4e2ce32aea300eea80bc4e02d2a54ba70e4"
+        }
+      }
+    }
+  ],
+  "data_refs": [
+    "sha256:ca555d88dfdddd908291afc968c631caecd6be8772920421e7a4be6a836afda9",
+    "sha256:79cc4003b59763b7d619b8e024dc24af1ed1451018e0bc02f22ef64a88547708"
+  ],
+  "independent_task_refs": [
+    "watch_suite-40",
+    "watch_suite-41"
+  ]
+}

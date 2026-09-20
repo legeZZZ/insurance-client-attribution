@@ -15,8 +15,17 @@ def retrieve_factor_candidates(
     source_types: Sequence[str] = (),
     kinds: Sequence[str] = (),
     limit: int = 20,
+    as_of: int | None = None,
+    search_window: int | None = None,
 ) -> dict[str, Any]:
-    items = store.retrieve(query, source_types=source_types, kinds=kinds, limit=limit)
+    items = store.retrieve(
+        query,
+        source_types=source_types,
+        kinds=kinds,
+        limit=limit,
+        as_of=as_of,
+        search_window=search_window,
+    )
     return {
         "query": query,
         "candidate_count": len(items),

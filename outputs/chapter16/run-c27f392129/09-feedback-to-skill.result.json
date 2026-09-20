@@ -1,0 +1,93 @@
+{
+  "status": "COMPLETED",
+  "owner_pid": 3025,
+  "claim_promotion_allowed": false,
+  "feedback": {
+    "entry": {
+      "seq": 3,
+      "kind": "alert_feedback",
+      "prev_digest": "1404ba0a887bde37",
+      "alert_id": "sha256:c2c02c75b8311a0c116dc0e6ec1dbe7fcffba26e112ca6b06c2b39ab4474c0ea",
+      "label": "useful",
+      "operator": "ops",
+      "source_kind": "internal_event",
+      "supersedes_seq": null,
+      "digest": "c0771dce5bb8e409"
+    },
+    "routing": "next_window_budget_calibration",
+    "event_id": "sha256:3d41b992c56d8cab366250305a1a68cec8061db706104734446c6c3828d72489",
+    "revision": 1,
+    "supersedes": null,
+    "payload": {
+      "alert_id": "sha256:c2c02c75b8311a0c116dc0e6ec1dbe7fcffba26e112ca6b06c2b39ab4474c0ea",
+      "operator": "ops",
+      "label": "useful",
+      "source_kind": "internal_event"
+    },
+    "kind": "alert_feedback",
+    "claim_promotion_allowed": false
+  },
+  "skill_proposal": {
+    "decision": "AUDIT_ONLY",
+    "name": "watch_skill",
+    "version": 1,
+    "spec": {
+      "schema_version": "skill/2",
+      "name": "watch_skill",
+      "version": 1,
+      "rules": [
+        {
+          "when": {
+            "workflow": "c_line"
+          },
+          "action": "scan_window",
+          "polarity": "reinforce",
+          "evidence": [
+            "sha256:32c8bbb6d691ce9a9c847c8d4d29353d6f4192c050ff47d2572dce3a6eea8fa4"
+          ]
+        }
+      ],
+      "applicability": {
+        "workflow": "c_line"
+      },
+      "claim_ceiling": "WATCHLIST",
+      "preconditions": [
+        "valid_current_data",
+        "scope_matches"
+      ],
+      "postconditions": [
+        "no_causal_without_identification",
+        "no_traffic_mutation"
+      ],
+      "source_trace_ids": [
+        "sha256:7f30dbc9031bff4bae9500883fac88b7191f6a0e008bfb096ae557d5a18dc106"
+      ],
+      "source_claim_refs": [],
+      "source_evidence_refs": [
+        "sha256:32c8bbb6d691ce9a9c847c8d4d29353d6f4192c050ff47d2572dce3a6eea8fa4"
+      ],
+      "negative_examples": [],
+      "validation_task_refs": [],
+      "compatibility_check_refs": [],
+      "delta": {
+        "base_version": null,
+        "previous_digest": null,
+        "added_rules": [
+          {
+            "when": {
+              "workflow": "c_line"
+            },
+            "action": "scan_window",
+            "polarity": "reinforce",
+            "evidence": [
+              "sha256:32c8bbb6d691ce9a9c847c8d4d29353d6f4192c050ff47d2572dce3a6eea8fa4"
+            ]
+          }
+        ]
+      },
+      "digest": "sha256:fbaf5b0fb2ad9ee36ddc758a5849781cb6676a0420154e128c7d9d9105bde943"
+    },
+    "feedback_ref": "sha256:3d41b992c56d8cab366250305a1a68cec8061db706104734446c6c3828d72489"
+  },
+  "next_step": "independent_validation_and_human_release"
+}

@@ -1,0 +1,37 @@
+{
+  "reviewer": "fixture-reviewer",
+  "spec_digest": "sha256:f999b2a871fa671e53a4041dbaa0b8f17fb41241617f5409098f2b22ad19bf73",
+  "passed": true,
+  "checks": [
+    {
+      "execution_status": "COMPLETED",
+      "binding": {
+        "task_id": "source",
+        "data_ref": "sha256:58e95b477106dba00b23182be42f8fddb5a5190334389e0bb35cefc204022a16",
+        "skill_ref": "sha256:f999b2a871fa671e53a4041dbaa0b8f17fb41241617f5409098f2b22ad19bf73"
+      },
+      "operation": "check_metric",
+      "input_digest": "sha256:8e169c864996d518eb317a732b2ce272e308a705219128042de51300f17f2bb6",
+      "result": {
+        "passed": true,
+        "claim_type": "DESCRIPTIVE_FACT",
+        "metric_digest": "sha256:a7990ff79959ccf465e0a8e46b2c74d47345ace7fe444d09aced898d5fa38047"
+      },
+      "pid": 8254,
+      "guardrails": {
+        "no_code_execution": true,
+        "no_traffic_mutation": true,
+        "fresh_evidence_only": true,
+        "no_causal_without_identification": true
+      },
+      "digest": "sha256:bbd8d2627c03d3f007cd8f2b016659eefacb7c58d6adf5b69cce66fe5951edce",
+      "cost": {
+        "input_bytes": 541,
+        "output_bytes": 757,
+        "elapsed_seconds": 0.04018137500133889,
+        "model_tokens": 0
+      },
+      "worker_digest": "sha256:c9ad049267cef46c636aae5fd929bce6eff697838a0507ad84491ccd0bdba775"
+    }
+  ]
+}

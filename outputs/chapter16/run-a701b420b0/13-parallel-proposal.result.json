@@ -1,0 +1,65 @@
+{
+  "decision": "AUDIT_ONLY",
+  "name": "parallel_watch",
+  "version": 1,
+  "spec": {
+    "schema_version": "skill/2",
+    "name": "parallel_watch",
+    "version": 1,
+    "rules": [
+      {
+        "when": {
+          "workflow": "c_line"
+        },
+        "action": "scan_window",
+        "polarity": "reinforce",
+        "evidence": [
+          "sha256:4128a1333e9e090633ef95a62fe0bf00f431f0a998519a3be01f65cfe661f21f",
+          "sha256:41907ab05cca90bce209773458e0df9d44080653ca0d273cf6cd43efd9923f66"
+        ]
+      }
+    ],
+    "applicability": {
+      "workflow": "c_line"
+    },
+    "claim_ceiling": "WATCHLIST",
+    "preconditions": [
+      "valid_current_data",
+      "scope_matches"
+    ],
+    "postconditions": [
+      "no_causal_without_identification",
+      "no_traffic_mutation"
+    ],
+    "source_trace_ids": [
+      "sha256:5b4c96420ecf8e647a9642a470335865d3d4b320a13bd3c51f913142032585f8",
+      "sha256:7f30dbc9031bff4bae9500883fac88b7191f6a0e008bfb096ae557d5a18dc106"
+    ],
+    "source_claim_refs": [],
+    "source_evidence_refs": [
+      "sha256:41907ab05cca90bce209773458e0df9d44080653ca0d273cf6cd43efd9923f66",
+      "sha256:4128a1333e9e090633ef95a62fe0bf00f431f0a998519a3be01f65cfe661f21f"
+    ],
+    "negative_examples": [],
+    "validation_task_refs": [],
+    "compatibility_check_refs": [],
+    "delta": {
+      "base_version": null,
+      "previous_digest": null,
+      "added_rules": [
+        {
+          "when": {
+            "workflow": "c_line"
+          },
+          "action": "scan_window",
+          "polarity": "reinforce",
+          "evidence": [
+            "sha256:4128a1333e9e090633ef95a62fe0bf00f431f0a998519a3be01f65cfe661f21f",
+            "sha256:41907ab05cca90bce209773458e0df9d44080653ca0d273cf6cd43efd9923f66"
+          ]
+        }
+      ]
+    },
+    "digest": "sha256:2a9a2aeac1f027e40ebbd9ee858d6816fc5152d6e2f4c1f7d5ffe939c15f6692"
+  }
+}

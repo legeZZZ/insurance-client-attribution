@@ -1,0 +1,15 @@
+{
+  "decision": "AUDIT_ONLY",
+  "hits": [
+    {
+      "name": "metric_skill",
+      "version": 1,
+      "spec_digest": "sha256:f999b2a871fa671e53a4041dbaa0b8f17fb41241617f5409098f2b22ad19bf73",
+      "mode": "AUDIT_ONLY",
+      "scope_matches": false,
+      "claim_ceiling": "DESCRIPTIVE_FACT",
+      "task_id": "mismatch",
+      "data_ref": "sha256:983a8d6a9322ca4f18cd56002f735d89fc5594ea84583c13edcb4ab242702204"
+    }
+  ]
+}

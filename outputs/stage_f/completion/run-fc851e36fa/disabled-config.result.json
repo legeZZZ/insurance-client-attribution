@@ -1,0 +1,8 @@
+{
+  "policy_id": "p",
+  "enabled": false,
+  "max_candidates": 8,
+  "max_nodes": 15,
+  "max_depth": 4,
+  "alpha": 0.05
+}

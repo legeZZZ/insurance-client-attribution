@@ -1,0 +1,59 @@
+{
+  "record": {
+    "experiment_id": "exp-001",
+    "status": "CREATED",
+    "platform_mode": "dry_run",
+    "assignment_provenance": "dry_run_experiment_platform",
+    "stable_randomization_unit": "user",
+    "approval_ref": "fixture:sandbox",
+    "design_digest": "sha256:a4a7f7d83ba5bcb2",
+    "traffic_percent": 0
+  },
+  "canary": {
+    "experiment_id": "exp-001",
+    "status": "RUNNING",
+    "platform_mode": "dry_run",
+    "assignment_provenance": "dry_run_experiment_platform",
+    "stable_randomization_unit": "user",
+    "approval_ref": "fixture:sandbox",
+    "design_digest": "sha256:a4a7f7d83ba5bcb2",
+    "traffic_percent": 5,
+    "side_effect": "none_dry_run"
+  },
+  "metrics": {
+    "experiment_id": "exp-001",
+    "window": {},
+    "control": {
+      "clicks": 250,
+      "impressions": 10000
+    },
+    "treatment": {
+      "clicks": 215,
+      "impressions": 10000
+    },
+    "guardrails": {
+      "error_rate": {
+        "value": 0.021,
+        "limit": 0.01
+      },
+      "latency_p95_ms": {
+        "value": 180,
+        "limit": 250
+      }
+    }
+  },
+  "final": {
+    "experiment_id": "exp-001",
+    "status": "PAUSE_RECOMMENDED",
+    "platform_mode": "dry_run",
+    "assignment_provenance": "dry_run_experiment_platform",
+    "stable_randomization_unit": "user",
+    "approval_ref": "fixture:sandbox",
+    "design_digest": "sha256:a4a7f7d83ba5bcb2",
+    "traffic_percent": 5,
+    "side_effect": "none_dry_run",
+    "pause_reason": "error_rate",
+    "requires_human_approval": true
+  },
+  "side_effect": "none_sandbox"
+}

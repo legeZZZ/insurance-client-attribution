@@ -1,0 +1,8 @@
+........................................................................./Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/.venv/lib/python3.14/site-packages/numpy/_core/_methods.py:113: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x112ff3010>
+  return um.clip(a, min, max, out=out, **kwargs)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.................................................................................................................
+----------------------------------------------------------------------
+Ran 186 tests in 55.467s
+
+OK

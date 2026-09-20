@@ -1,0 +1,65 @@
+{
+  "operation": "skills",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-3525b858da2e/governance.db",
+    "action": "freeze_suite",
+    "parameters": {
+      "cases": [
+        {
+          "task_id": "metric_suite-10",
+          "data_ref": "sha256:ff51ae2d8959eae2aa0cb76a56aebbd69b54aeac9464f687ef34c2e63e60a753",
+          "context": {
+            "metric_kind": "ratio_of_sums"
+          },
+          "request": {
+            "metric_contract": {
+              "name": "conversion",
+              "numerator": "converted",
+              "denominator": "users",
+              "aggregation": "ratio_of_sums",
+              "unit": "rate",
+              "analysis_unit": "user",
+              "target_population": "eligible_users",
+              "timezone": "UTC",
+              "window": [
+                10,
+                19
+              ],
+              "maturity_days": 2,
+              "deduplication": "unit_id"
+            }
+          },
+          "expected_operation": "check_metric",
+          "critical": true
+        },
+        {
+          "task_id": "metric_suite-11",
+          "data_ref": "sha256:6b3682172ead0ee81ee198940ba9b536b245e05aff5558782e26fc5ec2f329be",
+          "context": {
+            "metric_kind": "ratio_of_sums"
+          },
+          "request": {
+            "metric_contract": {
+              "name": "conversion",
+              "numerator": "converted",
+              "denominator": "users",
+              "aggregation": "ratio_of_sums",
+              "unit": "rate",
+              "analysis_unit": "user",
+              "target_population": "eligible_users",
+              "timezone": "UTC",
+              "window": [
+                11,
+                20
+              ],
+              "maturity_days": 2,
+              "deduplication": "unit_id"
+            }
+          },
+          "expected_operation": "check_metric",
+          "critical": true
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+test_direction_reversal_is_watchlist_and_cannot_schedule_action (test_stage_b_statistics.ConfirmationTests.test_direction_reversal_is_watchlist_and_cannot_schedule_action) ... ok
+test_fixed_signal_can_pass_confirmation (test_stage_b_statistics.ConfirmationTests.test_fixed_signal_can_pass_confirmation) ... ok
+test_holm_known_family (test_stage_b_statistics.ConfirmationTests.test_holm_known_family) ... ok
+test_joint_null_preserves_duplicate_views_and_lag_target (test_stage_b_statistics.ConfirmationTests.test_joint_null_preserves_duplicate_views_and_lag_target) ... ok
+test_short_holdout_cannot_promote (test_stage_b_statistics.ConfirmationTests.test_short_holdout_cannot_promote) ... ok
+test_empty_subgroup_kept_as_explicit_insufficient_result (test_stage_b_statistics.HTEInferenceTests.test_empty_subgroup_kept_as_explicit_insufficient_result) ... ok
+test_missing_arm_in_subgroup_is_insufficient (test_stage_b_statistics.HTEInferenceTests.test_missing_arm_in_subgroup_is_insufficient) ... ok
+test_strong_shrinkage_does_not_move_interval_center (test_stage_b_statistics.HTEInferenceTests.test_strong_shrinkage_does_not_move_interval_center) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.098s
+
+OK

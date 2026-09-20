@@ -1,0 +1,389 @@
+{
+  "scope": "fixed_single_local_rate_drop_fixture_only",
+  "search_budget": {
+    "evaluations": 1000,
+    "seconds": 2.0,
+    "top_k": 8
+  },
+  "summaries": {
+    "beam": {
+      "recall_at_8": 1.0,
+      "overlap_redundancy": 0.6492339544513458,
+      "evaluations": 26.0,
+      "seconds": 0.020408758450685127
+    },
+    "riskloc": {
+      "recall_at_8": 1.0,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26.0,
+      "seconds": 0.0021022624507168073
+    }
+  },
+  "runs": [
+    {
+      "seed": 0,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.6,
+      "evaluations": 26,
+      "seconds": 0.020275250000850065,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 0,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0052406249997147825,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 1,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.6521739130434783,
+      "evaluations": 26,
+      "seconds": 0.019984458998806076,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 1,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0018805409999913536,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 2,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.6666666666666666,
+      "evaluations": 26,
+      "seconds": 0.020535457999358186,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 2,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0019085000021732412,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 3,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.6666666666666666,
+      "evaluations": 26,
+      "seconds": 0.020026541998959146,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 3,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0018682500012801029,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 4,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.6666666666666666,
+      "evaluations": 26,
+      "seconds": 0.02037591699991026,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 4,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0018627079989528283,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 5,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.6190476190476191,
+      "evaluations": 26,
+      "seconds": 0.019939041998441098,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 5,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0019525829993654042,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 6,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.6666666666666666,
+      "evaluations": 26,
+      "seconds": 0.020722000001114793,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 6,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0018595000001369044,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 7,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.6521739130434783,
+      "evaluations": 26,
+      "seconds": 0.01995345800241921,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 7,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0018592920023365878,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 8,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.6666666666666666,
+      "evaluations": 26,
+      "seconds": 0.02072454200242646,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 8,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.002253042002848815,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 9,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.65,
+      "evaluations": 26,
+      "seconds": 0.020154084002570016,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 9,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0018473749987606425,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 10,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.6521739130434783,
+      "evaluations": 26,
+      "seconds": 0.021405874998890795,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 10,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0019022500018763822,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 11,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.65,
+      "evaluations": 26,
+      "seconds": 0.020472167001571506,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 11,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0020497910008998588,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 12,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.6666666666666666,
+      "evaluations": 26,
+      "seconds": 0.019374791001609992,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 12,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.002063125000859145,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 13,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.6190476190476191,
+      "evaluations": 26,
+      "seconds": 0.020461709002120188,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 13,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0018402090026938822,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 14,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.65,
+      "evaluations": 26,
+      "seconds": 0.020761167001182912,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 14,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0018673750018933788,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 15,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.65,
+      "evaluations": 26,
+      "seconds": 0.021381582999310922,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 15,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0018465840003045741,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 16,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.6521739130434783,
+      "evaluations": 26,
+      "seconds": 0.020684708000771934,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 16,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0018519160003052093,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 17,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.6666666666666666,
+      "evaluations": 26,
+      "seconds": 0.02048583400028292,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 17,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0021194580003793817,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 18,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.6521739130434783,
+      "evaluations": 26,
+      "seconds": 0.02090133300225716,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 18,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0021371670009102672,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 19,
+      "algorithm": "beam",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.6190476190476191,
+      "evaluations": 26,
+      "seconds": 0.0195552500008489,
+      "budget_exhausted": false
+    },
+    {
+      "seed": 19,
+      "algorithm": "riskloc",
+      "recall_at_8": 1,
+      "overlap_redundancy": 0.0,
+      "evaluations": 26,
+      "seconds": 0.0018349579986534081,
+      "budget_exhausted": false
+    }
+  ],
+  "limitations": [
+    "does_not_measure_mixed_sign_or_multiple_root_causes",
+    "search_deadline_excludes_result_assembly",
+    "no_causal_claim"
+  ]
+}

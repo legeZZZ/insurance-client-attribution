@@ -1,0 +1,102 @@
+#0 building with "rootless" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.backend
+#1 transferring dockerfile: 1.55kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14-slim
+#2 DONE 0.4s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 197B done
+#3 DONE 0.0s
+
+#4 [wheels 1/8] FROM docker.io/library/python:3.14-slim@sha256:cad9a2c871761c413caa6fdd6441c783451e740a48aaeba60ae62a8b53525ef6
+#4 resolve docker.io/library/python:3.14-slim@sha256:cad9a2c871761c413caa6fdd6441c783451e740a48aaeba60ae62a8b53525ef6 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 26.83kB 0.0s done
+#5 DONE 0.0s
+
+#6 [backend 10/18] COPY data /app/data
+#6 CACHED
+
+#7 [backend  7/18] COPY tools /app/tools
+#7 CACHED
+
+#8 [wheels 4/8] COPY tools/prepare_wheel_sources.py ./
+#8 CACHED
+
+#9 [wheels 8/8] RUN python -c "import pathlib,hashlib; p=pathlib.Path('/wheels'); (p/'SHA256SUMS').write_text(''.join(hashlib.sha256(f.read_bytes()).hexdigest()+'  '+f.name+chr(10) for f in sorted(p.glob('*.whl'))))"
+#9 CACHED
+
+#10 [backend 11/18] COPY specs /app/specs
+#10 CACHED
+
+#11 [backend  4/18] COPY requirements.lock.txt .
+#11 CACHED
+
+#12 [backend  3/18] COPY --from=wheels /wheels /wheels
+#12 CACHED
+
+#13 [backend  2/18] WORKDIR /app
+#13 CACHED
+
+#14 [backend  6/18] COPY track2_v5 /app/track2_v5
+#14 CACHED
+
+#15 [wheels 7/8] RUN pip wheel --ignore-requires-python --no-deps -r /sources/sources.txt -w /wheels
+#15 CACHED
+
+#16 [backend 12/18] COPY examples /app/examples
+#16 CACHED
+
+#17 [wheels 3/8] COPY requirements.lock.txt uv.lock ./
+#17 CACHED
+
+#18 [backend 15/18] COPY track2_clean_bundle /app/track2_clean_bundle
+#18 CACHED
+
+#19 [wheels 5/8] RUN apt-get update && apt-get install -y --no-install-recommends build-essential && rm -rf /var/lib/apt/lists/*
+#19 CACHED
+
+#20 [wheels 2/8] WORKDIR /build
+#20 CACHED
+
+#21 [wheels 6/8] RUN python prepare_wheel_sources.py uv.lock /sources
+#21 CACHED
+
+#22 [backend  8/18] COPY src /app/src
+#22 CACHED
+
+#23 [backend 14/18] COPY tests /app/tests
+#23 CACHED
+
+#24 [backend  5/18] RUN cd /wheels && sha256sum -c SHA256SUMS && pip install --ignore-requires-python --no-deps --no-index /wheels/*.whl && pip check
+#24 CACHED
+
+#25 [backend  9/18] COPY run_server.py config.example.json /app/
+#25 CACHED
+
+#26 [backend 13/18] COPY scripts /app/scripts
+#26 CACHED
+
+#27 [backend 16/18] RUN apt-get update && apt-get install -y --no-install-recommends procps && rm -rf /var/lib/apt/lists/*
+#27 CACHED
+
+#28 [backend 17/18] RUN mkdir -p /work /app/runtime_data && useradd --uid 10001 --no-create-home app && chown app /work /app/runtime_data
+#28 DONE 0.1s
+
+#29 [backend 18/18] WORKDIR /work
+#29 DONE 0.0s
+
+#30 exporting to image
+#30 exporting layers 0.0s done
+#30 exporting manifest sha256:e312f9418e52124efe9177dd92878c44c9901a6c6c931d775b2aed8181179182 done
+#30 exporting config sha256:3b23cc88859dcd9a7166fd63d772d219c2086c4fc730097fe2c41d2bd8c40660 done
+#30 exporting attestation manifest sha256:695214933b408ceace6fa5dfde3a97d782979e4e6b24c5054a7e8852422faa7f done
+#30 exporting manifest list sha256:c3495780dc5790edae41be662abb175473bb4b1aa6b9076f32a52bd6493e8c1b done
+#30 naming to docker.io/library/track2-backend:chapter16 done
+#30 unpacking to docker.io/library/track2-backend:chapter16 0.0s done
+#30 DONE 0.1s

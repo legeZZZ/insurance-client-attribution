@@ -1,0 +1,329 @@
+{
+  "model": "tigramite_pcmciplus_lpcmci",
+  "selection_manifest": {
+    "variables": [
+      "x",
+      "y"
+    ],
+    "protected_covariates": [],
+    "known_mechanism_nodes": [],
+    "parent_map": {},
+    "tau_max": 1,
+    "response_window_basis": "predeclared one-day simulated mechanism",
+    "test_policy": "both",
+    "alpha": 0.05,
+    "max_condition_dim": 1,
+    "shuffle_samples": 9,
+    "shuffle_block_length": 5,
+    "seed": 20260914,
+    "data_digest": "sha256:690d643500ebc69f9757638caf027ea729eb989b7070fc5b895b82d0ba9f8a06"
+  },
+  "claim_type": "CAUSAL_GRAPH_HYPOTHESIS",
+  "causal_effect_allowed": false,
+  "assumptions": [
+    "causal_stationarity",
+    "Markov_and_faithfulness",
+    "CI_test_model_applicability"
+  ],
+  "notes": [
+    "PCMCI+ additionally assumes causal sufficiency",
+    "PAG circles are unresolved endpoints, not proof of latent confounding"
+  ],
+  "status": "COMPLETED",
+  "runs": [
+    {
+      "algorithm": "PCMCI+",
+      "ci_test": "parcorr",
+      "edges": [],
+      "graph": [
+        [
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ]
+        ]
+      ],
+      "p_matrix": [
+        [
+          [
+            1.0,
+            0.347000585908416
+          ],
+          [
+            0.41000038895077073,
+            0.37207919118505456
+          ]
+        ],
+        [
+          [
+            0.41000038895077073,
+            0.7738084682145328
+          ],
+          [
+            1.0,
+            0.3573464728481463
+          ]
+        ]
+      ],
+      "val_matrix": [
+        [
+          [
+            0.0,
+            0.15684921406229782
+          ],
+          [
+            -0.13761244812156248,
+            -0.1489623795653281
+          ]
+        ],
+        [
+          [
+            -0.13761244812156248,
+            -0.048205120794198336
+          ],
+          [
+            0.0,
+            -0.15355531515550716
+          ]
+        ]
+      ],
+      "runtime_seconds": 0.004077499997947598
+    },
+    {
+      "algorithm": "LPCMCI",
+      "ci_test": "parcorr",
+      "edges": [],
+      "graph": [
+        [
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ]
+        ]
+      ],
+      "p_matrix": [
+        [
+          [
+            0.0,
+            0.347000585908416
+          ],
+          [
+            0.41000038895077073,
+            0.37207919118505456
+          ]
+        ],
+        [
+          [
+            0.41000038895077073,
+            0.7738084682145328
+          ],
+          [
+            0.0,
+            0.3573464728481463
+          ]
+        ]
+      ],
+      "val_matrix": [
+        [
+          [
+            0.0,
+            0.15684921406229782
+          ],
+          [
+            -0.13761244812156248,
+            -0.1489623795653281
+          ]
+        ],
+        [
+          [
+            -0.13761244812156248,
+            -0.048205120794198336
+          ],
+          [
+            0.0,
+            -0.15355531515550716
+          ]
+        ]
+      ],
+      "runtime_seconds": 0.0027040839995606802
+    },
+    {
+      "algorithm": "PCMCI+",
+      "ci_test": "cmiknn",
+      "edges": [],
+      "graph": [
+        [
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ]
+        ]
+      ],
+      "p_matrix": [
+        [
+          [
+            1.0,
+            0.5
+          ],
+          [
+            1.0,
+            0.1
+          ]
+        ],
+        [
+          [
+            1.0,
+            0.2
+          ],
+          [
+            1.0,
+            0.7
+          ]
+        ]
+      ],
+      "val_matrix": [
+        [
+          [
+            0.0,
+            0.05549086110540591
+          ],
+          [
+            0.026136604680716324,
+            0.33996583650977596
+          ]
+        ],
+        [
+          [
+            0.026136604680716324,
+            0.09566336892456495
+          ],
+          [
+            0.0,
+            0.035291304661774214
+          ]
+        ]
+      ],
+      "runtime_seconds": 0.7576432079986262
+    },
+    {
+      "algorithm": "LPCMCI",
+      "ci_test": "cmiknn",
+      "edges": [],
+      "graph": [
+        [
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ]
+        ]
+      ],
+      "p_matrix": [
+        [
+          [
+            0.0,
+            0.5
+          ],
+          [
+            0.9,
+            0.1
+          ]
+        ],
+        [
+          [
+            0.9,
+            0.2
+          ],
+          [
+            0.0,
+            0.7
+          ]
+        ]
+      ],
+      "val_matrix": [
+        [
+          [
+            0.0,
+            0.05549086110540591
+          ],
+          [
+            0.026136604680716324,
+            0.33996583650977596
+          ]
+        ],
+        [
+          [
+            0.026136604680716324,
+            0.09566336892456495
+          ],
+          [
+            0.0,
+            0.035291304661774214
+          ]
+        ]
+      ],
+      "runtime_seconds": 0.00976687499860418
+    }
+  ],
+  "ambiguities": [],
+  "disagreements": [],
+  "consensus_time_expanded_edges": [],
+  "tigramite_version": "5.2.10.1",
+  "graph_discovery_does_not_certify_identification": true,
+  "digest": "sha256:a426b0d630faf7b0cdb12e8c906fd66febccd634d374e8dde369ae9d9094393c"
+}

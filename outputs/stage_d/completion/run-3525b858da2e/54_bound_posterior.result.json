@@ -1,0 +1,36 @@
+{
+  "task_id": "fresh",
+  "data_ref": "sha256:48e50394670f3daa857e56966f25b62baa213d73db0ebdbbfa7f7a79f44daf41",
+  "context_ref": "sha256:3585e3692cc15600908cf7b7f5281d0f94c866b80cc9dbb7471b8c1aee45fec0",
+  "prior_check": {
+    "prior": [
+      6.0,
+      21.0
+    ],
+    "reason": "COMPATIBLE",
+    "predictive_interval": [
+      4.0,
+      48.0
+    ],
+    "historical_refs": [
+      "sha256:781a6d0087304bb3ecce4b4798f84fdae1ad4cade6c63a48b11e7cffe02226e7"
+    ],
+    "effective_pseudo_trials": 25.0,
+    "context_ref": "sha256:3585e3692cc15600908cf7b7f5281d0f94c866b80cc9dbb7471b8c1aee45fec0",
+    "method_retrieval_used": false,
+    "causal_eligible": false
+  },
+  "posterior_shape": [
+    27.0,
+    100.0
+  ],
+  "posterior_mean": 0.2125984251968504,
+  "posterior_interval": [
+    0.1462167908781344,
+    0.28754732046818565
+  ],
+  "claim_type": "DESCRIPTIVE_FACT",
+  "causal_eligible": false,
+  "method_memory_used": false,
+  "evidence_ref": "sha256:10a8149db53ceecb1ecf943fc871ec9e141373cbd02ad1fdbf2cf4c3d7dd96f5"
+}

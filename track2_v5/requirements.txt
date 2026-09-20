@@ -1,1 +1,9 @@
 numpy>=1.24
+tigramite==5.2.10.1
+scipy>=1.18.1
+scikit-learn>=1.9.1
+numba>=0.67.0
+
+dowhy==0.14
+
+econml==0.17.0

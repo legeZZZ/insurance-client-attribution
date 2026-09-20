@@ -1,0 +1,1351 @@
+{
+  "protocol_digest": "sha256:ad7513c0afc331c4d501896333271bd3302df787996cce6660ae8b541ab4d8c2",
+  "governance_once_seconds": 0.3018750409974018,
+  "governance_human_approval_events": 2,
+  "governance_snapshot": {
+    "spec": {
+      "schema_version": "skill/2",
+      "name": "metric",
+      "version": 1,
+      "rules": [
+        {
+          "when": {
+            "metric_kind": "sum"
+          },
+          "action": "check_metric",
+          "polarity": "reinforce",
+          "evidence": [
+            "sha256:bcfdf6ad65c9685b586d50d5c83264c8e8239f2717b1fd28a69244bf71f59316"
+          ]
+        }
+      ],
+      "applicability": {
+        "metric_kind": "sum"
+      },
+      "claim_ceiling": "DESCRIPTIVE_FACT",
+      "preconditions": [
+        "valid_current_data",
+        "scope_matches"
+      ],
+      "postconditions": [
+        "no_causal_without_identification",
+        "no_traffic_mutation"
+      ],
+      "source_trace_ids": [
+        "sha256:0212bb4265adfaf893e8d1d30cbbe1e505b37fe66e9ce12e6c5f9522ab7fedaf"
+      ],
+      "source_claim_refs": [],
+      "source_evidence_refs": [
+        "sha256:bcfdf6ad65c9685b586d50d5c83264c8e8239f2717b1fd28a69244bf71f59316"
+      ],
+      "negative_examples": [],
+      "validation_task_refs": [],
+      "compatibility_check_refs": [],
+      "delta": {
+        "base_version": null,
+        "previous_digest": null,
+        "added_rules": [
+          {
+            "when": {
+              "metric_kind": "sum"
+            },
+            "action": "check_metric",
+            "polarity": "reinforce",
+            "evidence": [
+              "sha256:bcfdf6ad65c9685b586d50d5c83264c8e8239f2717b1fd28a69244bf71f59316"
+            ]
+          }
+        ]
+      },
+      "digest": "sha256:515ddd07c4b1b404559e0e4a03c91c214d542d31288248fed966051e4864bd17"
+    },
+    "lifecycle": {
+      "trust_state": "trusted",
+      "review": {
+        "reviewer": "independent-reviewer",
+        "spec_digest": "sha256:515ddd07c4b1b404559e0e4a03c91c214d542d31288248fed966051e4864bd17",
+        "passed": true,
+        "checks": [
+          {
+            "execution_status": "COMPLETED",
+            "binding": {
+              "task_id": "source",
+              "data_ref": "sha256:1c206b51f08dc0628657d0c4e83543e52a5e98fd926245342b1be542b486db82",
+              "skill_ref": "sha256:515ddd07c4b1b404559e0e4a03c91c214d542d31288248fed966051e4864bd17"
+            },
+            "operation": "check_metric",
+            "input_digest": "sha256:94426b859648c1b79fbbad66045d23c1fe161493676df2d31d97d86cba1afa74",
+            "result": {
+              "passed": true,
+              "claim_type": "DESCRIPTIVE_FACT",
+              "metric_digest": "sha256:96549efe26603d5ed8c32ff7c7c0973f21e13a0db3457617d4c71d88723fb4a9"
+            },
+            "pid": 12721,
+            "guardrails": {
+              "no_code_execution": true,
+              "no_traffic_mutation": true,
+              "fresh_evidence_only": true,
+              "no_causal_without_identification": true
+            },
+            "digest": "sha256:1ee8b922a0d4f4dd9b73b91d42a8b6fc5bfe135989c92574522c8f7c95df3e74",
+            "cost": {
+              "input_bytes": 521,
+              "output_bytes": 758,
+              "elapsed_seconds": 0.04059816700100782,
+              "model_tokens": 0
+            },
+            "worker_digest": "sha256:c42c021c25dca68d0e0624f4dabc0bb175b241239c27afd23419858db2b435b3"
+          }
+        ]
+      },
+      "validation": {
+        "suite_ref": "sha256:12b45914293bd8714461b58a0974907dbc92395ab271bb1dec4da9c58fc2c776",
+        "spec_digest": "sha256:515ddd07c4b1b404559e0e4a03c91c214d542d31288248fed966051e4864bd17",
+        "passed": true,
+        "paired_gain": 1.0,
+        "critical_failures": [],
+        "pairs": [
+          {
+            "task_id": "validation-200",
+            "data_ref": "sha256:b912b0d591ae3ce8e61b3aa7313774c4838150d445ef7c5ac95398786d5e67fc",
+            "critical": true,
+            "base": {
+              "operation": null,
+              "score": 0,
+              "replay": null
+            },
+            "candidate": {
+              "operation": "check_metric",
+              "score": 1,
+              "replay": {
+                "execution_status": "COMPLETED",
+                "binding": {
+                  "task_id": "validation-200",
+                  "data_ref": "sha256:b912b0d591ae3ce8e61b3aa7313774c4838150d445ef7c5ac95398786d5e67fc",
+                  "skill_ref": "sha256:515ddd07c4b1b404559e0e4a03c91c214d542d31288248fed966051e4864bd17"
+                },
+                "operation": "check_metric",
+                "input_digest": "sha256:de176705ff20653f2fbee7967b15a9771a0313cedcde9cea31ce1fb8dd545e1e",
+                "result": {
+                  "passed": true,
+                  "claim_type": "DESCRIPTIVE_FACT",
+                  "metric_digest": "sha256:14c93c0c0a62f6602564778ed6a11de52ff8ab103496aaccf5c098cf981c2532"
+                },
+                "pid": 12724,
+                "guardrails": {
+                  "no_code_execution": true,
+                  "no_traffic_mutation": true,
+                  "fresh_evidence_only": true,
+                  "no_causal_without_identification": true
+                },
+                "digest": "sha256:46ac41d7db735932963f4c07a9531ac0b3451fcbb3d131e0df6b3b6e4a269fe6",
+                "cost": {
+                  "input_bytes": 533,
+                  "output_bytes": 766,
+                  "elapsed_seconds": 0.07893733300079475,
+                  "model_tokens": 0
+                },
+                "worker_digest": "sha256:66cd378bbc63afbc09a3b8b02777c9e3f04f36ca8db86c9ca260895217fdb672"
+              }
+            }
+          },
+          {
+            "task_id": "validation-201",
+            "data_ref": "sha256:700b08c8143839526ec35b4a21da88e42412f7d586f7e761569d2f4d22eb4115",
+            "critical": true,
+            "base": {
+              "operation": null,
+              "score": 0,
+              "replay": null
+            },
+            "candidate": {
+              "operation": "check_metric",
+              "score": 1,
+              "replay": {
+                "execution_status": "COMPLETED",
+                "binding": {
+                  "task_id": "validation-201",
+                  "data_ref": "sha256:700b08c8143839526ec35b4a21da88e42412f7d586f7e761569d2f4d22eb4115",
+                  "skill_ref": "sha256:515ddd07c4b1b404559e0e4a03c91c214d542d31288248fed966051e4864bd17"
+                },
+                "operation": "check_metric",
+                "input_digest": "sha256:adcbcc83983de87e7e484042835ee254b85a1d39e8b8aaad4ee08c618dd8fbd3",
+                "result": {
+                  "passed": true,
+                  "claim_type": "DESCRIPTIVE_FACT",
+                  "metric_digest": "sha256:d71e1825251d1577a76a1d17c1efd23334591ce911204176010d6c21009bf58c"
+                },
+                "pid": 12725,
+                "guardrails": {
+                  "no_code_execution": true,
+                  "no_traffic_mutation": true,
+                  "fresh_evidence_only": true,
+                  "no_causal_without_identification": true
+                },
+                "digest": "sha256:ae5a89ca5edf520112c70a0d4acb0f670d9f638ed8ca3285e93db7ccbe3e932f",
+                "cost": {
+                  "input_bytes": 533,
+                  "output_bytes": 766,
+                  "elapsed_seconds": 0.04058104100113269,
+                  "model_tokens": 0
+                },
+                "worker_digest": "sha256:ec950a9268935f2d82446da20ac18907bf3ff222e0b1e5b6a545a2dd7185cf65"
+              }
+            }
+          }
+        ],
+        "data_refs": [
+          "sha256:b912b0d591ae3ce8e61b3aa7313774c4838150d445ef7c5ac95398786d5e67fc",
+          "sha256:700b08c8143839526ec35b4a21da88e42412f7d586f7e761569d2f4d22eb4115"
+        ],
+        "independent_task_refs": [
+          "validation-200",
+          "validation-201"
+        ]
+      },
+      "release": {
+        "approval_ref": "sha256:b07913838f021eece985b9ce1132ddb409359a745a635f4da6efcd998a6c957b",
+        "fraction": 1.0,
+        "effective_window": 0,
+        "canary_passed": true
+      },
+      "suspended_scopes": [],
+      "execution_eligible": true,
+      "validation_history": [
+        {
+          "suite_ref": "sha256:761053b7dcc1ac064ce6fc9bb3a28905e8bb88bcd76686a6e265b909c989dd3a",
+          "data_refs": [
+            "sha256:96e0d756c0ed5c64d2c8d20629864c47cc7f5db197dc5d876bf775ede3bbdca9",
+            "sha256:e05f2115fb8958236869036c2b8fb9b0c6f6c8ee75ef41d90dc931017fe3ac3a"
+          ],
+          "independent_task_refs": [
+            "validation-100",
+            "validation-101"
+          ]
+        },
+        {
+          "suite_ref": "sha256:12b45914293bd8714461b58a0974907dbc92395ab271bb1dec4da9c58fc2c776",
+          "data_refs": [
+            "sha256:700b08c8143839526ec35b4a21da88e42412f7d586f7e761569d2f4d22eb4115",
+            "sha256:b912b0d591ae3ce8e61b3aa7313774c4838150d445ef7c5ac95398786d5e67fc"
+          ],
+          "independent_task_refs": [
+            "validation-200",
+            "validation-201"
+          ]
+        }
+      ]
+    },
+    "evidence_links": {
+      "source_claim_refs": [],
+      "source_task_refs": [
+        "sha256:bcfdf6ad65c9685b586d50d5c83264c8e8239f2717b1fd28a69244bf71f59316"
+      ],
+      "validation_task_refs": [
+        "validation-200",
+        "validation-201"
+      ],
+      "compatibility_check_refs": []
+    }
+  },
+  "source_trace": {
+    "task_id": "source",
+    "data_ref": "sha256:1c206b51f08dc0628657d0c4e83543e52a5e98fd926245342b1be542b486db82",
+    "context": {
+      "metric_kind": "sum"
+    },
+    "operation": "check_metric",
+    "author": "author",
+    "replay": {
+      "execution_status": "COMPLETED",
+      "binding": {
+        "task_id": "source",
+        "data_ref": "sha256:1c206b51f08dc0628657d0c4e83543e52a5e98fd926245342b1be542b486db82",
+        "skill_ref": "capture:author"
+      },
+      "operation": "check_metric",
+      "input_digest": "sha256:94426b859648c1b79fbbad66045d23c1fe161493676df2d31d97d86cba1afa74",
+      "result": {
+        "passed": true,
+        "claim_type": "DESCRIPTIVE_FACT",
+        "metric_digest": "sha256:96549efe26603d5ed8c32ff7c7c0973f21e13a0db3457617d4c71d88723fb4a9"
+      },
+      "pid": 12720,
+      "guardrails": {
+        "no_code_execution": true,
+        "no_traffic_mutation": true,
+        "fresh_evidence_only": true,
+        "no_causal_without_identification": true
+      },
+      "digest": "sha256:b0a43624370a3f68b37ca865d52b05bdc898c15b453d54c38ddf87f999f25d67",
+      "cost": {
+        "input_bytes": 464,
+        "output_bytes": 701,
+        "elapsed_seconds": 0.04647420800029067,
+        "model_tokens": 0
+      },
+      "worker_digest": "sha256:b5da4c9cfb08a211979e6ba63786b2d11a738961b995fc526ad0a207d66a298b"
+    },
+    "outcome": "success",
+    "failure_kind": null,
+    "correction": null,
+    "source_claim_ref": null,
+    "trace_id": "sha256:0212bb4265adfaf893e8d1d30cbbe1e505b37fe66e9ce12e6c5f9522ab7fedaf",
+    "evidence_ref": "sha256:bcfdf6ad65c9685b586d50d5c83264c8e8239f2717b1fd28a69244bf71f59316"
+  },
+  "runs": [
+    {
+      "seed": 72000,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.03383870800098521,
+      "cost": {
+        "input_bytes": 456,
+        "output_bytes": 692,
+        "elapsed_seconds": 0.033775915999285644,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:a4a3002a24a4fd11605d66a08daa0557f46212f69f8c0544a8e274dda7265412"
+    },
+    {
+      "seed": 72000,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03695483399860677,
+      "cost": {
+        "input_bytes": 466,
+        "output_bytes": 702,
+        "elapsed_seconds": 0.03632408300109091,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:1e4bd04f4dafc989333a35079be124cbd4c45b2e63a2cfb82ce533f3a0e820a7"
+    },
+    {
+      "seed": 72000,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.037155124999117106,
+      "cost": {
+        "input_bytes": 517,
+        "output_bytes": 753,
+        "elapsed_seconds": 0.03557216699846322,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:ecd92cdf6542419ad26b2c8817d614bc9dad8070bfa967c7b8bd3fd969a209fa"
+    },
+    {
+      "seed": 72001,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.03615579200049979,
+      "cost": {
+        "input_bytes": 476,
+        "output_bytes": 705,
+        "elapsed_seconds": 0.0360862499983341,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:9acacf7d411b1470722a4d53772d5a0f38734c782226d6ed4df90c824b39c3fc"
+    },
+    {
+      "seed": 72001,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03643883300173911,
+      "cost": {
+        "input_bytes": 486,
+        "output_bytes": 715,
+        "elapsed_seconds": 0.035921167000196874,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:ba0ed5f7d393a0ac59666c1f1416f171bd26655134859769368a0f562bdf1af7"
+    },
+    {
+      "seed": 72001,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.0372642080001242,
+      "cost": {
+        "input_bytes": 537,
+        "output_bytes": 766,
+        "elapsed_seconds": 0.0355645830022695,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:e225dfb46674b01805ca643c1104466d1de4307f00b9447d66fe0d162fc9ffe9"
+    },
+    {
+      "seed": 72002,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.0349086249989341,
+      "cost": {
+        "input_bytes": 476,
+        "output_bytes": 705,
+        "elapsed_seconds": 0.03484266599843977,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:1fad104c80a25020c5c668a48696cafb008f3f6b21dfa329ddf27ad57674e6f0"
+    },
+    {
+      "seed": 72002,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03733141699922271,
+      "cost": {
+        "input_bytes": 486,
+        "output_bytes": 715,
+        "elapsed_seconds": 0.036814291997870896,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:4d6deeab688508882118275285b4a07e681415944e7724e7a13164069def73e4"
+    },
+    {
+      "seed": 72002,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.038076500000897795,
+      "cost": {
+        "input_bytes": 537,
+        "output_bytes": 766,
+        "elapsed_seconds": 0.036363958002766594,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:a82214f0d79e00511fc753e2292d8eacbde9a186c3a396f96950a47bfe80bead"
+    },
+    {
+      "seed": 72003,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.03482120799890254,
+      "cost": {
+        "input_bytes": 476,
+        "output_bytes": 705,
+        "elapsed_seconds": 0.034729250000964385,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:719e94fac43988d885d1ea69759b525607ca558fb1cecba8430ab94e11b4f9c3"
+    },
+    {
+      "seed": 72003,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.035179375001462176,
+      "cost": {
+        "input_bytes": 486,
+        "output_bytes": 715,
+        "elapsed_seconds": 0.03453425000043353,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:f2577e46eec2ec37f5205aa5408b37a52fcc5da41096acd1d460fc086cc070d8"
+    },
+    {
+      "seed": 72003,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03802666599949589,
+      "cost": {
+        "input_bytes": 537,
+        "output_bytes": 766,
+        "elapsed_seconds": 0.035979792002763133,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:cabb4d306558b3d0d94a8247fdcb82e8ac20f9943c7c59cf4ebe38b691acd6f1"
+    },
+    {
+      "seed": 72004,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.036611124996852595,
+      "cost": {
+        "input_bytes": 456,
+        "output_bytes": 692,
+        "elapsed_seconds": 0.03654175000338,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:f591a1b7935439aebb1ecaf819a4ed3eccb937d87fb7f983933eb1671b31ba93"
+    },
+    {
+      "seed": 72004,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03662179099774221,
+      "cost": {
+        "input_bytes": 466,
+        "output_bytes": 702,
+        "elapsed_seconds": 0.036020292001921916,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:4871f2d8fa65cd8c2bdf32deafdb34732a8bec30e6677e4e86ff40c6bcfbfe8c"
+    },
+    {
+      "seed": 72004,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03694974999962142,
+      "cost": {
+        "input_bytes": 517,
+        "output_bytes": 753,
+        "elapsed_seconds": 0.03508049999800278,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:9aa968c026f8a21a433f12d807b8dcba6a5cdd23f97393e54eb8cdccf9706541"
+    },
+    {
+      "seed": 72005,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.03563904199836543,
+      "cost": {
+        "input_bytes": 476,
+        "output_bytes": 705,
+        "elapsed_seconds": 0.03556029200262856,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:b3877c1e02aef608e4eb81a08f270c02755b9ce937ec2b528845aa9e360bb8eb"
+    },
+    {
+      "seed": 72005,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03809270900092088,
+      "cost": {
+        "input_bytes": 486,
+        "output_bytes": 715,
+        "elapsed_seconds": 0.03747220900186221,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:83a1b1b6f5b1ce8edc83ea99ff3a1e5f352f5c8e3bf806d6cec2b51cb1167e3b"
+    },
+    {
+      "seed": 72005,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.036655375002737856,
+      "cost": {
+        "input_bytes": 537,
+        "output_bytes": 766,
+        "elapsed_seconds": 0.03487120800127741,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:334e3c9a3a0469438459cc180dd51dcb67b1b286eaaa3737a4382e86e9646faa"
+    },
+    {
+      "seed": 72006,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.03596937499969499,
+      "cost": {
+        "input_bytes": 476,
+        "output_bytes": 705,
+        "elapsed_seconds": 0.035894000000553206,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:63d7d040a201ec5b61860585a0f5d9233c1c145d84517fb2eb307e2cdfb0dfcb"
+    },
+    {
+      "seed": 72006,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03552533399852109,
+      "cost": {
+        "input_bytes": 486,
+        "output_bytes": 715,
+        "elapsed_seconds": 0.034881584000686416,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:bbc99d8a893e3654756bfb1e1187a77e0ee4362d936c6c48812aad3904075c8e"
+    },
+    {
+      "seed": 72006,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03776912499961327,
+      "cost": {
+        "input_bytes": 537,
+        "output_bytes": 766,
+        "elapsed_seconds": 0.03646337499958463,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:8f35be14e03214a2a1a52b40fc0df5343ffc907b7f75a1ce01ecca4b22a30b90"
+    },
+    {
+      "seed": 72007,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.03689483299967833,
+      "cost": {
+        "input_bytes": 476,
+        "output_bytes": 705,
+        "elapsed_seconds": 0.03683258299861336,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:2bdf888b1d0dc51f0cbb7169b6732e3e1ce20dc62d6c769bb58a7d3a3744368f"
+    },
+    {
+      "seed": 72007,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03696704200046952,
+      "cost": {
+        "input_bytes": 486,
+        "output_bytes": 715,
+        "elapsed_seconds": 0.036335749999125255,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:dba380d4c71b99e4e6a010fc60039dec94b53f2278eaa830c3b451e064938df6"
+    },
+    {
+      "seed": 72007,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03680762499789125,
+      "cost": {
+        "input_bytes": 537,
+        "output_bytes": 766,
+        "elapsed_seconds": 0.03545916599978227,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:032f6bcc79dcb26b008d97ca7c5e318ecc6e26b7c80f54f94e9559340d3ee32f"
+    },
+    {
+      "seed": 72008,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.03564129100050195,
+      "cost": {
+        "input_bytes": 456,
+        "output_bytes": 692,
+        "elapsed_seconds": 0.035574042001826456,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:1888eee735db7c6888bf6362b9c9dcf30fa0af330f1df63538fc86bc3e190746"
+    },
+    {
+      "seed": 72008,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.038149166997754946,
+      "cost": {
+        "input_bytes": 466,
+        "output_bytes": 702,
+        "elapsed_seconds": 0.037527000000409316,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:a553f62f1496f08081473a570bd9f1f20fa18be2fe63948586ff6f4fb3eaf87f"
+    },
+    {
+      "seed": 72008,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03771979099838063,
+      "cost": {
+        "input_bytes": 517,
+        "output_bytes": 753,
+        "elapsed_seconds": 0.036015041998325614,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:6df7928e00d500df858741971e786e6cabdb5d14820e625726cde0ba06b6b6fc"
+    },
+    {
+      "seed": 72009,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.03398725000079139,
+      "cost": {
+        "input_bytes": 476,
+        "output_bytes": 705,
+        "elapsed_seconds": 0.03391554200061364,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:9aba2272c1bdc57602fe4245a9ecb3a450264acba1b4bc8d749c873849f172f0"
+    },
+    {
+      "seed": 72009,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.035758541998802684,
+      "cost": {
+        "input_bytes": 486,
+        "output_bytes": 715,
+        "elapsed_seconds": 0.0351431249982852,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:52390df23e5beba815bb89bf32d72f5623f6363414f3d1faae680baec0d96c2f"
+    },
+    {
+      "seed": 72009,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03855216599913547,
+      "cost": {
+        "input_bytes": 537,
+        "output_bytes": 766,
+        "elapsed_seconds": 0.036847332998149795,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:f55a7f9f74809eff7b55e3069905a7ab95a44978f2051299e52e570cb66f0318"
+    },
+    {
+      "seed": 72010,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.037682792000850895,
+      "cost": {
+        "input_bytes": 476,
+        "output_bytes": 705,
+        "elapsed_seconds": 0.037603875000058906,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:12d60b4b35469930bb4ec8b9c6dde57808fec2939c915315de8dee73beaf9f69"
+    },
+    {
+      "seed": 72010,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.0350765830007731,
+      "cost": {
+        "input_bytes": 486,
+        "output_bytes": 715,
+        "elapsed_seconds": 0.034552584002085496,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:ec144384b9f9db45f516613ce357c7f651731bdd50b69adfe2378532145702d9"
+    },
+    {
+      "seed": 72010,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.038717084000381874,
+      "cost": {
+        "input_bytes": 537,
+        "output_bytes": 766,
+        "elapsed_seconds": 0.037209291996987304,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:74c9866d372daac2abac1535060296961369f36ff9932106410988e97e2ff6a8"
+    },
+    {
+      "seed": 72011,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.03661970800021663,
+      "cost": {
+        "input_bytes": 476,
+        "output_bytes": 705,
+        "elapsed_seconds": 0.03654508399995393,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:e0e073e2dd9ebbcbb65d3ec47378ffc179c2aec052289b5fd82753eb3063e9a3"
+    },
+    {
+      "seed": 72011,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03516558299816097,
+      "cost": {
+        "input_bytes": 486,
+        "output_bytes": 715,
+        "elapsed_seconds": 0.034589665996463737,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:8ec0e8018b8e6062b4b31c5834f9e025a444dd67359d3fdd62ae646ec7df5d6b"
+    },
+    {
+      "seed": 72011,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03627670800051419,
+      "cost": {
+        "input_bytes": 537,
+        "output_bytes": 766,
+        "elapsed_seconds": 0.03493508300016401,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:919cecc9f957a039a3397282ecbf06cf2ed60fd563638d5a6d8a37ee6bfcf869"
+    },
+    {
+      "seed": 72012,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.03378049999810173,
+      "cost": {
+        "input_bytes": 456,
+        "output_bytes": 692,
+        "elapsed_seconds": 0.033709167000779416,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:6913d5850345734e2c7c088b37792b07579b7e3d9c0f0a8bf1e62664034cdf24"
+    },
+    {
+      "seed": 72012,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03777987500143354,
+      "cost": {
+        "input_bytes": 466,
+        "output_bytes": 702,
+        "elapsed_seconds": 0.03725033399678068,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:ac80a29c0e0a33bc82c644abb71ec7d08bd759751053addc11f48f301f7ff004"
+    },
+    {
+      "seed": 72012,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.040200208000896964,
+      "cost": {
+        "input_bytes": 517,
+        "output_bytes": 753,
+        "elapsed_seconds": 0.03822220800066134,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:2265f9f6cf3aa3e6c5183b57cbfcb4e2d80029200cfd4d3b3ba9d5183d94c7c0"
+    },
+    {
+      "seed": 72013,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.0410287500017148,
+      "cost": {
+        "input_bytes": 476,
+        "output_bytes": 705,
+        "elapsed_seconds": 0.04093079200174543,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:34a3ec996c8f34c9937ace7f76596c6d93eed8479740b667b572d9079faa72f6"
+    },
+    {
+      "seed": 72013,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.0397079170033976,
+      "cost": {
+        "input_bytes": 486,
+        "output_bytes": 715,
+        "elapsed_seconds": 0.03910758300116868,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:cbaf28bb8dcd9e48b12474e8ff1f2c4c3c5ec02fc0db0138296aaaa3d76751d1"
+    },
+    {
+      "seed": 72013,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.037001832999521866,
+      "cost": {
+        "input_bytes": 537,
+        "output_bytes": 766,
+        "elapsed_seconds": 0.035381000001507346,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:0b3d6dedd35d8b0ff541fd3e2a4e2539858314d6c22ec284c2d8b9b7e078dd30"
+    },
+    {
+      "seed": 72014,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.034349249999650056,
+      "cost": {
+        "input_bytes": 476,
+        "output_bytes": 705,
+        "elapsed_seconds": 0.03427712499978952,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:3eadb55f19ab27182a64741eec987a970f8fe3d07a773240cba128bb34c2a82a"
+    },
+    {
+      "seed": 72014,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.037948332999803824,
+      "cost": {
+        "input_bytes": 486,
+        "output_bytes": 715,
+        "elapsed_seconds": 0.03735866699935286,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:1395bbfde3d5de17f36aaa8454d59c3f9d4e80cedd54d17ccf649be78013d9a5"
+    },
+    {
+      "seed": 72014,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.036296624999522464,
+      "cost": {
+        "input_bytes": 537,
+        "output_bytes": 766,
+        "elapsed_seconds": 0.03461612499813782,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:2b881a518bbdf68633cc942243b2582afd9e413c12e82c417aaa7eb1fee7205d"
+    },
+    {
+      "seed": 72015,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.04074445900187129,
+      "cost": {
+        "input_bytes": 476,
+        "output_bytes": 705,
+        "elapsed_seconds": 0.0406544169964036,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:a5b85ad5e1bce206037cfc179f8abe4542080a07452909e3646facc5105af405"
+    },
+    {
+      "seed": 72015,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.11903429200174287,
+      "cost": {
+        "input_bytes": 486,
+        "output_bytes": 715,
+        "elapsed_seconds": 0.11829637499977252,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:74423e6f2c6104a037c78c897c5a7eaad8dfa69c83fa647718ad3873280234ed"
+    },
+    {
+      "seed": 72015,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.043901250002818415,
+      "cost": {
+        "input_bytes": 537,
+        "output_bytes": 766,
+        "elapsed_seconds": 0.041945834000216564,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:a14ce31e9c0edc16ac79d9613103d6d09c7a60f5adc0009ce4457488bf5d7ec3"
+    },
+    {
+      "seed": 72016,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.041234290998545475,
+      "cost": {
+        "input_bytes": 456,
+        "output_bytes": 692,
+        "elapsed_seconds": 0.041148416999931214,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:d97192ac1128e35e75cac77d25d6a966f95df334c2392e788d5851f56e06243b"
+    },
+    {
+      "seed": 72016,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.04181741700085695,
+      "cost": {
+        "input_bytes": 466,
+        "output_bytes": 702,
+        "elapsed_seconds": 0.041230124999856343,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:89ea50e647a47ffddd1f412e02342568cf677332879d3a72a8d0d6825dda8310"
+    },
+    {
+      "seed": 72016,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.041596374998334795,
+      "cost": {
+        "input_bytes": 517,
+        "output_bytes": 753,
+        "elapsed_seconds": 0.04006754100191756,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:fa905713ec0a5aa2f913f3dc60193ab4f304b0c3def49b3d8f19a8f05581472e"
+    },
+    {
+      "seed": 72017,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.03863900000214926,
+      "cost": {
+        "input_bytes": 476,
+        "output_bytes": 705,
+        "elapsed_seconds": 0.03855279100025655,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:e9c86a066acc0ffb46d3739dfd3e5b2d5b39cff9dd1f427b653133e7437cc2f6"
+    },
+    {
+      "seed": 72017,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03757383300035144,
+      "cost": {
+        "input_bytes": 486,
+        "output_bytes": 715,
+        "elapsed_seconds": 0.036954791998141445,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:c6916e3195de6296b7cc3bde7efba924ac3fb7e190c89131c5ea2f1b78da6eec"
+    },
+    {
+      "seed": 72017,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.041954667001846246,
+      "cost": {
+        "input_bytes": 537,
+        "output_bytes": 766,
+        "elapsed_seconds": 0.040327167000214104,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:ed54cd866c301c196e8b9b275b83dae24ec86a8781a4dc373f53d2e37b64afc6"
+    },
+    {
+      "seed": 72018,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.03870687500239001,
+      "cost": {
+        "input_bytes": 476,
+        "output_bytes": 705,
+        "elapsed_seconds": 0.03862566600218997,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:dc926d81abe235ddbac6f0860046f3eea4e7059de46f436f323e1c8589e4a5d0"
+    },
+    {
+      "seed": 72018,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.0927268749983341,
+      "cost": {
+        "input_bytes": 486,
+        "output_bytes": 715,
+        "elapsed_seconds": 0.09208808400217094,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:41b992ed9ac3e6265d11aa1d41641a749faa9d7fc71a94cca499a38e193c9842"
+    },
+    {
+      "seed": 72018,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.06748654200055171,
+      "cost": {
+        "input_bytes": 537,
+        "output_bytes": 766,
+        "elapsed_seconds": 0.06549562500003958,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:18f83c4eb9261d2e2a6c64402e2c076e5fbccb7c5d96106a54cea8f40bad04d8"
+    },
+    {
+      "seed": 72019,
+      "arm": "no_memory",
+      "correct": true,
+      "retrieval_hit": false,
+      "seconds": 0.0441847920010332,
+      "cost": {
+        "input_bytes": 476,
+        "output_bytes": 705,
+        "elapsed_seconds": 0.04409416600174154,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:25e22b0b2db5e0356085b9f7d9eeff50eb5aeb7b1b9c295559d4d54349d311b0"
+    },
+    {
+      "seed": 72019,
+      "arm": "retrieval_only",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.04044866599724628,
+      "cost": {
+        "input_bytes": 486,
+        "output_bytes": 715,
+        "elapsed_seconds": 0.039820375000999775,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:764632ded24eab95c63e51b7ff74b7c834c9e18c8a67c9686d3b73e468a0c266"
+    },
+    {
+      "seed": 72019,
+      "arm": "governed",
+      "correct": true,
+      "retrieval_hit": true,
+      "seconds": 0.03945304100125213,
+      "cost": {
+        "input_bytes": 537,
+        "output_bytes": 766,
+        "elapsed_seconds": 0.03759833400181378,
+        "model_tokens": 0
+      },
+      "manual_interventions": 0,
+      "false_causal_assertion": false,
+      "report_digest": "sha256:18c16cc8692cf194d3f89dee4f38e30d0ed71825ee9014811c651d608eda900b"
+    }
+  ],
+  "summary": {
+    "no_memory": {
+      "correctness": {
+        "mean": 1.0,
+        "se": 0.0,
+        "mc_interval_95": [
+          0.6963192690458474,
+          1.0
+        ],
+        "n": 20,
+        "interval_method": "Hoeffding_95_bounded_mean"
+      },
+      "seconds": {
+        "mean": 0.03707188330008648,
+        "se": 0.0006430355793031933,
+        "mc_interval_95": [
+          0.03572599436476452,
+          0.038417772235408446
+        ],
+        "n": 20
+      },
+      "total_seconds_including_governance": 0.7414376660017297,
+      "false_causal_interval_95": [
+        0.0,
+        0.16843347098308528
+      ],
+      "model_tokens": 0
+    },
+    "retrieval_only": {
+      "correctness": {
+        "mean": 1.0,
+        "se": 0.0,
+        "mc_interval_95": [
+          0.6963192690458474,
+          1.0
+        ],
+        "n": 20,
+        "interval_method": "Hoeffding_95_bounded_mean"
+      },
+      "seconds": {
+        "mean": 0.04421492089986714,
+        "se": 0.004827405071701534,
+        "mc_interval_95": [
+          0.03411104596442316,
+          0.054318795835311115
+        ],
+        "n": 20
+      },
+      "total_seconds_including_governance": 0.8842984179973428,
+      "false_causal_interval_95": [
+        0.0,
+        0.16843347098308528
+      ],
+      "model_tokens": 0
+    },
+    "governed": {
+      "correctness": {
+        "mean": 1.0,
+        "se": 0.0,
+        "mc_interval_95": [
+          0.6963192690458474,
+          1.0
+        ],
+        "n": 20,
+        "interval_method": "Hoeffding_95_bounded_mean"
+      },
+      "seconds": {
+        "mean": 0.03989303320013278,
+        "se": 0.0015231097060721868,
+        "mc_interval_95": [
+          0.03670512794782092,
+          0.043080938452444636
+        ],
+        "n": 20
+      },
+      "total_seconds_including_governance": 1.0997357050000574,
+      "false_causal_interval_95": [
+        0.0,
+        0.16843347098308528
+      ],
+      "model_tokens": 0
+    }
+  },
+  "paired_correctness_gain": {
+    "mean": 0.0,
+    "se": 0.0,
+    "mc_interval_95": [
+      0.0,
+      0.0
+    ],
+    "n": 20
+  },
+  "interpretation": "No gain is a valid outcome. Governance cost is included; deterministic task results do not establish model-learning gains."
+}

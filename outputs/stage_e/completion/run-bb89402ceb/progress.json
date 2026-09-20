@@ -1,0 +1,66 @@
+[
+  {
+    "case": "insurance-A",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-bb89402ceb/insurance-A.result.json\"}\n",
+    "request_digest": "sha256:8c4024f3badd02c2184e51823d6d50aeb546bc44965ac6b9bd450fb5adbfff73"
+  },
+  {
+    "case": "insurance-B",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-bb89402ceb/insurance-B.result.json\"}\n",
+    "request_digest": "sha256:7730809f649a1976ba6436db695bfefbd500ba4ba2d47c61b593607470189902"
+  },
+  {
+    "case": "insurance-C",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-bb89402ceb/insurance-C.result.json\"}\n",
+    "request_digest": "sha256:0f9a4f732f7ed58de853da8c7a27a76e3b86c77796ced3ce7ce8ee6872247b07"
+  },
+  {
+    "case": "ecommerce-A",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-bb89402ceb/ecommerce-A.result.json\"}\n",
+    "request_digest": "sha256:099d527c3720a910b0bfa75450a01f6f309bd6ecc955694153d6b0247b7b2e39"
+  },
+  {
+    "case": "ecommerce-B",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-bb89402ceb/ecommerce-B.result.json\"}\n",
+    "request_digest": "sha256:766cc83b294c6cef9964bf84734e77cc289efa30504165200e0cdf72b778e497"
+  },
+  {
+    "case": "ecommerce-C",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-bb89402ceb/ecommerce-C.result.json\"}\n",
+    "request_digest": "sha256:97dfe6be75747019b4aaa1bf2a3171cbb5af9e547e29e54aba7b8de2ccbde18b"
+  },
+  {
+    "case": "unavailable-source",
+    "expected": 2,
+    "returncode": 2,
+    "stderr": "DATA_INVALID: data unavailable at analysis time\n",
+    "stdout": "",
+    "request_digest": "sha256:2f90b512ccb51759b3b98b7878ff88e3cb1ea7637c87bcc2be1d11559bb0f97f"
+  },
+  {
+    "case": "N1",
+    "expected": 0,
+    "returncode": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/tools/run_causal_pipeline.py\", line 105, in <module>\n    {\"status\": result.get(\"status\"), \"output\": str(args.output.resolve())},\n               ^^^^^^^^^^\nAttributeError: 'list' object has no attribute 'get'\n",
+    "stdout": "",
+    "request_digest": "sha256:52a37f91346d0ff93efcec3bf6ad258870fa3da3b0d4441044f76b60282af8ed"
+  }
+]

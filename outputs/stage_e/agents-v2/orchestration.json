@@ -1,0 +1,1442 @@
+[
+  {
+    "seed": 72000,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.663119207998534,
+    "total_io_bytes": 184697,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 170927,
+        "output_bytes": 13770,
+        "elapsed_seconds": 2.6591614589997334,
+        "pid": 12786
+      }
+    ],
+    "publication_digest": "sha256:087141649acf64e4d580f198ae7764555cbd91fab2a5e2475db50bfa9067993f"
+  },
+  {
+    "seed": 72000,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.25807204100056,
+    "total_io_bytes": 187378,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.037728791998233646,
+        "pid": 12787
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.035413292000157526,
+        "pid": 12788
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85276,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.115517041998828,
+        "pid": 12789
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87472,
+        "output_bytes": 9996,
+        "elapsed_seconds": 2.0653210829987074,
+        "pid": 12790
+      }
+    ],
+    "publication_digest": "sha256:087141649acf64e4d580f198ae7764555cbd91fab2a5e2475db50bfa9067993f"
+  },
+  {
+    "seed": 72001,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.0497851250001986,
+    "total_io_bytes": 184715,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 170947,
+        "output_bytes": 13768,
+        "elapsed_seconds": 2.045957667000039,
+        "pid": 12806
+      }
+    ],
+    "publication_digest": "sha256:ce8cea2369225d90b8500f9a81e44aa77059887df8654e76e2170c93bd9e08ac"
+  },
+  {
+    "seed": 72001,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.217081208000309,
+    "total_io_bytes": 187396,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.03702829199755797,
+        "pid": 12809
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.034605250002641696,
+        "pid": 12810
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85286,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.087665499999275,
+        "pid": 12811
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87482,
+        "output_bytes": 9994,
+        "elapsed_seconds": 2.053780000002007,
+        "pid": 12826
+      }
+    ],
+    "publication_digest": "sha256:ce8cea2369225d90b8500f9a81e44aa77059887df8654e76e2170c93bd9e08ac"
+  },
+  {
+    "seed": 72002,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.059406874999695,
+    "total_io_bytes": 184761,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 171023,
+        "output_bytes": 13738,
+        "elapsed_seconds": 2.0556160410014854,
+        "pid": 12829
+      }
+    ],
+    "publication_digest": "sha256:e0b4fab05084d8a58c31b5a293c2550d3f8399c30fd2d1bd8dc7e36e984f7f74"
+  },
+  {
+    "seed": 72002,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.231855333000567,
+    "total_io_bytes": 187442,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.037591582997265505,
+        "pid": 12835
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.038174249999428866,
+        "pid": 12836
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85324,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.061405458000081,
+        "pid": 12837
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87520,
+        "output_bytes": 9964,
+        "elapsed_seconds": 2.0906502500001807,
+        "pid": 12838
+      }
+    ],
+    "publication_digest": "sha256:e0b4fab05084d8a58c31b5a293c2550d3f8399c30fd2d1bd8dc7e36e984f7f74"
+  },
+  {
+    "seed": 72003,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.2044469169995864,
+    "total_io_bytes": 184624,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 170859,
+        "output_bytes": 13765,
+        "elapsed_seconds": 2.200622915999702,
+        "pid": 12854
+      }
+    ],
+    "publication_digest": "sha256:dabe4c24ddce83a9ae79f154d58afc00d05145f4f39bbc6bc57336063da212cc"
+  },
+  {
+    "seed": 72003,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.33965283300131,
+    "total_io_bytes": 187305,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.039111874997615814,
+        "pid": 12855
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.03782804100046633,
+        "pid": 12856
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85242,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.137080917000276,
+        "pid": 12857
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87438,
+        "output_bytes": 9991,
+        "elapsed_seconds": 2.121724374999758,
+        "pid": 12858
+      }
+    ],
+    "publication_digest": "sha256:dabe4c24ddce83a9ae79f154d58afc00d05145f4f39bbc6bc57336063da212cc"
+  },
+  {
+    "seed": 72004,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.2113188749972323,
+    "total_io_bytes": 184628,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 170857,
+        "output_bytes": 13771,
+        "elapsed_seconds": 2.2076239999987592,
+        "pid": 12874
+      }
+    ],
+    "publication_digest": "sha256:47f950c3c91f37b5dc388cc5db09aec73e9dbc6f7e2bd911ce2b0c5f944bdf4e"
+  },
+  {
+    "seed": 72004,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.322865875001298,
+    "total_io_bytes": 187309,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.03747983400171506,
+        "pid": 12875
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.036872125001536915,
+        "pid": 12876
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85241,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.129814500000066,
+        "pid": 12877
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87437,
+        "output_bytes": 9997,
+        "elapsed_seconds": 2.1144892079973943,
+        "pid": 12878
+      }
+    ],
+    "publication_digest": "sha256:47f950c3c91f37b5dc388cc5db09aec73e9dbc6f7e2bd911ce2b0c5f944bdf4e"
+  },
+  {
+    "seed": 72005,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.1263626250001835,
+    "total_io_bytes": 184569,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 170801,
+        "output_bytes": 13768,
+        "elapsed_seconds": 2.1226244999998016,
+        "pid": 12879
+      }
+    ],
+    "publication_digest": "sha256:25e425d9af8a1a4187f76f84954fd994aeffae8bb895c521faae3a138d6b4006"
+  },
+  {
+    "seed": 72005,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.372934874998464,
+    "total_io_bytes": 187250,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.038464291999844136,
+        "pid": 12880
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.03634891700130538,
+        "pid": 12881
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85213,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.1362384169988218,
+        "pid": 12882
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87409,
+        "output_bytes": 9994,
+        "elapsed_seconds": 2.157821500000864,
+        "pid": 12885
+      }
+    ],
+    "publication_digest": "sha256:25e425d9af8a1a4187f76f84954fd994aeffae8bb895c521faae3a138d6b4006"
+  },
+  {
+    "seed": 72006,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.136208791001991,
+    "total_io_bytes": 184801,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 171039,
+        "output_bytes": 13762,
+        "elapsed_seconds": 2.132474124999135,
+        "pid": 12886
+      }
+    ],
+    "publication_digest": "sha256:51e7e0e87a628981956bd0b23926551be147995a8a66a9331d997fe88803c5c4"
+  },
+  {
+    "seed": 72006,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.354565624998941,
+    "total_io_bytes": 187482,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.03715370899953996,
+        "pid": 12903
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.03476170800058753,
+        "pid": 12904
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85332,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.129768583999976,
+        "pid": 12905
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87528,
+        "output_bytes": 9988,
+        "elapsed_seconds": 2.148697666998487,
+        "pid": 12906
+      }
+    ],
+    "publication_digest": "sha256:51e7e0e87a628981956bd0b23926551be147995a8a66a9331d997fe88803c5c4"
+  },
+  {
+    "seed": 72007,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.199328916001832,
+    "total_io_bytes": 184657,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 170883,
+        "output_bytes": 13774,
+        "elapsed_seconds": 2.1955521250019956,
+        "pid": 12907
+      }
+    ],
+    "publication_digest": "sha256:9e26d0de5891a0b3e4c1fcf90f3b83e41bf7e3eb2e8c5a1a289c50f56ca95e8e"
+  },
+  {
+    "seed": 72007,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.967601750002359,
+    "total_io_bytes": 187338,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.03600100000039674,
+        "pid": 12908
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.037177750000410015,
+        "pid": 12909
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85254,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.487276957999711,
+        "pid": 12910
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87450,
+        "output_bytes": 10000,
+        "elapsed_seconds": 2.4031468749999476,
+        "pid": 12918
+      }
+    ],
+    "publication_digest": "sha256:9e26d0de5891a0b3e4c1fcf90f3b83e41bf7e3eb2e8c5a1a289c50f56ca95e8e"
+  },
+  {
+    "seed": 72008,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.4637084169989976,
+    "total_io_bytes": 184581,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 170813,
+        "output_bytes": 13768,
+        "elapsed_seconds": 2.459949083000538,
+        "pid": 12941
+      }
+    ],
+    "publication_digest": "sha256:67e80b0dcaf1f4d00679d184a94cf9ffd9127e22f64a1544225f524ff49fc2d7"
+  },
+  {
+    "seed": 72008,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.279645833001268,
+    "total_io_bytes": 187262,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.03708179100067355,
+        "pid": 12944
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.03567312499944819,
+        "pid": 12945
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85219,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.1176362090009206,
+        "pid": 12946
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87415,
+        "output_bytes": 9994,
+        "elapsed_seconds": 2.085333499999251,
+        "pid": 12947
+      }
+    ],
+    "publication_digest": "sha256:67e80b0dcaf1f4d00679d184a94cf9ffd9127e22f64a1544225f524ff49fc2d7"
+  },
+  {
+    "seed": 72009,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.2096234590026143,
+    "total_io_bytes": 184723,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 170955,
+        "output_bytes": 13768,
+        "elapsed_seconds": 2.2057472499982396,
+        "pid": 12988
+      }
+    ],
+    "publication_digest": "sha256:b00f5842cb366f2bb8ec444db7f9941c217aa330f37efd97263546f0bcf3509a"
+  },
+  {
+    "seed": 72009,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.515059833000123,
+    "total_io_bytes": 187404,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.03564516600090428,
+        "pid": 12991
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.03571758299949579,
+        "pid": 12992
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85290,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.2188917080020474,
+        "pid": 12994
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87486,
+        "output_bytes": 9994,
+        "elapsed_seconds": 2.2207923749992915,
+        "pid": 13006
+      }
+    ],
+    "publication_digest": "sha256:b00f5842cb366f2bb8ec444db7f9941c217aa330f37efd97263546f0bcf3509a"
+  },
+  {
+    "seed": 72010,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.195296875001077,
+    "total_io_bytes": 184741,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 170971,
+        "output_bytes": 13770,
+        "elapsed_seconds": 2.1897483749999083,
+        "pid": 13007
+      }
+    ],
+    "publication_digest": "sha256:8db3c2935d2c4e888457d9a50ff55fd9e8130cb4cf55a7f29b54efb5323395f9"
+  },
+  {
+    "seed": 72010,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.216366749998997,
+    "total_io_bytes": 187422,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.03724545799923362,
+        "pid": 13008
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.03778516700185719,
+        "pid": 13009
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85298,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.0715020000025106,
+        "pid": 13010
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87494,
+        "output_bytes": 9996,
+        "elapsed_seconds": 2.065936834002059,
+        "pid": 13011
+      }
+    ],
+    "publication_digest": "sha256:8db3c2935d2c4e888457d9a50ff55fd9e8130cb4cf55a7f29b54efb5323395f9"
+  },
+  {
+    "seed": 72011,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.148637708000024,
+    "total_io_bytes": 184585,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 170815,
+        "output_bytes": 13770,
+        "elapsed_seconds": 2.144778000001679,
+        "pid": 13013
+      }
+    ],
+    "publication_digest": "sha256:846924556a6cdbb839cdffd9f2a73f4c83a3ab7d372e693f0c6ef7ef5aecb176"
+  },
+  {
+    "seed": 72011,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.2727004589978606,
+    "total_io_bytes": 187266,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.0357027919999382,
+        "pid": 13014
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.035258125000837026,
+        "pid": 13015
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85220,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.0888880839993362,
+        "pid": 13016
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87416,
+        "output_bytes": 9996,
+        "elapsed_seconds": 2.1088632909995795,
+        "pid": 13017
+      }
+    ],
+    "publication_digest": "sha256:846924556a6cdbb839cdffd9f2a73f4c83a3ab7d372e693f0c6ef7ef5aecb176"
+  },
+  {
+    "seed": 72012,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.1216327080001065,
+    "total_io_bytes": 184803,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 171035,
+        "output_bytes": 13768,
+        "elapsed_seconds": 2.1178044580010464,
+        "pid": 13018
+      }
+    ],
+    "publication_digest": "sha256:6568f5049685d724a92a101b770017f2dc9eb69ac051c84d5878d5608ba7f316"
+  },
+  {
+    "seed": 72012,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.260062541001389,
+    "total_io_bytes": 187484,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.038221500002691755,
+        "pid": 13020
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.035255500002676854,
+        "pid": 13021
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85330,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.081280667000101,
+        "pid": 13022
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87526,
+        "output_bytes": 9994,
+        "elapsed_seconds": 2.10131362500033,
+        "pid": 13023
+      }
+    ],
+    "publication_digest": "sha256:6568f5049685d724a92a101b770017f2dc9eb69ac051c84d5878d5608ba7f316"
+  },
+  {
+    "seed": 72013,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.108123833000718,
+    "total_io_bytes": 184859,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 171089,
+        "output_bytes": 13770,
+        "elapsed_seconds": 2.1043996250009513,
+        "pid": 13027
+      }
+    ],
+    "publication_digest": "sha256:82b744403839db642d4c2deccb724263abed5ce94c1f8cf23340b28e84eb40bf"
+  },
+  {
+    "seed": 72013,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.200532999999268,
+    "total_io_bytes": 187540,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.039571708999574184,
+        "pid": 13028
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.03553729099803604,
+        "pid": 13029
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85357,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.063839624999673,
+        "pid": 13030
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87553,
+        "output_bytes": 9996,
+        "elapsed_seconds": 2.057670666999911,
+        "pid": 13031
+      }
+    ],
+    "publication_digest": "sha256:82b744403839db642d4c2deccb724263abed5ce94c1f8cf23340b28e84eb40bf"
+  },
+  {
+    "seed": 72014,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.064777833002154,
+    "total_io_bytes": 184701,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 170933,
+        "output_bytes": 13768,
+        "elapsed_seconds": 2.0609957499982556,
+        "pid": 13032
+      }
+    ],
+    "publication_digest": "sha256:87671a3e5dd08aeb1f21bd8b1d2101d23a91072add5d90ca612c2648c1b6efe9"
+  },
+  {
+    "seed": 72014,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.182661333998112,
+    "total_io_bytes": 187382,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.03852862499843468,
+        "pid": 13033
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.03380308300256729,
+        "pid": 13034
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85279,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.0596764580004674,
+        "pid": 13035
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87475,
+        "output_bytes": 9994,
+        "elapsed_seconds": 2.0466297079983633,
+        "pid": 13036
+      }
+    ],
+    "publication_digest": "sha256:87671a3e5dd08aeb1f21bd8b1d2101d23a91072add5d90ca612c2648c1b6efe9"
+  },
+  {
+    "seed": 72015,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.2054783750027127,
+    "total_io_bytes": 184777,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 171009,
+        "output_bytes": 13768,
+        "elapsed_seconds": 2.2017016249992594,
+        "pid": 13044
+      }
+    ],
+    "publication_digest": "sha256:3829354ecd38f6c633157ae251909beccc688cfa9191a7e63a1cf94b04645a5c"
+  },
+  {
+    "seed": 72015,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.405890665999323,
+    "total_io_bytes": 187458,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.03580508300001384,
+        "pid": 13051
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.03418999999848893,
+        "pid": 13052
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85317,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.200565582999843,
+        "pid": 13053
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87513,
+        "output_bytes": 9994,
+        "elapsed_seconds": 2.1310787919974246,
+        "pid": 13054
+      }
+    ],
+    "publication_digest": "sha256:3829354ecd38f6c633157ae251909beccc688cfa9191a7e63a1cf94b04645a5c"
+  },
+  {
+    "seed": 72016,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.166868958000123,
+    "total_io_bytes": 184755,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 171017,
+        "output_bytes": 13738,
+        "elapsed_seconds": 2.1629272079990187,
+        "pid": 13055
+      }
+    ],
+    "publication_digest": "sha256:46e1862ac977b17d130ad5081edf2b9d53bbe9217b65f3c1eb6855d06a76316a"
+  },
+  {
+    "seed": 72016,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.52652712499912,
+    "total_io_bytes": 187436,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.035277667000627844,
+        "pid": 13064
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.036013624998304294,
+        "pid": 13065
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85321,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.2511316249983793,
+        "pid": 13066
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87517,
+        "output_bytes": 9964,
+        "elapsed_seconds": 2.20020362500145,
+        "pid": 13068
+      }
+    ],
+    "publication_digest": "sha256:46e1862ac977b17d130ad5081edf2b9d53bbe9217b65f3c1eb6855d06a76316a"
+  },
+  {
+    "seed": 72017,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.1146655840020685,
+    "total_io_bytes": 184778,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 171013,
+        "output_bytes": 13765,
+        "elapsed_seconds": 2.1109197910009243,
+        "pid": 13089
+      }
+    ],
+    "publication_digest": "sha256:1ca9fc011f692e82d581c76b71ae4dc197e05b7a49e0c9dbac96038aa90a06b9"
+  },
+  {
+    "seed": 72017,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.222163083999476,
+    "total_io_bytes": 187459,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.03663108300315798,
+        "pid": 13091
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.036255458999221446,
+        "pid": 13092
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85319,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.095493541997712,
+        "pid": 13093
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87515,
+        "output_bytes": 9991,
+        "elapsed_seconds": 2.049597334000282,
+        "pid": 13094
+      }
+    ],
+    "publication_digest": "sha256:1ca9fc011f692e82d581c76b71ae4dc197e05b7a49e0c9dbac96038aa90a06b9"
+  },
+  {
+    "seed": 72018,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.091194832999463,
+    "total_io_bytes": 184550,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 170785,
+        "output_bytes": 13765,
+        "elapsed_seconds": 2.087376540999685,
+        "pid": 13095
+      }
+    ],
+    "publication_digest": "sha256:545f4d3d10ffcff6eb6dadc2f97f11da6c7452e0533cb06326f8592fe5abf0ce"
+  },
+  {
+    "seed": 72018,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.210691416999907,
+    "total_io_bytes": 187231,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.03543533400079468,
+        "pid": 13098
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.0348752499994589,
+        "pid": 13099
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85205,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.0683210419992974,
+        "pid": 13100
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87401,
+        "output_bytes": 9991,
+        "elapsed_seconds": 2.06804933300009,
+        "pid": 13101
+      }
+    ],
+    "publication_digest": "sha256:545f4d3d10ffcff6eb6dadc2f97f11da6c7452e0533cb06326f8592fe5abf0ce"
+  },
+  {
+    "seed": 72019,
+    "mode": "single_worker",
+    "status": "COMPLETED",
+    "seconds": 2.134135000000242,
+    "total_io_bytes": 184785,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0",
+          "L1",
+          "identification",
+          "L3"
+        ],
+        "input_bytes": 171021,
+        "output_bytes": 13764,
+        "elapsed_seconds": 2.1303441669988388,
+        "pid": 13104
+      }
+    ],
+    "publication_digest": "sha256:a50b56f70fbf2681b6c70697eaed3320f00dd1d78dd469ac252f1902ce0e405e"
+  },
+  {
+    "seed": 72019,
+    "mode": "isolated",
+    "status": "COMPLETED",
+    "seconds": 4.225239916999271,
+    "total_io_bytes": 187466,
+    "model_tokens": 0,
+    "fallback": false,
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 540,
+        "output_bytes": 914,
+        "elapsed_seconds": 0.038052333002269734,
+        "pid": 13105
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 449,
+        "elapsed_seconds": 0.03701337500024238,
+        "pid": 13106
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 85323,
+        "output_bytes": 2549,
+        "elapsed_seconds": 2.0532912080016104,
+        "pid": 13107
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 87519,
+        "output_bytes": 9990,
+        "elapsed_seconds": 2.092838666998432,
+        "pid": 13108
+      }
+    ],
+    "publication_digest": "sha256:a50b56f70fbf2681b6c70697eaed3320f00dd1d78dd469ac252f1902ce0e405e"
+  }
+]

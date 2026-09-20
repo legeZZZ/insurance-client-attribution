@@ -1,4 +1,4 @@
-# 复赛升级 Demo 报告
+# 升级 Demo 报告
 
 - 数据模式：`competition_deidentified`（真实脱敏数据）
 - 适配器：`authorized_adapter_compatible`

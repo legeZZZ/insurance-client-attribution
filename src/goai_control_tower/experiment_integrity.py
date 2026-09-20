@@ -197,7 +197,7 @@ def _numeric(values: Sequence[Any]) -> list[float] | None:
             if not math.isfinite(number):
                 return None
             converted.append(number)
-    except (TypeError, ValueError):
+    except TypeError, ValueError:
         return None
     return converted
 

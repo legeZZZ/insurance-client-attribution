@@ -8,3 +8,7 @@ venv/
 *.zip
 *.ppt
 *.pptx
+.local-runtime/
+
+# offline wheel bundle (216MB, rebuild via scripts)
+outputs/stage_e/deployment/wheels-linux-arm64.tar

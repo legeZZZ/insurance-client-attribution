@@ -1,0 +1,11 @@
+{
+  "operation": "investigation",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-cbec5763f469/runtime/hypotheses.sqlite3",
+    "action": "invalidate",
+    "parameters": {
+      "ref": "sha256:71e4beadcbabdf6c8341c7c7504d807f86ac2f27e9374f00ea6da1fa293875ff",
+      "reason": "phase C corrected-input replay"
+    }
+  }
+}

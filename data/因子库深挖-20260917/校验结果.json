@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "candidate_count": 38,
+  "source_count": 12,
+  "existing_named_count": 49,
+  "existing_series_count": 37,
+  "family_counts": {
+    "产品与价格": 6,
+    "体验与组件": 6,
+    "投保与核保": 6,
+    "续保与服务": 6,
+    "客群与渠道": 4,
+    "外部环境": 4,
+    "数据质量": 6
+  },
+  "checks": [
+    "unique IDs",
+    "no ID collision with audited 49 definitions",
+    "complete source references",
+    "existing FactorRegistry in-memory round-trip",
+    "no candidate returned by default active retrieval",
+    "zero fabricated snapshots",
+    "zero business observation evidence",
+    "no production DB writes"
+  ],
+  "not_verified": [
+    "source data availability",
+    "production authorization",
+    "measurement validity",
+    "business effects",
+    "causal identification",
+    "deduplication against all historical runtime databases"
+  ],
+  "sha256": {
+    "候选因子库.json": "9aaace3e52eab176b70d612ce4672366f64f3eec52da303cfc8c0ee0bc9e9554",
+    "研究来源.json": "71e5e2587b640268b1b9a5238b5257c39121ebc63df1fc0c973ec90179e253a7",
+    "现有因子盘点.json": "e388246bb45c266efbc51d55f4a9f85e475d66bc96c04a8a94e6e2bdba74bf60"
+  }
+}

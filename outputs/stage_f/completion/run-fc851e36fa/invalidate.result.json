@@ -1,0 +1,14 @@
+{
+  "affected": [
+    {
+      "ref": "sha256:a0365532c47d3ccb265fdda34c73fe9268b191c1c7800cb26e06dc67a2fb5fef",
+      "kind": "data",
+      "status": "INVALID"
+    },
+    {
+      "ref": "sha256:06983a483312edab240262e0c83f30d75c6d3a7d60c8c09a6a86740c6c3df9d8",
+      "kind": "manifest",
+      "status": "INVALID"
+    }
+  ]
+}

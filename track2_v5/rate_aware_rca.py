@@ -17,6 +17,7 @@ from __future__ import annotations
 import itertools
 import json
 import math
+import time
 from collections import defaultdict
 from collections.abc import Iterable, Mapping, Sequence
 from typing import Any
@@ -101,6 +102,21 @@ def decompose_rate_mix(
             "closure_error": None,
         }
     sums = (sum(s_before.values()), sum(s_after.values()))
+    if any(
+        not math.isfinite(v) or not 0 <= v <= 1
+        for v in (
+            *s_before.values(),
+            *s_after.values(),
+            *r_before.values(),
+            *r_after.values(),
+        )
+    ):
+        return {
+            "status": "DECOMPOSITION_NOT_CLOSED",
+            "closed": False,
+            "reason": "shares_and_rates_must_be_probabilities",
+            "closure_error": None,
+        }
     if not all(
         math.isfinite(value) for value in (*sums, *r_before.values(), *r_after.values())
     ) or any(abs(value - 1.0) > tolerance for value in sums):
@@ -319,11 +335,16 @@ def _candidate_metrics(
     isolation = abs(gap_change - complement_change) / max(
         abs(gap_change) + abs(complement_change), 1e-6
     )
-    _baseline_gap_values, current_gap_values = _daily_gap_change(
+    baseline_gap_values, current_gap_values = _daily_gap_change(
         panel, candidate_filter, baseline_days, current_days
     )
     current_sign = -1.0 if gap_change < 0 else 1.0
-    same_direction = [value * current_sign > 0 for value in current_gap_values]
+    baseline_daily_mean = (
+        float(np.mean(baseline_gap_values)) if baseline_gap_values else base_gap
+    )
+    same_direction = [
+        (value - baseline_daily_mean) * current_sign > 0 for value in current_gap_values
+    ]
     stability = sum(same_direction) / max(len(same_direction), 1)
     coverage = current_share
     impact = (
@@ -403,6 +424,82 @@ def _deduplicate(
     return kept
 
 
+def _atomic_ledger(panel, dimensions, baseline_days, current_days, candidates):
+    """Assign each full-dimensional cell to at most one ranked candidate.
+
+    Assignment is an accounting convention, not an attribution estimator.
+    Candidate-local decompositions must never be added across overlaps.
+    """
+    from .contracts import digest
+
+    before = _aggregate(panel, dimensions, baseline_days)
+    after = _aggregate(panel, dimensions, current_days)
+    decomposition = _decompose_aggregate(before, after, "treatment")
+    if not decomposition["closed"]:
+        return {
+            "status": "DECOMPOSITION_NOT_CLOSED",
+            "reason": decomposition["reason"],
+            "atoms": [],
+            "assigned_total": None,
+            "unassigned_total": None,
+            "closure_error": None,
+            "assignment_policy": "first_ranked_covering_candidate",
+        }
+    atoms = []
+    for cell in sorted(before):
+        scope = dict(cell)
+        atom_id = digest(scope)
+        owners = [
+            c["candidate_id"]
+            for c in candidates
+            if all(scope.get(k) == v for k, v in c["scope"].items())
+        ]
+        components = {
+            key: decomposition[f"{key}_by_cell"][str(cell)]
+            for key in ("rate", "mix", "interaction")
+        }
+        atoms.append(
+            {
+                "atom_id": atom_id,
+                "scope": scope,
+                **components,
+                "total": sum(components.values()),
+                "covering_candidates": owners,
+                "assigned_to": owners[0] if owners else None,
+            }
+        )
+    for candidate in candidates:
+        covered = [
+            a for a in atoms if candidate["candidate_id"] in a["covering_candidates"]
+        ]
+        assigned = [a for a in covered if a["assigned_to"] == candidate["candidate_id"]]
+        candidate["atomic_accounting"] = {
+            "covered_atom_ids": [a["atom_id"] for a in covered],
+            "assigned_atom_ids": [a["atom_id"] for a in assigned],
+            "shared_atom_count": sum(
+                len(a["covering_candidates"]) > 1 for a in covered
+            ),
+            "assigned_components": {
+                key: sum(a[key] for a in assigned)
+                for key in ("rate", "mix", "interaction")
+            },
+            "assigned_total": sum(a["total"] for a in assigned),
+            "descriptive_only": True,
+        }
+    assigned_total = sum(a["total"] for a in atoms if a["assigned_to"] is not None)
+    unassigned_total = sum(a["total"] for a in atoms if a["assigned_to"] is None)
+    return {
+        "status": "CLOSED",
+        "atoms": atoms,
+        "assignment_policy": "first_ranked_covering_candidate",
+        "effect_scale": "treatment_probability_difference",
+        "assigned_total": assigned_total,
+        "unassigned_total": unassigned_total,
+        "total": decomposition["delta"],
+        "closure_error": decomposition["delta"] - assigned_total - unassigned_total,
+    }
+
+
 def discover_rate_candidates(
     panel: Sequence[Mapping[str, Any]],
     dimensions: Sequence[str],
@@ -412,15 +509,26 @@ def discover_rate_candidates(
     top_k: int = 10,
     beam_width: int = 30,
     max_depth: int | None = None,
+    max_candidates: int = 10000,
+    max_seconds: float | None = None,
 ) -> dict[str, Any]:
     """Find rate-metric anomaly subspaces with a Squeeze-style beam search."""
+    started = time.monotonic()
+    if max_seconds is not None and (not math.isfinite(max_seconds) or max_seconds <= 0):
+        raise ValueError("max_seconds must be positive")
     if not panel or not dimensions:
         raise ValueError("panel and dimensions must be non-empty")
     validate_windows(baseline_window, current_window)
     if min_impressions < 0:
         raise ValueError("min_impressions must be non-negative")
-    if top_k <= 0 or beam_width <= 0:
-        raise ValueError("top_k and beam_width must be positive")
+    for name, value in (
+        ("top_k", top_k),
+        ("beam_width", beam_width),
+        ("max_candidates", max_candidates),
+        ("max_depth", len(dimensions) if max_depth is None else max_depth),
+    ):
+        if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+            raise ValueError(f"{name} must be a positive integer")
     days = [int(row["day"]) for row in panel]
     baseline_days = _period(days, baseline_window[0], baseline_window[1])
     current_days = _period(days, current_window[0], current_window[1])
@@ -439,6 +547,9 @@ def discover_rate_candidates(
         for dimension in dimensions
     }
     all_candidates: list[dict[str, Any]] = []
+    search_trace = []
+    evaluated = 0
+    exhausted = False
     beam: list[dict[str, Any]] = [{"scope": {}, "beam_score": float("inf")}]
     for depth in range(1, min(max_depth, len(dimensions)) + 1):
         next_beam: list[dict[str, Any]] = []
@@ -453,6 +564,20 @@ def discover_rate_candidates(
                     if signature in used_signatures:
                         continue
                     used_signatures.add(signature)
+                    if evaluated >= max_candidates or (
+                        max_seconds is not None
+                        and time.monotonic() - started >= max_seconds
+                    ):
+                        exhausted = True
+                        break
+                    evaluated += 1
+                    trace = {
+                        "scope": candidate,
+                        "parent_scope": dict(partial),
+                        "depth": depth,
+                        "evaluation_index": evaluated,
+                    }
+                    search_trace.append(trace)
                     metrics = _candidate_metrics(
                         panel,
                         candidate,
@@ -462,12 +587,18 @@ def discover_rate_candidates(
                         min_impressions,
                     )
                     if metrics is None:
+                        trace["status"] = "PRUNED_MISSING_CELL_OR_LOW_EXPOSURE"
                         continue
+                    trace["status"] = "SCORED"
                     metrics["beam_score"] = abs(float(metrics["gap_change"]))
                     all_candidates.append(metrics)
                     next_beam.append(
                         {"scope": candidate, "beam_score": metrics["beam_score"]}
                     )
+                if exhausted:
+                    break
+            if exhausted:
+                break
         next_beam.sort(
             key=lambda item: (
                 -float(item["beam_score"]),
@@ -475,9 +606,55 @@ def discover_rate_candidates(
             )
         )
         beam = next_beam[:beam_width]
+        kept_scopes = {tuple(sorted(c["scope"].items())) for c in beam}
+        for trace in search_trace:
+            if trace["depth"] == depth and trace["status"] == "SCORED":
+                trace["status"] = (
+                    "KEPT_FOR_EXPANSION"
+                    if tuple(sorted(trace["scope"].items())) in kept_scopes
+                    else "PRUNED_BEAM_WIDTH"
+                )
+                if depth == min(max_depth, len(dimensions)):
+                    trace["status"] = "TERMINAL_DEPTH"
+        if exhausted:
+            break
         if not beam:
             break
     ranked = _deduplicate(all_candidates, top_k)
+    from .contracts import digest
+
+    for candidate in ranked:
+        candidate["candidate_id"] = digest(
+            {
+                "scope": candidate["scope"],
+                "baseline": baseline_window,
+                "current": current_window,
+            }
+        )
+    atomic_ledger = _atomic_ledger(
+        panel, dimensions, baseline_days, current_days, ranked
+    )
+    triples = [
+        {
+            "candidate": {
+                "candidate_id": c["candidate_id"],
+                "scope": c["scope"],
+                "claim_type": "EXPLORATORY_LOCALIZATION",
+            },
+            "statistic": {
+                "name": "investigation_priority",
+                "value": c["priority"],
+                "is_pvalue": False,
+            },
+            "evidence": {
+                "baseline_window": list(baseline_window),
+                "current_window": list(current_window),
+                "atomic_accounting": c.get("atomic_accounting"),
+                "decomposition_status": atomic_ledger["status"],
+            },
+        }
+        for c in ranked
+    ]
 
     # Compute overall rates directly because the empty scope is not a lookup key.
     def total_metrics(selected: set[int]) -> dict[str, float]:
@@ -528,6 +705,21 @@ def discover_rate_candidates(
         "candidate_count": len(ranked),
         "input_validation": input_validation,
         "candidates": ranked,
+        "l0_schema_version": "1.0",
+        "l0_triples": triples,
+        "atomic_ledger": atomic_ledger,
+        "search_manifest": {
+            "max_seconds": max_seconds,
+            "max_candidates": max_candidates,
+            "evaluated_candidates": evaluated,
+            "beam_width": beam_width,
+            "max_depth": min(max_depth, len(dimensions)),
+            "budget_exhausted": exhausted,
+            "min_impressions": min_impressions,
+            "ranking_is_exploratory": True,
+        },
+        "pruning_trace": search_trace,
+        "runtime_seconds": time.monotonic() - started,
         "claim_policy": "candidate_only_until_randomized_or_quasi_experimental_validation",
         "limitations": [
             "候选名称来自输入面板维度，算法不能命名不存在数据入口的外部因素。",

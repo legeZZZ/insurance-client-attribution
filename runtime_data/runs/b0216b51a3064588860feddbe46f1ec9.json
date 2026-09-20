@@ -1,0 +1,951 @@
+{
+  "metrics": {
+    "bundle_decision": "ROLLBACK_RECOMMENDED",
+    "bundle_effect": -0.0216,
+    "oracle_bundle_ate": -0.0219,
+    "p_practical_harm": 1.0,
+    "hte_model": "crossfit_overlap_ridge_cate",
+    "hte_feature_count": 19,
+    "hte_continuous_features": 15,
+    "hte_design_columns": 91,
+    "overlap_subgroups": 7,
+    "rows_with_multiple_subgroups": 21385,
+    "worst_overlap_subgroup": "低端设备",
+    "worst_overlap_cate": -0.0309,
+    "top_hte_moderator": "ad_auction_pressure_index:high",
+    "ledger_state": "DECISION_READY",
+    "component_effects_significant": 2
+  },
+  "key_outputs": {
+    "claims": [
+      {
+        "claim_type": "ASSOCIATION_ONLY",
+        "statement": "新轮播样式上线后 CTR 由 4.1% 降至 3.2%，与样式变更同时出现。"
+      },
+      {
+        "claim_type": "FACTOR_CANDIDATE",
+        "statement": "FactorMiner 输出 9 个候选因子。"
+      },
+      {
+        "claim_type": "ASSOCIATION_ONLY",
+        "statement": "原条目缺少统一识别契约，已降为待验证的探索结果。",
+        "publication_guard": {
+          "status": "DOWNGRADED",
+          "reason_codes": [
+            "NOT_IDENTIFIABLE"
+          ],
+          "original_labels": {
+            "claim_type": "RANDOMIZED_EFFECT"
+          },
+          "effect_estimate": null
+        }
+      },
+      {
+        "claim_type": "EXPLORATORY_HETEROGENEITY",
+        "statement": "探索性分群候选，尚需独立确认。"
+      },
+      {
+        "claim_type": "EXPLORATORY_HETEROGENEITY",
+        "statement": "探索性分群候选，尚需独立确认。"
+      },
+      {
+        "claim_type": "ASSOCIATION_ONLY",
+        "statement": "原结论缺少统一识别和效应契约，作为待验证关联保留。"
+      },
+      {
+        "claim_type": "EXPERIMENT_INCONCLUSIVE",
+        "statement": "carousel.indicator_position 未达到组件级证据标准。"
+      },
+      {
+        "claim_type": "EXPERIMENT_INCONCLUSIVE",
+        "statement": "carousel.layout 未达到组件级证据标准。"
+      },
+      {
+        "claim_type": "EXPERIMENT_INCONCLUSIVE",
+        "statement": "carousel.media_aspect_ratio 未达到组件级证据标准。"
+      },
+      {
+        "claim_type": "ASSOCIATION_ONLY",
+        "statement": "原结论缺少统一识别和效应契约，作为待验证关联保留。"
+      }
+    ],
+    "design": {
+      "design_type": "fractional_factorial_resolution_v",
+      "arm_count": 16,
+      "design_diagnostics": {
+        "model_columns": [
+          "intercept",
+          "carousel.image_component",
+          "carousel.indicator_position",
+          "carousel.layout",
+          "carousel.media_aspect_ratio",
+          "carousel.text_density"
+        ],
+        "rank": 6,
+        "full_column_rank": true,
+        "factor_balance": {
+          "carousel.image_component": {
+            "level_0": 8,
+            "level_1": 8
+          },
+          "carousel.indicator_position": {
+            "level_0": 8,
+            "level_1": 8
+          },
+          "carousel.layout": {
+            "level_0": 8,
+            "level_1": 8
+          },
+          "carousel.media_aspect_ratio": {
+            "level_0": 8,
+            "level_1": 8
+          },
+          "carousel.text_density": {
+            "level_0": 8,
+            "level_1": 8
+          }
+        },
+        "factor_correlation_matrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "condition_number": 1.0000000000000007,
+        "main_effect_aliases": [],
+        "all_interaction_aliases": [
+          {
+            "left": "intercept",
+            "right": "carousel.image_component:carousel.indicator_position:carousel.layout:carousel.media_aspect_ratio:carousel.text_density",
+            "sign": -1
+          },
+          {
+            "left": "carousel.image_component",
+            "right": "carousel.indicator_position:carousel.layout:carousel.media_aspect_ratio:carousel.text_density",
+            "sign": -1
+          },
+          {
+            "left": "carousel.indicator_position",
+            "right": "carousel.image_component:carousel.layout:carousel.media_aspect_ratio:carousel.text_density",
+            "sign": -1
+          },
+          {
+            "left": "carousel.layout",
+            "right": "carousel.image_component:carousel.indicator_position:carousel.media_aspect_ratio:carousel.text_density",
+            "sign": -1
+          },
+          {
+            "left": "carousel.media_aspect_ratio",
+            "right": "carousel.image_component:carousel.indicator_position:carousel.layout:carousel.text_density",
+            "sign": -1
+          },
+          {
+            "left": "carousel.text_density",
+            "right": "carousel.image_component:carousel.indicator_position:carousel.layout:carousel.media_aspect_ratio",
+            "sign": -1
+          },
+          {
+            "left": "carousel.image_component:carousel.indicator_position",
+            "right": "carousel.layout:carousel.media_aspect_ratio:carousel.text_density",
+            "sign": -1
+          },
+          {
+            "left": "carousel.image_component:carousel.layout",
+            "right": "carousel.indicator_position:carousel.media_aspect_ratio:carousel.text_density",
+            "sign": -1
+          },
+          {
+            "left": "carousel.image_component:carousel.media_aspect_ratio",
+            "right": "carousel.indicator_position:carousel.layout:carousel.text_density",
+            "sign": -1
+          },
+          {
+            "left": "carousel.image_component:carousel.text_density",
+            "right": "carousel.indicator_position:carousel.layout:carousel.media_aspect_ratio",
+            "sign": -1
+          },
+          {
+            "left": "carousel.indicator_position:carousel.layout",
+            "right": "carousel.image_component:carousel.media_aspect_ratio:carousel.text_density",
+            "sign": -1
+          },
+          {
+            "left": "carousel.indicator_position:carousel.media_aspect_ratio",
+            "right": "carousel.image_component:carousel.layout:carousel.text_density",
+            "sign": -1
+          },
+          {
+            "left": "carousel.indicator_position:carousel.text_density",
+            "right": "carousel.image_component:carousel.layout:carousel.media_aspect_ratio",
+            "sign": -1
+          },
+          {
+            "left": "carousel.layout:carousel.media_aspect_ratio",
+            "right": "carousel.image_component:carousel.indicator_position:carousel.text_density",
+            "sign": -1
+          },
+          {
+            "left": "carousel.layout:carousel.text_density",
+            "right": "carousel.image_component:carousel.indicator_position:carousel.media_aspect_ratio",
+            "sign": -1
+          },
+          {
+            "left": "carousel.media_aspect_ratio:carousel.text_density",
+            "right": "carousel.image_component:carousel.indicator_position:carousel.layout",
+            "sign": -1
+          }
+        ],
+        "second_order_model_columns": [
+          "intercept",
+          "carousel.image_component",
+          "carousel.indicator_position",
+          "carousel.layout",
+          "carousel.media_aspect_ratio",
+          "carousel.text_density",
+          "carousel.image_component:carousel.indicator_position",
+          "carousel.image_component:carousel.layout",
+          "carousel.image_component:carousel.media_aspect_ratio",
+          "carousel.image_component:carousel.text_density",
+          "carousel.indicator_position:carousel.layout",
+          "carousel.indicator_position:carousel.media_aspect_ratio",
+          "carousel.indicator_position:carousel.text_density",
+          "carousel.layout:carousel.media_aspect_ratio",
+          "carousel.layout:carousel.text_density",
+          "carousel.media_aspect_ratio:carousel.text_density"
+        ],
+        "second_order_rank": 16,
+        "second_order_jointly_identifiable": true,
+        "resolution": 5,
+        "main_effect_assumption": "higher-order aliased interactions negligible"
+      }
+    },
+    "legacy_binary_hte": {
+      "model": "probability_scale_empirical_bayes_partial_pooling",
+      "likelihood": "beta_binomial_posterior_draws",
+      "random_effects_distribution": "gaussian",
+      "random_effects_parameters": {
+        "location": -0.021572382172755037,
+        "nu": null,
+        "scale": 0.010780900074858806,
+        "tau": 0.010780900074858806,
+        "scale_equals_tau": true,
+        "parameter_interpretation": "single random-effects distribution"
+      },
+      "likelihood_requested": "gaussian",
+      "effect_scale": "probability_difference",
+      "logit_taylor_target_used": false,
+      "shrinkage_weight_definition": "tau2_variance / (tau2_variance + raw_effect_variance)",
+      "standard_error_definition": "sqrt(final_posterior_effect_variance)",
+      "pooled_effect": -0.021572382172755037,
+      "pooled_standard_error": 0.0015631363733567781,
+      "pooled_credible_interval_95": [
+        -0.024652981367048576,
+        -0.01853780042189033
+      ],
+      "tau2_probability_difference": 0.00011622780642409063,
+      "tau_scale_probability_difference": 0.010780900074858806,
+      "tau_definition": "Gaussian random-effects standard deviation",
+      "tau_source": "der_simonian_laird",
+      "random_effect_variance_probability_difference": 0.00011622780642409063,
+      "student_t_nu": null,
+      "student_t_hyperparameter_method": null,
+      "student_t_hyperparameter_posterior": null,
+      "student_t_limitations": [],
+      "posterior_calculation": "normal-normal empirical-Bayes update",
+      "shrinkage_strength_legacy": null,
+      "shrinkage_method": "normal_normal",
+      "discovery_mode": false,
+      "segments": [
+        {
+          "segment_id": "device_low_end=0",
+          "impressions": 32542,
+          "effect_raw": -0.0162682360240108,
+          "effect_shrunk": -0.016461135084367976,
+          "standard_error_raw": 0.0020943855781608953,
+          "standard_error_shrunk": 0.0020567347667718268,
+          "shrinkage_weight": 0.96363240096564,
+          "probability_practical_harm": 0.9986,
+          "probability_practical_benefit": 0.0,
+          "shrunk_probability_practical_harm": 0.99898,
+          "shrunk_probability_practical_benefit": 0.0,
+          "moderation_raw": 0.005304146148744239,
+          "moderation_shrunk": 0.005111247088387064,
+          "prob_moderation_worse_raw": 8e-05,
+          "prob_moderation_worse_shrunk": 0.0001,
+          "credible_interval_raw_95": [
+            -0.020361491506390637,
+            -0.012144428839628466
+          ],
+          "credible_interval_95": null,
+          "evidence_level": "ASSOCIATION_ONLY",
+          "publication_guard": {
+            "status": "DOWNGRADED",
+            "reason_codes": [
+              "NOT_IDENTIFIABLE"
+            ],
+            "original_labels": {
+              "evidence_level": "HETEROGENEOUS_TREATMENT_EFFECT"
+            },
+            "effect_estimate": null
+          }
+        },
+        {
+          "segment_id": "device_low_end=1",
+          "impressions": 17458,
+          "effect_raw": -0.03180541538104728,
+          "effect_shrunk": -0.03141894318397263,
+          "standard_error_raw": 0.0021358554666763008,
+          "standard_error_shrunk": 0.0020959662944083114,
+          "shrinkage_weight": 0.9622328796156469,
+          "probability_practical_harm": 1.0,
+          "probability_practical_benefit": 0.0,
+          "shrunk_probability_practical_harm": 1.0,
+          "shrunk_probability_practical_benefit": 0.0,
+          "moderation_raw": -0.010233033208292238,
+          "moderation_shrunk": -0.009846561011217584,
+          "prob_moderation_worse_raw": 0.97756,
+          "prob_moderation_worse_shrunk": 0.96908,
+          "credible_interval_raw_95": [
+            -0.03610667693834141,
+            -0.027704818461841238
+          ],
+          "credible_interval_95": null,
+          "evidence_level": "ASSOCIATION_ONLY",
+          "publication_guard": {
+            "status": "DOWNGRADED",
+            "reason_codes": [
+              "NOT_IDENTIFIABLE"
+            ],
+            "original_labels": {
+              "evidence_level": "HETEROGENEOUS_TREATMENT_EFFECT"
+            },
+            "effect_estimate": null
+          }
+        }
+      ],
+      "input_validation": {
+        "status": "PASS",
+        "component": "hte_segments",
+        "used_sample_count": 50000,
+        "excluded_sample_count": 0,
+        "exclusion_reasons": [],
+        "checks_performed": [
+          "finite",
+          "count_range",
+          "non_empty",
+          "unique_segment_id"
+        ]
+      }
+    },
+    "high_dimensional_hte": {
+      "model": "crossfit_overlap_ridge_cate",
+      "aggregate_model_dependency": "beta_binomial_bundle_gate",
+      "evidence_level": "EXPLORATORY_HDIM_HTE",
+      "identification": "randomized_assignment_required; subgroup selection remains exploratory unless pre-registered",
+      "effect_scale": "probability_difference",
+      "transformed_outcome": "Y * (T - p) / (p * (1-p))",
+      "pooled_effect": -0.021569653154206725,
+      "observed_propensity": 0.4963,
+      "propensity_used": 0.4963,
+      "crossfit_folds": 5,
+      "ridge_alpha": 25.0,
+      "rows": 50000,
+      "feature_columns": [
+        "device_low_end",
+        "user_new_old",
+        "channel",
+        "placement",
+        "session_depth",
+        "prior_quote_count",
+        "quote_complexity_score",
+        "price_sensitivity_score",
+        "coverage_need_score",
+        "lead_quality_score",
+        "network_quality_score",
+        "market_pressure_index",
+        "ad_auction_pressure_index",
+        "competitor_quote_speed_index",
+        "fx_rate_pressure_index",
+        "regulatory_attention_index",
+        "quote_form_step_count",
+        "baseline_latency_risk",
+        "premium_index"
+      ],
+      "continuous_features": [
+        "session_depth",
+        "prior_quote_count",
+        "quote_complexity_score",
+        "price_sensitivity_score",
+        "coverage_need_score",
+        "lead_quality_score",
+        "network_quality_score",
+        "market_pressure_index",
+        "ad_auction_pressure_index",
+        "competitor_quote_speed_index",
+        "fx_rate_pressure_index",
+        "regulatory_attention_index",
+        "quote_form_step_count",
+        "baseline_latency_risk",
+        "premium_index"
+      ],
+      "diagnostics": {
+        "raw_feature_count": 19,
+        "continuous_feature_count": 15,
+        "basis_feature_count": 45,
+        "interaction_feature_count": 36,
+        "design_matrix_columns": 91,
+        "overlapping_subgroup_count": 7,
+        "total_subgroup_memberships": 75902,
+        "rows_in_any_subgroup": 31547,
+        "rows_with_multiple_subgroups": 21385,
+        "residual_standard_error": 0.35513429062717283
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "train_rows": 40000,
+          "test_rows": 10000
+        },
+        {
+          "fold": 2,
+          "train_rows": 40000,
+          "test_rows": 10000
+        },
+        {
+          "fold": 3,
+          "train_rows": 40000,
+          "test_rows": 10000
+        },
+        {
+          "fold": 4,
+          "train_rows": 40000,
+          "test_rows": 10000
+        },
+        {
+          "fold": 5,
+          "train_rows": 40000,
+          "test_rows": 10000
+        }
+      ],
+      "top_moderators": [
+        {
+          "term": "ad_auction_pressure_index:high",
+          "source_feature": "ad_auction_pressure_index",
+          "feature_type": "continuous",
+          "basis": "positive_hinge",
+          "coefficient": -0.018424052223812708,
+          "importance": 0.018424052223812708,
+          "direction": "amplifies_harm"
+        },
+        {
+          "term": "device_low_end=1 × prior_quote_count:high",
+          "source_feature": "device_low_end+prior_quote_count",
+          "feature_type": "interaction",
+          "basis": "pairwise",
+          "coefficient": 0.012645997213804468,
+          "importance": 0.012645997213804468,
+          "direction": "reduces_harm"
+        },
+        {
+          "term": "device_low_end=0 × prior_quote_count:high",
+          "source_feature": "device_low_end+prior_quote_count",
+          "feature_type": "interaction",
+          "basis": "pairwise",
+          "coefficient": -0.011911430167044686,
+          "importance": 0.011911430167044686,
+          "direction": "amplifies_harm"
+        },
+        {
+          "term": "competitor_quote_speed_index:high",
+          "source_feature": "competitor_quote_speed_index",
+          "feature_type": "continuous",
+          "basis": "positive_hinge",
+          "coefficient": 0.011002386062952747,
+          "importance": 0.011002386062952747,
+          "direction": "reduces_harm"
+        },
+        {
+          "term": "ad_auction_pressure_index",
+          "source_feature": "ad_auction_pressure_index",
+          "feature_type": "continuous",
+          "basis": "standardized",
+          "coefficient": 0.010943857068217827,
+          "importance": 0.010943857068217827,
+          "direction": "reduces_harm"
+        },
+        {
+          "term": "device_low_end=0 × quote_complexity_score:high",
+          "source_feature": "device_low_end+quote_complexity_score",
+          "feature_type": "interaction",
+          "basis": "pairwise",
+          "coefficient": 0.010245590881648765,
+          "importance": 0.010245590881648765,
+          "direction": "reduces_harm"
+        },
+        {
+          "term": "quote_form_step_count:high",
+          "source_feature": "quote_form_step_count",
+          "feature_type": "continuous",
+          "basis": "positive_hinge",
+          "coefficient": 0.010194550232503265,
+          "importance": 0.010194550232503265,
+          "direction": "reduces_harm"
+        },
+        {
+          "term": "competitor_quote_speed_index",
+          "source_feature": "competitor_quote_speed_index",
+          "feature_type": "continuous",
+          "basis": "standardized",
+          "coefficient": -0.010060323136829443,
+          "importance": 0.010060323136829443,
+          "direction": "amplifies_harm"
+        },
+        {
+          "term": "device_low_end=0 × prior_quote_count",
+          "source_feature": "device_low_end+prior_quote_count",
+          "feature_type": "interaction",
+          "basis": "pairwise",
+          "coefficient": 0.00986327662664033,
+          "importance": 0.00986327662664033,
+          "direction": "reduces_harm"
+        },
+        {
+          "term": "device_low_end=1 × session_depth:high",
+          "source_feature": "device_low_end+session_depth",
+          "feature_type": "interaction",
+          "basis": "pairwise",
+          "coefficient": -0.009458595670670925,
+          "importance": 0.009458595670670925,
+          "direction": "amplifies_harm"
+        },
+        {
+          "term": "device_low_end=1 × prior_quote_count",
+          "source_feature": "device_low_end+prior_quote_count",
+          "feature_type": "interaction",
+          "basis": "pairwise",
+          "coefficient": -0.009179197459991623,
+          "importance": 0.009179197459991623,
+          "direction": "amplifies_harm"
+        },
+        {
+          "term": "device_low_end=1 × quote_complexity_score:high",
+          "source_feature": "device_low_end+quote_complexity_score",
+          "feature_type": "interaction",
+          "basis": "pairwise",
+          "coefficient": -0.00915390211980227,
+          "importance": 0.00915390211980227,
+          "direction": "amplifies_harm"
+        }
+      ],
+      "subgroups": [
+        {
+          "subgroup_id": "low_end_device",
+          "label": "低端设备",
+          "condition": {
+            "device_low_end": 1
+          },
+          "rows": 17458,
+          "effective_rows_after_overlap": 5590.68,
+          "overlap_rows": 15809,
+          "raw_cate": -0.03228636310502299,
+          "effect_shrunk": -0.03094482171477627,
+          "standard_error": 0.0021270236195765476,
+          "estimate": -0.03181007433279448,
+          "estimator": "within_subgroup_difference_in_means",
+          "inference_status": "EXPLORATORY",
+          "se_method": "independent_arm_sample_variances",
+          "interval_95": [
+            -0.03597904062716451,
+            -0.02764110803842445
+          ],
+          "interval_method": "pointwise_normal_difference_in_means_not_selection_adjusted",
+          "probability_practical_harm": 1.0,
+          "probability_method": "normal_tail_area_not_a_posterior",
+          "evidence_level": "EXPLORATORY_HDIM_HTE"
+        },
+        {
+          "subgroup_id": "weak_network_high_complexity",
+          "label": "弱网络 × 高复杂报价",
+          "condition": {
+            "network_quality_score": {
+              "max": 0.58
+            },
+            "quote_complexity_score": {
+              "min": 0.6
+            }
+          },
+          "rows": 10188,
+          "effective_rows_after_overlap": 2858.82,
+          "overlap_rows": 9932,
+          "raw_cate": -0.0321978654602814,
+          "effect_shrunk": -0.029874012632516773,
+          "standard_error": 0.0027838903490203953,
+          "estimate": -0.03025899038353069,
+          "estimator": "within_subgroup_difference_in_means",
+          "inference_status": "EXPLORATORY",
+          "se_method": "independent_arm_sample_variances",
+          "interval_95": [
+            -0.035715415467610666,
+            -0.024802565299450713
+          ],
+          "interval_method": "pointwise_normal_difference_in_means_not_selection_adjusted",
+          "probability_practical_harm": 0.9999999999998296,
+          "probability_method": "normal_tail_area_not_a_posterior",
+          "evidence_level": "EXPLORATORY_HDIM_HTE"
+        },
+        {
+          "subgroup_id": "complex_quote_path",
+          "label": "报价复杂 × 表单步骤多",
+          "condition": {
+            "quote_complexity_score": {
+              "min": 0.62
+            },
+            "quote_form_step_count": {
+              "min": 6
+            }
+          },
+          "rows": 15212,
+          "effective_rows_after_overlap": 4508.44,
+          "overlap_rows": 14838,
+          "raw_cate": -0.029373911077503992,
+          "effect_shrunk": -0.02819778386408999,
+          "standard_error": 0.0023414396628232805,
+          "estimate": -0.029022625087756857,
+          "estimator": "within_subgroup_difference_in_means",
+          "inference_status": "EXPLORATORY",
+          "se_method": "independent_arm_sample_variances",
+          "interval_95": [
+            -0.03361184682689049,
+            -0.024433403348623227
+          ],
+          "interval_method": "pointwise_normal_difference_in_means_not_selection_adjusted",
+          "probability_practical_harm": 0.9999999999999998,
+          "probability_method": "normal_tail_area_not_a_posterior",
+          "evidence_level": "EXPLORATORY_HDIM_HTE"
+        },
+        {
+          "subgroup_id": "price_sensitive_new_users",
+          "label": "新客 × 价格敏感",
+          "condition": {
+            "user_new_old": "new",
+            "price_sensitivity_score": {
+              "min": 0.58
+            }
+          },
+          "rows": 12173,
+          "effective_rows_after_overlap": 4796.77,
+          "overlap_rows": 8368,
+          "raw_cate": -0.02583400435911172,
+          "effect_shrunk": -0.02522446014158866,
+          "standard_error": 0.0032159421759318713,
+          "estimate": -0.025357576672432082,
+          "estimator": "within_subgroup_difference_in_means",
+          "inference_status": "EXPLORATORY",
+          "se_method": "independent_arm_sample_variances",
+          "interval_95": [
+            -0.03166082333725855,
+            -0.019054330007605615
+          ],
+          "interval_method": "pointwise_normal_difference_in_means_not_selection_adjusted",
+          "probability_practical_harm": 0.9999991034785717,
+          "probability_method": "normal_tail_area_not_a_posterior",
+          "evidence_level": "EXPLORATORY_HDIM_HTE"
+        },
+        {
+          "subgroup_id": "external_pressure_combo",
+          "label": "外部压力 × 内部摩擦组合",
+          "condition": {
+            "competitor_quote_speed_index": {
+              "min": 0.46
+            },
+            "quote_form_step_count": {
+              "min": 6
+            }
+          },
+          "rows": 5298,
+          "effective_rows_after_overlap": 1316.98,
+          "overlap_rows": 5298,
+          "raw_cate": -0.02730459024945431,
+          "effect_shrunk": -0.02513737623014649,
+          "standard_error": 0.003798088833863544,
+          "estimate": -0.025086377941981392,
+          "estimator": "within_subgroup_difference_in_means",
+          "inference_status": "EXPLORATORY",
+          "se_method": "independent_arm_sample_variances",
+          "interval_95": [
+            -0.03253063205635394,
+            -0.017642123827608845
+          ],
+          "interval_method": "pointwise_normal_difference_in_means_not_selection_adjusted",
+          "probability_practical_harm": 0.9999643786783251,
+          "probability_method": "normal_tail_area_not_a_posterior",
+          "evidence_level": "EXPLORATORY_HDIM_HTE"
+        },
+        {
+          "subgroup_id": "paid_market_pressure",
+          "label": "付费渠道 × 竞价/竞品压力高",
+          "condition": {
+            "channel": "paid",
+            "market_pressure_index": {
+              "min": 0.55
+            }
+          },
+          "rows": 5903,
+          "effective_rows_after_overlap": 2091.56,
+          "overlap_rows": 4423,
+          "raw_cate": -0.0260010036643995,
+          "effect_shrunk": -0.02477499452728717,
+          "standard_error": 0.004149324061824076,
+          "estimate": -0.024632181558902618,
+          "estimator": "within_subgroup_difference_in_means",
+          "inference_status": "EXPLORATORY",
+          "se_method": "independent_arm_sample_variances",
+          "interval_95": [
+            -0.032764856720077805,
+            -0.01649950639772743
+          ],
+          "interval_method": "pointwise_normal_difference_in_means_not_selection_adjusted",
+          "probability_practical_harm": 0.9997893758874898,
+          "probability_method": "normal_tail_area_not_a_posterior",
+          "evidence_level": "EXPLORATORY_HDIM_HTE"
+        },
+        {
+          "subgroup_id": "regulatory_price_attention",
+          "label": "监管关注 × 价格敏感",
+          "condition": {
+            "regulatory_attention_index": {
+              "min": 0.22
+            },
+            "price_sensitivity_score": {
+              "min": 0.56
+            }
+          },
+          "rows": 9670,
+          "effective_rows_after_overlap": 3683.92,
+          "overlap_rows": 7072,
+          "raw_cate": -0.025153032989615975,
+          "effect_shrunk": -0.024513702914575497,
+          "standard_error": 0.0034194915516736714,
+          "estimate": -0.02290065877845029,
+          "estimator": "within_subgroup_difference_in_means",
+          "inference_status": "EXPLORATORY",
+          "se_method": "independent_arm_sample_variances",
+          "interval_95": [
+            -0.029602862219730686,
+            -0.016198455337169897
+          ],
+          "interval_method": "pointwise_normal_difference_in_means_not_selection_adjusted",
+          "probability_practical_harm": 0.9999192493926142,
+          "probability_method": "normal_tail_area_not_a_posterior",
+          "evidence_level": "EXPLORATORY_HDIM_HTE"
+        }
+      ],
+      "individual_cate_preview": [
+        {
+          "row": 22625,
+          "cate": -0.2344224472851877,
+          "memberships": 4
+        },
+        {
+          "row": 6539,
+          "cate": -0.11992835245777467,
+          "memberships": 3
+        },
+        {
+          "row": 12663,
+          "cate": -0.11638931715574513,
+          "memberships": 4
+        },
+        {
+          "row": 915,
+          "cate": -0.10828582047166721,
+          "memberships": 2
+        },
+        {
+          "row": 6632,
+          "cate": -0.10070995574325087,
+          "memberships": 5
+        },
+        {
+          "row": 33965,
+          "cate": -0.09980620839347754,
+          "memberships": 1
+        },
+        {
+          "row": 16349,
+          "cate": -0.09798722031170942,
+          "memberships": 1
+        },
+        {
+          "row": 23355,
+          "cate": -0.09654820075103648,
+          "memberships": 3
+        },
+        {
+          "row": 40306,
+          "cate": -0.09250059614813783,
+          "memberships": 2
+        },
+        {
+          "row": 7721,
+          "cate": -0.0903291088633012,
+          "memberships": 2
+        }
+      ]
+    },
+    "a_line_funnel": {
+      "window": {
+        "start_day": 60,
+        "end_day": 73
+      },
+      "metric": "carousel_ctr",
+      "estimand": "treatment-control rate difference",
+      "stages": [
+        {
+          "id": "exposure",
+          "label": "曝光",
+          "control": 25185,
+          "treatment": 24815,
+          "control_rate": 1.0,
+          "treatment_rate": 1.0,
+          "delta": 0.0
+        },
+        {
+          "id": "reach",
+          "label": "到达",
+          "control": 24331,
+          "treatment": 23536,
+          "control_rate": 0.966091,
+          "treatment_rate": 0.948459,
+          "delta": -0.017632
+        },
+        {
+          "id": "click",
+          "label": "点击",
+          "control": 1032,
+          "treatment": 489,
+          "control_rate": 0.040977,
+          "treatment_rate": 0.019706,
+          "delta": -0.021271
+        },
+        {
+          "id": "quote",
+          "label": "报价",
+          "control": 691,
+          "treatment": 296,
+          "control_rate": 0.669574,
+          "treatment_rate": 0.605317,
+          "delta": -0.064257
+        },
+        {
+          "id": "issue",
+          "label": "投保",
+          "control": 304,
+          "treatment": 124,
+          "control_rate": 0.439942,
+          "treatment_rate": 0.418919,
+          "delta": -0.021023
+        }
+      ],
+      "arms": [
+        {
+          "id": "control",
+          "label": "Control · 旧版轮播",
+          "component_version": "carousel.v1",
+          "exposures": 25185,
+          "reach": 24331,
+          "click": 1032,
+          "quote": 691,
+          "issue": 304,
+          "ctr": 0.040977,
+          "reach_rate": 0.966091,
+          "quote_rate_from_click": 0.669574,
+          "issue_rate_from_quote": 0.439942
+        },
+        {
+          "id": "treatment",
+          "label": "Treatment · 新版轮播",
+          "component_version": "carousel.v2",
+          "exposures": 24815,
+          "reach": 23536,
+          "click": 489,
+          "quote": 296,
+          "issue": 124,
+          "ctr": 0.019706,
+          "reach_rate": 0.948459,
+          "quote_rate_from_click": 0.605317,
+          "issue_rate_from_quote": 0.418919
+        }
+      ],
+      "evidence_level": "ASSOCIATION_ONLY",
+      "fixture_note": "后续报价与投保阶段由同一随机化曝光 fixture 按固定规则生成，用于演示漏斗分析。",
+      "overlap_subgroups": 7,
+      "publication_guard": {
+        "status": "DOWNGRADED",
+        "reason_codes": [
+          "NOT_IDENTIFIABLE"
+        ],
+        "original_labels": {
+          "evidence_level": "CAUSAL_READY"
+        },
+        "effect_estimate": null
+      }
+    }
+  },
+  "evidence_pointer": "outputs/demo_evidence.json",
+  "scenario": "line_a",
+  "title": "线 A · 组件归因全链路（异常→因子→实验→决策）",
+  "generated_at": "2026-09-19T16:36:46.132599+00:00",
+  "computed_at": "2026-09-19T16:36:46.132599+00:00",
+  "served_at": "2026-09-19T16:36:46.132599+00:00",
+  "runtime_seconds": 6.376,
+  "real_run": true,
+  "cache_hit": false,
+  "run_id": "b0216b51a3064588860feddbe46f1ec9",
+  "execution_mode": "deterministic_fixture",
+  "claim": "ASSOCIATION_ONLY",
+  "evidence": "outputs/demo_evidence.json",
+  "run_evidence_path": "/Users/lege/Documents/kimi/Workspaces/GOAI-归因罗盘/赛道二-决赛提交包/代码仓库/runtime_data/runs/b0216b51a3064588860feddbe46f1ec9.json",
+  "result_digest": "sha256:65dc1b659d8e16c42517eafe6118358961426b50c98e3e9bc322a08691d680bb",
+  "publication_guard": {
+    "status": "DOWNGRADED",
+    "reason_codes": [
+      "NOT_IDENTIFIABLE"
+    ],
+    "original_labels": {
+      "claim": "CAUSAL_READY"
+    },
+    "effect_estimate": null
+  }
+}

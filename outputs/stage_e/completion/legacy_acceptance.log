@@ -1,0 +1,11 @@
+[PASS] A1 历史数值/决策回归（不授予新因果资格）: bundle_effect=-0.0216 vs oracle=-0.0219（误差 0.0003，准入 ≤0.01），决策=ROLLBACK_RECOMMENDED
+[PASS] A1b 当前发布门与行动政策: {'action': 'KEEP_BASELINE', 'effect_ref': 'sha256:75a9acf0c9fdeda38eaaaca242b2781ff1bb49eda5aa57648fdb0b69cada9cea', 'guardrails_harmed': [], 'guardrails_unknown': [], 'worst_case_net_value': -604.8113375798496, 'policy': 'joint guardrails + practical threshold + interval worst-case loss', 'requires_approval_before_activation': False}
+[PASS] A2 证据门禁拒答: claim=REFUSED refused=True（准入：REFUSED 且 refused=true）
+[PASS] B1 开放因子发现: candidates=121（准入 >0），unknown_bucket=保留
+[PASS] B2 外部事件边界: mapped=2，全部 TEMPORAL_ASSOCIATION=True
+[PASS] C1 经验库消融: 冷启动稀疏场景 ATE RMSE：adaptive=0.003645 < static=0.004825（准入：adaptive 更低），mismatch_alarm=[601]
+[PASS] D1 公司数据链路: mode=company_adapter days=60 candidates=11
+
+==== 验收结论 ====
+7/7 项 PASS
+全部通过，达到准入标准。

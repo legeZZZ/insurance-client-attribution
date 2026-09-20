@@ -1,0 +1,25 @@
+{
+  "operation": "blind",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/blind.db",
+    "action": "reveal",
+    "parameters": {
+      "case_id": "A_null",
+      "truth": {
+        "marginal_dependence": null,
+        "conditional_relevance": null,
+        "graph_edges": null,
+        "intervention_effects": [
+          {
+            "id": "effect",
+            "effect": 0.0,
+            "identifiable": true
+          }
+        ],
+        "changed_mechanisms": null
+      },
+      "reviewer": "independent-business-review",
+      "evidence_ref": "fixture:known-DGP"
+    }
+  }
+}

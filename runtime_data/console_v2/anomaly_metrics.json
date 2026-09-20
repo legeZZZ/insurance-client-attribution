@@ -1,0 +1,123 @@
+[
+  {
+    "id": "residual",
+    "name": "残余异动（未解释成分）",
+    "change": "窗口内显著偏离基线",
+    "status": "部分已解释 · 未知量保留",
+    "window": "发现窗口 + 独立确认窗口",
+    "factors": [
+      {
+        "factor_id": "campaign.sms_push",
+        "strength": 0.7775,
+        "lag": 2,
+        "layer": "level",
+        "claim": "FACTOR_CANDIDATE",
+        "direction": "positive"
+      },
+      {
+        "factor_id": "channel.feed_ad",
+        "strength": 0.5782,
+        "lag": 1,
+        "layer": "level",
+        "claim": "WATCHLIST",
+        "direction": "positive"
+      },
+      {
+        "factor_id": "competitor.delisting",
+        "strength": 0.3737,
+        "lag": 7,
+        "layer": "level",
+        "claim": "WATCHLIST",
+        "direction": "positive"
+      },
+      {
+        "factor_id": "competitor.delisting",
+        "strength": 0.3089,
+        "lag": 3,
+        "layer": "level",
+        "claim": "WATCHLIST",
+        "direction": "positive"
+      }
+    ]
+  },
+  {
+    "id": "paid_conversion",
+    "name": "付费转化 · 华东/付费切面",
+    "change": "+8.4%",
+    "status": "UNEXPLAINED · 未解释阶跃保留",
+    "window": "full_review 场景输出",
+    "factors": [
+      {
+        "factor_id": "homepage.carousel_exposure",
+        "strength": null,
+        "lag": null,
+        "layer": "level",
+        "claim": "CAUSAL_CONFIRMED",
+        "direction": "positive",
+        "basis": "A 线随机化实验库结论"
+      },
+      {
+        "factor_id": "channel.feed_ad",
+        "strength": 0.58,
+        "lag": 1,
+        "layer": "level",
+        "claim": "WATCHLIST",
+        "direction": "positive"
+      },
+      {
+        "factor_id": "internal.quote_form_step_count",
+        "strength": 0.41,
+        "lag": 0,
+        "layer": "level",
+        "claim": "AB_TESTING",
+        "direction": "negative",
+        "basis": "新版报价页 5% 灰度实验中（ITT 区间未收口）"
+      }
+    ]
+  },
+  {
+    "id": "resource_ctr",
+    "name": "首页资源位 CTR · 全量切面",
+    "change": "-12.6% 同比下滑",
+    "status": "归因中 · 已定位 1 个因果因子",
+    "window": "近 14 天 vs 去年同期",
+    "factors": [
+      {
+        "factor_id": "homepage.carousel_exposure",
+        "strength": 0.83,
+        "lag": 0,
+        "layer": "level",
+        "claim": "CAUSAL_CONFIRMED",
+        "direction": "positive",
+        "basis": "A 线随机化实验库结论（轮播曝光→点击）"
+      },
+      {
+        "factor_id": "internal.page_latency_p95",
+        "strength": 0.44,
+        "lag": -4,
+        "layer": "velocity",
+        "claim": "WATCHLIST",
+        "direction": "negative",
+        "basis": "算法检出（导数层·增速），待人工业务核验"
+      },
+      {
+        "factor_id": "external.competitor_pressure_index",
+        "strength": 0.39,
+        "lag": -9,
+        "layer": "acceleration",
+        "claim": "TEMPORAL_ASSOCIATION",
+        "direction": "negative",
+        "basis": "外部时间关联（导数层·加速度）"
+      },
+      {
+        "factor_id": "internal.checkout_error_rate",
+        "strength": 0.36,
+        "lag": 0,
+        "layer": "level",
+        "claim": "AB_TESTING",
+        "direction": "negative",
+        "basis": "结算链路修复包 A/B 验证中"
+      }
+    ]
+  }
+]

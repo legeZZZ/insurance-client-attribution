@@ -1,0 +1,110 @@
+[
+  {
+    "source_id": "S1",
+    "title": "保险销售行为管理办法（商务部法规库转引监管总局）",
+    "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=98055",
+    "use_boundary": "监管要求与业务对象定义；不证明经营效果",
+    "checked_at": "2026-09-17",
+    "access_scope": "page_text_opened",
+    "license_ref": null
+  },
+  {
+    "source_id": "S2",
+    "title": "Google Web Vitals",
+    "url": "https://web.dev/articles/vitals",
+    "use_boundary": "浏览器性能测量定义；不提供本业务转化效果量",
+    "checked_at": "2026-09-17",
+    "access_scope": "page_text_opened",
+    "license_ref": null
+  },
+  {
+    "source_id": "S3",
+    "title": "W3C Carousel Pattern",
+    "url": "https://www.w3.org/WAI/ARIA/apg/patterns/carousel/",
+    "use_boundary": "轮播交互与可访问性设计依据",
+    "checked_at": "2026-09-17",
+    "access_scope": "page_text_opened",
+    "license_ref": null
+  },
+  {
+    "source_id": "S4",
+    "title": "Microsoft：Diagnosing Sample Ratio Mismatch",
+    "url": "https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/",
+    "use_boundary": "实验数据质量诊断依据",
+    "checked_at": "2026-09-17",
+    "access_scope": "page_text_opened",
+    "license_ref": null
+  },
+  {
+    "source_id": "S5",
+    "title": "Cole et al.：Barriers to Household Risk Management（2013）",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3995033/",
+    "use_boundary": "印度降雨保险实验证据；跨市场、跨险种外推有限",
+    "checked_at": "2026-09-17",
+    "access_scope": "search_index_excerpt_or_abstract; not full-paper review",
+    "license_ref": null
+  },
+  {
+    "source_id": "S6",
+    "title": "Handel et al.：Information Frictions and Adverse Selection（2015）",
+    "url": "https://www.nber.org/papers/w21759",
+    "use_boundary": "信息摩擦研究；本地因子操作化属于研究设计",
+    "checked_at": "2026-09-17",
+    "access_scope": "search_index_excerpt_or_abstract; not full-paper review",
+    "license_ref": null
+  },
+  {
+    "source_id": "S7",
+    "title": "Heiss et al.：Inattention and Switching Costs（2016）",
+    "url": "https://www.nber.org/papers/w22765",
+    "use_boundary": "美国Medicare Part D续保惰性研究；不能直接迁移效应量",
+    "checked_at": "2026-09-17",
+    "access_scope": "search_index_excerpt_or_abstract; not full-paper review",
+    "license_ref": null
+  },
+  {
+    "source_id": "S8",
+    "title": "Jaspersen et al.：Predicting Insurance Demand from Risk Attitudes（2019）",
+    "url": "https://www.nber.org/papers/w26508",
+    "use_boundary": "风险态度模型预测保险选择的局限",
+    "checked_at": "2026-09-17",
+    "access_scope": "search_index_excerpt_or_abstract; not full-paper review",
+    "license_ref": null
+  },
+  {
+    "source_id": "S9",
+    "title": "UCI Bank Marketing",
+    "url": "https://archive.ics.uci.edu/dataset/222/bank+marketing",
+    "use_boundary": "银行定存营销数据，非保险实证",
+    "checked_at": "2026-09-17",
+    "access_scope": "search_index_excerpt_or_abstract; not full-paper review",
+    "license_ref": null
+  },
+  {
+    "source_id": "S10",
+    "title": "金融监管总局：健全人身保险产品定价机制的通知（2024）",
+    "url": "https://www.nfra.gov.cn/cn/view/pages/ItemDetail.html?docId=1175200&itemId=928",
+    "use_boundary": "历史政策机制依据；不代表2026年当前利率上限",
+    "checked_at": "2026-09-17",
+    "access_scope": "search_index_excerpt_or_abstract; not full-paper review",
+    "license_ref": null
+  },
+  {
+    "source_id": "S11",
+    "title": "人民银行：2025年3月20日LPR公告",
+    "url": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125440/3876551/5625437/index.html",
+    "use_boundary": "官方发布日期示例；不是当前利率行情",
+    "checked_at": "2026-09-17",
+    "access_scope": "search_index_excerpt_or_abstract; not full-paper review",
+    "license_ref": null
+  },
+  {
+    "source_id": "S12",
+    "title": "国家统计局国家数据月度入口",
+    "url": "https://data.stats.gov.cn/easyquery.htm?Cn=A01",
+    "use_boundary": "月度宏观数据源入口；具体序列和可用日期需接入核验",
+    "checked_at": "2026-09-17",
+    "access_scope": "search_index_excerpt_or_abstract; not full-paper review",
+    "license_ref": null
+  }
+]

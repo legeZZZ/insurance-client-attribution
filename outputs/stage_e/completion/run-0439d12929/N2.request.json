@@ -1,0 +1,15 @@
+{
+  "operation": "external_adapter",
+  "parameters": {
+    "kind": "N2",
+    "parameters": {
+      "snapshot": {
+        "phase": "DISCOVERY",
+        "round": 0
+      },
+      "factor_ids": [
+        "x"
+      ]
+    }
+  }
+}

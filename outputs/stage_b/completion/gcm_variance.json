@@ -1,0 +1,364 @@
+{
+  "track": "C",
+  "status": "ESTIMATED",
+  "contracts": {
+    "MetricContract": {
+      "name": "revenue",
+      "numerator": "revenue",
+      "denominator": null,
+      "aggregation": "sum",
+      "unit": "currency",
+      "analysis_unit": "unit",
+      "target_population": "treated units",
+      "timezone": "UTC",
+      "window": [
+        50,
+        54
+      ],
+      "maturity_days": 2,
+      "deduplication": "unit/day",
+      "schema_version": "1.0",
+      "contract_type": "MetricContract",
+      "digest": "sha256:98537e49a030bfa5b3ef4125639ded7e5dfb2518e477bd0a4d99a081cdc4d3ac"
+    },
+    "IdentificationReport": {
+      "treatment": "x",
+      "outcome": "revenue",
+      "design": "GCM",
+      "status": "IDENTIFIED",
+      "assumptions": [
+        {
+          "name": "data_valid",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:c1a26c69da34d852c31a23cf825644af8bd3d1ce1f0a4e73dccb6711d25668a9"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "outcome_mature",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:c1a26c69da34d852c31a23cf825644af8bd3d1ce1f0a4e73dccb6711d25668a9"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "support_overlap",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:c1a26c69da34d852c31a23cf825644af8bd3d1ce1f0a4e73dccb6711d25668a9"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "independent_units",
+          "status": "assumed",
+          "passed": true,
+          "evidence_refs": [
+            "iid rows"
+          ],
+          "data_verifiable": false
+        },
+        {
+          "name": "accepted_graph",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:c1a26c69da34d852c31a23cf825644af8bd3d1ce1f0a4e73dccb6711d25668a9"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "mechanisms_fitted",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:c1a26c69da34d852c31a23cf825644af8bd3d1ce1f0a4e73dccb6711d25668a9"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "no_extrapolation",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:c1a26c69da34d852c31a23cf825644af8bd3d1ce1f0a4e73dccb6711d25668a9"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "causal_sufficiency",
+          "status": "assumed",
+          "passed": true,
+          "evidence_refs": [
+            "synthetic DAG"
+          ],
+          "data_verifiable": false
+        }
+      ],
+      "evidence_refs": [
+        "iid rows",
+        "sha256:c1a26c69da34d852c31a23cf825644af8bd3d1ce1f0a4e73dccb6711d25668a9",
+        "synthetic DAG"
+      ],
+      "adjustment_set": [],
+      "forbidden_adjustments": [
+        "revenue",
+        "x"
+      ],
+      "rejected_adjustments": [],
+      "support": {
+        "target_population": "treated units",
+        "data_digest": "sha256:c1a26c69da34d852c31a23cf825644af8bd3d1ce1f0a4e73dccb6711d25668a9",
+        "overlap_check": {
+          "status": "supported",
+          "evidence_refs": [
+            "sha256:c1a26c69da34d852c31a23cf825644af8bd3d1ce1f0a4e73dccb6711d25668a9"
+          ]
+        }
+      },
+      "ambiguities": [],
+      "reason_codes": [],
+      "route": "C",
+      "effect_scope": "individual",
+      "causal_effect_allowed": true,
+      "supplemental_evidence_needed": [],
+      "graph_ref": null,
+      "dag_digest": "sha256:d4709351898f4ef4955fdf56c76e47d7e7d63cdc7fd7e991658b324c26476725",
+      "schema_version": "1.0",
+      "contract_type": "IdentificationReport",
+      "digest": "sha256:f7f55e6960b9fcdf8e7b387ba0aecf39d19454fbcfafaf358de845103a6bde1b"
+    },
+    "EffectEstimate": {
+      "estimand": "ATE_intervention_on_old_population",
+      "unit": "currency",
+      "estimate": 2.0209644228262755,
+      "interval": [
+        1.9790254265287723,
+        2.0337592834691858
+      ],
+      "interval_method": "iid_row_bootstrap_with_GCM_simulation",
+      "selection_status": "exploratory",
+      "target_population": "treated units",
+      "window": [
+        50,
+        54
+      ],
+      "identification_ref": "sha256:f7f55e6960b9fcdf8e7b387ba0aecf39d19454fbcfafaf358de845103a6bde1b",
+      "diagnostics": {
+        "mechanisms": [
+          {
+            "period": "old",
+            "node": "revenue",
+            "parents_full_rank": true,
+            "heldout_rmse": 0.12133838455510614,
+            "limit": 0.3,
+            "passed": true
+          },
+          {
+            "period": "new",
+            "node": "revenue",
+            "parents_full_rank": true,
+            "heldout_rmse": 0.09975964997962913,
+            "limit": 0.3,
+            "passed": true
+          }
+        ],
+        "data_digest": "sha256:c1a26c69da34d852c31a23cf825644af8bd3d1ce1f0a4e73dccb6711d25668a9",
+        "bootstrap_samples": 20,
+        "simulation_samples": 200,
+        "sampling_ate_repeats": [
+          2.0025404743594937,
+          2.0101298330839534,
+          2.0254172781850612
+        ],
+        "graph_uncertainty": "conditional on accepted DAG; alternative graphs not averaged",
+        "structural_uncertainty": "linear additive-noise causal sufficiency is a maintained model assumption",
+        "support_scope": "observed marginal intervention range; high-dimensional transport not certified"
+      },
+      "schema_version": "1.0",
+      "contract_type": "EffectEstimate",
+      "digest": "sha256:9f86d4c83a33b288719a2eb968d4e66260ac67699ac4c244e59ad0f13b1d2f1c"
+    }
+  },
+  "mechanism_attribution": {
+    "functional": "variance",
+    "unit": "squared_metric_units",
+    "shapley_values": {
+      "revenue": -0.8136823188439304,
+      "x": 0.9025723841187618
+    },
+    "bootstrap_intervals": {
+      "revenue": [
+        -0.49209095751865617,
+        0.2490785131627934
+      ],
+      "x": [
+        -0.348806202772629,
+        1.882693246688211
+      ]
+    },
+    "covariance_node_order": [
+      "revenue",
+      "x"
+    ],
+    "bootstrap_covariance": [
+      [
+        0.05520059410192233,
+        0.02676122671284954
+      ],
+      [
+        0.02676122671284954,
+        0.41214049399091607
+      ]
+    ],
+    "attributed_total": 0.08889006527483145,
+    "interpretation": "distribution mechanism change, not treatment ATE",
+    "bootstrap_runs": [
+      {
+        "ate": 1.9798269416847818,
+        "attribution": {
+          "revenue": 0.2862093569224273,
+          "x": 0.6595244278033163
+        }
+      },
+      {
+        "ate": 2.0077619690854633,
+        "attribution": {
+          "revenue": -0.14291380544530896,
+          "x": 1.425785949476624
+        }
+      },
+      {
+        "ate": 1.9850147599617136,
+        "attribution": {
+          "revenue": -0.4291781688253622,
+          "x": 1.3693197592131552
+        }
+      },
+      {
+        "ate": 2.0269449386329828,
+        "attribution": {
+          "revenue": -0.24846279948389705,
+          "x": 0.29102486776302894
+        }
+      },
+      {
+        "ate": 2.0093873519847154,
+        "attribution": {
+          "revenue": -0.01104578779946963,
+          "x": 2.259005019979022
+        }
+      },
+      {
+        "ate": 2.029901917565138,
+        "attribution": {
+          "revenue": -0.5312733520059176,
+          "x": 1.193359156776013
+        }
+      },
+      {
+        "ate": 2.013397750732724,
+        "attribution": {
+          "revenue": -0.2577345321069928,
+          "x": 0.7370258715436657
+        }
+      },
+      {
+        "ate": 2.0049859659916924,
+        "attribution": {
+          "revenue": -0.2759394791030312,
+          "x": 1.4667697077878432
+        }
+      },
+      {
+        "ate": 2.026415659197921,
+        "attribution": {
+          "revenue": -0.06707995433276426,
+          "x": 1.2707103437560507
+        }
+      },
+      {
+        "ate": 2.032049308757809,
+        "attribution": {
+          "revenue": -0.4329357255216919,
+          "x": 1.0225637155884113
+        }
+      },
+      {
+        "ate": 2.008855420733521,
+        "attribution": {
+          "revenue": 0.02594540054265959,
+          "x": 1.44928063840903
+        }
+      },
+      {
+        "ate": 2.0122983744925667,
+        "attribution": {
+          "revenue": -0.34301072104217645,
+          "x": 0.14567441868775366
+        }
+      },
+      {
+        "ate": 2.022874269471033,
+        "attribution": {
+          "revenue": -0.40188670143415584,
+          "x": 0.8919960506015299
+        }
+      },
+      {
+        "ate": 1.9783002461495256,
+        "attribution": {
+          "revenue": 0.17667509746775023,
+          "x": 0.2861120755768898
+        }
+      },
+      {
+        "ate": 2.00259442718846,
+        "attribution": {
+          "revenue": -0.44878410045378825,
+          "x": -0.7961934317129753
+        }
+      },
+      {
+        "ate": 2.0209808612803974,
+        "attribution": {
+          "revenue": 0.20803915953372454,
+          "x": 1.0212969158674043
+        }
+      },
+      {
+        "ate": 2.0059296505356654,
+        "attribution": {
+          "revenue": -0.1392837551120989,
+          "x": 0.795757288390945
+        }
+      },
+      {
+        "ate": 2.0255419650859303,
+        "attribution": {
+          "revenue": -0.30686789573528106,
+          "x": 0.5453794249944552
+        }
+      },
+      {
+        "ate": 2.035306403446146,
+        "attribution": {
+          "revenue": -0.014220245550582877,
+          "x": 1.1751285367991158
+        }
+      },
+      {
+        "ate": 2.001889974905519,
+        "attribution": {
+          "revenue": -0.09616141685550561,
+          "x": 0.5489110574136622
+        }
+      }
+    ]
+  }
+}

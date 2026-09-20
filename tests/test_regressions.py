@@ -12,6 +12,16 @@ _PROJECT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_PROJECT))
 sys.path.insert(0, str(_PROJECT / "src"))
 
+from goai_control_tower.experiment_integrity import experiment_integrity_report
+from goai_control_tower.foundation import LocalEvidenceProvider
+from goai_control_tower.track2 import (
+    case_experiment_metadata,
+    default_metric_contract,
+    generate_dataset,
+)
+from goai_control_tower.track2_analysis import estimate_itt, evaluate_public_dataset
+from goai_control_tower.track2_datasets import load_dataset_catalog
+from run_server import bounded_float, bounded_int, valid_case
 from track2_v5.agent_chat import handle_message, reset_session
 from track2_v5.baseline_attribution import (
     attribute_baseline,
@@ -20,23 +30,13 @@ from track2_v5.baseline_attribution import (
     simulate_panel,
 )
 from track2_v5.bayes import estimate_high_dimensional_hte, estimate_hte
-from track2_v5.insursim_carousel import generate_bundle_stage, sanitize
 from track2_v5.claim_ledger import ClaimLedger
 from track2_v5.experiment_designer import design_experiment
 from track2_v5.fdr import benjamini_hochberg
+from track2_v5.insursim_carousel import generate_bundle_stage, sanitize
 from track2_v5.rate_aware_rca import decompose_rate_mix
 from track2_v5.scenario_reports import _scenario_experience, run_scenario
 from track2_v5.spec import spec_diff
-from run_server import bounded_float, bounded_int, valid_case
-from goai_control_tower.track2_analysis import estimate_itt, evaluate_public_dataset
-from goai_control_tower.track2 import (
-    case_experiment_metadata,
-    default_metric_contract,
-    generate_dataset,
-)
-from goai_control_tower.track2_datasets import load_dataset_catalog
-from goai_control_tower.experiment_integrity import experiment_integrity_report
-from goai_control_tower.foundation import LocalEvidenceProvider
 
 
 class RegressionTests(unittest.TestCase):
@@ -423,9 +423,7 @@ class RegressionTests(unittest.TestCase):
 
     def test_scenario_reports_expose_top_level_claim_and_evidence(self) -> None:
         report = run_scenario("line_b")
-        self.assertEqual(
-            report["claim"], "FACTOR_CANDIDATE / TEMPORAL_ASSOCIATION"
-        )
+        self.assertEqual(report["claim"], "FACTOR_CANDIDATE / TEMPORAL_ASSOCIATION")
         self.assertEqual(report["evidence"], report["evidence_pointer"])
         self.assertIn("key_outputs", report)
 

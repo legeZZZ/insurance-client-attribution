@@ -1,0 +1,17 @@
+test_deterministic_composition_and_short_data_rejected (test_causal_graph_and_tracks.GraphTests.test_deterministic_composition_and_short_data_rejected) ... ok
+test_protected_variables_and_parent_views_survive (test_causal_graph_and_tracks.GraphTests.test_protected_variables_and_parent_views_survive) ... ok
+test_real_pcmciplus_and_lpcmci_run_and_preserve_endpoints (test_causal_graph_and_tracks.GraphTests.test_real_pcmciplus_and_lpcmci_run_and_preserve_endpoints) ... ok
+test_gcm_requires_accepted_dag_not_pag (test_causal_graph_and_tracks.IdentificationTests.test_gcm_requires_accepted_dag_not_pag) ... ok
+test_mediator_adjustment_rejected_and_audited (test_causal_graph_and_tracks.IdentificationTests.test_mediator_adjustment_rejected_and_audited) ... ok
+test_missing_evidence_never_implies_identification (test_causal_graph_and_tracks.IdentificationTests.test_missing_evidence_never_implies_identification) ... ok
+test_single_series_and_simultaneous_events_do_not_identify_individual_effects (test_causal_graph_and_tracks.IdentificationTests.test_single_series_and_simultaneous_events_do_not_identify_individual_effects) ... ok
+test_all_three_estimators_run_with_cluster_disjoint_crossfitting (test_causal_graph_and_tracks.TrackATests.test_all_three_estimators_run_with_cluster_disjoint_crossfitting) ... ok
+test_duplicate_analysis_unit_rejected (test_causal_graph_and_tracks.TrackATests.test_duplicate_analysis_unit_rejected) ... ok
+test_failed_randomization_or_maturity_has_no_numeric_effect (test_causal_graph_and_tracks.TrackATests.test_failed_randomization_or_maturity_has_no_numeric_effect) ... ok
+test_group_assignment_conflict_and_srm_fail_closed (test_causal_graph_and_tracks.TrackATests.test_group_assignment_conflict_and_srm_fail_closed) ... ok
+test_post_treatment_feature_is_blocked_before_fit (test_causal_graph_and_tracks.TrackATests.test_post_treatment_feature_is_blocked_before_fit) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.049s
+
+OK

@@ -1,0 +1,11 @@
+{
+  "operation": "investigation",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_f/completion/run-fc851e36fa/state.db",
+    "action": "invalidate",
+    "parameters": {
+      "ref": "sha256:a0365532c47d3ccb265fdda34c73fe9268b191c1c7800cb26e06dc67a2fb5fef",
+      "reason": "fixture:corrected data"
+    }
+  }
+}

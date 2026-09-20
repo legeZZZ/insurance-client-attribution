@@ -1,0 +1,22 @@
+{
+  "schema_version": "orchestration/1",
+  "input_digest": "sha256:24b9f2aa03fb71c8527dc3a6c32eca53f96b9fd5aaba96466a31c183ee92fe83",
+  "execution_status": "FAILED",
+  "records": [],
+  "cost_ledger": [],
+  "baseline_bytes": 8043,
+  "cost_unit": "serialized_io_bytes_not_model_tokens",
+  "model_tokens": 0,
+  "worker_execution": "deterministic_processes_without_model_calls",
+  "fallback": false,
+  "reason_codes": [
+    "DATA_INVALID"
+  ],
+  "error_type": "TimeoutError",
+  "error": "isolated stage timed out; no downstream stage executed",
+  "total_io_bytes": 0,
+  "digest": "sha256:53e565b07521b8cdbca25f89855df11c77edd464bbe4b08daea4f0bcdb8b6a57",
+  "data_ref": "sha256:71e4beadcbabdf6c8341c7c7504d807f86ac2f27e9374f00ea6da1fa293875ff",
+  "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/runtime/hypotheses.sqlite3",
+  "run_id": "5b31ca2aac844437900c7632fc81bcea"
+}

@@ -1,9 +1,9 @@
 """FactorialExperimentDesigner: turn factor candidates into identifiable designs.
 
 - K <= 3 factors: full factorial (2^K arms).
-- K = 4..5: Resolution-IV fractional factorial (2^(K-1) arms).
+- K = 4: Resolution-IV; K = 5: Resolution-V half-fraction designs.
 - Each arm records its design code so component effects remain traceable.
-- Expected information gain ranks which factor set to test next.
+- Explicit value scores rank investigation value, never probabilities.
 """
 
 from __future__ import annotations
@@ -59,7 +59,11 @@ def design_experiment(
         design_type = "full_factorial"
     elif k <= 5:
         matrix = _fractional_resolution_iv(k)
-        design_type = "fractional_factorial_resolution_iv"
+        design_type = (
+            "fractional_factorial_resolution_iv"
+            if k == 4
+            else "fractional_factorial_resolution_v"
+        )
     else:
         raise ValueError("more than 5 factors: run a screening stage first")
 
@@ -71,6 +75,8 @@ def design_experiment(
             f"{design_type}; refusing a non-identifiable truncated design"
         )
 
+    if traffic_budget < len(matrix):
+        raise ValueError("traffic_budget must allocate at least one unit per arm")
     coded = np.asarray(matrix, dtype=float) * 2.0 - 1.0
     design_matrix = np.column_stack((np.ones(len(matrix)), coded))
     rank = int(np.linalg.matrix_rank(design_matrix))
@@ -96,6 +102,34 @@ def design_experiment(
                     }
                 )
 
+    # Enumerate all interactions: main-effect correlations alone miss defining aliases.
+    terms = [
+        tuple(c)
+        for order in range(k + 1)
+        for c in itertools.combinations(range(k), order)
+    ]
+    labels = [
+        "intercept" if not term else ":".join(factor_ids[j] for j in term)
+        for term in terms
+    ]
+    columns = [
+        np.prod(coded[:, term], axis=1) if term else np.ones(len(matrix))
+        for term in terms
+    ]
+    interaction_aliases = []
+    for i in range(len(terms)):
+        for j in range(i + 1, len(terms)):
+            dot = float(columns[i] @ columns[j] / len(matrix))
+            if abs(dot) > 1 - 1e-12:
+                interaction_aliases.append(
+                    {
+                        "left": labels[i],
+                        "right": labels[j],
+                        "sign": 1 if dot > 0 else -1,
+                    }
+                )
+    second_order = [i for i, term in enumerate(terms) if len(term) <= 2]
+    second_matrix = np.column_stack([columns[i] for i in second_order])
     guardrail_risk = guardrail_risk or {}
     engineering_cost = engineering_cost or {}
     uncertainty = uncertainty or {}
@@ -107,7 +141,8 @@ def design_experiment(
             {
                 "arm_id": f"arm-{index:02d}",
                 "design_code": {factor: bit for factor, bit in zip(factor_ids, bits)},
-                "planned_impressions": per_arm,
+                "planned_impressions": per_arm
+                + int(index < traffic_budget % len(matrix)),
                 "is_control": all(bit == 0 for bit in bits),
             }
         )
@@ -118,6 +153,11 @@ def design_experiment(
         info_gain = float(uncertainty.get(factor, 1.0))
         risk = float(guardrail_risk.get(factor, 0.1))
         cost = float(engineering_cost.get(factor, 0.1))
+        if not all(
+            math.isfinite(v) and v >= 0
+            for v in (info_gain, risk, cost, business_loss_weight)
+        ):
+            raise ValueError("value-score inputs must be finite and nonnegative")
         factor_scores[factor] = round(info_gain - business_loss_weight * risk - cost, 4)
 
     return {
@@ -134,6 +174,17 @@ def design_experiment(
             "factor_correlation_matrix": correlations.tolist(),
             "condition_number": condition_number,
             "main_effect_aliases": aliases,
+            "all_interaction_aliases": interaction_aliases,
+            "second_order_model_columns": [labels[i] for i in second_order],
+            "second_order_rank": int(np.linalg.matrix_rank(second_matrix)),
+            "second_order_jointly_identifiable": int(
+                np.linalg.matrix_rank(second_matrix)
+            )
+            == len(second_order),
+            "resolution": None if k <= 3 else k,
+            "main_effect_assumption": "higher-order aliased interactions negligible"
+            if k > 3
+            else "none from design aliasing",
         },
         "requirements": [
             "independent randomization per design code",
@@ -246,6 +297,10 @@ def estimate_component_effects(
                 "standard_error_scale": "log_odds_ratio",
                 "log_odds_ratio": round(log_odds_ratio, 6),
                 "analysis_model": "aggregated_binomial_logistic_glm_full_design_matrix",
+                "model_assumptions": [
+                    "main-effect-only logistic model; interaction terms omitted",
+                    "use design_diagnostics.all_interaction_aliases before assigning component interpretations",
+                ],
                 "design_matrix_rank": int(np.linalg.matrix_rank(x)),
                 "significant": significant,
                 "evidence_level": "COMPONENT_EFFECT"

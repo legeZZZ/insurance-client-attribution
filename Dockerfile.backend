@@ -1,0 +1,31 @@
+FROM python:3.14-slim AS wheels
+WORKDIR /build
+COPY requirements.lock.txt uv.lock ./
+COPY tools/prepare_wheel_sources.py ./
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential && rm -rf /var/lib/apt/lists/*
+RUN python prepare_wheel_sources.py uv.lock /sources
+RUN pip wheel --ignore-requires-python --no-deps -r /sources/sources.txt -w /wheels
+RUN python -c "import pathlib,hashlib; p=pathlib.Path('/wheels'); (p/'SHA256SUMS').write_text(''.join(hashlib.sha256(f.read_bytes()).hexdigest()+'  '+f.name+chr(10) for f in sorted(p.glob('*.whl'))))"
+
+FROM python:3.14-slim AS backend
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
+WORKDIR /app
+COPY --from=wheels /wheels /wheels
+COPY requirements.lock.txt .
+RUN cd /wheels && sha256sum -c SHA256SUMS && pip install --ignore-requires-python --no-deps --no-index /wheels/*.whl && pip check
+COPY track2_v5 /app/track2_v5
+COPY tools /app/tools
+COPY src /app/src
+COPY run_server.py config.example.json /app/
+COPY data /app/data
+COPY specs /app/specs
+COPY examples /app/examples
+COPY scripts /app/scripts
+COPY tests /app/tests
+COPY track2_clean_bundle /app/track2_clean_bundle
+RUN apt-get update && apt-get install -y --no-install-recommends procps && rm -rf /var/lib/apt/lists/*
+RUN mkdir -p /work /app/runtime_data && useradd --uid 10001 --no-create-home app && chown app /work /app/runtime_data
+USER app
+WORKDIR /work
+ENTRYPOINT ["python", "/app/tools/run_causal_pipeline.py"]
+CMD ["--help"]

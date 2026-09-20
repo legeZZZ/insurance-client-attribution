@@ -56,7 +56,7 @@ def validate_analysis_intent(
             errors.append("invalid:confidence_range")
         if confidence < min_confidence:
             errors.append("low:confidence")
-    except (TypeError, ValueError):
+    except TypeError, ValueError:
         errors.append("invalid:confidence")
     return {
         "valid": not errors,
@@ -215,3 +215,6 @@ __all__ = [
     "rule_intent",
     "validate_analysis_intent",
 ]
+
+# Policy transport is deliberately independent of the intent-only adapter.
+from .policy_adapter import LocalPolicyAdapter, run_loop  # noqa: F401

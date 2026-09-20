@@ -1,0 +1,55 @@
+{
+  "result": [
+    {
+      "factor_id": "driver",
+      "parent_factor_id": "driver",
+      "scope_id": "global",
+      "metric_id": "metric",
+      "lag": 2,
+      "effect_shape": "persistent",
+      "correlation": 0.9939969656165095,
+      "coverage": 0.975,
+      "n_pairs": 78,
+      "kind": "internal_event",
+      "score": 0.9691470414760968,
+      "budget_multiplier": 1.0,
+      "falsification": {
+        "placebo": {
+          "correlation": 0.004203492384784394,
+          "coverage": 0.9696969696969697,
+          "n_pairs": 64,
+          "kill": false,
+          "insufficient_data": false,
+          "applicable": true,
+          "status": "TESTED"
+        },
+        "lead_lag_reversal": {
+          "correlation": 0.003275688992860208,
+          "kill": false,
+          "skipped": false,
+          "applicable": true
+        },
+        "split_half": {
+          "first": 0.9932369623607123,
+          "second": 0.9937790952564576,
+          "kill": false,
+          "applicable": true,
+          "status": "TESTED"
+        },
+        "negative_controls": []
+      },
+      "falsification_status": "SURVIVED_EXPLORATORY",
+      "claim_type": "WATCHLIST",
+      "grade": "REVIEW",
+      "alert_id": "sha256:c2c02c75b8311a0c116dc0e6ec1dbe7fcffba26e112ca6b06c2b39ab4474c0ea",
+      "window_id": "0",
+      "discovery_window": [
+        0,
+        79
+      ],
+      "next_step": "仅下一独立窗口确认可晋级；人工标签只进入验证队列",
+      "evidence_ref": "sha256:9cf4ef79917a8b423f73c6d035a3b07fddbeacc2d55e7808ae93604bd0ae6162",
+      "status": "WATCHLIST"
+    }
+  ]
+}

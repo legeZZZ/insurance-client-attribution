@@ -1,0 +1,506 @@
+{
+  "status": "PASS",
+  "cli_cases": 32,
+  "cases": [
+    {
+      "case": "insurance-A",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/insurance-A.result.json\"}\n",
+      "request_digest": "sha256:609789da9eea8166151a6bcd3d976f16d66cabce321a487e240be51e00b54a5c"
+    },
+    {
+      "case": "insurance-B",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/insurance-B.result.json\"}\n",
+      "request_digest": "sha256:31a72571d79f23f27e05fe77079371a4c8f521625e4085c904a1e3f13d9a2552"
+    },
+    {
+      "case": "insurance-C",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/insurance-C.result.json\"}\n",
+      "request_digest": "sha256:bffc514927ab5a45e067782d464502ca76d48e429536b3af36295827aede924d"
+    },
+    {
+      "case": "ecommerce-A",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/ecommerce-A.result.json\"}\n",
+      "request_digest": "sha256:cbf5a594f309ee3195095acecbcf14176b0e907dd2659b94ade0afc9047da82a"
+    },
+    {
+      "case": "ecommerce-B",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/ecommerce-B.result.json\"}\n",
+      "request_digest": "sha256:08826f048e668767824939c87da2b3ca51c6795687125fea9af05fffc42364c2"
+    },
+    {
+      "case": "ecommerce-C",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/ecommerce-C.result.json\"}\n",
+      "request_digest": "sha256:44c440d5630145273f9d95707b007d0ad730f038703182793da42dc902a4d905"
+    },
+    {
+      "case": "unavailable-source",
+      "expected": 2,
+      "returncode": 2,
+      "stderr": "DATA_INVALID: data unavailable at analysis time\n",
+      "stdout": "",
+      "request_digest": "sha256:d201a5ee204d66d977145ec97de90dd3339782588c55ed7bad6c591a63254236"
+    },
+    {
+      "case": "N1",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": \"INTAKE_QUEUED\", \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/N1.result.json\"}\n",
+      "request_digest": "sha256:f05a2dcaa89bdfcc6f832da7c4c4846bc0903567f784b8ccd8fac7c7533a40a9"
+    },
+    {
+      "case": "N2",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/N2.result.json\"}\n",
+      "request_digest": "sha256:246c134264b185f0e0363cf89d73125fbcca69cdb9c4198f026ef53e253e47f6"
+    },
+    {
+      "case": "N3",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/N3.result.json\"}\n",
+      "request_digest": "sha256:cfccc2b7114b5a8a3d65e854efaf2cf82bbadf5dda598bd8d3bc1d2bfa9b1956"
+    },
+    {
+      "case": "N3-production-rejected",
+      "expected": 2,
+      "returncode": 2,
+      "stderr": "DATA_INVALID: production traffic operations require business platform; sandbox only\n",
+      "stdout": "",
+      "request_digest": "sha256:01df51a9b8ee6d6dea81edcd90abaa853569400b071c5324c0fc2ae72825ec04"
+    },
+    {
+      "case": "A_signal-freeze",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_signal-freeze.result.json\"}\n",
+      "request_digest": "sha256:a382198bd989ee88d75a7ec17a064e78352f51399756890fc97f3140da23ae55"
+    },
+    {
+      "case": "A_signal-early-reveal-rejected",
+      "expected": 2,
+      "returncode": 2,
+      "stderr": "DATA_INVALID: freeze actual algorithm result before revealing truth\n",
+      "stdout": "",
+      "request_digest": "sha256:45e931e7d5c5bd948414289e3731221559dbfcc41d0e6d9f6f2756748a29de76"
+    },
+    {
+      "case": "A_signal-run",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_signal-run.result.json\"}\n",
+      "request_digest": "sha256:6656511c901a12719fa491ca57c517b340d8bb0170b4128109614266991705cb"
+    },
+    {
+      "case": "A_signal-truth",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_signal-truth.result.json\"}\n",
+      "request_digest": "sha256:45e931e7d5c5bd948414289e3731221559dbfcc41d0e6d9f6f2756748a29de76"
+    },
+    {
+      "case": "A_signal-read",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_signal-read.result.json\"}\n",
+      "request_digest": "sha256:d30d7566c180731192cf0b3223bd6c39cff29e0dfe56adcc22edb778c99120c7"
+    },
+    {
+      "case": "A_signal-report",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": \"SCORED\", \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_signal-report.result.json\"}\n",
+      "request_digest": "sha256:89850b710144430fd6a996785e7c5af2812f9c60713d1b9c27a53c46390fc799"
+    },
+    {
+      "case": "A_signal-idempotent",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_signal-idempotent.result.json\"}\n",
+      "request_digest": "sha256:6656511c901a12719fa491ca57c517b340d8bb0170b4128109614266991705cb"
+    },
+    {
+      "case": "A_null-freeze",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_null-freeze.result.json\"}\n",
+      "request_digest": "sha256:5f48a3c49d78ff2e08cc66ceb21ac57ec8cdfdbc39840bccf5e0fb4988396a82"
+    },
+    {
+      "case": "A_null-early-reveal-rejected",
+      "expected": 2,
+      "returncode": 2,
+      "stderr": "DATA_INVALID: freeze actual algorithm result before revealing truth\n",
+      "stdout": "",
+      "request_digest": "sha256:ce5ab0a1f9e3a26ed957798bc7d5bd9da7059822f3872d8b7785c7ffa8dd01aa"
+    },
+    {
+      "case": "A_null-run",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_null-run.result.json\"}\n",
+      "request_digest": "sha256:854130623c4e0bb4239e50c99426b06853a94dc0e4c2b6df2a62250ed9f6a33d"
+    },
+    {
+      "case": "A_null-truth",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_null-truth.result.json\"}\n",
+      "request_digest": "sha256:ce5ab0a1f9e3a26ed957798bc7d5bd9da7059822f3872d8b7785c7ffa8dd01aa"
+    },
+    {
+      "case": "A_null-read",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_null-read.result.json\"}\n",
+      "request_digest": "sha256:cb3ba3018258c8c6db8b604332e557bb389730224c72422fa4e5e626bd9c2b5f"
+    },
+    {
+      "case": "A_null-report",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": \"SCORED\", \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_null-report.result.json\"}\n",
+      "request_digest": "sha256:93690d74f9185d46262bf4442760c07433624bde237c703302f0246684d46712"
+    },
+    {
+      "case": "A_null-idempotent",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_null-idempotent.result.json\"}\n",
+      "request_digest": "sha256:854130623c4e0bb4239e50c99426b06853a94dc0e4c2b6df2a62250ed9f6a33d"
+    },
+    {
+      "case": "A_overlap_invalid-freeze",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_overlap_invalid-freeze.result.json\"}\n",
+      "request_digest": "sha256:0b10c58a87c02af33593aeb9ff0b613b810c8771335a7a2c00195956e06a44b6"
+    },
+    {
+      "case": "A_overlap_invalid-early-reveal-rejected",
+      "expected": 2,
+      "returncode": 2,
+      "stderr": "DATA_INVALID: freeze actual algorithm result before revealing truth\n",
+      "stdout": "",
+      "request_digest": "sha256:1c12f94ac0be6371c46f6bfa8b19cb15ea610fb75c343f26a01a81f60c1101f7"
+    },
+    {
+      "case": "A_overlap_invalid-run",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_overlap_invalid-run.result.json\"}\n",
+      "request_digest": "sha256:4b2f6cda276708b9022033d325db2c747eda9ed17d0fa02a5e6ad0d67443aacc"
+    },
+    {
+      "case": "A_overlap_invalid-truth",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_overlap_invalid-truth.result.json\"}\n",
+      "request_digest": "sha256:1c12f94ac0be6371c46f6bfa8b19cb15ea610fb75c343f26a01a81f60c1101f7"
+    },
+    {
+      "case": "A_overlap_invalid-read",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_overlap_invalid-read.result.json\"}\n",
+      "request_digest": "sha256:3f1b4b865bdfd5dc608c3d1a34cda964ebb67f00269bae1f0961ad02d55b8f3b"
+    },
+    {
+      "case": "A_overlap_invalid-report",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": \"SCORED\", \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_overlap_invalid-report.result.json\"}\n",
+      "request_digest": "sha256:45bbde37ea0ae448d898d432104f8dea7425df60fc150896aa43964dfc78476a"
+    },
+    {
+      "case": "A_overlap_invalid-idempotent",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_overlap_invalid-idempotent.result.json\"}\n",
+      "request_digest": "sha256:4b2f6cda276708b9022033d325db2c747eda9ed17d0fa02a5e6ad0d67443aacc"
+    }
+  ],
+  "run_directory": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929",
+  "artifacts": [
+    {
+      "path": "run-0439d12929/A_null-early-reveal-rejected.request.json",
+      "digest": "sha256:207e3be076ce629e75ef6e7af327dade7b3bd19d25f33bee1ddc5451581ffb6a"
+    },
+    {
+      "path": "run-0439d12929/A_null-freeze.request.json",
+      "digest": "sha256:a3b21b40b4ac4dc87eedc85dbed8bd41d4a0a2b8c41c8d89bbcf4ae4abf55c48"
+    },
+    {
+      "path": "run-0439d12929/A_null-freeze.result.json",
+      "digest": "sha256:400ce93fcec13e9bc8ce7dde626c5d0e019f301aba94b2ae33738c5f3557d8ed"
+    },
+    {
+      "path": "run-0439d12929/A_null-idempotent.request.json",
+      "digest": "sha256:508676a62a0d4d6138434b579bfcdfa94998e5489fa61658e82852ceb8dddb16"
+    },
+    {
+      "path": "run-0439d12929/A_null-idempotent.result.json",
+      "digest": "sha256:4713f676b728f95fa8ab4cd130d0cab557ada45af505449e2a67f13864334fc1"
+    },
+    {
+      "path": "run-0439d12929/A_null-read.request.json",
+      "digest": "sha256:902a0fd19767bde6cc437d9ceec93962a779532642b686495474d1c75ef322c1"
+    },
+    {
+      "path": "run-0439d12929/A_null-read.result.json",
+      "digest": "sha256:4713f676b728f95fa8ab4cd130d0cab557ada45af505449e2a67f13864334fc1"
+    },
+    {
+      "path": "run-0439d12929/A_null-report.request.json",
+      "digest": "sha256:1437e512161fa01512a727e76a528fffb2b7a01b87289491123a4452554ba693"
+    },
+    {
+      "path": "run-0439d12929/A_null-report.result.json",
+      "digest": "sha256:4b5532519814a8bbbcb12b6ef0d96c64b640ea78b6985cf36d9ba0b28e03d4ef"
+    },
+    {
+      "path": "run-0439d12929/A_null-run.request.json",
+      "digest": "sha256:508676a62a0d4d6138434b579bfcdfa94998e5489fa61658e82852ceb8dddb16"
+    },
+    {
+      "path": "run-0439d12929/A_null-run.result.json",
+      "digest": "sha256:56b8baabb347580313505870afaa4e30946991c350538f30d569e3df5cd6035d"
+    },
+    {
+      "path": "run-0439d12929/A_null-truth.request.json",
+      "digest": "sha256:207e3be076ce629e75ef6e7af327dade7b3bd19d25f33bee1ddc5451581ffb6a"
+    },
+    {
+      "path": "run-0439d12929/A_null-truth.result.json",
+      "digest": "sha256:4713f676b728f95fa8ab4cd130d0cab557ada45af505449e2a67f13864334fc1"
+    },
+    {
+      "path": "run-0439d12929/A_overlap_invalid-early-reveal-rejected.request.json",
+      "digest": "sha256:634e3259c3a954124538ed9ad4cec94715f99d08582f00fc280c78e9d30bd7a4"
+    },
+    {
+      "path": "run-0439d12929/A_overlap_invalid-freeze.request.json",
+      "digest": "sha256:f7134daeead0b2266736a810e92e926ac3584c211d54b75f371ebb640505a7ee"
+    },
+    {
+      "path": "run-0439d12929/A_overlap_invalid-freeze.result.json",
+      "digest": "sha256:0076e6a0394c366e597cb8e2d9ce6ae25259f6ee17d3dda3e05e0da62e0a79d9"
+    },
+    {
+      "path": "run-0439d12929/A_overlap_invalid-idempotent.request.json",
+      "digest": "sha256:aeb814c7c1f11529db1665babc1e94c1e2bab28b5be6d8502959b513e237be23"
+    },
+    {
+      "path": "run-0439d12929/A_overlap_invalid-idempotent.result.json",
+      "digest": "sha256:f889fceb77a9afe9f941c320ec9f0f025052aa8b892be559da400953f3f48c3f"
+    },
+    {
+      "path": "run-0439d12929/A_overlap_invalid-read.request.json",
+      "digest": "sha256:d7667c5816ab8c31aa6cf3cfcfb4e294cb932e717e57a3ac3651d359528976be"
+    },
+    {
+      "path": "run-0439d12929/A_overlap_invalid-read.result.json",
+      "digest": "sha256:f889fceb77a9afe9f941c320ec9f0f025052aa8b892be559da400953f3f48c3f"
+    },
+    {
+      "path": "run-0439d12929/A_overlap_invalid-report.request.json",
+      "digest": "sha256:4c86451708181dfbdabf2d087a18aa384c92086b12b55d12a07f8b1431e5b59e"
+    },
+    {
+      "path": "run-0439d12929/A_overlap_invalid-report.result.json",
+      "digest": "sha256:e64e6e1c9a940d0e1a107f9219beada0e2af89c4d73f14c30f0f6443bbe41c04"
+    },
+    {
+      "path": "run-0439d12929/A_overlap_invalid-run.request.json",
+      "digest": "sha256:aeb814c7c1f11529db1665babc1e94c1e2bab28b5be6d8502959b513e237be23"
+    },
+    {
+      "path": "run-0439d12929/A_overlap_invalid-run.result.json",
+      "digest": "sha256:15e3827100b34b80a611eee20c0d422d9295e20cb4dc04662e881c25ed074542"
+    },
+    {
+      "path": "run-0439d12929/A_overlap_invalid-truth.request.json",
+      "digest": "sha256:634e3259c3a954124538ed9ad4cec94715f99d08582f00fc280c78e9d30bd7a4"
+    },
+    {
+      "path": "run-0439d12929/A_overlap_invalid-truth.result.json",
+      "digest": "sha256:f889fceb77a9afe9f941c320ec9f0f025052aa8b892be559da400953f3f48c3f"
+    },
+    {
+      "path": "run-0439d12929/A_signal-early-reveal-rejected.request.json",
+      "digest": "sha256:ac9f309446d065366d456c988210a2c2fa7d2104ee426d89b35cf72a29698064"
+    },
+    {
+      "path": "run-0439d12929/A_signal-freeze.request.json",
+      "digest": "sha256:67de5c212a5fd5ca43dee056fa9c2230cc04e3883611443157376a3b6d2907b1"
+    },
+    {
+      "path": "run-0439d12929/A_signal-freeze.result.json",
+      "digest": "sha256:6133278ab3a49fd7f2645c0a87b1bb5c6ab05f3686e0bd93e72edda72f216b74"
+    },
+    {
+      "path": "run-0439d12929/A_signal-idempotent.request.json",
+      "digest": "sha256:2b5a773ff145c3b9d6b4392609db01a746d4fb252c3a95d39c6726a9767614d4"
+    },
+    {
+      "path": "run-0439d12929/A_signal-idempotent.result.json",
+      "digest": "sha256:af47035d978f914fae0cff0b9cb7f848679079649a505aa4e04bfbee4891d187"
+    },
+    {
+      "path": "run-0439d12929/A_signal-read.request.json",
+      "digest": "sha256:a132eb484a1f9ee53b97c7b9c7dbd404c020f29660cb9792597d626f00565c05"
+    },
+    {
+      "path": "run-0439d12929/A_signal-read.result.json",
+      "digest": "sha256:af47035d978f914fae0cff0b9cb7f848679079649a505aa4e04bfbee4891d187"
+    },
+    {
+      "path": "run-0439d12929/A_signal-report.request.json",
+      "digest": "sha256:5571b0f1023fd647589ee02fbce528ea3e203cba58a6a92233d9456210120dfd"
+    },
+    {
+      "path": "run-0439d12929/A_signal-report.result.json",
+      "digest": "sha256:0a60aa16d94d1758f59f4dab96495f28a04cf46b771f5fe27de10a16fb442205"
+    },
+    {
+      "path": "run-0439d12929/A_signal-run.request.json",
+      "digest": "sha256:2b5a773ff145c3b9d6b4392609db01a746d4fb252c3a95d39c6726a9767614d4"
+    },
+    {
+      "path": "run-0439d12929/A_signal-run.result.json",
+      "digest": "sha256:21d65be89d5f86a2e6eb03577fff4ad19ecf270b83602efc67f21c3eda4885b0"
+    },
+    {
+      "path": "run-0439d12929/A_signal-truth.request.json",
+      "digest": "sha256:ac9f309446d065366d456c988210a2c2fa7d2104ee426d89b35cf72a29698064"
+    },
+    {
+      "path": "run-0439d12929/A_signal-truth.result.json",
+      "digest": "sha256:af47035d978f914fae0cff0b9cb7f848679079649a505aa4e04bfbee4891d187"
+    },
+    {
+      "path": "run-0439d12929/N1.request.json",
+      "digest": "sha256:f078d1a32f2698cc5f2804a57359613ca9f1bbe76a8f480f21c83e98916dca33"
+    },
+    {
+      "path": "run-0439d12929/N1.result.json",
+      "digest": "sha256:add9a3d9a806144f14dce617baebd60cb26634c672d16af47c2f90f87fa13db9"
+    },
+    {
+      "path": "run-0439d12929/N2.request.json",
+      "digest": "sha256:7d6aa2e91f5f03d416145322ae5ffb01f033c5b9977587d1fcf8dd39a835eb0b"
+    },
+    {
+      "path": "run-0439d12929/N2.result.json",
+      "digest": "sha256:436f6a5ef14e9c8b86fd15e1d534d5b90b7368f2914c6ab004b300009cffd0f6"
+    },
+    {
+      "path": "run-0439d12929/N3-production-rejected.request.json",
+      "digest": "sha256:cd9f137050c3b9651f9c4bbf933ef6996cfcee6391989b58bce4b7fa28fc96e8"
+    },
+    {
+      "path": "run-0439d12929/N3.request.json",
+      "digest": "sha256:d70b95e7311fddef694bd29c3220c722d5f6d5142f00904b0579e49a74be033f"
+    },
+    {
+      "path": "run-0439d12929/N3.result.json",
+      "digest": "sha256:659999978fa38909d6273d82cfd56757e10aa9c6eed1b5ed8791ea716090d783"
+    },
+    {
+      "path": "run-0439d12929/ecommerce-A.request.json",
+      "digest": "sha256:11faf3d83066625def808994d6679335fc5d0714795907511d8d0f47d5b89bc8"
+    },
+    {
+      "path": "run-0439d12929/ecommerce-A.result.json",
+      "digest": "sha256:814e1540feddf5c044e6390e3932636bcc4bda8c5a14dbbc30a3a29c5f6b75a5"
+    },
+    {
+      "path": "run-0439d12929/ecommerce-B.request.json",
+      "digest": "sha256:be9a249a96cffedc44c7caa8af4d40a890b7041423d258b6fac45d1e4c28e5f8"
+    },
+    {
+      "path": "run-0439d12929/ecommerce-B.result.json",
+      "digest": "sha256:265dc6a6e67fbdea2a50ea3977388771d59f33b01161a0206b4c4734309a63f7"
+    },
+    {
+      "path": "run-0439d12929/ecommerce-C.request.json",
+      "digest": "sha256:a421abd2a48144ee27670685eb3f18c1528f2c90de172969010af380d5d146d6"
+    },
+    {
+      "path": "run-0439d12929/ecommerce-C.result.json",
+      "digest": "sha256:0786a0ddf9d950e42969ea4326c803125ea43102ef031ccb25aab1337779e71e"
+    },
+    {
+      "path": "run-0439d12929/insurance-A.request.json",
+      "digest": "sha256:c73ec724b68d410d0d7ecd6f08849f4f4e37806987f192e70c04ed7b27bf8a1a"
+    },
+    {
+      "path": "run-0439d12929/insurance-A.result.json",
+      "digest": "sha256:2c2011c837f2bd867905a2e4d87410306d303d950c2a1e79dd3fc8850ac0bca4"
+    },
+    {
+      "path": "run-0439d12929/insurance-B.request.json",
+      "digest": "sha256:3b02609106d8ed8a141ac7c833a5fffb233207d621d271cf1f046f47a344e5e1"
+    },
+    {
+      "path": "run-0439d12929/insurance-B.result.json",
+      "digest": "sha256:faf4457cef60ee40a3706e2175cd9b2170420b81be48c694f65f70022addd86d"
+    },
+    {
+      "path": "run-0439d12929/insurance-C.request.json",
+      "digest": "sha256:49c2fe5354c78f587527dc4539b412ae1c6d75387098f57ccb6f7939175152a4"
+    },
+    {
+      "path": "run-0439d12929/insurance-C.result.json",
+      "digest": "sha256:cabcb921fef4956da8b97962f711d790e1ed8ba33154a54f5f5e048036118ce3"
+    },
+    {
+      "path": "run-0439d12929/progress.json",
+      "digest": "sha256:d39452f3032720a260a28c91286e8efd4e9f9f0ba6def65f3b30a7a9f0ab851c"
+    },
+    {
+      "path": "run-0439d12929/unavailable-source.request.json",
+      "digest": "sha256:5f7ad3899be7cf51e935686685368b16fb780d6550b90efc2e4acec2ffbf620a"
+    }
+  ],
+  "scope": "existing data and fixture business evidence; real business blind cases are replaceable later"
+}

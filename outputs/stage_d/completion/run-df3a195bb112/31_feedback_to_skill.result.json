@@ -1,0 +1,62 @@
+{
+  "decision": "AUDIT_ONLY",
+  "name": "watch_skill",
+  "version": 1,
+  "spec": {
+    "schema_version": "skill/2",
+    "name": "watch_skill",
+    "version": 1,
+    "rules": [
+      {
+        "when": {
+          "workflow": "c_line"
+        },
+        "action": "scan_window",
+        "polarity": "reinforce",
+        "evidence": [
+          "sha256:15cae3e0954f46c6f35d6c4d587cdf4d6cc271acacb35b5c2bfda002691dde83"
+        ]
+      }
+    ],
+    "applicability": {
+      "workflow": "c_line"
+    },
+    "claim_ceiling": "WATCHLIST",
+    "preconditions": [
+      "valid_current_data",
+      "scope_matches"
+    ],
+    "postconditions": [
+      "no_causal_without_identification",
+      "no_traffic_mutation"
+    ],
+    "source_trace_ids": [
+      "sha256:18c7cca7c68374581d631a5e3be4503beb71addd0b395db0e97a612d23167f91"
+    ],
+    "source_claim_refs": [],
+    "source_evidence_refs": [
+      "sha256:15cae3e0954f46c6f35d6c4d587cdf4d6cc271acacb35b5c2bfda002691dde83"
+    ],
+    "negative_examples": [],
+    "validation_task_refs": [],
+    "compatibility_check_refs": [],
+    "delta": {
+      "base_version": null,
+      "previous_digest": null,
+      "added_rules": [
+        {
+          "when": {
+            "workflow": "c_line"
+          },
+          "action": "scan_window",
+          "polarity": "reinforce",
+          "evidence": [
+            "sha256:15cae3e0954f46c6f35d6c4d587cdf4d6cc271acacb35b5c2bfda002691dde83"
+          ]
+        }
+      ]
+    },
+    "digest": "sha256:34b64dc22327c61fb1f3e60abfb9c90910c62aedc71b7619d615692af92d449d"
+  },
+  "feedback_ref": "sha256:33ace88517ba72e107e1a8f2533df82be392d0a3003765c8dc41c8d93e436b83"
+}

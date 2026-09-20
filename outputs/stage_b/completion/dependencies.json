@@ -1,0 +1,225 @@
+{
+  "versions": {
+    "dowhy": "0.14",
+    "econml": "0.17.0",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "tigramite": "5.2.10.1",
+    "pandas": "3.0.5",
+    "networkx": "3.6.1"
+  },
+  "requirements": [
+    {
+      "package": "dowhy",
+      "requirement": "causal-learn>=0.1.3.0",
+      "installed": "0.1.4.8",
+      "satisfied": true
+    },
+    {
+      "package": "dowhy",
+      "requirement": "cvxpy<2.0.0,>=1.7.1",
+      "installed": "1.9.2",
+      "satisfied": true
+    },
+    {
+      "package": "dowhy",
+      "requirement": "cython>=3.0",
+      "installed": "3.3.0",
+      "satisfied": true
+    },
+    {
+      "package": "dowhy",
+      "requirement": "joblib>=1.1.0",
+      "installed": "1.6.0",
+      "satisfied": true
+    },
+    {
+      "package": "dowhy",
+      "requirement": "networkx>=3.3; python_version >= \"3.10\"",
+      "installed": "3.6.1",
+      "satisfied": true
+    },
+    {
+      "package": "dowhy",
+      "requirement": "numba>=0.59",
+      "installed": "0.67.0",
+      "satisfied": true
+    },
+    {
+      "package": "dowhy",
+      "requirement": "numpy>2.0",
+      "installed": "2.5.3",
+      "satisfied": true
+    },
+    {
+      "package": "dowhy",
+      "requirement": "pandas>1.0",
+      "installed": "3.0.5",
+      "satisfied": true
+    },
+    {
+      "package": "dowhy",
+      "requirement": "scikit-learn>1.0",
+      "installed": "1.9.1",
+      "satisfied": true
+    },
+    {
+      "package": "dowhy",
+      "requirement": "scipy>=1.15; python_version >= \"3.13\"",
+      "installed": "1.18.1",
+      "satisfied": true
+    },
+    {
+      "package": "dowhy",
+      "requirement": "statsmodels>=0.14",
+      "installed": "0.15.0",
+      "satisfied": true
+    },
+    {
+      "package": "dowhy",
+      "requirement": "sympy>=1.10.1",
+      "installed": "1.14.0",
+      "satisfied": true
+    },
+    {
+      "package": "dowhy",
+      "requirement": "tqdm>=4.64.0",
+      "installed": "4.70.1",
+      "satisfied": true
+    },
+    {
+      "package": "econml",
+      "requirement": "numpy>=2.0.2",
+      "installed": "2.5.3",
+      "satisfied": true
+    },
+    {
+      "package": "econml",
+      "requirement": "numba>=0.60.0",
+      "installed": "0.67.0",
+      "satisfied": true
+    },
+    {
+      "package": "econml",
+      "requirement": "scipy>=1.13.1",
+      "installed": "1.18.1",
+      "satisfied": true
+    },
+    {
+      "package": "econml",
+      "requirement": "scikit-learn<1.10,>=1.6.0",
+      "installed": "1.9.1",
+      "satisfied": true
+    },
+    {
+      "package": "econml",
+      "requirement": "sparse>=0.15.4",
+      "installed": "0.19.2",
+      "satisfied": true
+    },
+    {
+      "package": "econml",
+      "requirement": "joblib>=1.4.2",
+      "installed": "1.6.0",
+      "satisfied": true
+    },
+    {
+      "package": "econml",
+      "requirement": "statsmodels>=0.14.4",
+      "installed": "0.15.0",
+      "satisfied": true
+    },
+    {
+      "package": "econml",
+      "requirement": "pandas>=2.2.3",
+      "installed": "3.0.5",
+      "satisfied": true
+    },
+    {
+      "package": "econml",
+      "requirement": "shap>=0.46.0",
+      "installed": "0.52.0",
+      "satisfied": true
+    },
+    {
+      "package": "econml",
+      "requirement": "lightgbm>=4.5.0",
+      "installed": "4.7.0",
+      "satisfied": true
+    },
+    {
+      "package": "econml",
+      "requirement": "packaging>=24.2",
+      "installed": "26.3",
+      "satisfied": true
+    },
+    {
+      "package": "scipy",
+      "requirement": "numpy<2.8,>=2.0.0",
+      "installed": "2.5.3",
+      "satisfied": true
+    },
+    {
+      "package": "scikit-learn",
+      "requirement": "numpy>=1.24.1",
+      "installed": "2.5.3",
+      "satisfied": true
+    },
+    {
+      "package": "scikit-learn",
+      "requirement": "scipy>=1.10.0",
+      "installed": "1.18.1",
+      "satisfied": true
+    },
+    {
+      "package": "scikit-learn",
+      "requirement": "joblib>=1.4.0",
+      "installed": "1.6.0",
+      "satisfied": true
+    },
+    {
+      "package": "scikit-learn",
+      "requirement": "narwhals>=2.0.1",
+      "installed": "2.26.0",
+      "satisfied": true
+    },
+    {
+      "package": "scikit-learn",
+      "requirement": "threadpoolctl>=3.5.0",
+      "installed": "3.6.0",
+      "satisfied": true
+    },
+    {
+      "package": "tigramite",
+      "requirement": "numpy>=1.18",
+      "installed": "2.5.3",
+      "satisfied": true
+    },
+    {
+      "package": "tigramite",
+      "requirement": "scipy>=1.10.0",
+      "installed": "1.18.1",
+      "satisfied": true
+    },
+    {
+      "package": "tigramite",
+      "requirement": "six",
+      "installed": "1.17.0",
+      "satisfied": true
+    },
+    {
+      "package": "pandas",
+      "requirement": "numpy>=2.3.3; python_version >= \"3.14\"",
+      "installed": "2.5.3",
+      "satisfied": true
+    },
+    {
+      "package": "pandas",
+      "requirement": "python-dateutil>=2.8.2",
+      "installed": "2.9.0.post0",
+      "satisfied": true
+    }
+  ],
+  "python_version_metadata": "excluded_by_user_request; runtime imports and execution tested"
+}

@@ -14,7 +14,7 @@ from typing import Any
 
 
 def load_spec(path: str | Path) -> dict[str, Any]:
-    with open(path, "r", encoding="utf-8") as handle:
+    with open(path, encoding="utf-8") as handle:
         spec = json.load(handle)
     if "component" not in spec or "props" not in spec:
         raise ValueError("spec must contain component and props")

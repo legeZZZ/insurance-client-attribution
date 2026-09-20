@@ -1,0 +1,2843 @@
+{
+  "operation": "causal_forest",
+  "parameters": {
+    "rows": [
+      {
+        "unit_id": 0,
+        "cluster": 0,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 1,
+        "cluster": 0,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 2,
+        "cluster": 0,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 3,
+        "cluster": 0,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 4,
+        "cluster": 1,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 5,
+        "cluster": 1,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 6,
+        "cluster": 1,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 7,
+        "cluster": 1,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 8,
+        "cluster": 2,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 9,
+        "cluster": 2,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 10,
+        "cluster": 2,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 11,
+        "cluster": 2,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 12,
+        "cluster": 3,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 1
+      },
+      {
+        "unit_id": 13,
+        "cluster": 3,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 14,
+        "cluster": 3,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 15,
+        "cluster": 3,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 16,
+        "cluster": 4,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 17,
+        "cluster": 4,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 18,
+        "cluster": 4,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 19,
+        "cluster": 4,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 20,
+        "cluster": 5,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 21,
+        "cluster": 5,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 22,
+        "cluster": 5,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 23,
+        "cluster": 5,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 24,
+        "cluster": 6,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 25,
+        "cluster": 6,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 26,
+        "cluster": 6,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 27,
+        "cluster": 6,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 1
+      },
+      {
+        "unit_id": 28,
+        "cluster": 7,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 29,
+        "cluster": 7,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 30,
+        "cluster": 7,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 1
+      },
+      {
+        "unit_id": 31,
+        "cluster": 7,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 32,
+        "cluster": 8,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 33,
+        "cluster": 8,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 34,
+        "cluster": 8,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 35,
+        "cluster": 8,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 36,
+        "cluster": 9,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 37,
+        "cluster": 9,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 38,
+        "cluster": 9,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 1
+      },
+      {
+        "unit_id": 39,
+        "cluster": 9,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 40,
+        "cluster": 10,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 41,
+        "cluster": 10,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 1
+      },
+      {
+        "unit_id": 42,
+        "cluster": 10,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 1
+      },
+      {
+        "unit_id": 43,
+        "cluster": 10,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 44,
+        "cluster": 11,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 45,
+        "cluster": 11,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 46,
+        "cluster": 11,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 47,
+        "cluster": 11,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 48,
+        "cluster": 12,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 49,
+        "cluster": 12,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 50,
+        "cluster": 12,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 51,
+        "cluster": 12,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 52,
+        "cluster": 13,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 53,
+        "cluster": 13,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 54,
+        "cluster": 13,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 1
+      },
+      {
+        "unit_id": 55,
+        "cluster": 13,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 56,
+        "cluster": 14,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 57,
+        "cluster": 14,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 58,
+        "cluster": 14,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 59,
+        "cluster": 14,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 60,
+        "cluster": 15,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 1
+      },
+      {
+        "unit_id": 61,
+        "cluster": 15,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 1
+      },
+      {
+        "unit_id": 62,
+        "cluster": 15,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 1
+      },
+      {
+        "unit_id": 63,
+        "cluster": 15,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 1
+      },
+      {
+        "unit_id": 64,
+        "cluster": 16,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 1
+      },
+      {
+        "unit_id": 65,
+        "cluster": 16,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 66,
+        "cluster": 16,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 67,
+        "cluster": 16,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 1
+      },
+      {
+        "unit_id": 68,
+        "cluster": 17,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 1
+      },
+      {
+        "unit_id": 69,
+        "cluster": 17,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 1
+      },
+      {
+        "unit_id": 70,
+        "cluster": 17,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 1
+      },
+      {
+        "unit_id": 71,
+        "cluster": 17,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 72,
+        "cluster": 18,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 73,
+        "cluster": 18,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 74,
+        "cluster": 18,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 1
+      },
+      {
+        "unit_id": 75,
+        "cluster": 18,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 76,
+        "cluster": 19,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 77,
+        "cluster": 19,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 78,
+        "cluster": 19,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 79,
+        "cluster": 19,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 1
+      },
+      {
+        "unit_id": 80,
+        "cluster": 20,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 81,
+        "cluster": 20,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 82,
+        "cluster": 20,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 83,
+        "cluster": 20,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 84,
+        "cluster": 21,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 85,
+        "cluster": 21,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 86,
+        "cluster": 21,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 87,
+        "cluster": 21,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 88,
+        "cluster": 22,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 89,
+        "cluster": 22,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 90,
+        "cluster": 22,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 91,
+        "cluster": 22,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 92,
+        "cluster": 23,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 1
+      },
+      {
+        "unit_id": 93,
+        "cluster": 23,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 94,
+        "cluster": 23,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 95,
+        "cluster": 23,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 96,
+        "cluster": 24,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 97,
+        "cluster": 24,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 98,
+        "cluster": 24,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 99,
+        "cluster": 24,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 100,
+        "cluster": 25,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 101,
+        "cluster": 25,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 1
+      },
+      {
+        "unit_id": 102,
+        "cluster": 25,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 103,
+        "cluster": 25,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 104,
+        "cluster": 26,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 105,
+        "cluster": 26,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 106,
+        "cluster": 26,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 1
+      },
+      {
+        "unit_id": 107,
+        "cluster": 26,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 108,
+        "cluster": 27,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 109,
+        "cluster": 27,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 110,
+        "cluster": 27,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 1
+      },
+      {
+        "unit_id": 111,
+        "cluster": 27,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 1
+      },
+      {
+        "unit_id": 112,
+        "cluster": 28,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 113,
+        "cluster": 28,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 114,
+        "cluster": 28,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 115,
+        "cluster": 28,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 1
+      },
+      {
+        "unit_id": 116,
+        "cluster": 29,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 117,
+        "cluster": 29,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 118,
+        "cluster": 29,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 119,
+        "cluster": 29,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 120,
+        "cluster": 30,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 121,
+        "cluster": 30,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 122,
+        "cluster": 30,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 123,
+        "cluster": 30,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 124,
+        "cluster": 31,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 125,
+        "cluster": 31,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 126,
+        "cluster": 31,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 127,
+        "cluster": 31,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 128,
+        "cluster": 32,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 129,
+        "cluster": 32,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 130,
+        "cluster": 32,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 131,
+        "cluster": 32,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 132,
+        "cluster": 33,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 133,
+        "cluster": 33,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 1
+      },
+      {
+        "unit_id": 134,
+        "cluster": 33,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 1
+      },
+      {
+        "unit_id": 135,
+        "cluster": 33,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 1
+      },
+      {
+        "unit_id": 136,
+        "cluster": 34,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 137,
+        "cluster": 34,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 138,
+        "cluster": 34,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 139,
+        "cluster": 34,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 140,
+        "cluster": 35,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 1
+      },
+      {
+        "unit_id": 141,
+        "cluster": 35,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 142,
+        "cluster": 35,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 143,
+        "cluster": 35,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 144,
+        "cluster": 36,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 1
+      },
+      {
+        "unit_id": 145,
+        "cluster": 36,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 1
+      },
+      {
+        "unit_id": 146,
+        "cluster": 36,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 147,
+        "cluster": 36,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 1
+      },
+      {
+        "unit_id": 148,
+        "cluster": 37,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 149,
+        "cluster": 37,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 150,
+        "cluster": 37,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 151,
+        "cluster": 37,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 152,
+        "cluster": 38,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 153,
+        "cluster": 38,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 154,
+        "cluster": 38,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 155,
+        "cluster": 38,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 156,
+        "cluster": 39,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 157,
+        "cluster": 39,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 1
+      },
+      {
+        "unit_id": 158,
+        "cluster": 39,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 159,
+        "cluster": 39,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 160,
+        "cluster": 40,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 161,
+        "cluster": 40,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 162,
+        "cluster": 40,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 163,
+        "cluster": 40,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 164,
+        "cluster": 41,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 165,
+        "cluster": 41,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 166,
+        "cluster": 41,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 167,
+        "cluster": 41,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 168,
+        "cluster": 42,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 169,
+        "cluster": 42,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 170,
+        "cluster": 42,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 171,
+        "cluster": 42,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 172,
+        "cluster": 43,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 1
+      },
+      {
+        "unit_id": 173,
+        "cluster": 43,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 174,
+        "cluster": 43,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 175,
+        "cluster": 43,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 176,
+        "cluster": 44,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 177,
+        "cluster": 44,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 178,
+        "cluster": 44,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 179,
+        "cluster": 44,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 180,
+        "cluster": 45,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 1
+      },
+      {
+        "unit_id": 181,
+        "cluster": 45,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 1
+      },
+      {
+        "unit_id": 182,
+        "cluster": 45,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 1
+      },
+      {
+        "unit_id": 183,
+        "cluster": 45,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 184,
+        "cluster": 46,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 1
+      },
+      {
+        "unit_id": 185,
+        "cluster": 46,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 186,
+        "cluster": 46,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 187,
+        "cluster": 46,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 188,
+        "cluster": 47,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 1
+      },
+      {
+        "unit_id": 189,
+        "cluster": 47,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 190,
+        "cluster": 47,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 191,
+        "cluster": 47,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 192,
+        "cluster": 48,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 193,
+        "cluster": 48,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 194,
+        "cluster": 48,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 195,
+        "cluster": 48,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 196,
+        "cluster": 49,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 1
+      },
+      {
+        "unit_id": 197,
+        "cluster": 49,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 1
+      },
+      {
+        "unit_id": 198,
+        "cluster": 49,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 199,
+        "cluster": 49,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 200,
+        "cluster": 50,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 201,
+        "cluster": 50,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 202,
+        "cluster": 50,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 203,
+        "cluster": 50,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 204,
+        "cluster": 51,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 205,
+        "cluster": 51,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 206,
+        "cluster": 51,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 207,
+        "cluster": 51,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 208,
+        "cluster": 52,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 209,
+        "cluster": 52,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 210,
+        "cluster": 52,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 211,
+        "cluster": 52,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 212,
+        "cluster": 53,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 213,
+        "cluster": 53,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 214,
+        "cluster": 53,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 1
+      },
+      {
+        "unit_id": 215,
+        "cluster": 53,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 216,
+        "cluster": 54,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 217,
+        "cluster": 54,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 218,
+        "cluster": 54,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 219,
+        "cluster": 54,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 220,
+        "cluster": 55,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 221,
+        "cluster": 55,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 222,
+        "cluster": 55,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 223,
+        "cluster": 55,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 1
+      },
+      {
+        "unit_id": 224,
+        "cluster": 56,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 225,
+        "cluster": 56,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 226,
+        "cluster": 56,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 227,
+        "cluster": 56,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 228,
+        "cluster": 57,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 229,
+        "cluster": 57,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 1
+      },
+      {
+        "unit_id": 230,
+        "cluster": 57,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 231,
+        "cluster": 57,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 232,
+        "cluster": 58,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 233,
+        "cluster": 58,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 234,
+        "cluster": 58,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 1
+      },
+      {
+        "unit_id": 235,
+        "cluster": 58,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 1
+      },
+      {
+        "unit_id": 236,
+        "cluster": 59,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 237,
+        "cluster": 59,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 238,
+        "cluster": 59,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 239,
+        "cluster": 59,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 240,
+        "cluster": 60,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 241,
+        "cluster": 60,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 242,
+        "cluster": 60,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 1
+      },
+      {
+        "unit_id": 243,
+        "cluster": 60,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 1
+      },
+      {
+        "unit_id": 244,
+        "cluster": 61,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 245,
+        "cluster": 61,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 246,
+        "cluster": 61,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 247,
+        "cluster": 61,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 248,
+        "cluster": 62,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 249,
+        "cluster": 62,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 250,
+        "cluster": 62,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 251,
+        "cluster": 62,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 252,
+        "cluster": 63,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 1
+      },
+      {
+        "unit_id": 253,
+        "cluster": 63,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 254,
+        "cluster": 63,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 255,
+        "cluster": 63,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 1
+      },
+      {
+        "unit_id": 256,
+        "cluster": 64,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 257,
+        "cluster": 64,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 258,
+        "cluster": 64,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 259,
+        "cluster": 64,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 260,
+        "cluster": 65,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 261,
+        "cluster": 65,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 262,
+        "cluster": 65,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 1
+      },
+      {
+        "unit_id": 263,
+        "cluster": 65,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 264,
+        "cluster": 66,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 265,
+        "cluster": 66,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 1
+      },
+      {
+        "unit_id": 266,
+        "cluster": 66,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 267,
+        "cluster": 66,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 268,
+        "cluster": 67,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 269,
+        "cluster": 67,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 270,
+        "cluster": 67,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 271,
+        "cluster": 67,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 272,
+        "cluster": 68,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 273,
+        "cluster": 68,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 1
+      },
+      {
+        "unit_id": 274,
+        "cluster": 68,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 1
+      },
+      {
+        "unit_id": 275,
+        "cluster": 68,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 1
+      },
+      {
+        "unit_id": 276,
+        "cluster": 69,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 277,
+        "cluster": 69,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 1
+      },
+      {
+        "unit_id": 278,
+        "cluster": 69,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 279,
+        "cluster": 69,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 280,
+        "cluster": 70,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 281,
+        "cluster": 70,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 1
+      },
+      {
+        "unit_id": 282,
+        "cluster": 70,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 1
+      },
+      {
+        "unit_id": 283,
+        "cluster": 70,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 284,
+        "cluster": 71,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 285,
+        "cluster": 71,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 286,
+        "cluster": 71,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 287,
+        "cluster": 71,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 288,
+        "cluster": 72,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 289,
+        "cluster": 72,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 290,
+        "cluster": 72,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 291,
+        "cluster": 72,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 292,
+        "cluster": 73,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 293,
+        "cluster": 73,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 1
+      },
+      {
+        "unit_id": 294,
+        "cluster": 73,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 1
+      },
+      {
+        "unit_id": 295,
+        "cluster": 73,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 296,
+        "cluster": 74,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 297,
+        "cluster": 74,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 298,
+        "cluster": 74,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 299,
+        "cluster": 74,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 300,
+        "cluster": 75,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 301,
+        "cluster": 75,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 1
+      },
+      {
+        "unit_id": 302,
+        "cluster": 75,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 303,
+        "cluster": 75,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 304,
+        "cluster": 76,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 1
+      },
+      {
+        "unit_id": 305,
+        "cluster": 76,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 306,
+        "cluster": 76,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 1
+      },
+      {
+        "unit_id": 307,
+        "cluster": 76,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 308,
+        "cluster": 77,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 309,
+        "cluster": 77,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 310,
+        "cluster": 77,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 311,
+        "cluster": 77,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 312,
+        "cluster": 78,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 1
+      },
+      {
+        "unit_id": 313,
+        "cluster": 78,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 1
+      },
+      {
+        "unit_id": 314,
+        "cluster": 78,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 315,
+        "cluster": 78,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 316,
+        "cluster": 79,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 1
+      },
+      {
+        "unit_id": 317,
+        "cluster": 79,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 318,
+        "cluster": 79,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 1
+      },
+      {
+        "unit_id": 319,
+        "cluster": 79,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 1
+      },
+      {
+        "unit_id": 320,
+        "cluster": 80,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 321,
+        "cluster": 80,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 322,
+        "cluster": 80,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 1
+      },
+      {
+        "unit_id": 323,
+        "cluster": 80,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 1
+      },
+      {
+        "unit_id": 324,
+        "cluster": 81,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 325,
+        "cluster": 81,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 326,
+        "cluster": 81,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 327,
+        "cluster": 81,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 328,
+        "cluster": 82,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 329,
+        "cluster": 82,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 330,
+        "cluster": 82,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 331,
+        "cluster": 82,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 332,
+        "cluster": 83,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 333,
+        "cluster": 83,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 334,
+        "cluster": 83,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 335,
+        "cluster": 83,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 336,
+        "cluster": 84,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 337,
+        "cluster": 84,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 338,
+        "cluster": 84,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 339,
+        "cluster": 84,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 340,
+        "cluster": 85,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 1
+      },
+      {
+        "unit_id": 341,
+        "cluster": 85,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 342,
+        "cluster": 85,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 1
+      },
+      {
+        "unit_id": 343,
+        "cluster": 85,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 1
+      },
+      {
+        "unit_id": 344,
+        "cluster": 86,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 1
+      },
+      {
+        "unit_id": 345,
+        "cluster": 86,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 1
+      },
+      {
+        "unit_id": 346,
+        "cluster": 86,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 347,
+        "cluster": 86,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 348,
+        "cluster": 87,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 1
+      },
+      {
+        "unit_id": 349,
+        "cluster": 87,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 350,
+        "cluster": 87,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 1
+      },
+      {
+        "unit_id": 351,
+        "cluster": 87,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 352,
+        "cluster": 88,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 1
+      },
+      {
+        "unit_id": 353,
+        "cluster": 88,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 354,
+        "cluster": 88,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 1
+      },
+      {
+        "unit_id": 355,
+        "cluster": 88,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 356,
+        "cluster": 89,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 357,
+        "cluster": 89,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 1
+      },
+      {
+        "unit_id": 358,
+        "cluster": 89,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 359,
+        "cluster": 89,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 360,
+        "cluster": 90,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 1
+      },
+      {
+        "unit_id": 361,
+        "cluster": 90,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 1
+      },
+      {
+        "unit_id": 362,
+        "cluster": 90,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 0
+      },
+      {
+        "unit_id": 363,
+        "cluster": 90,
+        "treatment": 0,
+        "x": 0.0,
+        "outcome": 1
+      },
+      {
+        "unit_id": 364,
+        "cluster": 91,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 365,
+        "cluster": 91,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 366,
+        "cluster": 91,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 1
+      },
+      {
+        "unit_id": 367,
+        "cluster": 91,
+        "treatment": 1,
+        "x": 0.1,
+        "outcome": 0
+      },
+      {
+        "unit_id": 368,
+        "cluster": 92,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 369,
+        "cluster": 92,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 0
+      },
+      {
+        "unit_id": 370,
+        "cluster": 92,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 371,
+        "cluster": 92,
+        "treatment": 0,
+        "x": 0.2,
+        "outcome": 1
+      },
+      {
+        "unit_id": 372,
+        "cluster": 93,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 373,
+        "cluster": 93,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 1
+      },
+      {
+        "unit_id": 374,
+        "cluster": 93,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 375,
+        "cluster": 93,
+        "treatment": 1,
+        "x": 0.3,
+        "outcome": 0
+      },
+      {
+        "unit_id": 376,
+        "cluster": 94,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 377,
+        "cluster": 94,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 378,
+        "cluster": 94,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 1
+      },
+      {
+        "unit_id": 379,
+        "cluster": 94,
+        "treatment": 0,
+        "x": 0.4,
+        "outcome": 0
+      },
+      {
+        "unit_id": 380,
+        "cluster": 95,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 381,
+        "cluster": 95,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 1
+      },
+      {
+        "unit_id": 382,
+        "cluster": 95,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 383,
+        "cluster": 95,
+        "treatment": 1,
+        "x": 0.5,
+        "outcome": 0
+      },
+      {
+        "unit_id": 384,
+        "cluster": 96,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 385,
+        "cluster": 96,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 1
+      },
+      {
+        "unit_id": 386,
+        "cluster": 96,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 1
+      },
+      {
+        "unit_id": 387,
+        "cluster": 96,
+        "treatment": 0,
+        "x": 0.6,
+        "outcome": 0
+      },
+      {
+        "unit_id": 388,
+        "cluster": 97,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 1
+      },
+      {
+        "unit_id": 389,
+        "cluster": 97,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 390,
+        "cluster": 97,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 0
+      },
+      {
+        "unit_id": 391,
+        "cluster": 97,
+        "treatment": 1,
+        "x": 0.7,
+        "outcome": 1
+      },
+      {
+        "unit_id": 392,
+        "cluster": 98,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 1
+      },
+      {
+        "unit_id": 393,
+        "cluster": 98,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 1
+      },
+      {
+        "unit_id": 394,
+        "cluster": 98,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 395,
+        "cluster": 98,
+        "treatment": 0,
+        "x": 0.8,
+        "outcome": 0
+      },
+      {
+        "unit_id": 396,
+        "cluster": 99,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 397,
+        "cluster": 99,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 1
+      },
+      {
+        "unit_id": 398,
+        "cluster": 99,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      },
+      {
+        "unit_id": 399,
+        "cluster": 99,
+        "treatment": 1,
+        "x": 0.9,
+        "outcome": 0
+      }
+    ],
+    "metric_contract": {
+      "name": "conversion",
+      "numerator": "converted_users",
+      "denominator": "users",
+      "aggregation": "ratio_of_sums",
+      "unit": "rate",
+      "analysis_unit": "user",
+      "target_population": "eligible_users",
+      "timezone": "UTC",
+      "window": [
+        0,
+        9
+      ],
+      "maturity_days": 2,
+      "deduplication": "unit_id"
+    },
+    "features": [
+      "x"
+    ],
+    "feature_roles": {
+      "x": "pre_treatment"
+    },
+    "query_features": [
+      [
+        0.1
+      ],
+      [
+        0.8
+      ]
+    ],
+    "n_estimators": 40,
+    "assignment_ref": "fixed randomization",
+    "randomized": true,
+    "observed_through": 11,
+    "no_interference_ref": "independent groups",
+    "cluster_column": "cluster"
+  }
+}

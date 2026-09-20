@@ -3,21 +3,22 @@
 from __future__ import annotations
 
 import math
-from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
+from collections.abc import Sequence
+from typing import Any
 
 import numpy as np
 from scipy.stats import beta as beta_dist
-
 
 # ---------------------------------------------------------------------------
 # Beta-Binomial posterior
 # ---------------------------------------------------------------------------
 
+
 def beta_posterior(
     clicks: int,
     impressions: int,
-    prior: Tuple[float, float] = (1.0, 1.0),
-) -> Tuple[float, float]:
+    prior: tuple[float, float] = (1.0, 1.0),
+) -> tuple[float, float]:
     """Return (alpha, beta) parameters for the posterior Beta distribution."""
     if impressions < 0 or clicks < 0 or clicks > impressions:
         raise ValueError("invalid impressions/clicks: %d / %d" % (clicks, impressions))
@@ -26,9 +27,9 @@ def beta_posterior(
 
 
 def posterior_summary(
-    shape: Tuple[float, float],
+    shape: tuple[float, float],
     credible_mass: float = 0.95,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Summarize a Beta distribution: mean, mode, variance, credible interval."""
     a, b = shape
     mean = a / (a + b)
@@ -51,14 +52,15 @@ def posterior_summary(
 # Two-arm comparison via Monte-Carlo
 # ---------------------------------------------------------------------------
 
+
 def compare_groups(
-    control: Dict[str, int],
-    treatment: Dict[str, int],
-    prior: Tuple[float, float] = (1.0, 1.0),
+    control: dict[str, int],
+    treatment: dict[str, int],
+    prior: tuple[float, float] = (1.0, 1.0),
     threshold: float = 0.0,
     draws: int = 200_000,
-    seed: Optional[int] = None,
-) -> Dict[str, Any]:
+    seed: int | None = None,
+) -> dict[str, Any]:
     """Compare two groups using Beta-Binomial posterior sampling.
 
     Parameters
@@ -120,10 +122,11 @@ def compare_groups(
 # Empirical Bayes shrinkage for small subgroups
 # ---------------------------------------------------------------------------
 
+
 def empirical_bayes_prior(
-    groups: Sequence[Dict[str, Any]],
+    groups: Sequence[dict[str, Any]],
     weight_field: str = "impressions",
-) -> Tuple[float, float]:
+) -> tuple[float, float]:
     """Estimate a Beta prior from pooled group data using method of moments.
 
     This is useful when many subgroups have small sample sizes.
@@ -143,10 +146,10 @@ def empirical_bayes_prior(
 
 
 def shrunken_subgroup_estimate(
-    group: Dict[str, Any],
-    global_prior: Tuple[float, float],
+    group: dict[str, Any],
+    global_prior: tuple[float, float],
     weight_field: str = "impressions",
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Compute a shrunken posterior for a subgroup using empirical Bayes.
 
     The shrinkage weight increases with sample size:
@@ -173,14 +176,15 @@ def shrunken_subgroup_estimate(
 # Sensitivity analysis
 # ---------------------------------------------------------------------------
 
+
 def prior_sensitivity(
-    control: Dict[str, int],
-    treatment: Dict[str, int],
-    priors: Optional[Sequence[Tuple[float, float]]] = None,
+    control: dict[str, int],
+    treatment: dict[str, int],
+    priors: Sequence[tuple[float, float]] | None = None,
     threshold: float = 0.0,
     draws: int = 50_000,
-    seed: Optional[int] = None,
-) -> List[Dict[str, Any]]:
+    seed: int | None = None,
+) -> list[dict[str, Any]]:
     """Run the same comparison under multiple priors to assess robustness."""
     if priors is None:
         # Uninformative, weakly informative, moderately informative
@@ -188,15 +192,26 @@ def prior_sensitivity(
     results = []
     rng = np.random.default_rng(seed)
     for prior in priors:
-        result = compare_groups(control, treatment, prior, threshold, draws, seed=int(rng.integers(0, 2**31)))
-        results.append({
-            "prior_alpha": prior[0],
-            "prior_beta": prior[1],
-            "decision": result["decision"],
-            "effect_absolute": result["effect_absolute"],
-            "probability_practical_harm": result["probability_practical_harm"],
-            "probability_practical_benefit": result["probability_practical_benefit"],
-        })
+        result = compare_groups(
+            control,
+            treatment,
+            prior,
+            threshold,
+            draws,
+            seed=int(rng.integers(0, 2**31)),
+        )
+        results.append(
+            {
+                "prior_alpha": prior[0],
+                "prior_beta": prior[1],
+                "decision": result["decision"],
+                "effect_absolute": result["effect_absolute"],
+                "probability_practical_harm": result["probability_practical_harm"],
+                "probability_practical_benefit": result[
+                    "probability_practical_benefit"
+                ],
+            }
+        )
     return results
 
 
@@ -204,13 +219,14 @@ def prior_sensitivity(
 # Heterogeneous treatment effect (HTE) ranking for factor candidates
 # ---------------------------------------------------------------------------
 
+
 def rank_factor_candidates(
-    factors: Sequence[Dict[str, Any]],
-    global_prior: Tuple[float, float] = (1.0, 1.0),
+    factors: Sequence[dict[str, Any]],
+    global_prior: tuple[float, float] = (1.0, 1.0),
     threshold: float = 0.0,
     draws: int = 100_000,
-    seed: Optional[int] = None,
-) -> List[Dict[str, Any]]:
+    seed: int | None = None,
+) -> list[dict[str, Any]]:
     """Rank factor candidates by their posterior probability of practical harm/benefit.
 
     Each factor must provide:
@@ -235,29 +251,34 @@ def rank_factor_candidates(
         # Factor score: probability of practical harm * expected absolute impact * stability * experimentability
         expected_abs_impact = abs(comp["effect_absolute"]) * eligible
         factor_score = (
-            max(comp["probability_practical_harm"], comp["probability_practical_benefit"])
+            max(
+                comp["probability_practical_harm"],
+                comp["probability_practical_benefit"],
+            )
             * expected_abs_impact
             * stability
             * experimentability
         )
 
-        ranked.append({
-            "factor_id": factor["factor_id"],
-            "factor_name": factor.get("factor_name", factor["factor_id"]),
-            "effect_absolute": comp["effect_absolute"],
-            "effect_relative": comp["effect_relative"],
-            "probability_harm": comp["probability_harm"],
-            "probability_practical_harm": comp["probability_practical_harm"],
-            "probability_practical_benefit": comp["probability_practical_benefit"],
-            "credible_interval_95": comp["credible_interval_95"],
-            "eligible_impressions": eligible,
-            "expected_absolute_impact": round(expected_abs_impact, 2),
-            "stability": stability,
-            "experimentability": experimentability,
-            "factor_score": round(factor_score, 2),
-            "evidence_level": "HETEROGENEITY_CANDIDATE",
-            "decision": comp["decision"],
-        })
+        ranked.append(
+            {
+                "factor_id": factor["factor_id"],
+                "factor_name": factor.get("factor_name", factor["factor_id"]),
+                "effect_absolute": comp["effect_absolute"],
+                "effect_relative": comp["effect_relative"],
+                "probability_harm": comp["probability_harm"],
+                "probability_practical_harm": comp["probability_practical_harm"],
+                "probability_practical_benefit": comp["probability_practical_benefit"],
+                "credible_interval_95": comp["credible_interval_95"],
+                "eligible_impressions": eligible,
+                "expected_absolute_impact": round(expected_abs_impact, 2),
+                "stability": stability,
+                "experimentability": experimentability,
+                "factor_score": round(factor_score, 2),
+                "evidence_level": "HETEROGENEITY_CANDIDATE",
+                "decision": comp["decision"],
+            }
+        )
 
     return sorted(ranked, key=lambda x: x["factor_score"], reverse=True)
 
@@ -266,12 +287,13 @@ def rank_factor_candidates(
 # Experiment design: expected information gain
 # ---------------------------------------------------------------------------
 
+
 def expected_information_gain(
-    prior_shape_control: Tuple[float, float],
-    prior_shape_treatment: Tuple[float, float],
+    prior_shape_control: tuple[float, float],
+    prior_shape_treatment: tuple[float, float],
     proposed_n_per_arm: int,
-    true_effect: Optional[float] = None,
-) -> Dict[str, Any]:
+    true_effect: float | None = None,
+) -> dict[str, Any]:
     """Estimate the expected information gain from running an experiment.
 
     Uses prior predictive simulation to estimate how much the posterior
@@ -303,9 +325,15 @@ def expected_information_gain(
     if true_effect is not None:
         # Simulate outcomes under assumed true effect
         # This is a simplified approximation
-        se = math.sqrt(p_c * (1 - p_c) / proposed_n_per_arm + p_t * (1 - p_t) / proposed_n_per_arm)
+        se = math.sqrt(
+            p_c * (1 - p_c) / proposed_n_per_arm + p_t * (1 - p_t) / proposed_n_per_arm
+        )
         z_threshold = 1.96  # 95% credible
-        prob_detect = 1.0 if abs(true_effect) > z_threshold * se else abs(true_effect) / (z_threshold * se)
+        prob_detect = (
+            1.0
+            if abs(true_effect) > z_threshold * se
+            else abs(true_effect) / (z_threshold * se)
+        )
         prob_detect = min(1.0, max(0.0, prob_detect))
     else:
         prob_detect = None
@@ -316,5 +344,7 @@ def expected_information_gain(
         "prior_precision": round(prior_precision, 6),
         "expected_post_precision": round(post_precision, 6),
         "information_gain_ratio": round(information_gain, 6),
-        "prob_detect_practical_effect": round(prob_detect, 6) if prob_detect is not None else None,
+        "prob_detect_practical_effect": round(prob_detect, 6)
+        if prob_detect is not None
+        else None,
     }

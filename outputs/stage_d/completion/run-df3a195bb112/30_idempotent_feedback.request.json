@@ -1,0 +1,17 @@
+{
+  "operation": "feedback",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/governance.db",
+    "action": "submit",
+    "parameters": {
+      "request_id": "feedback-1",
+      "kind": "alert_feedback",
+      "payload": {
+        "alert_id": "sha256:b1e463db57fb56dd75d42739b670ae1577c2756d52333e71782986d8fbddb789",
+        "label": "useful",
+        "operator": "fixture-analyst",
+        "source_kind": "internal_event"
+      }
+    }
+  }
+}

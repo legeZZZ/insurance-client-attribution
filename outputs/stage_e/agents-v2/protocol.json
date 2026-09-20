@@ -1,0 +1,37 @@
+{
+  "schema": "agent-comparison/1",
+  "seeds": [
+    72000,
+    72001,
+    72002,
+    72003,
+    72004,
+    72005,
+    72006,
+    72007,
+    72008,
+    72009,
+    72010,
+    72011,
+    72012,
+    72013,
+    72014,
+    72015,
+    72016,
+    72017,
+    72018,
+    72019
+  ],
+  "model": "deterministic_rules",
+  "model_calls": 0,
+  "method_budget": 1,
+  "worker_timeout": 30,
+  "memory_arms": [
+    "no_memory",
+    "retrieval_only",
+    "governed"
+  ],
+  "same_tools": true,
+  "cache_policy": "new task and data per seed, no cached execution",
+  "scope": "metric-check method tasks; no claim of language-model or general reasoning benefit"
+}

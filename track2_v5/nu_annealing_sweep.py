@@ -20,7 +20,6 @@ from pathlib import Path
 from typing import Any
 
 from .bayes import estimate_hte
-from .track2_benchmark import _split
 from .insursim_carousel import generate_bundle_stage, sanitize
 from .offline_pid_ablation import (
     SEEDS_MATCHED,
@@ -28,6 +27,7 @@ from .offline_pid_ablation import (
     TRUE_MODERATOR,
     _segments_from,
 )
+from .track2_benchmark import _split
 
 OUT = Path(__file__).resolve().parent.parent / "outputs" / "nu_annealing_sweep.json"
 

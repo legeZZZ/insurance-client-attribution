@@ -1,0 +1,227 @@
+{
+  "schema_version": "loop/1",
+  "data_ref": "sha256:857dc9745148ea1a420bc6de59810f340469095833fc860411c352bd0f130435",
+  "resource_name": "registry_analysis",
+  "config": {
+    "max_rounds": 3,
+    "max_tests": 2000,
+    "alpha": 0.05,
+    "max_lag": 1,
+    "smoothing_window": 1,
+    "derived_layers": [
+      "level"
+    ],
+    "bootstrap_reps": 19,
+    "block_length": 3,
+    "seasonal_period": null,
+    "statistic_method": "pearson",
+    "min_abs_correlation": 0.1,
+    "seed": 20260915,
+    "gap_days": 4
+  },
+  "discovery_days": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75
+  ],
+  "holdout_days": [
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99
+  ],
+  "round": 1,
+  "phase": "COMPLETED",
+  "attempts": [
+    {
+      "round": 1,
+      "proposal": {
+        "action": "ADD_HYPOTHESES",
+        "parameters": {
+          "factor_ids": [
+            "x:global"
+          ]
+        },
+        "rationale": "确定性规则：检查登记的可用候选"
+      },
+      "comparisons_charged": 3,
+      "discovery_window": [
+        0,
+        75
+      ],
+      "status": "COMPLETED",
+      "evidence_ref": "sha256:f2ecfaf00885753f95c8ca810ad74e2506ab58ea8bf988253e1b7f08a0aa5966",
+      "progressed": true,
+      "test_manifest": [
+        {
+          "series_index": 0,
+          "factor_id": "x:global",
+          "scope_id": "global",
+          "lag_days": -1,
+          "correlation": -0.012816301350161919,
+          "raw_pvalue": 0.9,
+          "n_pairs": 75,
+          "bh_q": 0.9,
+          "max_t_pvalue": 1.0,
+          "hypothesis_key": "sha256:0e39375facb9caf946e6807ca8d910b8d76e3b7e6f068bf15d066fb8ed1a4baf"
+        },
+        {
+          "series_index": 0,
+          "factor_id": "x:global",
+          "scope_id": "global",
+          "lag_days": 0,
+          "correlation": 0.9819548975474739,
+          "raw_pvalue": 0.05,
+          "n_pairs": 76,
+          "bh_q": 0.15000000000000002,
+          "max_t_pvalue": 0.05,
+          "hypothesis_key": "sha256:3a1b2b61d778be337573385c8d254c762e0b8d610dddd622fdc0dd166b0deefc"
+        },
+        {
+          "series_index": 0,
+          "factor_id": "x:global",
+          "scope_id": "global",
+          "lag_days": 1,
+          "correlation": -0.03970509676907019,
+          "raw_pvalue": 0.75,
+          "n_pairs": 75,
+          "bh_q": 0.9,
+          "max_t_pvalue": 0.95,
+          "hypothesis_key": "sha256:90c16d112ad48d467cb4b60123fff5b231b50b4ff6ef77b5eb431e7644fb38f2"
+        }
+      ],
+      "multiplicity_scope": "all adaptive discovery attempts counted; formal inference reserved for final holdout"
+    },
+    {
+      "stage": "final_holdout",
+      "evidence_ref": "sha256:c68b7028a90c58d9f7a97cad55399f14fa2d2421a40ca78fd50b1b8d93c2e337",
+      "comparisons_charged": 3,
+      "status": "COMPLETED",
+      "test_family_ref": "sha256:3fcd188b5794b2a039d40639364009595326228b4ca470906944ceed57f27278"
+    }
+  ],
+  "selected_factors": [
+    "x:global"
+  ],
+  "confirmation_min_abs_correlation": 0.1,
+  "hypotheses": {
+    "x:global": "sha256:9a8d6c735b99bc426b2cb32eed636b317ab775b7af3061dcabdb76f36d4108cb"
+  },
+  "tests_spent": 6,
+  "pending": null,
+  "reason_codes": [],
+  "exit_report": [
+    {
+      "hypothesis_id": "sha256:9a8d6c735b99bc426b2cb32eed636b317ab775b7af3061dcabdb76f36d4108cb",
+      "state": "supported",
+      "stopped_gate": 2,
+      "evidence_ref": "sha256:c68b7028a90c58d9f7a97cad55399f14fa2d2421a40ca78fd50b1b8d93c2e337",
+      "statistical_uncertainty": [
+        {
+          "factor_id": "x:global",
+          "correlation": 0.9819548975474739,
+          "holdout": {
+            "correlation": 0.9814477523866475,
+            "raw_pvalue": 0.05,
+            "n_pairs": 20,
+            "status": "TESTED",
+            "adjusted_pvalue": 0.05,
+            "survives": true
+          },
+          "causal_effect": null
+        }
+      ]
+    }
+  ],
+  "confirmation_ref": "sha256:c68b7028a90c58d9f7a97cad55399f14fa2d2421a40ca78fd50b1b8d93c2e337",
+  "version": 5
+}

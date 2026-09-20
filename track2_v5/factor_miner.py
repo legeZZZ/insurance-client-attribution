@@ -106,8 +106,8 @@ def mine_factors(
             }
         )
 
-    # 4) Priority scoring: impact x evidence x experimentability / cost proxy.
-    def priority(factor: Mapping[str, Any]) -> float:
+    # 4) Value scoring (ranking only; not a probability or significance): impact x evidence x experimentability / cost proxy.
+    def value_score(factor: Mapping[str, Any]) -> float:
         if factor["source_type"] == "INTERACTION_SCAN":
             evidence_prob = max(
                 float(factor.get("probability_practical_harm", 0.0)),
@@ -122,7 +122,7 @@ def mine_factors(
             before, after = factor.get("before"), factor.get("after")
             try:
                 impact = min(abs(float(after) - float(before)), 1.0)
-            except (TypeError, ValueError):
+            except TypeError, ValueError:
                 impact = 0.8  # categorical change
             evidence = 0.9
         experimentability = float(factor.get("experimentability", 0.0))
@@ -131,9 +131,10 @@ def mine_factors(
         return impact * evidence * (0.5 + experimentability) * business_value / cost
 
     for factor in candidates:
-        factor["priority"] = round(priority(factor), 6)
+        factor["value_score"] = round(value_score(factor), 6)
+        factor["score_semantics"] = "investigation_value_not_probability"
 
-    ranked = sorted(candidates, key=lambda item: item["priority"], reverse=True)
+    ranked = sorted(candidates, key=lambda item: item["value_score"], reverse=True)
     return {
         "claim_type": "FACTOR_CANDIDATE",
         "candidate_count": len(ranked),

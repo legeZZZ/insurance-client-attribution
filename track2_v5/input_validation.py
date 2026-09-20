@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import math
 from collections.abc import Mapping, Sequence
+
 try:
     from itertools import pairwise
 except ImportError:
+
     def pairwise(iterable):
         iterator = iter(iterable)
         try:
@@ -16,6 +18,8 @@ except ImportError:
         for current in iterator:
             yield previous, current
             previous = current
+
+
 from typing import Any
 
 

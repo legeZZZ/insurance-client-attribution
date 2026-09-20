@@ -8,3 +8,8 @@ outputs/*.png
 *.zip
 *.ppt
 *.pptx
+.venv/
+outputs/
+runtime_data/
+.ruff_cache/
+.local-runtime/

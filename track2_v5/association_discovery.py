@@ -15,12 +15,13 @@ from typing import Any
 
 import numpy as np
 
+from .association_screen import METHODS, dependence_statistic
 from .fdr import benjamini_hochberg
 from .input_validation import (
     validate_discovery_holdout,
     validate_ordered_series,
 )
-from .temporal_null import detrend_series, max_t_pvalues, moving_block_indices
+from .temporal_null import detrend_series, moving_block_indices
 
 
 def factor_series_from_snapshots(
@@ -88,6 +89,8 @@ def _series_values(
             (int(day), lookup[int(day)]) for day in factor_days if int(day) in lookup
         ]
     else:
+        if len(factor_days) != len(values):
+            raise ValueError("factor days and values must have equal length")
         paired = list(
             zip([int(day) for day in factor_days], [float(v) for v in values])
         )
@@ -113,15 +116,21 @@ def _detrend(
 
 
 def _rolling_median(values: np.ndarray, window: int = 3) -> np.ndarray:
-    """Apply a small causal-safe robust smoother before differencing."""
+    """Apply a trailing (causal) robust smoother before differencing.
+
+    Each point uses only the current and past ``window`` observations.  A
+    centred window would leak holdout-period values into discovery-period
+    features whenever derivation happens before the discovery/holdout split
+    (rev5 P1-F2).  Trailing smoothing keeps every derived value a function of
+    data available at that time.
+    """
     if len(values) < 3 or window <= 1:
         return values.astype(float, copy=True)
-    width = max(3, int(window))
-    if width % 2 == 0:
-        width += 1
-    half = width // 2
-    padded = np.pad(values.astype(float), (half, half), mode="edge")
-    return np.asarray([np.median(padded[i : i + width]) for i in range(len(values))])
+    width = max(2, int(window))
+    vals = values.astype(float)
+    return np.asarray(
+        [np.median(vals[max(0, i - width + 1) : i + 1]) for i in range(len(vals))]
+    )
 
 
 def derive_factor_layers(
@@ -169,7 +178,7 @@ def derive_factor_layers(
                     "first_difference" if layer == "velocity" else "second_difference"
                 ),
                 "unit": units[layer],
-                "smoothing": f"rolling_median_{smoothing_window}",
+                "smoothing": f"trailing_rolling_median_{smoothing_window}",
                 "days": factor_days.tolist(),
                 "values": values_by_layer[layer].tolist(),
             }
@@ -219,18 +228,19 @@ def _lag_test(
     bootstrap_reps: int,
     rng: np.random.Generator,
     seasonal_period: int | None,
+    statistic_method: str = "pearson",
 ) -> dict[str, Any]:
     x = _detrend(factor_values, pair_days, seasonal_period)
     y = _detrend(residual_values, pair_days, seasonal_period)
-    observed = _corr(x, y)
+    observed = dependence_statistic(x, y, statistic_method)
     null = np.zeros(max(bootstrap_reps, 1), dtype=float)
-    # Independent block resampling breaks cross-series alignment while
-    # preserving within-series serial dependence.  It is the null used for
-    # both the lag-level p-value and the later max-T correction.
+    # Conditional-X residual block null; asymptotic/empirical, not an exact
+    # randomization test for arbitrary nonstationary time series.
     for index in range(len(null)):
-        x_indices = _moving_block_indices(len(x), block_length, rng)
         y_indices = _moving_block_indices(len(y), block_length, rng)
-        null[index] = _corr(x[x_indices], y[y_indices])
+        null[index] = dependence_statistic(
+            x, _detrend(y[y_indices], pair_days, seasonal_period), statistic_method
+        )
     pvalue = (1.0 + float(np.sum(np.abs(null) >= abs(observed)))) / (len(null) + 1.0)
     return {
         "correlation": float(observed),
@@ -238,6 +248,63 @@ def _lag_test(
         "null_statistics": null,
         "n_pairs": len(x),
     }
+
+
+def _joint_max_t_pvalues(
+    test_records: list[dict[str, Any]],
+    y_grid: np.ndarray,
+    block_length: int,
+    bootstrap_reps: int,
+    rng: np.random.Generator,
+    seasonal_period: int | None,
+    statistic_method: str = "pearson",
+) -> list[float]:
+    """Conditional-X joint block-null diagnostic (empirical calibration required).
+
+    All X views stay fixed, preserving collinearity and parent/lag dependence.
+    Each replicate resamples one detrended Y grid shared by every hypothesis.
+    Target positions use t+lag, matching the observed statistic exactly.
+    """
+    if not test_records:
+        return []
+    reps = max(int(bootstrap_reps), 1)
+    grid_days = np.asarray(test_records[0]["_grid_days"])
+    grid_index = {int(day): pos for pos, day in enumerate(grid_days)}
+    residual_grid = _detrend(y_grid, grid_days, seasonal_period)
+    prepared = []
+    for record in test_records:
+        positions = np.asarray(
+            [
+                grid_index[int(day) + int(record["lag_days"])]
+                for day in record["_pair_days"]
+            ],
+            dtype=int,
+        )
+        record["_positions"] = positions
+        prepared.append(
+            (
+                _detrend(record["_x"], record["_pair_days"], seasonal_period),
+                positions,
+                record["_pair_days"],
+            )
+        )
+    null_max = np.zeros(reps, dtype=float)
+    for b in range(reps):
+        y_star_grid = residual_grid[
+            moving_block_indices(len(y_grid), block_length, rng)
+        ]
+        for x, positions, pair_days in prepared:
+            y_star = _detrend(y_star_grid[positions], pair_days, seasonal_period)
+            null_max[b] = max(
+                null_max[b], abs(dependence_statistic(x, y_star, statistic_method))
+            )
+    return [
+        float(
+            (1.0 + float(np.sum(null_max >= abs(float(record["correlation"])))))
+            / (reps + 1.0)
+        )
+        for record in test_records
+    ]
 
 
 def _observed_lag(
@@ -322,6 +389,10 @@ def _event_candidate(
         "association_score": round(score, 6),
         "claim_type": claim_type,
         "evidence_level": claim_type,
+        "raw_pvalue": None,
+        "bh_q": None,
+        "max_t_pvalue": None,
+        "confirmation_status": "EVENT_ALIGNMENT_ONLY",
         "validation_route": (
             "line_a_or_gray_release"
             if source_type == "internal_event"
@@ -346,6 +417,10 @@ def discover_association_factors(
     seasonal_period: int | None = 7,
     derived_layers: Sequence[str] = ("level", "velocity", "acceleration"),
     smoothing_window: int = 3,
+    confirmation_alpha: float = 0.05,
+    statistic_method: str = "pearson",
+    shadow_diagnostics: bool = False,
+    confirmation_max_t_threshold: int = 20,
 ) -> dict[str, Any]:
     """Rank internal/external factor candidates against unexplained residuals.
 
@@ -358,6 +433,16 @@ def discover_association_factors(
     input_validation = validate_ordered_series(
         days, residual, component="association_discovery"
     )
+    if statistic_method not in METHODS:
+        raise ValueError(f"statistic_method must be one of {METHODS}")
+    if not 0 < confirmation_alpha < 1:
+        raise ValueError("confirmation_alpha must lie in (0, 1)")
+    if (
+        isinstance(confirmation_max_t_threshold, bool)
+        or not isinstance(confirmation_max_t_threshold, int)
+        or confirmation_max_t_threshold < 1
+    ):
+        raise ValueError("confirmation_max_t_threshold must be a positive integer")
     if max_lag < 0:
         raise ValueError("max_lag must be non-negative")
     if bootstrap_reps <= 0:
@@ -415,7 +500,9 @@ def discover_association_factors(
     for factor in factor_series:
         expanded_series.extend(
             derive_factor_layers(
-                factor, smoothing_window=smoothing_window, layers=derived_layers
+                {**factor, "days": factor.get("days", all_days)},
+                smoothing_window=smoothing_window,
+                layers=derived_layers,
             )
         )
     candidate_series_count = len(expanded_series)
@@ -444,7 +531,14 @@ def discover_association_factors(
             if len(x) < 6:
                 continue
             test = _lag_test(
-                pair_days, x, y, inferred_block, bootstrap_reps, rng, seasonal_period
+                pair_days,
+                x,
+                y,
+                inferred_block,
+                bootstrap_reps,
+                rng,
+                seasonal_period,
+                statistic_method,
             )
             record = {
                 "series_index": series_index,
@@ -455,6 +549,9 @@ def discover_association_factors(
                 "raw_pvalue": test["raw_pvalue"],
                 "n_pairs": test["n_pairs"],
                 "null_statistics": test["null_statistics"],
+                "_pair_days": pair_days,
+                "_x": x,
+                "_grid_days": discovery_days_ordered,
             }
             test_records.append(record)
             if best_test is None or abs(record["correlation"]) > abs(
@@ -468,13 +565,147 @@ def discover_association_factors(
     for record, qvalue in zip(test_records, raw_q_values):
         record["bh_q"] = float(qvalue)
     if test_records:
-        max_t = max_t_pvalues(
-            [record["correlation"] for record in test_records],
-            [record["null_statistics"] for record in test_records],
+        y_grid = np.asarray(
+            [residual[all_days.index(day)] for day in discovery_days_ordered],
+            dtype=float,
+        )
+        max_t = _joint_max_t_pvalues(
+            test_records,
+            y_grid,
+            inferred_block,
+            bootstrap_reps,
+            rng,
+            seasonal_period,
+            statistic_method,
         )
         for record, pvalue in zip(test_records, max_t):
             record["max_t_pvalue"] = pvalue
+        for record in test_records:
+            for private_key in ("_pair_days", "_x", "_grid_days", "_positions"):
+                record.pop(private_key, None)
+    from .contracts import digest, validate_contract
+
+    for record in test_records:
+        view = expanded_series[int(record["series_index"])]
+        record["hypothesis_key"] = digest(
+            {
+                "factor": record["factor_id"],
+                "scope": record["scope_id"],
+                "view": view.get("derived_layer", "level"),
+                "lag": record["lag_days"],
+                "metric": f"detrended_residual_{statistic_method}",
+                "window": sorted(discovery_set),
+            }
+        )
+    confirmation_correction = (
+        "max_t" if len(selected_tests) >= confirmation_max_t_threshold else "holm"
+    )
+    family_contract = None
+    if test_records and holdout_set:
+        family_contract = validate_contract(
+            "TestFamilyContract",
+            {
+                "hypothesis_keys": [r["hypothesis_key"] for r in test_records],
+                "search_manifest": {
+                    "max_lag": max_lag,
+                    "layers": list(derived_layers),
+                    "smoothing_window": smoothing_window,
+                    "bootstrap_reps": bootstrap_reps,
+                },
+                "null_hypothesis": "no_residual_temporal_association",
+                "statistic": f"absolute_{statistic_method}",
+                "null_model": "conditional_x_residual_block",
+                "correction": confirmation_correction,
+                "frozen_at": max(discovery_set),
+                "discovery_window": [min(discovery_set), max(discovery_set)],
+                "holdout_window": [min(holdout_set), max(holdout_set)],
+                "gap_days": min(holdout_set) - max(discovery_set) - 1,
+                "alpha": confirmation_alpha,
+            },
+        )
     candidates: list[dict[str, Any]] = []
+    # The selected family is fixed entirely on discovery data before holdout.
+    confirmation_tests = []
+    confirmation_records = []
+    from .fdr import holm
+
+    for selected in selected_tests:
+        factor = expanded_series[int(selected["series_index"])]
+        fd, fv = _series_values(factor, all_days)
+        # Keep predictor AND response in holdout; avoid discovery-derived boundary values.
+        burn = max(0, smoothing_window - 1) + (
+            2
+            if factor.get("derived_layer") == "acceleration"
+            else 1
+            if factor.get("derived_layer") == "velocity"
+            else 0
+        )
+        safe = np.asarray(
+            [
+                bool(holdout_set)
+                and int(d) >= min(holdout_set) + burn
+                and int(d) in holdout_set
+                for d in fd
+            ]
+        )
+        hd = sorted(holdout_set)
+        pd, x, y = _lag_pairs(
+            hd,
+            [residual[all_days.index(d)] for d in hd],
+            fd[safe],
+            fv[safe],
+            int(selected["lag_days"]),
+        )
+        if len(x) < max(6, 2 * inferred_block):
+            confirmation_tests.append(
+                {
+                    "correlation": 0.0,
+                    "n_pairs": len(x),
+                    "raw_pvalue": 1.0,
+                    "status": "INSUFFICIENT_HOLDOUT",
+                }
+            )
+        else:
+            test = _lag_test(
+                pd,
+                x,
+                y,
+                inferred_block,
+                bootstrap_reps,
+                rng,
+                seasonal_period,
+                statistic_method,
+            )
+            test.pop("null_statistics", None)
+            test["status"] = "TESTED"
+            confirmation_tests.append(test)
+            confirmation_records.append(
+                {
+                    "correlation": test["correlation"],
+                    "lag_days": selected["lag_days"],
+                    "_grid_days": hd,
+                    "_pair_days": pd,
+                    "_x": x,
+                    "_test_index": len(confirmation_tests) - 1,
+                }
+            )
+    adjusted = holm([t["raw_pvalue"] for t in confirmation_tests])
+    if confirmation_correction == "max_t" and confirmation_records:
+        joint = _joint_max_t_pvalues(
+            confirmation_records,
+            np.asarray([residual[all_days.index(d)] for d in hd]),
+            inferred_block,
+            bootstrap_reps,
+            rng,
+            seasonal_period,
+            statistic_method,
+        )
+        adjusted = [1.0] * len(confirmation_tests)
+        for record, value in zip(confirmation_records, joint):
+            adjusted[record["_test_index"]] = value
+    for selected, test, adjusted_p in zip(selected_tests, confirmation_tests, adjusted):
+        test["adjusted_pvalue"] = adjusted_p
+        selected["_confirmation"] = test
     for selected in selected_tests:
         factor = expanded_series[int(selected["series_index"])]
         correlation = float(selected["correlation"])
@@ -482,30 +713,20 @@ def discover_association_factors(
             continue
         reliability = float(factor.get("source_reliability", 0.5))
         scope_match = float(factor.get("scope_match", 0.5))
-        holdout = None
-        if holdout_set:
-            holdout_days_ordered = [day for day in all_days if day in holdout_set]
-            holdout_residual = [
-                residual[all_days.index(day)] for day in holdout_days_ordered
-            ]
-            holdout_factor_days, holdout_values = _series_values(factor, all_days)
-            holdout_factor = {
-                **dict(factor),
-                "days": holdout_factor_days.tolist(),
-                "values": holdout_values.tolist(),
-            }
-            holdout = _observed_lag(
-                holdout_days_ordered,
-                holdout_residual,
-                holdout_factor,
-                int(selected["lag_days"]),
-                seasonal_period,
-            )
-            holdout["survives"] = bool(
-                holdout["n_pairs"] >= 6
-                and abs(float(holdout["correlation"])) >= min_abs_correlation
-                and np.sign(float(holdout["correlation"])) == np.sign(correlation)
-            )
+        holdout = selected["_confirmation"]
+        holdout["survives"] = bool(
+            holdout["status"] == "TESTED"
+            and abs(holdout["correlation"]) >= min_abs_correlation
+            and np.sign(holdout["correlation"]) == np.sign(correlation)
+            and holdout["adjusted_pvalue"] <= confirmation_alpha
+        )
+        confirmation_status = (
+            "CONFIRMED_ASSOCIATION"
+            if holdout["survives"]
+            else "HOLDOUT_FAILED"
+            if holdout["status"] == "TESTED"
+            else "INSUFFICIENT_HOLDOUT"
+        )
         max_t_pvalue = float(selected.get("max_t_pvalue", 1.0))
         bh_q = float(selected.get("bh_q", 1.0))
         score = (
@@ -516,9 +737,7 @@ def discover_association_factors(
         )
         candidates.append(
             {
-                "factor_id": str(
-                    factor.get("parent_factor_id", factor["factor_id"])
-                ),
+                "factor_id": str(factor.get("parent_factor_id", factor["factor_id"])),
                 "parent_factor_id": str(
                     factor.get("parent_factor_id", factor["factor_id"])
                 ),
@@ -528,7 +747,12 @@ def discover_association_factors(
                 "derived_layer": str(factor.get("derived_layer", "level")),
                 "transform": factor.get("transform", "identity"),
                 "unit": factor.get("unit"),
-                "direction": "positive" if correlation > 0 else "negative",
+                "direction": "unsigned_dependency"
+                if statistic_method == "dcor"
+                else "positive"
+                if correlation > 0
+                else "negative",
+                "statistic_method": statistic_method,
                 "source_type": str(factor.get("source_type", "factor_series")),
                 "kind": factor.get("kind"),
                 "scope": factor.get("scope"),
@@ -547,14 +771,23 @@ def discover_association_factors(
                 "bh_q": bh_q,
                 "max_t_pvalue": max_t_pvalue,
                 "holdout": holdout,
+                "hypothesis_key": selected["hypothesis_key"],
                 "scope_match": round(scope_match, 6),
                 "source_reliability": round(reliability, 6),
                 "source_uri": factor.get("source_uri"),
                 "content_digest": factor.get("content_digest"),
                 "license_ref": factor.get("license_ref"),
                 "association_score": round(score, 6),
-                "claim_type": "FACTOR_CANDIDATE",
-                "evidence_level": "FACTOR_CANDIDATE",
+                "claim_type": "FACTOR_CANDIDATE"
+                if holdout["survives"]
+                else "WATCHLIST",
+                "evidence_level": "FACTOR_CANDIDATE"
+                if holdout["survives"]
+                else "WATCHLIST",
+                "confirmation_status": confirmation_status,
+                "confirmation_method": f"{confirmation_correction}_fixed_discovery_family_block_null",
+                "confirmation_alpha": confirmation_alpha,
+                "statistical_guarantee": "empirical_only_until_pipeline_calibration",
                 "validation_route": "stratified_quasi_experiment",
             }
         )
@@ -604,7 +837,7 @@ def discover_association_factors(
             {str(f.get("scope_id", f.get("scope", "global"))) for f in expanded_series}
         ),
         "lags": lag_values,
-        "metric": "detrended_residual_correlation",
+        "metric": f"detrended_residual_{statistic_method}",
         "discovery_window": sorted(discovery_set),
     }
     selection_set_digest = (
@@ -613,6 +846,50 @@ def discover_association_factors(
             json.dumps(selection_set, ensure_ascii=False, sort_keys=True).encode()
         ).hexdigest()[:16]
     )
+    shadow_reports = []
+    if shadow_diagnostics:
+        from .temporal_shadow_stability import diagnose_shadow_stability
+
+        # Explicit diagnostic budget, evaluated after confirmation; never changes candidates.
+        for factor in list(factor_series)[:5]:
+            fd, fv = _series_values(factor, all_days)
+            lookup = dict(zip(fd.tolist(), fv.tolist()))
+            common = [d for d in all_days if d in lookup]
+            shadow_reports.append(
+                {
+                    "factor_id": factor["factor_id"],
+                    "scope_id": factor.get("scope_id", "global"),
+                    **diagnose_shadow_stability(
+                        common,
+                        [lookup[d] for d in common],
+                        [residual[all_days.index(d)] for d in common],
+                        kind=factor.get("data_kind", "continuous"),
+                        replicates=19,
+                        seed=seed,
+                    ),
+                }
+            )
+        for event in list(events)[:5]:
+            shadow_reports.append(
+                {
+                    "factor_id": event["factor_id"],
+                    **diagnose_shadow_stability(
+                        all_days,
+                        [
+                            int(
+                                event["start_day"]
+                                <= d
+                                <= event.get("end_day", event["start_day"])
+                            )
+                            for d in all_days
+                        ],
+                        residual,
+                        kind="event",
+                        replicates=19,
+                        seed=seed,
+                    ),
+                }
+            )
     return {
         "model": "line_b_association_factor_discovery",
         "claim_policy": "association_only_until_randomized_or_quasi_experimental_validation",
@@ -652,7 +929,13 @@ def discover_association_factors(
             "valid_comparisons": len(test_records),
             "block_length": inferred_block,
             "bootstrap_replicates": bootstrap_reps,
-            "bootstrap_method": "detrended_moving_block_independent_null_max_t",
+            "bootstrap_method": "conditional_x_shared_detrended_y_block_max_t",
+            "statistical_guarantee": "empirical_only_until_pipeline_calibration",
+            "statistic_method": statistic_method,
+            "confirmation_family_size": len(selected_tests),
+            "confirmation_alpha": confirmation_alpha,
+            "confirmation_correction": confirmation_correction,
+            "confirmation_max_t_threshold": confirmation_max_t_threshold,
             "seasonal_period": seasonal_period,
             "derived_layers": list(derived_layers),
             "smoothing_window": smoothing_window,
@@ -663,6 +946,17 @@ def discover_association_factors(
                 "BH 仅报告锁定候选集合内的辅助 q 值；跨 lag 选择后的可信防线是 holdout。"
             ),
         },
+        "shadow_diagnostics": shadow_reports,
+        "shadow_budget": {"factor_series": 5, "events": 5, "replicates": 19},
+        "test_family_contract": family_contract,
+        "attempted_tests": [
+            {
+                k: v
+                for k, v in r.items()
+                if not k.startswith("_") and k != "null_statistics"
+            }
+            for r in test_records
+        ],
         "tested_lag_count": len(test_records),
         "bh_q_survivors": sum(
             1 for record in test_records if float(record.get("bh_q", 1.0)) <= 0.05

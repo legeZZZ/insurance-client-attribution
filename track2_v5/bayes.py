@@ -1168,7 +1168,12 @@ def estimate_high_dimensional_hte(
         raise ValueError("rows must contain at least 50 observations")
     if not feature_columns:
         raise ValueError("feature_columns must not be empty")
-    if not isinstance(folds, int) or isinstance(folds, bool) or folds < 2:
+    if (
+        not isinstance(folds, int)
+        or isinstance(folds, bool)
+        or folds < 2
+        or folds > len(rows)
+    ):
         raise ValueError("folds must be an integer >= 2")
     if not math.isfinite(ridge_alpha) or ridge_alpha < 0:
         raise ValueError("ridge_alpha must be finite and non-negative")
@@ -1194,7 +1199,11 @@ def estimate_high_dimensional_hte(
 
     treated_mask = treatment == 1.0
     control_mask = treatment == 0.0
-    pooled_effect = float(np.mean(outcome[treated_mask]) - np.mean(outcome[control_mask]))
+    if not treated_mask.any() or not control_mask.any():
+        raise ValueError("both treatment arms must be observed")
+    pooled_effect = float(
+        np.mean(outcome[treated_mask]) - np.mean(outcome[control_mask])
+    )
     transformed_outcome = outcome * (treatment - p) / (p * (1.0 - p))
 
     matrix, terms, term_diagnostics = _build_hte_terms(
@@ -1260,18 +1269,54 @@ def estimate_high_dimensional_hte(
     for rule, mask in zip(subgroup_rules, membership_masks):
         n = int(np.sum(mask))
         if n == 0:
+            subgroup_summaries.append(
+                {
+                    "subgroup_id": str(rule.get("subgroup_id") or rule.get("id")),
+                    "condition": dict(rule.get("condition") or rule.get("where") or {}),
+                    "rows": 0,
+                    "estimate": None,
+                    "effect_shrunk": None,
+                    "standard_error": None,
+                    "interval_95": None,
+                    "inference_status": "EMPTY_SUBGROUP",
+                    "evidence_level": "EXPLORATORY_HDIM_HTE",
+                }
+            )
             continue
         values = cate[mask]
         raw_mean = float(np.mean(values))
         overlap_rows = int(np.sum(membership_count[mask] > 1))
-        effective_n = n / max(1.0, float(np.mean(np.maximum(membership_count[mask], 1.0))))
+        effective_n = n / max(
+            1.0, float(np.mean(np.maximum(membership_count[mask], 1.0)))
+        )
         weight = effective_n / (effective_n + prior_count)
         shrunk = float(pooled_effect + weight * (raw_mean - pooled_effect))
-        se = float(np.std(values) / math.sqrt(max(effective_n, 1.0)))
+        # Inference uses the same unshrunk difference-in-means for its center
+        # and sampling variance. The ridge/shrunk CATE is exploration only.
+        treated_values = outcome[mask & treated_mask]
+        control_values = outcome[mask & control_mask]
+        sufficient = len(treated_values) >= 2 and len(control_values) >= 2
+        estimate = (
+            float(np.mean(treated_values) - np.mean(control_values))
+            if sufficient
+            else None
+        )
+        se = (
+            float(
+                math.sqrt(
+                    np.var(treated_values, ddof=1) / len(treated_values)
+                    + np.var(control_values, ddof=1) / len(control_values)
+                )
+            )
+            if sufficient
+            else None
+        )
         subgroup_summaries.append(
             {
                 "subgroup_id": str(rule.get("subgroup_id") or rule.get("id")),
-                "label": str(rule.get("label") or rule.get("subgroup_id") or rule.get("id")),
+                "label": str(
+                    rule.get("label") or rule.get("subgroup_id") or rule.get("id")
+                ),
                 "condition": dict(rule.get("condition") or rule.get("where") or {}),
                 "rows": n,
                 "effective_rows_after_overlap": round(effective_n, 2),
@@ -1279,14 +1324,28 @@ def estimate_high_dimensional_hte(
                 "raw_cate": raw_mean,
                 "effect_shrunk": shrunk,
                 "standard_error": se,
-                "credible_interval_95": [shrunk - 1.96 * se, shrunk + 1.96 * se],
+                "estimate": estimate,
+                "estimator": "within_subgroup_difference_in_means",
+                "inference_status": "EXPLORATORY"
+                if sufficient
+                else "INSUFFICIENT_ARM_OBSERVATIONS",
+                "se_method": "independent_arm_sample_variances",
+                "interval_95": [estimate - 1.96 * se, estimate + 1.96 * se]
+                if sufficient
+                else None,
+                "interval_method": "pointwise_normal_difference_in_means_not_selection_adjusted",
                 "probability_practical_harm": _normal_cdf(
-                    -practical_threshold, shrunk, se
-                ),
+                    -practical_threshold, estimate, se
+                )
+                if sufficient
+                else None,
+                "probability_method": "normal_tail_area_not_a_posterior",
                 "evidence_level": "EXPLORATORY_HDIM_HTE",
             }
         )
-    subgroup_summaries.sort(key=lambda item: item["effect_shrunk"])
+    subgroup_summaries.sort(
+        key=lambda item: (item["effect_shrunk"] is None, item["effect_shrunk"] or 0.0)
+    )
 
     return {
         "model": "crossfit_overlap_ridge_cate",

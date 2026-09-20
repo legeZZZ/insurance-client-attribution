@@ -1,0 +1,19 @@
+{
+  "stage": "B batch 7",
+  "date": "2026-09-15",
+  "full_tests": 144,
+  "full_tests_seconds": 40.165,
+  "new_tests": 18,
+  "calibration": "preliminary; not T32 certification",
+  "sha256": {
+    "track2_v5/observational_tracks.py": "422465553aa73c33d6f61ed3583eab1152627648ad4146419f3ade6eba1e241f",
+    "track2_v5/identification.py": "4ab4fe30925e130da25ee9733e46533150400a8a2f063b91596c1f981a04b3dc",
+    "track2_v5/quant_track.py": "1cf81ffe172867bcb2e8c67a5759e0660f2f529d4ed25e3a8395f4712d0c9555",
+    "tools/run_causal_pipeline.py": "fe671cda223ecd6c46599dc86245ba5265e5924167e153f14fde90a35dbc4e5e",
+    "tools/check_observational_tracks.py": "48cec291dc41787f7824ee988040ca6d878800c3233044cae0466788ca3d241e",
+    "tests/test_observational_tracks.py": "df6fc03c7c12fa55b8d83f7f69fc8c017f34db4fd9b45390e946a7e9ae39e418",
+    "因果流水线接口说明.md": "a134b5e5bf6eb7e6cc6287e795de00c870e4dd010789fb96f1e0e9ae42851ed5",
+    "pyproject.toml": "2e3b91f3c422d1394d85ec08716e58dae83ac0984176bcffcb0994b44f1589c6",
+    "uv.lock": "3a1c0cc98fce1129670e6ad497ed60e53b44880ada75d7d9cc22fc1a523b0de4"
+  }
+}

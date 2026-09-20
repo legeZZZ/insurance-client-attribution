@@ -1,0 +1,342 @@
+{
+  "status": "PASS",
+  "cli_cases": 19,
+  "cases": [
+    {
+      "case": "01_direct_rct",
+      "operation": "pipeline",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/01_direct_rct.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "02_identification_refused",
+      "operation": "pipeline",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/02_identification_refused.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "03_cost_fallback",
+      "operation": "pipeline",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/03_cost_fallback.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "04_worker_timeout",
+      "operation": "pipeline",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/04_worker_timeout.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "05_full_four_layer",
+      "operation": "pipeline",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/05_full_four_layer.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "06_data_snapshot",
+      "operation": "investigation",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/06_data_snapshot.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "07_create_loop",
+      "operation": "investigation",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/07_create_loop.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "08_rules_loop",
+      "operation": "investigation",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/08_rules_loop.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "09_reopen_loop",
+      "operation": "investigation",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/09_reopen_loop.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "10_reject_post_terminal_change",
+      "operation": "investigation",
+      "returncode": 2,
+      "expected_returncode": 2,
+      "stdout": "",
+      "stderr": "DATA_INVALID: loop has ended; cannot change selection\n"
+    },
+    {
+      "case": "11_reject_window_escape",
+      "operation": "investigation",
+      "returncode": 2,
+      "expected_returncode": 2,
+      "stdout": "",
+      "stderr": "DATA_INVALID: policy cannot write statuses, windows, alpha or evidence\n"
+    },
+    {
+      "case": "12_audit",
+      "operation": "investigation",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/12_audit.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "13_invalidate_published_data",
+      "operation": "investigation",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/13_invalidate_published_data.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "15_adapter_intake",
+      "operation": "factor_registry",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/15_adapter_intake.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "16_same_window_excluded",
+      "operation": "factor_registry",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/16_same_window_excluded.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "17_next_window_retrieval",
+      "operation": "factor_registry",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/17_next_window_retrieval.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "18_registry_to_loop",
+      "operation": "investigation",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/18_registry_to_loop.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "19_registered_factor_loop",
+      "operation": "investigation",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/19_registered_factor_loop.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "20_factor_history",
+      "operation": "factor_registry",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/20_factor_history.result.json\"}\n",
+      "stderr": ""
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "run-157a96b46a5e/01_direct_rct.request.json",
+      "digest": "sha256:b6c9b6a6407806bfc0288b610e5ebf6e41ab5e09d494a63861668582abf3f5c4"
+    },
+    {
+      "path": "run-157a96b46a5e/01_direct_rct.result.json",
+      "digest": "sha256:ab4ede08e020b13957ce17b6246ed330178d44f6302bafc9e3d1bfb8ce8fd4f0"
+    },
+    {
+      "path": "run-157a96b46a5e/02_identification_refused.request.json",
+      "digest": "sha256:fa8fbd8879e7c8a75db3665887d8e7379c6f5c64f231c4a3dfad59e778efcbc2"
+    },
+    {
+      "path": "run-157a96b46a5e/02_identification_refused.result.json",
+      "digest": "sha256:00c65fcd05b86df66005732f0fea0f3461012c4ae9005a5dc12a6305718b8fbc"
+    },
+    {
+      "path": "run-157a96b46a5e/03_cost_fallback.request.json",
+      "digest": "sha256:3e650a5292942da06fa3a096e13ec2f15e50f2b0f1b7141284847c98b62b018e"
+    },
+    {
+      "path": "run-157a96b46a5e/03_cost_fallback.result.json",
+      "digest": "sha256:f5e94bb7c0d1bf964b77d1c35fcf70601076e3dae38fbd08e61760483ffaa125"
+    },
+    {
+      "path": "run-157a96b46a5e/04_worker_timeout.request.json",
+      "digest": "sha256:6d8ea0d79c79800b8a4ff61f6321685f91f0d7c3e09687ca3288cc2786e46e36"
+    },
+    {
+      "path": "run-157a96b46a5e/04_worker_timeout.result.json",
+      "digest": "sha256:efdb8530597dcf13a736e62ef0d3a4ff003056af50967c467483df9572991f81"
+    },
+    {
+      "path": "run-157a96b46a5e/05_full_four_layer.request.json",
+      "digest": "sha256:4dfc942b60294637437b083e9c7aa283e862457a2a8a38e73268c82a61428ec9"
+    },
+    {
+      "path": "run-157a96b46a5e/05_full_four_layer.result.json",
+      "digest": "sha256:f7b61820cad3d799f9f0a173b183f9d2162af5ec060bb0f7e0066603a1ee5c46"
+    },
+    {
+      "path": "run-157a96b46a5e/06_data_snapshot.request.json",
+      "digest": "sha256:02451caa62d5a161eed7a61ee60286b8f86765a80164f9a7afee72136ba0fbba"
+    },
+    {
+      "path": "run-157a96b46a5e/06_data_snapshot.result.json",
+      "digest": "sha256:1332cf93f959c93408b489030dc96c2a3de5e569fe9fdb8aac4c4dfca8756895"
+    },
+    {
+      "path": "run-157a96b46a5e/07_create_loop.request.json",
+      "digest": "sha256:2b6b72dd1a141297f59795cb6c5b3afd766f5c0d62e3a32ca3103222423534c4"
+    },
+    {
+      "path": "run-157a96b46a5e/07_create_loop.result.json",
+      "digest": "sha256:a03d2bab2b51bcafc5325f70dddeb677488d4a11089ee3ed1966707bb308b82f"
+    },
+    {
+      "path": "run-157a96b46a5e/08_rules_loop.request.json",
+      "digest": "sha256:20cb970e9778a5f97af1678b1f71dfca294f6977f40ae5d99660d13091603611"
+    },
+    {
+      "path": "run-157a96b46a5e/08_rules_loop.result.json",
+      "digest": "sha256:d6e118d207e1cb8120edd24015f84e44ac0ca530f095af86b13fcfc859658ccd"
+    },
+    {
+      "path": "run-157a96b46a5e/09_reopen_loop.request.json",
+      "digest": "sha256:bcfcc8caf340dda616d9d02300548fa3a22baf5a5ef89e47f50937fb9258fa03"
+    },
+    {
+      "path": "run-157a96b46a5e/09_reopen_loop.result.json",
+      "digest": "sha256:d6e118d207e1cb8120edd24015f84e44ac0ca530f095af86b13fcfc859658ccd"
+    },
+    {
+      "path": "run-157a96b46a5e/10_reject_post_terminal_change.request.json",
+      "digest": "sha256:a93d773d1cecc89884aa060291a49d912e54a7a6e6201efc7e99094972b40c53"
+    },
+    {
+      "path": "run-157a96b46a5e/11_reject_window_escape.request.json",
+      "digest": "sha256:8ca77f7d49ccceef681f0cdcf81c04d0e5efc95c7d8e8ac68465a68797ef706c"
+    },
+    {
+      "path": "run-157a96b46a5e/12_audit.request.json",
+      "digest": "sha256:e6e2a2e2364a37c2910b63bdb7fb7ffe46791d594c9ea8de3a46ec1ed0e0080c"
+    },
+    {
+      "path": "run-157a96b46a5e/12_audit.result.json",
+      "digest": "sha256:288f9b4fd235a8bed247715f6533e05c0023b6a7ee51b5c6e502b5182d4f1b2c"
+    },
+    {
+      "path": "run-157a96b46a5e/13_invalidate_published_data.request.json",
+      "digest": "sha256:772ebe6304c1d6b6379ac2c35b1769f72ff0773b2356634d3d3479e52ca0f270"
+    },
+    {
+      "path": "run-157a96b46a5e/13_invalidate_published_data.result.json",
+      "digest": "sha256:64ce2e16999497d986444096c9d17e7acff62f86f7ded2ab92eef8bd87986e54"
+    },
+    {
+      "path": "run-157a96b46a5e/14_read_revoked_report.result.json",
+      "digest": "sha256:fc95cd3f54ba5fc407082e4c2f9430c63922bd8e98c221aaf03f7672f5a61a96"
+    },
+    {
+      "path": "run-157a96b46a5e/15_adapter_intake.request.json",
+      "digest": "sha256:08599b9cd4b6e9c01851dd6b609b3b11c52749c5c76df734929e1b9acbf5dc56"
+    },
+    {
+      "path": "run-157a96b46a5e/15_adapter_intake.result.json",
+      "digest": "sha256:2fdb06bfca04af39abaf73ccdab6ebc4a649419385c3250428b7129fc94929a4"
+    },
+    {
+      "path": "run-157a96b46a5e/16_same_window_excluded.request.json",
+      "digest": "sha256:cdae135f4930c7dee790c04a948fb4bca69f2cce96d1b0fbf902e1ddf884caac"
+    },
+    {
+      "path": "run-157a96b46a5e/16_same_window_excluded.result.json",
+      "digest": "sha256:63c49671e4c0faf619ee397c992e45e4c411dce55a4ef9410067b01fc9c93a0f"
+    },
+    {
+      "path": "run-157a96b46a5e/17_next_window_retrieval.request.json",
+      "digest": "sha256:7e40599d653fc360f42666fe15dc08ad375c04052f91cb148ac138d74537974d"
+    },
+    {
+      "path": "run-157a96b46a5e/17_next_window_retrieval.result.json",
+      "digest": "sha256:2e23c4a455301960ad12103fc42f77333f7948a9931fcc0e0e876de3f016dfb7"
+    },
+    {
+      "path": "run-157a96b46a5e/18_registry_to_loop.request.json",
+      "digest": "sha256:108e5b5f3e106ecb1b0dd0692c3399f1ef0e52a47c6f674e5caa14a88ff917f0"
+    },
+    {
+      "path": "run-157a96b46a5e/18_registry_to_loop.result.json",
+      "digest": "sha256:fcef0c0c20e5998b0a44fbd5aca38fa88e35c4fdccafc7ffe64dc351032be3b9"
+    },
+    {
+      "path": "run-157a96b46a5e/19_registered_factor_loop.request.json",
+      "digest": "sha256:fcbb2451fed96fe7c656d26550f596d11dcd6453502b3d8f40c9c9ae5475d64a"
+    },
+    {
+      "path": "run-157a96b46a5e/19_registered_factor_loop.result.json",
+      "digest": "sha256:e6ae83fee2775cc251129ce26047df984262569cf21ae84ed3009d03494149ad"
+    },
+    {
+      "path": "run-157a96b46a5e/20_factor_history.request.json",
+      "digest": "sha256:a3c21bfe6130aa5fa7b366d6ab16991344a84dd9dc0f8e3834ec839992802f0c"
+    },
+    {
+      "path": "run-157a96b46a5e/20_factor_history.result.json",
+      "digest": "sha256:145dc7986851db409a45859142511a0d7cdcb79b0d69544628f3eeacd58aaf91"
+    },
+    {
+      "path": "run-157a96b46a5e/runtime/runs/19d5e841a17348508ac04d55f2be9df5.json",
+      "digest": "sha256:f5e94bb7c0d1bf964b77d1c35fcf70601076e3dae38fbd08e61760483ffaa125"
+    },
+    {
+      "path": "run-157a96b46a5e/runtime/runs/44f9eca51d26435592cd4510d025f6b1.json",
+      "digest": "sha256:ab4ede08e020b13957ce17b6246ed330178d44f6302bafc9e3d1bfb8ce8fd4f0"
+    },
+    {
+      "path": "run-157a96b46a5e/runtime/runs/47333bae5a2a4d5a8004add2f0c473a2.json",
+      "digest": "sha256:f7b61820cad3d799f9f0a173b183f9d2162af5ec060bb0f7e0066603a1ee5c46"
+    },
+    {
+      "path": "run-157a96b46a5e/runtime/runs/5b31ca2aac844437900c7632fc81bcea.json",
+      "digest": "sha256:efdb8530597dcf13a736e62ef0d3a4ff003056af50967c467483df9572991f81"
+    },
+    {
+      "path": "run-157a96b46a5e/runtime/runs/d7a35752e3194c3f81b761fc2907cdd7.json",
+      "digest": "sha256:00c65fcd05b86df66005732f0fea0f3461012c4ae9005a5dc12a6305718b8fbc"
+    }
+  ],
+  "run_directory": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e",
+  "verification": [
+    "four_process_ids",
+    "L0_baseline_and_L1_association_executed",
+    "direct_preregistered_RCT",
+    "refused_design_has_no_effect",
+    "timeout_stops_downstream",
+    "4x_cost_fallback",
+    "durable_rule_loop",
+    "one_final_holdout",
+    "reject_window_reset",
+    "revoked_report_redaction",
+    "adapter_next_window_factor_contract_loop"
+  ]
+}

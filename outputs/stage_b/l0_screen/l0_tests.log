@@ -1,0 +1,10 @@
+test_budget_and_pruning_are_explicit (test_stage_b_l0.L0Tests.test_budget_and_pruning_are_explicit) ... ok
+test_crossing_slices_do_not_double_count_atoms (test_stage_b_l0.L0Tests.test_crossing_slices_do_not_double_count_atoms) ... ok
+test_invalid_probability_and_budget_refused (test_stage_b_l0.L0Tests.test_invalid_probability_and_budget_refused) ... ok
+test_known_local_anomaly_is_recalled (test_stage_b_l0.L0Tests.test_known_local_anomaly_is_recalled) ... ok
+test_missing_cell_cannot_produce_closed_ledger (test_stage_b_l0.L0Tests.test_missing_cell_cannot_produce_closed_ledger) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.140s
+
+OK

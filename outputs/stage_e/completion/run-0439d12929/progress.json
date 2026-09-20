@@ -1,0 +1,258 @@
+[
+  {
+    "case": "insurance-A",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/insurance-A.result.json\"}\n",
+    "request_digest": "sha256:609789da9eea8166151a6bcd3d976f16d66cabce321a487e240be51e00b54a5c"
+  },
+  {
+    "case": "insurance-B",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/insurance-B.result.json\"}\n",
+    "request_digest": "sha256:31a72571d79f23f27e05fe77079371a4c8f521625e4085c904a1e3f13d9a2552"
+  },
+  {
+    "case": "insurance-C",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/insurance-C.result.json\"}\n",
+    "request_digest": "sha256:bffc514927ab5a45e067782d464502ca76d48e429536b3af36295827aede924d"
+  },
+  {
+    "case": "ecommerce-A",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/ecommerce-A.result.json\"}\n",
+    "request_digest": "sha256:cbf5a594f309ee3195095acecbcf14176b0e907dd2659b94ade0afc9047da82a"
+  },
+  {
+    "case": "ecommerce-B",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/ecommerce-B.result.json\"}\n",
+    "request_digest": "sha256:08826f048e668767824939c87da2b3ca51c6795687125fea9af05fffc42364c2"
+  },
+  {
+    "case": "ecommerce-C",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/ecommerce-C.result.json\"}\n",
+    "request_digest": "sha256:44c440d5630145273f9d95707b007d0ad730f038703182793da42dc902a4d905"
+  },
+  {
+    "case": "unavailable-source",
+    "expected": 2,
+    "returncode": 2,
+    "stderr": "DATA_INVALID: data unavailable at analysis time\n",
+    "stdout": "",
+    "request_digest": "sha256:d201a5ee204d66d977145ec97de90dd3339782588c55ed7bad6c591a63254236"
+  },
+  {
+    "case": "N1",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": \"INTAKE_QUEUED\", \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/N1.result.json\"}\n",
+    "request_digest": "sha256:f05a2dcaa89bdfcc6f832da7c4c4846bc0903567f784b8ccd8fac7c7533a40a9"
+  },
+  {
+    "case": "N2",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/N2.result.json\"}\n",
+    "request_digest": "sha256:246c134264b185f0e0363cf89d73125fbcca69cdb9c4198f026ef53e253e47f6"
+  },
+  {
+    "case": "N3",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/N3.result.json\"}\n",
+    "request_digest": "sha256:cfccc2b7114b5a8a3d65e854efaf2cf82bbadf5dda598bd8d3bc1d2bfa9b1956"
+  },
+  {
+    "case": "N3-production-rejected",
+    "expected": 2,
+    "returncode": 2,
+    "stderr": "DATA_INVALID: production traffic operations require business platform; sandbox only\n",
+    "stdout": "",
+    "request_digest": "sha256:01df51a9b8ee6d6dea81edcd90abaa853569400b071c5324c0fc2ae72825ec04"
+  },
+  {
+    "case": "A_signal-freeze",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_signal-freeze.result.json\"}\n",
+    "request_digest": "sha256:a382198bd989ee88d75a7ec17a064e78352f51399756890fc97f3140da23ae55"
+  },
+  {
+    "case": "A_signal-early-reveal-rejected",
+    "expected": 2,
+    "returncode": 2,
+    "stderr": "DATA_INVALID: freeze actual algorithm result before revealing truth\n",
+    "stdout": "",
+    "request_digest": "sha256:45e931e7d5c5bd948414289e3731221559dbfcc41d0e6d9f6f2756748a29de76"
+  },
+  {
+    "case": "A_signal-run",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_signal-run.result.json\"}\n",
+    "request_digest": "sha256:6656511c901a12719fa491ca57c517b340d8bb0170b4128109614266991705cb"
+  },
+  {
+    "case": "A_signal-truth",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_signal-truth.result.json\"}\n",
+    "request_digest": "sha256:45e931e7d5c5bd948414289e3731221559dbfcc41d0e6d9f6f2756748a29de76"
+  },
+  {
+    "case": "A_signal-read",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_signal-read.result.json\"}\n",
+    "request_digest": "sha256:d30d7566c180731192cf0b3223bd6c39cff29e0dfe56adcc22edb778c99120c7"
+  },
+  {
+    "case": "A_signal-report",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": \"SCORED\", \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_signal-report.result.json\"}\n",
+    "request_digest": "sha256:89850b710144430fd6a996785e7c5af2812f9c60713d1b9c27a53c46390fc799"
+  },
+  {
+    "case": "A_signal-idempotent",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_signal-idempotent.result.json\"}\n",
+    "request_digest": "sha256:6656511c901a12719fa491ca57c517b340d8bb0170b4128109614266991705cb"
+  },
+  {
+    "case": "A_null-freeze",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_null-freeze.result.json\"}\n",
+    "request_digest": "sha256:5f48a3c49d78ff2e08cc66ceb21ac57ec8cdfdbc39840bccf5e0fb4988396a82"
+  },
+  {
+    "case": "A_null-early-reveal-rejected",
+    "expected": 2,
+    "returncode": 2,
+    "stderr": "DATA_INVALID: freeze actual algorithm result before revealing truth\n",
+    "stdout": "",
+    "request_digest": "sha256:ce5ab0a1f9e3a26ed957798bc7d5bd9da7059822f3872d8b7785c7ffa8dd01aa"
+  },
+  {
+    "case": "A_null-run",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_null-run.result.json\"}\n",
+    "request_digest": "sha256:854130623c4e0bb4239e50c99426b06853a94dc0e4c2b6df2a62250ed9f6a33d"
+  },
+  {
+    "case": "A_null-truth",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_null-truth.result.json\"}\n",
+    "request_digest": "sha256:ce5ab0a1f9e3a26ed957798bc7d5bd9da7059822f3872d8b7785c7ffa8dd01aa"
+  },
+  {
+    "case": "A_null-read",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_null-read.result.json\"}\n",
+    "request_digest": "sha256:cb3ba3018258c8c6db8b604332e557bb389730224c72422fa4e5e626bd9c2b5f"
+  },
+  {
+    "case": "A_null-report",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": \"SCORED\", \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_null-report.result.json\"}\n",
+    "request_digest": "sha256:93690d74f9185d46262bf4442760c07433624bde237c703302f0246684d46712"
+  },
+  {
+    "case": "A_null-idempotent",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_null-idempotent.result.json\"}\n",
+    "request_digest": "sha256:854130623c4e0bb4239e50c99426b06853a94dc0e4c2b6df2a62250ed9f6a33d"
+  },
+  {
+    "case": "A_overlap_invalid-freeze",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_overlap_invalid-freeze.result.json\"}\n",
+    "request_digest": "sha256:0b10c58a87c02af33593aeb9ff0b613b810c8771335a7a2c00195956e06a44b6"
+  },
+  {
+    "case": "A_overlap_invalid-early-reveal-rejected",
+    "expected": 2,
+    "returncode": 2,
+    "stderr": "DATA_INVALID: freeze actual algorithm result before revealing truth\n",
+    "stdout": "",
+    "request_digest": "sha256:1c12f94ac0be6371c46f6bfa8b19cb15ea610fb75c343f26a01a81f60c1101f7"
+  },
+  {
+    "case": "A_overlap_invalid-run",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_overlap_invalid-run.result.json\"}\n",
+    "request_digest": "sha256:4b2f6cda276708b9022033d325db2c747eda9ed17d0fa02a5e6ad0d67443aacc"
+  },
+  {
+    "case": "A_overlap_invalid-truth",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_overlap_invalid-truth.result.json\"}\n",
+    "request_digest": "sha256:1c12f94ac0be6371c46f6bfa8b19cb15ea610fb75c343f26a01a81f60c1101f7"
+  },
+  {
+    "case": "A_overlap_invalid-read",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_overlap_invalid-read.result.json\"}\n",
+    "request_digest": "sha256:3f1b4b865bdfd5dc608c3d1a34cda964ebb67f00269bae1f0961ad02d55b8f3b"
+  },
+  {
+    "case": "A_overlap_invalid-report",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": \"SCORED\", \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_overlap_invalid-report.result.json\"}\n",
+    "request_digest": "sha256:45bbde37ea0ae448d898d432104f8dea7425df60fc150896aa43964dfc78476a"
+  },
+  {
+    "case": "A_overlap_invalid-idempotent",
+    "expected": 0,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/A_overlap_invalid-idempotent.result.json\"}\n",
+    "request_digest": "sha256:4b2f6cda276708b9022033d325db2c747eda9ed17d0fa02a5e6ad0d67443aacc"
+  }
+]

@@ -1,0 +1,280 @@
+{
+  "status": "PROPOSED",
+  "requires_approval_before_activation": true,
+  "metric_contract": {
+    "name": "conversion",
+    "numerator": "converted_users",
+    "denominator": "users",
+    "aggregation": "ratio_of_sums",
+    "unit": "rate",
+    "analysis_unit": "user",
+    "target_population": "eligible_users",
+    "timezone": "UTC",
+    "window": [
+      0,
+      9
+    ],
+    "maturity_days": 2,
+    "deduplication": "unit_id",
+    "schema_version": "1.0",
+    "contract_type": "MetricContract",
+    "digest": "sha256:a465b7b9997615c548c54c563f2f4a8922265bb674d0b7dc130336ed2f7f583b"
+  },
+  "mde": 0.05,
+  "allocation": 0.5,
+  "planned_units": 4461,
+  "planned_randomization_groups": 4461,
+  "design_effect": 1.0,
+  "sample_size_method": "normal fixed-horizon planning approximation; sequential boundaries may require more samples",
+  "sequential_policy": {
+    "metric_names": [
+      "conversion"
+    ],
+    "checkpoints": [
+      7,
+      14,
+      28
+    ],
+    "minimum_units": 100,
+    "deadline": 28,
+    "alpha": 0.05,
+    "maturity_days": 2,
+    "stopping_rules": null,
+    "method": "finite_look_Hoeffding_union_bound",
+    "observation_range": [
+      0.0,
+      1.0
+    ],
+    "assumption": "independent bounded units; aggregate dependent observations to independent cluster means",
+    "digest": "sha256:88bba0ed4153028f0350e9e6f963be599e88c71c2ab20cddb1002e0781b4f9d0"
+  },
+  "planning_alpha_per_contrast": 0.0125,
+  "factorial_design": {
+    "design_type": "fractional_factorial_resolution_iv",
+    "factors": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "arm_count": 8,
+    "arms": [
+      {
+        "arm_id": "arm-00",
+        "design_code": {
+          "a": 0,
+          "b": 0,
+          "c": 0,
+          "d": 0
+        },
+        "planned_impressions": 558,
+        "is_control": true
+      },
+      {
+        "arm_id": "arm-01",
+        "design_code": {
+          "a": 0,
+          "b": 0,
+          "c": 1,
+          "d": 1
+        },
+        "planned_impressions": 558,
+        "is_control": false
+      },
+      {
+        "arm_id": "arm-02",
+        "design_code": {
+          "a": 0,
+          "b": 1,
+          "c": 0,
+          "d": 1
+        },
+        "planned_impressions": 558,
+        "is_control": false
+      },
+      {
+        "arm_id": "arm-03",
+        "design_code": {
+          "a": 0,
+          "b": 1,
+          "c": 1,
+          "d": 0
+        },
+        "planned_impressions": 558,
+        "is_control": false
+      },
+      {
+        "arm_id": "arm-04",
+        "design_code": {
+          "a": 1,
+          "b": 0,
+          "c": 0,
+          "d": 1
+        },
+        "planned_impressions": 558,
+        "is_control": false
+      },
+      {
+        "arm_id": "arm-05",
+        "design_code": {
+          "a": 1,
+          "b": 0,
+          "c": 1,
+          "d": 0
+        },
+        "planned_impressions": 557,
+        "is_control": false
+      },
+      {
+        "arm_id": "arm-06",
+        "design_code": {
+          "a": 1,
+          "b": 1,
+          "c": 0,
+          "d": 0
+        },
+        "planned_impressions": 557,
+        "is_control": false
+      },
+      {
+        "arm_id": "arm-07",
+        "design_code": {
+          "a": 1,
+          "b": 1,
+          "c": 1,
+          "d": 1
+        },
+        "planned_impressions": 557,
+        "is_control": false
+      }
+    ],
+    "factor_value_scores": {
+      "a": 0.8,
+      "b": 0.8,
+      "c": 0.8,
+      "d": 0.8
+    },
+    "design_diagnostics": {
+      "model_columns": [
+        "intercept",
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "rank": 5,
+      "full_column_rank": true,
+      "factor_balance": {
+        "a": {
+          "level_0": 4,
+          "level_1": 4
+        },
+        "b": {
+          "level_0": 4,
+          "level_1": 4
+        },
+        "c": {
+          "level_0": 4,
+          "level_1": 4
+        },
+        "d": {
+          "level_0": 4,
+          "level_1": 4
+        }
+      },
+      "factor_correlation_matrix": [
+        [
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.9999999999999998,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.9999999999999998,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.9999999999999998
+        ]
+      ],
+      "condition_number": 1.0000000000000002,
+      "main_effect_aliases": [],
+      "all_interaction_aliases": [
+        {
+          "left": "intercept",
+          "right": "a:b:c:d",
+          "sign": 1
+        },
+        {
+          "left": "a",
+          "right": "b:c:d",
+          "sign": 1
+        },
+        {
+          "left": "b",
+          "right": "a:c:d",
+          "sign": 1
+        },
+        {
+          "left": "c",
+          "right": "a:b:d",
+          "sign": 1
+        },
+        {
+          "left": "d",
+          "right": "a:b:c",
+          "sign": 1
+        },
+        {
+          "left": "a:b",
+          "right": "c:d",
+          "sign": 1
+        },
+        {
+          "left": "a:c",
+          "right": "b:d",
+          "sign": 1
+        },
+        {
+          "left": "a:d",
+          "right": "b:c",
+          "sign": 1
+        }
+      ],
+      "second_order_model_columns": [
+        "intercept",
+        "a",
+        "b",
+        "c",
+        "d",
+        "a:b",
+        "a:c",
+        "a:d",
+        "b:c",
+        "b:d",
+        "c:d"
+      ],
+      "second_order_rank": 8,
+      "second_order_jointly_identifiable": false,
+      "resolution": 4,
+      "main_effect_assumption": "higher-order aliased interactions negligible"
+    },
+    "requirements": [
+      "independent randomization per design code",
+      "traceable assignment provenance",
+      "stable randomization unit",
+      "consistent exposure and outcome windows"
+    ]
+  }
+}

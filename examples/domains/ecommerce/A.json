@@ -1,0 +1,43 @@
+{
+  "schema": "enterprise/1",
+  "case_id": "ecommerce-A",
+  "domain": "ecommerce",
+  "line": "A",
+  "source": {
+    "source_uri": "company://ecommerce/sandbox",
+    "license_ref": "declared-company-authorized",
+    "timezone": "UTC",
+    "available_day": 101
+  },
+  "metric_contract": {
+    "name": "checkout_conversion",
+    "numerator": "converted",
+    "denominator": "eligible_users",
+    "aggregation": "ratio_of_sums",
+    "unit": "rate",
+    "analysis_unit": "user",
+    "target_population": "eligible_users",
+    "timezone": "UTC",
+    "window": [
+      0,
+      99
+    ],
+    "maturity_days": 2,
+    "deduplication": "unit_id"
+  },
+  "tables": {
+    "observations": {
+      "path": "observations.json",
+      "field_mapping": {
+        "subject_key": "unit_id",
+        "assigned_arm": "treatment",
+        "conversion": "outcome"
+      }
+    }
+  },
+  "parameters": {
+    "assignment_ref": "declared:sandbox-randomized",
+    "randomized": true,
+    "no_interference_ref": "declared:independent-units"
+  }
+}

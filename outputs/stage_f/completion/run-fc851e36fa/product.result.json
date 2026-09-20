@@ -1,0 +1,32 @@
+{
+  "decision": "PROPOSED",
+  "factor_id": "synth:bf53bfaefcdabd58c337",
+  "spec": {
+    "factor_id": "synth:bf53bfaefcdabd58c337",
+    "expression": {
+      "op": "multiply",
+      "args": [
+        {
+          "factor": "x"
+        },
+        {
+          "factor": "z"
+        }
+      ]
+    },
+    "unit": "index",
+    "parents": [
+      "x",
+      "z"
+    ],
+    "parent_units": {
+      "x": "index",
+      "z": "index"
+    },
+    "source_data_ref": "sha256:56d2af82d7cadd185a34224088573cfdd6f8f6e8b61e566308f80c3883057433",
+    "available_window": 100,
+    "claim_ceiling": "FACTOR_CANDIDATE",
+    "nodes": 3,
+    "ref": "sha256:98fe328a5b1b111ec2d8258b54ea9ad1e259145fac665dd8893b70c2a9f938dc"
+  }
+}

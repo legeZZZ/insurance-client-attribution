@@ -1,0 +1,57 @@
+{
+  "benchmark_version": "track2-hidden-v1",
+  "worker_isolation": "subprocess; public rows and metadata only",
+  "hidden_inputs": [
+    "scenario_family",
+    "seed",
+    "potential_outcomes",
+    "oracle_ate",
+    "expected_outcome"
+  ],
+  "seeds": 8,
+  "scenario_families": 3,
+  "evaluated_cases": 24,
+  "expected_distribution": {
+    "CAUSAL_READY": 8,
+    "DATA_INSUFFICIENT": 8,
+    "DESCRIPTIVE_ONLY": 8
+  },
+  "metrics": {
+    "causal_gate_accuracy": 0.916667,
+    "false_causal_assertion_rate": 0.0,
+    "refusal_recall": 1.0,
+    "issued_effect": {
+      "evaluated": 6,
+      "unavailable_due_to_gate": 2,
+      "bias": 0.003194,
+      "rmse": 0.008573,
+      "ci95_coverage": 1.0
+    },
+    "net_premium_effect": {
+      "evaluated": 6,
+      "unavailable_due_to_gate": 2,
+      "bias": 2.458854,
+      "rmse": 7.897745,
+      "ci95_coverage": 1.0
+    }
+  },
+  "failed_cases": [
+    {
+      "benchmark_id": "hb-1626ff95819e66be",
+      "expected": "CAUSAL_READY",
+      "predicted": "DESCRIPTIVE_ONLY",
+      "failed_integrity_checks": [
+        "pre_treatment_balance"
+      ]
+    },
+    {
+      "benchmark_id": "hb-4aa9d8a9649ec9a1",
+      "expected": "CAUSAL_READY",
+      "predicted": "DESCRIPTIVE_ONLY",
+      "failed_integrity_checks": [
+        "pre_treatment_balance"
+      ]
+    }
+  ],
+  "scope": "actual restored historical baseline; retain all failed gates, no pass-label rewriting"
+}

@@ -1,0 +1,28 @@
+{
+  "metric_names": [
+    "primary",
+    "harm"
+  ],
+  "checkpoints": [
+    7,
+    14
+  ],
+  "minimum_units": 100,
+  "deadline": 14,
+  "alpha": 0.05,
+  "maturity_days": 0,
+  "stopping_rules": {
+    "primary": "primary",
+    "threshold": 0.01,
+    "guardrail_limits": {
+      "harm": 0.05
+    }
+  },
+  "method": "finite_look_Hoeffding_union_bound",
+  "observation_range": [
+    0.0,
+    1.0
+  ],
+  "assumption": "independent bounded units; aggregate dependent observations to independent cluster means",
+  "digest": "sha256:8b2c30085ef2b0850eda55a9c4be2bf10ce7ff764f4614193d0bf551e77507ac"
+}

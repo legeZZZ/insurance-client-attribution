@@ -1,0 +1,17 @@
+services:
+  attribution-console:
+    build: .
+    ports:
+      - "8765:8765"
+    environment:
+      # 内网部署时设置访问令牌；不设置则仅监听回环地址使用
+      - T2_AUTH_TOKEN=${T2_AUTH_TOKEN:-}
+    volumes:
+      # 公司数据目录只读挂载；运行时证据与审计日志写到独立卷
+      - ./company_data:/app/company_data:ro
+      - attribution_runtime:/app/runtime_data
+    command: ["python", "run_server.py", "--data-config", "company_data/config.json"]
+    restart: unless-stopped
+
+volumes:
+  attribution_runtime:

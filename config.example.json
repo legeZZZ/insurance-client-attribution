@@ -1,0 +1,29 @@
+{
+  "data_dir": "data/真实脱敏数据",
+  "label": "示例 · 脱敏数据包",
+  "license_ref": "competition-deidentified",
+  "source_uri_prefix": "deidentified://competition",
+  "detection_threshold": 0.005,
+  "metric_name": "conversion_rate",
+  "metric_unit": "rate",
+  "files": {
+    "metric_panel": "lineB_panel.csv",
+    "factor_snapshots": "factor_snapshots.csv",
+    "change_registry": "change_registry.json",
+    "external_events": "external_events.json"
+  },
+  "field_mapping": {
+    "metric_panel": {},
+    "factor_snapshots": {}
+  },
+  "_说明": {
+    "data_dir": "数据目录（相对代码包根目录或绝对路径）",
+    "files": "五张契约表对应的文件名，缺省见 track2_v5/adapters.py:DEFAULT_FILES",
+    "field_mapping": "公司列名 -> 契约列名；契约列定义见 track2_v5/data_contract.py:TABLE_SPECS",
+    "experiment_readouts": "可选。提供后 change_registry 中的 experiment_id 才会生效，否则变更按未解释处理",
+    "association_statistic": "固定为 pearson、spearman 或 dcor；发现、联合零分布和留出检验使用相同统计量，不能看结果后换方法而不重新登记检验族",
+    "shadow_diagnostics": "可选经验诊断，最多5条因子序列及5个事件；不改变正式候选确认等级"
+  },
+  "association_statistic": "pearson",
+  "shadow_diagnostics": false
+}

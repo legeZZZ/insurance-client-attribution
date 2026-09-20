@@ -17,14 +17,7 @@ PROJECT = Path(__file__).resolve().parent
 sys.path.insert(0, str(PROJECT))
 sys.path.insert(0, str(PROJECT / "src"))
 
-from track2_v5.agent_chat import handle_message, reset_session
-from track2_v5.scenario_reports import SCENARIOS, render_markdown, run_scenario
-from goai_control_tower.track2_analysis import sanitize_rows
-from goai_control_tower.track2_v5_bridge import (
-    evaluate_with_bayes,
-    run_line_b_monthly_review,
-)
-from goai_control_tower.track2_benchmark import run_hidden_benchmark
+from goai_control_tower.configuration import load_config
 from goai_control_tower.track2 import (
     case_experiment_metadata,
     default_metric_contract,
@@ -32,14 +25,46 @@ from goai_control_tower.track2 import (
     public_case,
     run_case,
 )
-from goai_control_tower.configuration import load_config
+from goai_control_tower.track2_analysis import sanitize_rows
+from goai_control_tower.track2_benchmark import run_hidden_benchmark
 from goai_control_tower.track2_datasets import load_dataset_catalog
 from goai_control_tower.track2_real_data import run_real_data_case
+from goai_control_tower.track2_v5_bridge import (
+    evaluate_with_bayes,
+    run_line_b_monthly_review,
+)
+from track2_v5.agent_chat import handle_message, reset_session
+from track2_v5.scenario_reports import (
+    SCENARIOS,
+    render_markdown,
+    run_scenario,
+    set_company_config,
+)
+import console_v2
 
 RUNTIME = PROJECT / "runtime_data"
 STATIC = PROJECT / "web" / "static"
 MAX_REQUEST_BODY = 64 * 1024
 VALID_CASES = {"A", "B", "C"}
+AUTH_TOKEN = os.environ.get("T2_AUTH_TOKEN", "").strip()
+COMPANY_LABEL: str | None = None
+
+
+def audit(event: str, **fields: object) -> None:
+    """Append one JSON line to the audit log (intranet compliance trail)."""
+    try:
+        from datetime import datetime
+
+        RUNTIME.mkdir(parents=True, exist_ok=True)
+        record = {
+            "ts": datetime.now().isoformat(timespec="seconds"),
+            "event": event,
+            **fields,
+        }
+        with (RUNTIME / "audit.log").open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps(record, ensure_ascii=False) + "\n")
+    except OSError:
+        pass
 
 
 def bounded_int(value: str, *, minimum: int, maximum: int, name: str) -> int:
@@ -75,6 +100,17 @@ class Handler(BaseHTTPRequestHandler):
     def log_message(self, format: str, *args: object) -> None:
         return
 
+    def authorized(self) -> bool:
+        """If T2_AUTH_TOKEN is set, require `Authorization: Bearer <token>` for /api/*."""
+        if not AUTH_TOKEN:
+            return True
+        header = self.headers.get("Authorization", "")
+        if header == f"Bearer {AUTH_TOKEN}":
+            return True
+        audit("auth_rejected", path=self.path, client=self.client_address[0])
+        self.send_json({"error": "unauthorized"}, status=401)
+        return False
+
     def send_json(self, payload: object, status: int = 200) -> None:
         body = json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8")
         self.send_response(status)
@@ -85,7 +121,7 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def serve_static(self, path: str) -> None:
-        relative = "semifinal-demo.html" if path == "/" else path.lstrip("/")
+        relative = "final-console-v3.html" if path == "/" else path.lstrip("/")
         candidate = (STATIC / relative).resolve()
         if STATIC.resolve() not in candidate.parents and candidate != STATIC.resolve():
             self.send_error(404)
@@ -124,14 +160,40 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
         query = parse_qs(parsed.query)
+        if parsed.path.startswith("/api/") and not self.authorized():
+            return
         if parsed.path == "/api/health":
             self.send_json(
                 {
                     "status": "ok",
                     "runtime": "local-attribution-conformance",
                     "version": "0.1.0",
+                    "company_data": COMPANY_LABEL is not None,
+                    "auth": bool(AUTH_TOKEN),
                 }
             )
+            return
+        if parsed.path.startswith("/api/v2/"):
+            v2_get = {
+                "/api/v2/overview": console_v2.overview,
+                "/api/v2/factors": console_v2.factors,
+                "/api/v2/watchlist": console_v2.watchlist,
+                "/api/v2/feedback/queue": console_v2.feedback_queue,
+                "/api/v2/skills": console_v2.list_skills,
+                "/api/v2/conflicts": console_v2.conflicts,
+                "/api/v2/evidence": console_v2.evidence,
+                "/api/v2/alerts": console_v2.alerts,
+                "/api/v2/factors/ledger": console_v2.factor_ledger,
+            }
+            handler = v2_get.get(parsed.path)
+            if handler is None:
+                self.send_json({"error": "unknown v2 endpoint"}, status=404)
+                return
+            try:
+                self.send_json(handler(RUNTIME / "console_v2"))
+            except Exception as exc:  # noqa: BLE001 - keep failures machine-readable
+                self.send_json({"error": "v2 endpoint failed", "detail": str(exc)},
+                               status=500)
             return
         if parsed.path == "/api/track2/case":
             try:
@@ -205,6 +267,7 @@ class Handler(BaseHTTPRequestHandler):
             return
         if parsed.path == "/api/track2/scenario-run":
             scenario = query.get("scenario", ["line_a"])[0]
+            audit("scenario_run", scenario=scenario, client=self.client_address[0])
             try:
                 self.send_json(run_scenario(scenario, RUNTIME))
             except KeyError as exc:
@@ -245,32 +308,58 @@ class Handler(BaseHTTPRequestHandler):
             return
         self.serve_static(parsed.path)
 
+    def read_json_body(self):
+        raw_length = self.headers.get("Content-Length", "0")
+        length = bounded_int(
+            raw_length, minimum=1, maximum=MAX_REQUEST_BODY, name="Content-Length"
+        )
+        try:
+            payload = json.loads(self.rfile.read(length) or b"{}")
+        except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+            raise ValueError("invalid JSON body") from exc
+        if not isinstance(payload, dict):
+            raise ValueError("JSON body must be an object")
+        return payload
+
     def do_POST(self) -> None:
         parsed = urlparse(self.path)
-        if parsed.path == "/api/track2/chat":
-            raw_length = self.headers.get("Content-Length", "0")
+        if parsed.path.startswith("/api/") and not self.authorized():
+            return
+        if parsed.path.startswith("/api/v2/"):
             try:
-                length = bounded_int(
-                    raw_length,
-                    minimum=1,
-                    maximum=MAX_REQUEST_BODY,
-                    name="Content-Length",
-                )
+                payload = self.read_json_body()
             except ValueError as exc:
-                status = (
-                    413
-                    if raw_length.isdigit() and int(raw_length) > MAX_REQUEST_BODY
-                    else 400
-                )
-                self.send_json({"error": str(exc)}, status=status)
+                self.send_json({"error": str(exc)}, status=400)
+                return
+            v2_post = {
+                "/api/v2/feedback": console_v2.submit_feedback,
+                "/api/v2/skills/action": console_v2.skill_action,
+                "/api/v2/conflicts/input": console_v2.conflict_input,
+                "/api/v2/alerts/action": console_v2.alert_action,
+                "/api/v2/factors/manage": console_v2.factor_manage,
+            }
+            handler = v2_post.get(parsed.path)
+            if handler is None:
+                self.send_json({"error": "unknown v2 endpoint"}, status=404)
                 return
             try:
-                payload = json.loads(self.rfile.read(length) or b"{}")
-            except (json.JSONDecodeError, UnicodeDecodeError):
-                self.send_json({"error": "invalid JSON body"}, status=400)
+                result = handler(RUNTIME / "console_v2", payload)
+            except (ValueError, KeyError) as exc:
+                self.send_json({"error": str(exc), "governance": True}, status=400)
                 return
-            if not isinstance(payload, dict):
-                self.send_json({"error": "JSON body must be an object"}, status=400)
+            except Exception as exc:  # noqa: BLE001
+                self.send_json({"error": "v2 action failed", "detail": str(exc)},
+                               status=500)
+                return
+            audit("v2_action", endpoint=parsed.path,
+                  client=self.client_address[0])
+            self.send_json(result)
+            return
+        if parsed.path == "/api/track2/chat":
+            try:
+                payload = self.read_json_body()
+            except ValueError as exc:
+                self.send_json({"error": str(exc)}, status=400)
                 return
             session_id = str(payload.get("session_id") or "default")
             message = str(payload.get("message") or "")
@@ -287,15 +376,30 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def main() -> None:
+    global COMPANY_LABEL, RUNTIME
     parser = argparse.ArgumentParser(description="Run the GOAI attribution console")
     parser.add_argument("port", nargs="?", type=int, help="port override")
     parser.add_argument("--config", type=Path, help="JSON configuration file")
+    parser.add_argument(
+        "--data-config",
+        type=Path,
+        help="company data source config (see config.example.json); enables company_line_b",
+    )
     parser.add_argument("--host", help="host override")
     parser.add_argument("--runtime", help="runtime output directory override")
     args = parser.parse_args()
     config = load_config(args.config)
-    global RUNTIME
     RUNTIME = Path(args.runtime or config["runtime"]["output_dir"]).expanduser()
+    if args.data_config:
+        from track2_v5.adapters import load_config as load_data_config
+
+        data_config = load_data_config(args.data_config)
+        set_company_config(data_config)
+        COMPANY_LABEL = data_config.label
+        print(
+            f"company data source: {data_config.label} ({data_config.data_dir})",
+            flush=True,
+        )
     host = args.host or os.environ.get("HOST") or config["server"]["host"]
     port = (
         args.port

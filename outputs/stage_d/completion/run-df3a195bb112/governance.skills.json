@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "skills": {
+    "metric_skill": {
+      "versions": [
+        {
+          "version": 1,
+          "rules": [
+            {
+              "when": {
+                "metric_kind": "ratio_of_sums"
+              },
+              "action": "check_metric",
+              "polarity": "reinforce",
+              "evidence": [
+                "sha256:18ec8938a2eb205a35191f09dd728ed031d3cb9c7ce4047765ff9f05be9c475f"
+              ]
+            }
+          ],
+          "digest": "138422e959e5bc2c",
+          "note": "G0–G6 governed release",
+          "governance_binding": {
+            "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/governance.db",
+            "name": "metric_skill",
+            "version": 1,
+            "spec_digest": "sha256:d087a88ce5ee33d4ccb827f9d93f32cecc23765dcb4317fbf6bcd03c8c4b2427"
+          },
+          "evidence_binding": {
+            "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/governance.db",
+            "asset_ref": "sha256:413688d48f80a98bfda2c58a124db5324876ad845ff9bbcdb0b2d34e5676d467"
+          }
+        },
+        {
+          "version": 2,
+          "rules": [
+            {
+              "when": {
+                "metric_kind": "ratio_of_sums"
+              },
+              "action": "check_metric",
+              "polarity": "reinforce",
+              "evidence": [
+                "sha256:18ec8938a2eb205a35191f09dd728ed031d3cb9c7ce4047765ff9f05be9c475f"
+              ]
+            }
+          ],
+          "digest": "abc7cd5bfc202319",
+          "note": "G0–G6 governed release",
+          "governance_binding": {
+            "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/governance.db",
+            "name": "metric_skill",
+            "version": 1,
+            "spec_digest": "sha256:d087a88ce5ee33d4ccb827f9d93f32cecc23765dcb4317fbf6bcd03c8c4b2427"
+          },
+          "evidence_binding": {
+            "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/governance.db",
+            "asset_ref": "sha256:356ccfa271b0fee30f7b477f3d6c8985d2ac10f024bbe40e661de27542126d92"
+          }
+        }
+      ],
+      "active": 2,
+      "changelog": [
+        {
+          "version": 1,
+          "event": "registered",
+          "note": "G0–G6 governed release"
+        },
+        {
+          "version": 1,
+          "event": "activated",
+          "previous": null,
+          "note": "bound human release sha256:c677abe3af6f57a34a4f1b0cff33da340db36ddb994758fa60df1b27ad6aed0d"
+        },
+        {
+          "version": 2,
+          "event": "registered",
+          "note": "G0–G6 governed release"
+        },
+        {
+          "version": 2,
+          "event": "activated",
+          "previous": 1,
+          "note": "bound human release sha256:9f9c6913abf5449b3ac0062d8160e14ffa2914f9a7c7f4b6b02702e9dceab16a"
+        }
+      ],
+      "governed": true
+    },
+    "watch_skill": {
+      "versions": [
+        {
+          "version": 1,
+          "rules": [
+            {
+              "when": {
+                "workflow": "c_line"
+              },
+              "action": "scan_window",
+              "polarity": "reinforce",
+              "evidence": [
+                "sha256:15cae3e0954f46c6f35d6c4d587cdf4d6cc271acacb35b5c2bfda002691dde83"
+              ]
+            }
+          ],
+          "digest": "5a8c194076b1a88d",
+          "note": "G0–G6 governed release",
+          "governance_binding": {
+            "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/governance.db",
+            "name": "watch_skill",
+            "version": 1,
+            "spec_digest": "sha256:34b64dc22327c61fb1f3e60abfb9c90910c62aedc71b7619d615692af92d449d"
+          },
+          "evidence_binding": {
+            "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/governance.db",
+            "asset_ref": "sha256:66cb5cb0c03716766fb10167db69d9045a12e4ae3e43b350ac6370066ee63db2"
+          }
+        },
+        {
+          "version": 2,
+          "rules": [
+            {
+              "when": {
+                "workflow": "c_line"
+              },
+              "action": "scan_window",
+              "polarity": "reinforce",
+              "evidence": [
+                "sha256:15cae3e0954f46c6f35d6c4d587cdf4d6cc271acacb35b5c2bfda002691dde83"
+              ]
+            }
+          ],
+          "digest": "527c6ec4f2734e7d",
+          "note": "G0–G6 governed release",
+          "governance_binding": {
+            "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/governance.db",
+            "name": "watch_skill",
+            "version": 1,
+            "spec_digest": "sha256:34b64dc22327c61fb1f3e60abfb9c90910c62aedc71b7619d615692af92d449d"
+          },
+          "evidence_binding": {
+            "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/governance.db",
+            "asset_ref": "sha256:06b92f0cd8753856a7222e72ccae8c3deef305b09b46014ceb9a5423d6091d24"
+          }
+        }
+      ],
+      "active": 2,
+      "changelog": [
+        {
+          "version": 1,
+          "event": "registered",
+          "note": "G0–G6 governed release"
+        },
+        {
+          "version": 1,
+          "event": "activated",
+          "previous": null,
+          "note": "bound human release sha256:333726a4cb961f095c3b9a77378e46604eb9ab0ae0b95787beef3a655cdcdf09"
+        },
+        {
+          "version": 2,
+          "event": "registered",
+          "note": "G0–G6 governed release"
+        },
+        {
+          "version": 2,
+          "event": "activated",
+          "previous": 1,
+          "note": "bound human release sha256:044e9d3cba0aff98e02765236a2f91e43d0b8be671db75837ffc29732a8f9b9f"
+        }
+      ],
+      "governed": true
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "operation": "synthesis",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_f/completion/run-fc851e36fa/state.db",
+    "action": "set_enabled",
+    "parameters": {
+      "policy_id": "p",
+      "enabled": true
+    }
+  }
+}

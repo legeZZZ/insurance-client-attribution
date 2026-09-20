@@ -771,6 +771,94 @@
       "evidence_level": "COMPONENT_EFFECT"
     }
   ],
+  "a_line_funnel": {
+    "window": {
+      "start_day": 60,
+      "end_day": 73
+    },
+    "metric": "carousel_ctr",
+    "estimand": "treatment-control rate difference",
+    "stages": [
+      {
+        "id": "exposure",
+        "label": "曝光",
+        "control": 25185,
+        "treatment": 24815,
+        "control_rate": 1.0,
+        "treatment_rate": 1.0,
+        "delta": 0.0
+      },
+      {
+        "id": "reach",
+        "label": "到达",
+        "control": 24331,
+        "treatment": 23536,
+        "control_rate": 0.966091,
+        "treatment_rate": 0.948459,
+        "delta": -0.017632
+      },
+      {
+        "id": "click",
+        "label": "点击",
+        "control": 1032,
+        "treatment": 489,
+        "control_rate": 0.040977,
+        "treatment_rate": 0.019706,
+        "delta": -0.021271
+      },
+      {
+        "id": "quote",
+        "label": "报价",
+        "control": 691,
+        "treatment": 296,
+        "control_rate": 0.669574,
+        "treatment_rate": 0.605317,
+        "delta": -0.064257
+      },
+      {
+        "id": "issue",
+        "label": "投保",
+        "control": 304,
+        "treatment": 124,
+        "control_rate": 0.439942,
+        "treatment_rate": 0.418919,
+        "delta": -0.021023
+      }
+    ],
+    "arms": [
+      {
+        "id": "control",
+        "label": "Control · 旧版轮播",
+        "component_version": "carousel.v1",
+        "exposures": 25185,
+        "reach": 24331,
+        "click": 1032,
+        "quote": 691,
+        "issue": 304,
+        "ctr": 0.040977,
+        "reach_rate": 0.966091,
+        "quote_rate_from_click": 0.669574,
+        "issue_rate_from_quote": 0.439942
+      },
+      {
+        "id": "treatment",
+        "label": "Treatment · 新版轮播",
+        "component_version": "carousel.v2",
+        "exposures": 24815,
+        "reach": 23536,
+        "click": 489,
+        "quote": 296,
+        "issue": 124,
+        "ctr": 0.019706,
+        "reach_rate": 0.948459,
+        "quote_rate_from_click": 0.605317,
+        "issue_rate_from_quote": 0.418919
+      }
+    ],
+    "evidence_level": "CAUSAL_READY",
+    "fixture_note": "后续报价与投保阶段由同一随机化曝光 fixture 按固定规则生成，用于演示漏斗分析。",
+    "overlap_subgroups": 7
+  },
   "ledger": {
     "state": "DECISION_READY",
     "claims": [

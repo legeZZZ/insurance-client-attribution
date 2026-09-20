@@ -1,0 +1,9 @@
+{
+  "track2_v5/association_discovery.py": "e50697f43c03572469e2f4054fb48a988ec2ff27cfeb6a17c1b8f752f0d7ae63",
+  "track2_v5/bayes.py": "ede11af8368801f3e0b293261fbe5200e2181277203a7be38ed71d124c045a64",
+  "track2_v5/fdr.py": "fd55c147055a2e4ba6023001ab10128bde5373897f0799095da1a0476bcb7951",
+  "track2_v5/validation_planner.py": "8f2934b868bdd643ea798a0114c94c2dfc23dbb841525f9c16e09168c8888eaf",
+  "tests/test_stage_b_statistics.py": "c2039cf8a8ce5bea6b6012bb0dde62aa6a748ce536e04f6e0960a6cbee5917ee",
+  "tests/test_upgrade_v12.py": "209aeabb004d2af0898f6da3fe3635417d7b0a572ddb57a47d438d57a9f36e77",
+  "tools/check_stage_b_statistics.py": "77e7514ec0868a258e2f459850e5090094c4082d47a470263b819c04e857f6ad"
+}

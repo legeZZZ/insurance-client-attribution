@@ -32,12 +32,12 @@ from track2_v5.baseline_attribution import (
 )
 from track2_v5.bayes import bundle_compare, estimate_hte
 
+from .experiment_integrity import require_integrity_pass
 from .track2_analysis import (
     evaluate_public_dataset,
     prepare_analysis_rows,
     sanitize_rows,
 )
-from .experiment_integrity import require_integrity_pass
 
 
 def run_line_b_monthly_review(runtime_dir=None) -> dict[str, Any]:

@@ -1,0 +1,407 @@
+{
+  "phase": "C",
+  "status": "COMPLETE",
+  "tasks": [
+    "T17",
+    "T18",
+    "T19",
+    "T20",
+    "T21",
+    "T22"
+  ],
+  "tests": {
+    "passed": 186,
+    "total": 186,
+    "seconds": 55.467,
+    "new_phase_c_tests": 25
+  },
+  "cli_cases": 19,
+  "latest_run": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e",
+  "files": [
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/acceptance.json",
+      "bytes": 14395,
+      "sha256": "ad188e8804cbec1acfd46109c3767b21f905532b408e7c973b09839bce13e704"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/cli.log",
+      "bytes": 176,
+      "sha256": "a1697114da3e76f886ff9c63a50684c3fbdb56b8fbcb94cbd33a2aa44d6c7c17"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/regression.log",
+      "bytes": 625,
+      "sha256": "a22cb25337e8205c9c59a2fa2ea8e22beb6f77945954e53d0d5641a7afab6dbe"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/01_direct_rct.request.json",
+      "bytes": 17806,
+      "sha256": "c1fb9ab249cc3f64f08f18d92f8fb6fd98e8da2a42afe9af181dd94f0ec41308"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/01_direct_rct.result.json",
+      "bytes": 32422,
+      "sha256": "1db3d80504b878163bb760f601b973c634c9bf15477b2a64433d4b5cc2d4f6fb"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/02_identification_refused.request.json",
+      "bytes": 17807,
+      "sha256": "800a5be94c625fecf174d306af4edc8b0d803f98bc363471df678fd0d931ef56"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/02_identification_refused.result.json",
+      "bytes": 32098,
+      "sha256": "a66f447857c3a42b04009dccb3d3fb7900438a54a6705b658de56f157346953d"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/03_cost_fallback.request.json",
+      "bytes": 17799,
+      "sha256": "33f88589fc173914f7263126a275d7323829998361aad7bc4d3da33a7a494f7c"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/03_cost_fallback.result.json",
+      "bytes": 32167,
+      "sha256": "8d82a2383fbb11383f5e2a98ca68e2f8611317a23fd30287d261233d7314221c"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/04_worker_timeout.request.json",
+      "bytes": 17796,
+      "sha256": "57afdb87bdc8fbd7be3480a9e06eafeaf88e26830b0d03a51c533e07810fb9b2"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/04_worker_timeout.result.json",
+      "bytes": 950,
+      "sha256": "019aa13dd7fa6c2db4dbd8ef423a9b2593b60511882ad1b5a47be9fe0d66c7a1"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/05_full_four_layer.request.json",
+      "bytes": 32271,
+      "sha256": "0667a0815aa0317f0142179ede71d8a13be8c77babf484a7ba886832d213ea8e"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/05_full_four_layer.result.json",
+      "bytes": 60410,
+      "sha256": "176a65847f16c928c0da9f2913fe447441949627d58a3c6a9d0dac165344f709"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/06_data_snapshot.request.json",
+      "bytes": 8531,
+      "sha256": "c646392150dcb01cde6b34f1dd6c97e43f27dc091a046fe9373f6307aa768b25"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/06_data_snapshot.result.json",
+      "bytes": 123,
+      "sha256": "a9b06ed02cc0e8425fc1b890f142cfff8f6e56ac25330e36c5d64ad7b21d46c5"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/07_create_loop.request.json",
+      "bytes": 613,
+      "sha256": "5f098307d81cae845ee6a40cfbefcdaafc911d70b4dcfe44c074e66a9b546607"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/07_create_loop.result.json",
+      "bytes": 1647,
+      "sha256": "dba2439c94299fc74fcb01b6c106c8f4fd146f93badeef21913332a50dae03bf"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/08_rules_loop.request.json",
+      "bytes": 348,
+      "sha256": "8278f83558227b8045a3a7c568b144d0e2726d7b9fc1bb2abe6e034009f816c0"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/08_rules_loop.result.json",
+      "bytes": 4567,
+      "sha256": "bedc43728e8ad9244661176a4607655007ec45b092257d6f9777501b2065fd82"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/09_reopen_loop.request.json",
+      "bytes": 349,
+      "sha256": "3f636adae06e5262a6db6300a556441e321a9efb8c07162dcae712d122788595"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/09_reopen_loop.result.json",
+      "bytes": 4567,
+      "sha256": "bedc43728e8ad9244661176a4607655007ec45b092257d6f9777501b2065fd82"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/10_reject_post_terminal_change.request.json",
+      "bytes": 488,
+      "sha256": "470bf6e23fb92b76ce8893b7832f3981e0da16b7d3e2cd516a3f9fb0c81f06da"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/11_reject_window_escape.request.json",
+      "bytes": 514,
+      "sha256": "0682b4924df57b084336503c2aae2c3cf747331d0b92d87561b6563c32fa08de"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/12_audit.request.json",
+      "bytes": 249,
+      "sha256": "52276be7e777ac071da4d8d536bed341501ba94610552eb881c19526d7e51993"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/12_audit.result.json",
+      "bytes": 3213,
+      "sha256": "1429f33482e7b8fbcc4dda68968323e36e7410c890445a5acd418e753b3bb9ea"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/13_invalidate_published_data.request.json",
+      "bytes": 406,
+      "sha256": "368b970966062dc5cae60b6fc59930701f89fa18186422a7b8368994a56b4412"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/13_invalidate_published_data.result.json",
+      "bytes": 475,
+      "sha256": "942e0ea8ebf7b5935378affe66b2cf846a3753d41320ab93f415ffb699caceab"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/14_read_revoked_report.result.json",
+      "bytes": 287,
+      "sha256": "3243ff17744db76d4e7480a1afc7bac74ae1d2d0467ddfad024bd714de157712"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/15_adapter_intake.request.json",
+      "bytes": 5584,
+      "sha256": "9c3c1bb9a8033f3e03b1c3737d56f7cd1a02971580a2db788465e8c245946e2f"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/15_adapter_intake.result.json",
+      "bytes": 163,
+      "sha256": "f6fae6f8526ec6aa21f9164538d55df79c9b3485aa2c841337ca4fe4436b5af0"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/16_same_window_excluded.request.json",
+      "bytes": 297,
+      "sha256": "809a0d4ebf4cd515382718142d8954de1adb16e0a7180d92317832ed3063cbe0"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/16_same_window_excluded.result.json",
+      "bytes": 18,
+      "sha256": "ff1434e1a4afd84247c3f0475e98240a613c4f97c22f4afc7af1a014af57a627"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/17_next_window_retrieval.request.json",
+      "bytes": 297,
+      "sha256": "a9e06bd716366dadf543b68e6248498c2413753b73b9a2fe94591f34ba65b8bf"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/17_next_window_retrieval.result.json",
+      "bytes": 54534,
+      "sha256": "d81b88849f6761bbf123f18d3fc0b7e194f448251a0f65fdf0da9996a35c0fca"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/18_registry_to_loop.request.json",
+      "bytes": 834,
+      "sha256": "1b365c32adffb76513c0e90d53e5a44af65b4ee03f18a5d2e1b21981a35c9e68"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/18_registry_to_loop.result.json",
+      "bytes": 1659,
+      "sha256": "15e8a4dae7336780002bac2584ef0b1e791aa671bf95dc9a853ae408e5fb4ffa"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/19_registered_factor_loop.request.json",
+      "bytes": 348,
+      "sha256": "a6f599878c4bdb11123abcb0c4af9da5fe5f53297c4b09bf88ec03d27e1c70e8"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/19_registered_factor_loop.result.json",
+      "bytes": 4628,
+      "sha256": "2c7d194c6c8caf5b653c3b8aab6aa317d5562b9f1629b0da5b8acba7651aad6f"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/20_factor_history.request.json",
+      "bytes": 275,
+      "sha256": "d6cd670fbdc5c7e4e59450b85bc1d6b3198cbd58f7ba67aea8af2e9bc3847790"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/20_factor_history.result.json",
+      "bytes": 66620,
+      "sha256": "6de0050be2bb65160a24fc9dcbe8cb2e5dc9ead8f0b79f9c37bf7e68411389b2"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/factors.db",
+      "bytes": 114688,
+      "sha256": "d0a7066d5c35abc4bc38dabb26ba935b702f7c2407d5a4ae140abf64960b9af2"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/investigation.db",
+      "bytes": 155648,
+      "sha256": "9bbaaa21c38918e8595490d6e5cef8a69c554d5689565c9d0678937b38e7f8a9"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/runtime/hypotheses.sqlite3",
+      "bytes": 143360,
+      "sha256": "f275962320b263bb2a051b875dcef5dc63d8ad96d08f868a267872fb97f77bd1"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/runtime/runs/19d5e841a17348508ac04d55f2be9df5.json",
+      "bytes": 32167,
+      "sha256": "8d82a2383fbb11383f5e2a98ca68e2f8611317a23fd30287d261233d7314221c"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/runtime/runs/44f9eca51d26435592cd4510d025f6b1.json",
+      "bytes": 32422,
+      "sha256": "1db3d80504b878163bb760f601b973c634c9bf15477b2a64433d4b5cc2d4f6fb"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/runtime/runs/47333bae5a2a4d5a8004add2f0c473a2.json",
+      "bytes": 60410,
+      "sha256": "176a65847f16c928c0da9f2913fe447441949627d58a3c6a9d0dac165344f709"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/runtime/runs/5b31ca2aac844437900c7632fc81bcea.json",
+      "bytes": 950,
+      "sha256": "019aa13dd7fa6c2db4dbd8ef423a9b2593b60511882ad1b5a47be9fe0d66c7a1"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/runtime/runs/d7a35752e3194c3f81b761fc2907cdd7.json",
+      "bytes": 32098,
+      "sha256": "a66f447857c3a42b04009dccb3d3fb7900438a54a6705b658de56f157346953d"
+    },
+    {
+      "path": "可执行代码包/outputs/stage_c/completion/targeted_snapshot_tests.log",
+      "bytes": 125,
+      "sha256": "78bf067a9f9fc21dfb5a7176ca4d933fd53f36a17f2083d4703044f2aedaec5e"
+    },
+    {
+      "path": "可执行代码包/src/goai_control_tower/foundation.py",
+      "bytes": 18792,
+      "sha256": "b3ae19e7ec3c0aa1a0bef8c561cd9bb76d41afd72639a3319f8eada6f3dd3906"
+    },
+    {
+      "path": "可执行代码包/tests/test_stage_c.py",
+      "bytes": 28427,
+      "sha256": "5ed122d2e5f639a49818b3a18350e11baecfcee1df56a22eb85d569be7cd5608"
+    },
+    {
+      "path": "可执行代码包/tools/check_stage_c_acceptance.py",
+      "bytes": 9723,
+      "sha256": "8d72a0a4b2896abc932065c572990aedbdb1e67bcbca33027af731cd1e4b1ee1"
+    },
+    {
+      "path": "可执行代码包/tools/run_causal_pipeline.py",
+      "bytes": 3337,
+      "sha256": "1b1a486da91e93990d65a5711b19b99abf863a0033a8e068add4496f4c038df6"
+    },
+    {
+      "path": "可执行代码包/track2_clean_bundle/src/goai_control_tower/foundation.py",
+      "bytes": 18277,
+      "sha256": "c1321d65221e9b05ec4d311431fa62ec112f897de71019f505c13c53248828d4"
+    },
+    {
+      "path": "可执行代码包/track2_v5/__main__.py",
+      "bytes": 16485,
+      "sha256": "9c3db35faf404fd08f696c0af88cccdb317753710d401b00c6fcd53b42a911da"
+    },
+    {
+      "path": "可执行代码包/track2_v5/adapters.py",
+      "bytes": 18705,
+      "sha256": "8dad8b957a32a99c77fcc60fef5dccca027d838bdb9a0c9665bc2ee8f1f7adde"
+    },
+    {
+      "path": "可执行代码包/track2_v5/agent_adapter.py",
+      "bytes": 7816,
+      "sha256": "05fc164c838222ed5fab00219dde9c2068927a2907189089b8d7ed7c0e40915d"
+    },
+    {
+      "path": "可执行代码包/track2_v5/agent_orchestrator.py",
+      "bytes": 6890,
+      "sha256": "d77747af18e02f86abdd7155e7f854715f6fcc3a288ada8946fed2bd0307481f"
+    },
+    {
+      "path": "可执行代码包/track2_v5/association_discovery.py",
+      "bytes": 41804,
+      "sha256": "fead1f01e0b59a37eba2e9569ed3e16f51ffe5cee1c48f1a356423b47eec4bb0"
+    },
+    {
+      "path": "可执行代码包/track2_v5/causal_discovery.py",
+      "bytes": 11434,
+      "sha256": "5eff13520e3c6e84bfd4cf08ebecb05cdf4532c1f5ff8344bdf058a2059972f1"
+    },
+    {
+      "path": "可执行代码包/track2_v5/claim_ledger.py",
+      "bytes": 7741,
+      "sha256": "65b9f63dac78272922ece9c35b415e4ddc9ebd7f88b6a1d3657ade1885d7f9e2"
+    },
+    {
+      "path": "可执行代码包/track2_v5/factor_registry.py",
+      "bytes": 22431,
+      "sha256": "c237ac48708f896457fc048cb4386a638014da3340b350ba1a68dee0649c0e99"
+    },
+    {
+      "path": "可执行代码包/track2_v5/factor_retriever.py",
+      "bytes": 1398,
+      "sha256": "e933fbc4efeeb6379bc5f9903706e390ce88397e98e1c9d5f205415e0456c724"
+    },
+    {
+      "path": "可执行代码包/track2_v5/human_feedback.py",
+      "bytes": 11080,
+      "sha256": "e387f652987f5b9b69adcc68d5fdabe9dd4e54801df04cb148b79f9479ac3798"
+    },
+    {
+      "path": "可执行代码包/track2_v5/hypothesis_registry.py",
+      "bytes": 20399,
+      "sha256": "c258141900064da4765e41a059e918ee915d92578122a0a278ecbb44437ebab7"
+    },
+    {
+      "path": "可执行代码包/track2_v5/investigation_api.py",
+      "bytes": 5219,
+      "sha256": "f9da4a0902d51308b4bc1552ff1e6b1a45b773937150d093cb918d2b91b794c1"
+    },
+    {
+      "path": "可执行代码包/track2_v5/loop_controller.py",
+      "bytes": 28267,
+      "sha256": "405d9166deecc3c8c88ae7b5d4a1762418cf4ea1acbf67c1479078e25e74ea96"
+    },
+    {
+      "path": "可执行代码包/track2_v5/policy_adapter.py",
+      "bytes": 6403,
+      "sha256": "8a5b0b5aa41645628d76b296fa5e31627e709183e16d52b690441a758ab5bae1"
+    },
+    {
+      "path": "可执行代码包/track2_v5/policy_http_transport.py",
+      "bytes": 1283,
+      "sha256": "499106c29da134cb73ac91ef006381f943b42d816fddb19e056f2a0690822a30"
+    },
+    {
+      "path": "可执行代码包/track2_v5/publication.py",
+      "bytes": 12646,
+      "sha256": "1f2a9a3ad05241000e89c6615d5da7abf216b38a00b8aeb1ca49cce00c5b4546"
+    },
+    {
+      "path": "可执行代码包/track2_v5/scenario_reports.py",
+      "bytes": 67297,
+      "sha256": "b52291b2399a8d5cf4c343e1746ac5aefa6dca5b9d25dccfa1eeb37ed914e663"
+    },
+    {
+      "path": "可执行代码包/track2_v5/skill_evolution.py",
+      "bytes": 20015,
+      "sha256": "e9d520e97c053dc2b210317b4ec95e080d1e461cde49d10a79dffb25cd09faf3"
+    },
+    {
+      "path": "可执行代码包/track2_v5/stage_worker.py",
+      "bytes": 5337,
+      "sha256": "42e0dd80c92c0dfbaa2f75f5ce7ea551b43d83f13815f8a93a2103128171c28c"
+    },
+    {
+      "path": "可执行代码包/因果流水线接口说明.md",
+      "bytes": 23013,
+      "sha256": "c1ca7b08c9a4ed9a8ddc8419662c641ccfecd17ac63fa64ebc2eab64d11a4666"
+    },
+    {
+      "path": "审阅问题清单-修改前.md",
+      "bytes": 55682,
+      "sha256": "fc86657d0a9cf8fe7842df8af4b37e25af2012d7ed019ebf1f7e739f014a8174"
+    },
+    {
+      "path": "方案文档/赛道二-升级方案-v17-决赛完整版.html",
+      "bytes": 76256,
+      "sha256": "de46866a2df1d65cc212eceebf0c1ca0bb037e11e710a2b3e75c52ffe13c06ae"
+    },
+    {
+      "path": "阶段实施记录.md",
+      "bytes": 38641,
+      "sha256": "477ed67ce4c4bc8c22cf748109ea1edc3fbc18bd41a0455b4a136edd3967bdb0"
+    }
+  ]
+}

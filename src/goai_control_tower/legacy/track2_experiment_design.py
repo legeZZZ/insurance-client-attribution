@@ -3,35 +3,40 @@
 from __future__ import annotations
 
 import math
-from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
+from collections.abc import Sequence
+from typing import Any
 
-from .track2_bayesian import beta_posterior, compare_groups, expected_information_gain
-
+from .track2_bayesian import beta_posterior, expected_information_gain
 
 # ---------------------------------------------------------------------------
 # Experiment design candidate
 # ---------------------------------------------------------------------------
 
+
 def design_factorial_experiment(
-    factors: Sequence[Dict[str, Any]],
+    factors: Sequence[dict[str, Any]],
     base_rate: float = 0.1,
     mde: float = 0.05,
     alpha: float = 0.05,
     target_power: float = 0.80,
     max_factors: int = 4,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Design a factorial or partial factorial experiment from ranked factors.
 
     Selects top factors and computes required sample size per arm.
     """
     # Select top factors that are experimentable
-    selected = [f for f in factors if f.get("experimentability", 0) >= 0.5][:max_factors]
+    selected = [f for f in factors if f.get("experimentability", 0) >= 0.5][
+        :max_factors
+    ]
 
     # Normal approximation for binary outcome
     z_alpha = 1.96 if alpha == 0.05 else 1.96
     z_power = 0.84 if target_power == 0.80 else 0.84
     variance = max(base_rate * (1.0 - base_rate), 0.01)
-    required_per_arm = int(math.ceil(2.0 * (z_alpha + z_power) ** 2 * variance / max(mde ** 2, 1e-9)))
+    required_per_arm = math.ceil(
+        2.0 * (z_alpha + z_power) ** 2 * variance / max(mde**2, 1e-9)
+    )
 
     designs = []
     if len(selected) <= 3:
@@ -46,12 +51,16 @@ def design_factorial_experiment(
         total_required = required_per_arm * 2 * len(selected)
 
     for factor in selected:
-        designs.append({
-            "factor_id": factor["factor_id"],
-            "factor_name": factor.get("factor_name", factor["factor_id"]),
-            "expected_effect": factor.get("shrunken_effect", factor.get("raw_effect", 0)),
-            "experimentability": factor.get("experimentability", 0.5),
-        })
+        designs.append(
+            {
+                "factor_id": factor["factor_id"],
+                "factor_name": factor.get("factor_name", factor["factor_id"]),
+                "expected_effect": factor.get(
+                    "shrunken_effect", factor.get("raw_effect", 0)
+                ),
+                "experimentability": factor.get("experimentability", 0.5),
+            }
+        )
 
     return {
         "design_type": design_type,
@@ -62,7 +71,8 @@ def design_factorial_experiment(
         "alpha": alpha,
         "target_power": target_power,
         "mde": mde,
-        "recommendation": "Run %s experiment with %d arms, %d per arm" % (design_type, num_arms, required_per_arm),
+        "recommendation": "Run %s experiment with %d arms, %d per arm"
+        % (design_type, num_arms, required_per_arm),
     }
 
 
@@ -70,14 +80,15 @@ def design_factorial_experiment(
 # Optimal experiment selection via information gain
 # ---------------------------------------------------------------------------
 
+
 def select_next_experiment(
-    candidates: Sequence[Dict[str, Any]],
-    control_stats: Dict[str, int],
-    prior: Tuple[float, float] = (1.0, 1.0),
+    candidates: Sequence[dict[str, Any]],
+    control_stats: dict[str, int],
+    prior: tuple[float, float] = (1.0, 1.0),
     lambda_business_loss: float = 1.0,
     mu_experiment_cost: float = 0.1,
     max_n_per_arm: int = 100_000,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Select the best next experiment by maximizing:
 
         design_score = EIG - lambda * expected_business_loss - mu * experiment_cost
@@ -116,27 +127,37 @@ def select_next_experiment(
             info_gain = eig["information_gain_ratio"]
 
             # Expected business loss: if we ship and it's harmful
-            raw_effect = candidate.get("shrunken_effect", candidate.get("raw_effect", 0))
+            raw_effect = candidate.get(
+                "shrunken_effect", candidate.get("raw_effect", 0)
+            )
             prob_harm = candidate.get("probability_practical_harm", 0.5)
             expected_loss = prob_harm * abs(raw_effect) * n_per_arm * 2  # rough proxy
 
             # Experiment cost
             experiment_cost = mu_experiment_cost * n_per_arm * 2
 
-            score = info_gain - lambda_business_loss * expected_loss / 1e6 - experiment_cost / 1e6
+            score = (
+                info_gain
+                - lambda_business_loss * expected_loss / 1e6
+                - experiment_cost / 1e6
+            )
             if score > best_score:
                 best_score = score
                 best_n = n_per_arm
                 best_eig = eig
 
-        proposals.append({
-            "factor_id": candidate["factor_id"],
-            "factor_name": candidate.get("factor_name", candidate["factor_id"]),
-            "best_n_per_arm": best_n,
-            "expected_information_gain": best_eig["information_gain_ratio"] if best_eig else None,
-            "design_score": round(best_score, 6),
-            "expected_effect": raw_effect,
-        })
+        proposals.append(
+            {
+                "factor_id": candidate["factor_id"],
+                "factor_name": candidate.get("factor_name", candidate["factor_id"]),
+                "best_n_per_arm": best_n,
+                "expected_information_gain": best_eig["information_gain_ratio"]
+                if best_eig
+                else None,
+                "design_score": round(best_score, 6),
+                "expected_effect": raw_effect,
+            }
+        )
 
     proposals.sort(key=lambda x: x["design_score"], reverse=True)
     return {
@@ -150,15 +171,16 @@ def select_next_experiment(
 # Assurance computation
 # ---------------------------------------------------------------------------
 
+
 def compute_assurance(
-    prior_control: Tuple[float, float],
-    prior_treatment: Tuple[float, float],
+    prior_control: tuple[float, float],
+    prior_treatment: tuple[float, float],
     proposed_n_per_arm: int,
-    true_effect: Optional[float] = None,
+    true_effect: float | None = None,
     threshold: float = 0.0,
     n_simulations: int = 10_000,
-    seed: Optional[int] = None,
-) -> Dict[str, Any]:
+    seed: int | None = None,
+) -> dict[str, Any]:
     """Compute assurance metrics for an experimental design.
 
     Simulates the experiment under the prior predictive distribution
@@ -207,8 +229,12 @@ def compute_assurance(
 
         # CI coverage (approximate)
         se = math.sqrt(
-            post_c[0] * post_c[1] / ((post_c[0] + post_c[1]) ** 2 * (post_c[0] + post_c[1] + 1)) +
-            post_t[0] * post_t[1] / ((post_t[0] + post_t[1]) ** 2 * (post_t[0] + post_t[1] + 1))
+            post_c[0]
+            * post_c[1]
+            / ((post_c[0] + post_c[1]) ** 2 * (post_c[0] + post_c[1] + 1))
+            + post_t[0]
+            * post_t[1]
+            / ((post_t[0] + post_t[1]) ** 2 * (post_t[0] + post_t[1] + 1))
         )
         ci_lower = effect - 1.96 * se
         ci_upper = effect + 1.96 * se

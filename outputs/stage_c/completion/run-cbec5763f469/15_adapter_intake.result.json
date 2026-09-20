@@ -1,0 +1,10 @@
+{
+  "result": [
+    {
+      "factor_id": "x",
+      "eligible_from_window": 1,
+      "available_day": 0,
+      "claim_ceiling": "CANDIDATE_ASSOCIATION"
+    }
+  ]
+}

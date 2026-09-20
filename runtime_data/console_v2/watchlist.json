@@ -1,0 +1,479 @@
+{
+  "scan": {
+    "claim_type": "WATCHLIST",
+    "watchlist": [
+      {
+        "factor_id": "campaign.sms_push",
+        "parent_factor_id": "campaign.sms_push",
+        "scope_id": "global",
+        "metric_id": "residual",
+        "lag": 2,
+        "effect_shape": "persistent",
+        "correlation": 0.7774981685375055,
+        "coverage": 0.9777777777777777,
+        "n_pairs": 88,
+        "kind": "internal_event",
+        "score": 0.7602204314588943,
+        "budget_multiplier": 1.0,
+        "falsification": {
+          "placebo": {
+            "correlation": 0.16099620506859874,
+            "coverage": 0.9736842105263158,
+            "n_pairs": 74,
+            "kill": false,
+            "insufficient_data": false,
+            "applicable": true,
+            "status": "TESTED"
+          },
+          "lead_lag_reversal": {
+            "correlation": 0.15919442521395352,
+            "kill": false,
+            "skipped": false,
+            "applicable": true
+          },
+          "split_half": {
+            "first": 0.8030951740766101,
+            "second": 0.8040834064700767,
+            "kill": false,
+            "applicable": true,
+            "status": "TESTED"
+          },
+          "negative_controls": []
+        },
+        "falsification_status": "SURVIVED_EXPLORATORY",
+        "claim_type": "WATCHLIST",
+        "grade": "REVIEW",
+        "alert_id": "sha256:d19892fed477ba4b2a619b0a4f49e2eed9350b2d15bfbdc04cc8d0113b82d913",
+        "window_id": "discovery-2026w37",
+        "discovery_window": [
+          0,
+          89
+        ],
+        "next_step": "仅下一独立窗口确认可晋级；人工标签只进入验证队列",
+        "confirmation": {
+          "claim_type": "FACTOR_CANDIDATE",
+          "adjusted_pvalue": 0.02,
+          "window_correlation": 0.8246984410386939,
+          "reason_codes": []
+        }
+      },
+      {
+        "factor_id": "channel.feed_ad",
+        "parent_factor_id": "channel.feed_ad",
+        "scope_id": "global",
+        "metric_id": "residual",
+        "lag": 1,
+        "effect_shape": "persistent",
+        "correlation": 0.578185352538713,
+        "coverage": 0.9888888888888889,
+        "n_pairs": 89,
+        "kind": "internal_event",
+        "score": 0.5717610708438384,
+        "budget_multiplier": 1.0,
+        "falsification": {
+          "placebo": {
+            "correlation": 0.2658730915241215,
+            "coverage": 0.9868421052631579,
+            "n_pairs": 75,
+            "kill": false,
+            "insufficient_data": false,
+            "applicable": true,
+            "status": "TESTED"
+          },
+          "lead_lag_reversal": {
+            "correlation": 0.024374140558318082,
+            "kill": false,
+            "skipped": false,
+            "applicable": true
+          },
+          "split_half": {
+            "first": 0.5270493457460735,
+            "second": 0.6624860121116638,
+            "kill": false,
+            "applicable": true,
+            "status": "TESTED"
+          },
+          "negative_controls": []
+        },
+        "falsification_status": "SURVIVED_EXPLORATORY",
+        "claim_type": "WATCHLIST",
+        "grade": "REVIEW",
+        "alert_id": "sha256:3954d2890ca8820c43c9c3749a043b200705549cf07f29510a52da889a52ebba",
+        "window_id": "discovery-2026w37",
+        "discovery_window": [
+          0,
+          89
+        ],
+        "next_step": "仅下一独立窗口确认可晋级；人工标签只进入验证队列",
+        "confirmation": {
+          "claim_type": "WATCHLIST",
+          "adjusted_pvalue": 0.18,
+          "window_correlation": 0.33382878186401027,
+          "reason_codes": []
+        }
+      },
+      {
+        "factor_id": "competitor.delisting",
+        "parent_factor_id": "competitor.delisting",
+        "scope_id": "global",
+        "metric_id": "residual",
+        "lag": 7,
+        "effect_shape": "onset",
+        "correlation": 0.37368715670804803,
+        "coverage": 0.9222222222222223,
+        "n_pairs": 83,
+        "kind": "external_event",
+        "score": 0.34462260007519985,
+        "budget_multiplier": 1.0,
+        "falsification": {
+          "placebo": {
+            "correlation": 0.10002020443296651,
+            "coverage": 0.9078947368421053,
+            "n_pairs": 69,
+            "kill": false,
+            "insufficient_data": false,
+            "applicable": false,
+            "status": "NOT_APPLICABLE"
+          },
+          "lead_lag_reversal": {
+            "correlation": 0.11351499506483935,
+            "kill": false,
+            "skipped": true,
+            "applicable": false
+          },
+          "split_half": {
+            "first": null,
+            "second": null,
+            "kill": false,
+            "applicable": false,
+            "status": "NOT_APPLICABLE"
+          },
+          "negative_controls": []
+        },
+        "falsification_status": "SURVIVED_EXPLORATORY",
+        "claim_type": "WATCHLIST",
+        "grade": "REVIEW",
+        "alert_id": "sha256:9b79c136d4c9fcc035100a3477b6fd459825e79225d5e1954b5039037efcdee3",
+        "window_id": "discovery-2026w37",
+        "discovery_window": [
+          0,
+          89
+        ],
+        "next_step": "仅下一独立窗口确认可晋级；人工标签只进入验证队列",
+        "confirmation": {
+          "claim_type": "WATCHLIST",
+          "adjusted_pvalue": 1.0,
+          "window_correlation": 0.0,
+          "reason_codes": []
+        }
+      },
+      {
+        "factor_id": "competitor.delisting",
+        "parent_factor_id": "competitor.delisting",
+        "scope_id": "global",
+        "metric_id": "residual",
+        "lag": 3,
+        "effect_shape": "onset",
+        "correlation": 0.3089321897113412,
+        "coverage": 0.9666666666666667,
+        "n_pairs": 87,
+        "kind": "external_event",
+        "score": 0.29863445005429645,
+        "budget_multiplier": 1.0,
+        "falsification": {
+          "placebo": {
+            "correlation": 0.10041670114974628,
+            "coverage": 0.9605263157894737,
+            "n_pairs": 73,
+            "kill": false,
+            "insufficient_data": false,
+            "applicable": false,
+            "status": "NOT_APPLICABLE"
+          },
+          "lead_lag_reversal": {
+            "correlation": 0.16690052935117383,
+            "kill": false,
+            "skipped": true,
+            "applicable": false
+          },
+          "split_half": {
+            "first": null,
+            "second": null,
+            "kill": false,
+            "applicable": false,
+            "status": "NOT_APPLICABLE"
+          },
+          "negative_controls": []
+        },
+        "falsification_status": "SURVIVED_EXPLORATORY",
+        "claim_type": "WATCHLIST",
+        "grade": "REVIEW",
+        "alert_id": "sha256:fbea9fd47f897084fe5b22c547dca7f53c8f6b1091ba42e55f6d215b611669ca",
+        "window_id": "discovery-2026w37",
+        "discovery_window": [
+          0,
+          89
+        ],
+        "next_step": "仅下一独立窗口确认可晋级；人工标签只进入验证队列",
+        "confirmation": {
+          "claim_type": "WATCHLIST",
+          "adjusted_pvalue": 1.0,
+          "window_correlation": 0.0,
+          "reason_codes": []
+        }
+      }
+    ],
+    "deferred": [],
+    "killed": [],
+    "killed_count": 0,
+    "manifest": {
+      "M": 4,
+      "S": 1,
+      "K": 1,
+      "L": 5,
+      "grid_size": 20,
+      "tested": 20,
+      "test_budget": 100,
+      "budget": 5,
+      "attempts": [
+        {
+          "factor_id": "campaign.sms_push",
+          "parent_factor_id": "campaign.sms_push",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 0,
+          "effect_shape": "persistent",
+          "correlation": -0.056888244226313694,
+          "coverage": 1.0,
+          "n_pairs": 90
+        },
+        {
+          "factor_id": "campaign.sms_push",
+          "parent_factor_id": "campaign.sms_push",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 1,
+          "effect_shape": "persistent",
+          "correlation": -0.04456741451175983,
+          "coverage": 0.9888888888888889,
+          "n_pairs": 89
+        },
+        {
+          "factor_id": "campaign.sms_push",
+          "parent_factor_id": "campaign.sms_push",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 2,
+          "effect_shape": "persistent",
+          "correlation": 0.7774981685375055,
+          "coverage": 0.9777777777777777,
+          "n_pairs": 88
+        },
+        {
+          "factor_id": "campaign.sms_push",
+          "parent_factor_id": "campaign.sms_push",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 3,
+          "effect_shape": "persistent",
+          "correlation": 0.08822984300125546,
+          "coverage": 0.9666666666666667,
+          "n_pairs": 87
+        },
+        {
+          "factor_id": "campaign.sms_push",
+          "parent_factor_id": "campaign.sms_push",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 7,
+          "effect_shape": "persistent",
+          "correlation": 0.010242703683864943,
+          "coverage": 0.9222222222222223,
+          "n_pairs": 83
+        },
+        {
+          "factor_id": "channel.feed_ad",
+          "parent_factor_id": "channel.feed_ad",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 0,
+          "effect_shape": "persistent",
+          "correlation": 0.048687294941858715,
+          "coverage": 1.0,
+          "n_pairs": 90
+        },
+        {
+          "factor_id": "channel.feed_ad",
+          "parent_factor_id": "channel.feed_ad",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 1,
+          "effect_shape": "persistent",
+          "correlation": 0.578185352538713,
+          "coverage": 0.9888888888888889,
+          "n_pairs": 89
+        },
+        {
+          "factor_id": "channel.feed_ad",
+          "parent_factor_id": "channel.feed_ad",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 2,
+          "effect_shape": "persistent",
+          "correlation": -0.017032390157035268,
+          "coverage": 0.9777777777777777,
+          "n_pairs": 88
+        },
+        {
+          "factor_id": "channel.feed_ad",
+          "parent_factor_id": "channel.feed_ad",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 3,
+          "effect_shape": "persistent",
+          "correlation": -0.06459202702512384,
+          "coverage": 0.9666666666666667,
+          "n_pairs": 87
+        },
+        {
+          "factor_id": "channel.feed_ad",
+          "parent_factor_id": "channel.feed_ad",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 7,
+          "effect_shape": "persistent",
+          "correlation": -0.15789529544324213,
+          "coverage": 0.9222222222222223,
+          "n_pairs": 83
+        },
+        {
+          "factor_id": "competitor.delisting",
+          "parent_factor_id": "competitor.delisting",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 0,
+          "effect_shape": "onset",
+          "correlation": 0.2598737637752344,
+          "coverage": 1.0,
+          "n_pairs": 90
+        },
+        {
+          "factor_id": "competitor.delisting",
+          "parent_factor_id": "competitor.delisting",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 1,
+          "effect_shape": "onset",
+          "correlation": 0.24252116855899855,
+          "coverage": 0.9888888888888889,
+          "n_pairs": 89
+        },
+        {
+          "factor_id": "competitor.delisting",
+          "parent_factor_id": "competitor.delisting",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 2,
+          "effect_shape": "onset",
+          "correlation": 0.2579614839414281,
+          "coverage": 0.9777777777777777,
+          "n_pairs": 88
+        },
+        {
+          "factor_id": "competitor.delisting",
+          "parent_factor_id": "competitor.delisting",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 3,
+          "effect_shape": "onset",
+          "correlation": 0.3089321897113412,
+          "coverage": 0.9666666666666667,
+          "n_pairs": 87
+        },
+        {
+          "factor_id": "competitor.delisting",
+          "parent_factor_id": "competitor.delisting",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 7,
+          "effect_shape": "onset",
+          "correlation": 0.37368715670804803,
+          "coverage": 0.9222222222222223,
+          "n_pairs": 83
+        },
+        {
+          "factor_id": "market.noise_index",
+          "parent_factor_id": "market.noise_index",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 0,
+          "effect_shape": "persistent",
+          "correlation": 0.17788918644910087,
+          "coverage": 1.0,
+          "n_pairs": 90
+        },
+        {
+          "factor_id": "market.noise_index",
+          "parent_factor_id": "market.noise_index",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 1,
+          "effect_shape": "persistent",
+          "correlation": 0.15932925554060703,
+          "coverage": 0.9888888888888889,
+          "n_pairs": 89
+        },
+        {
+          "factor_id": "market.noise_index",
+          "parent_factor_id": "market.noise_index",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 2,
+          "effect_shape": "persistent",
+          "correlation": 0.017811591239109418,
+          "coverage": 0.9777777777777777,
+          "n_pairs": 88
+        },
+        {
+          "factor_id": "market.noise_index",
+          "parent_factor_id": "market.noise_index",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 3,
+          "effect_shape": "persistent",
+          "correlation": 0.05557812957049351,
+          "coverage": 0.9666666666666667,
+          "n_pairs": 87
+        },
+        {
+          "factor_id": "market.noise_index",
+          "parent_factor_id": "market.noise_index",
+          "scope_id": "global",
+          "metric_id": "residual",
+          "lag": 7,
+          "effect_shape": "persistent",
+          "correlation": 0.07164978810460614,
+          "coverage": 0.9222222222222223,
+          "n_pairs": 83
+        }
+      ],
+      "truncated": false,
+      "selection_policy": "registered_order_with_feedback_priority",
+      "inference": "exploratory_only",
+      "total_tests_spent": 32,
+      "total_test_budget": 200
+    },
+    "policy": "exploratory_only_no_cross_time_error_control_claim",
+    "data_digest": "sha256:6ccced4980181d6fa01b5cf8019c4a49ee1919b1afe76b8c418659b1ef2e690e"
+  },
+  "confirmation_window": [
+    100,
+    139
+  ],
+  "factor_kinds": {
+    "campaign.sms_push": "internal_event",
+    "channel.feed_ad": "internal_event",
+    "competitor.delisting": "external_event",
+    "market.noise_index": "external_event"
+  }
+}

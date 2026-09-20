@@ -1,0 +1,28 @@
+{
+  "operation": "investigation",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-3525b858da2e/governance.db",
+    "action": "revise_resource",
+    "parameters": {
+      "name": "current_metric",
+      "body": {
+        "metric_contract": {
+          "name": "conversion",
+          "numerator": "converted",
+          "denominator": "users",
+          "aggregation": "ratio_of_sums",
+          "unit": "rate",
+          "analysis_unit": "user",
+          "target_population": "eligible_users",
+          "timezone": "UTC",
+          "window": [
+            30,
+            39
+          ],
+          "maturity_days": 2,
+          "deduplication": "unit_id"
+        }
+      }
+    }
+  }
+}

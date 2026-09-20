@@ -1,0 +1,887 @@
+{
+  "status": "PASS",
+  "matrix": [
+    {
+      "shape": "persistent",
+      "watchlist_rate": 1.0,
+      "monte_carlo_interval": [
+        0.8842966917779722,
+        1
+      ],
+      "seeds": [
+        {
+          "seed": 0,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 1,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 2,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 3,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 4,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 5,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 6,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 7,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 8,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 9,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 10,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 11,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 12,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 13,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 14,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 15,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 16,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 17,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 18,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 19,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 20,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 21,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 22,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 23,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 24,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 25,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 26,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 27,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 28,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 29,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        }
+      ]
+    },
+    {
+      "shape": "onset",
+      "watchlist_rate": 1.0,
+      "monte_carlo_interval": [
+        0.8842966917779722,
+        1
+      ],
+      "seeds": [
+        {
+          "seed": 0,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 1,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 2,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 3,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 4,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 5,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 6,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 7,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 8,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 9,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 10,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 11,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 12,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 13,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 14,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 15,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 16,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 17,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 18,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 19,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 20,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 21,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 22,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 23,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 24,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 25,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 26,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 27,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 28,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 29,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        }
+      ]
+    },
+    {
+      "shape": "pulse",
+      "watchlist_rate": 1.0,
+      "monte_carlo_interval": [
+        0.8842966917779722,
+        1
+      ],
+      "seeds": [
+        {
+          "seed": 0,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 1,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 2,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 3,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 4,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 5,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 6,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 7,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 8,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 9,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 10,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 11,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 12,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 13,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 14,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 15,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 16,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 17,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 18,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 19,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 20,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 21,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 22,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 23,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 24,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 25,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 26,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 27,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 28,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        },
+        {
+          "seed": 29,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 3
+        }
+      ]
+    },
+    {
+      "shape": "null",
+      "watchlist_rate": 0.03333333333333333,
+      "monte_carlo_interval": [
+        0.0008435709266304788,
+        0.17216945563341265
+      ],
+      "seeds": [
+        {
+          "seed": 0,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 1,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 2,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 3,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 4,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 5,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 6,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 7,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 8,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 9,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 10,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 11,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 12,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 13,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 14,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 15,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 16,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 17,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 18,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 19,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 20,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 21,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 22,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 23,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 24,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 25,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 26,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 27,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        },
+        {
+          "seed": 28,
+          "watchlist_count": 1,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 5
+        },
+        {
+          "seed": 29,
+          "watchlist_count": 0,
+          "deferred_count": 0,
+          "killed_count": 0,
+          "tests_spent": 1
+        }
+      ]
+    }
+  ],
+  "scope": "exploratory WATCHLIST retention; not a causal/FDR guarantee",
+  "seed_cases": 120
+}

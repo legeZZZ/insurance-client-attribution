@@ -1,0 +1,50 @@
+mkdir -p failed for path /home/app/.config/matplotlib: [Errno 13] Permission denied: '/home/app'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-qaqzsdr1 because there was an issue with the default path (/home/app/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+Deferred by user: test_regressions.RegressionTests.test_console_uses_current_api_contract_for_all_scenarios
+........................................................................................EE....E........................................................................................................................................................
+======================================================================
+ERROR: test_line_a_exposes_high_dimensional_overlap_hte (test_regressions.RegressionTests.test_line_a_exposes_high_dimensional_overlap_hte)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/tests/test_regressions.py", line 431, in test_line_a_exposes_high_dimensional_overlap_hte
+    report = run_scenario("line_a")
+  File "/app/track2_v5/scenario_reports.py", line 1639, in run_scenario
+    runtime_dir.mkdir(parents=True, exist_ok=True)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.14/pathlib/__init__.py", line 1011, in mkdir
+    os.mkdir(self, mode)
+    ~~~~~~~~^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: '/app/runtime_data'
+
+======================================================================
+ERROR: test_line_b_fixture_has_realistic_factor_inventory (test_regressions.RegressionTests.test_line_b_fixture_has_realistic_factor_inventory)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/tests/test_regressions.py", line 441, in test_line_b_fixture_has_realistic_factor_inventory
+    report = run_scenario("line_b")
+  File "/app/track2_v5/scenario_reports.py", line 1639, in run_scenario
+    runtime_dir.mkdir(parents=True, exist_ok=True)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.14/pathlib/__init__.py", line 1011, in mkdir
+    os.mkdir(self, mode)
+    ~~~~~~~~^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: '/app/runtime_data'
+
+======================================================================
+ERROR: test_scenario_reports_expose_top_level_claim_and_evidence (test_regressions.RegressionTests.test_scenario_reports_expose_top_level_claim_and_evidence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/tests/test_regressions.py", line 425, in test_scenario_reports_expose_top_level_claim_and_evidence
+    report = run_scenario("line_b")
+  File "/app/track2_v5/scenario_reports.py", line 1639, in run_scenario
+    runtime_dir.mkdir(parents=True, exist_ok=True)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.14/pathlib/__init__.py", line 1011, in mkdir
+    os.mkdir(self, mode)
+    ~~~~~~~~^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: '/app/runtime_data'
+
+----------------------------------------------------------------------
+Ran 247 tests in 49.300s
+
+FAILED (errors=3)

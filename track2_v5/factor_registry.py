@@ -8,18 +8,14 @@ evidence and validation context; it never writes a causal conclusion.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import sqlite3
 from collections.abc import Mapping, Sequence
-try:
-    from datetime import UTC, datetime
-except ImportError:
-    from datetime import datetime, timezone
-
-    UTC = timezone.utc
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
+
+from .contracts import digest, finite, integer, validate_contract
 
 
 def _json(value: Any) -> str:
@@ -29,14 +25,14 @@ def _json(value: Any) -> str:
 
 
 def _digest(value: Any) -> str:
-    raw = json.dumps(value, ensure_ascii=False, sort_keys=True, default=str).encode()
-    return "sha256:" + hashlib.sha256(raw).hexdigest()[:16]
+    return digest(value)
 
 
 class FactorRegistry:
     """SQLite-backed registry with provenance and time-series snapshots."""
 
     def __init__(self, db_path: str | Path = ":memory:") -> None:
+        self._batch = False
         self.db_path = str(db_path)
         if self.db_path != ":memory:":
             Path(self.db_path).parent.mkdir(parents=True, exist_ok=True)
@@ -45,9 +41,44 @@ class FactorRegistry:
         self.connection.execute("PRAGMA foreign_keys = ON")
         self._init_schema()
 
+    def _commit(self):
+        if not self._batch:
+            self.connection.commit()
+
+    @staticmethod
+    def _validate_version(body):
+        digest(dict(body))
+        registered = body.get("factor_contract") or body.get("metadata", {}).get(
+            "factor_contract"
+        )
+        if registered:
+            available = body.get(
+                "available_day", body.get("metadata", {}).get("available_day")
+            )
+            if available is None:
+                raise ValueError("registered factor contract requires availability")
+            contract = {
+                k: v
+                for k, v in registered.items()
+                if k not in {"digest", "schema_version"}
+            }
+            if contract.get("factor_id") != body["factor_id"]:
+                raise ValueError("factor contract identity mismatch")
+            contract.update(available_at=available, as_of=available)
+            validate_contract("FactorContract", contract)
+        for key in ("available_day", "search_window"):
+            value = body.get(key, body.get("metadata", {}).get(key))
+            if value is not None:
+                integer(value, key)
+
     def _init_schema(self) -> None:
         self.connection.executescript(
             """
+            CREATE TABLE IF NOT EXISTS factor_versions (
+              kind TEXT NOT NULL, logical_key TEXT NOT NULL, version INTEGER NOT NULL,
+              factor_id TEXT NOT NULL, body TEXT NOT NULL, digest TEXT NOT NULL,
+              available_day INTEGER, search_window INTEGER,
+              PRIMARY KEY(kind,logical_key,version));
             CREATE TABLE IF NOT EXISTS factors (
               factor_id TEXT PRIMARY KEY,
               name TEXT NOT NULL,
@@ -91,9 +122,10 @@ class FactorRegistry:
             );
             """
         )
-        self.connection.commit()
+        self._commit()
 
     def register_factor(self, factor: Mapping[str, Any]) -> dict[str, Any]:
+        self._validate_version(factor)
         factor_id = str(factor["factor_id"])
         name = str(factor.get("name", factor_id))
         aliases = [str(value) for value in factor.get("aliases", [])]
@@ -132,7 +164,8 @@ class FactorRegistry:
             "INSERT INTO factor_fts(factor_id, name, description, aliases) VALUES (?, ?, ?, ?)",
             (factor_id, name, str(factor.get("description", "")), " ".join(aliases)),
         )
-        self.connection.commit()
+        self._version("factor", factor_id, dict(factor))
+        self._commit()
         return self.get_factor(factor_id) or {"factor_id": factor_id}
 
     def get_factor(self, factor_id: str) -> dict[str, Any] | None:
@@ -148,6 +181,7 @@ class FactorRegistry:
         return item
 
     def ingest_evidence(self, evidence: Mapping[str, Any]) -> dict[str, Any]:
+        self._validate_version(evidence)
         factor_id = str(evidence["factor_id"])
         if self.get_factor(factor_id) is None:
             raise KeyError(f"factor is not registered: {factor_id}")
@@ -171,10 +205,14 @@ class FactorRegistry:
                 now,
             ),
         )
-        self.connection.commit()
+        self._version(
+            "evidence", evidence_id, {**dict(evidence), "evidence_id": evidence_id}
+        )
+        self._commit()
         return {"evidence_id": evidence_id, **dict(evidence)}
 
     def ingest_factor_snapshot(self, snapshot: Mapping[str, Any]) -> dict[str, Any]:
+        self._validate_version(snapshot)
         factor_id = str(snapshot["factor_id"])
         if self.get_factor(factor_id) is None:
             raise KeyError(f"factor is not registered: {factor_id}")
@@ -190,15 +228,20 @@ class FactorRegistry:
             (
                 factor_id,
                 str(snapshot.get("scope_id", "global")),
-                int(snapshot["day"]),
-                float(snapshot["value"]),
+                integer(snapshot["day"], "day"),
+                finite(snapshot["value"], "snapshot value"),
                 snapshot.get("source_uri"),
                 snapshot.get("content_digest"),
                 snapshot.get("license_ref"),
                 _json(snapshot.get("metadata", {})),
             ),
         )
-        self.connection.commit()
+        self._version(
+            "snapshot",
+            _json([factor_id, snapshot.get("scope_id", "global"), snapshot["day"]]),
+            dict(snapshot),
+        )
+        self._commit()
         return dict(snapshot)
 
     def evidence_for(self, factor_id: str) -> list[dict[str, Any]]:
@@ -231,8 +274,19 @@ class FactorRegistry:
         source_types: Sequence[str] = (),
         kinds: Sequence[str] = (),
         limit: int = 20,
+        as_of: int | None = None,
+        search_window: int | None = None,
     ) -> list[dict[str, Any]]:
         """Return eligible factors with provenance, evidence and snapshots."""
+        if as_of is not None:
+            return self._retrieve_as_of(
+                query,
+                source_types=source_types,
+                kinds=kinds,
+                limit=limit,
+                as_of=as_of,
+                search_window=search_window,
+            )
         params: list[Any] = []
         if query.strip():
             sql = (
@@ -248,8 +302,7 @@ class FactorRegistry:
         if kinds:
             # Kind is metadata in this minimal store; filter is applied below.
             pass
-        sql += " ORDER BY f.updated_at DESC LIMIT ?"
-        params.append(max(1, int(limit)))
+        sql += " AND f.status = 'active' ORDER BY f.updated_at DESC"
         try:
             rows = self.connection.execute(sql, params).fetchall()
         except sqlite3.OperationalError:
@@ -273,12 +326,13 @@ class FactorRegistry:
                     + ")"
                 )
                 fallback_params.extend(source_types)
-            fallback_sql += " ORDER BY f.updated_at DESC LIMIT ?"
-            fallback_params.append(max(1, int(limit)))
+            fallback_sql += " AND f.status = 'active' ORDER BY f.updated_at DESC"
             rows = self.connection.execute(fallback_sql, fallback_params).fetchall()
         result = []
         for row in rows:
             item = self._factor_row(row)
+            if item.get("metadata", {}).get("search_window") is not None:
+                continue  # A queued intake requires explicit governed as-of retrieval.
             if kinds and str(item.get("metadata", {}).get("kind")) not in {
                 str(k) for k in kinds
             }:
@@ -297,7 +351,198 @@ class FactorRegistry:
             )
             item["retrieval_basis"] = "structured_filter+fts5+provenance"
             result.append(item)
-        return result
+        return result[: max(1, int(limit))]
+
+    def _version(self, kind, key, body):
+        metadata = body.get("metadata", {})
+        available = body.get("available_day", metadata.get("available_day"))
+        window = body.get("search_window", metadata.get("search_window"))
+        if available is not None:
+            available = integer(available, "available_day")
+        if window is not None:
+            window = integer(window, "search_window")
+        fingerprint = digest(body)
+        old = self.connection.execute(
+            "SELECT version,digest FROM factor_versions WHERE kind=? AND logical_key=? ORDER BY version DESC LIMIT 1",
+            (kind, key),
+        ).fetchone()
+        if old and old["digest"] == fingerprint:
+            return
+        self.connection.execute(
+            "INSERT INTO factor_versions VALUES (?,?,?,?,?,?,?,?)",
+            (
+                kind,
+                key,
+                old["version"] + 1 if old else 1,
+                body["factor_id"],
+                _json(body),
+                fingerprint,
+                available,
+                window,
+            ),
+        )
+
+    def history(self, factor_id):
+        return [
+            {**dict(r), "body": json.loads(r["body"])}
+            for r in self.connection.execute(
+                "SELECT * FROM factor_versions WHERE factor_id=? ORDER BY kind,logical_key,version",
+                (factor_id,),
+            )
+        ]
+
+    def intake_next_window(
+        self, factor, *, evidence=(), snapshots=(), current_window, available_day
+    ):
+        """Manual/external intake cannot enter an already frozen investigation."""
+        window = integer(current_window, "current_window") + 1
+        available_day = integer(available_day, "available_day")
+        fid = factor["factor_id"]
+        if not factor.get("source_type") or not factor.get("license_ref"):
+            raise ValueError("declared source and license required")
+        for item in [*evidence, *snapshots]:
+            if (
+                item.get("factor_id") != fid
+                or not item.get("license_ref")
+                or not item.get("source_uri")
+            ):
+                raise ValueError(
+                    "intake evidence requires matching factor, declared source and license"
+                )
+        # All validation precedes writes. No provenance investigation is performed.
+        for item in snapshots:
+            integer(item["day"], "day")
+            finite(item["value"], "value")
+
+        def stamp(item):
+            return {
+                **dict(item),
+                "available_day": available_day,
+                "search_window": window,
+                "metadata": {
+                    **item.get("metadata", {}),
+                    "available_day": available_day,
+                    "search_window": window,
+                },
+            }
+
+        try:
+            self._batch = True
+            with self.connection:
+                self.register_factor(stamp(factor))
+                for item in evidence:
+                    self.ingest_evidence(stamp(item))
+                for item in snapshots:
+                    self.ingest_factor_snapshot(stamp(item))
+        finally:
+            self._batch = False
+        return {
+            "factor_id": fid,
+            "eligible_from_window": window,
+            "available_day": available_day,
+            "claim_ceiling": "CANDIDATE_ASSOCIATION",
+        }
+
+    def _retrieve_as_of(
+        self, query, *, source_types, kinds, limit, as_of, search_window
+    ):
+        as_of = integer(as_of, "as_of")
+        if search_window is None:
+            raise ValueError("governed retrieval requires a search window")
+        search_window = integer(search_window, "search_window")
+        latest = {}
+        for row in self.connection.execute(
+            "SELECT * FROM factor_versions WHERE available_day<=? AND search_window<=? ORDER BY version",
+            (as_of, search_window),
+        ):
+            latest[(row["kind"], row["logical_key"])] = dict(row)
+        factors = [v for (kind, _), v in latest.items() if kind == "factor"]
+        result = []
+        for version in sorted(factors, key=lambda r: r["factor_id"]):
+            item = json.loads(version["body"])
+            if (
+                item.get("status", "active") != "active"
+                or (source_types and item.get("source_type") not in source_types)
+                or (kinds and item.get("metadata", {}).get("kind") not in kinds)
+            ):
+                continue
+            search = " ".join(
+                [
+                    item["factor_id"],
+                    item.get("name", ""),
+                    item.get("description", ""),
+                    *item.get("aliases", []),
+                ]
+            ).casefold()
+            if query.strip().casefold() not in search:
+                continue
+            fid = item["factor_id"]
+            related = [
+                (kind, row)
+                for (kind, _), row in latest.items()
+                if row["factor_id"] == fid
+            ]
+            item["evidence"] = [
+                {
+                    **json.loads(r["body"]),
+                    "version": r["version"],
+                    "registry_digest": r["digest"],
+                }
+                for k, r in related
+                if k == "evidence"
+            ]
+            item["snapshots"] = [
+                {
+                    **json.loads(r["body"]),
+                    "version": r["version"],
+                    "registry_digest": r["digest"],
+                }
+                for k, r in related
+                if k == "snapshot" and json.loads(r["body"])["day"] <= as_of
+            ]
+            registered = item.get("metadata", {}).get("factor_contract") or item.get(
+                "factor_contract"
+            )
+            item["factor_contract"] = None
+            if registered:
+                contract = {
+                    k: v
+                    for k, v in registered.items()
+                    if k not in {"digest", "schema_version"}
+                }
+                if contract.get("factor_id") != fid:
+                    raise ValueError("factor contract identity mismatch")
+                contract.update(available_at=version["available_day"], as_of=as_of)
+                item["factor_contract"] = validate_contract("FactorContract", contract)
+            item.update(
+                version=version["version"],
+                registry_digest=version["digest"],
+                as_of=as_of,
+                search_window=search_window,
+                claim_ceiling="CANDIDATE_ASSOCIATION",
+                posterior_probability=None,
+                causal_eligible=False,
+            )
+            item["production_eligible"] = bool(
+                item.get("license_ref")
+                and item["evidence"]
+                and all(
+                    e.get("license_ref") for e in item["evidence"] + item["snapshots"]
+                )
+            )
+            result.append(item)
+        return result[: max(1, integer(limit, "limit"))]
+
+    def export_window(self, registry, *, name, as_of, search_window, query=""):
+        candidates = self.retrieve_factor_candidates(
+            query, as_of=as_of, search_window=search_window, limit=100000
+        )
+        # A revised export invalidates statistics, claims and skills downstream.
+        return registry.revise_resource(
+            name,
+            {"as_of": as_of, "search_window": search_window, "candidates": candidates},
+            kind="snapshot",
+        )
 
     def close(self) -> None:
         self.connection.close()

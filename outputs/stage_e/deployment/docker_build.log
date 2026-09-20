@@ -1,0 +1,146 @@
+#0 building with "rootless" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.backend
+#1 transferring dockerfile: 1.51kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14-slim
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 197B done
+#3 DONE 0.0s
+
+#4 [wheels 1/8] FROM docker.io/library/python:3.14-slim@sha256:cad9a2c871761c413caa6fdd6441c783451e740a48aaeba60ae62a8b53525ef6
+#4 resolve docker.io/library/python:3.14-slim@sha256:cad9a2c871761c413caa6fdd6441c783451e740a48aaeba60ae62a8b53525ef6 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 155.06kB 0.0s done
+#5 DONE 0.0s
+
+#6 [wheels 2/8] WORKDIR /build
+#6 CACHED
+
+#7 [backend  3/18] COPY --from=wheels /wheels /wheels
+#7 CACHED
+
+#8 [wheels 8/8] RUN python -c "import pathlib,hashlib; p=pathlib.Path('/wheels'); (p/'SHA256SUMS').write_text(''.join(hashlib.sha256(f.read_bytes()).hexdigest()+'  '+f.name+chr(10) for f in sorted(p.glob('*.whl'))))"
+#8 CACHED
+
+#9 [backend  4/18] COPY requirements.lock.txt .
+#9 CACHED
+
+#10 [wheels 3/8] COPY requirements.lock.txt uv.lock ./
+#10 CACHED
+
+#11 [wheels 6/8] RUN python prepare_wheel_sources.py uv.lock /sources
+#11 CACHED
+
+#12 [wheels 7/8] RUN pip wheel --ignore-requires-python --no-deps -r /sources/sources.txt -w /wheels
+#12 CACHED
+
+#13 [backend  2/18] WORKDIR /app
+#13 CACHED
+
+#14 [wheels 4/8] COPY tools/prepare_wheel_sources.py ./
+#14 CACHED
+
+#15 [wheels 5/8] RUN apt-get update && apt-get install -y --no-install-recommends build-essential && rm -rf /var/lib/apt/lists/*
+#15 CACHED
+
+#16 [backend  5/18] RUN cd /wheels && sha256sum -c SHA256SUMS && pip install --ignore-requires-python --no-deps --no-index /wheels/*.whl && pip check
+#16 CACHED
+
+#17 [backend  6/18] COPY track2_v5 /app/track2_v5
+#17 DONE 0.0s
+
+#18 [backend  7/18] COPY tools /app/tools
+#18 DONE 0.0s
+
+#19 [backend  8/18] COPY src /app/src
+#19 DONE 0.0s
+
+#20 [backend  9/18] COPY run_server.py config.example.json /app/
+#20 DONE 0.0s
+
+#21 [backend 10/18] COPY data /app/data
+#21 DONE 0.0s
+
+#22 [backend 11/18] COPY specs /app/specs
+#22 DONE 0.0s
+
+#23 [backend 12/18] COPY examples /app/examples
+#23 DONE 0.0s
+
+#24 [backend 13/18] COPY scripts /app/scripts
+#24 DONE 0.0s
+
+#25 [backend 14/18] COPY tests /app/tests
+#25 DONE 0.0s
+
+#26 [backend 15/18] COPY track2_clean_bundle /app/track2_clean_bundle
+#26 DONE 0.0s
+
+#27 [backend 16/18] RUN apt-get update && apt-get install -y --no-install-recommends procps && rm -rf /var/lib/apt/lists/*
+#27 0.203 Get:1 http://deb.debian.org/debian trixie InRelease [140 kB]
+#27 0.256 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#27 0.276 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+#27 0.299 Get:4 http://deb.debian.org/debian trixie/main arm64 Packages [9614 kB]
+#27 0.461 Get:5 http://deb.debian.org/debian trixie-updates/main arm64 Packages [4424 B]
+#27 0.477 Get:6 http://deb.debian.org/debian-security trixie-security/main arm64 Packages [262 kB]
+#27 1.195 Fetched 10.1 MB in 1s (9463 kB/s)
+#27 1.195 Reading package lists...
+#27 1.589 Reading package lists...
+#27 1.959 Building dependency tree...
+#27 2.076 Reading state information...
+#27 2.232 The following additional packages will be installed:
+#27 2.232   libproc2-0
+#27 2.233 Recommended packages:
+#27 2.233   psmisc linux-sysctl-defaults
+#27 2.256 The following NEW packages will be installed:
+#27 2.257   libproc2-0 procps
+#27 2.324 0 upgraded, 2 newly installed, 0 to remove and 12 not upgraded.
+#27 2.324 Need to get 934 kB of archives.
+#27 2.324 After this operation, 3281 kB of additional disk space will be used.
+#27 2.324 Get:1 http://deb.debian.org/debian trixie/main arm64 libproc2-0 arm64 2:4.0.4-9 [62.8 kB]
+#27 2.368 Get:2 http://deb.debian.org/debian trixie/main arm64 procps arm64 2:4.0.4-9 [871 kB]
+#27 2.485 debconf: unable to initialize frontend: Dialog
+#27 2.485 debconf: (TERM is not set, so the dialog frontend is not usable.)
+#27 2.485 debconf: falling back to frontend: Readline
+#27 2.485 debconf: unable to initialize frontend: Readline
+#27 2.485 debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/aarch64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/aarch64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/aarch64-linux-gnu/perl-base /usr/lib/aarch64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8, <STDIN> line 2.)
+#27 2.485 debconf: falling back to frontend: Teletype
+#27 2.487 debconf: unable to initialize frontend: Teletype
+#27 2.487 debconf: (This frontend requires a controlling tty.)
+#27 2.487 debconf: falling back to frontend: Noninteractive
+#27 2.869 Fetched 934 kB in 0s (6213 kB/s)
+#27 2.878 Selecting previously unselected package libproc2-0:arm64.
+#27 2.878 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 5649 files and directories currently installed.)
+#27 2.882 Preparing to unpack .../libproc2-0_2%3a4.0.4-9_arm64.deb ...
+#27 2.884 Unpacking libproc2-0:arm64 (2:4.0.4-9) ...
+#27 2.898 Selecting previously unselected package procps.
+#27 2.899 Preparing to unpack .../procps_2%3a4.0.4-9_arm64.deb ...
+#27 2.902 Unpacking procps (2:4.0.4-9) ...
+#27 2.957 Setting up libproc2-0:arm64 (2:4.0.4-9) ...
+#27 2.959 Setting up procps (2:4.0.4-9) ...
+#27 2.969 Processing triggers for libc-bin (2.41-12+deb13u3) ...
+#27 DONE 3.0s
+
+#28 [backend 17/18] RUN mkdir /work && useradd --uid 10001 --no-create-home app && chown app /work
+#28 DONE 0.1s
+
+#29 [backend 18/18] WORKDIR /work
+#29 DONE 0.0s
+
+#30 exporting to image
+#30 exporting layers
+#30 exporting layers 0.2s done
+#30 exporting manifest sha256:c573df2b1954cb7362056250dcfdd49397dadc4be4ec9fc6a895dcafcd1dd089 done
+#30 exporting config sha256:f5b7a2c7a616569953d06b7ef731cbb602f42b3c59a834ad473107d05feca10a done
+#30 exporting attestation manifest sha256:b7d26466b6636a8ac1613959d806295ef1c2f007f0930c696ef426983926204d done
+#30 exporting manifest list sha256:47fbb0b584b0312afe9492dc02efca4aff2bb47466e1a5880f59568f5878d606 done
+#30 naming to docker.io/library/track2-backend:stage-ef done
+#30 unpacking to docker.io/library/track2-backend:stage-ef
+#30 unpacking to docker.io/library/track2-backend:stage-ef 0.2s done
+#30 DONE 0.4s

@@ -1,0 +1,1912 @@
+[
+  {
+    "factor_id": "product.matched_quote_gap",
+    "name": "同保障报价差",
+    "description": "自身年化报价/同日同风险同保障竞品报价中位数-1",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "产品×保障篮子×风险层×渠道"
+    },
+    "aliases": [
+      "同保障报价差",
+      "matched_quote_gap"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "产品与价格",
+      "priority": "P0",
+      "causal_role": "pre_exposure_context",
+      "formula": "自身年化报价/同日同风险同保障竞品报价中位数-1",
+      "data_source": "报价引擎+授权竞品报价快照",
+      "scope": "产品×保障篮子×风险层×渠道",
+      "lag_candidates": "0,1,7日",
+      "validation": "固定保障篮子和风险层做时间外验证；不把价格观察差异解释为随机效果",
+      "failure_mode": "免赔额、等待期、除外责任不匹配时不可比；竞品样本选择偏差",
+      "source_ids": [
+        "S5"
+      ],
+      "source_links": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC3995033/"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "product.matched_quote_gap",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "product.renewal_premium_change",
+    "name": "续保保费变化率",
+    "description": "续期同保障年化保费/上期同保障年化保费-1",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "续保批次×产品×保障版本"
+    },
+    "aliases": [
+      "续保保费变化率",
+      "renewal_premium_change"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "产品与价格",
+      "priority": "P0",
+      "causal_role": "pre_exposure_context",
+      "formula": "续期同保障年化保费/上期同保障年化保费-1",
+      "data_source": "续期报价+历史保单版本",
+      "scope": "续保批次×产品×保障版本",
+      "lag_candidates": "续保前30,14,7日",
+      "validation": "按到期批次验证流失预测增量；控制已知保障变化",
+      "failure_mode": "年龄及保障变化引起的自然涨价混杂；不能用成交价替代首次报价",
+      "source_ids": [
+        "S7"
+      ],
+      "source_links": [
+        "https://www.nber.org/papers/w22765"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "product.renewal_premium_change",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "product.coverage_version",
+    "name": "保障责任版本",
+    "description": "责任/免赔/等待期/续保条件的结构化版本及逐项差异",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "产品×版本×生效日"
+    },
+    "aliases": [
+      "保障责任版本",
+      "coverage_version"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "产品与价格",
+      "priority": "P1",
+      "causal_role": "change_candidate",
+      "formula": "责任/免赔/等待期/续保条件的结构化版本及逐项差异",
+      "data_source": "产品条款库+生效记录",
+      "scope": "产品×版本×生效日",
+      "lag_candidates": "0,7,30日",
+      "validation": "逐字段编码并核对实施范围；同期改价单列",
+      "failure_mode": "不能将文本差异总字数当作保障改善幅度",
+      "source_ids": [
+        "S1"
+      ],
+      "source_links": [
+        "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=98055"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "product.coverage_version",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "product.sale_unavailable_rate",
+    "name": "可售性阻断率",
+    "description": "因地区/产品停售/系统不可售被阻断的去重请求数/全部产品资格查询请求数",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "产品×地区×渠道"
+    },
+    "aliases": [
+      "可售性阻断率",
+      "sale_unavailable_rate"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "产品与价格",
+      "priority": "P0",
+      "causal_role": "upstream_diagnostic",
+      "formula": "因地区/产品停售/系统不可售被阻断的去重请求数/全部产品资格查询请求数",
+      "data_source": "资格查询服务+产品上下架日志",
+      "scope": "产品×地区×渠道",
+      "lag_candidates": "0,1日",
+      "validation": "按明确原因码拆分；自然灰度需验证可比性",
+      "failure_mode": "不含不进入资格查询的用户；技术不可售与核保拒绝不能合并",
+      "source_ids": [
+        "S1"
+      ],
+      "source_links": [
+        "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=98055"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "product.sale_unavailable_rate",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "product.withdrawal_horizon",
+    "name": "距正式停售生效日",
+    "description": "已公告停售生效日期-当前日期；无公告为缺失并附未公告标记",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "受影响产品×地区"
+    },
+    "aliases": [
+      "距正式停售生效日",
+      "withdrawal_horizon"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "产品与价格",
+      "priority": "P1",
+      "causal_role": "external_event_context",
+      "formula": "已公告停售生效日期-当前日期；无公告为缺失并附未公告标记",
+      "data_source": "正式公告+产品版本",
+      "scope": "受影响产品×地区",
+      "lag_candidates": "公告至生效及后30日",
+      "validation": "公告日与生效日分开事件研究；检验提前购买及后续回落",
+      "failure_mode": "禁止用事后得知的停售日期回填；营销宣传并非公告",
+      "source_ids": [
+        "S1",
+        "S10"
+      ],
+      "source_links": [
+        "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=98055",
+        "https://www.nfra.gov.cn/cn/view/pages/ItemDetail.html?docId=1175200&itemId=928"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "product.withdrawal_horizon",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "product.payment_schedule",
+    "name": "缴费方式配置",
+    "description": "趸交/年交/月交类别及各方式年化总额、首期金额分别记录",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "产品×缴费年期×版本"
+    },
+    "aliases": [
+      "缴费方式配置",
+      "payment_schedule"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "产品与价格",
+      "priority": "P1",
+      "causal_role": "treatment_candidate",
+      "formula": "趸交/年交/月交类别及各方式年化总额、首期金额分别记录",
+      "data_source": "产品费率配置+首次报价",
+      "scope": "产品×缴费年期×版本",
+      "lag_candidates": "0,7日",
+      "validation": "仅在允许的产品方案内比较展示方式；总成本明示",
+      "failure_mode": "不能把降低首期付款等同降低总保费；人群自选择",
+      "source_ids": [
+        "S5"
+      ],
+      "source_links": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC3995033/"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "product.payment_schedule",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "experience.lcp_p75",
+    "name": "首屏最大内容绘制P75",
+    "description": "同页面类型有效访问LCP的75分位数（毫秒）",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "页面×端类型×网络层"
+    },
+    "aliases": [
+      "首屏最大内容绘制P75",
+      "lcp_p75"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "体验与组件",
+      "priority": "P0",
+      "causal_role": "mediator_diagnostic",
+      "formula": "同页面类型有效访问LCP的75分位数（毫秒）",
+      "data_source": "浏览器RUM+页面版本",
+      "scope": "页面×端类型×网络层",
+      "lag_candidates": "0,1日",
+      "validation": "随机化加载策略，按分组估计总效果；LCP作机制指标",
+      "failure_mode": "仅有成功上报会话可导致选择偏差；原生App不能直接套用",
+      "source_ids": [
+        "S2"
+      ],
+      "source_links": [
+        "https://web.dev/articles/vitals"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "experience.lcp_p75",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "experience.inp_p75",
+    "name": "交互响应P75",
+    "description": "存在合格交互的访问INP的75分位数（毫秒）",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "页面×浏览器×设备层"
+    },
+    "aliases": [
+      "交互响应P75",
+      "inp_p75"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "体验与组件",
+      "priority": "P1",
+      "causal_role": "mediator_diagnostic",
+      "formula": "存在合格交互的访问INP的75分位数（毫秒）",
+      "data_source": "浏览器RUM+交互覆盖率",
+      "scope": "页面×浏览器×设备层",
+      "lag_candidates": "0,1日",
+      "validation": "随机化脚本优化并同时报告无交互与未上报比例",
+      "failure_mode": "无交互访问不能填0；不把处理后INP放入总效果回归",
+      "source_ids": [
+        "S2"
+      ],
+      "source_links": [
+        "https://web.dev/articles/vitals"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "experience.inp_p75",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "experience.cls_p75",
+    "name": "布局偏移P75",
+    "description": "有效访问CLS的75分位数",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "页面×设备层"
+    },
+    "aliases": [
+      "布局偏移P75",
+      "cls_p75"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "体验与组件",
+      "priority": "P1",
+      "causal_role": "mediator_diagnostic",
+      "formula": "有效访问CLS的75分位数",
+      "data_source": "浏览器RUM+模板版本",
+      "scope": "页面×设备层",
+      "lag_candidates": "0,1日",
+      "validation": "图片占位方案实验；观察误触和最终承保",
+      "failure_mode": "偏移下降不必然带来销售提升；和首屏渲染共线",
+      "source_ids": [
+        "S2"
+      ],
+      "source_links": [
+        "https://web.dev/articles/vitals"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "experience.cls_p75",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "experience.carousel_rotation_config",
+    "name": "轮播自动切换配置",
+    "description": "自动切换开关、间隔毫秒、暂停控件存在性分别编码",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "组件×版本×设备层"
+    },
+    "aliases": [
+      "轮播自动切换配置",
+      "carousel_rotation_config"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "体验与组件",
+      "priority": "P1",
+      "causal_role": "treatment_candidate",
+      "formula": "自动切换开关、间隔毫秒、暂停控件存在性分别编码",
+      "data_source": "Growth UI Spec+渲染快照",
+      "scope": "组件×版本×设备层",
+      "lag_candidates": "0,1日",
+      "validation": "比较符合可访问性要求的配置；点击和有效投保共同评估",
+      "failure_mode": "可访问性缺陷应修复；不得故意取消必要控制做实验",
+      "source_ids": [
+        "S3"
+      ],
+      "source_links": [
+        "https://www.w3.org/WAI/ARIA/apg/patterns/carousel/"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "experience.carousel_rotation_config",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "experience.offer_count",
+    "name": "可见可选方案数",
+    "description": "首屏实际展示且符合资格的去重方案数",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "产品族×新老客×页面"
+    },
+    "aliases": [
+      "可见可选方案数",
+      "offer_count"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "体验与组件",
+      "priority": "P1",
+      "causal_role": "treatment_candidate",
+      "formula": "首屏实际展示且符合资格的去重方案数",
+      "data_source": "推荐响应+渲染曝光",
+      "scope": "产品族×新老客×页面",
+      "lag_candidates": "0,7日",
+      "validation": "在同一合格方案池内随机化分组展示；记录选择质量",
+      "failure_mode": "方案数与方案质量同时变动造成混杂",
+      "source_ids": [
+        "S6"
+      ],
+      "source_links": [
+        "https://www.nber.org/papers/w21759"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "experience.offer_count",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "experience.explanation_variant",
+    "name": "条款解释呈现版本",
+    "description": "完整条款不变时摘要/术语说明/对比呈现的版本类别",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "产品×页面×版本"
+    },
+    "aliases": [
+      "条款解释呈现版本",
+      "explanation_variant"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "体验与组件",
+      "priority": "P0",
+      "causal_role": "treatment_candidate",
+      "formula": "完整条款不变时摘要/术语说明/对比呈现的版本类别",
+      "data_source": "CMS版本+审核记录+曝光",
+      "scope": "产品×页面×版本",
+      "lag_candidates": "0,7日",
+      "validation": "随机化已审阅的解释方式；理解题与成熟撤单作为护栏",
+      "failure_mode": "停留长短不是理解程度；少披露不能视为优化",
+      "source_ids": [
+        "S1",
+        "S6"
+      ],
+      "source_links": [
+        "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=98055",
+        "https://www.nber.org/papers/w21759"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "experience.explanation_variant",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "journey.quote_validity_remaining",
+    "name": "报价剩余有效时长",
+    "description": "报价过期时间-展示时间（分钟）",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "产品×报价版本"
+    },
+    "aliases": [
+      "报价剩余有效时长",
+      "quote_validity_remaining"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "投保与核保",
+      "priority": "P1",
+      "causal_role": "pre_exposure_context",
+      "formula": "报价过期时间-展示时间（分钟）",
+      "data_source": "quote_id+issued_at+expires_at+展示时刻",
+      "scope": "产品×报价版本",
+      "lag_candidates": "0日",
+      "validation": "检验过期集中分布；优化提醒方案可实验",
+      "failure_mode": "展示之后重报价会内生；按首次报价定义主分析",
+      "source_ids": [
+        "S1"
+      ],
+      "source_links": [
+        "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=98055"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "journey.quote_validity_remaining",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "journey.premium_requote_gap",
+    "name": "提交前后报价变化",
+    "description": "最终确认前报价/首次相同保障报价-1",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "产品×风险层×渠道"
+    },
+    "aliases": [
+      "提交前后报价变化",
+      "premium_requote_gap"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "投保与核保",
+      "priority": "P0",
+      "causal_role": "mediator_diagnostic",
+      "formula": "最终确认前报价/首次相同保障报价-1",
+      "data_source": "同一申请报价版本链",
+      "scope": "产品×风险层×渠道",
+      "lag_candidates": "0,1日",
+      "validation": "按健康告知/参数补全/版本切换原因拆解",
+      "failure_mode": "处理后因子，不能解释首次点击；客户主动改保障单列",
+      "source_ids": [
+        "S1"
+      ],
+      "source_links": [
+        "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=98055"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "journey.premium_requote_gap",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "journey.underwriting_backlog_age_p90",
+    "name": "核保待处理队列年龄P90",
+    "description": "时点t尚未结案申请的(t-入队时间)90分位数",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "队列×产品×日期"
+    },
+    "aliases": [
+      "核保待处理队列年龄P90",
+      "underwriting_backlog_age_p90"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "投保与核保",
+      "priority": "P0",
+      "causal_role": "pre_exposure_context",
+      "formula": "时点t尚未结案申请的(t-入队时间)90分位数",
+      "data_source": "核保队列时点快照",
+      "scope": "队列×产品×日期",
+      "lag_candidates": "1,3,7日",
+      "validation": "服务容量变化事件分析；明确队列干扰，按队列聚类",
+      "failure_mode": "只统计结案耗时会漏掉最慢单；申请复杂度混杂",
+      "source_ids": [
+        "S1"
+      ],
+      "source_links": [
+        "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=98055"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "journey.underwriting_backlog_age_p90",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "journey.additional_material_rate",
+    "name": "补件请求率",
+    "description": "固定观察窗内收到至少一次补件请求的申请/同期成熟申请",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "产品×申请批次×原因码"
+    },
+    "aliases": [
+      "补件请求率",
+      "additional_material_rate"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "投保与核保",
+      "priority": "P1",
+      "causal_role": "mediator_diagnostic",
+      "formula": "固定观察窗内收到至少一次补件请求的申请/同期成熟申请",
+      "data_source": "核保状态日志+申请批次",
+      "scope": "产品×申请批次×原因码",
+      "lag_candidates": "1,7,14日",
+      "validation": "分解资料质量与规则变更；随机化提交指引",
+      "failure_mode": "健康风险与规则调整混杂；未成熟申请右删失",
+      "source_ids": [
+        "S1"
+      ],
+      "source_links": [
+        "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=98055"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "journey.additional_material_rate",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "journey.otp_delivery_latency_p95",
+    "name": "验证码送达延迟P95",
+    "description": "成功送达验证码的送达时间-请求时间的95分位数，另报未送达比例",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "供应商×运营商×地区"
+    },
+    "aliases": [
+      "验证码送达延迟P95",
+      "otp_delivery_latency_p95"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "投保与核保",
+      "priority": "P0",
+      "causal_role": "mediator_diagnostic",
+      "formula": "成功送达验证码的送达时间-请求时间的95分位数，另报未送达比例",
+      "data_source": "验证码请求+供应商回执",
+      "scope": "供应商×运营商×地区",
+      "lag_candidates": "0,1日",
+      "validation": "路由灰度与供应商故障窗口核验",
+      "failure_mode": "只看成功回执会低估故障；不能替代短信失败率",
+      "source_ids": [
+        "S4"
+      ],
+      "source_links": [
+        "https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "journey.otp_delivery_latency_p95",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "journey.payment_decline_reason_share",
+    "name": "支付拒绝原因结构",
+    "description": "各拒绝原因去重支付意图数/全部支付意图数",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "支付通道×产品×端"
+    },
+    "aliases": [
+      "支付拒绝原因结构",
+      "payment_decline_reason_share"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "投保与核保",
+      "priority": "P0",
+      "causal_role": "mediator_diagnostic",
+      "formula": "各拒绝原因去重支付意图数/全部支付意图数",
+      "data_source": "支付意图日志+网关标准原因码",
+      "scope": "支付通道×产品×端",
+      "lag_candidates": "0,1日",
+      "validation": "区分技术、授权、余额等原因；仅对可修复链路验证",
+      "failure_mode": "同一订单重试不可当独立订单；不推断个人财务状况",
+      "source_ids": [
+        "S4"
+      ],
+      "source_links": [
+        "https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "journey.payment_decline_reason_share",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "service.renewal_reminder_lead_days",
+    "name": "续保提醒提前天数",
+    "description": "分配的首次提醒计划日期距保单到期日的天数",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "续保批次×产品×渠道"
+    },
+    "aliases": [
+      "续保提醒提前天数",
+      "renewal_reminder_lead_days"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "续保与服务",
+      "priority": "P0",
+      "causal_role": "treatment_candidate",
+      "formula": "分配的首次提醒计划日期距保单到期日的天数",
+      "data_source": "续保日历+触达分配日志",
+      "scope": "续保批次×产品×渠道",
+      "lag_candidates": "到期前30,14,7日",
+      "validation": "用户级提醒计划实验；按全部分配用户做ITT",
+      "failure_mode": "实际打开日是处理后变量；不能只比较已读用户",
+      "source_ids": [
+        "S7"
+      ],
+      "source_links": [
+        "https://www.nber.org/papers/w22765"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "service.renewal_reminder_lead_days",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "service.contact_frequency_cap",
+    "name": "触达频控配置",
+    "description": "每用户每7日计划允许触达上限，分渠道记录",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "活动×用户预处理层"
+    },
+    "aliases": [
+      "触达频控配置",
+      "contact_frequency_cap"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "续保与服务",
+      "priority": "P1",
+      "causal_role": "treatment_candidate",
+      "formula": "每用户每7日计划允许触达上限，分渠道记录",
+      "data_source": "CRM频控配置+分配日志",
+      "scope": "活动×用户预处理层",
+      "lag_candidates": "0,7,14日",
+      "validation": "频控方案随机化；退订投诉与投保共同评估",
+      "failure_mode": "实际触达次数受用户反馈影响；不能替代分配策略",
+      "source_ids": [
+        "S9"
+      ],
+      "source_links": [
+        "https://archive.ics.uci.edu/dataset/222/bank+marketing"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "service.contact_frequency_cap",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "service.agent_capacity_load",
+    "name": "顾问在手待办负载",
+    "description": "分配前未处理有效线索数/当班合格顾问数",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "团队×产品资质×小时"
+    },
+    "aliases": [
+      "顾问在手待办负载",
+      "agent_capacity_load"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "续保与服务",
+      "priority": "P1",
+      "causal_role": "pre_exposure_context",
+      "formula": "分配前未处理有效线索数/当班合格顾问数",
+      "data_source": "CRM队列+排班快照",
+      "scope": "团队×产品资质×小时",
+      "lag_candidates": "0,1,7日",
+      "validation": "团队或时间块设计，处理共享顾问溢出",
+      "failure_mode": "线索质量与排班同时变化；零顾问时记停服不算0",
+      "source_ids": [
+        "S1"
+      ],
+      "source_links": [
+        "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=98055"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "service.agent_capacity_load",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "service.claim_history_at_renewal",
+    "name": "续保前理赔体验",
+    "description": "仅用续保分配前已发生的是否理赔、已结案耗时和未结案标记",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "产品×续保批次"
+    },
+    "aliases": [
+      "续保前理赔体验",
+      "claim_history_at_renewal"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "续保与服务",
+      "priority": "P2",
+      "causal_role": "pre_exposure_context",
+      "formula": "仅用续保分配前已发生的是否理赔、已结案耗时和未结案标记",
+      "data_source": "最小化理赔汇总+保单时间轴",
+      "scope": "产品×续保批次",
+      "lag_candidates": "前365日历史",
+      "validation": "分层相关验证；不对理赔权益或服务质量人为降级实验",
+      "failure_mode": "理赔需求本身混杂；未结案不能用未来处理时间回填",
+      "source_ids": [
+        "S7"
+      ],
+      "source_links": [
+        "https://www.nber.org/papers/w22765"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "service.claim_history_at_renewal",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "service.cooling_off_cancel_rate",
+    "name": "成熟犹豫期撤单率",
+    "description": "合同规定犹豫期已完整经过的保单中犹豫期撤单数/该成熟保单数",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "承保批次×产品×渠道"
+    },
+    "aliases": [
+      "成熟犹豫期撤单率",
+      "cooling_off_cancel_rate"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "续保与服务",
+      "priority": "P0",
+      "causal_role": "outcome_guardrail",
+      "formula": "合同规定犹豫期已完整经过的保单中犹豫期撤单数/该成熟保单数",
+      "data_source": "承保+撤单+合同犹豫期字段",
+      "scope": "承保批次×产品×渠道",
+      "lag_candidates": "按合同成熟时间",
+      "validation": "作为理解/提醒实验的延迟护栏，报告成熟覆盖率",
+      "failure_mode": "结果不能回填为销售前因子；不可统一假设所有产品同一天数",
+      "source_ids": [
+        "S1"
+      ],
+      "source_links": [
+        "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=98055"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "service.cooling_off_cancel_rate",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "service.renewal_persistency_rate",
+    "name": "到期批次续保率",
+    "description": "固定宽限观察窗内完成续保的合格到期保单/同期合格到期保单",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "到期批次×产品"
+    },
+    "aliases": [
+      "到期批次续保率",
+      "renewal_persistency_rate"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "续保与服务",
+      "priority": "P1",
+      "causal_role": "outcome_guardrail",
+      "formula": "固定宽限观察窗内完成续保的合格到期保单/同期合格到期保单",
+      "data_source": "到期日历+续期保单+资格规则",
+      "scope": "到期批次×产品",
+      "lag_candidates": "按续保窗口成熟",
+      "validation": "明确停售迁移和不可续保单；长期效果验证",
+      "failure_mode": "按当月新保单分母算续保率错误；需冻结资格规则",
+      "source_ids": [
+        "S7"
+      ],
+      "source_links": [
+        "https://www.nber.org/papers/w22765"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "service.renewal_persistency_rate",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "mix.new_visitor_share",
+    "name": "新访客流量占比",
+    "description": "预先定义历史窗口内未访问的合格访客/全部合格访客",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "渠道×端×地区"
+    },
+    "aliases": [
+      "新访客流量占比",
+      "new_visitor_share"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "客群与渠道",
+      "priority": "P0",
+      "causal_role": "composition_context",
+      "formula": "预先定义历史窗口内未访问的合格访客/全部合格访客",
+      "data_source": "分配前身份标识+访问历史",
+      "scope": "渠道×端×地区",
+      "lag_candidates": "0,1,7日",
+      "validation": "先做固定分层mix/rate分解，再检验组内变化",
+      "failure_mode": "cookie重置伪造新客；不可用购买后身份信息分层",
+      "source_ids": [
+        "S4"
+      ],
+      "source_links": [
+        "https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "mix.new_visitor_share",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "mix.renewal_due_share",
+    "name": "近期到期客群占比",
+    "description": "分配前已知30日内到期客户/全部合格访问客户",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "产品×渠道×日期"
+    },
+    "aliases": [
+      "近期到期客群占比",
+      "renewal_due_share"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "客群与渠道",
+      "priority": "P1",
+      "causal_role": "composition_context",
+      "formula": "分配前已知30日内到期客户/全部合格访问客户",
+      "data_source": "保单日历+授权关联键",
+      "scope": "产品×渠道×日期",
+      "lag_candidates": "0,7,30日",
+      "validation": "区分自然续保季节与新客转化，按到期批次核验",
+      "failure_mode": "登录后才匹配出的到期身份可能产生选择偏差",
+      "source_ids": [
+        "S7"
+      ],
+      "source_links": [
+        "https://www.nber.org/papers/w22765"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "mix.renewal_due_share",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "mix.product_portfolio_share",
+    "name": "产品组合占比",
+    "description": "每个产品族的预定义入口合格流量/总合格入口流量",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "渠道×地区×日期"
+    },
+    "aliases": [
+      "产品组合占比",
+      "product_portfolio_share"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "客群与渠道",
+      "priority": "P0",
+      "causal_role": "composition_context",
+      "formula": "每个产品族的预定义入口合格流量/总合格入口流量",
+      "data_source": "入口产品标记+资格快照",
+      "scope": "渠道×地区×日期",
+      "lag_candidates": "0,1,7日",
+      "validation": "冻结产品族权重分解；同时报告各族保费和投保率",
+      "failure_mode": "用成交产品占比解释成交是循环定义",
+      "source_ids": [
+        "S1"
+      ],
+      "source_links": [
+        "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=98055"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "mix.product_portfolio_share",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "mix.partner_lead_duplicate_rate",
+    "name": "渠道线索重复率",
+    "description": "授权去重窗口内重复线索数/入站线索数",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "合作渠道×日期"
+    },
+    "aliases": [
+      "渠道线索重复率",
+      "partner_lead_duplicate_rate"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "客群与渠道",
+      "priority": "P1",
+      "causal_role": "measurement_diagnostic",
+      "formula": "授权去重窗口内重复线索数/入站线索数",
+      "data_source": "渠道lead_id+最小化稳定去重键",
+      "scope": "合作渠道×日期",
+      "lag_candidates": "0,1,7日",
+      "validation": "与合同有效线索及下游接通分开对账",
+      "failure_mode": "跨渠道身份不可拼接时单报未知覆盖率",
+      "source_ids": [
+        "S4"
+      ],
+      "source_links": [
+        "https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "mix.partner_lead_duplicate_rate",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "external.matched_competitor_coverage_change",
+    "name": "竞品同类保障变化",
+    "description": "匹配保障篮子下责任/免赔/等待期变化的类别向量",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "同险种×目标地区"
+    },
+    "aliases": [
+      "竞品同类保障变化",
+      "matched_competitor_coverage_change"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "外部环境",
+      "priority": "P2",
+      "causal_role": "external_event_context",
+      "formula": "匹配保障篮子下责任/免赔/等待期变化的类别向量",
+      "data_source": "竞品正式条款版本及授权快照",
+      "scope": "同险种×目标地区",
+      "lag_candidates": "0,7,30日",
+      "validation": "事件研究加不受影响产品负对照",
+      "failure_mode": "不能把保障扩展与竞品同时降价分开强行归因",
+      "source_ids": [
+        "S1",
+        "S6"
+      ],
+      "source_links": [
+        "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=98055",
+        "https://www.nber.org/papers/w21759"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "external.matched_competitor_coverage_change",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "external.policy_product_exposure",
+    "name": "政策影响产品暴露度",
+    "description": "政策适用产品指示×事件前冻结的合格流量占比",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "产品族×地区"
+    },
+    "aliases": [
+      "政策影响产品暴露度",
+      "policy_product_exposure"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "外部环境",
+      "priority": "P1",
+      "causal_role": "external_event_context",
+      "formula": "政策适用产品指示×事件前冻结的合格流量占比",
+      "data_source": "政策原文+内部产品映射+公告日期",
+      "scope": "产品族×地区",
+      "lag_candidates": "公告/生效分别0,7,30日",
+      "validation": "区别适用与不适用产品，检查预趋势及提前反应",
+      "failure_mode": "通知条数不是政策强度；冻结权重避免反向反馈",
+      "source_ids": [
+        "S10"
+      ],
+      "source_links": [
+        "https://www.nfra.gov.cn/cn/view/pages/ItemDetail.html?docId=1175200&itemId=928"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "external.policy_product_exposure",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "external.deposit_alternative_gap",
+    "name": "储蓄替代产品收益差",
+    "description": "同币种同期限公开存款利率与保单保证现金流IRR之差",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "储蓄型产品×币种×期限"
+    },
+    "aliases": [
+      "储蓄替代产品收益差",
+      "deposit_alternative_gap"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "外部环境",
+      "priority": "P2",
+      "causal_role": "external_context",
+      "formula": "同币种同期限公开存款利率与保单保证现金流IRR之差",
+      "data_source": "银行正式利率页+产品保证现金流",
+      "scope": "储蓄型产品×币种×期限",
+      "lag_candidates": "7,30,90日",
+      "validation": "低频验证，仅在期限与流动性可比子集分析",
+      "failure_mode": "LPR不是存款利率；非保证分红不能当保证收益",
+      "source_ids": [
+        "S10",
+        "S11"
+      ],
+      "source_links": [
+        "https://www.nfra.gov.cn/cn/view/pages/ItemDetail.html?docId=1175200&itemId=928",
+        "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125440/3876551/5625437/index.html"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "external.deposit_alternative_gap",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "external.holiday_distance",
+    "name": "距节假日距离",
+    "description": "当地工作日/调休日类别及距假期首尾天数",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "地区×渠道×日期"
+    },
+    "aliases": [
+      "距节假日距离",
+      "holiday_distance"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "外部环境",
+      "priority": "P1",
+      "causal_role": "calendar_context",
+      "formula": "当地工作日/调休日类别及距假期首尾天数",
+      "data_source": "正式日历+企业营业日历",
+      "scope": "地区×渠道×日期",
+      "lag_candidates": "前后7,14日",
+      "validation": "跨年同类节假日窗口验证，拆营业时间和需求",
+      "failure_mode": "公历同比错位；固定效应与该因子重复编码",
+      "source_ids": [
+        "S12"
+      ],
+      "source_links": [
+        "https://data.stats.gov.cn/easyquery.htm?Cn=A01"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "external.holiday_distance",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "quality.assignment_srm_stat",
+    "name": "分流比例失配统计量",
+    "description": "按预设分流比例计算各组去重分配人数的拟合优度统计量及p值",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "实验×分配单位×日期"
+    },
+    "aliases": [
+      "分流比例失配统计量",
+      "assignment_srm_stat"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "数据质量",
+      "priority": "P0",
+      "causal_role": "quality_gate",
+      "formula": "按预设分流比例计算各组去重分配人数的拟合优度统计量及p值",
+      "data_source": "分配服务日志+预设概率",
+      "scope": "实验×分配单位×日期",
+      "lag_candidates": "当日累计",
+      "validation": "A/A及分配日志对账；失败先排障",
+      "failure_mode": "有意非等比例分流不得用50:50检验；稀疏格需适用检验",
+      "source_ids": [
+        "S4"
+      ],
+      "source_links": [
+        "https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "quality.assignment_srm_stat",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "quality.cross_variant_contamination",
+    "name": "跨组污染率",
+    "description": "同实验同随机化单位出现多个不允许variant的单位数/分配单位数",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "实验×随机化单位"
+    },
+    "aliases": [
+      "跨组污染率",
+      "cross_variant_contamination"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "数据质量",
+      "priority": "P0",
+      "causal_role": "quality_gate",
+      "formula": "同实验同随机化单位出现多个不允许variant的单位数/分配单位数",
+      "data_source": "分配日志+曝光版本",
+      "scope": "实验×随机化单位",
+      "lag_candidates": "0,1日",
+      "validation": "核对粘性分流及跨端标识；比较分配与实际暴露",
+      "failure_mode": "合法多因子设计不可误判污染；主分析遵循原分配",
+      "source_ids": [
+        "S4"
+      ],
+      "source_links": [
+        "https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "quality.cross_variant_contamination",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "quality.event_duplicate_rate",
+    "name": "事件重复率",
+    "description": "重复event_id条数/接收事件条数",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "事件×SDK×版本"
+    },
+    "aliases": [
+      "事件重复率",
+      "event_duplicate_rate"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "数据质量",
+      "priority": "P0",
+      "causal_role": "quality_gate",
+      "formula": "重复event_id条数/接收事件条数",
+      "data_source": "采集原始元数据+去重结果",
+      "scope": "事件×SDK×版本",
+      "lag_candidates": "0,1日",
+      "validation": "重放幂等性和分组丢重率对账",
+      "failure_mode": "无稳定event_id不能可靠区分重复与真实多次行为",
+      "source_ids": [
+        "S4"
+      ],
+      "source_links": [
+        "https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "quality.event_duplicate_rate",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "quality.denominator_contract_change",
+    "name": "指标分母口径变更",
+    "description": "曝光资格/去重单位/机器人过滤/时间窗配置的版本差异",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "指标×版本×日期"
+    },
+    "aliases": [
+      "指标分母口径变更",
+      "denominator_contract_change"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "数据质量",
+      "priority": "P0",
+      "causal_role": "quality_gate",
+      "formula": "曝光资格/去重单位/机器人过滤/时间窗配置的版本差异",
+      "data_source": "指标契约版本+ETL部署记录",
+      "scope": "指标×版本×日期",
+      "lag_candidates": "0日",
+      "validation": "同一原始窗口双算旧新口径，报告差额",
+      "failure_mode": "口径变化不能当业务改善；重算会影响历史可比性",
+      "source_ids": [
+        "S4"
+      ],
+      "source_links": [
+        "https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "quality.denominator_contract_change",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "quality.source_availability_lag",
+    "name": "数据可用时间延迟",
+    "description": "available_at-event_time，汇总P95并记录缺失可用时间占比",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "来源×频率×日期"
+    },
+    "aliases": [
+      "数据可用时间延迟",
+      "source_availability_lag"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "数据质量",
+      "priority": "P0",
+      "causal_role": "quality_gate",
+      "formula": "available_at-event_time，汇总P95并记录缺失可用时间占比",
+      "data_source": "数据入仓日志+外部发布时间",
+      "scope": "来源×频率×日期",
+      "lag_candidates": "0,1,7日",
+      "validation": "按as-of重建快照与实时视图对照",
+      "failure_mode": "不能把月末所属日期当月度指标公布日",
+      "source_ids": [
+        "S4",
+        "S12"
+      ],
+      "source_links": [
+        "https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/",
+        "https://data.stats.gov.cn/easyquery.htm?Cn=A01"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "quality.source_availability_lag",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  },
+  {
+    "factor_id": "quality.order_policy_reconcile_gap",
+    "name": "支付承保对账差额",
+    "description": "成熟支付意图中已支付但无有效保单映射的数量/成熟已支付意图数",
+    "source_type": "RESEARCH_CANDIDATE",
+    "scope": {
+      "domain": "insurance_sales",
+      "grain": "产品×支付渠道×支付批次"
+    },
+    "aliases": [
+      "支付承保对账差额",
+      "order_policy_reconcile_gap"
+    ],
+    "status": "research_candidate",
+    "license_ref": null,
+    "metadata": {
+      "family": "数据质量",
+      "priority": "P0",
+      "causal_role": "quality_gate",
+      "formula": "成熟支付意图中已支付但无有效保单映射的数量/成熟已支付意图数",
+      "data_source": "支付账本+保单主键+退款状态",
+      "scope": "产品×支付渠道×支付批次",
+      "lag_candidates": "合同定义成熟窗口",
+      "validation": "区分异步出单、退款和真实丢单，按状态机核对",
+      "failure_mode": "异步延迟未成熟时不能判故障；保单拆分多对多映射",
+      "source_ids": [
+        "S4"
+      ],
+      "source_links": [
+        "https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/"
+      ],
+      "evidence_status": "mechanism_or_measurement_basis_only",
+      "definition_origin": "proposed_operationalization_2026-09-17",
+      "business_effect_verified": false,
+      "production_ready": false,
+      "data_readiness": "requires_authorized_data_mapping",
+      "claim_type": "FACTOR_CANDIDATE",
+      "unit_policy": "formula_specific; proportions 0..1; rates store numerator and denominator",
+      "missing_policy": "missing_not_zero; preserve reason and coverage; do not interpolate binary events",
+      "time_contract": {
+        "event_time": "business occurrence time",
+        "published_at": "external first publication if applicable",
+        "available_at": "first usable in pipeline",
+        "as_of": "analysis cutoff; require available_at <= as_of"
+      },
+      "parent_factor_id": "quality.order_policy_reconcile_gap",
+      "transform_policy": "numeric series only; prespecified trailing transforms; no differences for category hashes",
+      "causal_adjustment": "role depends on target and DAG; mediator/outcome/quality_gate excluded from default pretreatment adjustment"
+    }
+  }
+]

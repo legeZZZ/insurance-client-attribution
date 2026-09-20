@@ -1,0 +1,123 @@
+{
+  "reviewer": "fixture-reviewer",
+  "spec_digest": "sha256:6fe323b9e1aed48ee64ec370152eda38f68c5b22159b31495c938dad229c8f01",
+  "passed": true,
+  "checks": [
+    {
+      "execution_status": "COMPLETED",
+      "binding": {
+        "task_id": "feedback:sha256:33ace88517ba72e107e1a8f2533df82be392d0a3003765c8dc41c8d93e436b83",
+        "data_ref": "sha256:9103af4d06ddb33c3b9ef87dbd91c5d4292cc1ad8d17d2fe257b398aa3d85627",
+        "skill_ref": "sha256:6fe323b9e1aed48ee64ec370152eda38f68c5b22159b31495c938dad229c8f01"
+      },
+      "operation": "scan_window",
+      "input_digest": "sha256:799cdecb70301b423c0742949efe21f4588d54bb179b0bf8248b80094766bc1f",
+      "result": {
+        "passed": true,
+        "claim_type": "WATCHLIST",
+        "scan": {
+          "claim_type": "WATCHLIST",
+          "watchlist": [
+            {
+              "factor_id": "driver",
+              "parent_factor_id": "driver",
+              "scope_id": "global",
+              "metric_id": "metric",
+              "lag": 2,
+              "effect_shape": "persistent",
+              "correlation": 0.9840582264226366,
+              "coverage": 0.975,
+              "n_pairs": 78,
+              "kind": "internal_event",
+              "score": 0.9594567707620707,
+              "budget_multiplier": 1.0,
+              "falsification": {
+                "placebo": {
+                  "correlation": 0.0778270933535984,
+                  "coverage": 0.9696969696969697,
+                  "n_pairs": 64,
+                  "kill": false,
+                  "insufficient_data": false,
+                  "applicable": true,
+                  "status": "TESTED"
+                },
+                "lead_lag_reversal": {
+                  "correlation": 0.018109197477695464,
+                  "kill": false,
+                  "skipped": false,
+                  "applicable": true
+                },
+                "split_half": {
+                  "first": 0.9880555899335507,
+                  "second": 0.9767715403351585,
+                  "kill": false,
+                  "applicable": true,
+                  "status": "TESTED"
+                },
+                "negative_controls": []
+              },
+              "falsification_status": "SURVIVED_EXPLORATORY",
+              "claim_type": "WATCHLIST",
+              "grade": "REVIEW",
+              "alert_id": "sha256:bf2207b78e2145535c4692f525960f1d60aadcafaeb83e1f2655cced0c7e2f55",
+              "window_id": "1",
+              "discovery_window": [
+                0,
+                79
+              ],
+              "next_step": "仅下一独立窗口确认可晋级；人工标签只进入验证队列"
+            }
+          ],
+          "deferred": [],
+          "killed": [],
+          "killed_count": 0,
+          "manifest": {
+            "M": 1,
+            "S": 1,
+            "K": 1,
+            "L": 1,
+            "grid_size": 1,
+            "tested": 1,
+            "test_budget": 15,
+            "budget": 2,
+            "attempts": [
+              {
+                "factor_id": "driver",
+                "parent_factor_id": "driver",
+                "scope_id": "global",
+                "metric_id": "metric",
+                "lag": 2,
+                "effect_shape": "persistent",
+                "correlation": 0.9840582264226366,
+                "coverage": 0.975,
+                "n_pairs": 78
+              }
+            ],
+            "truncated": false,
+            "selection_policy": "registered_order_with_feedback_priority",
+            "inference": "exploratory_only",
+            "total_tests_spent": 5,
+            "total_test_budget": 30
+          },
+          "policy": "exploratory_only_no_cross_time_error_control_claim",
+          "data_digest": "sha256:1d2e006bd2e1e7c468776d86d20d58b22ffdcbde25ba6af4895b97594c2259ab"
+        }
+      },
+      "pid": 8308,
+      "guardrails": {
+        "no_code_execution": true,
+        "no_traffic_mutation": true,
+        "fresh_evidence_only": true,
+        "no_causal_without_identification": true
+      },
+      "digest": "sha256:e1d84d9c1850d514dc1dcdf62f629209360bbc728b77c7fdb801197aa5984e24",
+      "cost": {
+        "input_bytes": 4503,
+        "output_bytes": 2553,
+        "elapsed_seconds": 0.08652016699852538,
+        "model_tokens": 0
+      },
+      "worker_digest": "sha256:5eb9cb37273620cc9fd9254170810808c11a613e5e1debf46401d145dee41f01"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "operation": "experiment_proposal",
+  "parameters": {
+    "metric_contract": {
+      "name": "conversion",
+      "numerator": "converted_users",
+      "denominator": "users",
+      "aggregation": "ratio_of_sums",
+      "unit": "rate",
+      "analysis_unit": "user",
+      "target_population": "eligible_users",
+      "timezone": "UTC",
+      "window": [
+        0,
+        9
+      ],
+      "maturity_days": 2,
+      "deduplication": "unit_id"
+    },
+    "mde": 0.05,
+    "baseline_variance": 0.25,
+    "factors": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ]
+  }
+}

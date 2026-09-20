@@ -8,12 +8,12 @@ import random
 from pathlib import Path
 
 from .bayes import bundle_compare, estimate_high_dimensional_hte, estimate_hte
-from .track2_benchmark import run_benchmark
 from .claim_ledger import ClaimLedger
 from .experiment_designer import design_experiment, estimate_component_effects
 from .factor_miner import mine_factors
 from .insursim_carousel import generate_bundle_stage, generate_factorial_stage, sanitize
 from .spec import load_spec, spec_diff
+from .track2_benchmark import run_benchmark
 
 SPECS_DIR = Path(__file__).resolve().parent.parent / "specs"
 
@@ -163,11 +163,42 @@ def run_demo(seed: int = 20260809) -> dict:
         "impressions": sum(1 for r in estimation_rows if r["treatment"] == 1),
     }
     bundle = bundle_compare(control, treatment, practical_threshold=0.005, seed=seed)
+    from .publication import govern_output
+    from .quant_track import estimate_randomized_effect
+
+    metric = {
+        "name": "carousel_ctr",
+        "numerator": "clicks",
+        "denominator": "exposures",
+        "aggregation": "ratio_of_sums",
+        "unit": "rate",
+        "analysis_unit": "exposure",
+        "target_population": "fixture_eligible_exposures",
+        "timezone": "UTC",
+        "window": [60, 73],
+        "maturity_days": 0,
+        "deduplication": "unit_id",
+    }
+    qualified = estimate_randomized_effect(
+        [
+            {"unit_id": i, "treatment": r["treatment"], "outcome": r["clicked"]}
+            for i, r in enumerate(estimation_rows)
+        ],
+        metric,
+        assignment_ref="insursim:generate_bundle_stage",
+        randomized=True,
+        observed_through=73,
+        no_interference_ref="insursim:independent_exposure_generator",
+        seed=seed,
+    )
+    bundle["contracts"] = qualified["contracts"]
+    ledger.transition("BUNDLE_EXPERIMENT_READY")
     ledger.add_claim(
         "BUNDLE_EFFECT",
         f"新轮播整套样式在本实验中使 CTR 变化 {bundle['effect_absolute']:.4f}"
         f"（P(实际损害)={bundle['probability_practical_harm']:.3f}）。",
         estimand="ITT on qualified CTR",
+        contracts=qualified["contracts"],
         posterior_probability=bundle["probability_practical_harm"],
         credible_interval=bundle["credible_interval_95"],
         practical_threshold=0.005,
@@ -298,6 +329,7 @@ def run_demo(seed: int = 20260809) -> dict:
         "HETEROGENEOUS_TREATMENT_EFFECT",
         f"低端设备分群负向效应最大（收缩后 {worst['effect_shrunk']:.4f}）。",
         estimand="HTE by device_low_end",
+        selected_after_seeing_outcome=True,
     )
     ledger.add_claim(
         "EXPLORATORY_HETEROGENEITY",
@@ -334,6 +366,7 @@ def run_demo(seed: int = 20260809) -> dict:
                 f"独立随机化显示 {item['factor_id']} 的组件级效应为 {item['component_effect']:.4f}。",
                 estimand="Component ATE",
                 credible_interval=None,
+                design_record=design_record,
             )
         else:
             ledger.add_claim(
@@ -344,21 +377,23 @@ def run_demo(seed: int = 20260809) -> dict:
     ledger.transition("POSTERIOR_UPDATED")
     ledger.transition("DECISION_READY")
 
-    return {
-        "bundle": bundle,
-        "oracle_bundle_ate": truth["oracle_bundle_ate"],
-        "mined_top5": mined["candidates"][:5],
-        "hte": hte,
-        "high_dimensional_hte": hdim_hte,
-        "design": {
-            "design_type": design["design_type"],
-            "arm_count": design["arm_count"],
-            "design_diagnostics": design["design_diagnostics"],
-        },
-        "component_effects": effects,
-        "a_line_funnel": a_line_funnel,
-        "ledger": ledger.render(),
-    }
+    return govern_output(
+        {
+            "bundle": bundle,
+            "oracle_bundle_ate": truth["oracle_bundle_ate"],
+            "mined_top5": mined["candidates"][:5],
+            "hte": hte,
+            "high_dimensional_hte": hdim_hte,
+            "design": {
+                "design_type": design["design_type"],
+                "arm_count": design["arm_count"],
+                "design_diagnostics": design["design_diagnostics"],
+            },
+            "component_effects": effects,
+            "a_line_funnel": a_line_funnel,
+            "ledger": ledger.render(),
+        }
+    )
 
 
 def main() -> None:

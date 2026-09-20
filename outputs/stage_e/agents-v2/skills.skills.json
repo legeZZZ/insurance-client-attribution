@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "skills": {
+    "metric": {
+      "versions": [
+        {
+          "version": 1,
+          "rules": [
+            {
+              "when": {
+                "metric_kind": "sum"
+              },
+              "action": "check_metric",
+              "polarity": "reinforce",
+              "evidence": [
+                "sha256:bcfdf6ad65c9685b586d50d5c83264c8e8239f2717b1fd28a69244bf71f59316"
+              ]
+            }
+          ],
+          "digest": "c4cda778fb7cce74",
+          "note": "G0–G6 governed release",
+          "governance_binding": {
+            "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/agents-v2/skills.db",
+            "name": "metric",
+            "version": 1,
+            "spec_digest": "sha256:515ddd07c4b1b404559e0e4a03c91c214d542d31288248fed966051e4864bd17"
+          },
+          "evidence_binding": {
+            "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/agents-v2/skills.db",
+            "asset_ref": "sha256:5a4bfe102def227ec40e1581834045dce7a6db0cec5aa30f5972ba349c6a951f"
+          }
+        },
+        {
+          "version": 2,
+          "rules": [
+            {
+              "when": {
+                "metric_kind": "sum"
+              },
+              "action": "check_metric",
+              "polarity": "reinforce",
+              "evidence": [
+                "sha256:bcfdf6ad65c9685b586d50d5c83264c8e8239f2717b1fd28a69244bf71f59316"
+              ]
+            }
+          ],
+          "digest": "d3bcfb1b755726d8",
+          "note": "G0–G6 governed release",
+          "governance_binding": {
+            "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/agents-v2/skills.db",
+            "name": "metric",
+            "version": 1,
+            "spec_digest": "sha256:515ddd07c4b1b404559e0e4a03c91c214d542d31288248fed966051e4864bd17"
+          },
+          "evidence_binding": {
+            "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/agents-v2/skills.db",
+            "asset_ref": "sha256:04b9ff2dd781b689cfe26122b90ad12c8367f5e4100894bbe1a7bcf24ec27289"
+          }
+        }
+      ],
+      "active": 2,
+      "changelog": [
+        {
+          "version": 1,
+          "event": "registered",
+          "note": "G0–G6 governed release"
+        },
+        {
+          "version": 1,
+          "event": "activated",
+          "previous": null,
+          "note": "bound human release sha256:4cb101d9a8b669cadee9b0c9a33acf3e645b2625848469e024ba66bb66b398a7"
+        },
+        {
+          "version": 2,
+          "event": "registered",
+          "note": "G0–G6 governed release"
+        },
+        {
+          "version": 2,
+          "event": "activated",
+          "previous": 1,
+          "note": "bound human release sha256:b07913838f021eece985b9ce1132ddb409359a745a635f4da6efcd998a6c957b"
+        }
+      ],
+      "governed": true
+    }
+  }
+}

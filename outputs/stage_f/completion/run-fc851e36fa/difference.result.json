@@ -1,0 +1,32 @@
+{
+  "decision": "PROPOSED",
+  "factor_id": "synth:03b0ebc1f8afcfa066f9",
+  "spec": {
+    "factor_id": "synth:03b0ebc1f8afcfa066f9",
+    "expression": {
+      "op": "subtract",
+      "args": [
+        {
+          "factor": "u"
+        },
+        {
+          "factor": "v"
+        }
+      ]
+    },
+    "unit": "index",
+    "parents": [
+      "u",
+      "v"
+    ],
+    "parent_units": {
+      "u": "index",
+      "v": "index"
+    },
+    "source_data_ref": "sha256:56d2af82d7cadd185a34224088573cfdd6f8f6e8b61e566308f80c3883057433",
+    "available_window": 100,
+    "claim_ceiling": "FACTOR_CANDIDATE",
+    "nodes": 3,
+    "ref": "sha256:4336e1a15d79b812f0e88d317db2cd6997aa21976fcdab0f5ecbf4c1f45abd14"
+  }
+}

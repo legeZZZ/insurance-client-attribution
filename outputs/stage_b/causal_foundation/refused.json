@@ -1,0 +1,162 @@
+{
+  "track": "A",
+  "status": "REFUSED",
+  "contracts": {
+    "MetricContract": {
+      "name": "conversion",
+      "numerator": "converted",
+      "denominator": "users",
+      "aggregation": "ratio_of_sums",
+      "unit": "rate",
+      "analysis_unit": "user",
+      "target_population": "fixture_users",
+      "timezone": "UTC",
+      "window": [
+        0,
+        9
+      ],
+      "maturity_days": 2,
+      "deduplication": "unit_id",
+      "schema_version": "1.0",
+      "contract_type": "MetricContract",
+      "digest": "sha256:14663a92bdd86f3eff17cb56787b77e9268445158b9172bc9acf7ad29d6b0c88"
+    },
+    "IdentificationReport": {
+      "treatment": "assignment",
+      "outcome": "conversion",
+      "design": "RCT",
+      "status": "NOT_IDENTIFIED",
+      "assumptions": [
+        {
+          "name": "data_valid",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:767fdaaf623b29f14dabfd1492eaa5de2d5065f8de5c56c7e3bb5a424ef2a1e3"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "outcome_mature",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:767fdaaf623b29f14dabfd1492eaa5de2d5065f8de5c56c7e3bb5a424ef2a1e3"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "support_overlap",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:767fdaaf623b29f14dabfd1492eaa5de2d5065f8de5c56c7e3bb5a424ef2a1e3"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "assignment_traceable",
+          "status": "failed",
+          "passed": false,
+          "evidence_refs": [
+            "fixture:randomization-design"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "srm_pass",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:767fdaaf623b29f14dabfd1492eaa5de2d5065f8de5c56c7e3bb5a424ef2a1e3"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "assignment_consistent",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:767fdaaf623b29f14dabfd1492eaa5de2d5065f8de5c56c7e3bb5a424ef2a1e3"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "interference_absent",
+          "status": "assumed",
+          "passed": true,
+          "evidence_refs": [
+            "fixture:independent-clusters"
+          ],
+          "data_verifiable": false
+        }
+      ],
+      "evidence_refs": [
+        "fixture:independent-clusters",
+        "fixture:randomization-design",
+        "sha256:767fdaaf623b29f14dabfd1492eaa5de2d5065f8de5c56c7e3bb5a424ef2a1e3"
+      ],
+      "adjustment_set": [
+        "x"
+      ],
+      "forbidden_adjustments": [
+        "assignment",
+        "conversion"
+      ],
+      "rejected_adjustments": [],
+      "support": {
+        "target_population": "fixture_users",
+        "data_digest": "sha256:767fdaaf623b29f14dabfd1492eaa5de2d5065f8de5c56c7e3bb5a424ef2a1e3",
+        "overlap_check": {
+          "status": "supported",
+          "evidence_refs": [
+            "sha256:767fdaaf623b29f14dabfd1492eaa5de2d5065f8de5c56c7e3bb5a424ef2a1e3"
+          ]
+        }
+      },
+      "ambiguities": [],
+      "reason_codes": [
+        "DATA_INVALID"
+      ],
+      "route": "A",
+      "effect_scope": "individual",
+      "causal_effect_allowed": false,
+      "supplemental_evidence_needed": [
+        "assignment_traceable"
+      ],
+      "graph_ref": null,
+      "dag_digest": null,
+      "schema_version": "1.0",
+      "contract_type": "IdentificationReport",
+      "digest": "sha256:1d4cbc434ef1b2d43b3a6be74873978f4bd8510acc263b0d5ade0cc131b85567"
+    },
+    "EffectEstimate": {
+      "estimand": "ITT",
+      "unit": "rate",
+      "estimate": null,
+      "interval": null,
+      "interval_method": "cluster_influence_t_approximation",
+      "selection_status": "pre_registered",
+      "target_population": "fixture_users",
+      "window": [
+        0,
+        9
+      ],
+      "diagnostics": {
+        "srm_pvalue": 1.0,
+        "srm_alpha": 0.001,
+        "randomization_groups": 100,
+        "treated_groups": 50,
+        "control_groups": 50,
+        "data_digest": "sha256:767fdaaf623b29f14dabfd1492eaa5de2d5065f8de5c56c7e3bb5a424ef2a1e3",
+        "variance_unit": "cluster",
+        "interval_scope": "pointwise; not adjusted for adaptive subgroup selection"
+      },
+      "identification_ref": "sha256:1d4cbc434ef1b2d43b3a6be74873978f4bd8510acc263b0d5ade0cc131b85567",
+      "method": "AIPW",
+      "schema_version": "1.0",
+      "contract_type": "EffectEstimate",
+      "digest": "sha256:1e0194d406482669c2912245d80a24f1fcd7e4f2c09b527bc42545aa30997a6e"
+    }
+  }
+}

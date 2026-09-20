@@ -1,0 +1,16 @@
+{
+  "operation": "skills",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-3525b858da2e/governance.db",
+    "action": "replay",
+    "parameters": {
+      "name": "metric_skill",
+      "context": {
+        "metric_kind": "sum"
+      },
+      "task_id": "mismatch",
+      "data_ref": "sha256:983a8d6a9322ca4f18cd56002f735d89fc5594ea84583c13edcb4ab242702204",
+      "window": 3
+    }
+  }
+}

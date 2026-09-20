@@ -157,9 +157,9 @@ class FactorExperienceStore:
 
     def save(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        self.path.write_text(
-            json.dumps(self.data, ensure_ascii=False, indent=2), encoding="utf-8"
-        )
+        from .persistence import atomic_json
+
+        atomic_json(self.path, self.data)
 
     # ---- introspection ---------------------------------------------------
     def summary(self) -> dict[str, Any]:
@@ -172,3 +172,197 @@ class FactorExperienceStore:
             "shrinkage_strength": round(self.data["shrinkage_strength"], 1),
             "tracked_segments": len(self.data["predictions"]),
         }
+
+
+class GovernedPriorStore:
+    """Versioned statistical memory. Method retrieval never supplies these parameters."""
+
+    def __init__(self, path):
+        from .hypothesis_registry import HypothesisRegistry
+
+        self.registry = HypothesisRegistry(path)
+        self.db = self.registry.db
+        self.db.executescript("""
+          CREATE TABLE IF NOT EXISTS prior_observations(id TEXT PRIMARY KEY, period INTEGER NOT NULL, context_ref TEXT NOT NULL, body TEXT NOT NULL);
+        """)
+
+    def close(self):
+        self.registry.close()
+
+    def observe(
+        self, *, task_id, period, context, arm_key, successes, trials, data_ref
+    ):
+        from .contracts import digest, integer
+
+        period, successes, trials = (
+            integer(period, "period"),
+            integer(successes, "successes"),
+            integer(trials, "trials"),
+        )
+        if (
+            not task_id
+            or period < 0
+            or not 0 <= successes <= trials
+            or trials < 1
+            or set(context) != {"metric", "population", "assignment_version"}
+        ):
+            raise ValueError(
+                "bound binomial counts, period and complete statistical context required"
+            )
+        asset = self.registry.asset(data_ref)
+        if (
+            asset["status"] != "VALID"
+            or asset["kind"] != "data"
+            or asset["body"].get("successes") != successes
+            or asset["body"].get("trials") != trials
+            or asset["body"].get("arm_key") != arm_key
+        ):
+            raise ValueError("prior observation counts must match current evidence")
+        body = {
+            "task_id": task_id,
+            "period": period,
+            "context": context,
+            "arm_key": arm_key,
+            "successes": successes,
+            "trials": trials,
+            "data_ref": data_ref,
+        }
+        ref = digest({"task": task_id, "data": data_ref, "arm": arm_key})
+        context_ref = digest(context)
+        with self.registry.transaction():
+            for row in self.db.execute("SELECT id,body FROM prior_observations"):
+                previous = json.loads(row["body"])
+                if previous["data_ref"] == data_ref and previous["arm_key"] == arm_key:
+                    if any(
+                        previous[k] != body[k]
+                        for k in ("period", "context", "successes", "trials")
+                    ):
+                        raise ValueError(
+                            "same statistical observations cannot be relabeled or counted in another period"
+                        )
+                    return {"observation_ref": row["id"]}
+            old = self.db.execute(
+                "SELECT body FROM prior_observations WHERE id=?", (ref,)
+            ).fetchone()
+            if old and json.loads(old[0]) != body:
+                raise ValueError(
+                    "statistical observation revision requires a new data version"
+                )
+            self.db.execute(
+                "INSERT OR IGNORE INTO prior_observations VALUES (?,?,?,?)",
+                (ref, period, context_ref, json.dumps(body)),
+            )
+            self.registry._audit("STATISTICAL_MEMORY_OBSERVED", {"ref": ref, **body})
+        return {"observation_ref": ref}
+
+    def prior_for(
+        self,
+        *,
+        context,
+        arm_key,
+        current_period,
+        fresh_successes,
+        fresh_trials,
+        max_fraction=0.25,
+    ):
+        from .contracts import digest, integer, finite
+
+        current_period = integer(current_period, "current_period")
+        fresh_successes = integer(fresh_successes, "fresh_successes")
+        fresh_trials = integer(fresh_trials, "fresh_trials")
+        if (
+            not 0 <= fresh_successes <= fresh_trials
+            or fresh_trials < 1
+            or not 0 < finite(max_fraction, "max_fraction") <= 0.25
+        ):
+            raise ValueError("valid fresh binomial data and prior cap required")
+        observations = [
+            json.loads(r[0])
+            for r in self.db.execute(
+                "SELECT body FROM prior_observations WHERE context_ref=? AND period<? ORDER BY period",
+                (digest(context), current_period),
+            )
+        ]
+        eligible = [
+            o
+            for o in observations
+            if o["arm_key"] == arm_key
+            and self.registry.asset(o["data_ref"])["status"] == "VALID"
+        ]
+        if not eligible:
+            return {
+                "prior": None,
+                "reason": "NO_COMPATIBLE_VALID_HISTORY",
+                "method_retrieval_used": False,
+            }
+        successes = sum(
+            o["successes"] * DECAY ** (current_period - o["period"]) for o in eligible
+        )
+        failures = sum(
+            (o["trials"] - o["successes"]) * DECAY ** (current_period - o["period"])
+            for o in eligible
+        )
+        cap = min(CAP, max_fraction * fresh_trials)
+        total = successes + failures
+        if total > cap:
+            successes, failures = successes * cap / total, failures * cap / total
+        a, b = 1 + successes, 1 + failures
+        from scipy.stats import betabinom
+
+        lower, upper = betabinom.ppf([0.005, 0.995], fresh_trials, a, b)
+        mismatch = not lower <= fresh_successes <= upper
+        # A failed predictive check discards borrowed information for this task.
+        result = {
+            "prior": None if mismatch else [a, b],
+            "reason": "PREDICTIVE_MISMATCH" if mismatch else "COMPATIBLE",
+            "predictive_interval": [float(lower), float(upper)],
+            "historical_refs": [o["data_ref"] for o in eligible],
+            "effective_pseudo_trials": 0 if mismatch else successes + failures,
+            "context_ref": digest(context),
+            "method_retrieval_used": False,
+            "causal_eligible": False,
+        }
+        with self.registry.transaction():
+            self.registry._audit("STATISTICAL_PRIOR_CHECKED", result)
+        return result
+
+    def estimate_rate(self, *, task_id, context, arm_key, current_period, data_ref):
+        from .contracts import digest
+        from scipy.stats import beta
+
+        asset = self.registry.asset(data_ref)
+        if (
+            asset["status"] != "VALID"
+            or asset["kind"] != "data"
+            or asset["body"].get("arm_key") != arm_key
+        ):
+            raise ValueError("current binomial evidence required")
+        data = asset["body"]
+        checked = self.prior_for(
+            context=context,
+            arm_key=arm_key,
+            current_period=current_period,
+            fresh_successes=data["successes"],
+            fresh_trials=data["trials"],
+        )
+        a, b = checked["prior"] or [1.0, 1.0]
+        a += data["successes"]
+        b += data["trials"] - data["successes"]
+        result = {
+            "task_id": task_id,
+            "data_ref": data_ref,
+            "context_ref": digest(context),
+            "prior_check": checked,
+            "posterior_shape": [a, b],
+            "posterior_mean": a / (a + b),
+            "posterior_interval": beta.ppf([0.025, 0.975], a, b).tolist(),
+            "claim_type": "DESCRIPTIVE_FACT",
+            "causal_eligible": False,
+            "method_memory_used": False,
+        }
+        ref = self.registry.add_asset(
+            "manifest",
+            result,
+            dependencies=[data_ref, *checked.get("historical_refs", [])],
+        )
+        return {**result, "evidence_ref": ref}

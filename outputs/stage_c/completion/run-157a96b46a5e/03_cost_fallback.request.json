@@ -1,0 +1,834 @@
+{
+  "operation": "pipeline",
+  "parameters": {
+    "request": {
+      "route": "A",
+      "parameters": {
+        "rows": [
+          {
+            "unit_id": 0,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 1,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 2,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 3,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 4,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 5,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 6,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 7,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 8,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 9,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 10,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 11,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 12,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 13,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 14,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 15,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 16,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 17,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 18,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 19,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 20,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 21,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 22,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 23,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 24,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 25,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 26,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 27,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 28,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 29,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 30,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 31,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 32,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 33,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 34,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 35,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 36,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 37,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 38,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 39,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 40,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 41,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 42,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 43,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 44,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 45,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 46,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 47,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 48,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 49,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 50,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 51,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 52,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 53,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 54,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 55,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 56,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 57,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 58,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 59,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 60,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 61,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 62,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 63,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 64,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 65,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 66,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 67,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 68,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 69,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 70,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 71,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 72,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 73,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 74,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 75,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 76,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 77,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 78,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 79,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 80,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 81,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 82,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 83,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 84,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 85,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 86,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 87,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 88,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 89,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 90,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 91,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 92,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 93,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 94,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 95,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 96,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 97,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 98,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 99,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 100,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 101,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 102,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 103,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 104,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 105,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 106,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 107,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 108,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 109,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 110,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 111,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 112,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 113,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 114,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 115,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 116,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 117,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 118,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 119,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 120,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 121,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 122,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 123,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 124,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 125,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 126,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 127,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 128,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 129,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 130,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 131,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 132,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 133,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 134,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 135,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 136,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 137,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 138,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 139,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 140,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 141,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 142,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 143,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 144,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 145,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 146,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 147,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 148,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 149,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 150,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 151,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 152,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 153,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 154,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 155,
+            "treatment": 1,
+            "outcome": 0
+          },
+          {
+            "unit_id": 156,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 157,
+            "treatment": 1,
+            "outcome": 1
+          },
+          {
+            "unit_id": 158,
+            "treatment": 0,
+            "outcome": 0
+          },
+          {
+            "unit_id": 159,
+            "treatment": 1,
+            "outcome": 0
+          }
+        ],
+        "metric_contract": {
+          "name": "conversion",
+          "numerator": "converted",
+          "denominator": "users",
+          "aggregation": "ratio_of_sums",
+          "unit": "rate",
+          "analysis_unit": "user",
+          "target_population": "eligible_users",
+          "timezone": "UTC",
+          "window": [
+            0,
+            9
+          ],
+          "maturity_days": 2,
+          "deduplication": "unit_id"
+        },
+        "assignment_ref": "fixture:random_assignment",
+        "randomized": true,
+        "observed_through": 11,
+        "no_interference_ref": "fixture:independent_users"
+      }
+    },
+    "runtime_dir": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/runtime",
+    "baseline_bytes": 1
+  }
+}

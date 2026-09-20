@@ -1,0 +1,10 @@
+{
+  "publication_ref": "sha256:5a8cea8ea90525de308bcdb31e9d24c9fd8b888c5f17774e9da375ac0242e116",
+  "publication_status": "REVOKED",
+  "execution_status": "COMPLETED",
+  "reason_codes": [
+    "DATA_INVALID"
+  ],
+  "effect_estimate": null,
+  "next_action": "recompute_from_revised_data"
+}

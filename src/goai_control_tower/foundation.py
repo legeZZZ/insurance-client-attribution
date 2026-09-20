@@ -13,12 +13,13 @@ import sqlite3
 import tempfile
 import uuid
 from dataclasses import asdict, dataclass, field
+
 try:
     from datetime import UTC, datetime
 except ImportError:
-    from datetime import datetime, timezone
+    from datetime import datetime
 
-    UTC = timezone.utc
+    UTC = UTC
 from pathlib import Path
 from typing import Any, ClassVar
 
@@ -332,6 +333,9 @@ class AgentTeamsControlPlane:
         evidence_refs: list[str] | None = None,
         schema_version: str = "1.0",
     ) -> Artifact:
+        from track2_v5.publication import govern_output
+
+        payload = govern_output(payload)
         task = self.tasks[task_id]
         artifact = Artifact(
             new_id("art"),
@@ -558,6 +562,11 @@ class LocalEvidenceProvider:
         return self.root / (task_id + ".json")
 
     def write_pack(self, task_id: str, pack: dict[str, Any]) -> Path:
+        from track2_v5.publication import govern_output
+
+        governed = govern_output(pack)
+        pack.clear()
+        pack.update(governed)
         path = self.path_for(task_id)
         pack["evidence_pack_path"] = str(path)
         pack["evidence_pack_relative_path"] = "evidence/" + path.name

@@ -1,0 +1,18 @@
+{
+  "operation": "prior",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/governance.db",
+    "action": "estimate_rate",
+    "parameters": {
+      "task_id": "fresh",
+      "context": {
+        "metric": "conversion",
+        "population": "eligible",
+        "assignment_version": "v1"
+      },
+      "arm_key": "control",
+      "current_period": 2,
+      "data_ref": "sha256:48e50394670f3daa857e56966f25b62baa213d73db0ebdbbfa7f7a79f44daf41"
+    }
+  }
+}

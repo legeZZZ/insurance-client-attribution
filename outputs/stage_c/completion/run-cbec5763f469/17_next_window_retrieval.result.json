@@ -1,0 +1,1681 @@
+{
+  "result": [
+    {
+      "aliases": [],
+      "available_day": 0,
+      "factor_id": "x",
+      "license_ref": "fixture-license",
+      "metadata": {
+        "available_day": 0,
+        "factor_contract": {
+          "constraints": {},
+          "factor_id": "x",
+          "grain": "day",
+          "lineage": [],
+          "response_window": [
+            0,
+            1
+          ],
+          "source_uri": "fixture:declared-source",
+          "unit": "index",
+          "window": [
+            0,
+            99
+          ]
+        },
+        "kind": "continuous",
+        "search_window": 1
+      },
+      "name": "x",
+      "search_window": 1,
+      "source_type": "internal",
+      "evidence": [
+        {
+          "available_day": 0,
+          "evidence_id": "sha256:499ffae52a587e8b5afb7fa6e428534dc375153b8a28c370403e5946314f5211",
+          "evidence_type": "adapter_snapshot",
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "version": 1,
+          "registry_digest": "sha256:dd12c55727d46bad3a9790a0b614993b390cccdc331eeff003e73d177ed40a4c"
+        }
+      ],
+      "snapshots": [
+        {
+          "available_day": 0,
+          "day": 0,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.9891213503478509,
+          "version": 1,
+          "registry_digest": "sha256:f4d68f3a650805b8006286ce49c326e5dadd753172f9745da454748e083cdecf"
+        },
+        {
+          "available_day": 0,
+          "day": 1,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.3677866514678832,
+          "version": 1,
+          "registry_digest": "sha256:9180e2128ece95cf4ace025db98fef220802790618a8aeab198cf033c9032bdf"
+        },
+        {
+          "available_day": 0,
+          "day": 2,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.2879252612892487,
+          "version": 1,
+          "registry_digest": "sha256:905f3d09f840197f1304e56a3a7d072d202aa4964259a1e92a895759978e36b9"
+        },
+        {
+          "available_day": 0,
+          "day": 3,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.1939744191326132,
+          "version": 1,
+          "registry_digest": "sha256:e4a4d4a3a46e89c12f77858aded3b4cc29582617c27fa7972eb005b4b186f3e5"
+        },
+        {
+          "available_day": 0,
+          "day": 4,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.9202308996398569,
+          "version": 1,
+          "registry_digest": "sha256:dd997c67c02e30f19efd7ff19e0c7ddc825da8a65832095e5180dc57a0bc0ead"
+        },
+        {
+          "available_day": 0,
+          "day": 5,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.5771037912572513,
+          "version": 1,
+          "registry_digest": "sha256:e0b1280ae2b7d965d836732a7fb0e9a21fe3373850831545e41f2470c42df273"
+        },
+        {
+          "available_day": 0,
+          "day": 6,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.6364636463709805,
+          "version": 1,
+          "registry_digest": "sha256:5a97ea762850b167686f7f69907bf21d8b1d6eedb41ae7df771d96c8ac350e66"
+        },
+        {
+          "available_day": 0,
+          "day": 7,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.5419522204102933,
+          "version": 1,
+          "registry_digest": "sha256:983202e24752b4393c1d220ebbe47f3e2b752ee86555a1e529cd1ce8b0fd25b7"
+        },
+        {
+          "available_day": 0,
+          "day": 8,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.3165954511658161,
+          "version": 1,
+          "registry_digest": "sha256:f0528df6545009978c28e1cdc0fda6c611f5ffdff321d5c9f721514cb703fa24"
+        },
+        {
+          "available_day": 0,
+          "day": 9,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.32238911615896015,
+          "version": 1,
+          "registry_digest": "sha256:c65d4467d0082b3bbdf77059590ee49e34946a3497e2f639796058adda5b5c8d"
+        },
+        {
+          "available_day": 0,
+          "day": 10,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.09716731867045719,
+          "version": 1,
+          "registry_digest": "sha256:d7ae1143f69fd38fed1cfaaae41572bf5c9351031a91d00e9f7bb668865dd9a5"
+        },
+        {
+          "available_day": 0,
+          "day": 11,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -1.5259304065189514,
+          "version": 1,
+          "registry_digest": "sha256:0e279d4dd8d829860224c03ffb23451fa23ffb004c770f01f51f0aff0390e0a7"
+        },
+        {
+          "available_day": 0,
+          "day": 12,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.1921661041016585,
+          "version": 1,
+          "registry_digest": "sha256:a362cead48b4e033af913c82d003d2a6cd1e3ba5d087cfa19ed322cef457f02f"
+        },
+        {
+          "available_day": 0,
+          "day": 13,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.6710896751741096,
+          "version": 1,
+          "registry_digest": "sha256:b77c939396ffe82981026d63752df0206164a7d0577bec74ce078b172d032840"
+        },
+        {
+          "available_day": 0,
+          "day": 14,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.0002694196594604,
+          "version": 1,
+          "registry_digest": "sha256:4f8a022714cb1cd09b7494079b81711aeaa43c54cf6bae12e4f330b3abd6320a"
+        },
+        {
+          "available_day": 0,
+          "day": 15,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.1363211238531175,
+          "version": 1,
+          "registry_digest": "sha256:71986f03de3cecff38a3bb67841a53c9b619e9caac8b4cd761fcec7b9b27f8fc"
+        },
+        {
+          "available_day": 0,
+          "day": 16,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.5320330796287964,
+          "version": 1,
+          "registry_digest": "sha256:48c87f1e3f79848495203a09c7e1303912a8aa8bde0c19ef5f1aaf7642c18bd9"
+        },
+        {
+          "available_day": 0,
+          "day": 17,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.6599694137918207,
+          "version": 1,
+          "registry_digest": "sha256:84c5a0d926f5e05c2d123cb38215efe10916e76e5a515bfa91b62a98b665dec6"
+        },
+        {
+          "available_day": 0,
+          "day": 18,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.31179485646991756,
+          "version": 1,
+          "registry_digest": "sha256:793e9ebe32cfef5ba65aa9357d7ba106cdd2a47723674e211afa49559d8bd863"
+        },
+        {
+          "available_day": 0,
+          "day": 19,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.337769126558826,
+          "version": 1,
+          "registry_digest": "sha256:9b7e25c90965c0a1b1a71b1ae80d678dc0dd784e32f856008bfc07fb5b265bde"
+        },
+        {
+          "available_day": 0,
+          "day": 20,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -2.2074710981998042,
+          "version": 1,
+          "registry_digest": "sha256:b9a5cbdcb36e04d8d720b898e7dd37fdbe85a65db63109f1145b725413afe19c"
+        },
+        {
+          "available_day": 0,
+          "day": 21,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.8279214415587369,
+          "version": 1,
+          "registry_digest": "sha256:baf77cd755e579ea6925eb09fc12d9987223e1352db3ce8b07c12d9b95d0c216"
+        },
+        {
+          "available_day": 0,
+          "day": 22,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.541630394690618,
+          "version": 1,
+          "registry_digest": "sha256:e679167c61352588961cf26e0814e3ceaca8b17dc0e212e3043d1e9758c264b6"
+        },
+        {
+          "available_day": 0,
+          "day": 23,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.126806793265028,
+          "version": 1,
+          "registry_digest": "sha256:6ecf9a6e1171ddb670be058df20a5bcc19c3fbb9084da186cd486442661e693c"
+        },
+        {
+          "available_day": 0,
+          "day": 24,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.7547696443122508,
+          "version": 1,
+          "registry_digest": "sha256:4b986b232ae07bec0a7b3c2a34b3d031854dbb6eb92fee93cb0ab23bb35764a4"
+        },
+        {
+          "available_day": 0,
+          "day": 25,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.14597789311522394,
+          "version": 1,
+          "registry_digest": "sha256:c9285830b44630bd2f74cebc5424453c23f14f08ffd93569a25c0ec2b510641b"
+        },
+        {
+          "available_day": 0,
+          "day": 26,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.2819022270597127,
+          "version": 1,
+          "registry_digest": "sha256:d3edccebf51a2d9cfdc4ad39fb5aa7901d574f348ab8fb87d0ba75d8935e7478"
+        },
+        {
+          "available_day": 0,
+          "day": 27,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.0740306219719435,
+          "version": 1,
+          "registry_digest": "sha256:73fd3d8607fd69bd70030379d8f4a4a71c9130340c4764b4f1151ea06e6e40b1"
+        },
+        {
+          "available_day": 0,
+          "day": 28,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.39262084457727114,
+          "version": 1,
+          "registry_digest": "sha256:249640ac038832212f884f04050adf8db67fea306f0dd13ed340ea876d379bef"
+        },
+        {
+          "available_day": 0,
+          "day": 29,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.005114312828982818,
+          "version": 1,
+          "registry_digest": "sha256:7a9232cf450c088924fcb14bfe43ae9c929f874ff077db8a7df4c7a33ed1ce37"
+        },
+        {
+          "available_day": 0,
+          "day": 30,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.3617668721609232,
+          "version": 1,
+          "registry_digest": "sha256:9f2d7bffc19feab718a519956bd6ac7fa1314746405ac5938b6595fc42ed12b8"
+        },
+        {
+          "available_day": 0,
+          "day": 31,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -1.230232195490445,
+          "version": 1,
+          "registry_digest": "sha256:c80a3d6643c0de560893fe1121e3aba8f2767f27aa9055090f1ed0deb405c84d"
+        },
+        {
+          "available_day": 0,
+          "day": 32,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.2262292928211507,
+          "version": 1,
+          "registry_digest": "sha256:238bd36feadfd4478743daea4a7bba3bdbfb20faef5625a9a83e152584dea042"
+        },
+        {
+          "available_day": 0,
+          "day": 33,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -2.1720438866851817,
+          "version": 1,
+          "registry_digest": "sha256:9acfc647bb9c2dede6bd04893e6162483725dec4f5cfe9c2a3ea9df1f3b4c657"
+        },
+        {
+          "available_day": 0,
+          "day": 34,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.37014734585231535,
+          "version": 1,
+          "registry_digest": "sha256:ab9db7c2576d4b717443eebb528889dea659acc3b82d04e8b1d0d4cf85759d02"
+        },
+        {
+          "available_day": 0,
+          "day": 35,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.16438006967466792,
+          "version": 1,
+          "registry_digest": "sha256:51be513977944e970f76bc8e68078345a6494c721a45fb9da899ce7aee46f61e"
+        },
+        {
+          "available_day": 0,
+          "day": 36,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.8598811846127368,
+          "version": 1,
+          "registry_digest": "sha256:480800f11f17fcf64f04b30eb00209e57d841d631111cbb40f4b701966e84b58"
+        },
+        {
+          "available_day": 0,
+          "day": 37,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.761661236511811,
+          "version": 1,
+          "registry_digest": "sha256:1263381f0d56390fbb3106efdf61f256b6ae23f5ac7adbc5432d499e807d761b"
+        },
+        {
+          "available_day": 0,
+          "day": 38,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.993323775951811,
+          "version": 1,
+          "registry_digest": "sha256:5ab461d7ecc04824050fe5eb3acf26eb09329c8baccfa0cf72efd5966fd7e2de"
+        },
+        {
+          "available_day": 0,
+          "day": 39,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.29152142609843873,
+          "version": 1,
+          "registry_digest": "sha256:2495314f2b6809581cfaf99c01bdd2679b1dcd717e075ace77e6a760778117fd"
+        },
+        {
+          "available_day": 0,
+          "day": 40,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.7281275578891427,
+          "version": 1,
+          "registry_digest": "sha256:9c547fedff185d903c8185fe9ad5817bf3085efac0323c965b8d960641e9b956"
+        },
+        {
+          "available_day": 0,
+          "day": 41,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -1.2616003169196963,
+          "version": 1,
+          "registry_digest": "sha256:77fba8e6a989ad5eac7dabfc5bae38689c7cb5fc67a28de1ce2196c0d1cb9c1f"
+        },
+        {
+          "available_day": 0,
+          "day": 42,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.4299385266887068,
+          "version": 1,
+          "registry_digest": "sha256:e455561ac98da7df39a5404847bc41d06e236da829b5428bbb962887a82b5208"
+        },
+        {
+          "available_day": 0,
+          "day": 43,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.15647532482940535,
+          "version": 1,
+          "registry_digest": "sha256:77b6ebfbfbdfea0967f6e0f1ec77554842c6b8760d9fbb8df6d7123c7560243f"
+        },
+        {
+          "available_day": 0,
+          "day": 44,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.6737591499870575,
+          "version": 1,
+          "registry_digest": "sha256:2e9f2aba75a30b178c3bde6d8fd894510f542513668ab23ec060d1bf97525cdb"
+        },
+        {
+          "available_day": 0,
+          "day": 45,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.6390601004322052,
+          "version": 1,
+          "registry_digest": "sha256:0308c16af3b625f6ec1a6a1d8d884eb5d28a0a79b69c07531ad994f020fb57e6"
+        },
+        {
+          "available_day": 0,
+          "day": 46,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.061361327620372906,
+          "version": 1,
+          "registry_digest": "sha256:07131757e3fc45af79c7a2fbba83441cf4541405448d8585951754afb1a31205"
+        },
+        {
+          "available_day": 0,
+          "day": 47,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.39278492256994324,
+          "version": 1,
+          "registry_digest": "sha256:7a06c721f1ed31e4777ed5f38e5ca8652d2daaf86dd9c6f1a2e9ac080e22066f"
+        },
+        {
+          "available_day": 0,
+          "day": 48,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 2.2899099473145785,
+          "version": 1,
+          "registry_digest": "sha256:a8ee0ccb1fa4f39fa9cf8e727ecf7b4c058f7ecf6fc1a3be3088df6f88fd5018"
+        },
+        {
+          "available_day": 0,
+          "day": 49,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.718181147880596,
+          "version": 1,
+          "registry_digest": "sha256:35a8fd1d960fce00d045819af9742c6edbdd737b93b79f64e0a74f4fd0d10601"
+        },
+        {
+          "available_day": 0,
+          "day": 50,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.03260774315697052,
+          "version": 1,
+          "registry_digest": "sha256:8255d04f2b7af225aa0739ac613c1a7b00d97580c96deaa0992f733bd237ae56"
+        },
+        {
+          "available_day": 0,
+          "day": 51,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.028049895585638977,
+          "version": 1,
+          "registry_digest": "sha256:ee429b66b3b077d39b4e7be38fb7ca28e0045e8d77037acabd944af10e0cfa12"
+        },
+        {
+          "available_day": 0,
+          "day": 52,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.028272122739737816,
+          "version": 1,
+          "registry_digest": "sha256:3366ee6df586fa95c05eced24f00233372bb4100850e17615c6b4b54fc25a2d2"
+        },
+        {
+          "available_day": 0,
+          "day": 53,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.05534586195270899,
+          "version": 1,
+          "registry_digest": "sha256:fc753afc717a30794cdd543771c77c9eea0483135ef1ccdec54cc8192350cf16"
+        },
+        {
+          "available_day": 0,
+          "day": 54,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.48156285818994926,
+          "version": 1,
+          "registry_digest": "sha256:a3cb664ecb0ad2fb3f4ad4abd1f446456b8330a3123f4def9f94abcd80032bab"
+        },
+        {
+          "available_day": 0,
+          "day": 55,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.5834075004641189,
+          "version": 1,
+          "registry_digest": "sha256:5c109ce700f0610e504ac40aa3a47f33e4095fec7dd65206cfecd0d5112e8b61"
+        },
+        {
+          "available_day": 0,
+          "day": 56,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.8621605020712843,
+          "version": 1,
+          "registry_digest": "sha256:64b34ac4cd54e8c88db2a9b67123bea664096cfb92dd4ed0a52aa053696bb2f1"
+        },
+        {
+          "available_day": 0,
+          "day": 57,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -1.4881746132515903,
+          "version": 1,
+          "registry_digest": "sha256:2f033588ae7fab713d95f4f9bd18bb6e5a3c475a76130a574bb24e83ae19731b"
+        },
+        {
+          "available_day": 0,
+          "day": 58,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.2163068331092121,
+          "version": 1,
+          "registry_digest": "sha256:49b60a20d35c56a436dd299a5bbf15c13b25e1280c055e07fd39839878c83d15"
+        },
+        {
+          "available_day": 0,
+          "day": 59,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.9843763506958761,
+          "version": 1,
+          "registry_digest": "sha256:abdfe2f3194cfafb413d6e5af00475925cea24f063f3a9e76366d79e45c84f8f"
+        },
+        {
+          "available_day": 0,
+          "day": 60,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.5430841410126281,
+          "version": 1,
+          "registry_digest": "sha256:f7e3fde54d9ffab0230b0b28b9e482a8e0fdd9f8a4a7de000274fdc0963e7777"
+        },
+        {
+          "available_day": 0,
+          "day": 61,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.5586150390437845,
+          "version": 1,
+          "registry_digest": "sha256:2ebb0aae9a77a7e1ee19a861374ac71254602e7d4b992ca6933de650b0c0fcb7"
+        },
+        {
+          "available_day": 0,
+          "day": 62,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.31648282932264754,
+          "version": 1,
+          "registry_digest": "sha256:df20a31c47f77b94bc325afcd44b22598c5fdad8674b58a12694832d5e149de8"
+        },
+        {
+          "available_day": 0,
+          "day": 63,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.4606397412389045,
+          "version": 1,
+          "registry_digest": "sha256:3a03165c8584e6082cc723f0cdae47bfe5e3d5c78a794fea7c9477f6e4fc331c"
+        },
+        {
+          "available_day": 0,
+          "day": 64,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -1.4362697490249443,
+          "version": 1,
+          "registry_digest": "sha256:a4f87364a03530103f0871f54a401e2ed9d13a817f2c98dcf4d7e81f6714ca96"
+        },
+        {
+          "available_day": 0,
+          "day": 65,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.365108032036919,
+          "version": 1,
+          "registry_digest": "sha256:ed99374f89b76b1509f6992cb13f54d703965f33b5c0dbcf89fb39be207b79d2"
+        },
+        {
+          "available_day": 0,
+          "day": 66,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.43899988755746655,
+          "version": 1,
+          "registry_digest": "sha256:ef452003ccc90379b71955881e088a8a263b1db5f2467bbd16136dab5e45a040"
+        },
+        {
+          "available_day": 0,
+          "day": 67,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.7116950271980323,
+          "version": 1,
+          "registry_digest": "sha256:ebfce65705f0d140e589d52e650b3d30d1193b7fb62b84560f970d6bb6dfd953"
+        },
+        {
+          "available_day": 0,
+          "day": 68,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.2971717615398513,
+          "version": 1,
+          "registry_digest": "sha256:0151abae551a0f54c5fe7d881733f288bd1bc60eaea40132432cba253cc0c813"
+        },
+        {
+          "available_day": 0,
+          "day": 69,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.4384572726157321,
+          "version": 1,
+          "registry_digest": "sha256:49b4fca8e930323e6e4f7ca14c659e656dc20be3fc49e5f0234ed771f4a3bb51"
+        },
+        {
+          "available_day": 0,
+          "day": 70,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.2116374333746801,
+          "version": 1,
+          "registry_digest": "sha256:4f57d858f15fc53309e19e8171d2f9335e0ad6738cd12149b9515df07be6d8dc"
+        },
+        {
+          "available_day": 0,
+          "day": 71,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.36396383157911427,
+          "version": 1,
+          "registry_digest": "sha256:b5619a199e33d51ffe4339f6e38431f19374693f4c05d1c6719e786f6ea89bc2"
+        },
+        {
+          "available_day": 0,
+          "day": 72,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.9529644919745344,
+          "version": 1,
+          "registry_digest": "sha256:acef28d5d6ce3cd226dbb42ac6246452bf9a94e95d44d9f03613bdfdab99a04a"
+        },
+        {
+          "available_day": 0,
+          "day": 73,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.5195241292412778,
+          "version": 1,
+          "registry_digest": "sha256:3a61f85a6b158fce1bf5a0869172d6bea7c8c774c13367aa8b6a1d7cf8f27395"
+        },
+        {
+          "available_day": 0,
+          "day": 74,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.7039094489490383,
+          "version": 1,
+          "registry_digest": "sha256:31dbd297905bb3d1afe63e920fdd325188cd16f55cfeb717467ba6455e034757"
+        },
+        {
+          "available_day": 0,
+          "day": 75,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.24885870743094268,
+          "version": 1,
+          "registry_digest": "sha256:d9d8748f5fdbf143476bc90b3f8ec5f2f86ce5eb084628c7007f3057037cb73e"
+        },
+        {
+          "available_day": 0,
+          "day": 76,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.4997485911335096,
+          "version": 1,
+          "registry_digest": "sha256:7873d02a49d5ab9ebb2cc940a4460397d9a4a6f2d09c4b9ef137f91edaf06646"
+        },
+        {
+          "available_day": 0,
+          "day": 77,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.09959750192201784,
+          "version": 1,
+          "registry_digest": "sha256:f4376746b945b87502ca4098a9fae8df16785971b68fe51a99c1e09ad4913b33"
+        },
+        {
+          "available_day": 0,
+          "day": 78,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.12834321228831272,
+          "version": 1,
+          "registry_digest": "sha256:be51ed0d5f9db3e0f6966b89952ae1c9cf72011b08504f867aae78e66e745755"
+        },
+        {
+          "available_day": 0,
+          "day": 79,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.7342218924448597,
+          "version": 1,
+          "registry_digest": "sha256:fb002d27624d338322747bf61f8db74d9794997af1b7728791ee98da886f7d46"
+        },
+        {
+          "available_day": 0,
+          "day": 80,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.620475288234763,
+          "version": 1,
+          "registry_digest": "sha256:ec5aa8190a483a3682fa25b853c986a7869b4626bb0dc579e96374552d871d81"
+        },
+        {
+          "available_day": 0,
+          "day": 81,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.8132737204208481,
+          "version": 1,
+          "registry_digest": "sha256:f6cb13bf519e431b3f394099c630faefbb626bc743c6468dc937aadc41336482"
+        },
+        {
+          "available_day": 0,
+          "day": 82,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.6418010137407606,
+          "version": 1,
+          "registry_digest": "sha256:7cf747c3f750be04cb56f61c38e2e62369ff4060d90b979400c81233461f9edd"
+        },
+        {
+          "available_day": 0,
+          "day": 83,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.22650084837917228,
+          "version": 1,
+          "registry_digest": "sha256:060854660b0a02dd20c209fa25b5986d8d41864255ec90953cc9cfc933d2b0f0"
+        },
+        {
+          "available_day": 0,
+          "day": 84,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.6479652109953393,
+          "version": 1,
+          "registry_digest": "sha256:bcbbf30016a0e67eeb1dfe40787da5ab2e14348afb1718a5ad721e54d075a9b6"
+        },
+        {
+          "available_day": 0,
+          "day": 85,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.28337120662418985,
+          "version": 1,
+          "registry_digest": "sha256:6c806ef968b3fb9609a406c75bfc2969e800e6de856694c187f94c77e3c56517"
+        },
+        {
+          "available_day": 0,
+          "day": 86,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.9951313599700441,
+          "version": 1,
+          "registry_digest": "sha256:28ab6894b493fc3275e070b67cb4d1b382d8094d9809d08958e610b419257c56"
+        },
+        {
+          "available_day": 0,
+          "day": 87,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.2728717697893081,
+          "version": 1,
+          "registry_digest": "sha256:f3dd9a658abc648e63a1abf4485dcbe14267e23862f9c96132f6af3aec5f425e"
+        },
+        {
+          "available_day": 0,
+          "day": 88,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.42244414146775444,
+          "version": 1,
+          "registry_digest": "sha256:58812324ac4a6b488c02b325bad5b439dca704ead1627b9b6b35e19e3ed37bbe"
+        },
+        {
+          "available_day": 0,
+          "day": 89,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.08134296158935517,
+          "version": 1,
+          "registry_digest": "sha256:73e304041158a46b03dd6ec8808bcbacbce54ef11e05b1c81f7f8e66aac5107a"
+        },
+        {
+          "available_day": 0,
+          "day": 90,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.234577597061606,
+          "version": 1,
+          "registry_digest": "sha256:1e218af9fdf29a2383f3d06b6cb7af7004e727b766ca6f5abab30408dd51a2f6"
+        },
+        {
+          "available_day": 0,
+          "day": 91,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.15088803222043407,
+          "version": 1,
+          "registry_digest": "sha256:62e98149903810c0167d034270fa492dc93cc81f85a57360809ae943fdda0cef"
+        },
+        {
+          "available_day": 0,
+          "day": 92,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.4811195273342238,
+          "version": 1,
+          "registry_digest": "sha256:378ea47b9b92ec701d30678eba80d88821e095079269bd2ad2a557fb141f7b19"
+        },
+        {
+          "available_day": 0,
+          "day": 93,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.14875753240949288,
+          "version": 1,
+          "registry_digest": "sha256:91f5ff5f91c31e2510bb7cf23637e9d349414004c90a9bcdc1d1e8fdd3e01472"
+        },
+        {
+          "available_day": 0,
+          "day": 94,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 1.3156657065603552,
+          "version": 1,
+          "registry_digest": "sha256:8507b0b1afa74e4a87a567352da6ba42ed136eaa527a6c3e3d02c244c61b485c"
+        },
+        {
+          "available_day": 0,
+          "day": 95,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -1.2223456022065715,
+          "version": 1,
+          "registry_digest": "sha256:108230c05600d0ae68949cbbd7b9124e373c933502ce97980ae4b7619e85d440"
+        },
+        {
+          "available_day": 0,
+          "day": 96,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -0.30359134030022955,
+          "version": 1,
+          "registry_digest": "sha256:13fa5a830904f0036d93bfe43039b827c54d69386385cb6c8b95f6b47576ee30"
+        },
+        {
+          "available_day": 0,
+          "day": 97,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": -1.1736886756801914,
+          "version": 1,
+          "registry_digest": "sha256:55ef300a61f4360efd7d73cc3e5bfe1da9f27ee05b1a492a2a9b66aaf030aed7"
+        },
+        {
+          "available_day": 0,
+          "day": 98,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.826273507011688,
+          "version": 1,
+          "registry_digest": "sha256:2265691b3555a4d359b87c1f01ab013f2f003eccd7608f331bc3cfc5c416e4db"
+        },
+        {
+          "available_day": 0,
+          "day": 99,
+          "factor_id": "x",
+          "license_ref": "fixture-license",
+          "metadata": {
+            "available_day": 0,
+            "search_window": 1
+          },
+          "scope_id": "global",
+          "search_window": 1,
+          "source_uri": "fixture:declared-source",
+          "value": 0.8503222896230244,
+          "version": 1,
+          "registry_digest": "sha256:a50e91eef86a08b579b86bb5486de648dbb04ee7abbf98256eae93ccd6af4297"
+        }
+      ],
+      "factor_contract": {
+        "constraints": {},
+        "factor_id": "x",
+        "grain": "day",
+        "lineage": [],
+        "response_window": [
+          0,
+          1
+        ],
+        "source_uri": "fixture:declared-source",
+        "unit": "index",
+        "window": [
+          0,
+          99
+        ],
+        "available_at": 0,
+        "as_of": 99,
+        "schema_version": "1.0",
+        "contract_type": "FactorContract",
+        "digest": "sha256:e0995404d825753ae7f5450360ee0700101733b37bbb9144fd7d0800b14333e7"
+      },
+      "version": 1,
+      "registry_digest": "sha256:bcd3ce59d4528816e4ec9a1da0f78cc641c42d2ecf6effe0a9c3f32f3db0b7c8",
+      "as_of": 99,
+      "claim_ceiling": "CANDIDATE_ASSOCIATION",
+      "posterior_probability": null,
+      "causal_eligible": false,
+      "production_eligible": true
+    }
+  ]
+}

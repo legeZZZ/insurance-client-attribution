@@ -1,0 +1,10 @@
+{
+  "operation": "blind",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/blind.db",
+    "action": "read",
+    "parameters": {
+      "case_id": "A_signal"
+    }
+  }
+}

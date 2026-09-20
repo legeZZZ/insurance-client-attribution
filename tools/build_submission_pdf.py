@@ -10,7 +10,6 @@ from pathlib import Path
 
 from PIL import Image
 
-
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "方案PPT" / "保险经营归因Agent-复赛完整答辩版.pptx"
 OUT = ROOT / "复赛比赛交付包-v12" / "01_更新版项目方案" / "复赛升级方案-v12.pdf"

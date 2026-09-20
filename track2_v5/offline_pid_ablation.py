@@ -21,9 +21,9 @@ from pathlib import Path
 from typing import Any
 
 from .bayes import bundle_compare, estimate_hte
-from .track2_benchmark import _segment_predictive_brier, _split
 from .experience_store import FactorExperienceStore
 from .insursim_carousel import generate_bundle_stage, sanitize
+from .track2_benchmark import _segment_predictive_brier, _split
 
 OUT = Path(__file__).resolve().parent.parent / "outputs" / "offline_pid_ablation.json"
 

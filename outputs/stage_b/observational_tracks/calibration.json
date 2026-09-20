@@ -1,0 +1,4050 @@
+{
+  "scope": "three fixed synthetic designs; not full T32 stress calibration",
+  "repetitions": 100,
+  "seeds": [
+    20260915,
+    20260916,
+    20260917,
+    20260918,
+    20260919,
+    20260920,
+    20260921,
+    20260922,
+    20260923,
+    20260924,
+    20260925,
+    20260926,
+    20260927,
+    20260928,
+    20260929,
+    20260930,
+    20260931,
+    20260932,
+    20260933,
+    20260934,
+    20260935,
+    20260936,
+    20260937,
+    20260938,
+    20260939,
+    20260940,
+    20260941,
+    20260942,
+    20260943,
+    20260944,
+    20260945,
+    20260946,
+    20260947,
+    20260948,
+    20260949,
+    20260950,
+    20260951,
+    20260952,
+    20260953,
+    20260954,
+    20260955,
+    20260956,
+    20260957,
+    20260958,
+    20260959,
+    20260960,
+    20260961,
+    20260962,
+    20260963,
+    20260964,
+    20260965,
+    20260966,
+    20260967,
+    20260968,
+    20260969,
+    20260970,
+    20260971,
+    20260972,
+    20260973,
+    20260974,
+    20260975,
+    20260976,
+    20260977,
+    20260978,
+    20260979,
+    20260980,
+    20260981,
+    20260982,
+    20260983,
+    20260984,
+    20260985,
+    20260986,
+    20260987,
+    20260988,
+    20260989,
+    20260990,
+    20260991,
+    20260992,
+    20260993,
+    20260994,
+    20260995,
+    20260996,
+    20260997,
+    20260998,
+    20260999,
+    20261000,
+    20261001,
+    20261002,
+    20261003,
+    20261004,
+    20261005,
+    20261006,
+    20261007,
+    20261008,
+    20261009,
+    20261010,
+    20261011,
+    20261012,
+    20261013,
+    20261014
+  ],
+  "methods": {
+    "DiD": {
+      "estimated": 100,
+      "refused": 0,
+      "conditional_coverage": 0.91,
+      "coverage_wilson_95": [
+        0.8377378714728394,
+        0.9519274599974341
+      ],
+      "bias": -1.0984986476263947,
+      "rmse": 16.712859251332947,
+      "mean_width": 65.68397859806333,
+      "runs": [
+        {
+          "seed": 20260915,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 206.06605957855865,
+          "interval": [
+            169.6490246706059,
+            242.48309448651142
+          ],
+          "error": 6.066059578558651,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260916,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 241.20724794351602,
+          "interval": [
+            204.90840327028818,
+            277.50609261674384
+          ],
+          "error": 41.20724794351602,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260917,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 181.8761296093836,
+          "interval": [
+            153.8192973137697,
+            209.93296190499748
+          ],
+          "error": -18.12387039061639,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260918,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 189.52425432661215,
+          "interval": [
+            154.58720404613658,
+            224.4613046070877
+          ],
+          "error": -10.475745673387848,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260919,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 199.1504279769277,
+          "interval": [
+            162.14481510035387,
+            236.15604085350154
+          ],
+          "error": -0.8495720230723123,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260920,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 197.9095226697261,
+          "interval": [
+            155.77229154809885,
+            240.04675379135335
+          ],
+          "error": -2.090477330273899,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260921,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 218.74463948418494,
+          "interval": [
+            183.19964959017548,
+            254.28962937819443
+          ],
+          "error": 18.744639484184944,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260922,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 216.68661149032715,
+          "interval": [
+            190.6729392517947,
+            242.7002837288596
+          ],
+          "error": 16.686611490327152,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260923,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 202.29926038641128,
+          "interval": [
+            165.44112202262536,
+            239.1573987501972
+          ],
+          "error": 2.2992603864112766,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260924,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 196.58800856513813,
+          "interval": [
+            169.8723293479315,
+            223.3036877823448
+          ],
+          "error": -3.411991434861875,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260925,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 214.24361964996132,
+          "interval": [
+            185.33210897541798,
+            243.15513032450463
+          ],
+          "error": 14.243619649961317,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260926,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 222.5293834043308,
+          "interval": [
+            190.95110437357772,
+            254.10766243508388
+          ],
+          "error": 22.529383404330787,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260927,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 196.8418328364546,
+          "interval": [
+            158.52528618415303,
+            235.15837948875617
+          ],
+          "error": -3.158167163545386,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260928,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 193.7795908411996,
+          "interval": [
+            160.29938312198954,
+            227.25979856040962
+          ],
+          "error": -6.220409158800408,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260929,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 213.03001476482672,
+          "interval": [
+            172.85207359898044,
+            253.20795593067294
+          ],
+          "error": 13.030014764826717,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260930,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 187.75146187624722,
+          "interval": [
+            154.2591088015865,
+            221.2438149509079
+          ],
+          "error": -12.24853812375278,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260931,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 185.12410472510794,
+          "interval": [
+            152.6768595252024,
+            217.5713499250135
+          ],
+          "error": -14.87589527489206,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260932,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 197.49532791416976,
+          "interval": [
+            162.95622349375984,
+            232.03443233457966
+          ],
+          "error": -2.5046720858302365,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260933,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 195.55701032149705,
+          "interval": [
+            166.11633048111176,
+            224.99769016188233
+          ],
+          "error": -4.442989678502954,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260934,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 211.54483443156556,
+          "interval": [
+            177.73472090935138,
+            245.35494795377977
+          ],
+          "error": 11.544834431565562,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260935,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 186.34387338474846,
+          "interval": [
+            153.8894982162072,
+            218.79824855328974
+          ],
+          "error": -13.656126615251537,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260936,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 180.4622363401233,
+          "interval": [
+            139.71387668856207,
+            221.2105959916845
+          ],
+          "error": -19.537763659876703,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260937,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 192.09380571896304,
+          "interval": [
+            157.3768702869258,
+            226.81074115100026
+          ],
+          "error": -7.90619428103696,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260938,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 161.63337379777795,
+          "interval": [
+            124.43769371843938,
+            198.82905387711648
+          ],
+          "error": -38.36662620222205,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260939,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 168.21898032882459,
+          "interval": [
+            145.19042829806364,
+            191.24753235958553
+          ],
+          "error": -31.781019671175414,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260940,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 188.69066408458826,
+          "interval": [
+            156.53751173925653,
+            220.84381642992003
+          ],
+          "error": -11.309335915411737,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260941,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 192.50682868356927,
+          "interval": [
+            160.8492185193078,
+            224.16443884783072
+          ],
+          "error": -7.4931713164307325,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260942,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 195.87240286282997,
+          "interval": [
+            158.40305593988126,
+            233.3417497857787
+          ],
+          "error": -4.127597137170028,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260943,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 207.69928814931296,
+          "interval": [
+            168.74244628142716,
+            246.65613001719876
+          ],
+          "error": 7.699288149312963,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260944,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 188.8110784591312,
+          "interval": [
+            163.0338474758368,
+            214.58830944242558
+          ],
+          "error": -11.18892154086879,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260945,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 196.9342602878388,
+          "interval": [
+            159.2076186104673,
+            234.66090196521034
+          ],
+          "error": -3.0657397121611893,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260946,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 217.07160235526698,
+          "interval": [
+            190.54727319567277,
+            243.59593151486115
+          ],
+          "error": 17.071602355266975,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260947,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 196.63044481419155,
+          "interval": [
+            167.03452895186138,
+            226.22636067652175
+          ],
+          "error": -3.3695551858084514,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260948,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 194.37182435611203,
+          "interval": [
+            162.6541128123266,
+            226.08953589989747
+          ],
+          "error": -5.628175643887971,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260949,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 170.7024477644147,
+          "interval": [
+            134.13454710297208,
+            207.27034842585735
+          ],
+          "error": -29.2975522355853,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260950,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 218.52301949369365,
+          "interval": [
+            185.73931061844112,
+            251.30672836894615
+          ],
+          "error": 18.523019493693653,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260951,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 186.42790140541513,
+          "interval": [
+            159.03459339183294,
+            213.82120941899734
+          ],
+          "error": -13.572098594584872,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260952,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 205.88668483516628,
+          "interval": [
+            174.88061854035743,
+            236.89275112997512
+          ],
+          "error": 5.886684835166278,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260953,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 205.27033888208166,
+          "interval": [
+            171.06287137734319,
+            239.47780638682013
+          ],
+          "error": 5.27033888208166,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260954,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 200.2377764552442,
+          "interval": [
+            168.341038182237,
+            232.13451472825136
+          ],
+          "error": 0.23777645524418745,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260955,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 163.69249557647194,
+          "interval": [
+            131.78483703063375,
+            195.60015412231013
+          ],
+          "error": -36.30750442352806,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260956,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 204.20548162285428,
+          "interval": [
+            171.21375327204322,
+            237.1972099736653
+          ],
+          "error": 4.205481622854279,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260957,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 208.66682757228324,
+          "interval": [
+            172.46793314731255,
+            244.86572199725396
+          ],
+          "error": 8.666827572283239,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260958,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 182.17975422033703,
+          "interval": [
+            149.06307701283262,
+            215.29643142784147
+          ],
+          "error": -17.82024577966297,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260959,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 171.71807288362544,
+          "interval": [
+            147.77159810603416,
+            195.66454766121672
+          ],
+          "error": -28.28192711637456,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260960,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 204.7960338014157,
+          "interval": [
+            169.13932635480776,
+            240.4527412480236
+          ],
+          "error": 4.796033801415689,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260961,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 204.87525816006382,
+          "interval": [
+            168.08285612699078,
+            241.66766019313687
+          ],
+          "error": 4.875258160063822,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260962,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 189.26314999086244,
+          "interval": [
+            155.072023308309,
+            223.45427667341588
+          ],
+          "error": -10.736850009137555,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260963,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 217.31533052621722,
+          "interval": [
+            180.00875895820823,
+            254.6219020942262
+          ],
+          "error": 17.315330526217224,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260964,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 204.7000276288772,
+          "interval": [
+            174.29896820286274,
+            235.1010870548917
+          ],
+          "error": 4.700027628877194,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260965,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 198.55989777809134,
+          "interval": [
+            168.86986922700487,
+            228.24992632917787
+          ],
+          "error": -1.4401022219086599,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260966,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 229.84097986709884,
+          "interval": [
+            194.85502166677946,
+            264.8269380674182
+          ],
+          "error": 29.840979867098838,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260967,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 195.34992011662632,
+          "interval": [
+            164.70454197222742,
+            225.9952982610252
+          ],
+          "error": -4.650079883373678,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260968,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 202.03087168960218,
+          "interval": [
+            171.57255666399956,
+            232.48918671520477
+          ],
+          "error": 2.0308716896021792,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260969,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 194.94411557229583,
+          "interval": [
+            157.60515147763797,
+            232.28307966695368
+          ],
+          "error": -5.0558844277041715,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260970,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 192.0527572352018,
+          "interval": [
+            161.1809651864386,
+            222.924549283965
+          ],
+          "error": -7.9472427647982045,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260971,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 200.37899310504912,
+          "interval": [
+            173.36850052233666,
+            227.38948568776158
+          ],
+          "error": 0.3789931050491191,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260972,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 200.67763671353873,
+          "interval": [
+            164.97074311252834,
+            236.38453031454912
+          ],
+          "error": 0.6776367135387318,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260973,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 172.46607834039196,
+          "interval": [
+            138.50079609867137,
+            206.43136058211255
+          ],
+          "error": -27.53392165960804,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260974,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 225.80744212731804,
+          "interval": [
+            189.81886435490557,
+            261.79601989973054
+          ],
+          "error": 25.80744212731804,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260975,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 227.55319092259913,
+          "interval": [
+            197.97373598052363,
+            257.13264586467466
+          ],
+          "error": 27.55319092259913,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260976,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 180.53093722744399,
+          "interval": [
+            149.66864194379593,
+            211.39323251109207
+          ],
+          "error": -19.469062772556015,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260977,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 208.41707053485905,
+          "interval": [
+            173.84911716545753,
+            242.98502390426057
+          ],
+          "error": 8.41707053485905,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260978,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 206.4918735770437,
+          "interval": [
+            176.32810262787362,
+            236.6556445262138
+          ],
+          "error": 6.491873577043691,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260979,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 174.29743170524574,
+          "interval": [
+            147.65784105371463,
+            200.93702235677685
+          ],
+          "error": -25.702568294754258,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260980,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 214.8213453019526,
+          "interval": [
+            189.2159840059328,
+            240.42670659797238
+          ],
+          "error": 14.82134530195259,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260981,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 211.39003366767037,
+          "interval": [
+            178.4454971695417,
+            244.33457016579902
+          ],
+          "error": 11.390033667670366,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260982,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 194.67132631663873,
+          "interval": [
+            163.49967534780617,
+            225.84297728547128
+          ],
+          "error": -5.328673683361274,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260983,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 202.90886436250696,
+          "interval": [
+            169.86061146325594,
+            235.95711726175796
+          ],
+          "error": 2.908864362506961,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260984,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 197.5855472341742,
+          "interval": [
+            169.45527927486287,
+            225.7158151934855
+          ],
+          "error": -2.414452765825814,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260985,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 213.93647498351794,
+          "interval": [
+            178.4878244275352,
+            249.38512553950068
+          ],
+          "error": 13.93647498351794,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260986,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 196.8769019959666,
+          "interval": [
+            160.31232987289158,
+            233.4414741190416
+          ],
+          "error": -3.123098004033409,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260987,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 192.21805983105577,
+          "interval": [
+            155.57965173388916,
+            228.85646792822234
+          ],
+          "error": -7.781940168944232,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260988,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 202.7774441854696,
+          "interval": [
+            173.3163639857334,
+            232.23852438520578
+          ],
+          "error": 2.777444185469591,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260989,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 192.2623880318145,
+          "interval": [
+            159.55661082930703,
+            224.96816523432202
+          ],
+          "error": -7.73761196818549,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260990,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 199.28175172432833,
+          "interval": [
+            165.91450365448895,
+            232.64899979416774
+          ],
+          "error": -0.7182482756716695,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260991,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 215.32621845795657,
+          "interval": [
+            191.80804907006726,
+            238.84438784584586
+          ],
+          "error": 15.326218457956571,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260992,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 194.91375059433727,
+          "interval": [
+            158.66513574278954,
+            231.16236544588503
+          ],
+          "error": -5.086249405662727,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260993,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 223.67842490593617,
+          "interval": [
+            192.83253383226648,
+            254.52431597960583
+          ],
+          "error": 23.67842490593617,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260994,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 199.25794641459368,
+          "interval": [
+            162.39438251294544,
+            236.12151031624197
+          ],
+          "error": -0.7420535854063246,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260995,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 199.4683470899311,
+          "interval": [
+            158.75564510329707,
+            240.1810490765651
+          ],
+          "error": -0.5316529100689138,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260996,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 204.42709119459383,
+          "interval": [
+            168.44862885485742,
+            240.40555353433027
+          ],
+          "error": 4.427091194593828,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260997,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 199.73108440147823,
+          "interval": [
+            163.39271421995454,
+            236.0694545830019
+          ],
+          "error": -0.2689155985217724,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260998,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 215.05023930057786,
+          "interval": [
+            184.0943409189704,
+            246.00613768218528
+          ],
+          "error": 15.050239300577857,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260999,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 193.38651473009668,
+          "interval": [
+            164.71699099610652,
+            222.05603846408687
+          ],
+          "error": -6.613485269903322,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261000,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 166.03665026271807,
+          "interval": [
+            134.14743604096483,
+            197.92586448447128
+          ],
+          "error": -33.96334973728193,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261001,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 253.92898456485665,
+          "interval": [
+            212.88128747800118,
+            294.9766816517121
+          ],
+          "error": 53.92898456485665,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261002,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 182.82434260936037,
+          "interval": [
+            147.5515341664549,
+            218.09715105226584
+          ],
+          "error": -17.17565739063963,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261003,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 202.51909093195087,
+          "interval": [
+            166.54684945970828,
+            238.49133240419346
+          ],
+          "error": 2.5190909319508705,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261004,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 215.76276036038388,
+          "interval": [
+            188.2680867922837,
+            243.257433928484
+          ],
+          "error": 15.76276036038388,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261005,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 185.96886698206595,
+          "interval": [
+            152.16009868617184,
+            219.7776352779601
+          ],
+          "error": -14.031133017934053,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261006,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 174.3764041681116,
+          "interval": [
+            142.95954674004378,
+            205.7932615961794
+          ],
+          "error": -25.623595831888395,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261007,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 201.67426016903926,
+          "interval": [
+            167.46056328816218,
+            235.8879570499163
+          ],
+          "error": 1.6742601690392576,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261008,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 197.54524337936488,
+          "interval": [
+            160.69320715808706,
+            234.3972796006427
+          ],
+          "error": -2.4547566206351235,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261009,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 220.6080103872946,
+          "interval": [
+            189.3266005290445,
+            251.88942024554467
+          ],
+          "error": 20.6080103872946,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261010,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 215.57066896935913,
+          "interval": [
+            181.83096682552215,
+            249.31037111319614
+          ],
+          "error": 15.570668969359133,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261011,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 159.75260352613356,
+          "interval": [
+            127.73062843240699,
+            191.77457861986008
+          ],
+          "error": -40.247396473866445,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261012,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 165.30134567197052,
+          "interval": [
+            137.62971427012337,
+            192.97297707381767
+          ],
+          "error": -34.69865432802948,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261013,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 210.54878032792618,
+          "interval": [
+            182.68166918477874,
+            238.41589147107362
+          ],
+          "error": 10.548780327926181,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261014,
+          "truth": 200.0,
+          "status": "ESTIMATED",
+          "estimate": 190.61256445137377,
+          "interval": [
+            162.9214471176805,
+            218.30368178506708
+          ],
+          "error": -9.387435548626229,
+          "covered": true,
+          "reason_codes": []
+        }
+      ]
+    },
+    "SCM": {
+      "estimated": 100,
+      "refused": 0,
+      "conditional_coverage": 0.95,
+      "coverage_wilson_95": [
+        0.888249530768083,
+        0.9784563208456315
+      ],
+      "bias": -0.00855494282634929,
+      "rmse": 0.45828053542781727,
+      "mean_width": 2.033108681609639,
+      "runs": [
+        {
+          "seed": 20260915,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.450263000402273,
+          "interval": [
+            9.68138876188169,
+            11.219137238922857
+          ],
+          "error": 0.4502630004022734,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260916,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.782641478839915,
+          "interval": [
+            8.766683991973355,
+            10.798598965706475
+          ],
+          "error": -0.2173585211600848,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260917,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.446060238014855,
+          "interval": [
+            9.307207550822918,
+            11.584912925206792
+          ],
+          "error": 0.44606023801485506,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260918,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.880336903829662,
+          "interval": [
+            9.140878300346126,
+            10.619795507313198
+          ],
+          "error": -0.11966309617033843,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260919,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.765996901168291,
+          "interval": [
+            9.20482762081101,
+            10.327166181525573
+          ],
+          "error": -0.23400309883170856,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260920,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.674104226922031,
+          "interval": [
+            8.462738452465075,
+            10.885470001378987
+          ],
+          "error": -0.3258957730779688,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260921,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.425196507942786,
+          "interval": [
+            9.439761887129855,
+            11.410631128755718
+          ],
+          "error": 0.4251965079427862,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260922,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.901346493941064,
+          "interval": [
+            9.189410854224516,
+            10.613282133657613
+          ],
+          "error": -0.09865350605893575,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260923,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.960872438274714,
+          "interval": [
+            8.120779188498577,
+            11.800965688050852
+          ],
+          "error": -0.03912756172528553,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260924,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.586404979762952,
+          "interval": [
+            8.025503821666804,
+            11.147306137859099
+          ],
+          "error": -0.4135950202370484,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260925,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.984712138660356,
+          "interval": [
+            8.683731422533063,
+            11.28569285478765
+          ],
+          "error": -0.015287861339643882,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260926,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.222964716783437,
+          "interval": [
+            9.112064198239594,
+            11.33386523532728
+          ],
+          "error": 0.2229647167834372,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260927,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.467972336706989,
+          "interval": [
+            8.764754290778423,
+            10.171190382635555
+          ],
+          "error": -0.532027663293011,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260928,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.620768809137695,
+          "interval": [
+            9.247304111352335,
+            11.994233506923056
+          ],
+          "error": 0.6207688091376955,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260929,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 8.684956143464214,
+          "interval": [
+            7.601734231144562,
+            9.768178055783867
+          ],
+          "error": -1.3150438565357856,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260930,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.037025124122234,
+          "interval": [
+            8.357279966334593,
+            9.716770281909875
+          ],
+          "error": -0.9629748758777659,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260931,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.870716271502413,
+          "interval": [
+            8.51392897341801,
+            11.227503569586817
+          ],
+          "error": -0.12928372849758674,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260932,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.215916082649123,
+          "interval": [
+            9.33461272543092,
+            11.097219439867326
+          ],
+          "error": 0.2159160826491231,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260933,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.362143801559856,
+          "interval": [
+            8.236436845473367,
+            10.487850757646346
+          ],
+          "error": -0.6378561984401436,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260934,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.04951892773065,
+          "interval": [
+            9.165531483806674,
+            10.933506371654627
+          ],
+          "error": 0.049518927730650475,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260935,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.555524622860188,
+          "interval": [
+            9.605330050072773,
+            11.505719195647604
+          ],
+          "error": 0.5555246228601884,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260936,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.222928485632526,
+          "interval": [
+            8.410311520903177,
+            10.035545450361875
+          ],
+          "error": -0.7770715143674742,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260937,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.792580979794954,
+          "interval": [
+            8.770546151465107,
+            10.8146158081248
+          ],
+          "error": -0.20741902020504632,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260938,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.4157797088352,
+          "interval": [
+            9.382448829119571,
+            11.44911058855083
+          ],
+          "error": 0.4157797088352009,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260939,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.819085158934284,
+          "interval": [
+            8.824888688777556,
+            10.813281629091012
+          ],
+          "error": -0.1809148410657162,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260940,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.073698703592186,
+          "interval": [
+            8.714160340402273,
+            11.433237066782098
+          ],
+          "error": 0.07369870359218567,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260941,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.403819794593801,
+          "interval": [
+            8.942222493989746,
+            11.865417095197856
+          ],
+          "error": 0.4038197945938009,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260942,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.650418835702268,
+          "interval": [
+            8.48550278834112,
+            10.815334883063416
+          ],
+          "error": -0.34958116429773156,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260943,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.61854807217387,
+          "interval": [
+            8.065715859073412,
+            11.171380285274326
+          ],
+          "error": -0.3814519278261308,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260944,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.709518979985324,
+          "interval": [
+            8.751259992384453,
+            10.667777967586195
+          ],
+          "error": -0.2904810200146759,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260945,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.291993909948657,
+          "interval": [
+            9.397335698126446,
+            11.186652121770868
+          ],
+          "error": 0.2919939099486566,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260946,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.075549383959121,
+          "interval": [
+            9.145745262058837,
+            11.005353505859405
+          ],
+          "error": 0.07554938395912103,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260947,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.173062911453592,
+          "interval": [
+            8.941448016518683,
+            11.4046778063885
+          ],
+          "error": 0.17306291145359154,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260948,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.31886249658993,
+          "interval": [
+            10.25504101585886,
+            12.382683977321
+          ],
+          "error": 1.3188624965899294,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260949,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.096667403639218,
+          "interval": [
+            8.603782571509873,
+            11.589552235768563
+          ],
+          "error": 0.09666740363921811,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260950,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.322147882798777,
+          "interval": [
+            9.056507232596672,
+            11.587788533000882
+          ],
+          "error": 0.3221478827987774,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260951,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.805914124052567,
+          "interval": [
+            8.884785339628607,
+            10.727042908476527
+          ],
+          "error": -0.1940858759474331,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260952,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.264368319088122,
+          "interval": [
+            8.928219516045068,
+            11.600517122131176
+          ],
+          "error": 0.2643683190881223,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260953,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.838999720071843,
+          "interval": [
+            8.597107832342813,
+            11.080891607800874
+          ],
+          "error": -0.1610002799281567,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260954,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.770779767495512,
+          "interval": [
+            9.982552191390974,
+            11.559007343600049
+          ],
+          "error": 0.7707797674955117,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260955,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.385923007560189,
+          "interval": [
+            8.542938548313495,
+            10.228907466806882
+          ],
+          "error": -0.6140769924398111,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260956,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.894492232102547,
+          "interval": [
+            9.04997285446767,
+            10.739011609737423
+          ],
+          "error": -0.10550776789745342,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260957,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.627931317666635,
+          "interval": [
+            8.835071456847794,
+            10.420791178485475
+          ],
+          "error": -0.37206868233336543,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260958,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.329407738946536,
+          "interval": [
+            9.216549361395977,
+            11.442266116497095
+          ],
+          "error": 0.32940773894653574,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260959,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.851812053850857,
+          "interval": [
+            8.987411079690679,
+            10.716213028011035
+          ],
+          "error": -0.1481879461491431,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260960,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.602215614667553,
+          "interval": [
+            8.528335037726617,
+            10.67609619160849
+          ],
+          "error": -0.39778438533244653,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260961,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.499478574627396,
+          "interval": [
+            8.53065047303864,
+            10.468306676216152
+          ],
+          "error": -0.5005214253726038,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260962,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.586859955682064,
+          "interval": [
+            8.5571084323531,
+            10.616611479011027
+          ],
+          "error": -0.4131400443179363,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260963,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.060098182689224,
+          "interval": [
+            9.23150236532451,
+            10.888694000053938
+          ],
+          "error": 0.060098182689223734,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260964,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.412262420717335,
+          "interval": [
+            9.708414799745022,
+            11.116110041689648
+          ],
+          "error": 0.4122624207173349,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260965,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.754583041286672,
+          "interval": [
+            8.66638114222113,
+            10.842784940352214
+          ],
+          "error": -0.24541695871332792,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260966,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.397174491310867,
+          "interval": [
+            9.713602229961245,
+            11.08074675266049
+          ],
+          "error": 0.39717449131086724,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260967,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.581957924417692,
+          "interval": [
+            8.609500111714963,
+            10.55441573712042
+          ],
+          "error": -0.4180420755823082,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260968,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.754580546294648,
+          "interval": [
+            9.419887775086249,
+            12.089273317503046
+          ],
+          "error": 0.7545805462946475,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260969,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.532005687934761,
+          "interval": [
+            7.872922114556706,
+            11.191089261312817
+          ],
+          "error": -0.46799431206523856,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260970,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.376215297811132,
+          "interval": [
+            9.294726696572134,
+            11.45770389905013
+          ],
+          "error": 0.3762152978111324,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260971,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.967548979343965,
+          "interval": [
+            9.380069125352174,
+            10.555028833335756
+          ],
+          "error": -0.03245102065603511,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260972,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.240691416278601,
+          "interval": [
+            9.594234013661227,
+            10.887148818895975
+          ],
+          "error": 0.2406914162786009,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260973,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.631920951435141,
+          "interval": [
+            8.89640531625522,
+            10.367436586615062
+          ],
+          "error": -0.3680790485648586,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260974,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.694374674205449,
+          "interval": [
+            9.994914065390637,
+            11.39383528302026
+          ],
+          "error": 0.6943746742054486,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260975,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.15795203303412,
+          "interval": [
+            8.989576128262588,
+            11.326327937805651
+          ],
+          "error": 0.1579520330341193,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260976,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.668532627123968,
+          "interval": [
+            8.395443765954939,
+            10.941621488292997
+          ],
+          "error": -0.33146737287603223,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260977,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.493152209200526,
+          "interval": [
+            8.533925937924726,
+            10.452378480476325
+          ],
+          "error": -0.5068477907994744,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260978,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.655768245283273,
+          "interval": [
+            8.251435974741865,
+            11.060100515824681
+          ],
+          "error": -0.34423175471672707,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260979,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.343367897747902,
+          "interval": [
+            9.627891867650739,
+            11.058843927845064
+          ],
+          "error": 0.34336789774790155,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260980,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.32028602821111,
+          "interval": [
+            9.545262197297511,
+            11.095309859124708
+          ],
+          "error": 0.3202860282111093,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260981,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.395720557344774,
+          "interval": [
+            9.718133803155126,
+            11.073307311534421
+          ],
+          "error": 0.39572055734477374,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260982,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.072490468000453,
+          "interval": [
+            8.952982016609436,
+            11.19199891939147
+          ],
+          "error": 0.07249046800045278,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260983,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.348307854416188,
+          "interval": [
+            8.070022099162038,
+            10.626593609670337
+          ],
+          "error": -0.6516921455838123,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260984,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.552157035409468,
+          "interval": [
+            8.95199744117372,
+            10.152316629645217
+          ],
+          "error": -0.4478429645905315,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260985,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.902240944590408,
+          "interval": [
+            8.611171009650112,
+            11.193310879530705
+          ],
+          "error": -0.09775905540959151,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260986,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.850798479937733,
+          "interval": [
+            8.783803786378986,
+            10.91779317349648
+          ],
+          "error": -0.14920152006226672,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260987,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.409459644781073,
+          "interval": [
+            9.58925772719526,
+            11.229661562366886
+          ],
+          "error": 0.409459644781073,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260988,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.708579876258453,
+          "interval": [
+            8.804091115930005,
+            10.6130686365869
+          ],
+          "error": -0.29142012374154724,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260989,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.61909109912814,
+          "interval": [
+            8.259234551037022,
+            10.978947647219258
+          ],
+          "error": -0.38090890087186047,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260990,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.550260151787986,
+          "interval": [
+            8.419924863610355,
+            10.680595439965618
+          ],
+          "error": -0.4497398482120136,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260991,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.434666084331326,
+          "interval": [
+            8.246358585909256,
+            10.622973582753396
+          ],
+          "error": -0.5653339156686741,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260992,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.297201715052212,
+          "interval": [
+            10.771118658988483,
+            11.823284771115942
+          ],
+          "error": 1.2972017150522124,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260993,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.300791963283096,
+          "interval": [
+            9.437068328652375,
+            11.164515597913818
+          ],
+          "error": 0.3007919632830962,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260994,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.569518510369754,
+          "interval": [
+            8.232169824044323,
+            10.906867196695185
+          ],
+          "error": -0.430481489630246,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260995,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.581328629474388,
+          "interval": [
+            9.886233062839008,
+            11.276424196109769
+          ],
+          "error": 0.5813286294743882,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260996,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.16116234296218,
+          "interval": [
+            8.577197842463379,
+            9.745126843460982
+          ],
+          "error": -0.8388376570378195,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260997,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.390405538791269,
+          "interval": [
+            9.490749452193244,
+            11.290061625389294
+          ],
+          "error": 0.3904055387912688,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260998,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.138796442459657,
+          "interval": [
+            8.626019833198677,
+            11.651573051720638
+          ],
+          "error": 0.1387964424596575,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260999,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.790888671630787,
+          "interval": [
+            9.202278026452655,
+            10.37949931680892
+          ],
+          "error": -0.20911132836921276,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261000,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.331700404768604,
+          "interval": [
+            9.345875645873317,
+            11.317525163663891
+          ],
+          "error": 0.3317004047686041,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261001,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.77931811329371,
+          "interval": [
+            8.743056691467405,
+            10.815579535120015
+          ],
+          "error": -0.22068188670628963,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261002,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.98230415898562,
+          "interval": [
+            8.98557331318034,
+            10.9790350047909
+          ],
+          "error": -0.01769584101437971,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261003,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.184337214431743,
+          "interval": [
+            9.17524640028259,
+            11.193428028580895
+          ],
+          "error": 0.18433721443174278,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261004,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.787114948697871,
+          "interval": [
+            9.943599544376895,
+            11.630630353018848
+          ],
+          "error": 0.7871149486978712,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261005,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.734828262594412,
+          "interval": [
+            8.880025229023456,
+            10.589631296165368
+          ],
+          "error": -0.26517173740558775,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261006,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.89458898606747,
+          "interval": [
+            8.617632442134425,
+            11.171545530000515
+          ],
+          "error": -0.10541101393252994,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261007,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.381166488640766,
+          "interval": [
+            9.566060647176725,
+            11.196272330104806
+          ],
+          "error": 0.3811664886407655,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261008,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.330810493519511,
+          "interval": [
+            9.631945665554031,
+            11.02967532148499
+          ],
+          "error": 0.3308104935195111,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261009,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.032159794043162,
+          "interval": [
+            9.970079968112616,
+            12.094239619973708
+          ],
+          "error": 1.032159794043162,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261010,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.409910567769764,
+          "interval": [
+            8.01265862250809,
+            10.807162513031438
+          ],
+          "error": -0.5900894322302364,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261011,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.741781561474495,
+          "interval": [
+            8.633264482183698,
+            10.850298640765292
+          ],
+          "error": -0.2582184385255051,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261012,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.154571134359372,
+          "interval": [
+            9.263509496400154,
+            11.04563277231859
+          ],
+          "error": 0.1545711343593723,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261013,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.073996694958634,
+          "interval": [
+            9.214509188481511,
+            10.933484201435757
+          ],
+          "error": 0.07399669495863392,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261014,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.821290951702977,
+          "interval": [
+            8.800619331039368,
+            10.841962572366587
+          ],
+          "error": -0.17870904829702283,
+          "covered": true,
+          "reason_codes": []
+        }
+      ]
+    },
+    "BSTS": {
+      "estimated": 100,
+      "refused": 0,
+      "conditional_coverage": 0.93,
+      "coverage_wilson_95": [
+        0.8625048526092675,
+        0.9656807389327268
+      ],
+      "bias": 0.05326359952161003,
+      "rmse": 3.02856428522925,
+      "mean_width": 11.749430923237588,
+      "runs": [
+        {
+          "seed": 20260915,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 13.24200633674355,
+          "interval": [
+            7.369068181469371,
+            19.11494449201773
+          ],
+          "error": 3.2420063367435503,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260916,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 5.490332463683948,
+          "interval": [
+            -0.37388015724295354,
+            11.354545084610848
+          ],
+          "error": -4.509667536316052,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260917,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.824599705629534,
+          "interval": [
+            4.965159819286628,
+            16.684039591972443
+          ],
+          "error": 0.8245997056295344,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260918,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 7.306594407277893,
+          "interval": [
+            1.4470900190627418,
+            13.166098795493044
+          ],
+          "error": -2.6934055927221072,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260919,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 7.035914705715952,
+          "interval": [
+            1.16640509637769,
+            12.905424315054216
+          ],
+          "error": -2.9640852942840477,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260920,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.899016840931179,
+          "interval": [
+            4.036534505084186,
+            15.761499176778171
+          ],
+          "error": -0.1009831590688215,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260921,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 12.050401961901182,
+          "interval": [
+            6.174126218630478,
+            17.926677705171883
+          ],
+          "error": 2.0504019619011817,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260922,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.821853887809127,
+          "interval": [
+            3.9523859836568915,
+            15.69132179196136
+          ],
+          "error": -0.1781461121908734,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260923,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 6.12299202298988,
+          "interval": [
+            0.25693357981583365,
+            11.989050466163928
+          ],
+          "error": -3.87700797701012,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260924,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 8.963108004697991,
+          "interval": [
+            3.0851735874797335,
+            14.84104242191625
+          ],
+          "error": -1.0368919953020086,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260925,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.12624972202179,
+          "interval": [
+            3.258036836699131,
+            14.994462607344449
+          ],
+          "error": -0.8737502779782105,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260926,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 13.682252167799552,
+          "interval": [
+            7.815015307698929,
+            19.549489027900176
+          ],
+          "error": 3.682252167799552,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260927,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.108219499303514,
+          "interval": [
+            3.2399595140513933,
+            14.976479484555636
+          ],
+          "error": -0.8917805006964858,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260928,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 14.369075533663139,
+          "interval": [
+            8.498110561848286,
+            20.240040505477992
+          ],
+          "error": 4.369075533663139,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260929,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 4.052996665872027,
+          "interval": [
+            -1.8090857939046803,
+            9.915079125648735
+          ],
+          "error": -5.947003334127973,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260930,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 7.325783791735868,
+          "interval": [
+            1.4438144368742734,
+            13.207753146597463
+          ],
+          "error": -2.6742162082641316,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260931,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.767600033771725,
+          "interval": [
+            5.896322776515806,
+            17.638877291027644
+          ],
+          "error": 1.7676000337717248,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260932,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 12.85051778950867,
+          "interval": [
+            6.984238774610572,
+            18.71679680440677
+          ],
+          "error": 2.85051778950867,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260933,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.347498622444897,
+          "interval": [
+            3.485662604163905,
+            15.209334640725888
+          ],
+          "error": -0.6525013775551027,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260934,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.319492509366512,
+          "interval": [
+            3.42232539168125,
+            15.216659627051774
+          ],
+          "error": -0.680507490633488,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260935,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.720771164060343,
+          "interval": [
+            4.831954188465549,
+            16.609588139655138
+          ],
+          "error": 0.7207711640603431,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260936,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 3.8815835407295722,
+          "interval": [
+            -1.9793649928250368,
+            9.742532074284181
+          ],
+          "error": -6.118416459270428,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260937,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.28122738617389,
+          "interval": [
+            3.4180925497114885,
+            15.144362222636293
+          ],
+          "error": -0.7187726138261095,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260938,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 13.491214773723115,
+          "interval": [
+            7.6281758253412235,
+            19.354253722105007
+          ],
+          "error": 3.491214773723115,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260939,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.576302039254223,
+          "interval": [
+            4.657560226923132,
+            16.495043851585315
+          ],
+          "error": 0.5763020392542231,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260940,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.715328707279648,
+          "interval": [
+            5.852417320908833,
+            17.578240093650464
+          ],
+          "error": 1.7153287072796477,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260941,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.619602283925845,
+          "interval": [
+            5.755434489957267,
+            17.483770077894423
+          ],
+          "error": 1.619602283925845,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260942,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 7.550368249665278,
+          "interval": [
+            1.6531122210349993,
+            13.447624278295557
+          ],
+          "error": -2.4496317503347216,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260943,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.075287221128777,
+          "interval": [
+            3.203468856656116,
+            14.947105585601438
+          ],
+          "error": -0.924712778871223,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260944,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 8.119917983229154,
+          "interval": [
+            2.256705276643605,
+            13.983130689814704
+          ],
+          "error": -1.8800820167708459,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260945,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.006053559904517,
+          "interval": [
+            5.1461911796091035,
+            16.86591594019993
+          ],
+          "error": 1.006053559904517,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260946,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 8.276888019350626,
+          "interval": [
+            2.3955251654480048,
+            14.158250873253246
+          ],
+          "error": -1.7231119806493744,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260947,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.985908902141292,
+          "interval": [
+            4.092545901567116,
+            15.879271902715466
+          ],
+          "error": -0.014091097858708324,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260948,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 15.507267147539446,
+          "interval": [
+            9.645070738983417,
+            21.369463556095475
+          ],
+          "error": 5.507267147539446,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260949,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.672309697887648,
+          "interval": [
+            5.790950020069584,
+            17.553669375705713
+          ],
+          "error": 1.6723096978876484,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260950,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 13.381453661138034,
+          "interval": [
+            7.503846094612763,
+            19.259061227663302
+          ],
+          "error": 3.3814536611380337,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260951,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.963413772773286,
+          "interval": [
+            6.064841768979902,
+            17.86198577656667
+          ],
+          "error": 1.9634137727732863,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260952,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.424174793889762,
+          "interval": [
+            5.564666749304812,
+            17.28368283847471
+          ],
+          "error": 1.4241747938897618,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260953,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 6.71932515142907,
+          "interval": [
+            0.8314353100723428,
+            12.607214992785796
+          ],
+          "error": -3.2806748485709303,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260954,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 15.021756200108797,
+          "interval": [
+            9.134656733399378,
+            20.908855666818216
+          ],
+          "error": 5.021756200108797,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260955,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 8.488539888103196,
+          "interval": [
+            2.6117814272497224,
+            14.365298348956669
+          ],
+          "error": -1.5114601118968043,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260956,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.324372930064138,
+          "interval": [
+            3.464800554417115,
+            15.18394530571116
+          ],
+          "error": -0.675627069935862,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260957,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 7.370570246985225,
+          "interval": [
+            1.509714002907593,
+            13.231426491062857
+          ],
+          "error": -2.629429753014775,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260958,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 12.958421329937783,
+          "interval": [
+            7.0979888438581895,
+            18.818853816017377
+          ],
+          "error": 2.9584213299377833,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260959,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.443143979984306,
+          "interval": [
+            3.5743179344952516,
+            15.31197002547336
+          ],
+          "error": -0.5568560200156938,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260960,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 5.216254760328461,
+          "interval": [
+            -0.6483878895953419,
+            11.080897410252263
+          ],
+          "error": -4.783745239671539,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260961,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 3.6675814654431473,
+          "interval": [
+            -2.278954795612089,
+            9.614117726498383
+          ],
+          "error": -6.332418534556853,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260962,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 5.6783654398248675,
+          "interval": [
+            -0.24039692545346814,
+            11.597127805103202
+          ],
+          "error": -4.3216345601751325,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260963,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 12.253126211383252,
+          "interval": [
+            6.39171526982721,
+            18.114537152939295
+          ],
+          "error": 2.253126211383252,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260964,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 13.978576356509434,
+          "interval": [
+            8.080766117183275,
+            19.87638659583559
+          ],
+          "error": 3.978576356509434,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260965,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.61000689677755,
+          "interval": [
+            3.7181195564011817,
+            15.50189423715392
+          ],
+          "error": -0.38999310322244973,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260966,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.877489274343942,
+          "interval": [
+            5.004215348732878,
+            16.750763199955006
+          ],
+          "error": 0.877489274343942,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260967,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 6.918178894688906,
+          "interval": [
+            1.0553201639880996,
+            12.781037625389713
+          ],
+          "error": -3.0818211053110938,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260968,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 16.66114538529201,
+          "interval": [
+            10.798382895339873,
+            22.523907875244145
+          ],
+          "error": 6.661145385292009,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260969,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.045438919233682,
+          "interval": [
+            3.141739014565111,
+            14.949138823902253
+          ],
+          "error": -0.9545610807663181,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260970,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.360064437172353,
+          "interval": [
+            4.49778901551019,
+            16.222339858834516
+          ],
+          "error": 0.3600644371723529,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260971,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.038317332849513,
+          "interval": [
+            5.167385798925793,
+            16.909248866773233
+          ],
+          "error": 1.0383173328495126,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260972,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 8.719984768634406,
+          "interval": [
+            2.842466937922522,
+            14.59750259934629
+          ],
+          "error": -1.280015231365594,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260973,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 5.562045795541129,
+          "interval": [
+            -0.3096598593156017,
+            11.43375145039786
+          ],
+          "error": -4.437954204458871,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260974,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 14.86415083045451,
+          "interval": [
+            8.9981124125972,
+            20.730189248311817
+          ],
+          "error": 4.864150830454509,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260975,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.68527745528974,
+          "interval": [
+            5.814456025003175,
+            17.556098885576304
+          ],
+          "error": 1.6852774552897394,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260976,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 5.632034034389799,
+          "interval": [
+            -0.23335874474458063,
+            11.497426813524179
+          ],
+          "error": -4.367965965610201,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260977,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 6.695929753717045,
+          "interval": [
+            0.8328199035529691,
+            12.559039603881121
+          ],
+          "error": -3.304070246282955,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260978,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 8.215373650547864,
+          "interval": [
+            2.346766978413025,
+            14.083980322682702
+          ],
+          "error": -1.784626349452136,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260979,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 13.089399808878417,
+          "interval": [
+            7.228160007210128,
+            18.950639610546705
+          ],
+          "error": 3.089399808878417,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260980,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.412654143599497,
+          "interval": [
+            5.551841895233103,
+            17.27346639196589
+          ],
+          "error": 1.4126541435994966,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260981,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 12.879467398527037,
+          "interval": [
+            6.97997918456836,
+            18.778955612485714
+          ],
+          "error": 2.879467398527037,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260982,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.778984841608246,
+          "interval": [
+            5.919782736618174,
+            17.638186946598317
+          ],
+          "error": 1.7789848416082457,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260983,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 8.23072978442076,
+          "interval": [
+            2.3688304631397994,
+            14.09262910570172
+          ],
+          "error": -1.7692702155792404,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260984,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 7.712655766394172,
+          "interval": [
+            1.8249287991089798,
+            13.600382733679364
+          ],
+          "error": -2.287344233605828,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260985,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.921517328374748,
+          "interval": [
+            6.059161581687958,
+            17.783873075061535
+          ],
+          "error": 1.9215173283747475,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260986,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.237429376281296,
+          "interval": [
+            4.3322568166059945,
+            16.1426019359566
+          ],
+          "error": 0.23742937628129646,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260987,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 16.7032057894299,
+          "interval": [
+            10.841379056610474,
+            22.56503252224933
+          ],
+          "error": 6.7032057894299015,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260988,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 7.044176828641369,
+          "interval": [
+            1.1827432466283678,
+            12.90561041065437
+          ],
+          "error": -2.955823171358631,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260989,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 8.100299131156849,
+          "interval": [
+            2.223873661959658,
+            13.97672460035404
+          ],
+          "error": -1.8997008688431514,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260990,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 7.969733605309916,
+          "interval": [
+            2.104081092746253,
+            13.835386117873579
+          ],
+          "error": -2.0302663946900843,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260991,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 6.912876396256245,
+          "interval": [
+            1.0451992961007912,
+            12.780553496411699
+          ],
+          "error": -3.0871236037437546,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260992,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 16.507000567822647,
+          "interval": [
+            10.603490461321481,
+            22.410510674323813
+          ],
+          "error": 6.507000567822647,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260993,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 12.016820043757878,
+          "interval": [
+            6.154189098827036,
+            17.87945098868872
+          ],
+          "error": 2.0168200437578783,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260994,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.707677851743966,
+          "interval": [
+            4.827814842742188,
+            16.587540860745744
+          ],
+          "error": 0.7076778517439664,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260995,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 12.995298887106884,
+          "interval": [
+            7.103840778052336,
+            18.88675699616143
+          ],
+          "error": 2.995298887106884,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260996,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 5.421648982575765,
+          "interval": [
+            -0.4445301965812112,
+            11.28782816173274
+          ],
+          "error": -4.578351017424235,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260997,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.42880236278396,
+          "interval": [
+            3.544686128069885,
+            15.312918597498037
+          ],
+          "error": -0.5711976372160397,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260998,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 7.581750043902117,
+          "interval": [
+            1.7131951956988098,
+            13.450304892105425
+          ],
+          "error": -2.418249956097883,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20260999,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.865385634238667,
+          "interval": [
+            3.997409702112958,
+            15.733361566364376
+          ],
+          "error": -0.13461436576133323,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261000,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.9897254789271,
+          "interval": [
+            4.114944419105669,
+            15.864506538748532
+          ],
+          "error": -0.01027452107289939,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261001,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 7.645444267739813,
+          "interval": [
+            1.7732783741973952,
+            13.517610161282231
+          ],
+          "error": -2.354555732260187,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261002,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 7.4714448515763685,
+          "interval": [
+            1.5877631944667785,
+            13.35512650868596
+          ],
+          "error": -2.5285551484236315,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261003,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 12.25619381213665,
+          "interval": [
+            6.390956282277264,
+            18.121431341996036
+          ],
+          "error": 2.256193812136649,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261004,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 17.414422639104544,
+          "interval": [
+            11.552835480056913,
+            23.276009798152174
+          ],
+          "error": 7.414422639104544,
+          "covered": false,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261005,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 9.648283394058083,
+          "interval": [
+            3.7769486376472994,
+            15.519618150468867
+          ],
+          "error": -0.3517166059419168,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261006,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 6.49913090528335,
+          "interval": [
+            0.6236013249129018,
+            12.374660485653799
+          ],
+          "error": -3.5008690947166503,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261007,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 10.963393762422669,
+          "interval": [
+            5.0890916187409285,
+            16.837695906104408
+          ],
+          "error": 0.9633937624226689,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261008,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.961104552024501,
+          "interval": [
+            6.086876775897194,
+            17.835332328151807
+          ],
+          "error": 1.9611045520245014,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261009,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 14.958630774968336,
+          "interval": [
+            9.090632996904908,
+            20.826628553031764
+          ],
+          "error": 4.958630774968336,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261010,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 5.3064708258065165,
+          "interval": [
+            -0.5916578242748347,
+            11.204599475887868
+          ],
+          "error": -4.6935291741934835,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261011,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 11.164561157947107,
+          "interval": [
+            5.270236036869266,
+            17.058886279024946
+          ],
+          "error": 1.164561157947107,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261012,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 13.154334992019518,
+          "interval": [
+            7.264708833784847,
+            19.043961150254187
+          ],
+          "error": 3.1543349920195176,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261013,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 12.5406612110869,
+          "interval": [
+            6.680716823311179,
+            18.40060559886262
+          ],
+          "error": 2.540661211086899,
+          "covered": true,
+          "reason_codes": []
+        },
+        {
+          "seed": 20261014,
+          "truth": 10.0,
+          "status": "ESTIMATED",
+          "estimate": 8.873991788552699,
+          "interval": [
+            2.9829841130300343,
+            14.764999464075363
+          ],
+          "error": -1.1260082114473011,
+          "covered": true,
+          "reason_codes": []
+        }
+      ]
+    }
+  }
+}

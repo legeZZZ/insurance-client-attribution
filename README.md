@@ -1,7 +1,9 @@
 # GOAI 赛道二参赛交付包 · Spec 驱动的开放影响因子挖掘与贝叶斯实验归因 Agent
 
+> **2026-09-16 后端交付更新：**阶段A–F当前授权范围已完成。本机及Linux容器234/234后端测试，E/F共48项CLI验收；控制台相关内容保持历史版本，全部暂缓。当前运行、锁定依赖与离线部署以[后端交付与迁移说明](docs/后端交付与迁移说明.md)为准；逐文件落实见[交付映射与验收索引](docs/交付映射与验收索引.md)，统计适用条件与负结果见[阶段E-F评测报告](docs/阶段E-F评测报告.md)。下文旧版本指标只表示历史快照。
+
 > 适用赛题：**AI+金融｜面向企业经营与风险研判的金融服务 Agent**（参赛手册 §4.3.3）
-> 版本：v12.0 实施版（已同步上游 `bc6f688`）· 2026-09-01 · 本目录包含统计修订、Factor RAG、N2/N3 适配器、实验完整性门禁和回归测试。
+> 版本：v13.0 决赛版 · 2026-09-14 · 在 v12.0 实施版（统计修订、Factor RAG、N2/N3 适配器、实验完整性门禁）之上，新增决赛 D5–D7 升级：人在回路确认、技能自进化、C 线主动盯防。
 
 ---
 
@@ -15,8 +17,8 @@
 | 核心问题 | 经营指标异常时，"变了多少是真的、哪个因子造成的、下一步做什么实验"缺少可验证、可追溯、不越权的自动化回答 |
 | 解决方案 | 两条归因线：组件归因（Growth UI Spec 三类 Diff → FactorMiner → 聚合 Beta-Binomial Bundle 门禁 → 高维重叠 CATE/HTE → 因子化实验）+ 实验基线归因（A/B 持续对照基线 → rate-aware 多维候选生成 → 内外部因子关联 → 反事实验证），全部结论经证据分级状态机与 Claim Ledger 约束 |
 | 创新点 | ① Spec-driven 开放因子空间（不穷举因子清单）；② 证据分级状态机与拒答治理；③ 后验驱动的决策与下一轮实验闭环；④ 归因=汇总非分解 + "未知"诚实标注 |
-| 开放/复用价值 | 纯 numpy 无重依赖的方法包、组件 Spec 模板、脱敏数据生成器、评测 harness、示例数据与证据 JSON，可整体复用 |
-| 当前进展 | 两条归因线可运行且指标达标；v3 治理基线不回退；UCI 真实数据接入；v6.1（经验库+PID+重尾+错配报警）与三期产品化（M1 嵌套+校准 50 seeds、M2 外部事件映射、M3 控制台场景→实测→报告下载）全部落地并有消融证据；A 线新增 high-dimensional overlap ridge CATE；当前回归 35/35 |
+| 开放/复用价值 | 含锁定统计依赖的方法包、组件 Spec 模板、脱敏数据生成器、评测 harness、示例数据与证据 JSON，可整体复用 |
+| 当前进展 | 两条归因线可运行且指标达标；v3 治理基线不回退；UCI 真实数据接入；v6.1（经验库+PID+重尾+错配报警）与三期产品化（M1 嵌套+校准 50 seeds、M2 外部事件映射、M3 控制台场景→实测→报告下载）全部落地并有消融证据；A 线新增 high-dimensional overlap ridge CATE；决赛新增 D5 人在回路（候选确认/因子补充/告警反馈留证）、D6 技能自进化（轨迹→patch→影子回放→证据门晋级，保护统计核心不可自改）、D7 C 线主动盯防（复用 lead-lag 观测 + 三杀证伪，产出 WATCHLIST）；当前回归 61/61 |
 
 ## 2. 场景来源与用户痛点
 
@@ -38,7 +40,7 @@
 6. **验证与反馈**：脱敏数据回测、错配回测、真实公开数据、消融对照、v3 隐藏基准，指标见 §6。
 7. **安全边界**：无随机化只输出 ASSOCIATION_ONLY；外部因子恒为 TEMPORAL_ASSOCIATION；残差标"未知"；高风险动作全部转人工（见 §7）。
 
-## 4. 运行入口与依赖（复赛复现说明）
+## 4. 运行入口与依赖（复现说明）
 
 ### 4.1 环境要求
 
@@ -47,14 +49,19 @@
 
 ### 4.2 一键运行
 
-#### 复赛演示控制台
+#### 演示控制台
 
 ```bash
+# 首次或重置演示数据（C线扫描、因子库、技能治理链全部真实管线生成）
+.venv/bin/python tools/seed_console_v2.py
+
 python3 run_server.py 8765
 # 浏览器打开 http://127.0.0.1:8765
 ```
 
-默认入口是 `web/static/semifinal-demo.html`。控制台初始不展示最终结论；用户提交经营问题后，前端只发起一次意图请求和一次 `GET /api/track2/scenario-run`，由同一结果驱动 3D 指挥台、阶段轨迹和结果区。三维关系图支持悬浮查看内部证据、外部信号、未知残差和验证路径；候选因子库按内部可控/外部观察分类展示，并用不同边型区分候选关联、时间/范围关联和验证路径。默认 `full_review` 会自动运行 B 线候选挖掘、A 线实验、外部事件映射和 N1/N2/N3 dry-run；也可单独运行任一线路或无随机化拒答。结果区直接展示运行数据明细、残差趋势、候选因子库、验证计划、证据等级和异常处理。服务不可用时，页面使用明确标注的 本地脱敏数据回放，不能将其解释为生产数据。`UNEXPLAINED` 是正常的证据状态，表示当前仍保留未解释阶跃，不是执行失败；真实管线失败时 API 返回 JSON 错误对象。
+默认入口是决赛控制台 v3（`web/static/final-console-v3.html`，由 `tools/build_console_v3.py` 从模板生成）：浅色工作台 + 深色指挥中心双层设计（视觉体系复刻复赛演示页），六个视图——归因总控（3D 因子证据球，three.js r160，WebGL/CDN 不可用自动 2D 回退；高风险因子红色脉冲环）、风险预警中心（C 线：趋势预警 + 冲突预警「违背已验证归因逻辑」，如轮播图配置异常；预警生命周期 新预警→待确认→处置中→已闭环）、待办看板（HITL 统一收件箱：候选确认/证据冲突/发布审批/告警反馈四节点聚合，权限矩阵内嵌详情面板）、因子库（色条卡片网格，服务模式最多 40 条 B 线真实候选）、因子管理（人报因子补录/停用/启用 + 变更台账）、自进化与证据（技能治理时间线 + 负结果专区）。顶部全局预警条常驻所有视图。新增端点：`GET /api/v2/alerts`、`POST /api/v2/alerts/action`、`POST /api/v2/factors/manage`、`GET /api/v2/factors/ledger`。**零安装体验**：双击该文件即可离线回放（操作仅本地留痕并标注）。
+
+历史入口：`/semifinal-demo.html`（复赛全流程页：提交经营问题后由 `GET /api/track2/scenario-run` 一次结果驱动 3D 指挥台、阶段轨迹与结果区；服务不可用时使用明确标注的本地脱敏数据回放）。`UNEXPLAINED` 是正常的证据状态，表示当前仍保留未解释阶跃，不是执行失败；真实管线失败时 API 返回 JSON 错误对象。
 
 #### GitHub 仓库部署为可执行 HTTP 服务
 
@@ -68,17 +75,17 @@ python3 run_server.py 8765
 
 云平台会注入 `PORT`，服务会自动监听 `0.0.0.0:$PORT`。完整步骤见 `HTTP_DEPLOY.md`。
 
-#### 复赛升级 Demo（v12.0；脱敏数据回放，采用可替换授权适配器）
+#### 升级 Demo（脱敏数据回放，采用可替换授权适配器）
 
 ```bash
 # N1 外部事件适配器 + N2 本地模型/规则兜底 + N3 实验平台 dry-run 灰度
 python3 -m track2_v5.replay_upgrade_demo
 ```
 
-输出 `outputs/upgrade_demo_evidence.json` 和 `outputs/upgrade_demo_report.md`。完整升级目标、接口契约、里程碑、验收指标和现场演示脚本见根目录 `复赛升级方案.md`；快速运行与故障排查见 `复赛升级运行说明.md`。
+输出 `outputs/upgrade_demo_evidence.json` 和 `outputs/upgrade_demo_report.md`。快速运行与故障排查见 `运行说明.md`；决赛完整方案与叙事版见交付包根目录 `方案文档/`。
 
 ```bash
-# v12 回归测试：分解闭合、时序留出、RAG 来源链、N2 兜底、N3 审批
+# v13 回归测试：v12 全套 + D5–D7 共 61 条
 PYTHONPATH=. python3 -m unittest discover -s tests -v
 ```
 
@@ -109,6 +116,15 @@ python3 -m track2_v5.nu_annealing_sweep
 
 # ②d 公开外部事件时间线映射 + 覆盖率统计（M2）
 python3 -m track2_v5.external_events
+
+# ②e 决赛 D5 人在回路：候选确认/因子补充/告警反馈 → JSON 存证 + 预算校准
+python3 -m track2_v5.human_feedback
+
+# ②f 决赛 D6 技能自进化：Trace2Skill 式轨迹→patch→影子回放→证据门晋级（含回滚）
+python3 -m track2_v5.skill_evolution
+
+# ②g 决赛 D7 C 线主动盯防：扫描已关联因子 + 三杀证伪 → WATCHLIST 预警
+python3 -m track2_v5.watchlist_scan
 
 # ③ v3 治理基线隐藏基准（3 seeds / 9 cases）
 cd track2_clean_bundle
@@ -161,6 +177,9 @@ track2_v5/                    # v5/v6 方法包（纯 numpy）
   external_events.py          # 公开外部事件时间线 + 映射覆盖率（M2）
   scenario_reports.py         # 控制台场景运行 + 审计报告渲染（M3）
   agent_chat.py               # 多轮对话 Agent：Plan-and-Execute 状态机（8.1-2）
+  human_feedback.py           # 决赛 D5：人在回路确认/补充/反馈存证 + 预算校准
+  skill_evolution.py          # 决赛 D6：技能自进化（轨迹→patch→影子回放→晋级/回滚）
+  watchlist_scan.py           # 决赛 D7：C 线主动盯防（三杀证伪 → WATCHLIST）
 specs/                        # 轮播图 Growth UI Spec 两版本（可复用模板）
 track2_clean_bundle/          # v3 治理运行时（五层门禁、Claim Ledger、控制台）
 outputs/                      # 运行证据（11 份 JSON + benchmark 图）
@@ -169,16 +188,18 @@ outputs/                      # 运行证据（11 份 JSON + benchmark 图）
 ### 4.4 交付包结构（评审导览）
 
 ```text
-交付包核心材料：
-  作品简介.md                    # 项目名称/赛题/用户/问题/方案/创新点/复用价值/进展
-  方案PPT/赛道二答辩PPT.pptd      # pptd 工程（26 页，编辑器可导出 pptx）
-  保险经营归因Agent-复赛完整答辩版.pptx # 复赛完整答辩稿（15 页主线）
+决赛交付包结构：
   可执行代码包/                   # 即本 README 所在目录
     README.md（本文件：运行入口/依赖/配置/样例/证据索引）
-    数据来源与合规说明.md          # 数据类型、来源、授权、脱敏、隐私和专业决策边界
+    运行说明.md                    # 快速运行与故障排查
     演示手册.md                    # 控制台从初始状态开始的 5 分钟现场脚本
+    数据来源与合规说明.md          # 数据类型、来源、授权、脱敏、隐私和专业决策边界
+    验证交接手册.md / 真实数据验证手册.md
     requirements.txt / run_server.py
-    track2_v5/ track2_clean_bundle/ src/ web/ specs/ outputs/
+    track2_v5/ track2_clean_bundle/ src/ web/ specs/ outputs/ tests/
+  方案文档/
+    赛道二-升级方案-v17-决赛完整版.html   # 完整升级方案（算法 + Agent 架构 + D5–D7）
+    赛道二-项目方案-叙事版-v18.html      # 15 分钟汇报叙事版
 ```
 
 
@@ -236,10 +257,13 @@ ATT 汇总: naive 116.4 → 层级 119.4（真值 100，含实验噪声）
 | ν 退火扫参（对数网格 × 7 seeds） | 内点最优 / 默认值差距 / 全网格方向检出与 FP | 最优 ν=1400，默认 500 差距 12.1%，曲线平坦（<15%）；全网格 7/7 检出、FP=0，决策指标对 ν 不敏感——默认 500 为保守选择，线上由 PID 自适应 |
 | v3 隐藏基准（3 seeds / 9 cases） | 门禁准确率 / 错误因果断言率 / 拒答召回 | 1.00 / 0.00 / 1.00 |
 | 线 B 原型（5 seeds） | 未注册变动召回 / 外部对齐 / 未知诚实率 | 1.00 / 1.00 / 1.00 |
+| 决赛 D5 人在回路 | 确认/补充/反馈三类留证 / 预算校准三档 | 全通过（by_kind 计数、0.5/1.0/1.5 校准生效） |
+| 决赛 D6 技能自进化 | patch 无冲突合并 / 影子回放晋级 / 回滚 / 统计核心自改拦截 | 全通过（`SELF_MODIFICATION_FORBIDDEN` 生效） |
+| 决赛 D7 C 线主动盯防 | 埋针因子入 WATCHLIST / 噪声过滤 / 三杀证伪 | 埋针 driver 在 lag 2 入选；噪声被 MIN_STRENGTH 过滤；安慰剂/lead-lag 反转/半段符号三关生效 |
 
 证据文件（均在 `outputs/`）：`benchmark_metrics.json`、`demo_evidence.json`、`v3_caseC_bayes.json`、`T2-real-uci-bayes.json`、`lineB_baseline_attribution.json`、`lineB_association_discovery.json`、`lineB_rate_aware_rca.json`、`experience_ablation.json`、`nested_ablation_50seeds.json`、`external_event_mapping.json`、`offline_pid_ablation.json`、`nu_annealing_sweep.json`、`chat_demo_evidence.json`。
 
-文档归类：`方案文档/`（主方案、方法依据与借鉴边界、可行性验证报告）；`演示材料/`（方案介绍 HTML、答辩 PPT 工程）；`过程文档/`（评审纪要、实验复盘、历史修订稿等迭代记录，仅供溯源）。
+文档归类：方案文档见交付包根目录 `方案文档/`（v17 完整版 + v18 叙事版）；历史修订稿与评审纪要未纳入本包，仅供团队内部溯源。
 
 ## 7. 数据来源、授权与合规边界
 
@@ -295,10 +319,10 @@ ATT 汇总: naive 116.4 → 层级 119.4（真值 100，含实验噪声）
 
 | 阶段 | 内容 |
 |---|---|
-| M3（复赛） | v6.1 已完成：经验库持久层 + PID 自适应收缩 + Student-t 重尾似然 + 错配报警（消融见 §6）；下一步：PyMC 分层 Logistic / BART challenger 接入预留接口；RenderDiff 真实渲染快照接入；控制台线 B 月报 UI 面板；跨实验元分析 |
+| M3 | v6.1 已完成：经验库持久层 + PID 自适应收缩 + Student-t 重尾似然 + 错配报警（消融见 §6）；下一步：PyMC 分层 Logistic / BART challenger 接入预留接口；RenderDiff 真实渲染快照接入；控制台线 B 月报 UI 面板；跨实验元分析 |
 | M4 | 变动注册表对接真实发布系统（assignment_provenance）；序贯监测与护栏实时联动；贝叶斯结构时序用于外部因子强度估计 |
 | M5 | 多组件 Spec 模板库 + ModelScope/开源发布（许可证梳理后）；真实实验平台数据持续校准 |
 
 ## 11. 开放 / 复用计划
 
-可复用资产：`track2_v5` 方法包（numpy 单依赖）、Growth UI Spec 模板（specs/）、InsurSim-Carousel 脱敏数据生成器、贝叶斯评测 harness、示例输入输出与证据 JSON、方法文档（v6 方案 + 验证报告 + 答辩 QA）。复赛提交时整理为可访问仓库（许可证：代码 Apache-2.0 意向，文档 CC BY 4.0 意向，提交前完成依赖与许可证扫描）。
+可复用资产：`track2_v5` 方法包（numpy 单依赖）、Growth UI Spec 模板（specs/）、InsurSim-Carousel 脱敏数据生成器、贝叶斯评测 harness、示例输入输出与证据 JSON、方法文档（v6 方案 + 验证报告 + 答辩 QA）。决赛提交时整理为可访问仓库（许可证：代码 Apache-2.0 意向，文档 CC BY 4.0 意向，提交前完成依赖与许可证扫描）。

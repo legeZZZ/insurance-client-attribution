@@ -1,0 +1,106 @@
+{
+  "decision": "CRYSTALLIZE",
+  "suite_ref": "sha256:7dce958844100e04a07dec98b481ef5e72bd0064cc12a211f923ce1e98c96118",
+  "spec_digest": "sha256:d087a88ce5ee33d4ccb827f9d93f32cecc23765dcb4317fbf6bcd03c8c4b2427",
+  "passed": true,
+  "paired_gain": 1.0,
+  "critical_failures": [],
+  "pairs": [
+    {
+      "task_id": "metric_suite-10",
+      "data_ref": "sha256:ff51ae2d8959eae2aa0cb76a56aebbd69b54aeac9464f687ef34c2e63e60a753",
+      "critical": true,
+      "base": {
+        "operation": null,
+        "score": 0,
+        "replay": null
+      },
+      "candidate": {
+        "operation": "check_metric",
+        "score": 1,
+        "replay": {
+          "execution_status": "COMPLETED",
+          "binding": {
+            "task_id": "metric_suite-10",
+            "data_ref": "sha256:ff51ae2d8959eae2aa0cb76a56aebbd69b54aeac9464f687ef34c2e63e60a753",
+            "skill_ref": "sha256:d087a88ce5ee33d4ccb827f9d93f32cecc23765dcb4317fbf6bcd03c8c4b2427"
+          },
+          "operation": "check_metric",
+          "input_digest": "sha256:a44043414245ccb2fdd4b3d76a401152eae72766b22c0839aa592f241ddef5b2",
+          "result": {
+            "passed": true,
+            "claim_type": "DESCRIPTIVE_FACT",
+            "metric_digest": "sha256:b97fa39363df1bc40ee73878bc954708a7119e7e3ccf65c86614e6d7b75e3fb4"
+          },
+          "pid": 8656,
+          "guardrails": {
+            "no_code_execution": true,
+            "no_traffic_mutation": true,
+            "fresh_evidence_only": true,
+            "no_causal_without_identification": true
+          },
+          "digest": "sha256:5ba048de7738f696bc2619c0b99f71fb7d1840616f98c7481fca88300ba5144e",
+          "cost": {
+            "input_bytes": 552,
+            "output_bytes": 766,
+            "elapsed_seconds": 0.04032158299924049,
+            "model_tokens": 0
+          },
+          "worker_digest": "sha256:c5b1239b279aa8917c872d0a24668af7c401b58d0a40229bba67172cee9fd883"
+        }
+      }
+    },
+    {
+      "task_id": "metric_suite-11",
+      "data_ref": "sha256:6b3682172ead0ee81ee198940ba9b536b245e05aff5558782e26fc5ec2f329be",
+      "critical": true,
+      "base": {
+        "operation": null,
+        "score": 0,
+        "replay": null
+      },
+      "candidate": {
+        "operation": "check_metric",
+        "score": 1,
+        "replay": {
+          "execution_status": "COMPLETED",
+          "binding": {
+            "task_id": "metric_suite-11",
+            "data_ref": "sha256:6b3682172ead0ee81ee198940ba9b536b245e05aff5558782e26fc5ec2f329be",
+            "skill_ref": "sha256:d087a88ce5ee33d4ccb827f9d93f32cecc23765dcb4317fbf6bcd03c8c4b2427"
+          },
+          "operation": "check_metric",
+          "input_digest": "sha256:a84182c9a67e77beba233ffb544d611ec12f05dc3225cb36cad81c920305ad1a",
+          "result": {
+            "passed": true,
+            "claim_type": "DESCRIPTIVE_FACT",
+            "metric_digest": "sha256:6a2102d397277a046f8683b733c0cf83b73cfb332761690528e55136a7ac3943"
+          },
+          "pid": 8657,
+          "guardrails": {
+            "no_code_execution": true,
+            "no_traffic_mutation": true,
+            "fresh_evidence_only": true,
+            "no_causal_without_identification": true
+          },
+          "digest": "sha256:71e1efdfb0e6da65cf173207eafb901971d9265cd89c426cca374eae7c2f967d",
+          "cost": {
+            "input_bytes": 552,
+            "output_bytes": 766,
+            "elapsed_seconds": 0.03750450000006822,
+            "model_tokens": 0
+          },
+          "worker_digest": "sha256:2aadad8ae282145134914382f9770a052ff91ea5e2ddffe493bf72baa7e80028"
+        }
+      }
+    }
+  ],
+  "data_refs": [
+    "sha256:ff51ae2d8959eae2aa0cb76a56aebbd69b54aeac9464f687ef34c2e63e60a753",
+    "sha256:6b3682172ead0ee81ee198940ba9b536b245e05aff5558782e26fc5ec2f329be"
+  ],
+  "independent_task_refs": [
+    "metric_suite-10",
+    "metric_suite-11"
+  ]
+}

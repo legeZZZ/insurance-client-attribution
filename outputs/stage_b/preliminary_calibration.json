@@ -1,0 +1,38 @@
+{
+  "scope": "preliminary_probe_not_full_T32_acceptance",
+  "seeds": [
+    0,
+    99
+  ],
+  "repetitions": 100,
+  "hte": {
+    "population_effect": 0.1,
+    "predefined_subgroup": true,
+    "rows": 600,
+    "bias": -0.0010551769085771403,
+    "rmse": 0.043694274774259675,
+    "coverage": 0.97,
+    "coverage_wilson_95": [
+      0.915479219195973,
+      0.9897456617765851
+    ],
+    "mean_width": 0.19502381973672697
+  },
+  "confirmation": {
+    "null": "iid_gaussian_with_duplicate_factor",
+    "fwer": 0.0,
+    "fwer_wilson_95": [
+      0.0,
+      0.03699480747600191
+    ],
+    "bootstrap_reps": 99
+  },
+  "unverified": [
+    "serial_dependence",
+    "seasonality",
+    "heavy_tails",
+    "clustered_assignment",
+    "adaptive_subgroup_selection",
+    "full_causal_pipeline"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "track2_v5/rate_aware_rca.py": "5379ab116f0c6bac65e49b6b15b8187a9f7b8cd822c6b1eae979fd896817224c",
+  "track2_v5/risk_loc.py": "42810db8ac8c8a8dd8030904852394e895247544fb769c135dd57c60d65116f1",
+  "track2_v5/association_screen.py": "ea478fa94faf5d5a1b8f1a572e056e79e107fb78f7e2717b929051ccec58c802",
+  "track2_v5/association_discovery.py": "6955511ca6a7d3b624c84cb402c035ebb9d3798a43a2efae99748134be0e3673",
+  "track2_v5/temporal_shadow_stability.py": "b2bc6927a3410535b4f11af1a8bf914eea3b391e9f3ecc92297deea934bc4672",
+  "track2_v5/adapters.py": "858d74c1306effeb1599bb601353f74fb7fe7fca57e58980a705691bec22bd24",
+  "track2_v5/scenario_reports.py": "e470d0ca642bfb8748dd939874c33f90e4cf34ebc29e97a8d1a2043970566f9a",
+  "tests/test_stage_b_l0.py": "d7efbd8e70403be7c6fcd33a18e904e2eb0b36c62174decc0c608574333b5ecc",
+  "tests/test_association_screen.py": "7eeb3dc529fb55044056bf445e9ac6a9cc9e9ee0ffd032cf22cde9c52109924c",
+  "tests/test_risk_loc.py": "435772cff3c26db64455f36a6d173f75c7de25c0343ca5eaf38c45d4e2303e54",
+  "tests/test_temporal_shadow_stability.py": "cde9cd88710080ebf427845bc7809a663913201e7e59f7aafe8211345953d7e4",
+  "tools/compare_l0_localizers.py": "a84571964fe7fc1e734f1521dd7d26820c6dba039e71d1fa6cd18f11f1c13f1f",
+  "config.example.json": "2d361c54cf9fec259df4f0781736b1694ffa9e9afe3e016e4d4f31c6b8dfae0a"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "c",
+  "config": {
+    "input_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/chapter16/run-c27f392129/scan-input.json",
+    "interval_seconds": 60,
+    "max_staleness_seconds": 3600,
+    "test_budget": 30,
+    "lifetime_test_budget": 100000,
+    "timeout": 30,
+    "error_policy": "exploratory_only",
+    "total_alpha": 0.05,
+    "skill_name": null,
+    "skill_context": {},
+    "factor_db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/chapter16/run-c27f392129/factors.db"
+  },
+  "enabled": 0,
+  "watermark": null,
+  "next_due": 0.0,
+  "runs": []
+}

@@ -1,0 +1,24 @@
+{
+  "results": [
+    {
+      "alert_id": "sha256:b1e463db57fb56dd75d42739b670ae1577c2756d52333e71782986d8fbddb789",
+      "raw_pvalue": 0.005,
+      "correlation": 0.9871285116682458,
+      "reason_codes": [],
+      "adjusted_pvalue": 0.005,
+      "claim_type": "FACTOR_CANDIDATE",
+      "confirmed": true
+    }
+  ],
+  "alpha": 0.025,
+  "correction": "holm",
+  "family_digest": "sha256:1a9d8347f2fa3d3e26a840c62975c5890b1d0222720e17e863965dae4ecee028",
+  "window": [
+    90,
+    169
+  ],
+  "inference": "independent_frozen_family_empirical_block_null",
+  "causal_eligible": false,
+  "tests_charged": 1,
+  "error_policy": "summable_alpha_spending_conditional_on_valid_null_pvalues"
+}

@@ -1,0 +1,9 @@
+{
+  "status": "RELEASED",
+  "name": "metric_skill",
+  "version": 1,
+  "approval_ref": "sha256:9f9c6913abf5449b3ac0062d8160e14ffa2914f9a7c7f4b6b02702e9dceab16a",
+  "fraction": 1,
+  "effective_window": 3,
+  "canary_passed": true
+}

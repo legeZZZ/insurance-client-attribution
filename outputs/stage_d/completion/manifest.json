@@ -1,0 +1,93 @@
+{
+  "stage": "D",
+  "status": "COMPLETE",
+  "tasks": [
+    "T23",
+    "T24",
+    "T25",
+    "T26",
+    "T27",
+    "T28"
+  ],
+  "tests": 214,
+  "stage_tests": 28,
+  "seconds": 59.413,
+  "cli_cases": 55,
+  "seed_cases": 120,
+  "acceptance_sha256": "cfb6a0d0b591909454b051dc14717f0ea67fe8fd3062eadf8317be7cca4227b0",
+  "files": [
+    {
+      "path": "可执行代码包/track2_v5/skill_governance.py",
+      "sha256": "9f47dd9ee0d89550e3d7477460e6b956cddb54550b4e50bcadbdf47143bad08b"
+    },
+    {
+      "path": "可执行代码包/track2_v5/skill_replay.py",
+      "sha256": "7ca9292ad2d10bb0534477dd651064d774e1ab4acc148193fab44ba44eb361fa"
+    },
+    {
+      "path": "可执行代码包/track2_v5/skill_worker.py",
+      "sha256": "7ae69f7fcf7c00b9341334c9b110ce744a641057935888761082598176f3e489"
+    },
+    {
+      "path": "可执行代码包/track2_v5/skill_evolution.py",
+      "sha256": "1f423a82a2664a38849aee941f37f36310c8f4eabfe9123a01d30b22891bd507"
+    },
+    {
+      "path": "可执行代码包/track2_v5/experience_store.py",
+      "sha256": "72151898b4c698457f7c28fcb78b97471b09d6f1f8c1365ee889a24446168ebb"
+    },
+    {
+      "path": "可执行代码包/track2_v5/human_feedback.py",
+      "sha256": "b8ca4b8baf911f2448888c54b20fccf7792a24c3d224d67bb8c408bffc685496"
+    },
+    {
+      "path": "可执行代码包/track2_v5/feedback_service.py",
+      "sha256": "abfb9d889dc67674bfe072f6d233ce0be97161a18e4c1f551f53dca1152892f8"
+    },
+    {
+      "path": "可执行代码包/track2_v5/watchlist_scan.py",
+      "sha256": "24560052bb800b00158caef892b6132ace3b2c4dff13f301f36b7d1f93b0dbf9"
+    },
+    {
+      "path": "可执行代码包/track2_v5/scan_service.py",
+      "sha256": "c9b226bbfef592c2c21826b4e65864d7e6235ce033fa55e4db853443a778719b"
+    },
+    {
+      "path": "可执行代码包/track2_v5/scan_worker.py",
+      "sha256": "955dafd98289d9793fff185159e3c0bde690a5c3a10709739dfd251c882813fa"
+    },
+    {
+      "path": "可执行代码包/track2_v5/evolution_api.py",
+      "sha256": "408852a1a074897eadc97845f1528af222e4982e26cc673359804e0a0cde5bd3"
+    },
+    {
+      "path": "可执行代码包/tools/run_causal_pipeline.py",
+      "sha256": "66a9daa032a4f21cf1a437d0eeb25fa0aa924b10fafe578a0c7afb8e306013df"
+    },
+    {
+      "path": "可执行代码包/tools/check_stage_d_acceptance.py",
+      "sha256": "c0ee9dfee3f5b9cd668445589a4b7972d198960bd4c819b5663b115032562d52"
+    },
+    {
+      "path": "可执行代码包/tests/test_stage_d.py",
+      "sha256": "89c68d64ed5fcc0da8ca0e00981783f22d537c07b3737fcf799af001ada1f82f"
+    },
+    {
+      "path": "可执行代码包/因果流水线接口说明.md",
+      "sha256": "a5ca19e1033061de25c32b51440d29eef954e593c13d621a4d01a11df1f20a3c"
+    },
+    {
+      "path": "阶段实施记录.md",
+      "sha256": "47304809a0903e76e5c466be5696e8025dc2ebb5b9b26a676386a4d85353a2c4"
+    },
+    {
+      "path": "审阅问题清单-修改前.md",
+      "sha256": "4bde7b1bafd0221bad8e3ce763413e2d9ba3ce471f0931b0ae3776f45acd0b94"
+    },
+    {
+      "path": "方案文档/赛道二-升级方案-v17-决赛完整版.html",
+      "sha256": "4cb3bae73e237adad71b1d95ec07e492e753c58d931353cb7fd1150333325993"
+    }
+  ],
+  "snapshot_note": "阶段D完成时快照；后续阶段允许继续修改文件与累计日志"
+}

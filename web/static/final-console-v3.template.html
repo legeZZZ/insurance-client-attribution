@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOAI 经营归因 Agent | 决赛控制台 v3</title>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<style>
+/* 设计令牌逐字复刻 semifinal-demo.html */
+:root {
+  --bg: #eef3f5;   --paper: #ffffff;  --ink: #10242d;   --muted: #647680;
+  --line: #d9e3e6; --nav: #0c1c25;    --nav-2: #102936;
+  --cyan: #00a8a8; --cyan-soft: #e4f7f5;
+  --blue: #1774c7; --blue-soft: #e8f2fc;
+  --gold: #b57d13; --gold-soft: #fff5dc;
+  --red: #c14643;  --red-soft: #fff0ee;
+  --green: #16875f;--green-soft: #e7f7ef;
+  --shadow: 0 12px 28px rgba(20, 43, 55, .08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font:14px/1.55 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink)}
+code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+button{font:inherit;cursor:pointer}
+input,select,textarea{font:inherit}
+
+/* 外壳：左侧 rail + 右侧 workspace（复刻 semifinal） */
+.app{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh}
+.rail{background:var(--nav);color:#cfe4ea;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.rail .brand{padding:22px 22px 18px;border-bottom:1px solid rgba(125,194,207,.14)}
+.rail .brand b{display:block;font-size:15px;color:#eafcff;letter-spacing:.5px}
+.rail .brand span{font-size:11px;color:#7fa5b0;font-family:ui-monospace,Menlo,monospace}
+.rail nav{flex:1;padding:14px 12px;overflow:auto}
+.rail nav a{display:flex;align-items:center;gap:10px;padding:11px 12px;color:#a9c6cf;text-decoration:none;border-left:3px solid transparent;font-size:13px;position:relative}
+.rail nav a .idx{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#5f8791;width:20px}
+.rail nav a.active{background:var(--nav-2);color:#eafcff;border-left-color:var(--cyan)}
+.rail nav a:hover{background:var(--nav-2)}
+.nav-badge{margin-left:auto;min-width:20px;text-align:center;font-size:11px;font-weight:700;padding:1px 6px;border-radius:999px;font-family:ui-monospace,Menlo,monospace}
+.nav-badge.red{background:var(--red);color:#fff}
+.nav-badge.gold{background:var(--gold);color:#fff}
+.rail .foot{padding:14px 22px;border-top:1px solid rgba(125,194,207,.14);font-size:11px;color:#7fa5b0;font-family:ui-monospace,Menlo,monospace;line-height:1.8}
+.workspace{min-width:0;display:flex;flex-direction:column}
+.topbar{height:66px;background:var(--paper);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 26px;position:sticky;top:0;z-index:30}
+.topbar .crumb{font-size:14px;font-weight:600}
+.topbar .crumb span{color:var(--muted);font-weight:400}
+.topbar .right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.mode-badge{font-family:ui-monospace,Menlo,monospace;font-size:11px;padding:3px 10px;border:1px solid;border-radius:999px;font-weight:600}
+.mode-badge.online{color:var(--green);background:var(--green-soft);border-color:#c2e6d4}
+.mode-badge.offline{color:var(--gold);background:var(--gold-soft);border-color:#ecd9a8}
+#operator-input{width:150px;padding:6px 10px;border:1px solid var(--line);background:#f7fafb;font-size:12px}
+#operator-input:focus{outline:2px solid var(--cyan-soft);border-color:var(--cyan)}
+.stage{max-width:1440px;width:100%;margin:0 auto;padding:22px 26px 60px}
+.view{display:none}
+.view.active{display:block}
+
+/* 全局预警条 */
+#alert-strip{margin:0 26px;margin-top:16px;border:1px solid;padding:10px 16px;display:flex;align-items:center;gap:14px;font-size:13px;background:var(--paper);box-shadow:var(--shadow)}
+#alert-strip.calm{border-color:#c2e6d4;background:var(--green-soft);color:var(--green)}
+#alert-strip.alarmed{border-color:#ecc9c7;background:var(--red-soft);color:var(--ink);cursor:pointer}
+#alert-strip .cnt{font-weight:700;font-family:ui-monospace,Menlo,monospace}
+#alert-strip .cnt.red{color:var(--red)}#alert-strip .cnt.gold{color:var(--gold)}
+#alert-strip .latest{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+#alert-strip .go{color:var(--cyan);font-weight:600;white-space:nowrap}
+#offline-strip{margin:6px 26px 0;padding:9px 16px;border:1px solid #ecd9a8;background:var(--gold-soft);color:#7a5c10;font-size:12px;display:none}
+#offline-strip.show{display:block}
+#offline-strip code{background:rgba(255,255,255,.6)}
+
+.cc-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:14px}
+.metric-card{background:var(--cc-panel);border:1px solid var(--cc-line);border-top:3px solid var(--cc-cyan);padding:12px 16px;cursor:pointer;transition:box-shadow .2s}
+.metric-card:hover{box-shadow:0 0 24px rgba(87,228,208,.13)}
+.metric-card.on{border-color:var(--cc-cyan);box-shadow:0 0 24px rgba(87,228,208,.2)}
+.metric-card .m-name{font-size:13.5px;color:#eafcff;font-weight:600}
+.metric-card .m-change{font-size:20px;font-family:ui-monospace,Menlo,monospace;color:var(--cc-cyan);margin:2px 0}
+.metric-card .m-status{font-size:11px;color:var(--cc-orange)}
+.metric-card .m-meta{font-size:11px;color:var(--cc-muted);margin-top:4px;font-family:ui-monospace,Menlo,monospace}
+/* 深色指挥中心（复刻 semifinal 的 cc 体系） */
+.command-center{--cc-bg:#07131d;--cc-panel:rgba(10,28,41,.86);--cc-panel-2:rgba(12,35,50,.74);--cc-line:rgba(125,194,207,.18);--cc-text:#e5f8f8;--cc-muted:#86a9b3;--cc-cyan:#57e4d0;--cc-blue:#5da7ff;--cc-purple:#9c8cff;--cc-orange:#ffb765;--cc-red:#ff7772;--cc-green:#73ff9f;background:var(--cc-bg);color:var(--cc-text);padding:26px 28px 34px;position:relative}
+.command-center:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(125,194,207,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(125,194,207,.05) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;-webkit-mask-image:radial-gradient(ellipse at 30% 20%,#000 30%,transparent 75%);mask-image:radial-gradient(ellipse at 30% 20%,#000 30%,transparent 75%)}
+.command-center>*{position:relative}
+.cc-head{display:flex;align-items:baseline;gap:16px;margin-bottom:18px}
+.cc-head h2{font-size:19px;letter-spacing:1px;color:#eafcff}
+.cc-head .sub{color:var(--cc-muted);font-size:12px;font-family:ui-monospace,Menlo,monospace}
+.cc-head .clock{margin-left:auto;font-family:ui-monospace,Menlo,monospace;color:var(--cc-cyan);font-size:13px}
+.cc-panel{background:var(--cc-panel);border:1px solid var(--cc-line);padding:16px 18px}
+.cc-panel h3{font-size:12px;letter-spacing:1.5px;color:var(--cc-muted);font-weight:600;margin-bottom:12px;text-transform:uppercase}
+.cc-kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:14px}
+.kpi-card{background:var(--cc-panel);border:1px solid var(--cc-line);border-top:3px solid var(--cc-blue);padding:12px 14px}
+.kpi-card .v{font-size:24px;font-family:ui-monospace,Menlo,monospace;color:#eafcff}
+.kpi-card .l{font-size:11px;color:var(--cc-muted);margin-top:2px}
+.kpi-card.cyan{border-top-color:var(--cc-cyan)}.kpi-card.gold{border-top-color:var(--cc-orange)}.kpi-card.red{border-top-color:var(--cc-red)}.kpi-card.green{border-top-color:var(--cc-green)}
+.cc-main{display:grid;grid-template-columns:1.55fr .75fr;gap:14px;margin-bottom:14px}
+.cc-network{position:relative;min-height:470px;padding:0}
+#globe-stage{position:absolute;inset:0}
+#globe-stage canvas{display:block}
+.net-label{position:absolute;transform:translate(-50%,-130%);font-size:10px;font-family:ui-monospace,Menlo,monospace;color:var(--cc-muted);pointer-events:none;white-space:nowrap}
+#globe-tooltip{position:absolute;display:none;background:rgba(4,14,20,.94);border:1px solid var(--cc-line);padding:10px 12px;font-size:12px;max-width:280px;pointer-events:none;z-index:5;line-height:1.6}
+#globe-tooltip b{color:var(--cc-cyan);display:block;margin-bottom:2px}
+.net-legend{position:absolute;left:16px;bottom:12px;display:flex;gap:14px;font-size:11px;color:var(--cc-muted)}
+.net-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+.sig-list .sig{display:flex;gap:10px;padding:10px 0;border-bottom:1px dashed var(--cc-line);font-size:12.5px;align-items:flex-start}
+.sig-list .sig:last-child{border-bottom:none}
+.sig-list .dot{width:8px;height:8px;border-radius:50%;margin-top:5px;flex:none}
+.sig-list .sig b{color:#eafcff}
+.sig-list .sig .meta{color:var(--cc-muted);font-size:11px;font-family:ui-monospace,Menlo,monospace}
+.sig-list .sig .jump{margin-left:auto;color:var(--cc-cyan);font-size:11px;cursor:pointer;white-space:nowrap}
+.cc-flow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:14px}
+.cc-step{background:var(--cc-panel-2);border:1px solid var(--cc-line);padding:10px 12px;font-size:11px}
+.cc-step .no{font-family:ui-monospace,Menlo,monospace;color:var(--cc-muted);font-size:10px}
+.cc-step b{display:block;color:#d5eef0;font-size:12px;margin:2px 0}
+.cc-step.done{border-top:2px solid var(--cc-cyan)}
+.cc-step.active{border-top:2px solid var(--cc-orange);box-shadow:0 0 24px rgba(87,228,208,.13)}
+.cc-lower{display:grid;grid-template-columns:1.08fr .92fr;gap:14px}
+.log-stream{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;line-height:2;max-height:220px;overflow:auto}
+.log-stream .t{color:var(--cc-muted);margin-right:8px}
+.note-card{border:1px solid var(--cc-line);border-left:3px solid var(--cc-blue);padding:10px 12px;margin-bottom:10px;font-size:12px;background:var(--cc-panel-2)}
+.note-card b{color:#eafcff;display:block;margin-bottom:2px}
+.note-card.cyan{border-left-color:var(--cc-cyan)}.note-card.gold{border-left-color:var(--cc-orange)}.note-card.green{border-left-color:var(--cc-green)}
+.cc-foot{margin-top:16px;padding-top:10px;border-top:1px dashed var(--cc-line);color:var(--cc-muted);font-size:11px;font-family:ui-monospace,Menlo,monospace}
+
+/* 浅色区通用组件 */
+.card{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);padding:18px 22px;margin-bottom:14px}
+.card h3{font-size:15px;margin-bottom:12px}
+.pill{display:inline-block;padding:1px 10px;font-size:11px;border:1px solid;border-radius:999px;font-weight:600}
+.pill.cyan{color:var(--cyan);background:var(--cyan-soft);border-color:#bfe6e4}
+.pill.blue{color:var(--blue);background:var(--blue-soft);border-color:#c4dcf2}
+.pill.gold{color:var(--gold);background:var(--gold-soft);border-color:#ecd9a8}
+.pill.red{color:var(--red);background:var(--red-soft);border-color:#ecc9c7}
+.pill.green{color:var(--green);background:var(--green-soft);border-color:#c2e6d4}
+.pill.violet{color:#6b5ce7;background:#efedfd;border-color:#d6cff8}
+.btn{padding:6px 14px;border:1px solid var(--cyan);background:var(--cyan);color:#fff;font-size:12px;font-weight:600}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:#fff;color:var(--cyan)}
+.btn.danger{background:var(--red);border-color:var(--red)}
+.btn.warn{background:var(--gold);border-color:var(--gold)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.small{padding:3px 10px;font-size:11px}
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.chip{padding:4px 12px;border:1px solid var(--line);background:#fff;font-size:12px;color:var(--muted);border-radius:999px;cursor:pointer}
+.chip.on{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-soft);font-weight:600}
+
+/* 预警卡 */
+.alert-card{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);padding:16px 20px;margin-bottom:12px;border-left:4px solid var(--gold)}
+.alert-card.high{border-left-color:var(--red)}
+.alert-card .head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.alert-card .head b{font-size:15px}
+.alert-card .row{font-size:13px;margin:6px 0;color:#28414c}
+.alert-card .row b{color:var(--ink)}
+.alert-card .basis{background:#f7fafb;border:1px solid var(--line);padding:10px 12px;font-size:12px;margin:8px 0;line-height:1.7}
+.alert-card .ops{display:flex;gap:8px;margin-top:10px;align-items:center;flex-wrap:wrap}
+.alert-card .state-tag{margin-left:auto;font-size:11px;color:var(--muted);font-family:ui-monospace,Menlo,monospace}
+.spark{width:220px;height:44px;display:block}
+.falsify{font-size:12px;color:var(--muted);margin-top:6px}
+.falsify .pass{color:var(--green)}.falsify .fail{color:var(--red)}
+.jump-link{color:var(--cyan);cursor:pointer;font-size:12px;font-weight:600}
+
+/* 待办看板 */
+.todo-flow{display:flex;gap:0;margin-bottom:18px}
+.todo-flow .node{flex:1;background:var(--paper);border:1px solid var(--line);padding:12px 14px;position:relative;text-align:center}
+.todo-flow .node+.node{border-left:none}
+.todo-flow .node+.node:before{content:"→";position:absolute;left:-7px;top:38%;background:var(--bg);color:var(--muted);font-size:12px;z-index:2}
+.todo-flow .node b{font-size:13px;display:block}
+.todo-flow .node .cnt{font-family:ui-monospace,Menlo,monospace;font-size:20px;font-weight:700;margin-top:4px}
+.todo-flow .node.has{border-top:3px solid var(--cyan);box-shadow:0 0 24px rgba(0,168,168,.12)}
+.todo-flow .node .cnt.zero{color:#b9c8cd}
+.todo-group{margin-bottom:18px}
+.todo-group>h3{font-size:13px;color:var(--muted);letter-spacing:1px;margin-bottom:8px}
+.todo-item{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);padding:12px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px}
+.todo-item .info{flex:1;min-width:0}
+.todo-item .info b{font-size:13.5px}
+.todo-item .info .meta{font-size:11.5px;color:var(--muted);font-family:ui-monospace,Menlo,monospace;margin-top:2px}
+/* 详情滑出面板 */
+#drawer-mask{position:fixed;inset:0;background:rgba(12,28,37,.45);display:none;z-index:40}
+#drawer{position:fixed;top:0;right:0;bottom:0;width:520px;max-width:92vw;background:var(--bg);border-left:1px solid var(--line);box-shadow:-16px 0 40px rgba(20,43,55,.2);z-index:41;display:none;overflow:auto;padding:24px 26px}
+#drawer.open,#drawer-mask.open{display:block}
+#drawer h3{font-size:16px;margin-bottom:4px}
+#drawer .close{position:absolute;top:14px;right:16px;border:none;background:none;font-size:18px;color:var(--muted)}
+.rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.rule{border:1px solid;padding:10px 12px;font-size:12px;line-height:1.7}
+.rule.can{border-color:#c2e6d4;background:var(--green-soft)}
+.rule.cannot{border-color:#ecc9c7;background:var(--red-soft)}
+.rule b{display:block;margin-bottom:3px;font-size:12px}
+.rule.can b{color:var(--green)}.rule.cannot b{color:var(--red)}
+.evidence-box{background:#fff;border:1px solid var(--line);padding:12px 14px;font-size:12.5px;margin:10px 0;line-height:1.8}
+#drawer label{display:block;font-size:12px;color:var(--muted);margin:10px 0 4px}
+#drawer input,#drawer select,#drawer textarea{width:100%;padding:8px 10px;border:1px solid var(--line);background:#fff;font-size:13px}
+#drawer .ops{display:flex;gap:8px;margin-top:16px}
+.toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%);background:var(--nav);color:#eafcff;padding:10px 18px;font-size:13px;z-index:60;box-shadow:var(--shadow);display:none;max-width:80vw}
+.toast.err{background:var(--red)}
+
+/* 因子库卡片网格（复刻 cc-library-grid 语义） */
+.library-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.library-card{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);padding:14px 16px 12px 18px;position:relative;border-left:3px solid var(--blue);cursor:default}
+.library-card.external{border-left-color:#6b5ce7}
+.library-card.unknown{border-left-color:var(--gold)}
+.library-card.research{border-left-color:#94a8b0;border-style:dashed;background:#fafcfd}
+.library-card.verified:after{content:"";position:absolute;top:10px;right:10px;width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px var(--green-soft)}
+.library-card b{font-size:13px;display:block;margin-bottom:3px;padding-right:16px}
+.library-card .fid{font-size:10.5px;color:var(--muted);font-family:ui-monospace,Menlo,monospace;word-break:break-all}
+.library-card .tags{margin:7px 0;display:flex;gap:5px;flex-wrap:wrap}
+.library-card .strength{height:5px;background:#e7eef0;margin-top:8px}
+.library-card .strength i{display:block;height:100%;background:var(--cyan)}
+.library-card .sl{font-size:10.5px;color:var(--muted);margin-top:4px;display:flex;justify-content:space-between;font-family:ui-monospace,Menlo,monospace}
+.library-card.alerted{border-left-color:var(--red)}
+.plan-panel{margin-bottom:12px}
+.plan-frame{width:100%;height:72vh;border:1px solid var(--line);border-radius:10px;background:#fff;display:block}
+.library-card.alerted:before{content:"⚠";position:absolute;top:8px;right:26px;color:var(--red);font-size:13px}
+
+/* 因子管理表 */
+table.full{width:100%;border-collapse:collapse;font-size:12.5px;background:var(--paper)}
+table.full th,table.full td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.full th{background:#f4f8f9;font-weight:600;white-space:nowrap}
+.st-ok{color:var(--green);font-weight:600}.st-off{color:var(--muted)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+.form-grid .full-row{grid-column:1/-1}
+.card label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+.card input,.card select,.card textarea{width:100%;padding:8px 10px;border:1px solid var(--line);background:#fff;font-size:13px}
+
+/* 自进化时间线 */
+.skill-card{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);padding:16px 20px;margin-bottom:12px}
+.skill-card .head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.skill-card .head b{font-size:15px}
+.stage-bar{display:flex;gap:0;margin:10px 0}
+.stage-bar .st{flex:1;text-align:center;font-size:11px;padding:7px 4px;border:1px solid var(--line);color:var(--muted);background:#f7fafb}
+.stage-bar .st+.st{border-left:none}
+.stage-bar .st.hit{background:var(--cyan-soft);color:var(--cyan);border-color:#bfe6e4;font-weight:700}
+.stage-bar .st.now{background:var(--gold-soft);color:var(--gold);border-color:#ecd9a8;font-weight:700}
+.timeline{font-size:12.5px;line-height:2}
+.timeline .t{color:var(--muted);font-family:ui-monospace,Menlo,monospace;margin-right:8px;font-size:11px}
+.neg-item{border:1px solid #ecc9c7;background:var(--red-soft);padding:9px 12px;margin-bottom:8px;font-size:12.5px}
+.bound-item{border:1px solid var(--line);background:#f7fafb;padding:9px 12px;margin-bottom:8px;font-size:12.5px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+@media (max-width:1100px){.library-grid{grid-template-columns:repeat(2,1fr)}.cc-kpis{grid-template-columns:repeat(3,1fr)}.cc-main,.cc-lower,.two-col{grid-template-columns:1fr}.cc-flow{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:780px){.app{grid-template-columns:1fr}.rail{position:static;height:auto}.rail nav{display:flex;flex-wrap:wrap}.library-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="rail">
+    <div class="brand"><b>经营归因 Agent</b><span>决赛控制台 · v3.0</span></div>
+    <nav id="rail-nav">
+      <a data-view="overview" class="active"><span class="idx">01</span>归因总控</a>
+      <a data-view="alerts"><span class="idx">02</span>风险预警<span class="nav-badge red" id="nb-alerts" style="display:none"></span></a>
+      <a data-view="todo"><span class="idx">03</span>待办看板<span class="nav-badge gold" id="nb-todo" style="display:none"></span></a>
+      <a data-view="library"><span class="idx">04</span>因子库</a>
+      <a data-view="manage"><span class="idx">05</span>因子管理</a>
+      <a data-view="evolution"><span class="idx">06</span>自进化与证据</a>
+    </nav>
+    <div class="foot" id="rail-foot">本地脱敏数据回放 · 可复现</div>
+  </aside>
+  <div class="workspace">
+    <div class="topbar">
+      <div class="crumb">控制台 <span id="crumb">/ 归因总控</span></div>
+      <div class="right">
+        <input id="operator-input" placeholder="操作人（留痕必填）" title="所有人工操作都会以该身份留痕">
+        <span class="mode-badge offline" id="mode-badge">检测中…</span>
+      </div>
+    </div>
+    <div id="alert-strip" class="calm">检测预警状态…</div>
+    <div id="offline-strip">当前为离线回放：数据是真实管线输出快照；页面内操作仅本地留痕（浏览器 localStorage + 页内台账），<b>未提交治理层</b>。要真实执行（审批落库、反馈持久化、审计日志），在代码包目录执行 <code>.venv/bin/python tools/seed_console_v2.py</code> 后 <code>npm run dev</code>。</div>
+    <main class="stage">
+      <section class="view active" id="view-overview"></section>
+      <section class="view" id="view-alerts"></section>
+      <section class="view" id="view-todo"></section>
+      <section class="view" id="view-library"></section>
+      <section class="view" id="view-manage"></section>
+      <section class="view" id="view-evolution"></section>
+    </main>
+  </div>
+</div>
+<div id="drawer-mask"></div>
+<div id="drawer"><button class="close" onclick="closeDrawer()">✕</button><div id="drawer-body"></div></div>
+<div class="toast" id="toast"></div>
+<script>
+/* ================= 数据层：双模式 ================= */
+const INLINE = /*__V3_INLINE__*/null;
+const LS_LEDGER = 't2_v3_ledger';
+const LS_OPERATOR = 't2_v3_operator';
+let MODE = 'offline';           // 'service' | 'offline'
+let D = null;                   // 归一化数据
+let CURRENT = 'overview';
+let globeApi = null;
+
+const ENDPOINTS = ['overview','factors','watchlist','alerts','conflicts','skills','evidence','factors/ledger','feedback/queue'];
+
+async function fetchAll(){
+  const keys = ['overview','factors','watchlist','alerts','conflicts','skills','evidence','ledger','queue'];
+  const res = await Promise.all(ENDPOINTS.map(e=>fetch('/api/v2/'+e,{cache:'no-store'}).then(r=>r.json())));
+  const out = {}; keys.forEach((k,i)=>out[k]=res[i]);
+  out.bline_candidates = [];
+  try{ const r = await fetch('/api/track2/scenario-run?scenario=line_b',{cache:'no-store'}); const j = await r.json();
+       const cands = (((j||{}).key_outputs||{}).association_discovery||{}).candidates || [];
+       out.bline_candidates = cands.slice().sort((a,b)=>Math.abs(b.alignment_score||b.association_score||0)-Math.abs(a.alignment_score||a.association_score||0)).slice(0,40)
+         .map(c=>({factor_id:c.factor_id, derived_feature_id:c.derived_feature_id||c.factor_id+(c.start_day!=null?'@'+c.start_day:''), derived_layer:c.derived_layer, kind:c.kind==='internal_event'||c.kind==='release_audit'?'internal':'external', claim_type:c.claim_type||'TEMPORAL_ASSOCIATION', association_score:c.alignment_score||c.association_score||0, lag_days:c.distance_days, license_ref:c.license_ref})); }catch(e){}
+  return out;
+}
+
+function ledger(){ try{return JSON.parse(localStorage.getItem(LS_LEDGER)||'[]')}catch(e){return[]} }
+function pushLedger(entry){ const l=ledger(); l.push({...entry, at:new Date().toISOString()}); localStorage.setItem(LS_LEDGER, JSON.stringify(l)); }
+function operator(){ const v=document.getElementById('operator-input').value.trim(); if(!v){ toast('请先填写右上角「操作人」，所有人工操作需要留痕身份', true); throw new Error('operator required'); } return v; }
+function rid(){ return 'v3-'+Date.now()+'-'+Math.random().toString(36).slice(2,8); }
+function toast(msg, err){ const t=document.getElementById('toast'); t.textContent=msg; t.className='toast'+(err?' err':''); t.style.display='block'; clearTimeout(t._tm); t._tm=setTimeout(()=>t.style.display='none', 3600); }
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function pct(x){ return Math.round(Math.abs(x||0)*100)+'%'; }
+function zhDir(d){ return d==='positive'?'正向':d==='negative'?'负向':(d||'—'); }
+const KIND_LABEL = {internal_event:'内部事件', external_event:'外部事件', factor_series:'因子序列', operator_entry:'人工补录', internal_registry:'内部登记', public_monitor:'公开监测', 'operator-entry':'人工补录'};
+
+/* 归一化：把 snapshot / live 统一成页面模型 */
+function normalize(raw){
+  const alerts = (raw.alerts&&raw.alerts.alerts)||[];
+  const factors = (raw.factors&&raw.factors.factors)||[];
+  const wl = (raw.watchlist&&raw.watchlist.items)||[];
+  const skills = (raw.skills&&raw.skills.skills)||[];
+  const releases = (raw.skills&&raw.skills.releases)||[];
+  const conflicts = (raw.conflicts&&raw.conflicts.conflicts)||[];
+  const bline = raw.bline_candidates||[];
+
+  // 因子库卡片：registry 因子 + B 线候选合并去重
+  const cards = [];
+  const seen = new Set();
+  const alertFactor = new Set(alerts.filter(a=>a.level==='high'&&a.state.status==='open').map(a=>a.factor_id));
+  factors.forEach(f=>{
+    seen.add(f.factor_id);
+    const research = f.status==='research_candidate' || f.kind==='research_candidate';
+    const verified = !research && f.claim_type==='FACTOR_CANDIDATE';
+    const route = research ? 'research'
+                : f.kind==='internal_event'||f.source_type==='internal_registry' ? 'internal'
+                : f.source_type==='operator-entry'||f.kind==='operator_entry' ? 'internal'
+                : 'external';
+    cards.push({ fid:f.factor_id, name:f.name||f.factor_id, route,
+      status: research?'research':(f.status==='disabled'?'disabled':(verified?'verified':(f.strength!=null?'watch':'candidate'))),
+      claim: research?'研究候选':(f.claim_type||'—'), strength:f.strength, lag:f.lag,
+      src: f.source_type, license:f.license_ref, evidence_count:f.evidence_count||0,
+      family:f.family, priority:f.priority, formula:f.formula, data_source:f.data_source,
+      alerted: alertFactor.has(f.factor_id) });
+  });
+  bline.forEach(c=>{
+    const cid = c.derived_feature_id || c.factor_id;
+    if(seen.has(cid)) return; seen.add(cid);
+    const route = c.kind==='internal'?'internal':(c.kind==='external'?'external':'unknown');
+    cards.push({ fid:cid, name:zhName(cid), route, status:'candidate',
+      claim:c.claim_type||'FACTOR_CANDIDATE', strength:Math.abs(c.association_score||0),
+      lag:c.lag_days, src:'B线候选挖掘', license:c.license_ref, evidence_count:0,
+      layer:c.derived_layer, alerted:false });
+  });
+  // 本地离线新增的因子
+  ledger().filter(e=>e.type==='factor_create').forEach(e=>{
+    if(seen.has(e.factor.factor_id)) return; seen.add(e.factor.factor_id);
+    cards.push({ fid:e.factor.factor_id, name:e.factor.name, route:'internal', status:'candidate',
+      claim:'OPERATOR_ENTRY', strength:null, lag:null, src:'operator-entry(本地)',
+      license:'内部登记', evidence_count:0, alerted:false, local:true });
+  });
+  // 离线停用状态
+  const localStatus = {};
+  ledger().filter(e=>e.type==='factor_status').forEach(e=>localStatus[e.factor_id]=e.status);
+  cards.forEach(c=>{ if(localStatus[c.fid]) c.status = localStatus[c.fid]==='disabled'?'disabled':c.status; });
+
+  return { alerts, factors, wl, skills, releases, conflicts, cards,
+           evidence: raw.evidence||{}, overview: raw.overview||{},
+           metrics: (raw.overview&&raw.overview.metrics)||[],
+           queue: (raw.queue&&raw.queue.queue)||[], recent:(raw.queue&&raw.queue.recent)||[],
+           versions:(raw.ledger&&raw.ledger.ledger)||[],
+           skillsSuiteRef: (raw.skills&&raw.skills.demo_suite_ref)||'' };
+}
+
+/* 待办装配：四类节点 */
+function buildTodos(){
+  const done = new Set(ledger().filter(e=>e.type==='todo_done').map(e=>e.key));
+  const t = {1:[],2:[],3:[],4:[]};
+  D.wl.forEach(w=>{ if(w.claim_type!=='FACTOR_CANDIDATE' && !w.feedback_label)
+    t[1].push({key:'cand-'+w.alert_id, title:w.factor_id+' · lag '+w.lag,
+      meta:'相关 '+pct(w.correlation)+' · '+w.claim_type+' · 校正p '+(w.adjusted_pvalue??'—'), data:w}); });
+  D.conflicts.forEach(c=>{ if(c.status==='open')
+    t[2].push({key:'conf-'+c.id, title:c.title, meta:c.lines.join('/')+' 线 · '+c.status, data:c}); });
+  D.skills.forEach(s=>{
+    const st = s.trust_state;
+    if(st==='validated' || (s.validated && st!=='published' && st!=='approved'))
+      t[3].push({key:'skill-'+s.name, title:'技能 '+s.name+' v'+s.version+' 已验证，待审批发布', meta:'trust: '+st, data:s});
+    else if(st==='provisional')
+      t[3].push({key:'skill-'+s.name, title:'技能 '+s.name+' v'+s.version+' 提案待评审', meta:'trust: provisional', data:s});
+  });
+  const localAlert = new Set(ledger().filter(e=>e.type==='alert_action').map(e=>e.alert_id));
+  D.alerts.forEach(a=>{ if(a.state.status==='open' && !localAlert.has(a.alert_id))
+    t[4].push({key:'fb-'+a.alert_id, title:'预警「'+a.title+'」待标注价值', meta:a.level==='high'?'高风险':'关注', data:a}); });
+  [1,2,3,4].forEach(k=>{ t[k]=t[k].filter(x=>!done.has(x.key)); });
+  return t;
+}
+
+/* ================= 动作层：双模式 ================= */
+async function act(endpoint, body, offlineEntry, doneMsg){
+  body.request_id = rid();
+  if(MODE==='service'){
+    const r = await fetch('/api/v2/'+endpoint, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
+    const j = await r.json();
+    if(!r.ok || j.error){ toast(j.error||'操作被拒绝', true); return false; }
+    toast(j.note||doneMsg||'已提交治理层');
+    await reload(); return true;
+  }
+  pushLedger({...offlineEntry, request_id:body.request_id, operator:body.operator});
+  toast((doneMsg||'已记录')+'（离线：未提交治理层）');
+  if(offlineEntry && offlineEntry.type==='todo_done'){}
+  await reload(); return true;
+}
+async function reload(){
+  if(MODE==='service'){ D = normalize(await fetchAll()); }
+  else { D = normalize(INLINE); }
+  renderAll();
+}
+
+/* ================= 导航与全局预警条 ================= */
+const VIEW_NAMES = {overview:'归因总控', alerts:'风险预警', todo:'待办看板', library:'因子库', manage:'因子管理', evolution:'自进化与证据'};
+function showView(name){
+  CURRENT = name;
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active', v.id==='view-'+name));
+  document.querySelectorAll('#rail-nav a').forEach(a=>a.classList.toggle('active', a.dataset.view===name));
+  document.getElementById('crumb').textContent = '/ '+VIEW_NAMES[name];
+  if(location.hash !== '#'+name) history.replaceState(null,'','#'+name);
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('#rail-nav a').forEach(a=>a.addEventListener('click', ()=>showView(a.dataset.view)));
+
+function renderStrip(){
+  const strip = document.getElementById('alert-strip');
+  const open = D.alerts.filter(a=>a.state.status==='open');
+  const high = open.filter(a=>a.level==='high'), watch = open.filter(a=>a.level!=='high');
+  const nbA = document.getElementById('nb-alerts');
+  if(high.length){ nbA.style.display=''; nbA.textContent=high.length; } else nbA.style.display='none';
+  const todos = buildTodos(); const todoCnt = tAll(todos).length;
+  const nbT = document.getElementById('nb-todo');
+  if(todoCnt){ nbT.style.display=''; nbT.textContent=todoCnt; } else nbT.style.display='none';
+  if(!open.length){
+    strip.className='calm';
+    strip.innerHTML='✓ 当前无待处置风险 · C 线盯防中（盯防信号 '+D.wl.length+' 条）';
+    return;
+  }
+  strip.className='alarmed';
+  const latest = open[0];
+  strip.innerHTML = '<span class="cnt red">⚠ '+high.length+' 条高风险</span><span class="cnt gold">'+watch.length+' 条关注</span>'
+    + '<span class="latest">最近：'+esc(latest.title)+' — '+esc(latest.impact||'')+'</span>'
+    + '<span class="go">进入预警中心 →</span>';
+  strip.onclick = ()=>showView('alerts');
+}
+function tAll(t){ return [...t[1],...t[2],...t[3],...t[4]]; }
+</script>
+<script>
+/* ================= 01 归因总控 ================= */
+const ZH_NAME = {'campaign.sms_push':'短信触达','channel.feed_ad':'信息流投放','competitor.delisting':'竞品下架','market.noise_index':'大盘噪声指数','homepage.carousel_exposure':'首页轮播曝光','external.fx_rate_usd_cny':'美元兑人民币汇率','internal.checkout_error_rate':'结算错误率','internal.page_latency_p95':'页面延迟P95','external.competitor_pressure_index':'竞品压力指数','internal.audit.unregistered_release':'未登记发布动作','internal.payment_gateway_maintenance':'支付网关维护','internal.vendor.sms_provider_switch':'短信服务商切换','internal.pricing_rule_hotfix':'定价规则热修','internal.underwriting_rule_queue_change':'核保规则变更','quality.tracking_schema_gap':'埋点Schema缺口','external.competitor_price_drop':'竞品降价','external.aggregator_homepage_slot_loss':'聚合平台首页位丢失','external.broker_affiliate_push':'经纪联盟推送','external.market_rate_announcement':'市场利率公告','external.competitor_campaign':'竞品营销活动','external.negative_review_wave':'差评潮','internal.form_validation_error_rate':'表单校验错误率','internal.quote_form_step_count':'报价表单步数','internal.premium_quote_cache_miss_rate':'保费报价缓存未命中','internal.esign_redirect_exit_rate':'电签跳转退出率','internal.price_explanation_view_gap_rate':'价格说明查看缺口','internal.app_crash_rate':'App崩溃率','quality.tracking_gap_rate':'埋点缺口率','internal.channel_bid_cpc':'渠道出价CPC','external.regulatory_notice_density':'监管公告密度'};
+const ZH_LAYER = {level:'水平',velocity:'增速',acceleration:'加速度'};
+function zhName(fid){
+  let base=String(fid).split('@')[0], layer='';
+  const m = base.match(/\.(level|velocity|acceleration)$/);
+  if(m){ layer='·'+ZH_LAYER[m[1]]; base=base.slice(0,-m[0].length); }
+  if(ZH_NAME[base]) return ZH_NAME[base]+layer;
+  const card = (D&&D.cards||[]).find(c=>c.fid===fid);
+  if(card && /[一-龥]/.test(card.name)) return card.name;
+  return '未登记因子·'+base.split('.').pop()+layer;
+}
+function renderOverview(){
+  const el = document.getElementById('view-overview');
+  const open = D.alerts.filter(a=>a.state.status==='open');
+  const high = open.filter(a=>a.level==='high').length;
+  const todos = tAll(buildTodos()).length;
+  const verified = D.cards.filter(c=>c.status==='verified').length;
+  const kpis = [
+    {v:D.wl.length, l:'C 线盯防信号', cls:'cyan'},
+    {v:high, l:'高风险预警', cls:high?'red':'cyan'},
+    {v:todos, l:'待办（人在回路）', cls:todos?'gold':'cyan'},
+    {v:verified, l:'已验证因子', cls:'green'},
+    {v:D.skills.length, l:'治理中技能', cls:''},
+  ];
+  const recentStream = buildStream();
+  el.innerHTML = `
+  <div class="command-center">
+    <div class="cc-head"><h2>归因总控 · 因子证据球</h2>
+      <span class="sub">异动指标 × 关联因子 × 置信度 · ${MODE==='service'?'HTTP 实机管线':'本地脱敏数据回放'}</span>
+      <span class="clock" id="cc-clock"></span></div>
+    <div class="cc-kpis">${kpis.map(k=>`<div class="kpi-card ${k.cls}"><div class="v">${k.v}</div><div class="l">${k.l}</div></div>`).join('')}</div>
+    <div class="cc-metrics" id="cc-metrics"></div>
+    <div class="cc-main">
+      <div class="cc-panel cc-network"><h3>证据关系图 · 青色环=异动指标 · 边：绿粗=因果已确认 / 青实=关联已验证 / 蓝实=A/B 验证中 / 金虚=算法可疑待确认 / 紫虚=外部时间关联 · 线框小节点=导数派生值（增速/加速度）· 点因子可跳转</h3>
+        <div id="globe-stage"></div><div id="globe-tooltip"></div>
+      </div>
+      <div class="cc-panel"><h3>待复核清单</h3><div class="sig-list" id="sig-list"></div></div>
+    </div>
+    <div class="cc-lower">
+      <div class="cc-panel"><h3>Event Stream</h3><div class="log-stream">${recentStream}</div></div>
+      <div class="cc-panel"><h3>Decision Surface</h3>
+        <div class="note-card green"><b>已验证</b>${esc((D.cards.find(c=>c.status==='verified')||{}).name||'—')} · 独立窗口确认，进入因子库绿环</div>
+        <div class="note-card gold"><b>未知量保留</b>未解释残差桶保留，不强行归因（UNEXPLAINED 是证据状态，不是失败）</div>
+        <div class="note-card cyan"><b>建议动作</b>${esc((D.alerts.find(a=>a.state.status==='open')||{}).suggestion||'当前无待处置建议')}</div>
+        <div class="note-card"><b>口径</b>统计口径与负结果见「06 自进化与证据」</div>
+      </div>
+    </div>
+    <div class="cc-foot">EVIDENCE BOUNDARY · 无随机化证据只输出关联级结论 · 反馈不自动晋升任何结论</div>
+  </div>`;
+  renderMetricsBoard();
+  renderSigList();
+  initGlobe();
+  if(!window._clock){ window._clock=setInterval(()=>{ const c=document.getElementById('cc-clock'); if(c) c.textContent=new Date().toLocaleString('zh-CN',{hour12:false}); },1000); }
+}
+let SELECTED_METRIC = null;
+function renderMetricsBoard(){
+  const el = document.getElementById('cc-metrics'); if(!el) return;
+  el.innerHTML = (D.metrics||[]).map(m=>`
+    <div class="metric-card ${SELECTED_METRIC===m.id?'on':''}" onclick="selectMetric('${m.id}')">
+      <div class="m-name">${esc(m.name)}</div>
+      <div class="m-change">${esc(m.change)}</div>
+      <div class="m-status">${esc(m.status)}</div>
+      <div class="m-meta">关联因子 ${(m.factors||[]).length} 个 · ${esc(m.window||'')}</div>
+    </div>`).join('');
+}
+function selectMetric(id){
+  SELECTED_METRIC = SELECTED_METRIC===id ? null : id;
+  renderMetricsBoard();
+  if(globeApi && globeApi.selectMetric) globeApi.selectMetric(SELECTED_METRIC);
+}
+function renderSigList(){
+  const el = document.getElementById('sig-list'); if(!el) return;
+  const rows = [];
+  D.alerts.filter(a=>a.state.status==='open').forEach(a=>{
+    rows.push({color:a.level==='high'?'#ff7772':'#ffb765', title:a.title,
+      meta:(a.type==='conflict'?'冲突预警':'趋势预警')+(a.correlation!=null?' · 相关 '+pct(a.correlation):''),
+      jump:"openAlertFromGlobe('"+a.alert_id+"')"});
+  });
+  D.wl.filter(w=>w.claim_type!=='FACTOR_CANDIDATE').slice(0,3).forEach(w=>{
+    rows.push({color:'#5da7ff', title:w.factor_id+' · lag '+w.lag, meta:'盯防中 · 相关 '+pct(w.correlation),
+      jump:"showView('todo')"});
+  });
+  el.innerHTML = rows.map(r=>`<div class="sig"><span class="dot" style="background:${r.color}"></span>
+    <div><b>${esc(r.title)}</b><div class="meta">${esc(r.meta)}</div></div>
+    <span class="jump" onclick="${r.jump}">处理 →</span></div>`).join('')
+    || '<div class="sig"><div style="color:var(--cc-muted)">无待复核事项</div></div>';
+}
+function buildStream(){
+  const evts = [];
+  (D.recent||[]).slice(0,6).forEach(e=>{ const p=(e.payload||{}); evts.push({t:(e.at||'').slice(5,16)||'—', s:'人工反馈 · '+(p.alert_id||p.factor_id||'')+' · '+(p.label||p.action||'')}); });
+  D.releases.slice(0,4).forEach(r=>evts.push({t:'治理', s:'技能 '+(r.name||'')+' · '+(r.action||r.kind||'release')}));
+  evts.push({t:'管线', s:'C 线扫描完成 · 盯防 '+D.wl.length+' 条'});
+  evts.push({t:'管线', s:'独立窗口确认完成 · 已验证 '+D.cards.filter(c=>c.status==='verified').length+' 条'});
+  ledger().slice(-5).forEach(l=>evts.push({t:'本地', s:'离线留痕 · '+(l.type||'')+' · '+(l.operator||'')}));
+  return evts.map(e=>`<div><span class="t">${esc(e.t)}</span>${esc(e.s)}</div>`).join('');
+}
+
+/* ================= 3D 证据球（复刻 semifinal 架构 + 2D fallback） ================= */
+const CLAIM_ZH = {CAUSAL_CONFIRMED:'因果已确认（A 线实验）', FACTOR_CANDIDATE:'关联已验证（独立窗口确认）', WATCHLIST:'算法可疑 · 待人工确认', AB_TESTING:'A/B 验证中', TEMPORAL_ASSOCIATION:'外部时间关联'};
+const CLAIM_EDGE = {CAUSAL_CONFIRMED:'causal', FACTOR_CANDIDATE:'assoc', WATCHLIST:'watch', AB_TESTING:'abtest', TEMPORAL_ASSOCIATION:'temporal'};
+function globeData(){
+  /* 结构 = 异动指标（中心层）↔ 因子（球壳层），边 = 管线输出的归因关联 */
+  const metrics = (D.metrics && D.metrics.length ? D.metrics
+    : [{id:'residual', name:'残余异动（未解释成分）', factors:[]}]);
+  const alertFids = new Set(D.alerts.filter(a=>a.level==='high'&&a.state.status==='open').map(a=>a.factor_id));
+  const nodes=[], edges=[], fseen=new Set();
+  metrics.forEach((m,i)=> nodes.push({id:'metric:'+m.id, label:m.name, kind:'metric', mi:i}));
+  metrics.forEach(m=> (m.factors||[]).forEach(l=>{
+    const derived = l.layer && l.layer!=='level';
+    edges.push({a:'metric:'+m.id, b:l.factor_id, metric:m.id,
+      strength:l.strength, lag:l.lag, claim:l.claim, layer:l.layer||'level',
+      style: CLAIM_EDGE[l.claim]||'watch'});
+    if(!fseen.has(l.factor_id+(l.layer||''))){ fseen.add(l.factor_id+(l.layer||''));
+      const card = D.cards.find(c=>c.fid===l.factor_id);
+      nodes.push({id:l.factor_id, label:zhName(l.factor_id)+(derived?'·'+ZH_LAYER[l.layer]:''),
+        fid:l.factor_id,
+        kind: alertFids.has(l.factor_id)?'alerted':(l.claim==='CAUSAL_CONFIRMED'||l.claim==='FACTOR_CANDIDATE'?'verified':((card&&card.route)||'internal')),
+        derived: !!derived, strength:l.strength, lag:l.lag, claim:l.claim, idx:nodes.length});
+    }
+  }));
+  nodes.push({id:'unknown', label:'未解释残差', kind:'unknown', idx:nodes.length});
+  edges.push({a:'metric:'+metrics[0].id, b:'unknown', metric:metrics[0].id, style:'temporal'});
+  return {nodes, edges};
+}
+const NODE_COLOR = {metric:0x57e4d0, internal:0x5da7ff, external:0x9c8cff, unknown:0xffb765, verified:0x73ff9f, alerted:0xff7772};
+const EDGE_COLOR = {assoc:0x57e4d0, watch:0xffb765, abtest:0x5da7ff, temporal:0x9c8cff, causal:0x73ff9f};
+
+function initGlobe(){
+  const stage = document.getElementById('globe-stage');
+  if(!stage) return;
+  stage.innerHTML='';
+  document.querySelectorAll('.net-label').forEach(n=>n.remove());
+  const {nodes, edges} = globeData();
+  if(window.THREE){ try{ globeApi = initGlobe3D(stage, nodes, edges); return; }catch(e){} }
+  globeApi = initGlobe2D(stage, nodes, edges);
+}
+
+function metricPos(n, count){
+  /* 异动指标放中心层：单指标居中，多指标沿纵向排开 */
+  if(count===1) return new THREE.Vector3(0,0,0);
+  return new THREE.Vector3(0, (n.mi-(count-1)/2)*1.05, 0);
+}
+
+function initGlobe3D(stage, nodes, edges){
+  const W = stage.clientWidth||600, H = stage.clientHeight||470;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(34, W/H, .1, 100); camera.position.set(0,.2,7.6);
+  const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+  renderer.setSize(W,H); renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  stage.appendChild(renderer.domElement);
+  scene.add(new THREE.LineSegments(new THREE.WireframeGeometry(new THREE.SphereGeometry(2.35,24,16)), new THREE.LineBasicMaterial({color:0x3b8b99,transparent:true,opacity:.13})));
+  scene.add(new THREE.LineSegments(new THREE.WireframeGeometry(new THREE.SphereGeometry(2.52,24,16)), new THREE.LineBasicMaterial({color:0x57e4d0,transparent:true,opacity:.04})));
+  const metricCount = nodes.filter(n=>n.kind==='metric').length;
+  const outers = nodes.filter(n=>n.kind!=='metric');
+  const meshes = {}; const labels=[];
+  nodes.forEach(n=>{
+    if(n.kind==='metric'){
+      const m = new THREE.Mesh(new THREE.IcosahedronGeometry(.24,0), new THREE.MeshBasicMaterial({color:0x57e4d0,wireframe:true}));
+      m.position.copy(metricPos(n, metricCount)); scene.add(m);
+      const core = new THREE.Mesh(new THREE.IcosahedronGeometry(.1,0), new THREE.MeshBasicMaterial({color:0x57e4d0}));
+      core.position.copy(m.position); scene.add(core);
+      meshes[n.id]={m, core, base:.24, n};
+    } else {
+      const i = n.idx, total = outers.length;
+      let pos;
+      if(n.kind==='unknown') pos = new THREE.Vector3(0,-2.1,0);
+      else { const phi = Math.acos(1-2*(i+.5)/total), theta = Math.PI*(1+Math.sqrt(5))*i;
+        pos = new THREE.Vector3(2.35*Math.sin(phi)*Math.cos(theta), 2.35*Math.cos(phi)*.8, 2.35*Math.sin(phi)*Math.sin(theta)); }
+      const size = (.06 + Math.min(.08, (n.strength||0)*.09)) * (n.derived? .7 : 1);
+      const m = new THREE.Mesh(new THREE.IcosahedronGeometry(size,0),
+        new THREE.MeshBasicMaterial({color:NODE_COLOR[n.kind]||0x5da7ff, wireframe:!!n.derived}));
+      m.position.copy(pos); scene.add(m);
+      const hit = new THREE.Mesh(new THREE.SphereGeometry(.22,8,8), new THREE.MeshBasicMaterial({visible:false}));
+      hit.position.copy(pos); scene.add(hit); hit.userData.node=n;
+      const pack = {m, hit, base:size, n};
+      if(n.kind==='alerted'||n.kind==='verified'){
+        const ring = new THREE.Mesh(new THREE.TorusGeometry(size+.06,.012,8,32),
+          new THREE.MeshBasicMaterial({color:n.kind==='alerted'?0xff7772:0x73ff9f, transparent:true, opacity:.85}));
+        ring.position.copy(pos); scene.add(ring); pack.ring=ring;
+      }
+      meshes[n.id]=pack;
+    }
+    const div = document.createElement('div'); div.className='net-label';
+    if(n.kind==='metric'){ div.style.color='#57e4d0'; div.style.fontWeight='700'; }
+    div.textContent=n.label; stage.parentElement.appendChild(div); labels.push({div, pack:meshes[n.id]});
+  });
+  /* 边：因子 ↔ 异动指标；线型 = 关联等级，粗细/透明度 = 关联强度 */
+  const edgeObjs = [];
+  edges.forEach(e=>{
+    const A=meshes[e.a], B=meshes[e.b]; if(!A||!B) return;
+    const rec = {metric:e.metric, objs:[]};
+    if(e.style==='causal' || e.style==='assoc' || e.style==='abtest'){
+      const r = e.style==='causal' ? .012+.02*(e.strength||.5) : .006+.012*(e.strength||.3);
+      const tube = new THREE.Mesh(new THREE.TubeGeometry(new THREE.LineCurve3(A.m.position,B.m.position),1,r,6),
+        new THREE.MeshBasicMaterial({color:EDGE_COLOR[e.style],transparent:true,opacity:e.style==='causal'?.9:.75}));
+      scene.add(tube); rec.objs.push(tube);
+    } else {
+      const g = new THREE.BufferGeometry().setFromPoints([A.m.position, B.m.position]);
+      const mat = new THREE.LineDashedMaterial({color:EDGE_COLOR[e.style], dashSize:.08, gapSize:.06, transparent:true, opacity:.3+.5*(e.strength||0)});
+      const line = new THREE.Line(g, mat); line.computeLineDistances(); scene.add(line); rec.objs.push(line);
+    }
+    edgeObjs.push(rec);
+  });
+  let tx=0, ty=0, drag=false, px=0, py=0;
+  const ray = new THREE.Raycaster(); const mv = new THREE.Vector2();
+  const tip = document.getElementById('globe-tooltip');
+  stage.addEventListener('pointerdown', e=>{drag=true;px=e.clientX;py=e.clientY;});
+  addEventListener('pointerup', ()=>drag=false);
+  stage.addEventListener('pointermove', e=>{
+    const r = stage.getBoundingClientRect();
+    if(drag){ tx += (e.clientX-px)*.005; ty += (e.clientY-py)*.005; px=e.clientX; py=e.clientY; }
+    mv.x = ((e.clientX-r.left)/r.width)*2-1; mv.y = -((e.clientY-r.top)/r.height)*2+1;
+    ray.setFromCamera(mv, camera);
+    const hits = ray.intersectObjects(Object.values(meshes).map(p=>p.hit).filter(Boolean));
+    if(hits.length){
+      const n = hits[0].object.userData.node;
+      tip.style.display='block'; tip.style.left=(e.clientX-r.left+14)+'px'; tip.style.top=(e.clientY-r.top+10)+'px';
+      tip.innerHTML = '<b>'+esc(n.label)+'</b>'
+        +(n.kind==='metric'?'异动指标 · 点击左侧指标卡可聚焦'
+          :esc(CLAIM_ZH[n.claim]||'候选')+(n.derived?' · 导数派生值':' · 因子本体')
+          +(n.kind==='alerted'?'<br><span style="color:#ff7772">⚠ 高风险预警中</span>':''))
+        +(n.strength!=null?'<br>与异动指标关联强度：'+pct(n.strength):'')+(n.lag!=null?' · lag '+n.lag:'')
+        +(n.kind==='metric'?'':n.claim==='WATCHLIST'?'<br><span style="color:var(--cc-cyan)">点击去待办看板确认</span>':n.kind!=='unknown'?'<br><span style="color:var(--cc-cyan)">点击跳转因子库</span>':'');
+      stage.style.cursor='pointer';
+    } else { tip.style.display='none'; stage.style.cursor='grab'; }
+  });
+  stage.addEventListener('click', ()=>{
+    ray.setFromCamera(mv, camera);
+    const hits = ray.intersectObjects(Object.values(meshes).map(p=>p.hit).filter(Boolean));
+    if(hits.length){ const n=hits[0].object.userData.node;
+      if(n.kind==='alerted'){ openAlertFromGlobe(n.id); }
+      else if(n.claim==='WATCHLIST'){ showView('todo'); }
+      else if(n.kind!=='unknown'&&n.kind!=='metric'){ showView('library'); focusFactor(n.fid||n.id); } }
+  });
+  const t0 = performance.now();
+  (function anim(){
+    if(!stage.isConnected) return;
+    requestAnimationFrame(anim);
+    const t=(performance.now()-t0)/1000;
+    if(!drag) ty += .0019;
+    scene.rotation.y += (ty-scene.rotation.y)*.045;
+    scene.rotation.x += (tx*.4-scene.rotation.x)*.045;
+    Object.values(meshes).forEach(p=>{
+      if(p.n.kind==='metric'){ p.m.rotation.y += .01; if(p.core) p.core.rotation.y -= .014; return; }
+      p.m.scale.setScalar(1+Math.sin(t*2+p.m.position.x)*.05);
+      if(p.ring){ p.ring.lookAt(camera.position); p.ring.scale.setScalar(1+Math.sin(t*3)*.12); }
+    });
+    labels.forEach(({div, pack})=>{
+      const v = pack.m.position.clone().applyMatrix4(scene.matrixWorld).project(camera);
+      const front = v.z<1;
+      div.style.display = front?'':'none';
+      div.style.left = ((v.x*.5+.5)*W)+'px'; div.style.top = ((-v.y*.5+.5)*H+46)+'px';
+    });
+    renderer.render(scene, camera);
+  })();
+  return { selectMetric(mid){
+    Object.values(meshes).forEach(p=>{
+      const dim = mid && p.n.kind!=='metric' && !edges.some(e=>e.metric===mid && e.b===p.n.id);
+      const dimM = mid && p.n.kind==='metric' && p.n.id!=='metric:'+mid;
+      const op = (dim||dimM)? .12 : 1;
+      p.m.material.opacity = op; p.m.material.transparent = true;
+      if(p.core){ p.core.material.opacity=op; p.core.material.transparent=true; }
+      if(p.ring){ p.ring.material.opacity = (dim||dimM)? .1 : .85; }
+    });
+    edgeObjs.forEach(rec=> rec.objs.forEach(o=>{ o.material.opacity = (!mid||rec.metric===mid)? (o.material.dashSize?.8:.9) : .06; }));
+  } };
+}
+
+function initGlobe2D(stage, nodes, edges){
+  const W = stage.clientWidth||600, H = stage.clientHeight||470;
+  const cv = document.createElement('canvas'); cv.width=W*2; cv.height=H*2; cv.style.width=W+'px'; cv.style.height=H+'px';
+  stage.appendChild(cv);
+  const ctx = cv.getContext('2d'); ctx.scale(2,2);
+  const CSS_COLOR = {metric:'#57e4d0', internal:'#5da7ff', external:'#9c8cff', unknown:'#ffb765', verified:'#73ff9f', alerted:'#ff7772'};
+  const metricCount = nodes.filter(n=>n.kind==='metric').length;
+  const outers = nodes.filter(n=>n.kind!=='metric');
+  const pts = {};
+  nodes.forEach(n=>{
+    if(n.kind==='metric'){ pts[n.id]={n, x:0, y:metricCount===1?0:(n.mi-(metricCount-1)/2)*.52, z:0}; return; }
+    if(n.kind==='unknown'){ pts[n.id]={n, x:0, y:.92, z:0}; return; }
+    const i=n.idx, total=outers.length;
+    const phi=Math.acos(1-2*(i+.5)/total), theta=Math.PI*(1+Math.sqrt(5))*i;
+    pts[n.id]={n, x:Math.sin(phi)*Math.cos(theta), y:Math.cos(phi)*.8, z:Math.sin(phi)*Math.sin(theta)};
+  });
+  let spin=0, dimMetric=null;
+  (function anim(){
+    if(!cv.isConnected) return;
+    requestAnimationFrame(anim); spin+=.008;
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle='rgba(59,139,153,.25)'; ctx.beginPath(); ctx.arc(W/2,H/2,H*.38,0,7); ctx.stroke();
+    const proj={};
+    Object.values(pts).forEach(p=>{
+      const x=p.x*Math.cos(spin)-p.z*Math.sin(spin), z=p.x*Math.sin(spin)+p.z*Math.cos(spin);
+      proj[p.n.id]={...p, sx:W/2+x*H*.38, sy:H/2+p.y*H*.38, depth:z};
+    });
+    edges.forEach(e=>{
+      const A=proj[e.a],B=proj[e.b]; if(!A||!B) return;
+      const dim = dimMetric && e.metric!==dimMetric;
+      ctx.globalAlpha = dim? .06 : (e.style==='causal'? .95 : .3+.5*(e.strength||0));
+      ctx.strokeStyle = e.style==='causal'?'#73ff9f':e.style==='assoc'?'#57e4d0':e.style==='abtest'?'#5da7ff':e.style==='watch'?'#ffb765':'#9c8cff';
+      ctx.lineWidth = e.style==='causal'? 2.5 : e.style==='assoc'||e.style==='abtest'? 1.6 : 1;
+      ctx.setLineDash(e.style==='watch'||e.style==='temporal'?[4,3]:[]);
+      ctx.beginPath(); ctx.moveTo(A.sx,A.sy); ctx.lineTo(B.sx,B.sy); ctx.stroke();
+    });
+    ctx.setLineDash([]); ctx.lineWidth=1; ctx.globalAlpha=1;
+    Object.values(proj).forEach(p=>{
+      const linked = !dimMetric || p.n.kind==='metric' && ('metric:'+dimMetric)===p.n.id || edges.some(e=>e.metric===dimMetric && e.b===p.n.id);
+      const r = p.n.kind==='metric'?11:4+Math.min(6,(p.n.strength||0)*6);
+      ctx.globalAlpha = (p.depth>0?.95:.35) * (dimMetric&&!linked? .15:1);
+      if(p.n.kind==='metric'){ ctx.strokeStyle='#57e4d0'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.arc(p.sx,p.sy,r,0,7); ctx.stroke();
+        ctx.fillStyle='#57e4d0'; ctx.beginPath(); ctx.arc(p.sx,p.sy,4,0,7); ctx.fill(); }
+      else { const rr = p.n.derived? r*.7 : r;
+        if(p.n.derived){ ctx.strokeStyle = CSS_COLOR[p.n.kind]||'#5da7ff'; ctx.beginPath(); ctx.arc(p.sx,p.sy,rr,0,7); ctx.stroke(); }
+        else { ctx.fillStyle = CSS_COLOR[p.n.kind]||'#5da7ff'; ctx.beginPath(); ctx.arc(p.sx,p.sy,rr,0,7); ctx.fill(); }
+        if(p.n.kind==='alerted'||p.n.kind==='verified'){ ctx.strokeStyle=CSS_COLOR[p.n.kind]; ctx.beginPath(); ctx.arc(p.sx,p.sy,rr+4,0,7); ctx.stroke(); } }
+      if(p.depth>0){ ctx.fillStyle=p.n.kind==='metric'?'#57e4d0':'#86a9b3'; ctx.font=(p.n.kind==='metric'?'bold ':'')+'10px Menlo'; ctx.textAlign='center'; ctx.fillText(p.n.label, p.sx, p.sy-r-6); }
+      ctx.globalAlpha=1;
+    });
+  })();
+  return { selectMetric(mid){ dimMetric = mid; } };
+}
+function openAlertFromGlobe(fidOrAlert){
+  const a = D.alerts.find(x=>x.alert_id===fidOrAlert) || D.alerts.find(x=>x.factor_id===fidOrAlert);
+  showView('alerts');
+  if(a) setTimeout(()=>{ const el=document.getElementById('alert-'+a.alert_id); if(el){ el.scrollIntoView({block:'center'}); el.style.outline='2px solid var(--red)'; setTimeout(()=>el.style.outline='',1800); } },60);
+}
+function focusFactor(fid){
+  setTimeout(()=>{ const el=document.getElementById('fcard-'+CSS.escape(fid)); if(el){ el.scrollIntoView({block:'center'}); el.style.outline='2px solid var(--cyan)'; setTimeout(()=>el.style.outline='',1800); } },60);
+}
+</script>
+<script>
+/* ================= 02 风险预警中心 ================= */
+let ALERT_FILTER = 'all';
+const STATUS_ZH = {open:'待确认', confirmed:'已确认·待处置', adopted:'处置中', closed:'已闭环', dismissed:'误报'};
+function renderAlerts(){
+  const el = document.getElementById('view-alerts');
+  const chips = [['all','全部'],['high','⚠ 高风险'],['watch','关注'],['doing','处置中'],['done','已闭环/误报']];
+  let list = D.alerts.slice();
+  if(ALERT_FILTER==='high') list=list.filter(a=>a.level==='high');
+  if(ALERT_FILTER==='watch') list=list.filter(a=>a.level==='watch');
+  if(ALERT_FILTER==='doing') list=list.filter(a=>['confirmed','adopted'].includes(a.state.status));
+  if(ALERT_FILTER==='done') list=list.filter(a=>['closed','dismissed'].includes(a.state.status));
+  // 本地离线状态覆盖
+  const local = {}; ledger().filter(e=>e.type==='alert_action').forEach(e=>local[e.alert_id]=e);
+  list = list.map(a=> local[a.alert_id] ? {...a, state:{status:({confirm:'confirmed',adopt:'adopted',close:'closed',dismiss:'dismissed'})[local[a.alert_id].action]||'open', reason:local[a.alert_id].reason, operator:local[a.alert_id].operator, local:true}} : a);
+
+  el.innerHTML = `
+  <div class="card"><h3>风险预警中心 · C 线主动盯防</h3>
+    <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px">预警两类来源：<b>趋势预警</b>（盯防信号关联强度越阈值：≥55% 高风险 / ≥30% 关注）与 <b>冲突预警</b>（当前配置违背已验证归因结论）。同一信号 24h 冷却不重复刷屏。反馈与标注<b>不自动晋升任何统计结论</b>。</div>
+    <div class="filter-bar">${chips.map(c=>`<span class="chip ${ALERT_FILTER===c[0]?'on':''}" onclick="ALERT_FILTER='${c[0]}';renderAlerts()">${c[1]}</span>`).join('')}</div>
+  </div>
+  <div id="alert-list">${list.map(renderAlertCard).join('')||'<div class="card" style="color:var(--muted)">该分类下暂无预警</div>'}</div>
+  <div class="card"><h3>盯防区（未到预警阈值，值得瞄一眼）</h3>
+    ${D.wl.filter(w=>Math.abs(w.correlation)<0.3 && w.claim_type!=='FACTOR_CANDIDATE').map(w=>`
+      <div style="display:flex;gap:12px;font-size:12.5px;padding:7px 0;border-bottom:1px dashed var(--line)">
+        <b style="min-width:220px">${esc(w.factor_id)} · lag ${w.lag}</b>
+        <span class="mono" style="color:var(--muted)">相关 ${pct(w.correlation)} · 距关注阈值还差 ${Math.max(0,Math.round((0.3-Math.abs(w.correlation))*100))} pct</span>
+      </div>`).join('')||'<div style="color:var(--muted);font-size:12.5px">无</div>'}
+  </div>`;
+  list.forEach(a=>{ if(a.trend) drawSpark('spark-'+a.alert_id, a.trend); });
+}
+
+function renderAlertCard(a){
+  const st = a.state.status;
+  const lvlPill = a.level==='high' ? '<span class="pill red">⚠ 高风险</span>' : '<span class="pill gold">关注</span>';
+  const typePill = a.type==='conflict' ? '<span class="pill violet">冲突预警 · 违背已验证结论</span>' : '<span class="pill blue">趋势预警</span>';
+  let ops = '';
+  if(st==='open') ops = `<button class="btn small" onclick="alertAct('${a.alert_id}','confirm')">确认风险</button>
+    <button class="btn small danger" onclick="alertDismiss('${a.alert_id}')">误报</button>`;
+  else if(st==='confirmed') ops = `<button class="btn small" onclick="alertAct('${a.alert_id}','adopt')">采纳建议 → 处置中</button>`;
+  else if(st==='adopted') ops = `<button class="btn small ghost" onclick="alertAct('${a.alert_id}','close')">效果回看完成 → 闭环</button>`;
+  const stateNote = st!=='open' ? `<span class="state-tag">${STATUS_ZH[st]}${a.state.operator?' · '+esc(a.state.operator):''}${a.state.reason?' · '+esc(a.state.reason):''}${a.state.local?' · 本地留痕':''}</span>` : '';
+  const conflictJump = a.type==='conflict' ? `<div class="row">依据结论：<span class="jump-link" onclick="showView('library');focusFactor('${esc(a.factor_id)}')">${esc(a.conclusion.name)} → ${esc(a.conclusion.metric)}（已验证，方向${zhDir(a.conclusion.direction)}）→ 因子库查看</span></div>` : '';
+  let falsify = '';
+  if(a.falsification){
+    const f=a.falsification;
+    const gate=(label, obj, detail)=>{
+      if(!obj) return `<span class="pass">✓ ${label}</span>`;
+      if(obj.applicable===false||obj.skipped) return `<span style="color:var(--muted)">— ${label}（不适用）</span>`;
+      return obj.kill?`<span class="fail">✗ ${label}（击杀）</span>`:`<span class="pass">✓ ${label}${detail||''}</span>`;};
+    falsify = `<div class="falsify">三杀证伪：${gate('安慰剂', f.placebo, f.placebo?`（安慰剂相关 ${(f.placebo.correlation||0).toFixed(2)}，覆盖 ${(f.placebo.coverage||0).toFixed(2)}）`:'')}
+      ${gate('先后倒置', f.lead_lag_reversal, f.lead_lag_reversal?`（倒置后相关 ${(f.lead_lag_reversal.correlation||0).toFixed(2)}）`:'')}
+      ${gate('半分稳定', f.split_half, f.split_half?`（前半 ${(f.split_half.first||0).toFixed(2)} / 后半 ${(f.split_half.second||0).toFixed(2)}）`:'')}</div>`;
+  }
+  return `<div class="alert-card ${a.level}" id="alert-${a.alert_id}">
+    <div class="head">${lvlPill}${typePill}<b>${esc(a.title)}</b>${stateNote}</div>
+    <div class="basis"><b>依据：</b>${esc(a.basis)}</div>
+    ${a.trend?`<canvas class="spark" id="spark-${a.alert_id}"></canvas>`:''}
+    ${conflictJump}
+    <div class="row"><b>预计影响：</b>${esc(a.impact)}</div>
+    <div class="row"><b>建议动作：</b>${esc(a.suggestion)}</div>
+    ${falsify}
+    <div class="ops">${ops}</div>
+  </div>`;
+}
+function drawSpark(id, trend){
+  const cv = document.getElementById(id); if(!cv) return;
+  const W=220,H=44; cv.width=W*2; cv.height=H*2; const ctx=cv.getContext('2d'); ctx.scale(2,2);
+  const res = trend.residual||[], fac = trend.factor||[];
+  const line=(data,color)=>{ if(!data.length) return;
+    const mx=Math.max(...data.map(Math.abs))||1;
+    ctx.strokeStyle=color; ctx.beginPath();
+    data.forEach((v,i)=>{ const x=i/(data.length-1)*W, y=H/2-(v/mx)*(H/2-4); i?ctx.lineTo(x,y):ctx.moveTo(x,y); });
+    ctx.stroke(); };
+  line(res,'rgba(100,118,128,.7)'); line(fac,'#00a8a8');
+}
+function alertAct(alertId, action){
+  let op; try{ op=operator(); }catch(e){ return; }
+  const reason = action==='adopt'||action==='close' ? (prompt(action==='adopt'?'处置说明（可留空）':'效果回看说明（可留空）')||'') : '';
+  act('alerts/action', {alert_id:alertId, action, operator:op, reason},
+    {type:'alert_action', alert_id:alertId, action, reason}, '预警状态已流转');
+}
+function alertDismiss(alertId){
+  let op; try{ op=operator(); }catch(e){ return; }
+  const reason = prompt('误报原因（必填，进反馈台账）');
+  if(!reason) { toast('误报必须说明原因', true); return; }
+  act('alerts/action', {alert_id:alertId, action:'dismiss', operator:op, reason},
+    {type:'alert_action', alert_id:alertId, action:'dismiss', reason}, '已标注误报');
+}
+
+/* ================= 03 待办看板（HITL 统一收件箱） ================= */
+const STATIONS = {
+  1:{name:'候选确认台', trigger:'B/C 候选需要业务事实核验', can:'确认、否决候选；补充短信 / 竞品 / 临时策略 / 配置变更等业务事实', cannot:'不能把确认直接写成因果结论——只进入下一窗口验证队列，统计门决定最终等级'},
+  2:{name:'证据冲突台', trigger:'A/B/C 线路方向不一致，或对照污染', can:'提供事件时间、影响范围和业务机制', cannot:'不能用「经验判断」替代识别报告'},
+  3:{name:'发布台', trigger:'新技能、扩大灰度、回滚、真实流量动作', can:'审批发布、限定范围、要求重放', cannot:'不能绕过统计核心和高风险审批'},
+  4:{name:'告警反馈台', trigger:'C 线信号需要标注价值', can:'标有用 / 误报并说明原因', cannot:'不能把反馈当作真值标签自动晋升'},
+};
+function renderTodo(){
+  const el = document.getElementById('view-todo');
+  const t = buildTodos();
+  el.innerHTML = `
+  <div class="card"><h3>待办看板 · 所有需要人工的事项</h3>
+    <div style="font-size:12.5px;color:var(--muted)">四个门禁节点的待办统一汇聚在此。点「进去处理」就地办理；每个节点的权限边界（能做 / 不能做）写死在详情面板里。</div></div>
+  <div class="todo-flow">${[1,2,3,4].map(k=>`
+    <div class="node ${t[k].length?'has':''}"><b>${['① 候选确认','② 证据冲突','③ 发布审批','④ 告警反馈'][k-1]}</b>
+      <div class="cnt ${t[k].length?'':'zero'}">${t[k].length}</div></div>`).join('')}</div>
+  ${[1,2,3,4].map(k=>`
+    <div class="todo-group"><h3>${STATIONS[k].name} · 触发：${STATIONS[k].trigger}</h3>
+    ${t[k].map(item=>`<div class="todo-item"><div class="info"><b>${esc(item.title)}</b><div class="meta">${esc(item.meta)}</div></div>
+      <button class="btn small" onclick="openTodo(${k},'${esc(item.key)}')">进去处理</button></div>`).join('')
+      || '<div style="color:var(--muted);font-size:12.5px;padding:6px 2px">无待办</div>'}
+    </div>`).join('')}`;
+}
+function findTodo(key){
+  const t = buildTodos();
+  for(const k of [1,2,3,4]){ const it = t[k].find(x=>x.key===key); if(it) return {station:k, item:it}; }
+  return null;
+}
+function openTodo(station, key){
+  const found = findTodo(key); if(!found) return;
+  const s = STATIONS[station], it = found.item;
+  let evidence = '', form = '';
+  if(station===1){
+    const w = it.data;
+    evidence = `<div class="evidence-box"><b>统计证据</b><br>因子 <span class="mono">${esc(w.factor_id)}</span> · lag ${w.lag}<br>
+      关联强度 ${pct(w.correlation)} · 校正后 p ${w.adjusted_pvalue??'—'}<br>证伪状态：${esc(w.falsification_status||'—')}<br>
+      下一步：${esc(w.next_step||'独立窗口继续确认')}</div>`;
+    form = `<label>业务事实核验结论</label>
+      <div class="ops"><button class="btn" onclick="todoCandidate('${esc(it.key)}','${esc(w.factor_id)}','confirm')">确认（业务事实成立）</button>
+      <button class="btn danger" onclick="todoCandidate('${esc(it.key)}','${esc(w.factor_id)}','deny')">否决</button></div>
+      <label>或补充新业务事实（联动因子管理）</label>
+      <button class="btn ghost" onclick="closeDrawer();showView('manage')">去 05 因子管理补录 →</button>`;
+  } else if(station===2){
+    const c = it.data;
+    evidence = `<div class="evidence-box"><b>冲突明细</b><br>${esc(c.detail)}</div>`;
+    form = `<label>事件时间</label><input id="cf-time" placeholder="如 2026-09-10">
+      <label>影响范围</label><input id="cf-scope" placeholder="如 华东 / 付费切面">
+      <label>业务机制</label><textarea id="cf-mech" rows="3" placeholder="为什么会观察到这种冲突"></textarea>
+      <div class="ops"><button class="btn" onclick="todoConflict('${esc(it.key)}','${esc(c.id)}')">提交核验输入</button></div>`;
+  } else if(station===3){
+    const sk = it.data;
+    evidence = `<div class="evidence-box"><b>技能验证摘要</b><br>名称 <span class="mono">${esc(sk.name)} v${sk.version}</span><br>
+      信任状态：${esc(sk.trust_state)} · 规则 ${sk.rules} 条<br>评审 ${sk.review_passed?'✓ 通过':'— 未评审'} · 验证 ${sk.validated?'✓ 通过':'— 未验证'}<br>
+      声明上限：${esc(sk.claim_ceiling||'—')}</div>`;
+    const canApprove = sk.validated && sk.trust_state!=='published';
+    form = `<label>灰度比例（批准时限定范围）</label>
+      <select id="sk-frac"><option value="0.05">5% 灰度</option><option value="0.1">10% 灰度</option><option value="0.2">20% 灰度</option></select>
+      <div class="ops">
+      ${sk.trust_state==='provisional'?`<button class="btn" onclick="todoSkill('${esc(sk.name)}',${sk.version},'review')">通过评审</button>`:''}
+      ${canApprove?`<button class="btn" onclick="todoSkill('${esc(sk.name)}',${sk.version},'approve')">批准发布</button>`:''}
+      <button class="btn warn" onclick="toast('已要求重放验证套件（演示态）');markLocalDone('${esc(it.key)}')">要求重放</button></div>`;
+  } else {
+    const a = it.data;
+    evidence = `<div class="evidence-box"><b>信号卡</b><br>${esc(a.title)}<br>${esc(a.basis)}</div>`;
+    form = `<label>标注原因（必填，进反馈台账）</label><input id="fb-reason" placeholder="为什么有用 / 为什么误报">
+      <div class="ops"><button class="btn" onclick="todoFeedback('${esc(it.key)}','${esc(a.alert_id)}','confirm')">有用</button>
+      <button class="btn danger" onclick="todoFeedback('${esc(it.key)}','${esc(a.alert_id)}','dismiss')">误报</button></div>`;
+  }
+  document.getElementById('drawer-body').innerHTML = `
+    <h3>${s.name}</h3><div style="font-size:12.5px;color:var(--muted)">${esc(it.title)}</div>
+    <div class="rule-grid">
+      <div class="rule can"><b>✓ 人工可以做</b>${esc(s.can)}</div>
+      <div class="rule cannot"><b>✗ 人工不能做</b>${esc(s.cannot)}</div>
+    </div>
+    ${evidence}${form}`;
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawer-mask').classList.add('open');
+  document.getElementById('drawer-mask').onclick = closeDrawer;
+}
+function closeDrawer(){ document.getElementById('drawer').classList.remove('open'); document.getElementById('drawer-mask').classList.remove('open'); }
+function markLocalDone(key){ pushLedger({type:'todo_done', key}); closeDrawer(); reload(); }
+async function todoCandidate(key, fid, verdict){
+  let op; try{ op=operator(); }catch(e){ return; }
+  const ok = await act('feedback', {kind:'candidate_review', operator:op,
+    payload:{factor_id:fid, label:verdict==='confirm'?'useful':'false_positive', operator:op, source_kind:'console_candidate'}},
+    {type:'todo_done', key}, verdict==='confirm'?'候选已确认，进入下一窗口验证队列':'候选已否决');
+  if(ok!==false) markLocalDone(key);
+}
+async function todoConflict(key, cid){
+  let op; try{ op=operator(); }catch(e){ return; }
+  const time=document.getElementById('cf-time').value.trim(), scope=document.getElementById('cf-scope').value.trim(), mech=document.getElementById('cf-mech').value.trim();
+  if(!time||!scope||!mech){ toast('事件时间、影响范围、业务机制均为必填', true); return; }
+  const ok = await act('conflicts/input', {conflict_id:cid, operator:op, event_time:time, scope, mechanism:mech},
+    {type:'todo_done', key}, '冲突核验输入已提交');
+  if(ok!==false) markLocalDone(key);
+}
+async function todoSkill(name, version, action){
+  let op; try{ op=operator(); }catch(e){ return; }
+  const frac = parseFloat((document.getElementById('sk-frac')||{}).value||0.05);
+  if(MODE==='service'){
+    const suite = D.skillsSuiteRef || '';
+    const body = action==='review' ? {action:'review', name, version, operator:op}
+      : {action:'approve', name, version, operator:op, suite_ref:suite};
+    const ok = await act('skills/action', body, null, '技能治理动作已执行');
+    if(ok){ closeDrawer(); }
+    return;
+  }
+  pushLedger({type:'skill_action', name, version, action, fraction:frac, operator:op});
+  toast('已记录（离线：未提交治理层）'); closeDrawer(); reload();
+}
+async function todoFeedback(key, alertId, action){
+  let op; try{ op=operator(); }catch(e){ return; }
+  const reason = document.getElementById('fb-reason').value.trim();
+  if(!reason){ toast('标注原因必填', true); return; }
+  const ok = await act('alerts/action', {alert_id:alertId, action, operator:op, reason},
+    {type:'alert_action', alert_id:alertId, action, reason}, '反馈已记录');
+  if(ok!==false) markLocalDone(key);
+}
+</script>
+<script>
+/* ================= 04 因子库 ================= */
+let LIB_SRC='all', LIB_ST='all';
+let PLAN_OPEN=false;
+function togglePlan(){PLAN_OPEN=!PLAN_OPEN;renderLibrary();}
+function renderLibrary(){
+  const el = document.getElementById('view-library');
+  let list = D.cards.slice();
+  if(LIB_SRC!=='all') list=list.filter(c=>c.route===LIB_SRC);
+  if(LIB_ST!=='all') list=list.filter(c=>c.status===LIB_ST);
+  const srcChips=[['all','全部来源'],['internal','内部可控'],['external','外部观察'],['research','研究候选'],['unknown','未知']];
+  const stChips=[['all','全部状态'],['verified','已验证'],['watch','盯防中'],['candidate','候选'],['research','研究候选'],['disabled','已停用']];
+  el.innerHTML = `
+  <div class="card plan-panel">
+    <h3 style="display:flex;justify-content:space-between;align-items:center;gap:10px">完整技术方案 · 深度方案评审工作台 v17.1
+      <span class="chip ${PLAN_OPEN?'on':''}" style="cursor:pointer;flex:none" onclick="togglePlan()">${PLAN_OPEN?'收起方案 ▲':'展开方案 ▼'}</span></h3>
+    <div style="font-size:12.5px;color:var(--muted)">Agent 编排、证据状态机、离线主动扫描、RSI 自进化治理与评审清单的完整方案视图；也可 <a href="plan-review.html" target="_blank" style="color:var(--blue)">新窗口打开完整方案</a>。</div>
+    ${PLAN_OPEN?'<iframe class="plan-frame" src="plan-review.html" title="完整技术方案"></iframe>':''}
+  </div>
+  <div class="card"><h3>候选因子库 · ${D.cards.length} 项</h3>
+    <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px">色条：蓝=内部可控 / 紫=外部观察 / 金=未知待补数 / 灰虚线=研究候选（因子库深挖 20260917：38 项定义，含操作化公式与数据需求，埋点接入前不进扫描）；绿点=已验证（独立窗口确认）；⚠=当前命中高风险预警。每条因子可追溯来源。</div>
+    <div class="filter-bar">${srcChips.map(c=>`<span class="chip ${LIB_SRC===c[0]?'on':''}" onclick="LIB_SRC='${c[0]}';renderLibrary()">${c[1]}</span>`).join('')}
+      <span style="width:12px"></span>
+      ${stChips.map(c=>`<span class="chip ${LIB_ST===c[0]?'on':''}" onclick="LIB_ST='${c[0]}';renderLibrary()">${c[1]}</span>`).join('')}</div>
+  </div>
+  <div class="library-grid">${list.map(c=>`
+    <div class="library-card ${c.route==='external'?'external':c.route==='unknown'?'unknown':c.route==='research'?'research':''} ${c.status==='verified'?'verified':''} ${c.alerted?'alerted':''}"
+         id="fcard-${esc(c.fid)}" title="来源：${esc(c.src||'—')}${c.license?' · '+esc(c.license):''}${c.lag!=null?' · lag '+c.lag:''}${c.layer?' · 派生层 '+esc(c.layer):''}${c.evidence_count?' · 证据 '+c.evidence_count+' 条':''}${c.formula?'\n操作化公式：'+esc(c.formula):''}${c.data_source?'\n数据需求：'+esc(c.data_source):''}">
+      <b>${esc(c.name)}</b><div class="fid">${esc(c.fid)}</div>
+      <div class="tags">
+        <span class="pill ${c.route==='external'?'violet':c.route==='unknown'?'gold':c.route==='research'?'':'blue'}">${c.route==='research'?esc(c.family||'研究候选'):esc(KIND_LABEL[c.src]||c.src||'—')}</span>
+        ${c.status==='verified'?'<span class="pill green">已验证</span>':c.status==='watch'?'<span class="pill gold">盯防中</span>':c.status==='disabled'?'<span class="pill">已停用</span>':c.status==='research'?`<span class="pill ${c.priority==='P0'?'red':c.priority==='P1'?'gold':''}">${esc(c.priority||'研究候选')}</span>`:'<span class="pill cyan">候选</span>'}
+      </div>
+      ${c.strength!=null?`<div class="strength"><i style="width:${Math.min(100,Math.abs(c.strength)*100)}%"></i></div><div class="sl"><span>关联强度</span><span>${pct(c.strength)}</span></div>`:'<div class="sl" style="margin-top:12px"><span>本窗口未检出关联</span><span>—</span></div>'}
+      <div class="sl"><span>${esc(c.claim)}</span><span>${c.lag!=null?'lag '+c.lag:''}</span></div>
+    </div>`).join('')||'<div class="card" style="color:var(--muted)">该过滤条件下暂无因子</div>'}</div>`;
+}
+
+/* ================= 05 因子管理 ================= */
+function renderManage(){
+  const el = document.getElementById('view-manage');
+  const rows = D.cards.map(c=>{
+    const f = D.factors.find(x=>x.factor_id===c.fid) || {};
+    return {fid:c.fid, name:c.name, src:c.src, status:c.status, strength:c.strength, lag:c.lag, card:c,
+      managed: !!D.factors.find(x=>x.factor_id===c.fid)};
+  });
+  const versions = D.versions.slice().sort((a,b)=>a.factor_id.localeCompare(b.factor_id)||b.version-a.version);
+  el.innerHTML = `
+  <div class="card"><h3>因子管理 · 全表</h3>
+    <table class="full"><tr><th>因子</th><th>来源</th><th>状态</th><th>关联强度</th><th>lag</th><th>操作</th></tr>
+    ${rows.map(r=>`<tr>
+      <td><b>${esc(r.name)}</b><br><span class="mono" style="color:var(--muted);font-size:10.5px">${esc(r.fid)}</span></td>
+      <td>${esc(KIND_LABEL[r.src]||r.src||'—')}</td>
+      <td>${r.status==='disabled'?'<span class="st-off">已停用</span>':r.status==='research'?'<span style="color:var(--gold);font-weight:600">研究候选</span>':'<span class="st-ok">启用中</span>'}${r.managed?'':'<br><span style="font-size:10.5px;color:var(--muted)">B线候选·未登记</span>'}</td>
+      <td class="mono">${r.strength!=null?pct(r.strength):'—'}</td>
+      <td class="mono">${r.lag!=null?r.lag:'—'}</td>
+      <td>${r.managed?`<button class="btn small ${r.status==='disabled'?'':'warn'}" onclick="factorToggle('${esc(r.fid)}','${r.status==='disabled'?'enable':'disable'}')">${r.status==='disabled'?'启用':'停用'}</button>`:'<span style="font-size:11px;color:var(--muted)">登记后可管理</span>'}</td>
+    </tr>`).join('')}</table>
+    <div style="font-size:11.5px;color:var(--muted);margin-top:8px">停用后下一窗口起不参与 C 线扫描与 B 线候选打分；人工补录不覆盖已登记因子元数据；一切变更进台账与审计日志。</div>
+  </div>
+  <div class="card"><h3>补录业务事实（人报因子）</h3>
+    <div class="form-grid">
+      <div><label>类型</label><select id="fm-cat"><option>短信触达</option><option>竞品动作</option><option>临时策略</option><option>配置变更</option><option>其他外部事件</option></select></div>
+      <div><label>因子 ID（小写字母/数字/. _ -）</label><input id="fm-id" placeholder="如 operator.sms_0925"></div>
+      <div><label>名称</label><input id="fm-name" placeholder="如 9/25 短信批次"></div>
+      <div><label>发生日（int day）</label><input id="fm-day" type="number" placeholder="如 145"></div>
+      <div class="full-row"><label>业务事实说明（时间、范围、机制）</label><textarea id="fm-mech" rows="3"></textarea></div>
+    </div>
+    <div class="ops" style="margin-top:12px"><button class="btn" onclick="factorCreate()">提交补录</button>
+      <span style="font-size:11.5px;color:var(--muted)">${MODE==='service'?'服务模式：写入因子库 + 审计日志':'离线模式：进本地台账，服务版启动后需重新提交'}</span></div>
+  </div>
+  <div class="card"><h3>变更台账（因子库不可变版本记录）</h3>
+    <div class="timeline">${versions.slice(0,20).map(v=>`<div><span class="t">v${v.version}</span><span class="mono">${esc(v.factor_id)}</span> · ${esc((v.body&&v.body.name)||'')} · ${esc((v.body&&v.body.status)||'active')}${v.body&&v.body.metadata&&v.body.metadata.operator?' · 操作人 '+esc(v.body.metadata.operator):''}</div>`).join('')||'<div style="color:var(--muted)">暂无</div>'}
+    ${ledger().filter(e=>e.type&&e.type.startsWith('factor_')).map(e=>`<div><span class="t">本地</span>${esc(e.type)} · <span class="mono">${esc(e.factor_id||e.factor&&e.factor.factor_id||'')}</span> · ${esc(e.operator||'')}</div>`).join('')}</div>
+  </div>`;
+}
+async function factorCreate(){
+  let op; try{ op=operator(); }catch(e){ return; }
+  const f = { factor_id:document.getElementById('fm-id').value.trim(),
+    name:document.getElementById('fm-name').value.trim(),
+    category:document.getElementById('fm-cat').value,
+    mechanism:document.getElementById('fm-mech').value.trim(),
+    available_day:parseInt(document.getElementById('fm-day').value||'0',10)||0 };
+  if(!f.factor_id||!f.name||!f.mechanism){ toast('因子 ID、名称、业务事实说明均为必填', true); return; }
+  const ok = await act('factors/manage', {action:'create', operator:op, factor:f},
+    {type:'factor_create', factor:f}, '人报因子已登记');
+  if(ok){ renderAll(); }
+}
+async function factorToggle(fid, action){
+  let op; try{ op=operator(); }catch(e){ return; }
+  if(action==='disable' && !confirm('停用后下一窗口起该因子不参与扫描与候选打分，确认停用？')) return;
+  await act('factors/manage', {action, operator:op, factor:{factor_id:fid}},
+    {type:'factor_status', factor_id:fid, status:action==='disable'?'disabled':'active'},
+    action==='disable'?'已停用':'已启用');
+}
+
+/* ================= 06 自进化与证据 ================= */
+const TRUST_STAGES = ['provisional','reviewed','validated','approved','published'];
+const TRUST_ZH = {provisional:'提案', reviewed:'已评审', validated:'已验证', approved:'已审批', published:'已发布'};
+function trustStageIndex(s){
+  if(s.trust_state==='published') return 4;
+  if(s.trust_state==='approved') return 3;
+  if(s.validated || s.trust_state==='validated') return 2;
+  if(s.review_passed || s.trust_state==='reviewed') return 1;
+  return 0;
+}
+function renderEvolution(){
+  const el = document.getElementById('view-evolution');
+  const ev = D.evidence||{};
+  const reg = ev.regression||{}, stats = ev.statistics||{};
+  const localSkill = ledger().filter(e=>e.type==='skill_action');
+  el.innerHTML = `
+  <div class="card"><h3>自进化 · 技能治理时间线</h3>
+    <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px">技能从运行轨迹中提炼，沿「提案 → 评审 → 验证 → 审批 → 发布」逐级晋升；每一步都要过门禁，发布台（03 待办看板 ③）是人工审批入口。</div>
+    ${D.skills.map(s=>{ const idx=trustStageIndex(s); const local = localSkill.find(e=>e.name===s.name); return `
+    <div class="skill-card"><div class="head"><b>${esc(s.name)}</b><span class="mono" style="color:var(--muted)">v${s.version}</span>
+      <span class="pill ${idx>=2?'green':'gold'}">${TRUST_ZH[Object.keys(TRUST_ZH)[idx]]||s.trust_state}${local?' · 本地操作已留痕':''}</span>
+      <span style="margin-left:auto;font-size:11.5px;color:var(--muted)">规则 ${s.rules} 条 · 声明上限 ${esc(s.claim_ceiling||'—')}</span></div>
+      <div class="stage-bar">${TRUST_STAGES.map((st,i)=>`<div class="st ${i<idx?'hit':i===idx?'now':''}">${TRUST_ZH[st]}</div>`).join('')}</div>
+      <div style="font-size:12px;color:var(--muted)">评审 ${s.review_passed?'✓':'—'} · 验证 ${s.validated?'✓':'—'}${idx===2?' · 下一步：发布台审批':idx===0?' · 下一步：独立评审':''}</div>
+    </div>`;}).join('')||'<div style="color:var(--muted)">无治理中技能</div>'}
+  </div>
+  <div class="two-col">
+    <div class="card"><h3>审批与发布记录</h3>
+      <div class="timeline">${D.releases.map(r=>`<div><span class="t">${esc((r.at||'').slice(5,16)||'—')}</span>${esc(r.action||r.kind||'release')} · <span class="mono">${esc(r.name||'')}</span>${r.operator?' · '+esc(r.operator):''}${r.approver?' · '+esc(r.approver):''}</div>`).join('')||'<div style="color:var(--muted)">暂无发布记录</div>'}</div>
+    </div>
+    <div class="card"><h3>反馈闭环（不自动晋升任何结论）</h3>
+      <div class="timeline">${(D.recent||[]).slice(0,10).map(e=>{const p=e.payload||{};return `<div><span class="t">${esc((e.at||'').slice(5,16)||'—')}</span>${esc(e.kind||'feedback')} · <span class="mono">${esc(p.alert_id||p.factor_id||'')}</span> · ${esc(p.label||p.action||'')}${p.operator?' · '+esc(p.operator):''}</div>`;}).join('')||'<div style="color:var(--muted)">暂无反馈</div>'}
+      ${ledger().map(l=>`<div><span class="t">本地</span>${esc(l.type||'')} · ${esc(l.operator||'')} <span style="color:var(--gold)">（未提交治理层）</span></div>`).join('')}</div>
+    </div>
+  </div>
+  <div class="card"><h3>证据底线</h3>
+    <div class="cc-kpis" style="grid-template-columns:repeat(3,1fr)">
+      <div class="card" style="box-shadow:none;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--green)">${esc(reg.local||'—')}</div><div style="font-size:12px;color:var(--muted)">本机回归</div></div>
+      <div class="card" style="box-shadow:none;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--green)">${esc(reg.container||'—')}</div><div style="font-size:12px;color:var(--muted)">容器回归</div></div>
+      <div class="card" style="box-shadow:none;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--blue)">${esc(reg.cli_acceptance||'—')} 项</div><div style="font-size:12px;color:var(--muted)">CLI 验收</div></div>
+    </div>
+    <div style="font-size:12.5px;color:var(--muted)">关联 FDP ≤ ${stats.association_fdp_max??'—'} · 功效 ${stats.association_power??'—'} · 随机化区间覆盖 ${(stats.randomized_coverage||[]).join('–')} · 盯防保留率 ${esc(stats.watchlist_keep_rate||'—')}（null ${esc(stats.watchlist_null_rate||'—')}）</div>
+  </div>
+  <div class="two-col">
+    <div class="card"><h3>负结果（如实保留，未删除不利种子）</h3>
+      ${(ev.negative_results||[]).map(n=>`<div class="neg-item">✗ ${esc(n)}</div>`).join('')}</div>
+    <div class="card"><h3>口径边界</h3>
+      ${(ev.boundaries||[]).map(b=>`<div class="bound-item">${esc(b)}</div>`).join('')}
+      <div class="bound-item">本页全部数据可由 <span class="mono">tools/seed_console_v2.py + tools/build_console_v3.py</span> 重新生成</div></div>
+  </div>`;
+}
+
+/* ================= 启动 ================= */
+function renderAll(){
+  renderStrip(); renderOverview(); renderAlerts(); renderTodo(); renderLibrary(); renderManage(); renderEvolution();
+  const off = document.getElementById('offline-strip');
+  off.classList.toggle('show', MODE!=='service');
+  const badge = document.getElementById('mode-badge');
+  if(MODE==='service'){ badge.className='mode-badge online'; badge.textContent='HTTP API · 实机管线'; document.getElementById('rail-foot').textContent='HTTP 实机 · 操作落治理层'; }
+  else { badge.className='mode-badge offline'; badge.textContent='本地脱敏数据回放'; document.getElementById('rail-foot').textContent='本地脱敏数据回放 · 可复现'; }
+}
+(async function boot(){
+  const inp = document.getElementById('operator-input');
+  inp.value = localStorage.getItem(LS_OPERATOR)||'';
+  inp.addEventListener('change', ()=>localStorage.setItem(LS_OPERATOR, inp.value.trim()));
+  if(location.protocol!=='file:'){
+    try{ const raw = await fetchAll(); if(raw && raw.overview && !raw.overview.error){ D=normalize(raw); MODE='service'; } }catch(e){}
+  }
+  if(!D){ D = normalize(INLINE||{}); MODE='offline'; }
+  const hash = location.hash.replace('#','');
+  renderAll();
+  if(VIEW_NAMES[hash]) showView(hash);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "skills": {
+    "metric": {
+      "versions": [
+        {
+          "version": 1,
+          "rules": [
+            {
+              "when": {
+                "metric_kind": "sum"
+              },
+              "action": "check_metric",
+              "polarity": "reinforce",
+              "evidence": [
+                "sha256:ab88e1982bf40cfa7b8ca86599108dd12af36ea31d966371148cb11eaa10c9f3"
+              ]
+            }
+          ],
+          "digest": "db6b36fad31da897",
+          "note": "G0–G6 governed release",
+          "governance_binding": {
+            "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/agents/skills.db",
+            "name": "metric",
+            "version": 1,
+            "spec_digest": "sha256:49cbeca4cef7c09967fd5440727252dc18fdc522bec2523e1d99820edf8132d1"
+          },
+          "evidence_binding": {
+            "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/agents/skills.db",
+            "asset_ref": "sha256:2416a0b5990aa36694ddd142de49a802bb9a6fdb361f132051582b5df33e07ee"
+          }
+        },
+        {
+          "version": 2,
+          "rules": [
+            {
+              "when": {
+                "metric_kind": "sum"
+              },
+              "action": "check_metric",
+              "polarity": "reinforce",
+              "evidence": [
+                "sha256:ab88e1982bf40cfa7b8ca86599108dd12af36ea31d966371148cb11eaa10c9f3"
+              ]
+            }
+          ],
+          "digest": "9a9aaf8cf7fbc259",
+          "note": "G0–G6 governed release",
+          "governance_binding": {
+            "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/agents/skills.db",
+            "name": "metric",
+            "version": 1,
+            "spec_digest": "sha256:49cbeca4cef7c09967fd5440727252dc18fdc522bec2523e1d99820edf8132d1"
+          },
+          "evidence_binding": {
+            "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/agents/skills.db",
+            "asset_ref": "sha256:38158d23b93eca8c1e730f9df47b072f4705268babc32e53ac9c572942e9612f"
+          }
+        }
+      ],
+      "active": 2,
+      "changelog": [
+        {
+          "version": 1,
+          "event": "registered",
+          "note": "G0–G6 governed release"
+        },
+        {
+          "version": 1,
+          "event": "activated",
+          "previous": null,
+          "note": "bound human release sha256:132be1799d525c54d4e53bc02a6960f8c0e5490e7e4bd4080d14200a766b6506"
+        },
+        {
+          "version": 2,
+          "event": "registered",
+          "note": "G0–G6 governed release"
+        },
+        {
+          "version": 2,
+          "event": "activated",
+          "previous": 1,
+          "note": "bound human release sha256:e9488394272fd5993e3fa5461258917b25b3b778b6cfde23bcd70554dc17bfdc"
+        }
+      ],
+      "governed": true
+    }
+  }
+}

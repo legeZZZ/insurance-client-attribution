@@ -8,6 +8,13 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
+from .foundation import (
+    AgentIdentity,
+    AgentTeamsControlPlane,
+    LocalEvidenceProvider,
+    SQLiteCheckpointProvider,
+    TeamTopology,
+)
 from .track2_analysis import (
     aggregate_funnel,
     build_claim,
@@ -15,13 +22,6 @@ from .track2_analysis import (
     estimate_itt,
     extract_features,
     sanitize_rows,
-)
-from .foundation import (
-    AgentIdentity,
-    AgentTeamsControlPlane,
-    LocalEvidenceProvider,
-    SQLiteCheckpointProvider,
-    TeamTopology,
 )
 
 TRACK2_AGENTS = [
@@ -510,9 +510,7 @@ def run_case(base_dir: Path, case: str = "A") -> dict[str, Any]:
     if case not in {"A", "B", "C"}:
         raise ValueError("case must be A, B or C")
     control_plane = build_control_plane()
-    checkpoint = SQLiteCheckpointProvider(
-        base_dir / "checkpoints" / "track2.sqlite3"
-    )
+    checkpoint = SQLiteCheckpointProvider(base_dir / "checkpoints" / "track2.sqlite3")
     evidence_provider = LocalEvidenceProvider(base_dir / "evidence")
     task_id = f"T2-case-{case}"
     task = control_plane.create_task(

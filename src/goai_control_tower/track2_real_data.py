@@ -9,12 +9,13 @@ import os
 import urllib.request
 from collections import Counter, defaultdict
 from collections.abc import Mapping
+
 try:
     from datetime import UTC, datetime
 except ImportError:
-    from datetime import datetime, timezone
+    from datetime import datetime
 
-    UTC = timezone.utc
+    UTC = UTC
 from pathlib import Path
 from typing import Any
 
@@ -423,3 +424,27 @@ def run_real_data_case(base_dir: Path, csv_path: Path) -> dict[str, Any]:
     pack = analyze_bank_marketing_csv(csv_path)
     LocalEvidenceProvider(base_dir / "evidence").write_pack(str(pack["task_id"]), pack)
     return pack
+
+
+def resolve_bank_marketing_csv(runtime_dir: Path, explicit: Path | None = None) -> Path:
+    """Resolve explicit input, runtime cache, or the shipped dataset without downloads."""
+    if explicit is not None:
+        if not explicit.is_file():
+            raise FileNotFoundError(f"UCI CSV not found: {explicit}")
+        return explicit
+    project = Path(__file__).resolve().parents[2]
+    candidates = [
+        Path(runtime_dir) / "datasets" / "uci-bank-marketing" / "data.csv",
+        project
+        / "track2_clean_bundle"
+        / "runtime_data"
+        / "datasets"
+        / "uci-bank-marketing"
+        / "data.csv",
+    ]
+    for candidate in candidates:
+        if candidate.is_file():
+            return candidate
+    raise FileNotFoundError(
+        "UCI CSV unavailable; use --real-data-path or --fetch-real-data"
+    )

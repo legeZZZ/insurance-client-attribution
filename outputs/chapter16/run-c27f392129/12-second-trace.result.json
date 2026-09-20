@@ -1,0 +1,191 @@
+{
+  "task_id": "second",
+  "data_ref": "sha256:bfd3fd279ececa02e00472d745cb34d70b1fb7c469a22aab6f0085ceb8a6e3df",
+  "context": {
+    "workflow": "c_line"
+  },
+  "operation": "scan_window",
+  "author": "ops",
+  "replay": {
+    "execution_status": "COMPLETED",
+    "binding": {
+      "task_id": "second",
+      "data_ref": "sha256:bfd3fd279ececa02e00472d745cb34d70b1fb7c469a22aab6f0085ceb8a6e3df",
+      "skill_ref": "capture:ops"
+    },
+    "operation": "scan_window",
+    "input_digest": "sha256:4e30b91e8e3d8a0f910dda3f9ca43347e2f69d8c80bb843d0e2809eb3e88fe17",
+    "result": {
+      "passed": true,
+      "claim_type": "WATCHLIST",
+      "scan": {
+        "claim_type": "WATCHLIST",
+        "watchlist": [
+          {
+            "factor_id": "driver",
+            "parent_factor_id": "driver",
+            "scope_id": "global",
+            "metric_id": "metric",
+            "lag": 2,
+            "effect_shape": "persistent",
+            "correlation": 0.9939969656165095,
+            "coverage": 0.975,
+            "n_pairs": 78,
+            "kind": "internal_event",
+            "score": 0.9691470414760968,
+            "budget_multiplier": 1.0,
+            "falsification": {
+              "placebo": {
+                "correlation": 0.004203492384784394,
+                "coverage": 0.9696969696969697,
+                "n_pairs": 64,
+                "kill": false,
+                "insufficient_data": false,
+                "applicable": true,
+                "status": "TESTED"
+              },
+              "lead_lag_reversal": {
+                "correlation": 0.003275688992860208,
+                "kill": false,
+                "skipped": false,
+                "applicable": true
+              },
+              "split_half": {
+                "first": 0.9932369623607123,
+                "second": 0.9937790952564576,
+                "kill": false,
+                "applicable": true,
+                "status": "TESTED"
+              },
+              "negative_controls": []
+            },
+            "falsification_status": "SURVIVED_EXPLORATORY",
+            "claim_type": "WATCHLIST",
+            "grade": "REVIEW",
+            "alert_id": "sha256:bf2207b78e2145535c4692f525960f1d60aadcafaeb83e1f2655cced0c7e2f55",
+            "window_id": "1",
+            "discovery_window": [
+              0,
+              79
+            ],
+            "next_step": "仅下一独立窗口确认可晋级；人工标签只进入验证队列"
+          },
+          {
+            "factor_id": "sms",
+            "parent_factor_id": "sms",
+            "scope_id": "global",
+            "metric_id": "metric",
+            "lag": 2,
+            "effect_shape": "persistent",
+            "correlation": 0.9939969656165095,
+            "coverage": 0.975,
+            "n_pairs": 78,
+            "kind": "internal_event",
+            "score": 0.9691470414760968,
+            "budget_multiplier": 1.0,
+            "falsification": {
+              "placebo": {
+                "correlation": 0.004203492384784394,
+                "coverage": 0.9696969696969697,
+                "n_pairs": 64,
+                "kill": false,
+                "insufficient_data": false,
+                "applicable": true,
+                "status": "TESTED"
+              },
+              "lead_lag_reversal": {
+                "correlation": 0.003275688992860208,
+                "kill": false,
+                "skipped": false,
+                "applicable": true
+              },
+              "split_half": {
+                "first": 0.9932369623607123,
+                "second": 0.9937790952564576,
+                "kill": false,
+                "applicable": true,
+                "status": "TESTED"
+              },
+              "negative_controls": []
+            },
+            "falsification_status": "SURVIVED_EXPLORATORY",
+            "claim_type": "WATCHLIST",
+            "grade": "REVIEW",
+            "alert_id": "sha256:455b96dc97c27b2c451f080109e74b6c93c35b6b4b32f6d36c1d450eaa48a613",
+            "window_id": "1",
+            "discovery_window": [
+              0,
+              79
+            ],
+            "next_step": "仅下一独立窗口确认可晋级；人工标签只进入验证队列"
+          }
+        ],
+        "deferred": [],
+        "killed": [],
+        "killed_count": 0,
+        "manifest": {
+          "M": 2,
+          "S": 1,
+          "K": 1,
+          "L": 1,
+          "grid_size": 2,
+          "tested": 2,
+          "test_budget": 15,
+          "budget": 2,
+          "attempts": [
+            {
+              "factor_id": "driver",
+              "parent_factor_id": "driver",
+              "scope_id": "global",
+              "metric_id": "metric",
+              "lag": 2,
+              "effect_shape": "persistent",
+              "correlation": 0.9939969656165095,
+              "coverage": 0.975,
+              "n_pairs": 78
+            },
+            {
+              "factor_id": "sms",
+              "parent_factor_id": "sms",
+              "scope_id": "global",
+              "metric_id": "metric",
+              "lag": 2,
+              "effect_shape": "persistent",
+              "correlation": 0.9939969656165095,
+              "coverage": 0.975,
+              "n_pairs": 78
+            }
+          ],
+          "truncated": false,
+          "selection_policy": "registered_order_with_feedback_priority",
+          "inference": "exploratory_only",
+          "total_tests_spent": 10,
+          "total_test_budget": 30
+        },
+        "policy": "exploratory_only_no_cross_time_error_control_claim",
+        "data_digest": "sha256:91b732d636bae6b00728c30679dd08fd6051381c3e80874ffb931aa81bd264a3"
+      }
+    },
+    "pid": 3038,
+    "guardrails": {
+      "no_code_execution": true,
+      "no_traffic_mutation": true,
+      "fresh_evidence_only": true,
+      "no_causal_without_identification": true
+    },
+    "digest": "sha256:41ec0bd4b614b53c6272abeb721da59ce8be2ac422e0718a6bc3f93246d79435",
+    "cost": {
+      "input_bytes": 6490,
+      "output_bytes": 3693,
+      "elapsed_seconds": 0.10777170900018973,
+      "model_tokens": 0
+    },
+    "worker_digest": "sha256:5c5c8314500790e298c7bc99cee4a16b6476387462c50a8910859a71c4db83c3"
+  },
+  "outcome": "success",
+  "failure_kind": null,
+  "correction": null,
+  "source_claim_ref": null,
+  "trace_id": "sha256:5b4c96420ecf8e647a9642a470335865d3d4b320a13bd3c51f913142032585f8",
+  "evidence_ref": "sha256:16e319232a238ee35ac8ed203dd7dda97f955a1566f3cb64a702634665307f03"
+}

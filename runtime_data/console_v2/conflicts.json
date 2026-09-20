@@ -1,0 +1,26 @@
+[
+  {
+    "id": "conflict-1",
+    "status": "open",
+    "lines": [
+      "A",
+      "B"
+    ],
+    "title": "A线实验与B线关联方向不一致",
+    "detail": "轮播改版 A 线 ITT 为负（-0.016，区间不含 0），B 线关联扫描同期曝光切片为正相关。疑似对照污染或结构混杂，需要业务事实核验。",
+    "human_can": "提供事件时间、影响范围、业务机制说明",
+    "human_cannot": "不能用经验判断替代识别报告"
+  },
+  {
+    "id": "conflict-2",
+    "status": "open",
+    "lines": [
+      "B",
+      "C"
+    ],
+    "title": "C线盯防信号与B线注册表缺位",
+    "detail": "C 线检出 competitor.delisting 与残差同向（lag 1），但变动注册表无对应记录。需要确认是否未登记的外部事件。",
+    "human_can": "确认外部事件真实性并补充时间/范围",
+    "human_cannot": "不能把确认直接写成因果结论"
+  }
+]

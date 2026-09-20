@@ -1,0 +1,14 @@
+.......E.
+======================================================================
+ERROR: test_new_window_units_and_source_invalidation (test_stage_f.SynthesisTests.test_new_window_units_and_source_invalidation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/tests/test_stage_f.py", line 86, in test_new_window_units_and_source_invalidation
+    self.service.registry.invalidate(self.ref,'source corrected')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: HypothesisRegistry.invalidate() takes 2 positional arguments but 3 were given
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.123s
+
+FAILED (errors=1)

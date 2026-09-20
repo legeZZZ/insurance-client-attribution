@@ -1,0 +1,8 @@
+{
+  "operation": "enterprise",
+  "parameters": {
+    "manifest_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/examples/domains/ecommerce/B.json",
+    "as_of": 101,
+    "runtime_dir": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-bb89402ceb/runtime"
+  }
+}

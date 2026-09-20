@@ -26,8 +26,10 @@ from goai_control_tower.track2_analysis import sanitize_rows
 from goai_control_tower.track2_benchmark import run_hidden_benchmark
 from goai_control_tower.track2_datasets import load_dataset_catalog
 from goai_control_tower.track2_real_data import run_real_data_case
-from goai_control_tower.track2_v5_bridge import evaluate_with_bayes, run_line_b_monthly_review
-
+from goai_control_tower.track2_v5_bridge import (
+    evaluate_with_bayes,
+    run_line_b_monthly_review,
+)
 
 RUNTIME = PROJECT / "runtime_data"
 STATIC = PROJECT / "web" / "static"
@@ -58,11 +60,19 @@ class Handler(BaseHTTPRequestHandler):
             self.send_error(404)
             return
         body = candidate.read_bytes()
-        content_type = mimetypes.guess_type(str(candidate))[0] or "application/octet-stream"
+        content_type = (
+            mimetypes.guess_type(str(candidate))[0] or "application/octet-stream"
+        )
         self.send_response(200)
         self.send_header(
             "Content-Type",
-            content_type + ("; charset=utf-8" if content_type.startswith("text/") or content_type == "application/javascript" else ""),
+            content_type
+            + (
+                "; charset=utf-8"
+                if content_type.startswith("text/")
+                or content_type == "application/javascript"
+                else ""
+            ),
         )
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
@@ -72,7 +82,13 @@ class Handler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         query = parse_qs(parsed.query)
         if parsed.path == "/api/health":
-            self.send_json({"status": "ok", "runtime": "local-track2-conformance", "version": "0.1.0"})
+            self.send_json(
+                {
+                    "status": "ok",
+                    "runtime": "local-track2-conformance",
+                    "version": "0.1.0",
+                }
+            )
             return
         if parsed.path == "/api/track2/case":
             case = query.get("case", ["A"])[0].upper()
@@ -89,11 +105,14 @@ class Handler(BaseHTTPRequestHandler):
         if parsed.path == "/api/track2/real-data":
             csv_path = RUNTIME / "datasets" / "uci-bank-marketing" / "data.csv"
             if not csv_path.is_file():
-                self.send_json({
-                    "error": "真实数据尚未下载",
-                    "dataset": "UCI Bank Marketing",
-                    "download_command": "PYTHONPATH=src python3 -m goai_control_tower --track2-fetch-real-data",
-                }, status=404)
+                self.send_json(
+                    {
+                        "error": "真实数据尚未下载",
+                        "dataset": "UCI Bank Marketing",
+                        "download_command": "PYTHONPATH=src python3 -m goai_control_tower --track2-fetch-real-data",
+                    },
+                    status=404,
+                )
                 return
             self.send_json(run_real_data_case(RUNTIME, csv_path))
             return
@@ -107,8 +126,11 @@ class Handler(BaseHTTPRequestHandler):
                 "metric_contract": default_metric_contract(),
                 "experiment_metadata": case_experiment_metadata(case),
             }
-            self.send_json(evaluate_with_bayes(bundle, practical_threshold=threshold,
-                                               hte_segment_field="channel"))
+            self.send_json(
+                evaluate_with_bayes(
+                    bundle, practical_threshold=threshold, hte_segment_field="channel"
+                )
+            )
             return
         if parsed.path == "/api/track2/line-b-review":
             # Line B: monthly baseline attribution evidence pack.

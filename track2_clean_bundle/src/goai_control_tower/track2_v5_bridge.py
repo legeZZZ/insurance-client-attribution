@@ -10,31 +10,32 @@ v3 behavior: the hidden benchmark and all v3 metrics stay untouched.
 from __future__ import annotations
 
 import sys
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Any, Dict, Mapping
+from typing import Any
 
 # track2_v5 lives at the workspace root, one level above this bundle.
 _WORKSPACE_ROOT = Path(__file__).resolve().parents[3]
 if str(_WORKSPACE_ROOT) not in sys.path:
     sys.path.insert(0, str(_WORKSPACE_ROOT))
 
-from track2_v5.bayes import bundle_compare, estimate_hte  # noqa: E402
-from track2_v5.association_discovery import (  # noqa: E402
+from track2_v5.association_discovery import (
     discover_association_factors,
     factor_series_from_snapshots,
 )
-from track2_v5.baseline_attribution import (  # noqa: E402
+from track2_v5.baseline_attribution import (
     attribute_baseline,
     change_registry_entry,
     external_event_entry,
     run_validation,
     simulate_panel,
 )
+from track2_v5.bayes import bundle_compare, estimate_hte
 
-from .track2_analysis import evaluate_public_dataset, sanitize_rows  # noqa: E402
+from .track2_analysis import evaluate_public_dataset, sanitize_rows
 
 
-def run_line_b_monthly_review(runtime_dir=None) -> Dict[str, Any]:
+def run_line_b_monthly_review(runtime_dir=None) -> dict[str, Any]:
     """Line B monthly review: baseline attribution + registries -> evidence pack.
 
     Produces a v3-style evidence pack JSON so the console / Evidence drawer
@@ -43,13 +44,23 @@ def run_line_b_monthly_review(runtime_dir=None) -> Dict[str, Any]:
     """
     panel = simulate_panel()
     registry = [
-        change_registry_entry("chg_ranking", 15, "search_ranking", experiment_id="exp_ranking"),
-        change_registry_entry("chg_subsidy", 30, "subsidy_push", experiment_id="exp_subsidy"),
+        change_registry_entry(
+            "chg_ranking", 15, "search_ranking", experiment_id="exp_ranking"
+        ),
+        change_registry_entry(
+            "chg_subsidy", 30, "subsidy_push", experiment_id="exp_subsidy"
+        ),
     ]
-    external = [external_event_entry("ext_regulation", 45, 49, "regulation", "监管新规发布")]
+    external = [
+        external_event_entry("ext_regulation", 45, 49, "regulation", "监管新规发布")
+    ]
     demo = attribute_baseline(
-        panel["days"], panel["control"], panel["treated"],
-        registry, external, panel["experiments"],
+        panel["days"],
+        panel["control"],
+        panel["treated"],
+        registry,
+        external,
+        panel["experiments"],
     )
     anomaly_windows = [
         {
@@ -78,14 +89,21 @@ def run_line_b_monthly_review(runtime_dir=None) -> Dict[str, Any]:
             "source_reliability": 0.65,
         },
     ]
-    association_series = factor_series_from_snapshots([
-        {"factor_id": "external.fx_rate_usd_cny", "source_type": "factor_series",
-         "kind": "macro", "day": day,
-         "value": 1.0 + (0.02 if day >= 50 else 0.0),
-         "scope_id": "cross_border", "scope_match": 0.45,
-         "source_reliability": 0.70}
-        for day in panel["days"]
-    ])
+    association_series = factor_series_from_snapshots(
+        [
+            {
+                "factor_id": "external.fx_rate_usd_cny",
+                "source_type": "factor_series",
+                "kind": "macro",
+                "day": day,
+                "value": 1.0 + (0.02 if day >= 50 else 0.0),
+                "scope_id": "cross_border",
+                "scope_match": 0.45,
+                "source_reliability": 0.70,
+            }
+            for day in panel["days"]
+        ]
+    )
     association_discovery = discover_association_factors(
         panel["days"],
         demo["series"]["residual"],
@@ -119,7 +137,10 @@ def run_line_b_monthly_review(runtime_dir=None) -> Dict[str, Any]:
         evidence_dir.mkdir(parents=True, exist_ok=True)
         path = evidence_dir / "T2-lineB-monthly-review.json"
         import json as _json
-        path.write_text(_json.dumps(pack, ensure_ascii=False, indent=2), encoding="utf-8")
+
+        path.write_text(
+            _json.dumps(pack, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
         pack["evidence_pack_path"] = str(path)
     return pack
 
@@ -137,7 +158,7 @@ def evaluate_with_bayes(
     practical_threshold: float = 0.005,
     hte_segment_field: str | None = None,
     seed: int = 20260809,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """v3 evaluation + Bayesian decision layer for CAUSAL_READY datasets.
 
     - If the v3 gate is not CAUSAL_READY, the Bayesian layer refuses to
@@ -161,8 +182,9 @@ def evaluate_with_bayes(
     control = _binary_group(rows, treatment_column, "issued", 0)
     treatment = _binary_group(rows, treatment_column, "issued", 1)
     bundle_result = bundle_compare(
-        control, treatment, practical_threshold=practical_threshold, seed=seed)
-    bayes_layer: Dict[str, Any] = {
+        control, treatment, practical_threshold=practical_threshold, seed=seed
+    )
+    bayes_layer: dict[str, Any] = {
         "status": "ACTIVE",
         "bundle_decision": bundle_result,
         "decision_rule": {
@@ -177,13 +199,16 @@ def evaluate_with_bayes(
         segments = []
         for value in sorted({str(row.get(hte_segment_field)) for row in rows}):
             subset = [row for row in rows if str(row.get(hte_segment_field)) == value]
-            segments.append({
-                "segment_id": f"{hte_segment_field}={value}",
-                "control": _binary_group(subset, treatment_column, "issued", 0),
-                "treatment": _binary_group(subset, treatment_column, "issued", 1),
-            })
+            segments.append(
+                {
+                    "segment_id": f"{hte_segment_field}={value}",
+                    "control": _binary_group(subset, treatment_column, "issued", 0),
+                    "treatment": _binary_group(subset, treatment_column, "issued", 1),
+                }
+            )
         bayes_layer["hte"] = estimate_hte(
-            segments, practical_threshold=practical_threshold, seed=seed)
+            segments, practical_threshold=practical_threshold, seed=seed
+        )
 
     result["bayes_layer"] = bayes_layer
     return result

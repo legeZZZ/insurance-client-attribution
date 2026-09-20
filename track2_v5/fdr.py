@@ -24,4 +24,20 @@ def benjamini_hochberg(pvalues: Sequence[float]) -> list[float]:
     return adjusted.tolist()
 
 
-__all__ = ["benjamini_hochberg"]
+def holm(pvalues: Sequence[float]) -> list[float]:
+    """Step-down Bonferroni; FWER validity requires valid input p-values."""
+    if not pvalues:
+        return []
+    values = np.asarray(pvalues, dtype=float)
+    if not np.all(np.isfinite(values)) or np.any(values < 0) or np.any(values > 1):
+        raise ValueError("pvalues must be finite and in [0, 1]")
+    order = np.argsort(values)
+    result = np.empty(len(values))
+    running = 0.0
+    for rank, pos in enumerate(order):
+        running = max(running, min(1.0, (len(values) - rank) * values[pos]))
+        result[pos] = running
+    return result.tolist()
+
+
+__all__ = ["benjamini_hochberg", "holm"]

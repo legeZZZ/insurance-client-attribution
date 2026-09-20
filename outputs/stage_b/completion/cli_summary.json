@@ -1,0 +1,66 @@
+{
+  "cuped": {
+    "status": "ESTIMATED",
+    "output": "outputs/stage_b/completion/cuped.json"
+  },
+  "ratio_itt": {
+    "status": "ESTIMATED",
+    "output": "outputs/stage_b/completion/ratio_itt.json"
+  },
+  "forest": {
+    "status": "ESTIMATED",
+    "output": "outputs/stage_b/completion/forest.json"
+  },
+  "staggered": {
+    "status": "ESTIMATED",
+    "output": "outputs/stage_b/completion/staggered.json"
+  },
+  "mixture": {
+    "status": "ESTIMATED",
+    "output": "outputs/stage_b/completion/mixture.json"
+  },
+  "ratio_series": {
+    "status": "ESTIMATED",
+    "output": "outputs/stage_b/completion/ratio_series.json"
+  },
+  "gcm_mean": {
+    "status": "ESTIMATED",
+    "output": "outputs/stage_b/completion/gcm_mean.json"
+  },
+  "gcm_variance": {
+    "status": "ESTIMATED",
+    "output": "outputs/stage_b/completion/gcm_variance.json"
+  },
+  "gcm_kl": {
+    "status": "ESTIMATED",
+    "output": "outputs/stage_b/completion/gcm_kl.json"
+  },
+  "gcm_refused": {
+    "status": "REFUSED",
+    "output": "outputs/stage_b/completion/gcm_refused.json"
+  },
+  "negative_suite": {
+    "status": "ESTIMATED",
+    "output": "outputs/stage_b/completion/negative_suite.json"
+  },
+  "action": {
+    "status": "LAUNCH_PROPOSAL",
+    "output": "outputs/stage_b/completion/action.json"
+  },
+  "proposal": {
+    "status": "PROPOSED",
+    "output": "outputs/stage_b/completion/proposal.json"
+  },
+  "sequential_policy": {
+    "status": "OUTPUT",
+    "output": "outputs/stage_b/completion/sequential_policy.json"
+  },
+  "checkpoint": {
+    "status": "STOPPED",
+    "output": "outputs/stage_b/completion/checkpoint.json"
+  },
+  "large_max_t": {
+    "status": "OUTPUT",
+    "output": "outputs/stage_b/completion/large_max_t.json"
+  }
+}

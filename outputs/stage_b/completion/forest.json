@@ -1,0 +1,182 @@
+{
+  "track": "A",
+  "status": "ESTIMATED",
+  "challenger": "EconML_CausalForestDML",
+  "contracts": {
+    "MetricContract": {
+      "name": "conversion",
+      "numerator": "converted_users",
+      "denominator": "users",
+      "aggregation": "ratio_of_sums",
+      "unit": "rate",
+      "analysis_unit": "user",
+      "target_population": "eligible_users",
+      "timezone": "UTC",
+      "window": [
+        0,
+        9
+      ],
+      "maturity_days": 2,
+      "deduplication": "unit_id",
+      "schema_version": "1.0",
+      "contract_type": "MetricContract",
+      "digest": "sha256:a465b7b9997615c548c54c563f2f4a8922265bb674d0b7dc130336ed2f7f583b"
+    },
+    "IdentificationReport": {
+      "treatment": "assignment",
+      "outcome": "conversion",
+      "design": "RCT",
+      "status": "IDENTIFIED",
+      "assumptions": [
+        {
+          "name": "data_valid",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:0d899a17b3cedc46e07ffd815559cbf4105912263661a2567ee2eb6c892375d5"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "outcome_mature",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:0d899a17b3cedc46e07ffd815559cbf4105912263661a2567ee2eb6c892375d5"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "support_overlap",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:0d899a17b3cedc46e07ffd815559cbf4105912263661a2567ee2eb6c892375d5"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "assignment_traceable",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "fixed randomization"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "srm_pass",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:0d899a17b3cedc46e07ffd815559cbf4105912263661a2567ee2eb6c892375d5"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "assignment_consistent",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:0d899a17b3cedc46e07ffd815559cbf4105912263661a2567ee2eb6c892375d5"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "interference_absent",
+          "status": "assumed",
+          "passed": true,
+          "evidence_refs": [
+            "independent groups"
+          ],
+          "data_verifiable": false
+        }
+      ],
+      "evidence_refs": [
+        "fixed randomization",
+        "independent groups",
+        "sha256:0d899a17b3cedc46e07ffd815559cbf4105912263661a2567ee2eb6c892375d5"
+      ],
+      "adjustment_set": [
+        "x"
+      ],
+      "forbidden_adjustments": [
+        "assignment",
+        "conversion"
+      ],
+      "rejected_adjustments": [],
+      "support": {
+        "target_population": "eligible_users",
+        "data_digest": "sha256:0d899a17b3cedc46e07ffd815559cbf4105912263661a2567ee2eb6c892375d5",
+        "overlap_check": {
+          "status": "supported",
+          "evidence_refs": [
+            "sha256:0d899a17b3cedc46e07ffd815559cbf4105912263661a2567ee2eb6c892375d5"
+          ]
+        }
+      },
+      "ambiguities": [],
+      "reason_codes": [],
+      "route": "A",
+      "effect_scope": "individual",
+      "causal_effect_allowed": true,
+      "supplemental_evidence_needed": [],
+      "graph_ref": null,
+      "dag_digest": null,
+      "schema_version": "1.0",
+      "contract_type": "IdentificationReport",
+      "digest": "sha256:f55f188f6f3761485657ff99f713179f0fe2c7fc20047a9fc27844dc479e2188"
+    },
+    "EffectEstimate": {
+      "estimand": "ITT",
+      "unit": "rate",
+      "estimate": -0.048258809965174024,
+      "interval": [
+        -0.19095781795793182,
+        0.09444019802758373
+      ],
+      "interval_method": "honest_forest_BLB_approximation",
+      "selection_status": "exploratory",
+      "target_population": "eligible_users",
+      "window": [
+        0,
+        9
+      ],
+      "diagnostics": {
+        "honest": true,
+        "n_estimators": 40,
+        "variance_unit": "cluster",
+        "training_groups": 100,
+        "seed": 20260915,
+        "interval_scope": "pointwise honest forest approximation, not adaptive subgroup confirmation",
+        "query_features": [
+          [
+            0.1
+          ],
+          [
+            0.8
+          ]
+        ],
+        "cate": [
+          0.030845041075219112,
+          -0.10333040275607795
+        ],
+        "cate_intervals": [
+          [
+            -0.0915182669897976,
+            0.1532083491402358
+          ],
+          [
+            -0.2815351165887086,
+            0.07487431107655267
+          ]
+        ]
+      },
+      "identification_ref": "sha256:f55f188f6f3761485657ff99f713179f0fe2c7fc20047a9fc27844dc479e2188",
+      "method": "EconML_CausalForestDML",
+      "schema_version": "1.0",
+      "contract_type": "EffectEstimate",
+      "digest": "sha256:07bb6ecd5a590c17e19c78033cd774c4f2429ae0a8d128082fa057dda1e8f2c4"
+    }
+  }
+}

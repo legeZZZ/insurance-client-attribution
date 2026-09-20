@@ -1,0 +1,21 @@
+{
+  "operation": "investigation",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-cbec5763f469/investigation.db",
+    "action": "create_loop",
+    "parameters": {
+      "data_ref": "sha256:6af9f02bda48fef28e57e1b7aa6a39eb421b54cf0396713b855e6d82ac7db71b",
+      "resource_name": "panel",
+      "config": {
+        "max_lag": 1,
+        "derived_layers": [
+          "level"
+        ],
+        "smoothing_window": 1,
+        "bootstrap_reps": 19,
+        "block_length": 3,
+        "min_abs_correlation": 0.1
+      }
+    }
+  }
+}

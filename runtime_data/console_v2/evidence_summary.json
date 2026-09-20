@@ -1,0 +1,28 @@
+{
+  "regression": {
+    "local": "235/235",
+    "container": "234/234",
+    "cli_acceptance": 48
+  },
+  "statistics": {
+    "association_fdp_max": 0.01,
+    "association_power": 1.0,
+    "randomized_coverage": [
+      0.9,
+      0.98
+    ],
+    "watchlist_keep_rate": "30/30（植入三型）",
+    "watchlist_null_rate": "1/30"
+  },
+  "negative_results": [
+    "图方向严格共识在植入场景功效为 0——不标为统计功效达标",
+    "稀疏信号下 knockoff 功效为 0——低功效负结果",
+    "错设协方差时 knockoff FDP≈0.562——禁止正式使用的压力证据",
+    "三组记忆条件正确率相同——不宣称“越用越强”"
+  ],
+  "boundaries": [
+    "无随机化证据只输出关联级结论；外部因子恒为 TEMPORAL_ASSOCIATION",
+    "研究模块（knockoff/因子合成）formal_selection_allowed=false",
+    "反馈与人工标签不自动晋升任何结论"
+  ]
+}

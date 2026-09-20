@@ -1,0 +1,36 @@
+{
+  "status": "COMPLETED",
+  "owner_pid": 3054,
+  "claim_promotion_allowed": false,
+  "feedback": {
+    "entry": {
+      "seq": 4,
+      "kind": "alert_feedback",
+      "prev_digest": "c0771dce5bb8e409",
+      "alert_id": "sha256:c2c02c75b8311a0c116dc0e6ec1dbe7fcffba26e112ca6b06c2b39ab4474c0ea",
+      "label": "false_positive",
+      "operator": "ops",
+      "source_kind": "internal_event",
+      "supersedes_seq": 3,
+      "digest": "03583f5978e38a1e"
+    },
+    "routing": "next_window_budget_calibration",
+    "event_id": "sha256:30ec74e7276f0c94c4cdfc1f0618c9dc0c4d30536d20e29f796e250151e8eeb0",
+    "revision": 2,
+    "supersedes": "sha256:3d41b992c56d8cab366250305a1a68cec8061db706104734446c6c3828d72489",
+    "payload": {
+      "alert_id": "sha256:c2c02c75b8311a0c116dc0e6ec1dbe7fcffba26e112ca6b06c2b39ab4474c0ea",
+      "operator": "ops",
+      "label": "false_positive",
+      "source_kind": "internal_event"
+    },
+    "kind": "alert_feedback",
+    "claim_promotion_allowed": false
+  },
+  "skill_proposal": {
+    "decision": "AUDIT_ONLY",
+    "feedback_ref": "sha256:30ec74e7276f0c94c4cdfc1f0618c9dc0c4d30536d20e29f796e250151e8eeb0",
+    "negative_example_retained": true
+  },
+  "next_step": "independent_validation_and_human_release"
+}

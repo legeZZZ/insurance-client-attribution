@@ -165,9 +165,23 @@ def attribute_baseline(
     change_registry: Sequence[Mapping[str, Any]],
     external_registry: Sequence[Mapping[str, Any]],
     experiments: Mapping[str, Mapping[str, float]],
-    detection_threshold: float = 18.0,
+    detection_threshold: float | None = None,
     min_run: int = 3,
+    metric_contract: Mapping[str, Any] | None = None,
+    experiment_covariance: Mapping[str, Mapping[str, float]] | None = None,
 ) -> dict[str, Any]:
+    if detection_threshold is None:
+        detection_threshold = (
+            0.005 if metric_contract and metric_contract.get("unit") == "rate" else 18.0
+        )
+    if metric_contract is not None:
+        from .contracts import validate_contract
+
+        metric_contract = validate_contract("MetricContract", metric_contract)
+        if metric_contract["unit"] == "rate" and detection_threshold > 1:
+            raise ValueError(
+                "rate detection_threshold must use probability units between 0 and 1"
+            )
     series_validation = validate_ordered_series(
         days, control, treated, component="baseline_attribution"
     )
@@ -203,6 +217,25 @@ def attribute_baseline(
             raise ValueError(
                 f"external_registry[{index}] window must be contained in days"
             )
+    # A shared experimental estimate may not be silently charged twice.
+    assignments: dict[str, list[Mapping[str, Any]]] = {}
+    for ch in change_registry:
+        if ch.get("experiment_id"):
+            assignments.setdefault(str(ch["experiment_id"]), []).append(ch)
+    for exp_id, changes in assignments.items():
+        if len(changes) > 1:
+            if any("allocation_weight" not in ch for ch in changes):
+                raise ValueError(
+                    f"experiment {exp_id} reused without explicit allocation weights"
+                )
+            weights = [float(ch["allocation_weight"]) for ch in changes]
+            if (
+                any(not math.isfinite(w) or w < 0 for w in weights)
+                or sum(weights) > 1.0 + 1e-12
+            ):
+                raise ValueError(
+                    "shared experiment allocation weights must be non-negative and sum <= 1"
+                )
     c = np.asarray(control)
     t = np.asarray(treated)
     gap = t - c  # treated vs persistent baseline: no model assumptions
@@ -212,13 +245,93 @@ def attribute_baseline(
     explained = np.zeros(len(days))
     per_change_explained: dict[str, np.ndarray] = {}
     shrunk_map = dict(zip(experiments.keys(), agg["per_experiment_shrunk"]))
+    # In contract mode independent target effects are not pooled as if exchangeable.
+    # Legacy simulation mode retains its documented partial-pooling benchmark.
+    if metric_contract is not None:
+        shrunk_map = {key: float(e["att_estimate"]) for key, e in experiments.items()}
+    ids = list(experiments)
+    coefficients = np.zeros((len(days), len(ids)))
+    transfer_checks = []
     for ch in change_registry:
         exp_id = ch.get("experiment_id")
         effect = np.zeros(len(days))
-        if exp_id and exp_id in shrunk_map:
-            effect[np.asarray(days) >= ch["start_day"]] = shrunk_map[exp_id]
+        issues = []
+        if exp_id:
+            estimate = experiments[exp_id]
+            if metric_contract is not None:
+                if estimate.get("unit") != metric_contract["unit"]:
+                    issues.append("EFFECT_UNIT_MISMATCH")
+                if (
+                    estimate.get("target_population")
+                    != metric_contract["target_population"]
+                    or ch.get("target_population")
+                    != metric_contract["target_population"]
+                ):
+                    issues.append("TARGET_POPULATION_NOT_ESTABLISHED")
+                if not estimate.get("evidence_ref"):
+                    issues.append("EXPERIMENT_EVIDENCE_MISSING")
+                if "coverage" not in ch:
+                    issues.append("COVERAGE_MISSING")
+            coverage = float(ch.get("coverage", 1.0))
+            allocation = float(ch.get("allocation_weight", 1.0))
+            ramp = ch.get("ramp_days", 0)
+            end = ch.get("end_day", days[-1])
+            if (
+                not math.isfinite(coverage)
+                or not 0 <= coverage <= 1
+                or not math.isfinite(allocation)
+                or not 0 <= allocation <= 1
+            ):
+                raise ValueError("coverage and allocation_weight must be in [0,1]")
+            if (
+                isinstance(ramp, bool)
+                or not isinstance(ramp, int)
+                or ramp < 0
+                or end < ch["start_day"]
+            ):
+                raise ValueError("invalid change response window")
+            if not issues:
+                response = np.asarray(
+                    [
+                        0.0
+                        if d < ch["start_day"] or d > end
+                        else min((d - ch["start_day"] + 1) / ramp, 1.0)
+                        if ramp
+                        else 1.0
+                        for d in days
+                    ]
+                )
+                weights = response * coverage * allocation
+                effect = weights * shrunk_map[exp_id]
+                coefficients[:, ids.index(exp_id)] += weights
+        else:
+            issues.append("EXPERIMENT_READOUT_MISSING")
+        transfer_checks.append(
+            {
+                "change_id": ch["change_id"],
+                "experiment_id": exp_id,
+                "included": not issues,
+                "reason_codes": issues,
+            }
+        )
         per_change_explained[ch["change_id"]] = effect
         explained += effect
+    covariance = np.diag([float(experiments[key]["att_se"]) ** 2 for key in ids])
+    if experiment_covariance is not None:
+        for i, left in enumerate(ids):
+            for j, right in enumerate(ids):
+                if right in experiment_covariance.get(left, {}):
+                    covariance[i, j] = float(experiment_covariance[left][right])
+        if (
+            not np.all(np.isfinite(covariance))
+            or not np.allclose(covariance, covariance.T)
+            or (len(ids) and np.linalg.eigvalsh(covariance).min() < -1e-10)
+        ):
+            raise ValueError(
+                "experiment covariance must be finite symmetric positive semidefinite"
+            )
+    variance = np.einsum("ij,jk,ik->i", coefficients, covariance, coefficients)
+    effect_se = np.sqrt(np.maximum(variance, 0))
 
     residual = gap - explained
 
@@ -233,17 +346,33 @@ def attribute_baseline(
     for ev in external_registry:
         event_days.update(range(ev["start_day"], ev["end_day"] + 1))
     fit_mask = np.array([d not in event_days for d in days])
-    trend = np.polyfit(np.asarray(days)[fit_mask], c[fit_mask], deg=1)
-    control_fit = np.polyval(trend, days)
+    trend_available = int(np.sum(fit_mask)) >= 2
+    control_fit = (
+        np.polyval(np.polyfit(np.asarray(days)[fit_mask], c[fit_mask], deg=1), days)
+        if trend_available
+        else None
+    )
     for ev in external_registry:
         window = (np.asarray(days) >= ev["start_day"]) & (
             np.asarray(days) <= ev["end_day"]
         )
+        if control_fit is None:
+            ext_assoc.append(
+                {
+                    "event_id": ev["event_id"],
+                    "kind": ev["kind"],
+                    "window_deviation": None,
+                    "claim_type": "TEMPORAL_ASSOCIATION",
+                    "alignment": "INSUFFICIENT_DATA",
+                    "reason": "fewer_than_two_non_event_days",
+                }
+            )
+            continue
         deviation = float(np.mean(c[window] - control_fit[window]))
         assoc = {
             "event_id": ev["event_id"],
             "kind": ev["kind"],
-            "window_deviation": round(deviation, 2),
+            "window_deviation": float(deviation),
             "claim_type": "TEMPORAL_ASSOCIATION",
             "note": "外生事件不可随机化；仅报告与指标的共同变化，不作因果断言。",
         }
@@ -263,12 +392,15 @@ def attribute_baseline(
     # 3) Unregistered / miscalibrated change detection: two-sided STEP
     #    detection on the smoothed residual. Both upward and downward shifts
     #    are anomalous; direction is retained as a separate business field.
-    kernel = np.ones(3) / 3.0
+    kernel = np.ones(min(3, len(days))) / min(3, len(days))
     smoothed = np.convolve(residual_after_ext, kernel, mode="same")
     smoothed[0] = residual_after_ext[0]
     smoothed[-1] = residual_after_ext[-1]
     n = len(days)
-    step_threshold = max(detection_threshold * 1.2, 1.0)
+    step_threshold = max(
+        detection_threshold * 1.2,
+        1e-12 if metric_contract and metric_contract["unit"] == "rate" else 1.0,
+    )
     candidates: list[tuple[int, float]] = []
     half = 5
     for i in range(half, n - half):
@@ -285,16 +417,16 @@ def attribute_baseline(
         if alerts and days[i] - alerts[-1]["onset_day"] <= half:
             if abs(score) > abs(alerts[-1]["step_score"]):
                 alerts[-1]["onset_day"] = int(days[i])
-                alerts[-1]["step_score"] = round(score, 2)
-                alerts[-1]["absolute_step"] = round(abs(score), 2)
+                alerts[-1]["step_score"] = float(score)
+                alerts[-1]["absolute_step"] = float(abs(score))
                 alerts[-1]["direction"] = "up" if score > 0 else "down"
             continue
         alerts.append(
             {
                 "alert": "UNEXPLAINED_STEP_SUSPECTED",
                 "onset_day": int(days[i]),
-                "step_score": round(score, 2),
-                "absolute_step": round(abs(score), 2),
+                "step_score": float(score),
+                "absolute_step": float(abs(score)),
                 "direction": "up" if score > 0 else "down",
                 "note": "未注册变更，或已注册变动的线上效果与实验 ATT 不一致（解释赤字）；上涨和下降均检测。",
             }
@@ -321,26 +453,44 @@ def attribute_baseline(
             ],
         },
         "baseline_definition": "persistent control group, no model assumptions",
+        "metric_contract": dict(metric_contract) if metric_contract else None,
+        "transfer_checks": transfer_checks,
+        "explained_uncertainty": {
+            "method": "linear_covariance_propagation_of_registered_readouts",
+            "scope": "unshrunk_registered_readouts_only; legacy pooled point estimates have no calibrated interval",
+            "cross_experiment_covariance": "supplied"
+            if experiment_covariance is not None
+            else "assumed_independent",
+            "standard_error": effect_se.tolist(),
+            "interval_95": (
+                [
+                    [float(v - 1.96 * se), float(v + 1.96 * se)]
+                    for v, se in zip(explained, effect_se)
+                ]
+                if metric_contract is not None
+                else None
+            ),
+        },
         "att_aggregation": {
-            "naive_total": round(agg["naive_total"], 2),
-            "hierarchical_total": round(agg["shrunk_total"], 2),
+            "naive_total": float(agg["naive_total"]),
+            "hierarchical_total": float(agg["shrunk_total"]),
             "tau2": round(agg["tau2"], 4),
         },
         "external_associations": ext_assoc,
         "unregistered_alerts": alerts,
         "unknown_bucket": {
             "window_start_day": int(unknown_start),
-            "mean_residual_late_window": round(unknown_mean, 2),
+            "mean_residual_late_window": float(unknown_mean),
             "claim_type": "UNEXPLAINED",
             "policy": "残差不建模、不摊派、不假装分解。",
         },
         "series": {
-            "gap": [round(float(v), 2) for v in gap],
-            "explained_registered": [round(float(v), 2) for v in explained],
+            "gap": [float(v) for v in gap],
+            "explained_registered": [float(v) for v in explained],
             "external_control_deviation": [
                 round(float(v), 2) for v in external_control_deviation
             ],
-            "residual": [round(float(v), 2) for v in residual_after_ext],
+            "residual": [float(v) for v in residual_after_ext],
         },
     }
 

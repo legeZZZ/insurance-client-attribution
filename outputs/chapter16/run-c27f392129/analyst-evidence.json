@@ -1,0 +1,38 @@
+[
+  {
+    "trace_id": "sha256:5b4c96420ecf8e647a9642a470335865d3d4b320a13bd3c51f913142032585f8",
+    "patch": {
+      "when": {
+        "workflow": "c_line"
+      },
+      "action": "scan_window",
+      "evidence": [
+        "sha256:16e319232a238ee35ac8ed203dd7dda97f955a1566f3cb64a702634665307f03"
+      ],
+      "polarity": "reinforce"
+    },
+    "issue": false,
+    "negative_example": false,
+    "analyst_pid": 3053,
+    "policy": "verified-operation-only/1",
+    "model_tokens": 0
+  },
+  {
+    "trace_id": "sha256:7f30dbc9031bff4bae9500883fac88b7191f6a0e008bfb096ae557d5a18dc106",
+    "patch": {
+      "when": {
+        "workflow": "c_line"
+      },
+      "action": "scan_window",
+      "evidence": [
+        "sha256:32c8bbb6d691ce9a9c847c8d4d29353d6f4192c050ff47d2572dce3a6eea8fa4"
+      ],
+      "polarity": "reinforce"
+    },
+    "issue": false,
+    "negative_example": false,
+    "analyst_pid": 3052,
+    "policy": "verified-operation-only/1",
+    "model_tokens": 0
+  }
+]

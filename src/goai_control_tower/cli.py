@@ -8,11 +8,15 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
-from .track2_benchmark import run_hidden_benchmark
-from .track2 import public_case, run_case
 from .configuration import load_config, resolve_output_dir, validate_evidence_pack
+from .track2 import public_case, run_case
+from .track2_benchmark import run_hidden_benchmark
 from .track2_datasets import load_dataset_catalog
-from .track2_real_data import fetch_bank_marketing_csv, run_real_data_case
+from .track2_real_data import (
+    fetch_bank_marketing_csv,
+    resolve_bank_marketing_csv,
+    run_real_data_case,
+)
 
 
 def _read_json(path: str | None) -> dict[str, Any] | None:
@@ -91,6 +95,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
         if args.fetch_real_data:
             fetch_bank_marketing_csv(real_data_path)
+        if not args.fetch_real_data:
+            real_data_path = resolve_bank_marketing_csv(output_dir, args.real_data_path)
         result["real_data"] = run_real_data_case(output_dir, real_data_path)
 
     print(json.dumps(result, ensure_ascii=False, indent=2))

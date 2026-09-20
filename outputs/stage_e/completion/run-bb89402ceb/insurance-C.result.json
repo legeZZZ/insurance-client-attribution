@@ -1,0 +1,128 @@
+{
+  "schema": "enterprise-result/1",
+  "case_id": "insurance-C",
+  "domain": "insurance",
+  "line": "C",
+  "engine": "track2_v5_shared",
+  "mode": "sandbox_no_production_actions",
+  "provenance": {
+    "manifest_digest": "sha256:9034f4156f7d2fe9ba3bba1a9b611f103909e794eeba20875a74a781232e474e",
+    "tables": [
+      {
+        "table": "panel",
+        "path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/examples/domains/insurance/panel.json",
+        "sha256": "sha256:049f3ecf55e0dc086961b7759b2ffc010030fcc36659edcaefd5e23aa499c303",
+        "mapped_digest": "sha256:049f3ecf55e0dc086961b7759b2ffc010030fcc36659edcaefd5e23aa499c303",
+        "rows": 100
+      },
+      {
+        "table": "factors",
+        "path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/examples/domains/insurance/factors.json",
+        "sha256": "sha256:e063d36c7d16752eed36df651f3265af88abc189622db9fd9bca0ce73ca18458",
+        "mapped_digest": "sha256:e063d36c7d16752eed36df651f3265af88abc189622db9fd9bca0ce73ca18458",
+        "rows": 100
+      }
+    ],
+    "source": {
+      "source_uri": "company://insurance/sandbox",
+      "license_ref": "declared-company-authorized",
+      "timezone": "UTC",
+      "available_day": 101
+    },
+    "as_of": 101
+  },
+  "data_ref": "sha256:18ca34104152d43faf509397c816beeb595f79f09409cbafa68e79947821e38a",
+  "result_ref": "sha256:8164b7c538a1a6724c083bcc3bc22a628390cccfa84c5a835df2ae2f08d828ba",
+  "result": {
+    "baseline": null,
+    "scan": {
+      "claim_type": "WATCHLIST",
+      "watchlist": [
+        {
+          "factor_id": "contact_intensity",
+          "parent_factor_id": "contact_intensity",
+          "scope_id": "global",
+          "metric_id": "policy_conversion",
+          "lag": 2,
+          "effect_shape": "persistent",
+          "correlation": 0.9943681384798791,
+          "coverage": 0.98,
+          "n_pairs": 98,
+          "kind": "unknown",
+          "score": 0.9744807757102816,
+          "budget_multiplier": 1.0,
+          "falsification": {
+            "placebo": {
+              "correlation": 0.016107198332388245,
+              "coverage": 0.9767441860465116,
+              "n_pairs": 84,
+              "kill": false,
+              "insufficient_data": false,
+              "applicable": true,
+              "status": "TESTED"
+            },
+            "lead_lag_reversal": {
+              "correlation": 0.03438977346482971,
+              "kill": false,
+              "skipped": false,
+              "applicable": true
+            },
+            "split_half": {
+              "first": 0.9940281957929499,
+              "second": 0.995486354295272,
+              "kill": false,
+              "applicable": true,
+              "status": "TESTED"
+            },
+            "negative_controls": []
+          },
+          "falsification_status": "SURVIVED_EXPLORATORY",
+          "claim_type": "WATCHLIST",
+          "grade": "REVIEW",
+          "alert_id": "sha256:7e024bba120402f513376b1a10e3892019cbf31b245e6d1557b91ccb6184ed07",
+          "window_id": "sha256:38cccf2bebd0b1eccb064f57a44043dbf786926a951a649a18bb3b9513a3ab4e",
+          "discovery_window": [
+            0,
+            99
+          ],
+          "next_step": "仅下一独立窗口确认可晋级；人工标签只进入验证队列"
+        }
+      ],
+      "deferred": [],
+      "killed": [],
+      "killed_count": 0,
+      "manifest": {
+        "M": 1,
+        "S": 1,
+        "K": 1,
+        "L": 1,
+        "grid_size": 1,
+        "tested": 1,
+        "test_budget": 15,
+        "budget": 3,
+        "attempts": [
+          {
+            "factor_id": "contact_intensity",
+            "parent_factor_id": "contact_intensity",
+            "scope_id": "global",
+            "metric_id": "policy_conversion",
+            "lag": 2,
+            "effect_shape": "persistent",
+            "correlation": 0.9943681384798791,
+            "coverage": 0.98,
+            "n_pairs": 98
+          }
+        ],
+        "truncated": false,
+        "selection_policy": "registered_order_with_feedback_priority",
+        "inference": "exploratory_only",
+        "total_tests_spent": 5,
+        "total_test_budget": 30
+      },
+      "policy": "exploratory_only_no_cross_time_error_control_claim",
+      "data_digest": "sha256:aa100d26bdcdae48bf7724c31748b42b9423d42a04fce9b350779fb8317b441f"
+    },
+    "execution_status": "COMPLETED",
+    "causal_eligible": false
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "status": "PASS",
+  "cli_cases": 16,
+  "cases": [
+    {
+      "case": "knockoff-dependent",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "case": "discovery-data",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "case": "disabled-config",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "case": "disabled-reject",
+      "expected": 2,
+      "returncode": 2,
+      "stderr": "DATA_INVALID: synthesis experimental switch is disabled\n"
+    },
+    {
+      "case": "enable",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "case": "product",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "case": "sum",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "case": "difference",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "case": "freeze",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "case": "mutate-frozen-reject",
+      "expected": 2,
+      "returncode": 2,
+      "stderr": "DATA_INVALID: family already frozen; new expressions require a new future task\n"
+    },
+    {
+      "case": "reuse-discovery-reject",
+      "expected": 2,
+      "returncode": 2,
+      "stderr": "DATA_INVALID: independent future confirmation window required\n"
+    },
+    {
+      "case": "confirmation-data",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "case": "confirm",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "case": "idempotent",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "case": "invalidate",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "case": "withdrawn",
+      "expected": 0,
+      "returncode": 0,
+      "stderr": ""
+    }
+  ],
+  "run_directory": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_f/completion/run-fc851e36fa"
+}

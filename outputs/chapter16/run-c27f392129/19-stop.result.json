@@ -1,0 +1,317 @@
+{
+  "name": "c",
+  "config": {
+    "input_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/chapter16/run-c27f392129/scan-input.json",
+    "interval_seconds": 60,
+    "max_staleness_seconds": 3600,
+    "test_budget": 30,
+    "lifetime_test_budget": 100000,
+    "timeout": 30,
+    "error_policy": "exploratory_only",
+    "total_alpha": 0.05,
+    "skill_name": null,
+    "skill_context": {},
+    "factor_db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/chapter16/run-c27f392129/factors.db"
+  },
+  "enabled": 0,
+  "watermark": 1,
+  "next_due": 1789625526.659766,
+  "runs": [
+    {
+      "id": "b43a6ce8b4ca46348c8a76c3a4c4cc9b",
+      "status": "COMPLETED",
+      "window": 0,
+      "body": {
+        "data_ref": "sha256:9830f282a5253857c132128a1572a7e83717515a707829287035dbbfb3e72283",
+        "request_digest": "sha256:03e003caae5647e294ac86ac764a56865132359b78c4192b0aa1f9d575beb3d7",
+        "raw_input_digest": "sha256:2aae822c48759fff755a3c2367b0e000d58e44fc67f1fd2fccbfa8b33c9a2626",
+        "registry_intake": {
+          "as_of": 79,
+          "search_window": 0,
+          "added": [],
+          "skipped": [],
+          "snapshot_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "tests_charged": 5,
+        "owner_pid": 2968,
+        "lease_until": 1789625496.007735,
+        "started_at": 1789625456.007735,
+        "result": {
+          "claim_type": "WATCHLIST",
+          "watchlist": [
+            {
+              "factor_id": "driver",
+              "parent_factor_id": "driver",
+              "scope_id": "global",
+              "metric_id": "metric",
+              "lag": 2,
+              "effect_shape": "persistent",
+              "correlation": 0.9939969656165095,
+              "coverage": 0.975,
+              "n_pairs": 78,
+              "kind": "internal_event",
+              "score": 0.9691470414760968,
+              "budget_multiplier": 1.0,
+              "falsification": {
+                "placebo": {
+                  "correlation": 0.004203492384784394,
+                  "coverage": 0.9696969696969697,
+                  "n_pairs": 64,
+                  "kill": false,
+                  "insufficient_data": false,
+                  "applicable": true,
+                  "status": "TESTED"
+                },
+                "lead_lag_reversal": {
+                  "correlation": 0.003275688992860208,
+                  "kill": false,
+                  "skipped": false,
+                  "applicable": true
+                },
+                "split_half": {
+                  "first": 0.9932369623607123,
+                  "second": 0.9937790952564576,
+                  "kill": false,
+                  "applicable": true,
+                  "status": "TESTED"
+                },
+                "negative_controls": []
+              },
+              "falsification_status": "SURVIVED_EXPLORATORY",
+              "claim_type": "WATCHLIST",
+              "grade": "REVIEW",
+              "alert_id": "sha256:ae2debdf6370f4715dccb71fd20449fa68270e8e2ad4026ac82b516ca5db023a",
+              "window_id": "0",
+              "discovery_window": [
+                0,
+                79
+              ],
+              "next_step": "仅下一独立窗口确认可晋级；人工标签只进入验证队列"
+            }
+          ],
+          "deferred": [],
+          "killed": [],
+          "killed_count": 0,
+          "manifest": {
+            "M": 1,
+            "S": 1,
+            "K": 1,
+            "L": 1,
+            "grid_size": 1,
+            "tested": 1,
+            "test_budget": 15,
+            "budget": 2,
+            "attempts": [
+              {
+                "factor_id": "driver",
+                "parent_factor_id": "driver",
+                "scope_id": "global",
+                "metric_id": "metric",
+                "lag": 2,
+                "effect_shape": "persistent",
+                "correlation": 0.9939969656165095,
+                "coverage": 0.975,
+                "n_pairs": 78
+              }
+            ],
+            "truncated": false,
+            "selection_policy": "registered_order_with_feedback_priority",
+            "inference": "exploratory_only",
+            "total_tests_spent": 5,
+            "total_test_budget": 30
+          },
+          "policy": "exploratory_only_no_cross_time_error_control_claim",
+          "data_digest": "sha256:dd785a808d731314f9a646be6f4d6a1d2a09bd6abba231de94ea5fa5888d7c6d"
+        },
+        "evidence_ref": "sha256:9cf4ef79917a8b423f73c6d035a3b07fddbeacc2d55e7808ae93604bd0ae6162",
+        "skill_usage": null,
+        "cost": {
+          "input_bytes": 4340,
+          "output_bytes": 2435,
+          "elapsed_seconds": 0.07991183300009652,
+          "model_tokens": 0
+        },
+        "completed_at": 1789625456.093786
+      }
+    },
+    {
+      "id": "f1bf3c2af2ae4dd88fb7001fcd867727",
+      "status": "COMPLETED",
+      "window": 1,
+      "body": {
+        "data_ref": "sha256:bfd3fd279ececa02e00472d745cb34d70b1fb7c469a22aab6f0085ceb8a6e3df",
+        "request_digest": "sha256:4e30b91e8e3d8a0f910dda3f9ca43347e2f69d8c80bb843d0e2809eb3e88fe17",
+        "raw_input_digest": "sha256:bfb697fd7d3d58353cc42536f46e76cba1d4217170701aa360b6571d2e767daa",
+        "registry_intake": {
+          "as_of": 79,
+          "search_window": 1,
+          "added": [
+            "sms"
+          ],
+          "skipped": [],
+          "snapshot_digest": "sha256:91997842e7ffe39f7b6875f0211c3016e86249173bd77afcf6d1e035a1312963"
+        },
+        "tests_charged": 10,
+        "owner_pid": 3020,
+        "lease_until": 1789625506.659766,
+        "started_at": 1789625466.659766,
+        "result": {
+          "claim_type": "WATCHLIST",
+          "watchlist": [
+            {
+              "factor_id": "driver",
+              "parent_factor_id": "driver",
+              "scope_id": "global",
+              "metric_id": "metric",
+              "lag": 2,
+              "effect_shape": "persistent",
+              "correlation": 0.9939969656165095,
+              "coverage": 0.975,
+              "n_pairs": 78,
+              "kind": "internal_event",
+              "score": 0.9691470414760968,
+              "budget_multiplier": 1.0,
+              "falsification": {
+                "placebo": {
+                  "correlation": 0.004203492384784394,
+                  "coverage": 0.9696969696969697,
+                  "n_pairs": 64,
+                  "kill": false,
+                  "insufficient_data": false,
+                  "applicable": true,
+                  "status": "TESTED"
+                },
+                "lead_lag_reversal": {
+                  "correlation": 0.003275688992860208,
+                  "kill": false,
+                  "skipped": false,
+                  "applicable": true
+                },
+                "split_half": {
+                  "first": 0.9932369623607123,
+                  "second": 0.9937790952564576,
+                  "kill": false,
+                  "applicable": true,
+                  "status": "TESTED"
+                },
+                "negative_controls": []
+              },
+              "falsification_status": "SURVIVED_EXPLORATORY",
+              "claim_type": "WATCHLIST",
+              "grade": "REVIEW",
+              "alert_id": "sha256:bf2207b78e2145535c4692f525960f1d60aadcafaeb83e1f2655cced0c7e2f55",
+              "window_id": "1",
+              "discovery_window": [
+                0,
+                79
+              ],
+              "next_step": "仅下一独立窗口确认可晋级；人工标签只进入验证队列"
+            },
+            {
+              "factor_id": "sms",
+              "parent_factor_id": "sms",
+              "scope_id": "global",
+              "metric_id": "metric",
+              "lag": 2,
+              "effect_shape": "persistent",
+              "correlation": 0.9939969656165095,
+              "coverage": 0.975,
+              "n_pairs": 78,
+              "kind": "internal_event",
+              "score": 0.9691470414760968,
+              "budget_multiplier": 1.0,
+              "falsification": {
+                "placebo": {
+                  "correlation": 0.004203492384784394,
+                  "coverage": 0.9696969696969697,
+                  "n_pairs": 64,
+                  "kill": false,
+                  "insufficient_data": false,
+                  "applicable": true,
+                  "status": "TESTED"
+                },
+                "lead_lag_reversal": {
+                  "correlation": 0.003275688992860208,
+                  "kill": false,
+                  "skipped": false,
+                  "applicable": true
+                },
+                "split_half": {
+                  "first": 0.9932369623607123,
+                  "second": 0.9937790952564576,
+                  "kill": false,
+                  "applicable": true,
+                  "status": "TESTED"
+                },
+                "negative_controls": []
+              },
+              "falsification_status": "SURVIVED_EXPLORATORY",
+              "claim_type": "WATCHLIST",
+              "grade": "REVIEW",
+              "alert_id": "sha256:455b96dc97c27b2c451f080109e74b6c93c35b6b4b32f6d36c1d450eaa48a613",
+              "window_id": "1",
+              "discovery_window": [
+                0,
+                79
+              ],
+              "next_step": "仅下一独立窗口确认可晋级；人工标签只进入验证队列"
+            }
+          ],
+          "deferred": [],
+          "killed": [],
+          "killed_count": 0,
+          "manifest": {
+            "M": 2,
+            "S": 1,
+            "K": 1,
+            "L": 1,
+            "grid_size": 2,
+            "tested": 2,
+            "test_budget": 15,
+            "budget": 2,
+            "attempts": [
+              {
+                "factor_id": "driver",
+                "parent_factor_id": "driver",
+                "scope_id": "global",
+                "metric_id": "metric",
+                "lag": 2,
+                "effect_shape": "persistent",
+                "correlation": 0.9939969656165095,
+                "coverage": 0.975,
+                "n_pairs": 78
+              },
+              {
+                "factor_id": "sms",
+                "parent_factor_id": "sms",
+                "scope_id": "global",
+                "metric_id": "metric",
+                "lag": 2,
+                "effect_shape": "persistent",
+                "correlation": 0.9939969656165095,
+                "coverage": 0.975,
+                "n_pairs": 78
+              }
+            ],
+            "truncated": false,
+            "selection_policy": "registered_order_with_feedback_priority",
+            "inference": "exploratory_only",
+            "total_tests_spent": 10,
+            "total_test_budget": 30
+          },
+          "policy": "exploratory_only_no_cross_time_error_control_claim",
+          "data_digest": "sha256:91b732d636bae6b00728c30679dd08fd6051381c3e80874ffb931aa81bd264a3"
+        },
+        "evidence_ref": "sha256:c33ea2dc3ecfb0e8118bdb16aaa4fdc74ca6821452188bf164c8c3af2c4843bd",
+        "skill_usage": null,
+        "cost": {
+          "input_bytes": 6504,
+          "output_bytes": 3707,
+          "elapsed_seconds": 0.08260133300018424,
+          "model_tokens": 0
+        },
+        "completed_at": 1789625466.746327
+      }
+    }
+  ]
+}

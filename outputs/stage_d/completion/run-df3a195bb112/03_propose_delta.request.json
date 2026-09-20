@@ -1,0 +1,16 @@
+{
+  "operation": "skills",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/governance.db",
+    "action": "propose",
+    "parameters": {
+      "name": "metric_skill",
+      "trace_ids": [
+        "sha256:b737b27d0fb4d73e9ad4db303b7262d0b8a96e334f752c076df30952d8b21f9c"
+      ],
+      "applicability": {
+        "metric_kind": "ratio_of_sums"
+      }
+    }
+  }
+}

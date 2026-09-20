@@ -1,0 +1,9 @@
+{
+  "operation": "external_adapter",
+  "parameters": {
+    "kind": "N3",
+    "parameters": {
+      "mode": "production"
+    }
+  }
+}

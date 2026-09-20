@@ -1,0 +1,12 @@
+{
+  "operation": "skills",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-3525b858da2e/governance.db",
+    "action": "validate",
+    "parameters": {
+      "name": "watch_skill",
+      "version": 1,
+      "suite_ref": "sha256:4a5d3914472b8b29a6374b126115d946deea028f8c6ab57414c5ca666261a3b2"
+    }
+  }
+}

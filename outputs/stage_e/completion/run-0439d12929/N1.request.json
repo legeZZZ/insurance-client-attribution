@@ -1,0 +1,32 @@
+{
+  "operation": "external_adapter",
+  "parameters": {
+    "kind": "N1",
+    "parameters": {
+      "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_e/completion/run-0439d12929/factors.db",
+      "current_window": 100,
+      "available_day": 101,
+      "factor_series": [
+        {
+          "factor_id": "external-x",
+          "days": [
+            0,
+            1
+          ],
+          "values": [
+            1,
+            2
+          ],
+          "source_uri": "declared://authorized",
+          "license_ref": "declared",
+          "unit": "index",
+          "source_type": "authorized_external",
+          "response_window": [
+            1,
+            2
+          ]
+        }
+      ]
+    }
+  }
+}

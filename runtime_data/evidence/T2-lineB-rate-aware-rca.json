@@ -23,41 +23,41 @@
       "closed": true,
       "reason": null,
       "rate": -0.002764893353180502,
-      "mix": -1.527107192263285e-05,
+      "mix": -1.5271071922632865e-05,
       "interaction": -1.998837030497584e-05,
       "delta": -0.0028001527954081076,
-      "closure_error": 2.8697476252975695e-18,
+      "closure_error": 2.8833001524536384e-18,
       "share_sum_before": 1.0,
       "share_sum_after": 1.0,
       "rate_by_cell": {
-        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": -8.172722867552023e-06,
-        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": 3.6823251932054314e-06,
-        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": -0.0027621861452853647,
         "(('channel', 'organic'), ('region', 'west'), ('version', '8.3'))": 8.246247483391596e-06,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": -0.0027621861452853647,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": -1.5980442016358864e-05,
         "(('channel', 'organic'), ('region', 'east'), ('version', '8.3'))": -5.366892955916519e-06,
-        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 1.520582201365803e-05,
         "(('channel', 'paid'), ('region', 'west'), ('version', '8.4'))": -3.2154474556495304e-07,
-        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": -1.5980442016358864e-05
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": 3.6823251932054314e-06,
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": -8.172722867552023e-06,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 1.520582201365803e-05
       },
       "mix_by_cell": {
-        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": -0.00016217767100756752,
-        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": -9.202677316910367e-06,
-        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": 4.2392799579977055e-05,
         "(('channel', 'organic'), ('region', 'west'), ('version', '8.3'))": -2.9821453294303302e-05,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": 4.2392799579977055e-05,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": 6.746090955983358e-06,
         "(('channel', 'organic'), ('region', 'east'), ('version', '8.3'))": 9.06210111322652e-06,
-        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 5.138615683631181e-05,
         "(('channel', 'paid'), ('region', 'west'), ('version', '8.4'))": 7.634358121064958e-05,
-        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": 6.746090955983358e-06
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": -9.202677316910367e-06,
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": -0.00016217767100756752,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 5.138615683631181e-05
       },
       "interaction_by_cell": {
-        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": 2.101731628609543e-07,
-        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": -5.466981221985462e-09,
-        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": -2.025967508148206e-05,
         "(('channel', 'organic'), ('region', 'west'), ('version', '8.3'))": -3.9330942403005225e-08,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": -2.025967508148206e-05,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": -1.8693168008671554e-08,
         "(('channel', 'organic'), ('region', 'east'), ('version', '8.3'))": -7.794410689198802e-09,
-        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 1.3669010032967963e-07,
         "(('channel', 'paid'), ('region', 'west'), ('version', '8.4'))": -4.2729843615530434e-09,
-        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": -1.8693168008671554e-08
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": -5.466981221985462e-09,
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": 2.101731628609543e-07,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 1.3669010032967963e-07
       },
       "basis": "probability_difference; rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate"
     },
@@ -66,41 +66,41 @@
       "closed": true,
       "reason": null,
       "rate": 4.1968867557947955e-05,
-      "mix": -1.5572466169001475e-05,
+      "mix": -1.557246616900149e-05,
       "interaction": 1.0221107926153772e-07,
-      "delta": 2.6498612468200955e-05,
-      "closure_error": -7.06307687490859e-18,
+      "delta": 2.6498612468207894e-05,
+      "closure_error": -1.0724231205627493e-19,
       "share_sum_before": 1.0,
       "share_sum_after": 1.0,
       "rate_by_cell": {
-        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": -8.767484796018292e-07,
-        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": 6.966024891256489e-06,
-        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": -5.47241112205095e-07,
         "(('channel', 'organic'), ('region', 'west'), ('version', '8.3'))": 9.148010195960756e-06,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": -5.47241112205095e-07,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": 8.352934358533326e-06,
         "(('channel', 'organic'), ('region', 'east'), ('version', '8.3'))": 6.579675939122688e-06,
-        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 1.0638747421737857e-05,
         "(('channel', 'paid'), ('region', 'west'), ('version', '8.4'))": 1.7074643431437621e-06,
-        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": 8.352934358533326e-06
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": 6.966024891256489e-06,
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": -8.767484796018292e-07,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 1.0638747421737857e-05
       },
       "mix_by_cell": {
-        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": -0.00014268045603231167,
-        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": -8.11945531952583e-06,
-        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": 3.6785409514787994e-05,
         "(('channel', 'organic'), ('region', 'west'), ('version', '8.3'))": -2.628100678447734e-05,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": 3.6785409514787994e-05,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": 5.855517892487204e-06,
         "(('channel', 'organic'), ('region', 'east'), ('version', '8.3'))": 7.956404993666598e-06,
-        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 4.468485447419568e-05,
         "(('channel', 'paid'), ('region', 'west'), ('version', '8.4'))": 6.622626509217587e-05,
-        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": 5.855517892487204e-06
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": -8.11945531952583e-06,
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": -0.00014268045603231167,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 4.468485447419568e-05
       },
       "interaction_by_cell": {
-        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": 2.2546830961691892e-08,
-        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": -1.0342141248864424e-08,
-        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": -4.013823305655126e-09,
         "(('channel', 'organic'), ('region', 'west'), ('version', '8.3'))": -4.363195051374509e-08,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.4'))": -4.013823305655126e-09,
+        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": 9.7708689890823e-09,
         "(('channel', 'organic'), ('region', 'east'), ('version', '8.3'))": 9.55575169704573e-09,
-        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 9.563517520810647e-08,
         "(('channel', 'paid'), ('region', 'west'), ('version', '8.4'))": 2.2690367473875972e-08,
-        "(('channel', 'paid'), ('region', 'west'), ('version', '8.3'))": 9.7708689890823e-09
+        "(('channel', 'organic'), ('region', 'east'), ('version', '8.4'))": -1.0342141248864424e-08,
+        "(('channel', 'organic'), ('region', 'west'), ('version', '8.4'))": 2.2546830961691892e-08,
+        "(('channel', 'paid'), ('region', 'east'), ('version', '8.3'))": 9.563517520810647e-08
       },
       "basis": "probability_difference; rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate"
     }
@@ -154,7 +154,7 @@
       "candidate_contribution_change": -0.0027400530207868697,
       "candidate_closure_error": 0.0,
       "decomposition_status": "CLOSED",
-      "decomposition_closure_error": 9.815417792782832e-18,
+      "decomposition_closure_error": 2.8833001524536384e-18,
       "decomposition_basis": "rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate",
       "coverage": 0.12645207673776218,
       "scope_focus": 0.8735479232622378,
@@ -167,7 +167,24 @@
       "claim_type": "FACTOR_CANDIDATE",
       "evidence_level": "FACTOR_CANDIDATE",
       "note": "该结果定位异常分层，不证明分层因素造成了指标变化。",
-      "beam_score": 0.021999595714038464
+      "beam_score": 0.021999595714038464,
+      "candidate_id": "sha256:911b90954beb93d9aa0864c8519d8f3e39c36bb44c3fa8cfc44aec8b9055a0a7",
+      "atomic_accounting": {
+        "covered_atom_ids": [
+          "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124"
+        ],
+        "assigned_atom_ids": [
+          "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124"
+        ],
+        "shared_atom_count": 1,
+        "assigned_components": {
+          "rate": -0.0027621861452853647,
+          "mix": 4.2392799579977055e-05,
+          "interaction": -2.025967508148206e-05
+        },
+        "assigned_total": -0.0027400530207868697,
+        "descriptive_only": true
+      }
     },
     {
       "scope": {
@@ -200,7 +217,7 @@
       "candidate_contribution_change": -0.0026640352573061472,
       "candidate_closure_error": -8.673617379884035e-19,
       "decomposition_status": "CLOSED",
-      "decomposition_closure_error": -1.1008040182516887e-17,
+      "decomposition_closure_error": -4.5028271476038606e-18,
       "decomposition_basis": "rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate",
       "coverage": 0.2528158621646507,
       "scope_focus": 0.7471841378353493,
@@ -213,7 +230,25 @@
       "claim_type": "FACTOR_CANDIDATE",
       "evidence_level": "FACTOR_CANDIDATE",
       "note": "该结果定位异常分层，不证明分层因素造成了指标变化。",
-      "beam_score": 0.011011749760283476
+      "beam_score": 0.011011749760283476,
+      "candidate_id": "sha256:04922a4a59bcaad713ba5ee68ff5f3faeaa034e6a786da145e249d9fedb6cc1f",
+      "atomic_accounting": {
+        "covered_atom_ids": [
+          "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124",
+          "sha256:646458ba55ee9b127c9061c918a77eddc12492fe19050da27e8b282303941f75"
+        ],
+        "assigned_atom_ids": [
+          "sha256:646458ba55ee9b127c9061c918a77eddc12492fe19050da27e8b282303941f75"
+        ],
+        "shared_atom_count": 2,
+        "assigned_components": {
+          "rate": -3.2154474556495304e-07,
+          "mix": 7.634358121064958e-05,
+          "interaction": -4.2729843615530434e-09
+        },
+        "assigned_total": 7.601776348072307e-05,
+        "descriptive_only": true
+      }
     },
     {
       "scope": {
@@ -246,7 +281,7 @@
       "candidate_contribution_change": -0.0026733243518365715,
       "candidate_closure_error": 4.336808689942018e-19,
       "decomposition_status": "CLOSED",
-      "decomposition_closure_error": -4.9907181252223376e-18,
+      "decomposition_closure_error": 2.3818566476790926e-18,
       "decomposition_basis": "rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate",
       "coverage": 0.2518635773116557,
       "scope_focus": 0.7481364226883442,
@@ -259,7 +294,25 @@
       "claim_type": "FACTOR_CANDIDATE",
       "evidence_level": "FACTOR_CANDIDATE",
       "note": "该结果定位异常分层，不证明分层因素造成了指标变化。",
-      "beam_score": 0.011026985426215226
+      "beam_score": 0.011026985426215226,
+      "candidate_id": "sha256:59aa9d0886997ce72cb3ea7174d1982b129689859a5f3ba84fd0da4ef27d9b8a",
+      "atomic_accounting": {
+        "covered_atom_ids": [
+          "sha256:ae29062af602d6cc3c6d9eb5292776423ca543f152e1d6c60188022b44feb439",
+          "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124"
+        ],
+        "assigned_atom_ids": [
+          "sha256:ae29062af602d6cc3c6d9eb5292776423ca543f152e1d6c60188022b44feb439"
+        ],
+        "shared_atom_count": 2,
+        "assigned_components": {
+          "rate": 1.520582201365803e-05,
+          "mix": 5.138615683631181e-05,
+          "interaction": 1.3669010032967963e-07
+        },
+        "assigned_total": 6.672866895029952e-05,
+        "descriptive_only": true
+      }
     },
     {
       "scope": {
@@ -292,7 +345,7 @@
       "candidate_contribution_change": -0.002745578839891797,
       "candidate_closure_error": -4.336808689942018e-19,
       "decomposition_status": "CLOSED",
-      "decomposition_closure_error": 4.445228907190568e-18,
+      "decomposition_closure_error": 4.446922973085077e-18,
       "decomposition_basis": "rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate",
       "coverage": 0.25046352938208694,
       "scope_focus": 0.7495364706179131,
@@ -305,7 +358,25 @@
       "claim_type": "FACTOR_CANDIDATE",
       "evidence_level": "FACTOR_CANDIDATE",
       "note": "该结果定位异常分层，不证明分层因素造成了指标变化。",
-      "beam_score": 0.011119601959126646
+      "beam_score": 0.011119601959126646,
+      "candidate_id": "sha256:ba1e06e7f6e3a9a29c2f7a4456da580e41aef9d008e9f70ab85ff671060d1fda",
+      "atomic_accounting": {
+        "covered_atom_ids": [
+          "sha256:4c603d045d9a4a65690aa019e141fd71b63c27d309588ecb2849922311b1e684",
+          "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124"
+        ],
+        "assigned_atom_ids": [
+          "sha256:4c603d045d9a4a65690aa019e141fd71b63c27d309588ecb2849922311b1e684"
+        ],
+        "shared_atom_count": 2,
+        "assigned_components": {
+          "rate": 3.6823251932054314e-06,
+          "mix": -9.202677316910367e-06,
+          "interaction": -5.466981221985462e-09
+        },
+        "assigned_total": -5.52581910492692e-06,
+        "descriptive_only": true
+      }
     },
     {
       "scope": {
@@ -342,15 +413,35 @@
       "coverage": 0.5036514763568483,
       "scope_focus": 0.49634852364315174,
       "isolation": 0.9832843820288509,
-      "stability": 0.05,
+      "stability": 1.0,
       "complement_gap_change": -4.691790437139076e-05,
       "baseline_impressions": 157558,
       "current_impressions": 79862,
-      "priority": 0.0011530491659589195,
+      "priority": 0.0021962841256360373,
       "claim_type": "FACTOR_CANDIDATE",
       "evidence_level": "FACTOR_CANDIDATE",
       "note": "该结果定位异常分层，不证明分层因素造成了指标变化。",
-      "beam_score": 0.00556674285915771
+      "beam_score": 0.00556674285915771,
+      "candidate_id": "sha256:976007b79f377cafd9f62b6e7faee3e4bea4680d4d6a0c55464f8511615ae1e3",
+      "atomic_accounting": {
+        "covered_atom_ids": [
+          "sha256:ae29062af602d6cc3c6d9eb5292776423ca543f152e1d6c60188022b44feb439",
+          "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124",
+          "sha256:8b0cd0e2d2019d42956572f6f95d870606abfefaaa4eaf000c77e4fcb3b4286b",
+          "sha256:646458ba55ee9b127c9061c918a77eddc12492fe19050da27e8b282303941f75"
+        ],
+        "assigned_atom_ids": [
+          "sha256:8b0cd0e2d2019d42956572f6f95d870606abfefaaa4eaf000c77e4fcb3b4286b"
+        ],
+        "shared_atom_count": 3,
+        "assigned_components": {
+          "rate": -1.5980442016358864e-05,
+          "mix": 6.746090955983358e-06,
+          "interaction": -1.8693168008671554e-08
+        },
+        "assigned_total": -9.253044228384179e-06,
+        "descriptive_only": true
+      }
     },
     {
       "scope": {
@@ -387,15 +478,35 @@
       "coverage": 0.5008135413644792,
       "scope_focus": 0.4991864586355208,
       "isolation": 0.9757376732830575,
-      "stability": 0.0,
+      "stability": 1.0,
       "complement_gap_change": -6.847169422453253e-05,
       "baseline_impressions": 157233,
       "current_impressions": 79412,
-      "priority": 0.0010627844393857112,
+      "priority": 0.0021255688787714224,
       "claim_type": "FACTOR_CANDIDATE",
       "evidence_level": "FACTOR_CANDIDATE",
       "note": "该结果定位异常分层，不证明分层因素造成了指标变化。",
-      "beam_score": 0.005575809254042351
+      "beam_score": 0.005575809254042351,
+      "candidate_id": "sha256:9976a0e5f77a863140faf2ecb7e642dc600317bcfa7ac4781a692f98c19bb051",
+      "atomic_accounting": {
+        "covered_atom_ids": [
+          "sha256:947ce4febd92f3d56c3a9f8fcdf3940fc249be4f39927cb57c4d5030bebbb585",
+          "sha256:4c603d045d9a4a65690aa019e141fd71b63c27d309588ecb2849922311b1e684",
+          "sha256:ae29062af602d6cc3c6d9eb5292776423ca543f152e1d6c60188022b44feb439",
+          "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124"
+        ],
+        "assigned_atom_ids": [
+          "sha256:947ce4febd92f3d56c3a9f8fcdf3940fc249be4f39927cb57c4d5030bebbb585"
+        ],
+        "shared_atom_count": 3,
+        "assigned_components": {
+          "rate": -5.366892955916519e-06,
+          "mix": 9.06210111322652e-06,
+          "interaction": -7.794410689198802e-09
+        },
+        "assigned_total": 3.687413746620802e-06,
+        "descriptive_only": true
+      }
     },
     {
       "scope": {
@@ -432,15 +543,35 @@
       "coverage": 0.49963422171209465,
       "scope_focus": 0.5003657782879054,
       "isolation": 0.9769895746686772,
-      "stability": 0.0,
+      "stability": 1.0,
       "complement_gap_change": -6.508907473706804e-05,
       "baseline_impressions": 157770,
       "current_impressions": 79225,
-      "priority": 0.0010564155179406845,
+      "priority": 0.002112831035881369,
       "claim_type": "FACTOR_CANDIDATE",
       "evidence_level": "FACTOR_CANDIDATE",
       "note": "该结果定位异常分层，不证明分层因素造成了指标变化。",
-      "beam_score": 0.005592266128381741
+      "beam_score": 0.005592266128381741,
+      "candidate_id": "sha256:d55d118b5f83f8005d2ef8568111091f30bcdae98de7ce9e93193dd78ab12ab6",
+      "atomic_accounting": {
+        "covered_atom_ids": [
+          "sha256:4c603d045d9a4a65690aa019e141fd71b63c27d309588ecb2849922311b1e684",
+          "sha256:15558f89e2257f9547d968dea956c855f375fb195c16fdb6216adc2700577912",
+          "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124",
+          "sha256:646458ba55ee9b127c9061c918a77eddc12492fe19050da27e8b282303941f75"
+        ],
+        "assigned_atom_ids": [
+          "sha256:15558f89e2257f9547d968dea956c855f375fb195c16fdb6216adc2700577912"
+        ],
+        "shared_atom_count": 4,
+        "assigned_components": {
+          "rate": -8.172722867552023e-06,
+          "mix": -0.00016217767100756752,
+          "interaction": 2.101731628609543e-07
+        },
+        "assigned_total": -0.00017014022071225858,
+        "descriptive_only": true
+      }
     },
     {
       "scope": {
@@ -473,22 +604,865 @@
       "candidate_contribution_change": -0.00019175475746557175,
       "candidate_closure_error": 3.5236570605778894e-19,
       "decomposition_status": "CLOSED",
-      "decomposition_closure_error": -4.9907181252223376e-18,
+      "decomposition_closure_error": 2.3818566476790926e-18,
       "decomposition_basis": "rate=before_share*delta_rate; mix=delta_share*before_rate; interaction=delta_share*delta_rate",
       "coverage": 0.2473985595903283,
       "scope_focus": 0.7526014404096717,
       "isolation": 0.9826298752419477,
-      "stability": 0.0,
+      "stability": 0.45,
       "complement_gap_change": -0.0037454068712712493,
       "baseline_impressions": 79199,
       "current_impressions": 39229,
-      "priority": 8.340208006952119e-05,
+      "priority": 0.00012093301610080571,
       "claim_type": "FACTOR_CANDIDATE",
       "evidence_level": "FACTOR_CANDIDATE",
       "note": "该结果定位异常分层，不证明分层因素造成了指标变化。",
-      "beam_score": 3.281408468421704e-05
+      "beam_score": 3.281408468421704e-05,
+      "candidate_id": "sha256:9520e38e410a2a4cc60ceb5896e6d7534fca0ae56fbef2af6cc5e9e429e5f0d2",
+      "atomic_accounting": {
+        "covered_atom_ids": [
+          "sha256:569598c20331d007a80e93bdead9ac5e31b1339f906812c1d86739458d476efc",
+          "sha256:15558f89e2257f9547d968dea956c855f375fb195c16fdb6216adc2700577912"
+        ],
+        "assigned_atom_ids": [
+          "sha256:569598c20331d007a80e93bdead9ac5e31b1339f906812c1d86739458d476efc"
+        ],
+        "shared_atom_count": 1,
+        "assigned_components": {
+          "rate": 8.246247483391596e-06,
+          "mix": -2.9821453294303302e-05,
+          "interaction": -3.9330942403005225e-08
+        },
+        "assigned_total": -2.161453675331471e-05,
+        "descriptive_only": true
+      }
     }
   ],
+  "l0_schema_version": "1.0",
+  "l0_triples": [
+    {
+      "candidate": {
+        "candidate_id": "sha256:911b90954beb93d9aa0864c8519d8f3e39c36bb44c3fa8cfc44aec8b9055a0a7",
+        "scope": {
+          "version": "8.4",
+          "region": "east",
+          "channel": "paid"
+        },
+        "claim_type": "EXPLORATORY_LOCALIZATION"
+      },
+      "statistic": {
+        "name": "investigation_priority",
+        "value": 0.002640077125968194,
+        "is_pvalue": false
+      },
+      "evidence": {
+        "baseline_window": [
+          0,
+          39
+        ],
+        "current_window": [
+          40,
+          59
+        ],
+        "atomic_accounting": {
+          "covered_atom_ids": [
+            "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124"
+          ],
+          "assigned_atom_ids": [
+            "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124"
+          ],
+          "shared_atom_count": 1,
+          "assigned_components": {
+            "rate": -0.0027621861452853647,
+            "mix": 4.2392799579977055e-05,
+            "interaction": -2.025967508148206e-05
+          },
+          "assigned_total": -0.0027400530207868697,
+          "descriptive_only": true
+        },
+        "decomposition_status": "CLOSED"
+      }
+    },
+    {
+      "candidate": {
+        "candidate_id": "sha256:04922a4a59bcaad713ba5ee68ff5f3faeaa034e6a786da145e249d9fedb6cc1f",
+        "scope": {
+          "version": "8.4",
+          "channel": "paid"
+        },
+        "claim_type": "EXPLORATORY_LOCALIZATION"
+      },
+      "statistic": {
+        "name": "investigation_priority",
+        "value": 0.002521552751011502,
+        "is_pvalue": false
+      },
+      "evidence": {
+        "baseline_window": [
+          0,
+          39
+        ],
+        "current_window": [
+          40,
+          59
+        ],
+        "atomic_accounting": {
+          "covered_atom_ids": [
+            "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124",
+            "sha256:646458ba55ee9b127c9061c918a77eddc12492fe19050da27e8b282303941f75"
+          ],
+          "assigned_atom_ids": [
+            "sha256:646458ba55ee9b127c9061c918a77eddc12492fe19050da27e8b282303941f75"
+          ],
+          "shared_atom_count": 2,
+          "assigned_components": {
+            "rate": -3.2154474556495304e-07,
+            "mix": 7.634358121064958e-05,
+            "interaction": -4.2729843615530434e-09
+          },
+          "assigned_total": 7.601776348072307e-05,
+          "descriptive_only": true
+        },
+        "decomposition_status": "CLOSED"
+      }
+    },
+    {
+      "candidate": {
+        "candidate_id": "sha256:59aa9d0886997ce72cb3ea7174d1982b129689859a5f3ba84fd0da4ef27d9b8a",
+        "scope": {
+          "region": "east",
+          "channel": "paid"
+        },
+        "claim_type": "EXPLORATORY_LOCALIZATION"
+      },
+      "statistic": {
+        "name": "investigation_priority",
+        "value": 0.0024857278660730562,
+        "is_pvalue": false
+      },
+      "evidence": {
+        "baseline_window": [
+          0,
+          39
+        ],
+        "current_window": [
+          40,
+          59
+        ],
+        "atomic_accounting": {
+          "covered_atom_ids": [
+            "sha256:ae29062af602d6cc3c6d9eb5292776423ca543f152e1d6c60188022b44feb439",
+            "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124"
+          ],
+          "assigned_atom_ids": [
+            "sha256:ae29062af602d6cc3c6d9eb5292776423ca543f152e1d6c60188022b44feb439"
+          ],
+          "shared_atom_count": 2,
+          "assigned_components": {
+            "rate": 1.520582201365803e-05,
+            "mix": 5.138615683631181e-05,
+            "interaction": 1.3669010032967963e-07
+          },
+          "assigned_total": 6.672866895029952e-05,
+          "descriptive_only": true
+        },
+        "decomposition_status": "CLOSED"
+      }
+    },
+    {
+      "candidate": {
+        "candidate_id": "sha256:ba1e06e7f6e3a9a29c2f7a4456da580e41aef9d008e9f70ab85ff671060d1fda",
+        "scope": {
+          "version": "8.4",
+          "region": "east"
+        },
+        "claim_type": "EXPLORATORY_LOCALIZATION"
+      },
+      "statistic": {
+        "name": "investigation_priority",
+        "value": 0.0024513148094412567,
+        "is_pvalue": false
+      },
+      "evidence": {
+        "baseline_window": [
+          0,
+          39
+        ],
+        "current_window": [
+          40,
+          59
+        ],
+        "atomic_accounting": {
+          "covered_atom_ids": [
+            "sha256:4c603d045d9a4a65690aa019e141fd71b63c27d309588ecb2849922311b1e684",
+            "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124"
+          ],
+          "assigned_atom_ids": [
+            "sha256:4c603d045d9a4a65690aa019e141fd71b63c27d309588ecb2849922311b1e684"
+          ],
+          "shared_atom_count": 2,
+          "assigned_components": {
+            "rate": 3.6823251932054314e-06,
+            "mix": -9.202677316910367e-06,
+            "interaction": -5.466981221985462e-09
+          },
+          "assigned_total": -5.52581910492692e-06,
+          "descriptive_only": true
+        },
+        "decomposition_status": "CLOSED"
+      }
+    },
+    {
+      "candidate": {
+        "candidate_id": "sha256:976007b79f377cafd9f62b6e7faee3e4bea4680d4d6a0c55464f8511615ae1e3",
+        "scope": {
+          "channel": "paid"
+        },
+        "claim_type": "EXPLORATORY_LOCALIZATION"
+      },
+      "statistic": {
+        "name": "investigation_priority",
+        "value": 0.0021962841256360373,
+        "is_pvalue": false
+      },
+      "evidence": {
+        "baseline_window": [
+          0,
+          39
+        ],
+        "current_window": [
+          40,
+          59
+        ],
+        "atomic_accounting": {
+          "covered_atom_ids": [
+            "sha256:ae29062af602d6cc3c6d9eb5292776423ca543f152e1d6c60188022b44feb439",
+            "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124",
+            "sha256:8b0cd0e2d2019d42956572f6f95d870606abfefaaa4eaf000c77e4fcb3b4286b",
+            "sha256:646458ba55ee9b127c9061c918a77eddc12492fe19050da27e8b282303941f75"
+          ],
+          "assigned_atom_ids": [
+            "sha256:8b0cd0e2d2019d42956572f6f95d870606abfefaaa4eaf000c77e4fcb3b4286b"
+          ],
+          "shared_atom_count": 3,
+          "assigned_components": {
+            "rate": -1.5980442016358864e-05,
+            "mix": 6.746090955983358e-06,
+            "interaction": -1.8693168008671554e-08
+          },
+          "assigned_total": -9.253044228384179e-06,
+          "descriptive_only": true
+        },
+        "decomposition_status": "CLOSED"
+      }
+    },
+    {
+      "candidate": {
+        "candidate_id": "sha256:9976a0e5f77a863140faf2ecb7e642dc600317bcfa7ac4781a692f98c19bb051",
+        "scope": {
+          "region": "east"
+        },
+        "claim_type": "EXPLORATORY_LOCALIZATION"
+      },
+      "statistic": {
+        "name": "investigation_priority",
+        "value": 0.0021255688787714224,
+        "is_pvalue": false
+      },
+      "evidence": {
+        "baseline_window": [
+          0,
+          39
+        ],
+        "current_window": [
+          40,
+          59
+        ],
+        "atomic_accounting": {
+          "covered_atom_ids": [
+            "sha256:947ce4febd92f3d56c3a9f8fcdf3940fc249be4f39927cb57c4d5030bebbb585",
+            "sha256:4c603d045d9a4a65690aa019e141fd71b63c27d309588ecb2849922311b1e684",
+            "sha256:ae29062af602d6cc3c6d9eb5292776423ca543f152e1d6c60188022b44feb439",
+            "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124"
+          ],
+          "assigned_atom_ids": [
+            "sha256:947ce4febd92f3d56c3a9f8fcdf3940fc249be4f39927cb57c4d5030bebbb585"
+          ],
+          "shared_atom_count": 3,
+          "assigned_components": {
+            "rate": -5.366892955916519e-06,
+            "mix": 9.06210111322652e-06,
+            "interaction": -7.794410689198802e-09
+          },
+          "assigned_total": 3.687413746620802e-06,
+          "descriptive_only": true
+        },
+        "decomposition_status": "CLOSED"
+      }
+    },
+    {
+      "candidate": {
+        "candidate_id": "sha256:d55d118b5f83f8005d2ef8568111091f30bcdae98de7ce9e93193dd78ab12ab6",
+        "scope": {
+          "version": "8.4"
+        },
+        "claim_type": "EXPLORATORY_LOCALIZATION"
+      },
+      "statistic": {
+        "name": "investigation_priority",
+        "value": 0.002112831035881369,
+        "is_pvalue": false
+      },
+      "evidence": {
+        "baseline_window": [
+          0,
+          39
+        ],
+        "current_window": [
+          40,
+          59
+        ],
+        "atomic_accounting": {
+          "covered_atom_ids": [
+            "sha256:4c603d045d9a4a65690aa019e141fd71b63c27d309588ecb2849922311b1e684",
+            "sha256:15558f89e2257f9547d968dea956c855f375fb195c16fdb6216adc2700577912",
+            "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124",
+            "sha256:646458ba55ee9b127c9061c918a77eddc12492fe19050da27e8b282303941f75"
+          ],
+          "assigned_atom_ids": [
+            "sha256:15558f89e2257f9547d968dea956c855f375fb195c16fdb6216adc2700577912"
+          ],
+          "shared_atom_count": 4,
+          "assigned_components": {
+            "rate": -8.172722867552023e-06,
+            "mix": -0.00016217767100756752,
+            "interaction": 2.101731628609543e-07
+          },
+          "assigned_total": -0.00017014022071225858,
+          "descriptive_only": true
+        },
+        "decomposition_status": "CLOSED"
+      }
+    },
+    {
+      "candidate": {
+        "candidate_id": "sha256:9520e38e410a2a4cc60ceb5896e6d7534fca0ae56fbef2af6cc5e9e429e5f0d2",
+        "scope": {
+          "region": "west",
+          "channel": "organic"
+        },
+        "claim_type": "EXPLORATORY_LOCALIZATION"
+      },
+      "statistic": {
+        "name": "investigation_priority",
+        "value": 0.00012093301610080571,
+        "is_pvalue": false
+      },
+      "evidence": {
+        "baseline_window": [
+          0,
+          39
+        ],
+        "current_window": [
+          40,
+          59
+        ],
+        "atomic_accounting": {
+          "covered_atom_ids": [
+            "sha256:569598c20331d007a80e93bdead9ac5e31b1339f906812c1d86739458d476efc",
+            "sha256:15558f89e2257f9547d968dea956c855f375fb195c16fdb6216adc2700577912"
+          ],
+          "assigned_atom_ids": [
+            "sha256:569598c20331d007a80e93bdead9ac5e31b1339f906812c1d86739458d476efc"
+          ],
+          "shared_atom_count": 1,
+          "assigned_components": {
+            "rate": 8.246247483391596e-06,
+            "mix": -2.9821453294303302e-05,
+            "interaction": -3.9330942403005225e-08
+          },
+          "assigned_total": -2.161453675331471e-05,
+          "descriptive_only": true
+        },
+        "decomposition_status": "CLOSED"
+      }
+    }
+  ],
+  "atomic_ledger": {
+    "status": "CLOSED",
+    "atoms": [
+      {
+        "atom_id": "sha256:947ce4febd92f3d56c3a9f8fcdf3940fc249be4f39927cb57c4d5030bebbb585",
+        "scope": {
+          "channel": "organic",
+          "region": "east",
+          "version": "8.3"
+        },
+        "rate": -5.366892955916519e-06,
+        "mix": 9.06210111322652e-06,
+        "interaction": -7.794410689198802e-09,
+        "total": 3.687413746620802e-06,
+        "covering_candidates": [
+          "sha256:9976a0e5f77a863140faf2ecb7e642dc600317bcfa7ac4781a692f98c19bb051"
+        ],
+        "assigned_to": "sha256:9976a0e5f77a863140faf2ecb7e642dc600317bcfa7ac4781a692f98c19bb051"
+      },
+      {
+        "atom_id": "sha256:4c603d045d9a4a65690aa019e141fd71b63c27d309588ecb2849922311b1e684",
+        "scope": {
+          "channel": "organic",
+          "region": "east",
+          "version": "8.4"
+        },
+        "rate": 3.6823251932054314e-06,
+        "mix": -9.202677316910367e-06,
+        "interaction": -5.466981221985462e-09,
+        "total": -5.52581910492692e-06,
+        "covering_candidates": [
+          "sha256:ba1e06e7f6e3a9a29c2f7a4456da580e41aef9d008e9f70ab85ff671060d1fda",
+          "sha256:9976a0e5f77a863140faf2ecb7e642dc600317bcfa7ac4781a692f98c19bb051",
+          "sha256:d55d118b5f83f8005d2ef8568111091f30bcdae98de7ce9e93193dd78ab12ab6"
+        ],
+        "assigned_to": "sha256:ba1e06e7f6e3a9a29c2f7a4456da580e41aef9d008e9f70ab85ff671060d1fda"
+      },
+      {
+        "atom_id": "sha256:569598c20331d007a80e93bdead9ac5e31b1339f906812c1d86739458d476efc",
+        "scope": {
+          "channel": "organic",
+          "region": "west",
+          "version": "8.3"
+        },
+        "rate": 8.246247483391596e-06,
+        "mix": -2.9821453294303302e-05,
+        "interaction": -3.9330942403005225e-08,
+        "total": -2.161453675331471e-05,
+        "covering_candidates": [
+          "sha256:9520e38e410a2a4cc60ceb5896e6d7534fca0ae56fbef2af6cc5e9e429e5f0d2"
+        ],
+        "assigned_to": "sha256:9520e38e410a2a4cc60ceb5896e6d7534fca0ae56fbef2af6cc5e9e429e5f0d2"
+      },
+      {
+        "atom_id": "sha256:15558f89e2257f9547d968dea956c855f375fb195c16fdb6216adc2700577912",
+        "scope": {
+          "channel": "organic",
+          "region": "west",
+          "version": "8.4"
+        },
+        "rate": -8.172722867552023e-06,
+        "mix": -0.00016217767100756752,
+        "interaction": 2.101731628609543e-07,
+        "total": -0.00017014022071225858,
+        "covering_candidates": [
+          "sha256:d55d118b5f83f8005d2ef8568111091f30bcdae98de7ce9e93193dd78ab12ab6",
+          "sha256:9520e38e410a2a4cc60ceb5896e6d7534fca0ae56fbef2af6cc5e9e429e5f0d2"
+        ],
+        "assigned_to": "sha256:d55d118b5f83f8005d2ef8568111091f30bcdae98de7ce9e93193dd78ab12ab6"
+      },
+      {
+        "atom_id": "sha256:ae29062af602d6cc3c6d9eb5292776423ca543f152e1d6c60188022b44feb439",
+        "scope": {
+          "channel": "paid",
+          "region": "east",
+          "version": "8.3"
+        },
+        "rate": 1.520582201365803e-05,
+        "mix": 5.138615683631181e-05,
+        "interaction": 1.3669010032967963e-07,
+        "total": 6.672866895029952e-05,
+        "covering_candidates": [
+          "sha256:59aa9d0886997ce72cb3ea7174d1982b129689859a5f3ba84fd0da4ef27d9b8a",
+          "sha256:976007b79f377cafd9f62b6e7faee3e4bea4680d4d6a0c55464f8511615ae1e3",
+          "sha256:9976a0e5f77a863140faf2ecb7e642dc600317bcfa7ac4781a692f98c19bb051"
+        ],
+        "assigned_to": "sha256:59aa9d0886997ce72cb3ea7174d1982b129689859a5f3ba84fd0da4ef27d9b8a"
+      },
+      {
+        "atom_id": "sha256:fd555a5aae35a8bf11a14f80affd3bc98b9eb3b35a6ad9c786e16f09791bf124",
+        "scope": {
+          "channel": "paid",
+          "region": "east",
+          "version": "8.4"
+        },
+        "rate": -0.0027621861452853647,
+        "mix": 4.2392799579977055e-05,
+        "interaction": -2.025967508148206e-05,
+        "total": -0.0027400530207868697,
+        "covering_candidates": [
+          "sha256:911b90954beb93d9aa0864c8519d8f3e39c36bb44c3fa8cfc44aec8b9055a0a7",
+          "sha256:04922a4a59bcaad713ba5ee68ff5f3faeaa034e6a786da145e249d9fedb6cc1f",
+          "sha256:59aa9d0886997ce72cb3ea7174d1982b129689859a5f3ba84fd0da4ef27d9b8a",
+          "sha256:ba1e06e7f6e3a9a29c2f7a4456da580e41aef9d008e9f70ab85ff671060d1fda",
+          "sha256:976007b79f377cafd9f62b6e7faee3e4bea4680d4d6a0c55464f8511615ae1e3",
+          "sha256:9976a0e5f77a863140faf2ecb7e642dc600317bcfa7ac4781a692f98c19bb051",
+          "sha256:d55d118b5f83f8005d2ef8568111091f30bcdae98de7ce9e93193dd78ab12ab6"
+        ],
+        "assigned_to": "sha256:911b90954beb93d9aa0864c8519d8f3e39c36bb44c3fa8cfc44aec8b9055a0a7"
+      },
+      {
+        "atom_id": "sha256:8b0cd0e2d2019d42956572f6f95d870606abfefaaa4eaf000c77e4fcb3b4286b",
+        "scope": {
+          "channel": "paid",
+          "region": "west",
+          "version": "8.3"
+        },
+        "rate": -1.5980442016358864e-05,
+        "mix": 6.746090955983358e-06,
+        "interaction": -1.8693168008671554e-08,
+        "total": -9.253044228384179e-06,
+        "covering_candidates": [
+          "sha256:976007b79f377cafd9f62b6e7faee3e4bea4680d4d6a0c55464f8511615ae1e3"
+        ],
+        "assigned_to": "sha256:976007b79f377cafd9f62b6e7faee3e4bea4680d4d6a0c55464f8511615ae1e3"
+      },
+      {
+        "atom_id": "sha256:646458ba55ee9b127c9061c918a77eddc12492fe19050da27e8b282303941f75",
+        "scope": {
+          "channel": "paid",
+          "region": "west",
+          "version": "8.4"
+        },
+        "rate": -3.2154474556495304e-07,
+        "mix": 7.634358121064958e-05,
+        "interaction": -4.2729843615530434e-09,
+        "total": 7.601776348072307e-05,
+        "covering_candidates": [
+          "sha256:04922a4a59bcaad713ba5ee68ff5f3faeaa034e6a786da145e249d9fedb6cc1f",
+          "sha256:976007b79f377cafd9f62b6e7faee3e4bea4680d4d6a0c55464f8511615ae1e3",
+          "sha256:d55d118b5f83f8005d2ef8568111091f30bcdae98de7ce9e93193dd78ab12ab6"
+        ],
+        "assigned_to": "sha256:04922a4a59bcaad713ba5ee68ff5f3faeaa034e6a786da145e249d9fedb6cc1f"
+      }
+    ],
+    "assignment_policy": "first_ranked_covering_candidate",
+    "effect_scale": "treatment_probability_difference",
+    "assigned_total": -0.0028001527954081107,
+    "unassigned_total": 0,
+    "total": -0.0028001527954081076,
+    "closure_error": 3.0357660829594124e-18
+  },
+  "search_manifest": {
+    "max_seconds": null,
+    "max_candidates": 10000,
+    "evaluated_candidates": 26,
+    "beam_width": 20,
+    "max_depth": 3,
+    "budget_exhausted": false,
+    "min_impressions": 1000,
+    "ranking_is_exploratory": true
+  },
+  "pruning_trace": [
+    {
+      "scope": {
+        "channel": "organic"
+      },
+      "parent_scope": {},
+      "depth": 1,
+      "evaluation_index": 1,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "channel": "paid"
+      },
+      "parent_scope": {},
+      "depth": 1,
+      "evaluation_index": 2,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "region": "east"
+      },
+      "parent_scope": {},
+      "depth": 1,
+      "evaluation_index": 3,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "region": "west"
+      },
+      "parent_scope": {},
+      "depth": 1,
+      "evaluation_index": 4,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "version": "8.3"
+      },
+      "parent_scope": {},
+      "depth": 1,
+      "evaluation_index": 5,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "version": "8.4"
+      },
+      "parent_scope": {},
+      "depth": 1,
+      "evaluation_index": 6,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "version": "8.4",
+        "channel": "organic"
+      },
+      "parent_scope": {
+        "version": "8.4"
+      },
+      "depth": 2,
+      "evaluation_index": 7,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "version": "8.4",
+        "channel": "paid"
+      },
+      "parent_scope": {
+        "version": "8.4"
+      },
+      "depth": 2,
+      "evaluation_index": 8,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "version": "8.4",
+        "region": "east"
+      },
+      "parent_scope": {
+        "version": "8.4"
+      },
+      "depth": 2,
+      "evaluation_index": 9,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "version": "8.4",
+        "region": "west"
+      },
+      "parent_scope": {
+        "version": "8.4"
+      },
+      "depth": 2,
+      "evaluation_index": 10,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "region": "east",
+        "channel": "organic"
+      },
+      "parent_scope": {
+        "region": "east"
+      },
+      "depth": 2,
+      "evaluation_index": 11,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "region": "east",
+        "channel": "paid"
+      },
+      "parent_scope": {
+        "region": "east"
+      },
+      "depth": 2,
+      "evaluation_index": 12,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "region": "east",
+        "version": "8.3"
+      },
+      "parent_scope": {
+        "region": "east"
+      },
+      "depth": 2,
+      "evaluation_index": 13,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "channel": "paid",
+        "region": "west"
+      },
+      "parent_scope": {
+        "channel": "paid"
+      },
+      "depth": 2,
+      "evaluation_index": 14,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "channel": "paid",
+        "version": "8.3"
+      },
+      "parent_scope": {
+        "channel": "paid"
+      },
+      "depth": 2,
+      "evaluation_index": 15,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "region": "west",
+        "channel": "organic"
+      },
+      "parent_scope": {
+        "region": "west"
+      },
+      "depth": 2,
+      "evaluation_index": 16,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "region": "west",
+        "version": "8.3"
+      },
+      "parent_scope": {
+        "region": "west"
+      },
+      "depth": 2,
+      "evaluation_index": 17,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "version": "8.3",
+        "channel": "organic"
+      },
+      "parent_scope": {
+        "version": "8.3"
+      },
+      "depth": 2,
+      "evaluation_index": 18,
+      "status": "KEPT_FOR_EXPANSION"
+    },
+    {
+      "scope": {
+        "version": "8.4",
+        "region": "east",
+        "channel": "organic"
+      },
+      "parent_scope": {
+        "version": "8.4",
+        "region": "east"
+      },
+      "depth": 3,
+      "evaluation_index": 19,
+      "status": "TERMINAL_DEPTH"
+    },
+    {
+      "scope": {
+        "version": "8.4",
+        "region": "east",
+        "channel": "paid"
+      },
+      "parent_scope": {
+        "version": "8.4",
+        "region": "east"
+      },
+      "depth": 3,
+      "evaluation_index": 20,
+      "status": "TERMINAL_DEPTH"
+    },
+    {
+      "scope": {
+        "region": "east",
+        "channel": "paid",
+        "version": "8.3"
+      },
+      "parent_scope": {
+        "region": "east",
+        "channel": "paid"
+      },
+      "depth": 3,
+      "evaluation_index": 21,
+      "status": "TERMINAL_DEPTH"
+    },
+    {
+      "scope": {
+        "version": "8.4",
+        "channel": "paid",
+        "region": "west"
+      },
+      "parent_scope": {
+        "version": "8.4",
+        "channel": "paid"
+      },
+      "depth": 3,
+      "evaluation_index": 22,
+      "status": "TERMINAL_DEPTH"
+    },
+    {
+      "scope": {
+        "channel": "paid",
+        "region": "west",
+        "version": "8.3"
+      },
+      "parent_scope": {
+        "channel": "paid",
+        "region": "west"
+      },
+      "depth": 3,
+      "evaluation_index": 23,
+      "status": "TERMINAL_DEPTH"
+    },
+    {
+      "scope": {
+        "region": "west",
+        "version": "8.3",
+        "channel": "organic"
+      },
+      "parent_scope": {
+        "region": "west",
+        "version": "8.3"
+      },
+      "depth": 3,
+      "evaluation_index": 24,
+      "status": "TERMINAL_DEPTH"
+    },
+    {
+      "scope": {
+        "region": "east",
+        "channel": "organic",
+        "version": "8.3"
+      },
+      "parent_scope": {
+        "region": "east",
+        "channel": "organic"
+      },
+      "depth": 3,
+      "evaluation_index": 25,
+      "status": "TERMINAL_DEPTH"
+    },
+    {
+      "scope": {
+        "version": "8.4",
+        "channel": "organic",
+        "region": "west"
+      },
+      "parent_scope": {
+        "version": "8.4",
+        "channel": "organic"
+      },
+      "depth": 3,
+      "evaluation_index": 26,
+      "status": "TERMINAL_DEPTH"
+    }
+  ],
+  "runtime_seconds": 0.02009741705842316,
   "claim_policy": "candidate_only_until_randomized_or_quasi_experimental_validation",
   "limitations": [
     "候选名称来自输入面板维度，算法不能命名不存在数据入口的外部因素。",

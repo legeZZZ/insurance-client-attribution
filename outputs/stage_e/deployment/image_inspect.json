@@ -1,0 +1,79 @@
+[
+    {
+        "Id": "sha256:47fbb0b584b0312afe9492dc02efca4aff2bb47466e1a5880f59568f5878d606",
+        "RepoTags": [
+            "track2-backend:stage-ef"
+        ],
+        "RepoDigests": [
+            "track2-backend@sha256:47fbb0b584b0312afe9492dc02efca4aff2bb47466e1a5880f59568f5878d606"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-09-16T06:52:26.223665786-04:00",
+        "Config": {
+            "User": "app",
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "PYTHON_VERSION=3.14.7",
+                "PYTHON_SHA256=3b48dac8fb59f62eaa67ac83c1eb12bda1b7a08406dd286e252c11a66be27f81",
+                "PYTHONDONTWRITEBYTECODE=1",
+                "PYTHONUNBUFFERED=1",
+                "OPENBLAS_NUM_THREADS=1",
+                "OMP_NUM_THREADS=1"
+            ],
+            "Entrypoint": [
+                "python",
+                "/app/tools/run_causal_pipeline.py"
+            ],
+            "Cmd": [
+                "--help"
+            ],
+            "WorkingDir": "/work",
+            "ArgsEscaped": true
+        },
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Size": 2040444133,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:41d6505109809884e681a97f978542a2d4d3506af0124f18b3f3a471edfcc9b7",
+                "sha256:949be5bd1124f5823981fd2e5434337e33d7f0a81d9bb500ac1f5d0112772a36",
+                "sha256:d5aef19d88292d919790674e9f66fb598442f06dfa79bc1d8c336e78c4b3504f",
+                "sha256:498c08431b5e90c22bff5972632a86aa8af32d528c6d0fe62db1bd2546b21d18",
+                "sha256:cde91158e7ab531433175072eed0b9f69bda802df11855b9ddc2bb0c57acd1fe",
+                "sha256:39d0e55b9d4a8e484f65094d9a9f52b5c0e83bfbd93558395838e6a7b64fb26a",
+                "sha256:01026fffd979e196f6a236eec9d59d8e06b60f55b21de0bfa9b4dac54ceaa59e",
+                "sha256:e884770cdb01da8a9f8bc881a5ab47c506deec4c00a6cf9a7753a0e3ec109285",
+                "sha256:58440621ab426cdfbecd0da990a85fa2e357052b6672f3861e4780efb541ec99",
+                "sha256:d144d030a8e9b89f08efaa1a97f14e6db58746714d81e03b49e59b6fe19d3ee4",
+                "sha256:cdc91298fdf5e889770fbc6634c36854415d0899130753e8e24f790ceaa57318",
+                "sha256:7701cb45ee04489fdf1811d80090d005e2b574612588835595442f05f705747e",
+                "sha256:b60ccc76ec965a804a4de4f5111b1915563002bf6bad545ab0e7d9394eb87adb",
+                "sha256:017206b9baca897140d3652a25eda5f63bd8c72c3e6f3fe4e7f91f6d0fe29ffa",
+                "sha256:98d7a32036b16f426e6dd284ad9a9a372dc9a0ce46ff37025ad983db85246178",
+                "sha256:1e07a92e21741f207945f129db08ffeb3d9f89d0a28026276e50a51677fda5fd",
+                "sha256:be2b7da954c776ab31357ae26090b9affadb4d3d10cd54c59987b6e86636bbc3",
+                "sha256:bc92135e22a278684972578699cb997c6ade2527cfbe61ba09322e6b000db1ac",
+                "sha256:3a6715b44b3cb318bb9959c1f941936b039d8e6da075e914f9c73a65120135a8",
+                "sha256:c19e79673f01a50b861acf9cb08d990807408f0bab1690627ba86f77bf64dcab",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-09-16T10:52:26.476492312Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:47fbb0b584b0312afe9492dc02efca4aff2bb47466e1a5880f59568f5878d606",
+            "size": 856
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "1sa30xl3g3my18sukhk44vx4w",
+                    "CreatedAt": "2026-09-16T06:52:26.644854162-04:00"
+                }
+            ]
+        }
+    }
+]

@@ -1,0 +1,14 @@
+{
+  "operation": "skills",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-3525b858da2e/governance.db",
+    "action": "approve",
+    "parameters": {
+      "name": "watch_skill",
+      "version": 1,
+      "approver": "fixture-human",
+      "credential_ref": "fixture:watch-expanded",
+      "suite_ref": "sha256:20233dbb967e63cc2cc64763a5c6904ae3b5120540b9bdd8bbaf6c3484bc8068"
+    }
+  }
+}

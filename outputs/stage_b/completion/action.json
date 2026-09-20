@@ -1,0 +1,9 @@
+{
+  "action": "LAUNCH_PROPOSAL",
+  "effect_ref": "sha256:c8773feab6917a74fb89a03d06c1c33dfd946e288a5301f8d480b999d86e4864",
+  "guardrails_harmed": [],
+  "guardrails_unknown": [],
+  "worst_case_net_value": 8.941475248765691,
+  "policy": "joint guardrails + practical threshold + interval worst-case loss",
+  "requires_approval_before_activation": true
+}

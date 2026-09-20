@@ -1,0 +1,301 @@
+{
+  "scope": "scenario_reports.py named definitions only; not an exhaustive inventory of runtime databases or all Spec paths",
+  "named_count": 49,
+  "series_definition_count": 37,
+  "named_factors": [
+    {
+      "factor_id": "internal.audit.unregistered_release",
+      "name": "未登记发布变更",
+      "description": "内部发布审计中发现的未登记版本/配置变更",
+      "has_series_definition": false
+    },
+    {
+      "factor_id": "external.competitor_campaign",
+      "name": "竞品营销活动",
+      "description": "授权或公开来源观察到的竞品投放/促销活动",
+      "has_series_definition": false
+    },
+    {
+      "factor_id": "external.fx_rate_usd_cny",
+      "name": "美元兑人民币汇率",
+      "description": "授权宏观数据源中的日度汇率快照",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.page_latency_p95",
+      "name": "页面 P95 延迟",
+      "description": "内部可观测性中的页面响应延迟",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "external.competitor_pressure_index",
+      "name": "竞品压力指数",
+      "description": "授权或公开来源构造的竞品压力序列",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.checkout_error_rate",
+      "name": "结算错误率",
+      "description": "内部可观测性中的结算失败比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.quote_api_timeout_rate",
+      "name": "报价 API 超时率",
+      "description": "内部可观测性中的报价接口超时比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.payment_retry_rate",
+      "name": "支付重试率",
+      "description": "支付链路中需要重试的交易比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.form_validation_error_rate",
+      "name": "表单校验错误率",
+      "description": "前端表单校验失败或阻断比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.agent_followup_sla_hours",
+      "name": "顾问跟进 SLA",
+      "description": "CRM 中销售跟进平均耗时",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.sms_delivery_failure_rate",
+      "name": "短信送达失败率",
+      "description": "短信供应商链路的送达失败比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.premium_quote_cache_miss_rate",
+      "name": "保费报价缓存未命中",
+      "description": "报价缓存未命中比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.channel_bid_cpc",
+      "name": "付费渠道 CPC",
+      "description": "内部投放系统记录的点击成本",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.app_crash_rate",
+      "name": "客户端崩溃率",
+      "description": "App 端会话崩溃比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.quote_form_step_count",
+      "name": "报价表单步骤数",
+      "description": "报价到投保路径中的表单步骤数量",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.document_upload_failure_rate",
+      "name": "资料上传失败率",
+      "description": "投保资料上传失败或重传比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.esign_redirect_exit_rate",
+      "name": "电子签跳出率",
+      "description": "电子签名重定向后退出比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.coverage_comparison_confusion_rate",
+      "name": "保障责任对比困惑率",
+      "description": "保障责任对比页中的困惑或反复查看比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.price_explanation_view_gap_rate",
+      "name": "价格解释缺口率",
+      "description": "报价解释模块未被有效查看或理解的比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.prefill_success_rate",
+      "name": "资料预填成功率",
+      "description": "投保表单资料预填成功比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.agent_contact_answer_rate",
+      "name": "顾问接通率",
+      "description": "CRM 外呼或在线顾问联系成功比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.underwriting_referral_rate",
+      "name": "核保转人工率",
+      "description": "自动核保转人工或排队的比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "internal.vendor.sms_provider_switch",
+      "name": "短信供应商切换",
+      "description": "供应商路由或服务商切换事件",
+      "has_series_definition": false
+    },
+    {
+      "factor_id": "internal.payment_gateway_maintenance",
+      "name": "支付通道维护",
+      "description": "支付网关维护或限流窗口",
+      "has_series_definition": false
+    },
+    {
+      "factor_id": "internal.pricing_rule_hotfix",
+      "name": "定价规则热修",
+      "description": "定价或费率配置热修事件",
+      "has_series_definition": false
+    },
+    {
+      "factor_id": "internal.underwriting_rule_queue_change",
+      "name": "核保队列规则变更",
+      "description": "核保规则或队列策略调整事件",
+      "has_series_definition": false
+    },
+    {
+      "factor_id": "external.competitor_campaign_intensity",
+      "name": "竞品活动强度",
+      "description": "授权外部源构造的竞品活动强度序列",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "external.regulatory_notice_density",
+      "name": "监管通知密度",
+      "description": "公开或授权政策源中的保险相关通知密度",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "external.search_trend_insurance",
+      "name": "保险搜索热度",
+      "description": "授权搜索趋势中的保险意图指数",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "external.market_rate_index",
+      "name": "市场利率指数",
+      "description": "授权宏观源中的市场利率压力指标",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "external.macro_consumer_confidence",
+      "name": "消费者信心指数",
+      "description": "授权宏观源中的需求信心指标",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "external.weather_rainfall_index",
+      "name": "东区降雨指数",
+      "description": "授权天气源中的区域降雨强度",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "external.aggregator_rank_drop_index",
+      "name": "聚合平台排名下滑",
+      "description": "授权聚合平台源中的排名或展示位下滑指数",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "external.competitor_quote_speed_index",
+      "name": "竞品报价速度指数",
+      "description": "授权竞品体验基准中的报价速度优势指数",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "external.ad_auction_pressure_paid_search",
+      "name": "付费搜索竞价压力",
+      "description": "授权广告情报源中的付费搜索竞价压力",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "external.review_sentiment_negative_index",
+      "name": "负面评价情绪指数",
+      "description": "授权评价源中的负面情绪波动",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "external.travel_seasonality_index",
+      "name": "出行季节性指数",
+      "description": "日历和需求源中的出行季节性强度",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "external.mobile_network_outage_index",
+      "name": "移动网络故障指数",
+      "description": "区域移动网络或基础设施异常强度",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "external.competitor_price_drop",
+      "name": "竞品价格下调",
+      "description": "授权价格源观察到的竞品报价下调窗口",
+      "has_series_definition": false
+    },
+    {
+      "factor_id": "external.broker_affiliate_push",
+      "name": "经纪渠道集中投放",
+      "description": "公开或授权市场源观察到的经纪渠道投放",
+      "has_series_definition": false
+    },
+    {
+      "factor_id": "external.market_rate_announcement",
+      "name": "市场利率公告",
+      "description": "授权宏观源中的利率公告事件",
+      "has_series_definition": false
+    },
+    {
+      "factor_id": "external.aggregator_homepage_slot_loss",
+      "name": "聚合首页展位丢失",
+      "description": "授权聚合平台源观察到的展位变化事件",
+      "has_series_definition": false
+    },
+    {
+      "factor_id": "external.negative_review_wave",
+      "name": "负面评价集中波动",
+      "description": "授权评价源观察到的负面评价集中窗口",
+      "has_series_definition": false
+    },
+    {
+      "factor_id": "quality.event_late_arrival_rate",
+      "name": "事件迟到率",
+      "description": "内部数据质量监控中的事件延迟到达比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "quality.tracking_gap_rate",
+      "name": "埋点缺口率",
+      "description": "内部数据质量监控中的埋点缺口比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "quality.identity_stitch_drop_rate",
+      "name": "身份拼接掉线率",
+      "description": "内部身份拼接链路的匹配掉线比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "quality.tracking_schema_gap",
+      "name": "埋点 Schema 缺口",
+      "description": "埋点字段或版本不一致的质量事件",
+      "has_series_definition": false
+    },
+    {
+      "factor_id": "quality.consent_event_loss_rate",
+      "name": "同意授权事件丢失率",
+      "description": "授权同意事件在采集链路中的丢失比例",
+      "has_series_definition": true
+    },
+    {
+      "factor_id": "quality.utm_attribution_null_rate",
+      "name": "UTM 归因空值率",
+      "description": "付费流量归因参数缺失或无法归属比例",
+      "has_series_definition": true
+    }
+  ]
+}

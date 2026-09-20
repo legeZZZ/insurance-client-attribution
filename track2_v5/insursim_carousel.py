@@ -60,7 +60,9 @@ def generate_bundle_stage(
         placement = str(rng.choice(["home_top", "home_mid"], p=[0.7, 0.3]))
         t = int(rng.random() < 0.5)
         session_depth = int(rng.poisson(2.5 if user_new_old == "old" else 1.6) + 1)
-        prior_quote_count = int(max(0, rng.poisson(1.2 if user_new_old == "old" else 0.35)))
+        prior_quote_count = int(
+            max(0, rng.poisson(1.2 if user_new_old == "old" else 0.35))
+        )
         quote_complexity_score = float(
             np.clip(
                 0.24
@@ -83,9 +85,7 @@ def generate_bundle_stage(
         )
         coverage_need_score = float(
             np.clip(
-                0.22
-                + 0.08 * prior_quote_count
-                + rng.beta(2.4, 3.8),
+                0.22 + 0.08 * prior_quote_count + rng.beta(2.4, 3.8),
                 0.0,
                 1.0,
             )
@@ -142,19 +142,36 @@ def generate_bundle_stage(
             )
         )
         fx_rate_pressure_index = float(
-            np.clip(0.42 + 0.12 * math.sin(i / 1100.0 + 1.6) + rng.normal(0, 0.05), 0.0, 1.0)
+            np.clip(
+                0.42 + 0.12 * math.sin(i / 1100.0 + 1.6) + rng.normal(0, 0.05), 0.0, 1.0
+            )
         )
         regulatory_attention_index = float(
-            np.clip(0.18 + 0.20 * (45_000 <= i % 100_000 <= 62_000) + rng.normal(0, 0.04), 0.0, 1.0)
+            np.clip(
+                0.18 + 0.20 * (45_000 <= i % 100_000 <= 62_000) + rng.normal(0, 0.04),
+                0.0,
+                1.0,
+            )
         )
         quote_form_step_count = int(
             4 + device_low_end + (channel == "paid") + (quote_complexity_score > 0.68)
         )
         baseline_latency_risk = float(
-            np.clip(0.18 + 0.30 * device_low_end + 0.18 * (1.0 - network_quality_score), 0.0, 1.0)
+            np.clip(
+                0.18 + 0.30 * device_low_end + 0.18 * (1.0 - network_quality_score),
+                0.0,
+                1.0,
+            )
         )
         premium_index = float(
-            np.clip(0.55 + 0.18 * coverage_need_score + 0.10 * price_sensitivity_score + rng.normal(0, 0.10), 0.0, 1.0)
+            np.clip(
+                0.55
+                + 0.18 * coverage_need_score
+                + 0.10 * price_sensitivity_score
+                + rng.normal(0, 0.10),
+                0.0,
+                1.0,
+            )
         )
 
         logit = math.log(BASE_CTR / (1 - BASE_CTR))
@@ -170,9 +187,9 @@ def generate_bundle_stage(
         logit += t * (bundle_logit_effect + moderator_logit_effect * device_low_end)
         logit += t * (
             -0.24 * quote_complexity_score
-            -0.18 * price_sensitivity_score
-            -0.28 * market_pressure_index * (channel == "paid")
-            -0.16 * baseline_latency_risk
+            - 0.18 * price_sensitivity_score
+            - 0.28 * market_pressure_index * (channel == "paid")
+            - 0.16 * baseline_latency_risk
             + 0.10 * coverage_need_score
         )
         if quote_form_step_count >= 6 and competitor_quote_speed_index > 0.45:

@@ -1,0 +1,14 @@
+{
+  "operation": "skills",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/governance.db",
+    "action": "publish",
+    "parameters": {
+      "name": "metric_skill",
+      "version": 1,
+      "approval_ref": "sha256:9f9c6913abf5449b3ac0062d8160e14ffa2914f9a7c7f4b6b02702e9dceab16a",
+      "fraction": 1,
+      "effective_window": 3
+    }
+  }
+}

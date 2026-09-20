@@ -1,0 +1,29 @@
+{
+  "affected": [
+    {
+      "ref": "sha256:58e95b477106dba00b23182be42f8fddb5a5190334389e0bb35cefc204022a16",
+      "kind": "data",
+      "status": "INVALID"
+    },
+    {
+      "ref": "sha256:3ffffb7c7ba5aa54f657f8bad897159e9bbf76743d325a311af2a72d24b0d799",
+      "kind": "manifest",
+      "status": "INVALID"
+    },
+    {
+      "ref": "sha256:c05dfd63b710e871a9414d07a55de254f8c5988e3c05d3960b6da677241fda91",
+      "kind": "skill",
+      "status": "SUSPENDED"
+    },
+    {
+      "ref": "sha256:a2f4543ec8d3f3924257ff40d75d5da2ee493de5ad26068a233e472b1b401b25",
+      "kind": "skill",
+      "status": "SUSPENDED"
+    },
+    {
+      "ref": "sha256:ec2f2a5f21fec6f88c003dba7bebaed1d4f297d28424b794cbb70179958acaaf",
+      "kind": "manifest",
+      "status": "INVALID"
+    }
+  ]
+}

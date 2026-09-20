@@ -1,0 +1,16 @@
+[
+  {
+    "factor_id": "campaign.sms_push",
+    "name": "短信触达campaign",
+    "metric": "残余异动（经营指标异常成分）",
+    "direction": "positive",
+    "basis": "B 线发现 + 独立窗口确认，校正后 p=0.02"
+  },
+  {
+    "factor_id": "homepage.carousel_exposure",
+    "name": "首页轮播曝光",
+    "metric": "付费转化",
+    "direction": "positive",
+    "basis": "A 线随机化实验库结论（已验证因子）"
+  }
+]

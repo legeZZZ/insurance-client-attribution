@@ -1,0 +1,8 @@
+test_categorical_labels_are_not_ordinal (test_temporal_shadow_stability.ShadowTests.test_categorical_labels_are_not_ordinal) ... ok
+test_event_and_continuous_have_distinct_shadow_policies (test_temporal_shadow_stability.ShadowTests.test_event_and_continuous_have_distinct_shadow_policies) ... ok
+test_short_series_and_bad_event_fail_explicitly (test_temporal_shadow_stability.ShadowTests.test_short_series_and_bad_event_fail_explicitly) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.036s
+
+OK

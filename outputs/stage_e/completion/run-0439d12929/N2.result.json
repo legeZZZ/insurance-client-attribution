@@ -1,0 +1,17 @@
+{
+  "proposal": {
+    "action": "ADD_HYPOTHESES",
+    "parameters": {
+      "factor_ids": [
+        "x"
+      ]
+    },
+    "rationale": "确定性规则：检查登记的可用候选"
+  },
+  "provider": "rules",
+  "fallback_reason": null,
+  "elapsed_seconds": 0,
+  "token_usage": {
+    "total_tokens": 0
+  }
+}

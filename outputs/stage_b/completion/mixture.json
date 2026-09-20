@@ -1,0 +1,940 @@
+{
+  "track": "B",
+  "status": "ESTIMATED",
+  "contracts": {
+    "MetricContract": {
+      "name": "revenue",
+      "numerator": "revenue",
+      "denominator": null,
+      "aggregation": "sum",
+      "unit": "currency",
+      "analysis_unit": "unit",
+      "target_population": "treated units",
+      "timezone": "UTC",
+      "window": [
+        50,
+        54
+      ],
+      "maturity_days": 2,
+      "deduplication": "unit/day",
+      "schema_version": "1.0",
+      "contract_type": "MetricContract",
+      "digest": "sha256:98537e49a030bfa5b3ef4125639ded7e5dfb2518e477bd0a4d99a081cdc4d3ac"
+    },
+    "IdentificationReport": {
+      "treatment": "registered_intervention",
+      "outcome": "revenue",
+      "design": "BSTS",
+      "status": "IDENTIFIED",
+      "assumptions": [
+        {
+          "name": "data_valid",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:8063c904d17339e9f2a304409f3ba78563fe10dcc31aa220e73cd8b6e3cb05df"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "outcome_mature",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:8063c904d17339e9f2a304409f3ba78563fe10dcc31aa220e73cd8b6e3cb05df"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "support_overlap",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:8063c904d17339e9f2a304409f3ba78563fe10dcc31aa220e73cd8b6e3cb05df"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "control_predictive_gain",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:8063c904d17339e9f2a304409f3ba78563fe10dcc31aa220e73cd8b6e3cb05df"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "preperiod_backtest",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:8063c904d17339e9f2a304409f3ba78563fe10dcc31aa220e73cd8b6e3cb05df"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "unaffected_controls",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "design:c1",
+            "design:c2",
+            "design:c3"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "stable_relationship",
+          "status": "assumed",
+          "passed": true,
+          "evidence_refs": [
+            "design:stable"
+          ],
+          "data_verifiable": false
+        }
+      ],
+      "evidence_refs": [
+        "design:c1",
+        "design:c2",
+        "design:c3",
+        "design:stable",
+        "sha256:0d545f83957e01fc5d622c40b5eb582829bb8dfe7e3a236d9b2e500144e46c1d",
+        "sha256:8063c904d17339e9f2a304409f3ba78563fe10dcc31aa220e73cd8b6e3cb05df"
+      ],
+      "adjustment_set": [],
+      "forbidden_adjustments": [
+        "registered_intervention",
+        "revenue"
+      ],
+      "rejected_adjustments": [],
+      "support": {
+        "target_population": "treated units",
+        "data_digest": "sha256:0d545f83957e01fc5d622c40b5eb582829bb8dfe7e3a236d9b2e500144e46c1d",
+        "overlap_check": {
+          "status": "supported",
+          "evidence_refs": [
+            "sha256:8063c904d17339e9f2a304409f3ba78563fe10dcc31aa220e73cd8b6e3cb05df"
+          ]
+        }
+      },
+      "ambiguities": [],
+      "reason_codes": [],
+      "route": "B",
+      "effect_scope": "individual",
+      "causal_effect_allowed": true,
+      "supplemental_evidence_needed": [],
+      "graph_ref": null,
+      "dag_digest": null,
+      "schema_version": "1.0",
+      "contract_type": "IdentificationReport",
+      "digest": "sha256:7a95c23f8972a363154cafde632733d2568fa25fb944a858b0623c39eb3c60b1"
+    },
+    "EffectEstimate": {
+      "estimand": "ATT",
+      "unit": "currency",
+      "estimate": 9.989303247880244,
+      "interval": [
+        9.906808039331962,
+        10.07179845642862
+      ],
+      "interval_method": "finite_hyperprior_posterior_predictive_mixture",
+      "selection_status": "pre_registered",
+      "target_population": "treated units",
+      "window": [
+        50,
+        54
+      ],
+      "diagnostics": {
+        "hyperparameter_grid": [
+          {
+            "observation_variance": 0.0001,
+            "level_variance": 1e-05,
+            "prior_variance": 1000,
+            "prior_mass": 1
+          },
+          {
+            "observation_variance": 0.001,
+            "level_variance": 1e-05,
+            "prior_variance": 1000,
+            "prior_mass": 1
+          }
+        ],
+        "posterior_weights": [
+          0.9999999999999574,
+          3.8229929510059335e-14
+        ],
+        "weight_training_window": [
+          0,
+          49
+        ],
+        "components": [
+          {
+            "track": "B",
+            "status": "ESTIMATED",
+            "contracts": {
+              "MetricContract": {
+                "name": "revenue",
+                "numerator": "revenue",
+                "denominator": null,
+                "aggregation": "sum",
+                "unit": "currency",
+                "analysis_unit": "unit",
+                "target_population": "treated units",
+                "timezone": "UTC",
+                "window": [
+                  50,
+                  54
+                ],
+                "maturity_days": 2,
+                "deduplication": "unit/day",
+                "schema_version": "1.0",
+                "contract_type": "MetricContract",
+                "digest": "sha256:98537e49a030bfa5b3ef4125639ded7e5dfb2518e477bd0a4d99a081cdc4d3ac"
+              },
+              "IdentificationReport": {
+                "treatment": "registered_intervention",
+                "outcome": "revenue",
+                "design": "BSTS",
+                "status": "IDENTIFIED",
+                "assumptions": [
+                  {
+                    "name": "data_valid",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:8063c904d17339e9f2a304409f3ba78563fe10dcc31aa220e73cd8b6e3cb05df"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "outcome_mature",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:8063c904d17339e9f2a304409f3ba78563fe10dcc31aa220e73cd8b6e3cb05df"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "support_overlap",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:8063c904d17339e9f2a304409f3ba78563fe10dcc31aa220e73cd8b6e3cb05df"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "control_predictive_gain",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:8063c904d17339e9f2a304409f3ba78563fe10dcc31aa220e73cd8b6e3cb05df"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "preperiod_backtest",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:8063c904d17339e9f2a304409f3ba78563fe10dcc31aa220e73cd8b6e3cb05df"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "unaffected_controls",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "design:c1",
+                      "design:c2",
+                      "design:c3"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "stable_relationship",
+                    "status": "assumed",
+                    "passed": true,
+                    "evidence_refs": [
+                      "design:stable"
+                    ],
+                    "data_verifiable": false
+                  }
+                ],
+                "evidence_refs": [
+                  "design:c1",
+                  "design:c2",
+                  "design:c3",
+                  "design:stable",
+                  "sha256:8063c904d17339e9f2a304409f3ba78563fe10dcc31aa220e73cd8b6e3cb05df"
+                ],
+                "adjustment_set": [],
+                "forbidden_adjustments": [
+                  "registered_intervention",
+                  "revenue"
+                ],
+                "rejected_adjustments": [],
+                "support": {
+                  "target_population": "treated units",
+                  "data_digest": "sha256:8063c904d17339e9f2a304409f3ba78563fe10dcc31aa220e73cd8b6e3cb05df",
+                  "overlap_check": {
+                    "status": "supported",
+                    "evidence_refs": [
+                      "sha256:8063c904d17339e9f2a304409f3ba78563fe10dcc31aa220e73cd8b6e3cb05df"
+                    ]
+                  }
+                },
+                "ambiguities": [],
+                "reason_codes": [],
+                "route": "B",
+                "effect_scope": "individual",
+                "causal_effect_allowed": true,
+                "supplemental_evidence_needed": [],
+                "graph_ref": null,
+                "dag_digest": null,
+                "schema_version": "1.0",
+                "contract_type": "IdentificationReport",
+                "digest": "sha256:c92b6378f6a9d3b4d633950172e6c3ce0a651fbda9cb1811e5ecd662eb4feadb"
+              },
+              "EffectEstimate": {
+                "estimand": "ATT",
+                "unit": "currency",
+                "estimate": 9.989303247880288,
+                "interval": [
+                  9.906808039331967,
+                  10.07179845642861
+                ],
+                "interval_method": "fixed_hyperparameter_Gaussian_posterior_predictive_95",
+                "selection_status": "pre_registered",
+                "target_population": "treated units",
+                "window": [
+                  50,
+                  54
+                ],
+                "diagnostics": {
+                  "configuration": {
+                    "method": "BSTS",
+                    "backtest_rmse_limit": 0.5,
+                    "min_backtest_gain": 0.0,
+                    "prefit_rmse_limit": 0.1,
+                    "loo_effect_limit": 0.2,
+                    "max_weight": 0.7,
+                    "block_length": 2,
+                    "bootstrap_samples": 199,
+                    "observation_variance": 0.0001,
+                    "level_variance": 1e-05,
+                    "prior_variance": 1000,
+                    "seed": 20260915
+                  },
+                  "control_names": [
+                    "c1",
+                    "c2",
+                    "c3"
+                  ],
+                  "rejected_controls": [],
+                  "training_window": [
+                    0,
+                    49
+                  ],
+                  "aggregation": "sum of daily aggregate effects over the metric window",
+                  "control_selection": "prespecified; not selected from root-cause candidates",
+                  "posterior_state": {
+                    "state_mean": [
+                      9.987893459625832,
+                      0.6036938638297793,
+                      0.6015176210232539,
+                      0.6914894837539083
+                    ],
+                    "state_covariance": [
+                      [
+                        2.7690485759351533e-05,
+                        1.4833155006511387e-06,
+                        -1.1973029430122533e-06,
+                        1.6755319620716307e-07
+                      ],
+                      [
+                        1.4833154666307463e-06,
+                        199.39194225663485,
+                        198.4980229133855,
+                        -346.74677684828373
+                      ],
+                      [
+                        -1.1973029852916746e-06,
+                        198.49802291338548,
+                        197.6081225807731,
+                        -345.19224260470133
+                      ],
+                      [
+                        1.6755318705886634e-07,
+                        -346.74677684828356,
+                        -345.19224260470077,
+                        602.9999418191618
+                      ]
+                    ],
+                    "control_center": [
+                      9.974857238415122,
+                      10.002780713262261,
+                      9.98881897583869
+                    ],
+                    "control_scale": [
+                      2.0050760428784447,
+                      1.9960868903045894,
+                      1.743434713391571
+                    ]
+                  },
+                  "counterfactual_joint_covariance": [
+                    [
+                      0.00013749117002935402,
+                      3.706687280181249e-05,
+                      3.7534145110120714e-05,
+                      3.7718716397561554e-05,
+                      3.621595485758365e-05
+                    ],
+                    [
+                      3.706687273233859e-05,
+                      0.00014891933323686948,
+                      5.149667592210318e-05,
+                      4.695445752288901e-05,
+                      4.9912926315266414e-05
+                    ],
+                    [
+                      3.7534144955233286e-05,
+                      5.149667593858762e-05,
+                      0.00016789723081918107,
+                      5.746301479164704e-05,
+                      6.309897689604374e-05
+                    ],
+                    [
+                      3.771871639829675e-05,
+                      4.6954457624307844e-05,
+                      5.746301502424754e-05,
+                      0.00016806502090706336,
+                      6.561808673410386e-05
+                    ],
+                    [
+                      3.621595477369576e-05,
+                      4.991292617501242e-05,
+                      6.309897656931059e-05,
+                      6.561808661830501e-05,
+                      0.00018304962545783991
+                    ]
+                  ],
+                  "interval_scope": "Gaussian posterior predictive interval conditional on fixed hyperparameters and unaffected controls",
+                  "model": "local level random walk + static Gaussian regression; no spike-and-slab or hyperparameter integration",
+                  "backtest": {
+                    "window": [
+                      45,
+                      49
+                    ],
+                    "prediction": [
+                      11.231111041113726,
+                      9.222932052158896,
+                      6.145544046335843,
+                      9.30977380501459,
+                      11.106298066676361
+                    ],
+                    "rmse": 0.01153444862414386,
+                    "limit": 0.5,
+                    "baseline_rmse": 2.2081027511264204,
+                    "rmse_gain": 2.1965683025022766,
+                    "minimum_gain": 0.0,
+                    "baseline": "same local-level model without controls"
+                  },
+                  "time_placebos": {
+                    "requested": 20,
+                    "executed": 20,
+                    "runs": [
+                      {
+                        "day": 6,
+                        "descriptive_total_difference": -0.1344880740249046
+                      },
+                      {
+                        "day": 9,
+                        "descriptive_total_difference": -0.042621521238237925
+                      },
+                      {
+                        "day": 10,
+                        "descriptive_total_difference": -0.023587806944101786
+                      },
+                      {
+                        "day": 12,
+                        "descriptive_total_difference": -0.019781494190194593
+                      },
+                      {
+                        "day": 16,
+                        "descriptive_total_difference": 0.010410223925735096
+                      },
+                      {
+                        "day": 17,
+                        "descriptive_total_difference": -0.07248153996257045
+                      },
+                      {
+                        "day": 19,
+                        "descriptive_total_difference": -0.017509495027971056
+                      },
+                      {
+                        "day": 22,
+                        "descriptive_total_difference": 0.02257230743594718
+                      },
+                      {
+                        "day": 23,
+                        "descriptive_total_difference": -0.014140738492221416
+                      },
+                      {
+                        "day": 24,
+                        "descriptive_total_difference": -0.0008625534857085171
+                      },
+                      {
+                        "day": 27,
+                        "descriptive_total_difference": 0.01920662163941156
+                      },
+                      {
+                        "day": 28,
+                        "descriptive_total_difference": -0.004496029403193269
+                      },
+                      {
+                        "day": 31,
+                        "descriptive_total_difference": -0.036599325020291396
+                      },
+                      {
+                        "day": 32,
+                        "descriptive_total_difference": -0.04353165172883777
+                      },
+                      {
+                        "day": 34,
+                        "descriptive_total_difference": -0.05353683228747386
+                      },
+                      {
+                        "day": 36,
+                        "descriptive_total_difference": 0.04055123514638659
+                      },
+                      {
+                        "day": 38,
+                        "descriptive_total_difference": 0.04219822331418044
+                      },
+                      {
+                        "day": 39,
+                        "descriptive_total_difference": 0.0686963376633436
+                      },
+                      {
+                        "day": 44,
+                        "descriptive_total_difference": -0.031584303816785564
+                      },
+                      {
+                        "day": 45,
+                        "descriptive_total_difference": -0.0365550622234494
+                      }
+                    ],
+                    "formal_pvalue": null,
+                    "scope": "overlapping empirical diagnostics, not independent randomized inference"
+                  },
+                  "counterfactual": [
+                    9.239596029848341,
+                    10.876157237458123,
+                    11.956020501248513,
+                    8.911867273138768,
+                    12.459508027769948
+                  ],
+                  "data_digest": "sha256:8063c904d17339e9f2a304409f3ba78563fe10dcc31aa220e73cd8b6e3cb05df"
+                },
+                "identification_ref": "sha256:c92b6378f6a9d3b4d633950172e6c3ce0a651fbda9cb1811e5ecd662eb4feadb",
+                "method": "BSTS",
+                "schema_version": "1.0",
+                "contract_type": "EffectEstimate",
+                "digest": "sha256:5d34c6196db69e8191cdb4bf8852d2ca6ea05442edd6e03dca9868ea9a15bde0"
+              }
+            }
+          },
+          {
+            "track": "B",
+            "status": "ESTIMATED",
+            "contracts": {
+              "MetricContract": {
+                "name": "revenue",
+                "numerator": "revenue",
+                "denominator": null,
+                "aggregation": "sum",
+                "unit": "currency",
+                "analysis_unit": "unit",
+                "target_population": "treated units",
+                "timezone": "UTC",
+                "window": [
+                  50,
+                  54
+                ],
+                "maturity_days": 2,
+                "deduplication": "unit/day",
+                "schema_version": "1.0",
+                "contract_type": "MetricContract",
+                "digest": "sha256:98537e49a030bfa5b3ef4125639ded7e5dfb2518e477bd0a4d99a081cdc4d3ac"
+              },
+              "IdentificationReport": {
+                "treatment": "registered_intervention",
+                "outcome": "revenue",
+                "design": "BSTS",
+                "status": "IDENTIFIED",
+                "assumptions": [
+                  {
+                    "name": "data_valid",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:a0364cf97db96f9dc6a670bffaf65d0365a6cf5c2572ebe7b3ebaaa5a1a8038c"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "outcome_mature",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:a0364cf97db96f9dc6a670bffaf65d0365a6cf5c2572ebe7b3ebaaa5a1a8038c"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "support_overlap",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:a0364cf97db96f9dc6a670bffaf65d0365a6cf5c2572ebe7b3ebaaa5a1a8038c"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "control_predictive_gain",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:a0364cf97db96f9dc6a670bffaf65d0365a6cf5c2572ebe7b3ebaaa5a1a8038c"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "preperiod_backtest",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:a0364cf97db96f9dc6a670bffaf65d0365a6cf5c2572ebe7b3ebaaa5a1a8038c"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "unaffected_controls",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "design:c1",
+                      "design:c2",
+                      "design:c3"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "stable_relationship",
+                    "status": "assumed",
+                    "passed": true,
+                    "evidence_refs": [
+                      "design:stable"
+                    ],
+                    "data_verifiable": false
+                  }
+                ],
+                "evidence_refs": [
+                  "design:c1",
+                  "design:c2",
+                  "design:c3",
+                  "design:stable",
+                  "sha256:a0364cf97db96f9dc6a670bffaf65d0365a6cf5c2572ebe7b3ebaaa5a1a8038c"
+                ],
+                "adjustment_set": [],
+                "forbidden_adjustments": [
+                  "registered_intervention",
+                  "revenue"
+                ],
+                "rejected_adjustments": [],
+                "support": {
+                  "target_population": "treated units",
+                  "data_digest": "sha256:a0364cf97db96f9dc6a670bffaf65d0365a6cf5c2572ebe7b3ebaaa5a1a8038c",
+                  "overlap_check": {
+                    "status": "supported",
+                    "evidence_refs": [
+                      "sha256:a0364cf97db96f9dc6a670bffaf65d0365a6cf5c2572ebe7b3ebaaa5a1a8038c"
+                    ]
+                  }
+                },
+                "ambiguities": [],
+                "reason_codes": [],
+                "route": "B",
+                "effect_scope": "individual",
+                "causal_effect_allowed": true,
+                "supplemental_evidence_needed": [],
+                "graph_ref": null,
+                "dag_digest": null,
+                "schema_version": "1.0",
+                "contract_type": "IdentificationReport",
+                "digest": "sha256:2dca4b606451faecaa48e9cb59fc78fe3ce7249c38ae72d3784f2c4574d83c14"
+              },
+              "EffectEstimate": {
+                "estimand": "ATT",
+                "unit": "currency",
+                "estimate": 9.985914796949832,
+                "interval": [
+                  9.808987808169329,
+                  10.162841785730334
+                ],
+                "interval_method": "fixed_hyperparameter_Gaussian_posterior_predictive_95",
+                "selection_status": "pre_registered",
+                "target_population": "treated units",
+                "window": [
+                  50,
+                  54
+                ],
+                "diagnostics": {
+                  "configuration": {
+                    "method": "BSTS",
+                    "backtest_rmse_limit": 0.5,
+                    "min_backtest_gain": 0.0,
+                    "prefit_rmse_limit": 0.1,
+                    "loo_effect_limit": 0.2,
+                    "max_weight": 0.7,
+                    "block_length": 2,
+                    "bootstrap_samples": 199,
+                    "observation_variance": 0.001,
+                    "level_variance": 1e-05,
+                    "prior_variance": 1000,
+                    "seed": 20260915
+                  },
+                  "control_names": [
+                    "c1",
+                    "c2",
+                    "c3"
+                  ],
+                  "rejected_controls": [],
+                  "training_window": [
+                    0,
+                    49
+                  ],
+                  "aggregation": "sum of daily aggregate effects over the metric window",
+                  "control_selection": "prespecified; not selected from root-cause candidates",
+                  "posterior_state": {
+                    "state_mean": [
+                      9.988329522097485,
+                      0.6042424121806714,
+                      0.6012907986787173,
+                      0.6916750730250666
+                    ],
+                    "state_covariance": [
+                      [
+                        9.709312321269135e-05,
+                        7.034471071430286e-06,
+                        -6.0356330440107415e-06,
+                        5.899267634505348e-07
+                      ],
+                      [
+                        7.034471071137565e-06,
+                        199.3919645524501,
+                        198.49800519395774,
+                        -346.74677417101464
+                      ],
+                      [
+                        -6.0356330283366704e-06,
+                        198.4980051939578,
+                        197.6081445044647,
+                        -345.1922402436162
+                      ],
+                      [
+                        5.899267321743834e-07,
+                        -346.74677417101486,
+                        -345.1922402436163,
+                        602.9999447103102
+                      ]
+                    ],
+                    "control_center": [
+                      9.974857238415122,
+                      10.002780713262261,
+                      9.98881897583869
+                    ],
+                    "control_scale": [
+                      2.0050760428784447,
+                      1.9960868903045894,
+                      1.743434713391571
+                    ]
+                  },
+                  "counterfactual_joint_covariance": [
+                    [
+                      0.001108397585390151,
+                      0.00010198137207362951,
+                      0.00010056182985428167,
+                      0.00011021941488885958,
+                      9.411516058341565e-05
+                    ],
+                    [
+                      0.0001019813720589928,
+                      0.0011248745380634956,
+                      0.0001402627361440002,
+                      0.00011071236901800998,
+                      0.00013329301166257194
+                    ],
+                    [
+                      0.000100561829854881,
+                      0.00014026273608781195,
+                      0.0011956150442328803,
+                      0.00011952825543359714,
+                      0.00016381845375641881
+                    ],
+                    [
+                      0.00011021941489032444,
+                      0.00011071236903332927,
+                      0.00011952825542549067,
+                      0.0011430942607435304,
+                      0.00011851502876721761
+                    ],
+                    [
+                      9.411516059400266e-05,
+                      0.00013329301161649006,
+                      0.0001638184537458942,
+                      0.00011851502878792145,
+                      0.0011907719964961224
+                    ]
+                  ],
+                  "interval_scope": "Gaussian posterior predictive interval conditional on fixed hyperparameters and unaffected controls",
+                  "model": "local level random walk + static Gaussian regression; no spike-and-slab or hyperparameter integration",
+                  "backtest": {
+                    "window": [
+                      45,
+                      49
+                    ],
+                    "prediction": [
+                      11.227160019086888,
+                      9.219173693309768,
+                      6.141242997061918,
+                      9.306009904781284,
+                      11.103325596862309
+                    ],
+                    "rmse": 0.00966076187579324,
+                    "limit": 0.5,
+                    "baseline_rmse": 1.9939957074853805,
+                    "rmse_gain": 1.9843349456095871,
+                    "minimum_gain": 0.0,
+                    "baseline": "same local-level model without controls"
+                  },
+                  "time_placebos": {
+                    "requested": 20,
+                    "executed": 20,
+                    "runs": [
+                      {
+                        "day": 6,
+                        "descriptive_total_difference": -0.13755243645715876
+                      },
+                      {
+                        "day": 9,
+                        "descriptive_total_difference": -0.047448108737579986
+                      },
+                      {
+                        "day": 10,
+                        "descriptive_total_difference": -0.027708695485546997
+                      },
+                      {
+                        "day": 12,
+                        "descriptive_total_difference": -0.015003302611614089
+                      },
+                      {
+                        "day": 16,
+                        "descriptive_total_difference": -0.003377899206265411
+                      },
+                      {
+                        "day": 17,
+                        "descriptive_total_difference": -0.05756923215550991
+                      },
+                      {
+                        "day": 19,
+                        "descriptive_total_difference": -0.021589645020844372
+                      },
+                      {
+                        "day": 22,
+                        "descriptive_total_difference": 0.0023147869004152
+                      },
+                      {
+                        "day": 23,
+                        "descriptive_total_difference": -0.017130539315063587
+                      },
+                      {
+                        "day": 24,
+                        "descriptive_total_difference": -0.009399596518127495
+                      },
+                      {
+                        "day": 27,
+                        "descriptive_total_difference": 0.013484038723977854
+                      },
+                      {
+                        "day": 28,
+                        "descriptive_total_difference": -0.0028414330583172998
+                      },
+                      {
+                        "day": 31,
+                        "descriptive_total_difference": -0.03458228030778354
+                      },
+                      {
+                        "day": 32,
+                        "descriptive_total_difference": -0.041461502303306474
+                      },
+                      {
+                        "day": 34,
+                        "descriptive_total_difference": -0.051814117918805636
+                      },
+                      {
+                        "day": 36,
+                        "descriptive_total_difference": 0.016096613254017456
+                      },
+                      {
+                        "day": 38,
+                        "descriptive_total_difference": 0.0278566345769633
+                      },
+                      {
+                        "day": 39,
+                        "descriptive_total_difference": 0.05152686001969009
+                      },
+                      {
+                        "day": 44,
+                        "descriptive_total_difference": -0.012402050771507689
+                      },
+                      {
+                        "day": 45,
+                        "descriptive_total_difference": -0.01780826202620034
+                      }
+                    ],
+                    "formal_pvalue": null,
+                    "scope": "overlapping empirical diagnostics, not independent randomized inference"
+                  },
+                  "counterfactual": [
+                    9.239781128424303,
+                    10.876854298361543,
+                    11.957382045226511,
+                    8.912012180363588,
+                    12.460507868018205
+                  ],
+                  "data_digest": "sha256:a0364cf97db96f9dc6a670bffaf65d0365a6cf5c2572ebe7b3ebaaa5a1a8038c"
+                },
+                "identification_ref": "sha256:2dca4b606451faecaa48e9cb59fc78fe3ce7249c38ae72d3784f2c4574d83c14",
+                "method": "BSTS",
+                "schema_version": "1.0",
+                "contract_type": "EffectEstimate",
+                "digest": "sha256:784ff979d14d283d241c21e73072d0f4daa496593f1d162539fbd8d6b58236c0"
+              }
+            }
+          }
+        ],
+        "interval_scope": "exact Gaussian predictive mixture conditional on finite hyperprior",
+        "between_hyperparameter_variance": 4.389407494645196e-19
+      },
+      "identification_ref": "sha256:7a95c23f8972a363154cafde632733d2568fa25fb944a858b0623c39eb3c60b1",
+      "method": "BSTS",
+      "schema_version": "1.0",
+      "contract_type": "EffectEstimate",
+      "digest": "sha256:cbf6a517ac45a35a4217a09244151a8d1773d1cfba7bec45b3b5a21ebfe96a11"
+    }
+  }
+}

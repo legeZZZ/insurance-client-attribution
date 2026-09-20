@@ -11,12 +11,13 @@ import hashlib
 import json
 import time
 from collections.abc import Mapping
+
 try:
     from datetime import UTC, datetime
 except ImportError:
-    from datetime import datetime, timezone
+    from datetime import datetime
 
-    UTC = timezone.utc
+    UTC = UTC
 from pathlib import Path
 from typing import Any
 

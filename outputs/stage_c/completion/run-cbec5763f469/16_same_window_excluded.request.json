@@ -1,0 +1,11 @@
+{
+  "operation": "factor_registry",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-cbec5763f469/factors.db",
+    "action": "retrieve",
+    "parameters": {
+      "as_of": 99,
+      "search_window": 0
+    }
+  }
+}

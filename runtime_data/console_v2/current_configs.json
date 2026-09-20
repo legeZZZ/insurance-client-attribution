@@ -1,0 +1,21 @@
+[
+  {
+    "config_id": "cfg-carousel-0917",
+    "title": "轮播图配置异常",
+    "factor_id": "homepage.carousel_exposure",
+    "current_direction": "negative",
+    "detail": "本周轮播首位分配给低转化素材 mat_7731（历史转化 0.4%，位均 1.2%），首页高转化曝光位被挤出。",
+    "suggestion": "恢复高转化素材至轮播首位；调整后以 5% 灰度观察 付费转化回升，再全量。",
+    "since_day": 137,
+    "owner": "运营后台"
+  },
+  {
+    "config_id": "cfg-feed-0915",
+    "title": "信息流投放节奏",
+    "factor_id": "channel.feed_ad",
+    "current_direction": "positive",
+    "detail": "信息流维持既有出价与素材节奏。",
+    "since_day": 130,
+    "owner": "运营后台"
+  }
+]

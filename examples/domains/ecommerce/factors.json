@@ -1,0 +1,702 @@
+[
+  {
+    "factor_id": "promotion_intensity",
+    "day": 0,
+    "value": -1.0238806223089694,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 1,
+    "value": -0.23834303473970692,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 2,
+    "value": 0.6347420686997415,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 3,
+    "value": -0.12184283318581356,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 4,
+    "value": 0.39873408976891755,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 5,
+    "value": 0.835871191522185,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 6,
+    "value": 0.26200331045860087,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 7,
+    "value": 0.2762305114717134,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 8,
+    "value": 1.7335149666792715,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 9,
+    "value": 1.7452820797745525,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 10,
+    "value": -0.22511515040313854,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 11,
+    "value": 0.5304449852276168,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 12,
+    "value": -0.6846421151124659,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 13,
+    "value": -1.1034120247072534,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 14,
+    "value": 1.0444929144343982,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 15,
+    "value": 0.7778856563962704,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 16,
+    "value": -0.9235125356106568,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 17,
+    "value": -0.5564261693858098,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 18,
+    "value": -0.7515650927736321,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 19,
+    "value": 1.1140680300496677,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 20,
+    "value": -0.22295007277220052,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 21,
+    "value": 0.31237599782220815,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 22,
+    "value": -0.28599674016315124,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 23,
+    "value": -0.9301294361861463,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 24,
+    "value": 1.920301184810833,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 25,
+    "value": 1.2248543386614898,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 26,
+    "value": -0.2919897371224868,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 27,
+    "value": 0.3748536138755498,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 28,
+    "value": -0.4048211641167414,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 29,
+    "value": -1.8259589205846651,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 30,
+    "value": 0.3099733062454463,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 31,
+    "value": -0.42028267761899457,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 32,
+    "value": -0.7224608057844616,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 33,
+    "value": -0.38073210870900387,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 34,
+    "value": -0.6821712312306683,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 35,
+    "value": 0.25176432526784814,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 36,
+    "value": -1.1255967407981053,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 37,
+    "value": -0.16816544004661924,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 38,
+    "value": 0.2724400017372538,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 39,
+    "value": 0.3356544977443234,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 40,
+    "value": -2.117986866759688,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 41,
+    "value": 1.2061660986293257,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 42,
+    "value": -0.9443143403133093,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 43,
+    "value": -0.8467393290698448,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 44,
+    "value": 0.5444357152496674,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 45,
+    "value": 0.6556888697482599,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 46,
+    "value": 0.6003711420436363,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 47,
+    "value": 1.2023599662461801,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 48,
+    "value": 1.4837444267754216,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 49,
+    "value": -0.27228170715077327,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 50,
+    "value": -0.3984445212752967,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 51,
+    "value": 0.5616697092632424,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 52,
+    "value": 0.6532643413802431,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 53,
+    "value": 0.6756499454265378,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 54,
+    "value": 0.5066779299982127,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 55,
+    "value": -0.18836429636932803,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 56,
+    "value": -0.006235115605802069,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 57,
+    "value": 1.7144029576054167,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 58,
+    "value": -1.7702521726143199,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 59,
+    "value": 1.2523084935739606,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 60,
+    "value": -0.5792744544626156,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 61,
+    "value": 0.7722660218454637,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 62,
+    "value": -0.9468440404250466,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 63,
+    "value": -0.9925111647617832,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 64,
+    "value": 2.9435180680748823,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 65,
+    "value": -0.2587083568696672,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 66,
+    "value": 0.2154425093746384,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 67,
+    "value": 0.4542302698121034,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 68,
+    "value": -0.7942059355217372,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 69,
+    "value": -1.9595591362873237,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 70,
+    "value": -0.2101415525142002,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 71,
+    "value": 1.0422822708215005,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 72,
+    "value": -0.2156517754450482,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 73,
+    "value": -0.14534074791531112,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 74,
+    "value": 0.9336150236427128,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 75,
+    "value": -0.4637761312388669,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 76,
+    "value": -0.49232047330663326,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 77,
+    "value": -0.9481548339102418,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 78,
+    "value": 0.5146429547889978,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 79,
+    "value": -0.621146137843155,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 80,
+    "value": -0.009884252212974617,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 81,
+    "value": 0.7099451168225419,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 82,
+    "value": -1.7875041953884698,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 83,
+    "value": 0.20848016613935758,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 84,
+    "value": 0.9539415091651032,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 85,
+    "value": 0.9934522528965049,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 86,
+    "value": -0.8895634514624465,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 87,
+    "value": 0.14031453548925907,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 88,
+    "value": 0.3149578298079515,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 89,
+    "value": 1.3571811621233851,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 90,
+    "value": 1.0377921232997405,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 91,
+    "value": 0.3686371556380974,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 92,
+    "value": 0.4571522251390399,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 93,
+    "value": -0.5139464518629533,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 94,
+    "value": -0.7355635771210888,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 95,
+    "value": 1.0705494414906684,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 96,
+    "value": 0.7165848431298385,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 97,
+    "value": 0.27023379623739474,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 98,
+    "value": -0.2562835495749205,
+    "effect_shape": "persistent",
+    "unit": "index"
+  },
+  {
+    "factor_id": "promotion_intensity",
+    "day": 99,
+    "value": 0.9377798263566147,
+    "effect_shape": "persistent",
+    "unit": "index"
+  }
+]

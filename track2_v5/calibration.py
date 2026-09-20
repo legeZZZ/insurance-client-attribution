@@ -10,9 +10,11 @@ from __future__ import annotations
 
 import math
 from collections.abc import Sequence
+
 try:
     from itertools import pairwise
 except ImportError:
+
     def pairwise(iterable):
         iterator = iter(iterable)
         try:
@@ -22,6 +24,8 @@ except ImportError:
         for current in iterator:
             yield previous, current
             previous = current
+
+
 from typing import Any
 
 BINS = (0.0, 0.2, 0.4, 0.6, 0.8, 1.000001)

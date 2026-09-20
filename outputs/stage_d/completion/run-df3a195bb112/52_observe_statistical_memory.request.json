@@ -1,0 +1,20 @@
+{
+  "operation": "prior",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/governance.db",
+    "action": "observe",
+    "parameters": {
+      "task_id": "historical",
+      "period": 1,
+      "context": {
+        "metric": "conversion",
+        "population": "eligible",
+        "assignment_version": "v1"
+      },
+      "arm_key": "control",
+      "successes": 20,
+      "trials": 100,
+      "data_ref": "sha256:781a6d0087304bb3ecce4b4798f84fdae1ad4cade6c63a48b11e7cffe02226e7"
+    }
+  }
+}

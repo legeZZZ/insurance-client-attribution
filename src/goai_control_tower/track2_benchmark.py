@@ -10,10 +10,11 @@ import subprocess
 import sys
 from collections import Counter
 from collections.abc import Iterable, Mapping, Sequence
+from pathlib import Path
 from typing import Any
 
-from .track2_analysis import sanitize_rows
 from .track2 import case_experiment_metadata, default_metric_contract, generate_dataset
+from .track2_analysis import sanitize_rows
 
 SCENARIOS: tuple[tuple[str, str, str], ...] = (
     ("observational_confounded", "A", "DESCRIPTIVE_ONLY"),
@@ -60,8 +61,12 @@ def _run_isolated_worker(
     public_datasets: Sequence[Mapping[str, Any]],
 ) -> list[dict[str, Any]]:
     environment = dict(os.environ)
+    source_root = str(Path(__file__).resolve().parents[1])
+    environment["PYTHONPATH"] = os.pathsep.join(
+        filter(None, [source_root, environment.get("PYTHONPATH", "")])
+    )
     completed = subprocess.run(
-        [sys.executable, "-m", "runtime.worker"],
+        [sys.executable, "-m", "goai_control_tower.track2_worker"],
         input=json.dumps({"datasets": list(public_datasets)}, ensure_ascii=False),
         text=True,
         capture_output=True,
@@ -87,9 +92,13 @@ def _effect_metrics(
 ) -> dict[str, Any]:
     errors: list[float] = []
     covered = 0
+    unavailable = 0
     for output in outputs:
         hidden = oracle[str(output["benchmark_id"])]
         if hidden["expected_outcome"] != "CAUSAL_READY":
+            continue
+        if not output.get("estimate", {}).get(outcome):
+            unavailable += 1
             continue
         estimate = float(output["estimate"][outcome]["estimate"])
         truth = float(hidden["oracle_ate"][outcome])
@@ -100,6 +109,7 @@ def _effect_metrics(
     count = len(errors)
     return {
         "evaluated": count,
+        "unavailable_due_to_gate": unavailable,
         "bias": round(sum(errors) / count, 6) if count else None,
         "rmse": round(math.sqrt(sum(error**2 for error in errors) / count), 6)
         if count
@@ -141,6 +151,9 @@ def run_hidden_benchmark(
                     "benchmark_id": benchmark_id,
                     "expected": expected,
                     "predicted": predicted,
+                    "failed_integrity_checks": output.get(
+                        "experiment_integrity", {}
+                    ).get("failed_checks", []),
                 }
             )
     correct = sum(1 for expected, predicted, _ in predictions if expected == predicted)

@@ -1,0 +1,25 @@
+{
+  "entry": {
+    "seq": 1,
+    "kind": "alert_feedback",
+    "prev_digest": "genesis",
+    "alert_id": "sha256:b1e463db57fb56dd75d42739b670ae1577c2756d52333e71782986d8fbddb789",
+    "label": "useful",
+    "operator": "fixture-analyst",
+    "source_kind": "internal_event",
+    "supersedes_seq": null,
+    "digest": "cdb1f09da36ceee6"
+  },
+  "routing": "next_window_budget_calibration",
+  "event_id": "sha256:33ace88517ba72e107e1a8f2533df82be392d0a3003765c8dc41c8d93e436b83",
+  "revision": 1,
+  "supersedes": null,
+  "payload": {
+    "alert_id": "sha256:b1e463db57fb56dd75d42739b670ae1577c2756d52333e71782986d8fbddb789",
+    "label": "useful",
+    "operator": "fixture-analyst",
+    "source_kind": "internal_event"
+  },
+  "kind": "alert_feedback",
+  "claim_promotion_allowed": false
+}

@@ -1,0 +1,41 @@
+{
+  "decision": "STOP_SUCCESS",
+  "policy_ref": "sha256:8b2c30085ef2b0850eda55a9c4be2bf10ce7ff764f4614193d0bf551e77507ac",
+  "state": {
+    "policy_ref": "sha256:8b2c30085ef2b0850eda55a9c4be2bf10ce7ff764f4614193d0bf551e77507ac",
+    "looks": [
+      7
+    ],
+    "counts": {
+      "primary": {
+        "treatment": 100000,
+        "control": 100000
+      },
+      "harm": {
+        "treatment": 100000,
+        "control": 100000
+      }
+    },
+    "terminal": true
+  },
+  "metrics": {
+    "primary": {
+      "estimate": 0.4,
+      "interval": [
+        0.3892591238757783,
+        0.4107408761242217
+      ],
+      "status": "READY"
+    },
+    "harm": {
+      "estimate": 0.0,
+      "interval": [
+        -0.010740876124221685,
+        0.010740876124221685
+      ],
+      "status": "READY"
+    }
+  },
+  "status": "STOPPED",
+  "error_control": "simultaneous over the finite registered looks and metrics; no p-value peeking"
+}

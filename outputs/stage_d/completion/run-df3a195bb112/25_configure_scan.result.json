@@ -1,0 +1,21 @@
+{
+  "name": "resident",
+  "config": {
+    "input_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/scan_input.json",
+    "interval_seconds": 0.2,
+    "max_staleness_seconds": 3600,
+    "test_budget": 30,
+    "lifetime_test_budget": 100000,
+    "timeout": 5,
+    "error_policy": "alpha_spending_empirical",
+    "total_alpha": 0.05,
+    "skill_name": "watch_skill",
+    "skill_context": {
+      "workflow": "c_line"
+    }
+  },
+  "enabled": 0,
+  "watermark": null,
+  "next_due": 0.0,
+  "runs": []
+}

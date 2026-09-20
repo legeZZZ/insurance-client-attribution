@@ -1,0 +1,9 @@
+{
+  "status": "RELEASED",
+  "name": "watch_skill",
+  "version": 1,
+  "approval_ref": "sha256:58a93e05182a63d5fe7c8793cb753b432a1e9a3d9930e241f90874533104b297",
+  "fraction": 1,
+  "effective_window": 2,
+  "canary_passed": true
+}

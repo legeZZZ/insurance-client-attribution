@@ -185,9 +185,7 @@ def _run_period(
 
 def run_experience_ablation(store_path=None) -> dict[str, Any]:
     if store_path is None:
-        store_path = (
-            Path(tempfile.gettempdir()) / "experience_store_ablation.json"
-        )
+        store_path = Path(tempfile.gettempdir()) / "experience_store_ablation.json"
         Path(store_path).unlink(missing_ok=True)
     store = FactorExperienceStore(store_path)
 

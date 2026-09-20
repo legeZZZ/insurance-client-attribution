@@ -1,0 +1,2110 @@
+{
+  "schema_version": "orchestration/1",
+  "input_digest": "sha256:13afd1640e1ebee11026e4d8549aa815a67b235bc06e2b4d066ab4972dc46f58",
+  "execution_status": "COMPLETED",
+  "records": [
+    {
+      "stage": "L0",
+      "previous_ref": "sha256:13afd1640e1ebee11026e4d8549aa815a67b235bc06e2b4d066ab4972dc46f58",
+      "input_digest": "sha256:2e6174e1788176bd47d86bf228e192e1620195a1521ce0a4aef6da7a0badadd8",
+      "output": {
+        "baseline": {
+          "input_validation": {
+            "status": "PASS",
+            "component": "baseline_attribution",
+            "used_sample_count": 100,
+            "excluded_sample_count": 0,
+            "exclusion_reasons": [],
+            "checks_performed": [
+              "finite",
+              "equal_length",
+              "unique_days",
+              "strictly_increasing_days",
+              "positive_experiment_standard_error",
+              "unique_registry_ids",
+              "registry_windows_contained_in_days"
+            ],
+            "experiment_estimates": {
+              "status": "PASS",
+              "component": "experiment_estimates",
+              "used_sample_count": 0,
+              "excluded_sample_count": 0,
+              "exclusion_reasons": [],
+              "checks_performed": [
+                "finite",
+                "positive_standard_error",
+                "unique_experiment_id"
+              ]
+            },
+            "change_count": 0,
+            "external_event_count": 0
+          },
+          "baseline_definition": "persistent control group, no model assumptions",
+          "metric_contract": {
+            "name": "conversion",
+            "numerator": "converted",
+            "denominator": "users",
+            "aggregation": "ratio_of_sums",
+            "unit": "rate",
+            "analysis_unit": "user",
+            "target_population": "eligible_users",
+            "timezone": "UTC",
+            "window": [
+              0,
+              9
+            ],
+            "maturity_days": 2,
+            "deduplication": "unit_id",
+            "schema_version": "1.0",
+            "contract_type": "MetricContract",
+            "digest": "sha256:a7990ff79959ccf465e0a8e46b2c74d47345ace7fe444d09aced898d5fa38047"
+          },
+          "transfer_checks": [],
+          "explained_uncertainty": {
+            "method": "linear_covariance_propagation_of_registered_readouts",
+            "scope": "unshrunk_registered_readouts_only; legacy pooled point estimates have no calibrated interval",
+            "cross_experiment_covariance": "assumed_independent",
+            "standard_error": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "interval_95": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ]
+          },
+          "att_aggregation": {
+            "naive_total": 0.0,
+            "hierarchical_total": 0.0,
+            "tau2": 0.0
+          },
+          "external_associations": [],
+          "unregistered_alerts": [],
+          "unknown_bucket": {
+            "window_start_day": 90,
+            "mean_residual_late_window": 0.0,
+            "claim_type": "UNEXPLAINED",
+            "policy": "残差不建模、不摊派、不假装分解。"
+          },
+          "series": {
+            "gap": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "explained_registered": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "external_control_deviation": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "residual": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "claim_type": "DESCRIPTIVE_FACT",
+        "metric_contract": {
+          "name": "conversion",
+          "numerator": "converted",
+          "denominator": "users",
+          "aggregation": "ratio_of_sums",
+          "unit": "rate",
+          "analysis_unit": "user",
+          "target_population": "eligible_users",
+          "timezone": "UTC",
+          "window": [
+            0,
+            9
+          ],
+          "maturity_days": 2,
+          "deduplication": "unit_id",
+          "schema_version": "1.0",
+          "contract_type": "MetricContract",
+          "digest": "sha256:a7990ff79959ccf465e0a8e46b2c74d47345ace7fe444d09aced898d5fa38047"
+        },
+        "input_digest": "sha256:13afd1640e1ebee11026e4d8549aa815a67b235bc06e2b4d066ab4972dc46f58"
+      },
+      "pid": 23917,
+      "digest": "sha256:fc09fec16ee8d8e7b853b16ef898f145b0902d7c41106be9450bb60dc48b8c67"
+    },
+    {
+      "stage": "L1",
+      "previous_ref": "sha256:fc09fec16ee8d8e7b853b16ef898f145b0902d7c41106be9450bb60dc48b8c67",
+      "input_digest": "sha256:3d1ac011988795fb7fb82c921152052774161de7f4072013e99a07d3b67d66a3",
+      "output": {
+        "status": "COMPLETED",
+        "result": {
+          "model": "line_b_association_factor_discovery",
+          "claim_policy": "association_only_until_randomized_or_quasi_experimental_validation",
+          "candidate_generation": "source adapters enumerate observable internal and authorized external snapshots; ranking does not invent unobserved factor names.",
+          "anomaly_windows": [],
+          "candidate_count": 1,
+          "input_validation": {
+            "status": "PASS",
+            "component": "association_discovery",
+            "used_sample_count": 100,
+            "excluded_sample_count": 0,
+            "exclusion_reasons": [],
+            "checks_performed": [
+              "finite",
+              "equal_length",
+              "unique_days",
+              "strictly_increasing_days",
+              "forward_discovery_holdout",
+              "sorted_non_overlapping_anomaly_windows",
+              "unique_factor_series",
+              "unique_events"
+            ],
+            "factor_series_count": 1,
+            "event_count": 0,
+            "anomaly_window_count": 0
+          },
+          "search_manifest": {
+            "factors_considered": 1,
+            "scopes_considered": 1,
+            "lags_considered": 3,
+            "metrics_considered": 1,
+            "M": 1,
+            "D": 1,
+            "S": 1,
+            "L": 3,
+            "K": 1,
+            "candidate_series_considered": 1,
+            "comparisons": 3,
+            "N": 3,
+            "candidate_series_comparisons": 3,
+            "valid_comparisons": 3,
+            "block_length": 3,
+            "bootstrap_replicates": 19,
+            "bootstrap_method": "conditional_x_shared_detrended_y_block_max_t",
+            "statistical_guarantee": "empirical_only_until_pipeline_calibration",
+            "statistic_method": "pearson",
+            "confirmation_family_size": 1,
+            "confirmation_alpha": 0.05,
+            "confirmation_correction": "holm",
+            "confirmation_max_t_threshold": 20,
+            "seasonal_period": 7,
+            "derived_layers": [
+              "level"
+            ],
+            "smoothing_window": 1,
+            "selection_policy": "discovery_then_holdout_then_validation",
+            "selection_set_digest": "sha256:245f2692257b9cba",
+            "bh_is_auxiliary": true,
+            "post_selection_warning": "BH 仅报告锁定候选集合内的辅助 q 值；跨 lag 选择后的可信防线是 holdout。"
+          },
+          "shadow_diagnostics": [],
+          "shadow_budget": {
+            "factor_series": 5,
+            "events": 5,
+            "replicates": 19
+          },
+          "test_family_contract": {
+            "hypothesis_keys": [
+              "sha256:1e83a885e3b74c77a5a84c40946540dfff79a5c3201939c68f513cdc4a93edbb",
+              "sha256:2891c85bcaff181974a4a812c88a8960cb2a599362ad5df3d5f6fb9ba1f2fbdc",
+              "sha256:e2673596dea8c03f4aa1a9e41c100eae7ddac4555e78715fd3bfa658157efa79"
+            ],
+            "search_manifest": {
+              "max_lag": 1,
+              "layers": [
+                "level"
+              ],
+              "smoothing_window": 1,
+              "bootstrap_reps": 19
+            },
+            "null_hypothesis": "no_residual_temporal_association",
+            "statistic": "absolute_pearson",
+            "null_model": "conditional_x_residual_block",
+            "correction": "holm",
+            "frozen_at": 73,
+            "discovery_window": [
+              0,
+              73
+            ],
+            "holdout_window": [
+              80,
+              99
+            ],
+            "gap_days": 6,
+            "alpha": 0.05,
+            "schema_version": "1.0",
+            "contract_type": "TestFamilyContract",
+            "digest": "sha256:32762204c1fbaf25d8c84dc393c825b50684abaf039fd49a50de8aa0655a24bb"
+          },
+          "attempted_tests": [
+            {
+              "series_index": 0,
+              "factor_id": "x",
+              "scope_id": "global",
+              "lag_days": -1,
+              "correlation": -0.08275470371030275,
+              "raw_pvalue": 0.45,
+              "n_pairs": 73,
+              "bh_q": 0.45,
+              "max_t_pvalue": 0.75,
+              "hypothesis_key": "sha256:1e83a885e3b74c77a5a84c40946540dfff79a5c3201939c68f513cdc4a93edbb"
+            },
+            {
+              "series_index": 0,
+              "factor_id": "x",
+              "scope_id": "global",
+              "lag_days": 0,
+              "correlation": 0.9815711785772068,
+              "raw_pvalue": 0.05,
+              "n_pairs": 74,
+              "bh_q": 0.15000000000000002,
+              "max_t_pvalue": 0.05,
+              "hypothesis_key": "sha256:2891c85bcaff181974a4a812c88a8960cb2a599362ad5df3d5f6fb9ba1f2fbdc"
+            },
+            {
+              "series_index": 0,
+              "factor_id": "x",
+              "scope_id": "global",
+              "lag_days": 1,
+              "correlation": -0.11675198623201469,
+              "raw_pvalue": 0.2,
+              "n_pairs": 73,
+              "bh_q": 0.30000000000000004,
+              "max_t_pvalue": 0.65,
+              "hypothesis_key": "sha256:e2673596dea8c03f4aa1a9e41c100eae7ddac4555e78715fd3bfa658157efa79"
+            }
+          ],
+          "tested_lag_count": 3,
+          "bh_q_survivors": 0,
+          "holdout_survivors": 1,
+          "holdout_window": [
+            80,
+            99
+          ],
+          "discovery_window": [
+            0,
+            73
+          ],
+          "event_candidate_coverage": 0.0,
+          "candidates": [
+            {
+              "factor_id": "x",
+              "parent_factor_id": "x",
+              "derived_feature_id": "x.level",
+              "derived_layer": "level",
+              "transform": "identity",
+              "unit": "index",
+              "direction": "positive",
+              "statistic_method": "pearson",
+              "source_type": "internal",
+              "kind": "continuous",
+              "scope": null,
+              "target_scope": null,
+              "experimentability": "external_or_observational",
+              "scope_id": "global",
+              "correlation": 0.9815711785772068,
+              "lag_days": 0,
+              "coverage": 1.0,
+              "n_pairs": 74,
+              "raw_pvalue": 0.05,
+              "bh_q": 0.15000000000000002,
+              "max_t_pvalue": 0.05,
+              "holdout": {
+                "correlation": 0.9821423589625828,
+                "raw_pvalue": 0.05,
+                "n_pairs": 20,
+                "status": "TESTED",
+                "adjusted_pvalue": 0.05,
+                "survives": true
+              },
+              "hypothesis_key": "sha256:2891c85bcaff181974a4a812c88a8960cb2a599362ad5df3d5f6fb9ba1f2fbdc",
+              "scope_match": 0.5,
+              "source_reliability": 0.5,
+              "source_uri": null,
+              "content_digest": null,
+              "license_ref": null,
+              "association_score": 0.233123,
+              "claim_type": "FACTOR_CANDIDATE",
+              "evidence_level": "FACTOR_CANDIDATE",
+              "confirmation_status": "CONFIRMED_ASSOCIATION",
+              "confirmation_method": "holm_fixed_discovery_family_block_null",
+              "confirmation_alpha": 0.05,
+              "statistical_guarantee": "empirical_only_until_pipeline_calibration",
+              "validation_route": "stratified_quasi_experiment",
+              "candidate_id": "cand-001"
+            }
+          ]
+        },
+        "claims": [
+          {
+            "claim_type": "CONDITIONAL_TEMPORAL",
+            "statement": "观察到经留出确认的条件时序关联；尚非干预效应。",
+            "factor_id": "x",
+            "identification": {
+              "status": "NOT_IDENTIFIED"
+            },
+            "statistical_uncertainty": {
+              "pvalue": 0.05,
+              "qvalue": null,
+              "test_family_ref": "sha256:32762204c1fbaf25d8c84dc393c825b50684abaf039fd49a50de8aa0655a24bb",
+              "effect": null,
+              "interval": null
+            },
+            "action_policy": {
+              "action": "INDEPENDENT_EXPERIMENT"
+            },
+            "execution_status": "COMPLETED"
+          }
+        ],
+        "causal_eligible": false
+      },
+      "pid": 23918,
+      "digest": "sha256:1ef238f2d6cf620b03c748441f757d4634921f9cfe4dd45a537d92f47a4df24a"
+    },
+    {
+      "stage": "identification",
+      "previous_ref": "sha256:1ef238f2d6cf620b03c748441f757d4634921f9cfe4dd45a537d92f47a4df24a",
+      "input_digest": "sha256:24b9f2aa03fb71c8527dc3a6c32eca53f96b9fd5aaba96466a31c183ee92fe83",
+      "output": {
+        "identification": {
+          "treatment": "assignment",
+          "outcome": "conversion",
+          "design": "RCT",
+          "status": "IDENTIFIED",
+          "assumptions": [
+            {
+              "name": "data_valid",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "outcome_mature",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "support_overlap",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "assignment_traceable",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "fixture:random_assignment"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "srm_pass",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "assignment_consistent",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "interference_absent",
+              "status": "assumed",
+              "passed": true,
+              "evidence_refs": [
+                "fixture:independent_users"
+              ],
+              "data_verifiable": false
+            }
+          ],
+          "evidence_refs": [
+            "fixture:independent_users",
+            "fixture:random_assignment",
+            "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+          ],
+          "adjustment_set": [],
+          "forbidden_adjustments": [
+            "assignment",
+            "conversion"
+          ],
+          "rejected_adjustments": [],
+          "support": {
+            "target_population": "eligible_users",
+            "data_digest": "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9",
+            "overlap_check": {
+              "status": "supported",
+              "evidence_refs": [
+                "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+              ]
+            }
+          },
+          "ambiguities": [],
+          "reason_codes": [],
+          "route": "A",
+          "effect_scope": "individual",
+          "causal_effect_allowed": true,
+          "supplemental_evidence_needed": [],
+          "graph_ref": null,
+          "dag_digest": null,
+          "schema_version": "1.0",
+          "contract_type": "IdentificationReport",
+          "digest": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210"
+        }
+      },
+      "pid": 23919,
+      "digest": "sha256:ab5a7596922e99ebc1f0d7364b4e0af87bf3aa5a963c5e9fafcb48d8a1ec1621"
+    },
+    {
+      "stage": "L3",
+      "previous_ref": "sha256:ab5a7596922e99ebc1f0d7364b4e0af87bf3aa5a963c5e9fafcb48d8a1ec1621",
+      "input_digest": "sha256:d2a8ae5d07d7b5408ed6c1f3db93629638c535d88e8baa30c579108759851b86",
+      "output": {
+        "result": {
+          "track": "A",
+          "status": "ESTIMATED",
+          "contracts": {
+            "MetricContract": {
+              "name": "conversion",
+              "numerator": "converted",
+              "denominator": "users",
+              "aggregation": "ratio_of_sums",
+              "unit": "rate",
+              "analysis_unit": "user",
+              "target_population": "eligible_users",
+              "timezone": "UTC",
+              "window": [
+                0,
+                9
+              ],
+              "maturity_days": 2,
+              "deduplication": "unit_id",
+              "schema_version": "1.0",
+              "contract_type": "MetricContract",
+              "digest": "sha256:a7990ff79959ccf465e0a8e46b2c74d47345ace7fe444d09aced898d5fa38047"
+            },
+            "IdentificationReport": {
+              "treatment": "assignment",
+              "outcome": "conversion",
+              "design": "RCT",
+              "status": "IDENTIFIED",
+              "assumptions": [
+                {
+                  "name": "data_valid",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "outcome_mature",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "support_overlap",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "assignment_traceable",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "fixture:random_assignment"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "srm_pass",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "assignment_consistent",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "interference_absent",
+                  "status": "assumed",
+                  "passed": true,
+                  "evidence_refs": [
+                    "fixture:independent_users"
+                  ],
+                  "data_verifiable": false
+                }
+              ],
+              "evidence_refs": [
+                "fixture:independent_users",
+                "fixture:random_assignment",
+                "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+              ],
+              "adjustment_set": [],
+              "forbidden_adjustments": [
+                "assignment",
+                "conversion"
+              ],
+              "rejected_adjustments": [],
+              "support": {
+                "target_population": "eligible_users",
+                "data_digest": "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9",
+                "overlap_check": {
+                  "status": "supported",
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ]
+                }
+              },
+              "ambiguities": [],
+              "reason_codes": [],
+              "route": "A",
+              "effect_scope": "individual",
+              "causal_effect_allowed": true,
+              "supplemental_evidence_needed": [],
+              "graph_ref": null,
+              "dag_digest": null,
+              "schema_version": "1.0",
+              "contract_type": "IdentificationReport",
+              "digest": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210"
+            },
+            "EffectEstimate": {
+              "estimand": "ITT",
+              "unit": "rate",
+              "estimate": 0.5,
+              "interval": [
+                0.3892477119442753,
+                0.6107522880557247
+              ],
+              "interval_method": "cluster_influence_t_approximation",
+              "selection_status": "pre_registered",
+              "target_population": "eligible_users",
+              "window": [
+                0,
+                9
+              ],
+              "diagnostics": {
+                "srm_pvalue": 1.0,
+                "srm_alpha": 0.001,
+                "randomization_groups": 160,
+                "treated_groups": 80,
+                "control_groups": 80,
+                "data_digest": "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9",
+                "variance_unit": "unit_id",
+                "interval_scope": "pointwise; not adjusted for adaptive subgroup selection",
+                "standard_error": 0.05607721540920443,
+                "degrees_of_freedom": 159,
+                "variance_method": "cluster_sum_influence_function"
+              },
+              "identification_ref": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210",
+              "method": "ITT",
+              "schema_version": "1.0",
+              "contract_type": "EffectEstimate",
+              "digest": "sha256:daf83c5f467584a7ec956ba2cf91a7a4764209bd562fee9137c28394cdfc4e9f"
+            }
+          }
+        },
+        "publication": {
+          "schema_version": "publication/1",
+          "execution_status": "COMPLETED",
+          "claim_type": "RANDOMIZED_EFFECT",
+          "interpretation": "PRACTICAL_EFFECT",
+          "statement": "随机实验估计conversion的ITT为0.5，区间超过预设实质阈值。",
+          "identification": {
+            "design": "RCT",
+            "estimand": "ITT",
+            "status": "IDENTIFIED",
+            "assumptions": [
+              {
+                "name": "data_valid",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "outcome_mature",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "support_overlap",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "assignment_traceable",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "fixture:random_assignment"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "srm_pass",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "assignment_consistent",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "interference_absent",
+                "status": "assumed",
+                "passed": true,
+                "evidence_refs": [
+                  "fixture:independent_users"
+                ],
+                "data_verifiable": false
+              }
+            ],
+            "ref": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210"
+          },
+          "statistical_uncertainty": {
+            "effect": 0.5,
+            "interval": [
+              0.3892477119442753,
+              0.6107522880557247
+            ],
+            "interval_method": "cluster_influence_t_approximation",
+            "selection_status": "pre_registered",
+            "pvalue": null,
+            "qvalue": null,
+            "posterior_probability": null,
+            "effect_ref": "sha256:daf83c5f467584a7ec956ba2cf91a7a4764209bd562fee9137c28394cdfc4e9f"
+          },
+          "action_policy": {
+            "action": "REVIEW_POLICY",
+            "practical_threshold": 0.0,
+            "requires_approval_before_activation": true
+          },
+          "reason_codes": [],
+          "remedies": [],
+          "contracts": {
+            "MetricContract": {
+              "name": "conversion",
+              "numerator": "converted",
+              "denominator": "users",
+              "aggregation": "ratio_of_sums",
+              "unit": "rate",
+              "analysis_unit": "user",
+              "target_population": "eligible_users",
+              "timezone": "UTC",
+              "window": [
+                0,
+                9
+              ],
+              "maturity_days": 2,
+              "deduplication": "unit_id",
+              "schema_version": "1.0",
+              "contract_type": "MetricContract",
+              "digest": "sha256:a7990ff79959ccf465e0a8e46b2c74d47345ace7fe444d09aced898d5fa38047"
+            },
+            "IdentificationReport": {
+              "treatment": "assignment",
+              "outcome": "conversion",
+              "design": "RCT",
+              "status": "IDENTIFIED",
+              "assumptions": [
+                {
+                  "name": "data_valid",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "outcome_mature",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "support_overlap",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "assignment_traceable",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "fixture:random_assignment"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "srm_pass",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "assignment_consistent",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "interference_absent",
+                  "status": "assumed",
+                  "passed": true,
+                  "evidence_refs": [
+                    "fixture:independent_users"
+                  ],
+                  "data_verifiable": false
+                }
+              ],
+              "evidence_refs": [
+                "fixture:independent_users",
+                "fixture:random_assignment",
+                "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+              ],
+              "adjustment_set": [],
+              "forbidden_adjustments": [
+                "assignment",
+                "conversion"
+              ],
+              "rejected_adjustments": [],
+              "support": {
+                "target_population": "eligible_users",
+                "data_digest": "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9",
+                "overlap_check": {
+                  "status": "supported",
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ]
+                }
+              },
+              "ambiguities": [],
+              "reason_codes": [],
+              "route": "A",
+              "effect_scope": "individual",
+              "causal_effect_allowed": true,
+              "supplemental_evidence_needed": [],
+              "graph_ref": null,
+              "dag_digest": null,
+              "schema_version": "1.0",
+              "contract_type": "IdentificationReport",
+              "digest": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210"
+            },
+            "EffectEstimate": {
+              "estimand": "ITT",
+              "unit": "rate",
+              "estimate": 0.5,
+              "interval": [
+                0.3892477119442753,
+                0.6107522880557247
+              ],
+              "interval_method": "cluster_influence_t_approximation",
+              "selection_status": "pre_registered",
+              "target_population": "eligible_users",
+              "window": [
+                0,
+                9
+              ],
+              "diagnostics": {
+                "srm_pvalue": 1.0,
+                "srm_alpha": 0.001,
+                "randomization_groups": 160,
+                "treated_groups": 80,
+                "control_groups": 80,
+                "data_digest": "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9",
+                "variance_unit": "unit_id",
+                "interval_scope": "pointwise; not adjusted for adaptive subgroup selection",
+                "standard_error": 0.05607721540920443,
+                "degrees_of_freedom": 159,
+                "variance_method": "cluster_sum_influence_function"
+              },
+              "identification_ref": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210",
+              "method": "ITT",
+              "schema_version": "1.0",
+              "contract_type": "EffectEstimate",
+              "digest": "sha256:daf83c5f467584a7ec956ba2cf91a7a4764209bd562fee9137c28394cdfc4e9f"
+            }
+          },
+          "publication_options": {
+            "practical_threshold": 0.0,
+            "component_design": null,
+            "action_policy": null
+          },
+          "digest": "sha256:3c3ef3a692a3f23d29cb162d63f77598186eb59bb3ebefe7256a9dbfa8c3c8d8"
+        }
+      },
+      "pid": 23920,
+      "digest": "sha256:9dda9237a2c142a1b85761793ed49ffcdb9bd1a1462acc1cb478749c2e917627"
+    }
+  ],
+  "cost_ledger": [
+    {
+      "stages": [
+        "L0"
+      ],
+      "input_bytes": 2049,
+      "output_bytes": 6482,
+      "elapsed_seconds": 0.08230366699717706,
+      "pid": 23917
+    },
+    {
+      "stages": [
+        "L1"
+      ],
+      "input_bytes": 5411,
+      "output_bytes": 5815,
+      "elapsed_seconds": 0.11475341600453248,
+      "pid": 23918
+    },
+    {
+      "stages": [
+        "identification"
+      ],
+      "input_bytes": 8216,
+      "output_bytes": 2591,
+      "elapsed_seconds": 2.3241502919991035,
+      "pid": 23919
+    },
+    {
+      "stages": [
+        "L3"
+      ],
+      "input_bytes": 10454,
+      "output_bytes": 10053,
+      "elapsed_seconds": 2.3037094169994816,
+      "pid": 23920
+    }
+  ],
+  "baseline_bytes": 10000000,
+  "cost_unit": "serialized_io_bytes_not_model_tokens",
+  "model_tokens": 0,
+  "worker_execution": "deterministic_processes_without_model_calls",
+  "fallback": false,
+  "publication": {
+    "schema_version": "publication/1",
+    "execution_status": "COMPLETED",
+    "claim_type": "RANDOMIZED_EFFECT",
+    "interpretation": "PRACTICAL_EFFECT",
+    "statement": "随机实验估计conversion的ITT为0.5，区间超过预设实质阈值。",
+    "identification": {
+      "design": "RCT",
+      "estimand": "ITT",
+      "status": "IDENTIFIED",
+      "assumptions": [
+        {
+          "name": "data_valid",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "outcome_mature",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "support_overlap",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "assignment_traceable",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "fixture:random_assignment"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "srm_pass",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "assignment_consistent",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "interference_absent",
+          "status": "assumed",
+          "passed": true,
+          "evidence_refs": [
+            "fixture:independent_users"
+          ],
+          "data_verifiable": false
+        }
+      ],
+      "ref": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210"
+    },
+    "statistical_uncertainty": {
+      "effect": 0.5,
+      "interval": [
+        0.3892477119442753,
+        0.6107522880557247
+      ],
+      "interval_method": "cluster_influence_t_approximation",
+      "selection_status": "pre_registered",
+      "pvalue": null,
+      "qvalue": null,
+      "posterior_probability": null,
+      "effect_ref": "sha256:daf83c5f467584a7ec956ba2cf91a7a4764209bd562fee9137c28394cdfc4e9f"
+    },
+    "action_policy": {
+      "action": "REVIEW_POLICY",
+      "practical_threshold": 0.0,
+      "requires_approval_before_activation": true
+    },
+    "reason_codes": [],
+    "remedies": [],
+    "contracts": {
+      "MetricContract": {
+        "name": "conversion",
+        "numerator": "converted",
+        "denominator": "users",
+        "aggregation": "ratio_of_sums",
+        "unit": "rate",
+        "analysis_unit": "user",
+        "target_population": "eligible_users",
+        "timezone": "UTC",
+        "window": [
+          0,
+          9
+        ],
+        "maturity_days": 2,
+        "deduplication": "unit_id",
+        "schema_version": "1.0",
+        "contract_type": "MetricContract",
+        "digest": "sha256:a7990ff79959ccf465e0a8e46b2c74d47345ace7fe444d09aced898d5fa38047"
+      },
+      "IdentificationReport": {
+        "treatment": "assignment",
+        "outcome": "conversion",
+        "design": "RCT",
+        "status": "IDENTIFIED",
+        "assumptions": [
+          {
+            "name": "data_valid",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "outcome_mature",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "support_overlap",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "assignment_traceable",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "fixture:random_assignment"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "srm_pass",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "assignment_consistent",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "interference_absent",
+            "status": "assumed",
+            "passed": true,
+            "evidence_refs": [
+              "fixture:independent_users"
+            ],
+            "data_verifiable": false
+          }
+        ],
+        "evidence_refs": [
+          "fixture:independent_users",
+          "fixture:random_assignment",
+          "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+        ],
+        "adjustment_set": [],
+        "forbidden_adjustments": [
+          "assignment",
+          "conversion"
+        ],
+        "rejected_adjustments": [],
+        "support": {
+          "target_population": "eligible_users",
+          "data_digest": "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9",
+          "overlap_check": {
+            "status": "supported",
+            "evidence_refs": [
+              "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+            ]
+          }
+        },
+        "ambiguities": [],
+        "reason_codes": [],
+        "route": "A",
+        "effect_scope": "individual",
+        "causal_effect_allowed": true,
+        "supplemental_evidence_needed": [],
+        "graph_ref": null,
+        "dag_digest": null,
+        "schema_version": "1.0",
+        "contract_type": "IdentificationReport",
+        "digest": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210"
+      },
+      "EffectEstimate": {
+        "estimand": "ITT",
+        "unit": "rate",
+        "estimate": 0.5,
+        "interval": [
+          0.3892477119442753,
+          0.6107522880557247
+        ],
+        "interval_method": "cluster_influence_t_approximation",
+        "selection_status": "pre_registered",
+        "target_population": "eligible_users",
+        "window": [
+          0,
+          9
+        ],
+        "diagnostics": {
+          "srm_pvalue": 1.0,
+          "srm_alpha": 0.001,
+          "randomization_groups": 160,
+          "treated_groups": 80,
+          "control_groups": 80,
+          "data_digest": "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9",
+          "variance_unit": "unit_id",
+          "interval_scope": "pointwise; not adjusted for adaptive subgroup selection",
+          "standard_error": 0.05607721540920443,
+          "degrees_of_freedom": 159,
+          "variance_method": "cluster_sum_influence_function"
+        },
+        "identification_ref": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210",
+        "method": "ITT",
+        "schema_version": "1.0",
+        "contract_type": "EffectEstimate",
+        "digest": "sha256:daf83c5f467584a7ec956ba2cf91a7a4764209bd562fee9137c28394cdfc4e9f"
+      }
+    },
+    "publication_options": {
+      "practical_threshold": 0.0,
+      "component_design": null,
+      "action_policy": null
+    },
+    "digest": "sha256:3c3ef3a692a3f23d29cb162d63f77598186eb59bb3ebefe7256a9dbfa8c3c8d8"
+  },
+  "reason_codes": [],
+  "total_io_bytes": 51071,
+  "digest": "sha256:d541485c4462385211aae97b90eed25b1805b7015d79efa8834db6c58028ed4f",
+  "data_ref": "sha256:b25a1b347735364787b3132a4a414ba7255f4f3d9609423593bdd7dfc336912f",
+  "publication_ref": "sha256:5646a8e1270803c29d5354183542c7dbd1536b3e9454ce2f7506098346da4162",
+  "publication_status": "VALID",
+  "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-cbec5763f469/runtime/hypotheses.sqlite3",
+  "run_id": "4ab44a72a9b74d469dce4748f1d9c1f7"
+}

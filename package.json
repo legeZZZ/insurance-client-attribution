@@ -1,0 +1,10 @@
+{
+  "name": "goai-track2-console",
+  "private": true,
+  "version": "2.0.0",
+  "description": "经营归因 Agent 决赛指挥台 v2（Python 后端，npm 仅作启动入口）",
+  "scripts": {
+    "seed": ".venv/bin/python tools/seed_console_v2.py",
+    "dev": ".venv/bin/python run_server.py ${PORT:-7100}"
+  }
+}

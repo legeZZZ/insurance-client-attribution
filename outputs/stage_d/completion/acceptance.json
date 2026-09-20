@@ -1,0 +1,887 @@
+{
+  "status": "PASS",
+  "cli_cases": 55,
+  "cases": [
+    {
+      "case": "01_source_metric",
+      "operation": "investigation",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/01_source_metric.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "02_capture_success",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/02_capture_success.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "03_propose_delta",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/03_propose_delta.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "04_reject_self_review",
+      "operation": "skills",
+      "expected": 2,
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "DATA_INVALID: reviewer must be distinct from capture authors\n"
+    },
+    {
+      "case": "05_independent_review",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/05_independent_review.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "06_metric_suite_data_10",
+      "operation": "investigation",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/06_metric_suite_data_10.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "07_metric_suite_data_11",
+      "operation": "investigation",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/07_metric_suite_data_11.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "08_metric_suite_freeze",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/08_metric_suite_freeze.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "09_paired_validation",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/09_paired_validation.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "10_reject_missing_receipt",
+      "operation": "skills",
+      "expected": 2,
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "DATA_INVALID: valid bound human receipt required\n"
+    },
+    {
+      "case": "11_fixture_human_approval",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/11_fixture_human_approval.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "12_reject_direct_full_release",
+      "operation": "skills",
+      "expected": 2,
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "DATA_INVALID: expand only after independent canary monitoring passes\n"
+    },
+    {
+      "case": "13_canary_release",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": \"RELEASED\", \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/13_canary_release.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "14_metric_canary_data_20",
+      "operation": "investigation",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/14_metric_canary_data_20.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "15_metric_canary_data_21",
+      "operation": "investigation",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/15_metric_canary_data_21.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "16_metric_canary_freeze",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/16_metric_canary_freeze.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "17_independent_canary",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/17_independent_canary.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "18_fixture_expand_approval",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/18_fixture_expand_approval.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "19_staged_expansion",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": \"RELEASED\", \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/19_staged_expansion.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "20_current_metric",
+      "operation": "investigation",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/20_current_metric.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "21_fresh_bound_replay",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/21_fresh_bound_replay.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "22_mismatch_audit_only",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/22_mismatch_audit_only.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "23_invalidate_skill_source",
+      "operation": "investigation",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/23_invalidate_skill_source.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "24_suspended_after_reopen",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/24_suspended_after_reopen.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "25_configure_scan",
+      "operation": "scan",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/25_configure_scan.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "26_start_scan",
+      "operation": "scan",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/26_start_scan.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "27_first_scan",
+      "operation": "scan",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": \"COMPLETED\", \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/27_first_scan.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "28_read_alerts",
+      "operation": "scan",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/28_read_alerts.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "29_useful_feedback",
+      "operation": "feedback",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/29_useful_feedback.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "30_idempotent_feedback",
+      "operation": "feedback",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/30_idempotent_feedback.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "31_feedback_to_skill",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/31_feedback_to_skill.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "32_watch_independent_review",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/32_watch_independent_review.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "33_watch_suite_data_40",
+      "operation": "investigation",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/33_watch_suite_data_40.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "34_watch_suite_data_41",
+      "operation": "investigation",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/34_watch_suite_data_41.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "35_watch_suite_freeze",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/35_watch_suite_freeze.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "36_watch_paired_validation",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/36_watch_paired_validation.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "37_watch_human_approval",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/37_watch_human_approval.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "38_watch_canary_publish",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": \"RELEASED\", \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/38_watch_canary_publish.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "39_watch_canary_data_50",
+      "operation": "investigation",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/39_watch_canary_data_50.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "40_watch_canary_data_51",
+      "operation": "investigation",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/40_watch_canary_data_51.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "41_watch_canary_freeze",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/41_watch_canary_freeze.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "42_watch_canary_monitor",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/42_watch_canary_monitor.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "43_watch_expand_approval",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/43_watch_expand_approval.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "44_watch_expanded",
+      "operation": "skills",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": \"RELEASED\", \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/44_watch_expanded.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "45_next_window_uses_skill",
+      "operation": "scan",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": \"COMPLETED\", \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/45_next_window_uses_skill.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "46_same_window_dedup",
+      "operation": "scan",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": \"ALREADY_PROCESSED\", \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/46_same_window_dedup.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "47_independent_confirmation",
+      "operation": "scan",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/47_independent_confirmation.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "48_reject_confirmation_reuse",
+      "operation": "scan",
+      "expected": 2,
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "DATA_INVALID: valid unconfirmed watchlist family required\n"
+    },
+    {
+      "case": "49_launch_real_resident_worker",
+      "operation": "scan",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": \"RUNNING\", \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/49_launch_real_resident_worker.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "50_stop_resident_worker",
+      "operation": "scan",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/50_stop_resident_worker.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "51_prior_observations",
+      "operation": "investigation",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/51_prior_observations.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "52_observe_statistical_memory",
+      "operation": "prior",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/52_observe_statistical_memory.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "53_fresh_binomial",
+      "operation": "investigation",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/53_fresh_binomial.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "54_bound_posterior",
+      "operation": "prior",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/54_bound_posterior.result.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "case": "55_audit_trail",
+      "operation": "investigation",
+      "expected": 0,
+      "returncode": 0,
+      "stdout": "{\"status\": null, \"output\": \"/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112/55_audit_trail.result.json\"}\n",
+      "stderr": ""
+    }
+  ],
+  "pressure_seed_cases": 120,
+  "run_directory": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_d/completion/run-df3a195bb112",
+  "artifacts": [
+    {
+      "path": "run-df3a195bb112/01_source_metric.request.json",
+      "digest": "sha256:7587b5acdf30db066f05910377cebfcfaba5c33fb8c3ea6864667053fff41d56"
+    },
+    {
+      "path": "run-df3a195bb112/01_source_metric.result.json",
+      "digest": "sha256:d122fdd24d0c07c4c4fbedd0b6e6517e2f15830fb509e50fc3503f8dc6d9935c"
+    },
+    {
+      "path": "run-df3a195bb112/02_capture_success.request.json",
+      "digest": "sha256:914a8b69f70e5f388023faec004f908e572be8dc1fa1f4e541e0c56931f28e43"
+    },
+    {
+      "path": "run-df3a195bb112/02_capture_success.result.json",
+      "digest": "sha256:c6266fa57bb71a40058481c676176b77349bf8594759f92a39a856842dc9a7d6"
+    },
+    {
+      "path": "run-df3a195bb112/03_propose_delta.request.json",
+      "digest": "sha256:c605dbb3c83f46413660230697ac1cd695481dc1ee867a206ee8ad50f2f13838"
+    },
+    {
+      "path": "run-df3a195bb112/03_propose_delta.result.json",
+      "digest": "sha256:b7adfa333af18e448f434a576cdd465fdf463c49e672fb510a7adfc97be16071"
+    },
+    {
+      "path": "run-df3a195bb112/04_reject_self_review.request.json",
+      "digest": "sha256:2f24dc4e2befce83bb6dd01db43ae428be5a4f4a177ee9ca30b6b3c846598744"
+    },
+    {
+      "path": "run-df3a195bb112/05_independent_review.request.json",
+      "digest": "sha256:049884f34b9624eff41c198970c8b646923a8699baef75b6555dcb6b48859409"
+    },
+    {
+      "path": "run-df3a195bb112/05_independent_review.result.json",
+      "digest": "sha256:713813beb6342f0fef523a125db6f4dbfe081eb4b729c6ec70028a3e5b56cfc2"
+    },
+    {
+      "path": "run-df3a195bb112/06_metric_suite_data_10.request.json",
+      "digest": "sha256:34a20eae68932f68d0fc0df95a09340c6c64e287454088534009008d4f0d5f94"
+    },
+    {
+      "path": "run-df3a195bb112/06_metric_suite_data_10.result.json",
+      "digest": "sha256:95a18ee3d968a4db33515a3374ae57b07961aa3fe2316d2fc69540daf459d25b"
+    },
+    {
+      "path": "run-df3a195bb112/07_metric_suite_data_11.request.json",
+      "digest": "sha256:1baa6542b601a554c0f1f98d8bb8ff1fa4396814c74ea5a00da99e93c2af6e27"
+    },
+    {
+      "path": "run-df3a195bb112/07_metric_suite_data_11.result.json",
+      "digest": "sha256:e2d6800f47e20ea9fc548b29b98ed1d33c138e37cbddf42935e84948f1045914"
+    },
+    {
+      "path": "run-df3a195bb112/08_metric_suite_freeze.request.json",
+      "digest": "sha256:5ce1fc4a385b9289f302db63e158c8fda463c148ef416b4219f5a376e52fa0a2"
+    },
+    {
+      "path": "run-df3a195bb112/08_metric_suite_freeze.result.json",
+      "digest": "sha256:a4c235568207a20628134d078c8478a51e4d58c5bd32d1f66d43c73725b0078f"
+    },
+    {
+      "path": "run-df3a195bb112/09_paired_validation.request.json",
+      "digest": "sha256:d46c9348142e8ee3d6cca83006f5722b32f1db2b1229660a204199df2482f3b2"
+    },
+    {
+      "path": "run-df3a195bb112/09_paired_validation.result.json",
+      "digest": "sha256:345b62cec1fbf5264e427f913dae783298813b1c6f7ae5c609d3475adc4172cf"
+    },
+    {
+      "path": "run-df3a195bb112/10_reject_missing_receipt.request.json",
+      "digest": "sha256:8eaea064c456eaf39b691185585519db22a77d84a508a7ba60aeefe5b1c2ac50"
+    },
+    {
+      "path": "run-df3a195bb112/11_fixture_human_approval.request.json",
+      "digest": "sha256:b566bb034c4271daa267f1d467a2a79cbc6025a7e13e05d2d88fb6fb56312376"
+    },
+    {
+      "path": "run-df3a195bb112/11_fixture_human_approval.result.json",
+      "digest": "sha256:81fb0ed783587f8bf7272db716ecc4ec6c86424bf4e40715ea4d4e5730072567"
+    },
+    {
+      "path": "run-df3a195bb112/12_reject_direct_full_release.request.json",
+      "digest": "sha256:d2fdc46b2b273d9dba104ce4faffefe19f61d4fcaa87e9d14b082300fcc21147"
+    },
+    {
+      "path": "run-df3a195bb112/13_canary_release.request.json",
+      "digest": "sha256:3c9072ab065e7cca1492559be3350f9216c6779d95dc61facdf3bcad9499d80b"
+    },
+    {
+      "path": "run-df3a195bb112/13_canary_release.result.json",
+      "digest": "sha256:84aa97719ff1c40d97472508914018da7dff69615b803ab254f461883a4521f8"
+    },
+    {
+      "path": "run-df3a195bb112/14_metric_canary_data_20.request.json",
+      "digest": "sha256:d9ba284de35e1dc4e8c3d6132ad7589f5f93a4cdcd042a32accf1f60b30b30e2"
+    },
+    {
+      "path": "run-df3a195bb112/14_metric_canary_data_20.result.json",
+      "digest": "sha256:d138cab5bf3b5c1cb2e9d9a3c46ae3a4c79afa1e968e4fb50766d4ef213e85c4"
+    },
+    {
+      "path": "run-df3a195bb112/15_metric_canary_data_21.request.json",
+      "digest": "sha256:8ae090d3360a6d152ee8b52057bcecfd0129b3c51c75988d037b01da54f260ab"
+    },
+    {
+      "path": "run-df3a195bb112/15_metric_canary_data_21.result.json",
+      "digest": "sha256:b70979eff055b8a215f16df7bc6be970096d376a11b8365b4fe41d813882a396"
+    },
+    {
+      "path": "run-df3a195bb112/16_metric_canary_freeze.request.json",
+      "digest": "sha256:6e111cd3baf408d650e22f4442823dd5604081d68fdbea1d4d8003580d3791c2"
+    },
+    {
+      "path": "run-df3a195bb112/16_metric_canary_freeze.result.json",
+      "digest": "sha256:b39d9fa8c55a684902fbb600fc12cfe8ffad780e3961e52f39d015e718caf9f1"
+    },
+    {
+      "path": "run-df3a195bb112/17_independent_canary.request.json",
+      "digest": "sha256:cfb7ea172082d95a3d2aea021ea6e3db2888b36dd482cbddfb5ae5e487908a77"
+    },
+    {
+      "path": "run-df3a195bb112/17_independent_canary.result.json",
+      "digest": "sha256:9132f5277329873a980837739bb6d3efaf3d4d4ea20ba4254ca10ebfdf36a203"
+    },
+    {
+      "path": "run-df3a195bb112/18_fixture_expand_approval.request.json",
+      "digest": "sha256:af96de8b88d4c920f41eddd9274d0481aa4aa59ceb50c86d9af6988e93e21eea"
+    },
+    {
+      "path": "run-df3a195bb112/18_fixture_expand_approval.result.json",
+      "digest": "sha256:57d291e9367b9f8ea808afbb5faa11097724c5438a0b0d5d7a5d1d3c594d3362"
+    },
+    {
+      "path": "run-df3a195bb112/19_staged_expansion.request.json",
+      "digest": "sha256:cc5cc7fb87de7cb4848f511b83efb57a727d2b2ced03059eca447deb2b319a5d"
+    },
+    {
+      "path": "run-df3a195bb112/19_staged_expansion.result.json",
+      "digest": "sha256:c3eec5b440bcee2aec3d8345a41401c368164ae716714a19061062c17a04a58b"
+    },
+    {
+      "path": "run-df3a195bb112/20_current_metric.request.json",
+      "digest": "sha256:bd4e609dc708632c0fe7bc899e471f10b0ce93a9625ca6f2ca48b7ac6c625491"
+    },
+    {
+      "path": "run-df3a195bb112/20_current_metric.result.json",
+      "digest": "sha256:b8a44735dd79361eff957bf9ec58be4892ea2a6e507c8037019d6f3d6baf2d4f"
+    },
+    {
+      "path": "run-df3a195bb112/21_fresh_bound_replay.request.json",
+      "digest": "sha256:97666c906f8a209a59ce4c7afb40b72b79ecb3584cbc2e0011d47c959d2e1b0b"
+    },
+    {
+      "path": "run-df3a195bb112/21_fresh_bound_replay.result.json",
+      "digest": "sha256:27e1bc4de9680cb721c139cfb3707fe38a739e1ad6ac31b8a276851661767052"
+    },
+    {
+      "path": "run-df3a195bb112/22_mismatch_audit_only.request.json",
+      "digest": "sha256:fe2b67ad5bf175b4758bd43cebadb47e23f6336aef82566e12f9a59116558928"
+    },
+    {
+      "path": "run-df3a195bb112/22_mismatch_audit_only.result.json",
+      "digest": "sha256:3d2bbc40cacb825f98339f7fce093d9c56b94924bca2d2776ec04c13e5c32b20"
+    },
+    {
+      "path": "run-df3a195bb112/23_invalidate_skill_source.request.json",
+      "digest": "sha256:0f87ede0b5b15f0548a640344883ce7b33ab108778f6408bdf2fa1375459fce6"
+    },
+    {
+      "path": "run-df3a195bb112/23_invalidate_skill_source.result.json",
+      "digest": "sha256:636af9cac2841a4058ba1a296d881a31696aef8bba510dc48e1c454d56b58466"
+    },
+    {
+      "path": "run-df3a195bb112/24_suspended_after_reopen.request.json",
+      "digest": "sha256:a2b62f8666ccaaf6e40e965e1620ef139f1eb1257635b0d89c233d5e4566486a"
+    },
+    {
+      "path": "run-df3a195bb112/24_suspended_after_reopen.result.json",
+      "digest": "sha256:03edc6080db9cb60200a67e788696b3d5df0c77d00f0df563b450146e6711992"
+    },
+    {
+      "path": "run-df3a195bb112/25_configure_scan.request.json",
+      "digest": "sha256:eb023dc5eb2d9b7e76560d06beef554622bdf5290938311af4d1d2574eb1bc3e"
+    },
+    {
+      "path": "run-df3a195bb112/25_configure_scan.result.json",
+      "digest": "sha256:7f2f2a344f52a489e7f61b09a2166ebcdec4a72d09479e116ee8740cb5829f0c"
+    },
+    {
+      "path": "run-df3a195bb112/26_start_scan.request.json",
+      "digest": "sha256:58d42b4c494168fd8b4a3482406def43b2fbb6713522db9e020b02700072e890"
+    },
+    {
+      "path": "run-df3a195bb112/26_start_scan.result.json",
+      "digest": "sha256:5dc97c430febfd5af481d5fdb24c7aab5e7e36592ea4f74a4de7a8ea2c03d380"
+    },
+    {
+      "path": "run-df3a195bb112/27_first_scan.request.json",
+      "digest": "sha256:6b882f54a996735f3053a7a82ea011a792f6ee64b29e1e57e437040e37471af1"
+    },
+    {
+      "path": "run-df3a195bb112/27_first_scan.result.json",
+      "digest": "sha256:5fee7295fe1df7c1cf29b16337824f85eceb6575713a348e9898e41aa08d2341"
+    },
+    {
+      "path": "run-df3a195bb112/28_read_alerts.request.json",
+      "digest": "sha256:d0ad4e1ae3eb1c37619da68c51dd5073aa54e6fb1704998553ad5de18726f93b"
+    },
+    {
+      "path": "run-df3a195bb112/28_read_alerts.result.json",
+      "digest": "sha256:cfd49cc9d9afec55a2e366e8e4fff6599016e7bd8ad9c10f181a0bb4ee3641d0"
+    },
+    {
+      "path": "run-df3a195bb112/29_useful_feedback.request.json",
+      "digest": "sha256:2b1d38b9745bf6364c387f238138c48346dbc4ba0a54ec6216f90215b20140ca"
+    },
+    {
+      "path": "run-df3a195bb112/29_useful_feedback.result.json",
+      "digest": "sha256:287565b999b366db2623198bef454baa1d8c3c465227a7d5698b78ca6b86aa0a"
+    },
+    {
+      "path": "run-df3a195bb112/30_idempotent_feedback.request.json",
+      "digest": "sha256:2b1d38b9745bf6364c387f238138c48346dbc4ba0a54ec6216f90215b20140ca"
+    },
+    {
+      "path": "run-df3a195bb112/30_idempotent_feedback.result.json",
+      "digest": "sha256:287565b999b366db2623198bef454baa1d8c3c465227a7d5698b78ca6b86aa0a"
+    },
+    {
+      "path": "run-df3a195bb112/31_feedback_to_skill.request.json",
+      "digest": "sha256:f2e4f4d4ec0470cc85021536a5dc9e591cd9f539eacd3e5bfef30819b4d8bd0b"
+    },
+    {
+      "path": "run-df3a195bb112/31_feedback_to_skill.result.json",
+      "digest": "sha256:92cc3b16e5ead2680654fc22d1d3fb8e22dbffbbe88caa360a059202ea926033"
+    },
+    {
+      "path": "run-df3a195bb112/32_watch_independent_review.request.json",
+      "digest": "sha256:4628eb526582c639e0de5a55e1815cc1cfc7db035dc96005be2e01f662031fc0"
+    },
+    {
+      "path": "run-df3a195bb112/32_watch_independent_review.result.json",
+      "digest": "sha256:1f18966154381c5b259f9633f74139e8b35af5947b777a5a08d96372a352daaf"
+    },
+    {
+      "path": "run-df3a195bb112/33_watch_suite_data_40.request.json",
+      "digest": "sha256:345b9cf564fe9833836bb6ef4fb0036ef78d9b19ce6d684837edee19c3ea748f"
+    },
+    {
+      "path": "run-df3a195bb112/33_watch_suite_data_40.result.json",
+      "digest": "sha256:b644b42bf754a268de3e1f0356323b6f56947c80139fed3afb0d2bce0ebc895e"
+    },
+    {
+      "path": "run-df3a195bb112/34_watch_suite_data_41.request.json",
+      "digest": "sha256:0c47e64f394a300f1d0880c998da00414ae0e5342807e8db30fd094983f4ab7d"
+    },
+    {
+      "path": "run-df3a195bb112/34_watch_suite_data_41.result.json",
+      "digest": "sha256:a2624cb131adae6a9dc2dd3216563eba594707ae0d755a5534e684032de25b41"
+    },
+    {
+      "path": "run-df3a195bb112/35_watch_suite_freeze.request.json",
+      "digest": "sha256:b31676d077c689791856fb3a1cfcbb26e17fc29ad631aa6430c64b036d994dab"
+    },
+    {
+      "path": "run-df3a195bb112/35_watch_suite_freeze.result.json",
+      "digest": "sha256:aa8a43d12e8c5ea76cd07209de04165ac2e7e9769ac4526467fc545caca31e60"
+    },
+    {
+      "path": "run-df3a195bb112/36_watch_paired_validation.request.json",
+      "digest": "sha256:48a16a26be70a6e916c7984e181aa733915b65e50475667f7a39c8ee8355b00b"
+    },
+    {
+      "path": "run-df3a195bb112/36_watch_paired_validation.result.json",
+      "digest": "sha256:bd579d63386f5e25f86a2905434bc35eff18013e3c74d42999cd71382825284e"
+    },
+    {
+      "path": "run-df3a195bb112/37_watch_human_approval.request.json",
+      "digest": "sha256:e68ca79017ca1c40ed6e542c3c1f5ca23a85bc07016c64a31a56f0007685a3b8"
+    },
+    {
+      "path": "run-df3a195bb112/37_watch_human_approval.result.json",
+      "digest": "sha256:dd8ac6f2fcba10c59de22e65ed1c08fdece41512c25b5f489a22ed1ff6239c24"
+    },
+    {
+      "path": "run-df3a195bb112/38_watch_canary_publish.request.json",
+      "digest": "sha256:7504ed08f5e9ff6e06ad54aa98f336d9f33ec3c07292d93a39908f3c3b11d09f"
+    },
+    {
+      "path": "run-df3a195bb112/38_watch_canary_publish.result.json",
+      "digest": "sha256:61a958c849d414ff80d8cd2f7d9aabd2d3c98c091ee4ea32692edeccebfd1643"
+    },
+    {
+      "path": "run-df3a195bb112/39_watch_canary_data_50.request.json",
+      "digest": "sha256:ddd08646329d947b2358ee45cef0d667dd9355d97f3f2b3e205193d5e0b53006"
+    },
+    {
+      "path": "run-df3a195bb112/39_watch_canary_data_50.result.json",
+      "digest": "sha256:a1ea421f074beb3f06b48fc35ac2c6efa6bf1b661eef4820dd3a6c208af7401d"
+    },
+    {
+      "path": "run-df3a195bb112/40_watch_canary_data_51.request.json",
+      "digest": "sha256:f90798b9eab8b5c96640549f58a824e92d0c9b776fc3ce51143f8d3391893a22"
+    },
+    {
+      "path": "run-df3a195bb112/40_watch_canary_data_51.result.json",
+      "digest": "sha256:f39ae4d7b4fe4861322fc734aa449c39c6e990a122b0c5f3eecdb0a9edd11847"
+    },
+    {
+      "path": "run-df3a195bb112/41_watch_canary_freeze.request.json",
+      "digest": "sha256:241b4e0f97801a2fff66193e0bf61d31066ec68f62db26edfd9f6455df404ec3"
+    },
+    {
+      "path": "run-df3a195bb112/41_watch_canary_freeze.result.json",
+      "digest": "sha256:06df47f08ac93ab1def814141b59c6246bf3b11a560e3802fa86e9ba40e38936"
+    },
+    {
+      "path": "run-df3a195bb112/42_watch_canary_monitor.request.json",
+      "digest": "sha256:e4e2bedac292f6ba1c6a43f906b01b2903b60ee00f802c949f00d91717b5e936"
+    },
+    {
+      "path": "run-df3a195bb112/42_watch_canary_monitor.result.json",
+      "digest": "sha256:4a852347228ae3949ece04cdb6fd0fe097910d6a23e8972ca442f4ad6dff1a72"
+    },
+    {
+      "path": "run-df3a195bb112/43_watch_expand_approval.request.json",
+      "digest": "sha256:a8f397f9b2495c1d877367b721c84fd8c9a81a5a5782ac8d918fd5e8e15301eb"
+    },
+    {
+      "path": "run-df3a195bb112/43_watch_expand_approval.result.json",
+      "digest": "sha256:11a7c06eb77a8e281bbe413fd65f7cd59756df5aeb79edafe2ff16062c851075"
+    },
+    {
+      "path": "run-df3a195bb112/44_watch_expanded.request.json",
+      "digest": "sha256:c294c0bd9d792b7e5236120e1f00e91b25b7d80e486505b714df79494ddf9936"
+    },
+    {
+      "path": "run-df3a195bb112/44_watch_expanded.result.json",
+      "digest": "sha256:6d8a1df3429ed12b54e712b4430bb44764b6069478080aaffeaf309c1f00e4b4"
+    },
+    {
+      "path": "run-df3a195bb112/45_next_window_uses_skill.request.json",
+      "digest": "sha256:6b882f54a996735f3053a7a82ea011a792f6ee64b29e1e57e437040e37471af1"
+    },
+    {
+      "path": "run-df3a195bb112/45_next_window_uses_skill.result.json",
+      "digest": "sha256:5c34430d04873646cbe9416f0e9adba1016ad46d88b83cada60e9ef5d2fbc609"
+    },
+    {
+      "path": "run-df3a195bb112/46_same_window_dedup.request.json",
+      "digest": "sha256:6b882f54a996735f3053a7a82ea011a792f6ee64b29e1e57e437040e37471af1"
+    },
+    {
+      "path": "run-df3a195bb112/46_same_window_dedup.result.json",
+      "digest": "sha256:5b7e662cbedc95750698501075f1592bda5dd9915600e7e1bdd4cb287dd5b9ba"
+    },
+    {
+      "path": "run-df3a195bb112/47_independent_confirmation.request.json",
+      "digest": "sha256:ac8df2a39600d17aef064ccde184d365c569d81190eb7331a38e22d619adefa8"
+    },
+    {
+      "path": "run-df3a195bb112/47_independent_confirmation.result.json",
+      "digest": "sha256:3f3c77a0bd062f6e70c36b61094b96e1e7e7a77f9a773b9fe4df708f181ba7b9"
+    },
+    {
+      "path": "run-df3a195bb112/48_reject_confirmation_reuse.request.json",
+      "digest": "sha256:ac8df2a39600d17aef064ccde184d365c569d81190eb7331a38e22d619adefa8"
+    },
+    {
+      "path": "run-df3a195bb112/49_launch_real_resident_worker.request.json",
+      "digest": "sha256:c9859c4067ad5fa988ec5f63fd2f5077b50651e8264125012c2551f3c7c32979"
+    },
+    {
+      "path": "run-df3a195bb112/49_launch_real_resident_worker.result.json",
+      "digest": "sha256:759d89bbe62a3003d10d09ca7cabb2af45fd8e671c102d47152f4b939a049634"
+    },
+    {
+      "path": "run-df3a195bb112/50_stop_resident_worker.request.json",
+      "digest": "sha256:8c3e635d43b3758e7eb4e45c348441ba4e574c494672f683d02b72900588fa6c"
+    },
+    {
+      "path": "run-df3a195bb112/50_stop_resident_worker.result.json",
+      "digest": "sha256:3b7ad20554b983da170df09174a35eae8b6b32b54eb91d3c60436d4a5140ca18"
+    },
+    {
+      "path": "run-df3a195bb112/51_prior_observations.request.json",
+      "digest": "sha256:8811dfff0109353f033981349984185bc8a1584d8b3a1349b5674a28bc0ae1e8"
+    },
+    {
+      "path": "run-df3a195bb112/51_prior_observations.result.json",
+      "digest": "sha256:12e7c69ec06ea61c8626d2b822b37f7b2aef7873398ed9387749648a7cbd06d2"
+    },
+    {
+      "path": "run-df3a195bb112/52_observe_statistical_memory.request.json",
+      "digest": "sha256:e57ddbfb7532e34d56bc0730fb17527ffd3742fb6494dbcf065f5e6869782ed3"
+    },
+    {
+      "path": "run-df3a195bb112/52_observe_statistical_memory.result.json",
+      "digest": "sha256:c4772b740815d45071b7109525a3931691445dc8528ef1e50468833e9769d1e2"
+    },
+    {
+      "path": "run-df3a195bb112/53_fresh_binomial.request.json",
+      "digest": "sha256:f1592e81fa930fa370715603476f84577f801cdad68a0ab606c3e09d3a0c2235"
+    },
+    {
+      "path": "run-df3a195bb112/53_fresh_binomial.result.json",
+      "digest": "sha256:22147e7179254d7f2eba166070a47907cdf31b15fd4a1e431ed94348c51db370"
+    },
+    {
+      "path": "run-df3a195bb112/54_bound_posterior.request.json",
+      "digest": "sha256:aa3207f0b017c28cd797ab838f6b1f0970a872b2cc03f1078ccab1f9b809290a"
+    },
+    {
+      "path": "run-df3a195bb112/54_bound_posterior.result.json",
+      "digest": "sha256:9a9286fb917879c86cf68ae74794ae8873e67637c8e182b857a155e9afc801ad"
+    },
+    {
+      "path": "run-df3a195bb112/55_audit_trail.request.json",
+      "digest": "sha256:16a22e3bc5805a89ef76ac6ca4a10a2996b15a4e073d5fc3a001d1d46ca33b3d"
+    },
+    {
+      "path": "run-df3a195bb112/55_audit_trail.result.json",
+      "digest": "sha256:56a0c1c63367e5a6069e19d4c897074681805a547697c40ca9e0cbc1b10b5d59"
+    },
+    {
+      "path": "run-df3a195bb112/effect_form_pressure.json",
+      "digest": "sha256:c7a77f2f7915c1a42886f74d06c53efa869b53ba993e912c9a4f3c246baa4963"
+    },
+    {
+      "path": "run-df3a195bb112/governance.skills.json",
+      "digest": "sha256:bf777f0c5b6ba124e425ca99f45d779a0a186d170351b4b1eb085e3d32bfe044"
+    },
+    {
+      "path": "run-df3a195bb112/scan_input.json",
+      "digest": "sha256:fd8d89bb611eb04a143fb369b1e593632714f53e2bb0173cf17150c0b0cd9184"
+    }
+  ],
+  "approval_scope": "fixture approval receipts only; not a production authorization"
+}

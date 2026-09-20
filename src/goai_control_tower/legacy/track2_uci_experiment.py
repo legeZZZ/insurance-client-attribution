@@ -4,11 +4,11 @@ from __future__ import annotations
 
 import math
 import random
+from collections.abc import Mapping, Sequence
 from pathlib import Path
-from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
+from typing import Any
 
-from .track2_analysis import aggregate_funnel, sanitize_rows
-from .track2_bayesian import compare_groups, empirical_bayes_prior, prior_sensitivity
+from .track2_bayesian import compare_groups, prior_sensitivity
 from .track2_factor_mining import build_factor_report
 
 
@@ -18,7 +18,7 @@ def synthesize_ab_from_uci(
     outcome_column: str = "y",
     treatment_effect: float = 0.03,
     seed: int = 42,
-) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Create a synthetic randomized experiment from UCI Bank Marketing data.
 
     The original data has no randomized treatment, so we:
@@ -29,7 +29,7 @@ def synthesize_ab_from_uci(
     This lets us validate our Bayesian estimators against a known ground truth.
     """
     rng = random.Random(seed)
-    modified_rows: List[Dict[str, Any]] = []
+    modified_rows: list[dict[str, Any]] = []
     truth = {
         "true_effect": treatment_effect,
         "assignment": "randomized",
@@ -44,7 +44,9 @@ def synthesize_ab_from_uci(
         new_row["assignment"] = "randomized"
 
         # Original outcome (yes/no -> 1/0)
-        original_outcome = 1 if str(new_row.get(outcome_column, "")).strip().lower() == "yes" else 0
+        original_outcome = (
+            1 if str(new_row.get(outcome_column, "")).strip().lower() == "yes" else 0
+        )
 
         # Apply treatment effect
         if treatment == 1:
@@ -67,15 +69,17 @@ def evaluate_synthetic_experiment(
     rows: Sequence[Mapping[str, Any]],
     treatment_column: str = "treatment",
     outcome_column: str = "_synthetic_outcome",
-    true_effect: Optional[float] = None,
-) -> Dict[str, Any]:
+    true_effect: float | None = None,
+) -> dict[str, Any]:
     """Evaluate a synthetic experiment using both frequentist and Bayesian methods."""
     # Convert to binary outcome if needed
     clean_rows = []
     for row in rows:
         new_row = dict(row)
         if isinstance(new_row.get(outcome_column), str):
-            new_row[outcome_column] = 1 if new_row[outcome_column].strip().lower() == "yes" else 0
+            new_row[outcome_column] = (
+                1 if new_row[outcome_column].strip().lower() == "yes" else 0
+            )
         clean_rows.append(new_row)
 
     # Aggregate
@@ -92,8 +96,8 @@ def evaluate_synthetic_experiment(
     treat_rate = treat_clicks / max(1, treat_impressions)
     freq_effect = treat_rate - ctrl_rate
     freq_se = math.sqrt(
-        ctrl_rate * (1 - ctrl_rate) / max(1, ctrl_impressions) +
-        treat_rate * (1 - treat_rate) / max(1, treat_impressions)
+        ctrl_rate * (1 - ctrl_rate) / max(1, ctrl_impressions)
+        + treat_rate * (1 - treat_rate) / max(1, treat_impressions)
     )
     freq_ci = [freq_effect - 1.96 * freq_se, freq_effect + 1.96 * freq_se]
 
@@ -165,17 +169,17 @@ def run_uci_synthetic_benchmark(
     csv_path: Path,
     seeds: Sequence[int] = (101, 211, 307),
     treatment_effects: Sequence[float] = (0.0, 0.02, 0.05),
-    max_rows: Optional[int] = 5000,
-) -> Dict[str, Any]:
+    max_rows: int | None = 5000,
+) -> dict[str, Any]:
     """Run a benchmark suite on synthetic UCI A/B experiments."""
-    from .track2_real_data import fetch_bank_marketing_csv
 
     if not csv_path.is_file():
-        raise FileNotFoundError("UCI CSV not found: %s" % csv_path)
+        raise FileNotFoundError(f"UCI CSV not found: {csv_path}")
 
     # Read CSV
     import csv
-    all_rows: List[Dict[str, Any]] = []
+
+    all_rows: list[dict[str, Any]] = []
     with csv_path.open("r", encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle)
         for i, row in enumerate(reader):
@@ -186,7 +190,9 @@ def run_uci_synthetic_benchmark(
     results = []
     for seed in seeds:
         for effect in treatment_effects:
-            synth_rows, truth = synthesize_ab_from_uci(all_rows, treatment_effect=effect, seed=seed)
+            synth_rows, _truth = synthesize_ab_from_uci(
+                all_rows, treatment_effect=effect, seed=seed
+            )
             eval_result = evaluate_synthetic_experiment(
                 synth_rows,
                 true_effect=effect,
@@ -200,20 +206,32 @@ def run_uci_synthetic_benchmark(
     if calibrations:
         avg_bias_bayes = sum(c["bayes_bias"] for c in calibrations) / len(calibrations)
         avg_bias_freq = sum(c["freq_bias"] for c in calibrations) / len(calibrations)
-        avg_rmse_bayes = math.sqrt(sum(c["bayes_rmse"] for c in calibrations) / len(calibrations))
-        avg_rmse_freq = math.sqrt(sum(c["freq_rmse"] for c in calibrations) / len(calibrations))
-        ci_coverage = sum(1 for c in calibrations if c["ci_covers_truth"]) / len(calibrations)
+        avg_rmse_bayes = math.sqrt(
+            sum(c["bayes_rmse"] for c in calibrations) / len(calibrations)
+        )
+        avg_rmse_freq = math.sqrt(
+            sum(c["freq_rmse"] for c in calibrations) / len(calibrations)
+        )
+        ci_coverage = sum(1 for c in calibrations if c["ci_covers_truth"]) / len(
+            calibrations
+        )
     else:
-        avg_bias_bayes = avg_bias_freq = avg_rmse_bayes = avg_rmse_freq = ci_coverage = None
+        avg_bias_bayes = avg_bias_freq = avg_rmse_bayes = avg_rmse_freq = (
+            ci_coverage
+        ) = None
 
     return {
         "benchmark_type": "uci_synthetic_ab",
         "n_seeds": len(seeds),
         "n_effects": len(treatment_effects),
         "total_experiments": len(results),
-        "avg_bias_bayes": round(avg_bias_bayes, 6) if avg_bias_bayes is not None else None,
+        "avg_bias_bayes": round(avg_bias_bayes, 6)
+        if avg_bias_bayes is not None
+        else None,
         "avg_bias_freq": round(avg_bias_freq, 6) if avg_bias_freq is not None else None,
-        "avg_rmse_bayes": round(avg_rmse_bayes, 6) if avg_rmse_bayes is not None else None,
+        "avg_rmse_bayes": round(avg_rmse_bayes, 6)
+        if avg_rmse_bayes is not None
+        else None,
         "avg_rmse_freq": round(avg_rmse_freq, 6) if avg_rmse_freq is not None else None,
         "bayes_ci_coverage": round(ci_coverage, 6) if ci_coverage is not None else None,
         "results": results,

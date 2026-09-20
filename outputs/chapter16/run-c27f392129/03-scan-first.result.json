@@ -1,0 +1,114 @@
+{
+  "status": "COMPLETED",
+  "run_id": "b43a6ce8b4ca46348c8a76c3a4c4cc9b",
+  "data_ref": "sha256:9830f282a5253857c132128a1572a7e83717515a707829287035dbbfb3e72283",
+  "request_digest": "sha256:03e003caae5647e294ac86ac764a56865132359b78c4192b0aa1f9d575beb3d7",
+  "raw_input_digest": "sha256:2aae822c48759fff755a3c2367b0e000d58e44fc67f1fd2fccbfa8b33c9a2626",
+  "registry_intake": {
+    "as_of": 79,
+    "search_window": 0,
+    "added": [],
+    "skipped": [],
+    "snapshot_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "tests_charged": 5,
+  "owner_pid": 2968,
+  "lease_until": 1789625496.007735,
+  "started_at": 1789625456.007735,
+  "result": {
+    "claim_type": "WATCHLIST",
+    "watchlist": [
+      {
+        "factor_id": "driver",
+        "parent_factor_id": "driver",
+        "scope_id": "global",
+        "metric_id": "metric",
+        "lag": 2,
+        "effect_shape": "persistent",
+        "correlation": 0.9939969656165095,
+        "coverage": 0.975,
+        "n_pairs": 78,
+        "kind": "internal_event",
+        "score": 0.9691470414760968,
+        "budget_multiplier": 1.0,
+        "falsification": {
+          "placebo": {
+            "correlation": 0.004203492384784394,
+            "coverage": 0.9696969696969697,
+            "n_pairs": 64,
+            "kill": false,
+            "insufficient_data": false,
+            "applicable": true,
+            "status": "TESTED"
+          },
+          "lead_lag_reversal": {
+            "correlation": 0.003275688992860208,
+            "kill": false,
+            "skipped": false,
+            "applicable": true
+          },
+          "split_half": {
+            "first": 0.9932369623607123,
+            "second": 0.9937790952564576,
+            "kill": false,
+            "applicable": true,
+            "status": "TESTED"
+          },
+          "negative_controls": []
+        },
+        "falsification_status": "SURVIVED_EXPLORATORY",
+        "claim_type": "WATCHLIST",
+        "grade": "REVIEW",
+        "alert_id": "sha256:ae2debdf6370f4715dccb71fd20449fa68270e8e2ad4026ac82b516ca5db023a",
+        "window_id": "0",
+        "discovery_window": [
+          0,
+          79
+        ],
+        "next_step": "仅下一独立窗口确认可晋级；人工标签只进入验证队列"
+      }
+    ],
+    "deferred": [],
+    "killed": [],
+    "killed_count": 0,
+    "manifest": {
+      "M": 1,
+      "S": 1,
+      "K": 1,
+      "L": 1,
+      "grid_size": 1,
+      "tested": 1,
+      "test_budget": 15,
+      "budget": 2,
+      "attempts": [
+        {
+          "factor_id": "driver",
+          "parent_factor_id": "driver",
+          "scope_id": "global",
+          "metric_id": "metric",
+          "lag": 2,
+          "effect_shape": "persistent",
+          "correlation": 0.9939969656165095,
+          "coverage": 0.975,
+          "n_pairs": 78
+        }
+      ],
+      "truncated": false,
+      "selection_policy": "registered_order_with_feedback_priority",
+      "inference": "exploratory_only",
+      "total_tests_spent": 5,
+      "total_test_budget": 30
+    },
+    "policy": "exploratory_only_no_cross_time_error_control_claim",
+    "data_digest": "sha256:dd785a808d731314f9a646be6f4d6a1d2a09bd6abba231de94ea5fa5888d7c6d"
+  },
+  "evidence_ref": "sha256:9cf4ef79917a8b423f73c6d035a3b07fddbeacc2d55e7808ae93604bd0ae6162",
+  "skill_usage": null,
+  "cost": {
+    "input_bytes": 4340,
+    "output_bytes": 2435,
+    "elapsed_seconds": 0.07991183300009652,
+    "model_tokens": 0
+  },
+  "completed_at": 1789625456.093786
+}

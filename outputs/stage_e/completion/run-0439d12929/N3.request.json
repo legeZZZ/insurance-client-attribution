@@ -1,0 +1,21 @@
+{
+  "operation": "external_adapter",
+  "parameters": {
+    "kind": "N3",
+    "parameters": {
+      "design": {
+        "template_id": "ab",
+        "metric": "conversion",
+        "factors": [
+          "x"
+        ],
+        "stable_randomization_unit": "user",
+        "metric_contract": {
+          "name": "conversion",
+          "unit": "rate"
+        }
+      },
+      "approval_ref": "fixture:sandbox"
+    }
+  }
+}

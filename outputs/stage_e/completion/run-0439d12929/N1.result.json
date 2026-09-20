@@ -1,0 +1,11 @@
+{
+  "result": [
+    {
+      "factor_id": "external-x",
+      "eligible_from_window": 101,
+      "available_day": 101,
+      "claim_ceiling": "CANDIDATE_ASSOCIATION"
+    }
+  ],
+  "status": "INTAKE_QUEUED"
+}

@@ -1,0 +1,123 @@
+{
+  "events": [
+    {
+      "seq": 1,
+      "event": "RESOURCE_REVISED",
+      "body": {
+        "name": "panel",
+        "ref": "sha256:6af9f02bda48fef28e57e1b7aa6a39eb421b54cf0396713b855e6d82ac7db71b",
+        "version": 1
+      }
+    },
+    {
+      "seq": 2,
+      "event": "LOOP_CREATED",
+      "body": {
+        "id": "sha256:40496ff7b66b54e609e4d79f237f140769f5d7fdaf0f0dd916632be6175e5387",
+        "data_ref": "sha256:6af9f02bda48fef28e57e1b7aa6a39eb421b54cf0396713b855e6d82ac7db71b",
+        "holdout_window": [
+          80,
+          99
+        ]
+      }
+    },
+    {
+      "seq": 3,
+      "event": "POLICY_PROPOSED",
+      "body": {
+        "loop": "sha256:40496ff7b66b54e609e4d79f237f140769f5d7fdaf0f0dd916632be6175e5387",
+        "proposal": {
+          "action": "ADD_HYPOTHESES",
+          "parameters": {
+            "factor_ids": [
+              "x"
+            ]
+          },
+          "rationale": "确定性规则：检查登记的可用候选"
+        },
+        "provider": "rules",
+        "fallback_reason": null,
+        "elapsed_seconds": 0,
+        "token_usage": {
+          "total_tokens": 0
+        }
+      }
+    },
+    {
+      "seq": 4,
+      "event": "ASSET_RECORDED",
+      "body": {
+        "ref": "sha256:8c80bc5251fd1e0a7b0b064a4a72bca64835b75e3e714d6c97b7ed4f4b56377a",
+        "kind": "statistic"
+      }
+    },
+    {
+      "seq": 5,
+      "event": "HYPOTHESIS_REGISTERED",
+      "body": {
+        "id": "sha256:625c12e6dcf023c30353f2f591379c8b43d25ea85882350456a984631d96417f",
+        "parents": []
+      }
+    },
+    {
+      "seq": 6,
+      "event": "EVIDENCE_MOVED_STATE",
+      "body": {
+        "id": "sha256:625c12e6dcf023c30353f2f591379c8b43d25ea85882350456a984631d96417f",
+        "from": "open",
+        "to": "open",
+        "evidence": "sha256:8c80bc5251fd1e0a7b0b064a4a72bca64835b75e3e714d6c97b7ed4f4b56377a",
+        "gate": 1
+      }
+    },
+    {
+      "seq": 7,
+      "event": "POLICY_PROPOSED",
+      "body": {
+        "loop": "sha256:40496ff7b66b54e609e4d79f237f140769f5d7fdaf0f0dd916632be6175e5387",
+        "proposal": {
+          "action": "STOP",
+          "parameters": {},
+          "rationale": "确定性规则：冻结候选并完成留出确认"
+        },
+        "provider": "rules",
+        "fallback_reason": null,
+        "elapsed_seconds": 0,
+        "token_usage": {
+          "total_tokens": 0
+        }
+      }
+    },
+    {
+      "seq": 8,
+      "event": "HOLDOUT_CONSUMED",
+      "body": {
+        "loop": "sha256:40496ff7b66b54e609e4d79f237f140769f5d7fdaf0f0dd916632be6175e5387",
+        "resource": "panel",
+        "window": [
+          80,
+          99
+        ]
+      }
+    },
+    {
+      "seq": 9,
+      "event": "ASSET_RECORDED",
+      "body": {
+        "ref": "sha256:f1aaf30f972e4f0c90b0c291ed5f7786ba2b148edc5dee0bbb03844eaa07d162",
+        "kind": "statistic"
+      }
+    },
+    {
+      "seq": 10,
+      "event": "EVIDENCE_MOVED_STATE",
+      "body": {
+        "id": "sha256:625c12e6dcf023c30353f2f591379c8b43d25ea85882350456a984631d96417f",
+        "from": "open",
+        "to": "supported",
+        "evidence": "sha256:f1aaf30f972e4f0c90b0c291ed5f7786ba2b148edc5dee0bbb03844eaa07d162",
+        "gate": 2
+      }
+    }
+  ]
+}

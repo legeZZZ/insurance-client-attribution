@@ -1,0 +1,8 @@
+mkdir -p failed for path /home/app/.config/matplotlib: [Errno 13] Permission denied: '/home/app'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-ey6igpva because there was an issue with the default path (/home/app/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+Deferred by user: test_regressions.RegressionTests.test_console_uses_current_api_contract_for_all_scenarios
+.......................................................................................................................................................................................................................................................
+----------------------------------------------------------------------
+Ran 247 tests in 86.748s
+
+OK

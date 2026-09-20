@@ -1,0 +1,19 @@
+{
+  "affected": [
+    {
+      "ref": "sha256:71e4beadcbabdf6c8341c7c7504d807f86ac2f27e9374f00ea6da1fa293875ff",
+      "kind": "data",
+      "status": "INVALID"
+    },
+    {
+      "ref": "sha256:5293ef0a2d33d3dae852e84bc774069bfdc9895717459c94382e6736fb871a18",
+      "kind": "statistic",
+      "status": "INVALID"
+    },
+    {
+      "ref": "sha256:5a8cea8ea90525de308bcdb31e9d24c9fd8b888c5f17774e9da375ac0242e116",
+      "kind": "claim",
+      "status": "REVOKED"
+    }
+  ]
+}

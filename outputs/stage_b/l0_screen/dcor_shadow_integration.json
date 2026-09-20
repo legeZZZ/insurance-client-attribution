@@ -1,0 +1,238 @@
+{
+  "model": "line_b_association_factor_discovery",
+  "claim_policy": "association_only_until_randomized_or_quasi_experimental_validation",
+  "candidate_generation": "source adapters enumerate observable internal and authorized external snapshots; ranking does not invent unobserved factor names.",
+  "anomaly_windows": [],
+  "candidate_count": 1,
+  "input_validation": {
+    "status": "PASS",
+    "component": "association_discovery",
+    "used_sample_count": 200,
+    "excluded_sample_count": 0,
+    "exclusion_reasons": [],
+    "checks_performed": [
+      "finite",
+      "equal_length",
+      "unique_days",
+      "strictly_increasing_days",
+      "forward_discovery_holdout",
+      "sorted_non_overlapping_anomaly_windows",
+      "unique_factor_series",
+      "unique_events"
+    ],
+    "factor_series_count": 1,
+    "event_count": 0,
+    "anomaly_window_count": 0
+  },
+  "search_manifest": {
+    "factors_considered": 1,
+    "scopes_considered": 1,
+    "lags_considered": 1,
+    "metrics_considered": 1,
+    "M": 1,
+    "D": 1,
+    "S": 1,
+    "L": 1,
+    "K": 1,
+    "candidate_series_considered": 1,
+    "comparisons": 1,
+    "N": 1,
+    "candidate_series_comparisons": 1,
+    "valid_comparisons": 1,
+    "block_length": 5,
+    "bootstrap_replicates": 99,
+    "bootstrap_method": "conditional_x_shared_detrended_y_block_max_t",
+    "statistical_guarantee": "empirical_only_until_pipeline_calibration",
+    "statistic_method": "dcor",
+    "confirmation_family_size": 1,
+    "confirmation_alpha": 0.05,
+    "confirmation_correction": "holm",
+    "seasonal_period": null,
+    "derived_layers": [
+      "level"
+    ],
+    "smoothing_window": 1,
+    "selection_policy": "discovery_then_holdout_then_validation",
+    "selection_set_digest": "sha256:ac07f77daf88438e",
+    "bh_is_auxiliary": true,
+    "post_selection_warning": "BH \u4ec5\u62a5\u544a\u9501\u5b9a\u5019\u9009\u96c6\u5408\u5185\u7684\u8f85\u52a9 q \u503c\uff1b\u8de8 lag \u9009\u62e9\u540e\u7684\u53ef\u4fe1\u9632\u7ebf\u662f holdout\u3002"
+  },
+  "shadow_diagnostics": [
+    {
+      "factor_id": "quadratic",
+      "scope_id": "global",
+      "method": "temporal_shadow_contiguous_subsample",
+      "guarantee": "empirical_only",
+      "formal_pvalue": null,
+      "formal_qvalue": null,
+      "kind": "continuous",
+      "assumptions": [
+        "regular_daily_grid",
+        "approximate_stationarity_for_shadow_comparison"
+      ],
+      "tski_relation": "subsampling_diagnostic_only_not_theoretical_knockoffs",
+      "status": "DIAGNOSTIC_ONLY",
+      "observed_score": 0.5081480745010974,
+      "shadow_method": "block_order_permutation",
+      "shadow_scores": [
+        0.07877297875137207,
+        0.08922626178680758,
+        0.07911419508748724,
+        0.10933458051934755,
+        0.0995455281121371,
+        0.08276813309576933,
+        0.07920694505319044,
+        0.12310640669376399,
+        0.0867922770706582,
+        0.08293018905242025,
+        0.06779130287327534,
+        0.14356273180783097,
+        0.11014428255766352,
+        0.12330790104539273,
+        0.07708754038891472,
+        0.11148163460621989,
+        0.1449177060459991,
+        0.08514241887274623,
+        0.091500533190009
+      ],
+      "observed_exceeds_shadow_fraction": 1.0,
+      "subsamples": [
+        {
+          "window": [
+            0,
+            139
+          ],
+          "score": 0.5064780256251721
+        },
+        {
+          "window": [
+            15,
+            154
+          ],
+          "score": 0.5148697169920201
+        },
+        {
+          "window": [
+            30,
+            169
+          ],
+          "score": 0.5181114700411702
+        },
+        {
+          "window": [
+            45,
+            184
+          ],
+          "score": 0.5270081768130843
+        },
+        {
+          "window": [
+            60,
+            199
+          ],
+          "score": 0.5310048560912066
+        }
+      ],
+      "replicates": 19,
+      "block_length": 5,
+      "seed": 20260827,
+      "changes_claim_eligibility": false
+    }
+  ],
+  "shadow_budget": {
+    "factor_series": 5,
+    "events": 5,
+    "replicates": 19
+  },
+  "test_family_contract": {
+    "hypothesis_keys": [
+      "sha256:5565407012c8273941da80d4beaf5ca2fa2fde243cdb3e19e32040224b807195"
+    ],
+    "search_manifest": {
+      "max_lag": 0,
+      "layers": [
+        "level"
+      ],
+      "smoothing_window": 1,
+      "bootstrap_reps": 99
+    },
+    "null_hypothesis": "no_residual_temporal_association",
+    "statistic": "absolute_dcor",
+    "null_model": "conditional_x_residual_block",
+    "correction": "holm",
+    "frozen_at": 99,
+    "discovery_window": [
+      0,
+      99
+    ],
+    "holdout_window": [
+      110,
+      199
+    ],
+    "gap_days": 10,
+    "alpha": 0.05,
+    "schema_version": "1.0",
+    "contract_type": "TestFamilyContract",
+    "digest": "sha256:ccb4ec7ea4719e0fcabaad3439b7124ad550e1521786132f908cba2716d58fec"
+  },
+  "tested_lag_count": 1,
+  "bh_q_survivors": 1,
+  "holdout_survivors": 1,
+  "holdout_window": [
+    110,
+    199
+  ],
+  "discovery_window": [
+    0,
+    99
+  ],
+  "event_candidate_coverage": 0.0,
+  "candidates": [
+    {
+      "factor_id": "quadratic",
+      "parent_factor_id": "quadratic",
+      "derived_feature_id": "quadratic.level",
+      "derived_layer": "level",
+      "transform": "identity",
+      "unit": "source_unit",
+      "direction": "unsigned_dependency",
+      "statistic_method": "dcor",
+      "source_type": "factor_series",
+      "kind": null,
+      "scope": null,
+      "target_scope": null,
+      "experimentability": "external_or_observational",
+      "scope_id": "global",
+      "correlation": 0.49442570894653964,
+      "lag_days": 0,
+      "coverage": 1.0,
+      "n_pairs": 100,
+      "raw_pvalue": 0.01,
+      "bh_q": 0.01,
+      "max_t_pvalue": 0.01,
+      "holdout": {
+        "correlation": 0.5248695700971671,
+        "raw_pvalue": 0.01,
+        "n_pairs": 90,
+        "status": "TESTED",
+        "adjusted_pvalue": 0.01,
+        "survives": true
+      },
+      "hypothesis_key": "sha256:5565407012c8273941da80d4beaf5ca2fa2fde243cdb3e19e32040224b807195",
+      "scope_match": 0.5,
+      "source_reliability": 0.5,
+      "source_uri": null,
+      "content_digest": null,
+      "license_ref": null,
+      "association_score": 0.12237,
+      "claim_type": "FACTOR_CANDIDATE",
+      "evidence_level": "FACTOR_CANDIDATE",
+      "confirmation_status": "CONFIRMED_ASSOCIATION",
+      "confirmation_method": "holm_fixed_discovery_family_block_null",
+      "confirmation_alpha": 0.05,
+      "statistical_guarantee": "empirical_only_until_pipeline_calibration",
+      "validation_route": "stratified_quasi_experiment",
+      "candidate_id": "cand-001"
+    }
+  ]
+}

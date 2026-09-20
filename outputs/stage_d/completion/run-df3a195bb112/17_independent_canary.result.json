@@ -1,0 +1,106 @@
+{
+  "decision": "CRYSTALLIZE",
+  "suite_ref": "sha256:cdc05337d9596fee9fe86da8a402ec2f355a6aac69c1d6c6807c93389e889abc",
+  "spec_digest": "sha256:d087a88ce5ee33d4ccb827f9d93f32cecc23765dcb4317fbf6bcd03c8c4b2427",
+  "passed": true,
+  "paired_gain": 1.0,
+  "critical_failures": [],
+  "pairs": [
+    {
+      "task_id": "metric_canary-20",
+      "data_ref": "sha256:0308fcbc5c1ba8fbe89892b0493b7f62688ebb0b498d67e5bf3d9c9ccffb1f49",
+      "critical": true,
+      "base": {
+        "operation": null,
+        "score": 0,
+        "replay": null
+      },
+      "candidate": {
+        "operation": "check_metric",
+        "score": 1,
+        "replay": {
+          "execution_status": "COMPLETED",
+          "binding": {
+            "task_id": "metric_canary-20",
+            "data_ref": "sha256:0308fcbc5c1ba8fbe89892b0493b7f62688ebb0b498d67e5bf3d9c9ccffb1f49",
+            "skill_ref": "sha256:d087a88ce5ee33d4ccb827f9d93f32cecc23765dcb4317fbf6bcd03c8c4b2427"
+          },
+          "operation": "check_metric",
+          "input_digest": "sha256:635141170f0150f7a359b70d65727d3bce54850d70cd099dc1ab82ff09367bd9",
+          "result": {
+            "passed": true,
+            "claim_type": "DESCRIPTIVE_FACT",
+            "metric_digest": "sha256:3d75cd53c8f1cf62ea41e37a3926f7f76aa0706f103175bc456d1c1b13bc9925"
+          },
+          "pid": 8666,
+          "guardrails": {
+            "no_code_execution": true,
+            "no_traffic_mutation": true,
+            "fresh_evidence_only": true,
+            "no_causal_without_identification": true
+          },
+          "digest": "sha256:13376d4114a4b9e7cdf07b374a8ece847ef81c3d4c4c20ef50aced3b5b469adf",
+          "cost": {
+            "input_bytes": 553,
+            "output_bytes": 767,
+            "elapsed_seconds": 0.040508332998797414,
+            "model_tokens": 0
+          },
+          "worker_digest": "sha256:8897e96a4e53eca89107517803cf30ff778a9e67dcd4166fb8ff887f478f5017"
+        }
+      }
+    },
+    {
+      "task_id": "metric_canary-21",
+      "data_ref": "sha256:166bedc2930e2e805a21fad0ded3a9522f8ae3babd9a69b5b6d49fa5b73cd8db",
+      "critical": true,
+      "base": {
+        "operation": null,
+        "score": 0,
+        "replay": null
+      },
+      "candidate": {
+        "operation": "check_metric",
+        "score": 1,
+        "replay": {
+          "execution_status": "COMPLETED",
+          "binding": {
+            "task_id": "metric_canary-21",
+            "data_ref": "sha256:166bedc2930e2e805a21fad0ded3a9522f8ae3babd9a69b5b6d49fa5b73cd8db",
+            "skill_ref": "sha256:d087a88ce5ee33d4ccb827f9d93f32cecc23765dcb4317fbf6bcd03c8c4b2427"
+          },
+          "operation": "check_metric",
+          "input_digest": "sha256:10e01f95f4177afd501f614e330fb0071533c00a141886647ca03bad6ac1a45d",
+          "result": {
+            "passed": true,
+            "claim_type": "DESCRIPTIVE_FACT",
+            "metric_digest": "sha256:6baa2bac9c27f744d597e2d0bae6a2008c7d8d3f9255b5d17a01d862410f6fb2"
+          },
+          "pid": 8667,
+          "guardrails": {
+            "no_code_execution": true,
+            "no_traffic_mutation": true,
+            "fresh_evidence_only": true,
+            "no_causal_without_identification": true
+          },
+          "digest": "sha256:79b77dc670ce5427a1a035c7b0e5a66b1539dc07c55eed84f555490466828c52",
+          "cost": {
+            "input_bytes": 553,
+            "output_bytes": 767,
+            "elapsed_seconds": 0.03632458399988536,
+            "model_tokens": 0
+          },
+          "worker_digest": "sha256:c4b1ed31b49603c595ac161bf34592b4d324ab2e7e9f601585d45db9b59670fd"
+        }
+      }
+    }
+  ],
+  "data_refs": [
+    "sha256:0308fcbc5c1ba8fbe89892b0493b7f62688ebb0b498d67e5bf3d9c9ccffb1f49",
+    "sha256:166bedc2930e2e805a21fad0ded3a9522f8ae3babd9a69b5b6d49fa5b73cd8db"
+  ],
+  "independent_task_refs": [
+    "metric_canary-20",
+    "metric_canary-21"
+  ]
+}

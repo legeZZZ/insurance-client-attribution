@@ -1,0 +1,8 @@
+test_budget_is_respected (test_risk_loc.RiskLocTests.test_budget_is_respected) ... ok
+test_exact_null_returns_no_candidates (test_risk_loc.RiskLocTests.test_exact_null_returns_no_candidates) ... ok
+test_localization_and_nonoverlapping_removal (test_risk_loc.RiskLocTests.test_localization_and_nonoverlapping_removal) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.029s
+
+OK

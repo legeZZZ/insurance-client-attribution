@@ -1,0 +1,32 @@
+{
+  "status": "COMPLETED",
+  "owner_pid": 3531,
+  "alert_ref": "sha256:c2c02c75b8311a0c116dc0e6ec1dbe7fcffba26e112ca6b06c2b39ab4474c0ea",
+  "claim_promotion_allowed": false,
+  "feedback": {
+    "entry": {
+      "seq": 1,
+      "kind": "candidate_review",
+      "prev_digest": "genesis",
+      "factor_id": "driver",
+      "decision": "confirmed",
+      "operator": "ops",
+      "note": "",
+      "claim_type": "FACTOR_CANDIDATE",
+      "digest": "76649f62de7acdd4"
+    },
+    "routing": "queued_for_validation",
+    "event_id": "sha256:10be16ed235e4d02526261b4e1cc6dafe5bb541de6371b69515f5c27f53040a8",
+    "revision": 1,
+    "supersedes": null,
+    "payload": {
+      "factor_id": "driver",
+      "decision": "confirmed",
+      "operator": "ops",
+      "current_window": 0
+    },
+    "kind": "candidate_review",
+    "claim_promotion_allowed": false
+  },
+  "next_step": "next_window_validation"
+}

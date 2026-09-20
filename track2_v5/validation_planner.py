@@ -12,6 +12,7 @@ def plan_validation(
     *,
     discovery_window: Sequence[int],
     holdout_window: Sequence[int] | None = None,
+    experiment_design_parameters: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_type = str(candidate.get("source_type", "factor_series"))
     factor_id = str(candidate.get("factor_id", "unknown"))
@@ -86,6 +87,27 @@ def plan_validation(
             "pre_registration_required": True,
             "causal_claim_allowed": False,
         }
+    requires_evidence = candidate.get("claim_type") == "WATCHLIST" or candidate.get(
+        "confirmation_status"
+    ) in {"HOLDOUT_FAILED", "INSUFFICIENT_HOLDOUT"}
+    if requires_evidence:
+        route = "collect_independent_confirmation_evidence"
+        design = "frozen_candidate_new_holdout"
+        experiment_spec = None
+    if experiment_spec is not None and experiment_design_parameters is not None:
+        from .action_interface import propose_experiment
+
+        prospective_metric = {
+            k: v
+            for k, v in metric_contract.items()
+            if k not in {"digest", "schema_version", "contract_type"}
+        }
+        if target_window is not None:
+            prospective_metric["window"] = target_window
+        experiment_spec["governed_design"] = propose_experiment(
+            metric_contract=prospective_metric, **experiment_design_parameters
+        )
+        experiment_spec["requires_approval_before_activation"] = True
     return {
         "plan_id": f"validation:{factor_id}:{derived_layer}",
         "factor_id": factor_id,
@@ -104,7 +126,9 @@ def plan_validation(
         if is_controllable
         else "external_or_observational",
         "next_window_action": (
-            "run_targeted_abtest"
+            "collect_independent_confirmation_evidence"
+            if requires_evidence
+            else "run_targeted_abtest"
             if is_controllable
             else "run_mitigation_abtest_and_quasi_experiment"
             if experiment_spec
@@ -126,6 +150,7 @@ def plan_validation(
             "claim_type",
             "evidence_refs",
         ],
-        "claim_type_before_validation": "FACTOR_CANDIDATE",
+        "claim_type_before_validation": candidate.get("claim_type", "WATCHLIST"),
+        "requires_confirmation": requires_evidence,
         "causal_claim_allowed": False,
     }

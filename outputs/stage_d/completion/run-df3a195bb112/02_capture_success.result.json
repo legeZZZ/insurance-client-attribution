@@ -1,0 +1,45 @@
+{
+  "task_id": "source",
+  "data_ref": "sha256:58e95b477106dba00b23182be42f8fddb5a5190334389e0bb35cefc204022a16",
+  "context": {
+    "metric_kind": "ratio_of_sums"
+  },
+  "operation": "check_metric",
+  "author": "fixture-author",
+  "replay": {
+    "execution_status": "COMPLETED",
+    "binding": {
+      "task_id": "source",
+      "data_ref": "sha256:58e95b477106dba00b23182be42f8fddb5a5190334389e0bb35cefc204022a16",
+      "skill_ref": "capture:fixture-author"
+    },
+    "operation": "check_metric",
+    "input_digest": "sha256:8e169c864996d518eb317a732b2ce272e308a705219128042de51300f17f2bb6",
+    "result": {
+      "passed": true,
+      "claim_type": "DESCRIPTIVE_FACT",
+      "metric_digest": "sha256:a7990ff79959ccf465e0a8e46b2c74d47345ace7fe444d09aced898d5fa38047"
+    },
+    "pid": 8638,
+    "guardrails": {
+      "no_code_execution": true,
+      "no_traffic_mutation": true,
+      "fresh_evidence_only": true,
+      "no_causal_without_identification": true
+    },
+    "digest": "sha256:f9f9c0de01fca4c5ebbdf094f6d4e573cbb7d0d4ddd270987c9327498225df2d",
+    "cost": {
+      "input_bytes": 492,
+      "output_bytes": 708,
+      "elapsed_seconds": 0.04069237499970768,
+      "model_tokens": 0
+    },
+    "worker_digest": "sha256:75d7c4af0a89a00e4f32549258b75e4fc969c8b0e0c075a4d5d0bc3c183df002"
+  },
+  "outcome": "success",
+  "failure_kind": null,
+  "correction": null,
+  "source_claim_ref": null,
+  "trace_id": "sha256:b737b27d0fb4d73e9ad4db303b7262d0b8a96e334f752c076df30952d8b21f9c",
+  "evidence_ref": "sha256:18ec8938a2eb205a35191f09dd728ed031d3cb9c7ce4047765ff9f05be9c475f"
+}

@@ -1,0 +1,24 @@
+{
+  "operation": "synthesis",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_f/completion/run-fc851e36fa/state.db",
+    "action": "propose",
+    "parameters": {
+      "policy_id": "p",
+      "task_id": "t",
+      "data_ref": "sha256:56d2af82d7cadd185a34224088573cfdd6f8f6e8b61e566308f80c3883057433",
+      "current_window": 99,
+      "expression": {
+        "op": "multiply",
+        "args": [
+          {
+            "factor": "x"
+          },
+          {
+            "factor": "z"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+iid_signal EMPIRICAL_RESULT_ONLY
+iid_null EMPIRICAL_RESULT_ONLY
+iid_sparse LOW_POWER
+ar_unthinned FORMAL_USE_REJECTED
+ar_thinned FORMAL_USE_REJECTED
+wrong_covariance FORMAL_USE_REJECTED
+synthesis interaction
+synthesis null

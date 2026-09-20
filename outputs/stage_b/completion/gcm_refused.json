@@ -1,0 +1,193 @@
+{
+  "track": "C",
+  "status": "REFUSED",
+  "contracts": {
+    "MetricContract": {
+      "name": "revenue",
+      "numerator": "revenue",
+      "denominator": null,
+      "aggregation": "sum",
+      "unit": "currency",
+      "analysis_unit": "unit",
+      "target_population": "treated units",
+      "timezone": "UTC",
+      "window": [
+        50,
+        54
+      ],
+      "maturity_days": 2,
+      "deduplication": "unit/day",
+      "schema_version": "1.0",
+      "contract_type": "MetricContract",
+      "digest": "sha256:98537e49a030bfa5b3ef4125639ded7e5dfb2518e477bd0a4d99a081cdc4d3ac"
+    },
+    "IdentificationReport": {
+      "treatment": "x",
+      "outcome": "revenue",
+      "design": "GCM",
+      "status": "NOT_IDENTIFIED",
+      "assumptions": [
+        {
+          "name": "data_valid",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:b08f18974d2efc539d8b19cf466941c49864c2dd108014243a9b65a3d6bf6d74"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "outcome_mature",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:b08f18974d2efc539d8b19cf466941c49864c2dd108014243a9b65a3d6bf6d74"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "support_overlap",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:b08f18974d2efc539d8b19cf466941c49864c2dd108014243a9b65a3d6bf6d74"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "independent_units",
+          "status": "assumed",
+          "passed": true,
+          "evidence_refs": [
+            "iid rows"
+          ],
+          "data_verifiable": false
+        },
+        {
+          "name": "accepted_graph",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:b08f18974d2efc539d8b19cf466941c49864c2dd108014243a9b65a3d6bf6d74"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "mechanisms_fitted",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:b08f18974d2efc539d8b19cf466941c49864c2dd108014243a9b65a3d6bf6d74"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "no_extrapolation",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:b08f18974d2efc539d8b19cf466941c49864c2dd108014243a9b65a3d6bf6d74"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "causal_sufficiency",
+          "status": "missing",
+          "passed": false,
+          "evidence_refs": [],
+          "data_verifiable": false
+        }
+      ],
+      "evidence_refs": [
+        "iid rows",
+        "sha256:b08f18974d2efc539d8b19cf466941c49864c2dd108014243a9b65a3d6bf6d74"
+      ],
+      "adjustment_set": [],
+      "forbidden_adjustments": [
+        "revenue",
+        "x"
+      ],
+      "rejected_adjustments": [],
+      "support": {
+        "target_population": "treated units",
+        "data_digest": "sha256:b08f18974d2efc539d8b19cf466941c49864c2dd108014243a9b65a3d6bf6d74",
+        "overlap_check": {
+          "status": "supported",
+          "evidence_refs": [
+            "sha256:b08f18974d2efc539d8b19cf466941c49864c2dd108014243a9b65a3d6bf6d74"
+          ]
+        }
+      },
+      "ambiguities": [],
+      "reason_codes": [
+        "NOT_IDENTIFIABLE"
+      ],
+      "route": "C",
+      "effect_scope": "individual",
+      "causal_effect_allowed": false,
+      "supplemental_evidence_needed": [
+        "causal_sufficiency"
+      ],
+      "graph_ref": null,
+      "dag_digest": "sha256:d4709351898f4ef4955fdf56c76e47d7e7d63cdc7fd7e991658b324c26476725",
+      "schema_version": "1.0",
+      "contract_type": "IdentificationReport",
+      "digest": "sha256:2de0e02a87307af253527f2e9f0914196ccef914df4e788e1e73015c67878620"
+    },
+    "EffectEstimate": {
+      "estimand": "ATE_intervention_on_old_population",
+      "unit": "currency",
+      "estimate": null,
+      "interval": null,
+      "interval_method": "iid_row_bootstrap_with_GCM_simulation",
+      "selection_status": "exploratory",
+      "target_population": "treated units",
+      "window": [
+        50,
+        54
+      ],
+      "identification_ref": "sha256:2de0e02a87307af253527f2e9f0914196ccef914df4e788e1e73015c67878620",
+      "diagnostics": {
+        "mechanisms": [
+          {
+            "period": "old",
+            "node": "revenue",
+            "parents_full_rank": true,
+            "heldout_rmse": 0.12133838455510614,
+            "limit": 0.3,
+            "passed": true
+          },
+          {
+            "period": "new",
+            "node": "revenue",
+            "parents_full_rank": true,
+            "heldout_rmse": 0.09975964997962913,
+            "limit": 0.3,
+            "passed": true
+          }
+        ],
+        "data_digest": "sha256:b08f18974d2efc539d8b19cf466941c49864c2dd108014243a9b65a3d6bf6d74",
+        "bootstrap_samples": 20,
+        "simulation_samples": 200,
+        "sampling_ate_repeats": [],
+        "graph_uncertainty": "conditional on accepted DAG; alternative graphs not averaged",
+        "structural_uncertainty": "linear additive-noise causal sufficiency is a maintained model assumption",
+        "support_scope": "observed marginal intervention range; high-dimensional transport not certified"
+      },
+      "schema_version": "1.0",
+      "contract_type": "EffectEstimate",
+      "digest": "sha256:ed880626eef0013a0fddf2975b14048a0360fcc4cd432eba2c961a747c694a2d"
+    }
+  },
+  "mechanism_attribution": {
+    "functional": "mean",
+    "unit": "currency",
+    "shapley_values": null,
+    "bootstrap_intervals": null,
+    "covariance_node_order": null,
+    "bootstrap_covariance": null,
+    "attributed_total": null,
+    "interpretation": "distribution mechanism change, not treatment ATE",
+    "bootstrap_runs": []
+  }
+}

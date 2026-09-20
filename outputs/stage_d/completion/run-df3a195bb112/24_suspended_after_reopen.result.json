@@ -1,0 +1,251 @@
+{
+  "spec": {
+    "schema_version": "skill/2",
+    "name": "metric_skill",
+    "version": 1,
+    "rules": [
+      {
+        "when": {
+          "metric_kind": "ratio_of_sums"
+        },
+        "action": "check_metric",
+        "polarity": "reinforce",
+        "evidence": [
+          "sha256:18ec8938a2eb205a35191f09dd728ed031d3cb9c7ce4047765ff9f05be9c475f"
+        ]
+      }
+    ],
+    "applicability": {
+      "metric_kind": "ratio_of_sums"
+    },
+    "claim_ceiling": "DESCRIPTIVE_FACT",
+    "preconditions": [
+      "valid_current_data",
+      "scope_matches"
+    ],
+    "postconditions": [
+      "no_causal_without_identification",
+      "no_traffic_mutation"
+    ],
+    "source_trace_ids": [
+      "sha256:b737b27d0fb4d73e9ad4db303b7262d0b8a96e334f752c076df30952d8b21f9c"
+    ],
+    "source_claim_refs": [],
+    "source_evidence_refs": [
+      "sha256:18ec8938a2eb205a35191f09dd728ed031d3cb9c7ce4047765ff9f05be9c475f"
+    ],
+    "negative_examples": [],
+    "validation_task_refs": [],
+    "compatibility_check_refs": [],
+    "delta": {
+      "base_version": null,
+      "previous_digest": null,
+      "added_rules": [
+        {
+          "when": {
+            "metric_kind": "ratio_of_sums"
+          },
+          "action": "check_metric",
+          "polarity": "reinforce",
+          "evidence": [
+            "sha256:18ec8938a2eb205a35191f09dd728ed031d3cb9c7ce4047765ff9f05be9c475f"
+          ]
+        }
+      ]
+    },
+    "digest": "sha256:d087a88ce5ee33d4ccb827f9d93f32cecc23765dcb4317fbf6bcd03c8c4b2427"
+  },
+  "lifecycle": {
+    "trust_state": "suspended",
+    "review": {
+      "reviewer": "fixture-reviewer",
+      "spec_digest": "sha256:d087a88ce5ee33d4ccb827f9d93f32cecc23765dcb4317fbf6bcd03c8c4b2427",
+      "passed": true,
+      "checks": [
+        {
+          "execution_status": "COMPLETED",
+          "binding": {
+            "task_id": "source",
+            "data_ref": "sha256:58e95b477106dba00b23182be42f8fddb5a5190334389e0bb35cefc204022a16",
+            "skill_ref": "sha256:d087a88ce5ee33d4ccb827f9d93f32cecc23765dcb4317fbf6bcd03c8c4b2427"
+          },
+          "operation": "check_metric",
+          "input_digest": "sha256:8e169c864996d518eb317a732b2ce272e308a705219128042de51300f17f2bb6",
+          "result": {
+            "passed": true,
+            "claim_type": "DESCRIPTIVE_FACT",
+            "metric_digest": "sha256:a7990ff79959ccf465e0a8e46b2c74d47345ace7fe444d09aced898d5fa38047"
+          },
+          "pid": 8648,
+          "guardrails": {
+            "no_code_execution": true,
+            "no_traffic_mutation": true,
+            "fresh_evidence_only": true,
+            "no_causal_without_identification": true
+          },
+          "digest": "sha256:b4e4454d98297ff81c65c9e98a4cb42f55a6da4207bb03cd35cab10e146c9ee2",
+          "cost": {
+            "input_bytes": 541,
+            "output_bytes": 757,
+            "elapsed_seconds": 0.03970099999969534,
+            "model_tokens": 0
+          },
+          "worker_digest": "sha256:e1ae6973a8d7aa973624f2361425f218fbf7ddea57bfd30ec40d296b923cb00b"
+        }
+      ]
+    },
+    "validation": {
+      "suite_ref": "sha256:cdc05337d9596fee9fe86da8a402ec2f355a6aac69c1d6c6807c93389e889abc",
+      "spec_digest": "sha256:d087a88ce5ee33d4ccb827f9d93f32cecc23765dcb4317fbf6bcd03c8c4b2427",
+      "passed": true,
+      "paired_gain": 1.0,
+      "critical_failures": [],
+      "pairs": [
+        {
+          "task_id": "metric_canary-20",
+          "data_ref": "sha256:0308fcbc5c1ba8fbe89892b0493b7f62688ebb0b498d67e5bf3d9c9ccffb1f49",
+          "critical": true,
+          "base": {
+            "operation": null,
+            "score": 0,
+            "replay": null
+          },
+          "candidate": {
+            "operation": "check_metric",
+            "score": 1,
+            "replay": {
+              "execution_status": "COMPLETED",
+              "binding": {
+                "task_id": "metric_canary-20",
+                "data_ref": "sha256:0308fcbc5c1ba8fbe89892b0493b7f62688ebb0b498d67e5bf3d9c9ccffb1f49",
+                "skill_ref": "sha256:d087a88ce5ee33d4ccb827f9d93f32cecc23765dcb4317fbf6bcd03c8c4b2427"
+              },
+              "operation": "check_metric",
+              "input_digest": "sha256:635141170f0150f7a359b70d65727d3bce54850d70cd099dc1ab82ff09367bd9",
+              "result": {
+                "passed": true,
+                "claim_type": "DESCRIPTIVE_FACT",
+                "metric_digest": "sha256:3d75cd53c8f1cf62ea41e37a3926f7f76aa0706f103175bc456d1c1b13bc9925"
+              },
+              "pid": 8666,
+              "guardrails": {
+                "no_code_execution": true,
+                "no_traffic_mutation": true,
+                "fresh_evidence_only": true,
+                "no_causal_without_identification": true
+              },
+              "digest": "sha256:13376d4114a4b9e7cdf07b374a8ece847ef81c3d4c4c20ef50aced3b5b469adf",
+              "cost": {
+                "input_bytes": 553,
+                "output_bytes": 767,
+                "elapsed_seconds": 0.040508332998797414,
+                "model_tokens": 0
+              },
+              "worker_digest": "sha256:8897e96a4e53eca89107517803cf30ff778a9e67dcd4166fb8ff887f478f5017"
+            }
+          }
+        },
+        {
+          "task_id": "metric_canary-21",
+          "data_ref": "sha256:166bedc2930e2e805a21fad0ded3a9522f8ae3babd9a69b5b6d49fa5b73cd8db",
+          "critical": true,
+          "base": {
+            "operation": null,
+            "score": 0,
+            "replay": null
+          },
+          "candidate": {
+            "operation": "check_metric",
+            "score": 1,
+            "replay": {
+              "execution_status": "COMPLETED",
+              "binding": {
+                "task_id": "metric_canary-21",
+                "data_ref": "sha256:166bedc2930e2e805a21fad0ded3a9522f8ae3babd9a69b5b6d49fa5b73cd8db",
+                "skill_ref": "sha256:d087a88ce5ee33d4ccb827f9d93f32cecc23765dcb4317fbf6bcd03c8c4b2427"
+              },
+              "operation": "check_metric",
+              "input_digest": "sha256:10e01f95f4177afd501f614e330fb0071533c00a141886647ca03bad6ac1a45d",
+              "result": {
+                "passed": true,
+                "claim_type": "DESCRIPTIVE_FACT",
+                "metric_digest": "sha256:6baa2bac9c27f744d597e2d0bae6a2008c7d8d3f9255b5d17a01d862410f6fb2"
+              },
+              "pid": 8667,
+              "guardrails": {
+                "no_code_execution": true,
+                "no_traffic_mutation": true,
+                "fresh_evidence_only": true,
+                "no_causal_without_identification": true
+              },
+              "digest": "sha256:79b77dc670ce5427a1a035c7b0e5a66b1539dc07c55eed84f555490466828c52",
+              "cost": {
+                "input_bytes": 553,
+                "output_bytes": 767,
+                "elapsed_seconds": 0.03632458399988536,
+                "model_tokens": 0
+              },
+              "worker_digest": "sha256:c4b1ed31b49603c595ac161bf34592b4d324ab2e7e9f601585d45db9b59670fd"
+            }
+          }
+        }
+      ],
+      "data_refs": [
+        "sha256:0308fcbc5c1ba8fbe89892b0493b7f62688ebb0b498d67e5bf3d9c9ccffb1f49",
+        "sha256:166bedc2930e2e805a21fad0ded3a9522f8ae3babd9a69b5b6d49fa5b73cd8db"
+      ],
+      "independent_task_refs": [
+        "metric_canary-20",
+        "metric_canary-21"
+      ]
+    },
+    "release": {
+      "approval_ref": "sha256:9f9c6913abf5449b3ac0062d8160e14ffa2914f9a7c7f4b6b02702e9dceab16a",
+      "fraction": 1,
+      "effective_window": 3,
+      "canary_passed": true
+    },
+    "suspended_scopes": [],
+    "execution_eligible": false,
+    "validation_history": [
+      {
+        "suite_ref": "sha256:7dce958844100e04a07dec98b481ef5e72bd0064cc12a211f923ce1e98c96118",
+        "data_refs": [
+          "sha256:6b3682172ead0ee81ee198940ba9b536b245e05aff5558782e26fc5ec2f329be",
+          "sha256:ff51ae2d8959eae2aa0cb76a56aebbd69b54aeac9464f687ef34c2e63e60a753"
+        ],
+        "independent_task_refs": [
+          "metric_suite-10",
+          "metric_suite-11"
+        ]
+      },
+      {
+        "suite_ref": "sha256:cdc05337d9596fee9fe86da8a402ec2f355a6aac69c1d6c6807c93389e889abc",
+        "data_refs": [
+          "sha256:0308fcbc5c1ba8fbe89892b0493b7f62688ebb0b498d67e5bf3d9c9ccffb1f49",
+          "sha256:166bedc2930e2e805a21fad0ded3a9522f8ae3babd9a69b5b6d49fa5b73cd8db"
+        ],
+        "independent_task_refs": [
+          "metric_canary-20",
+          "metric_canary-21"
+        ]
+      }
+    ],
+    "compatibility_check_refs": [
+      "sha256:a3b87d4a2ba73338d9186c3093517d85a903eb32faf03f261b612bd1606653b3"
+    ]
+  },
+  "evidence_links": {
+    "source_claim_refs": [],
+    "source_task_refs": [
+      "sha256:18ec8938a2eb205a35191f09dd728ed031d3cb9c7ce4047765ff9f05be9c475f"
+    ],
+    "validation_task_refs": [
+      "metric_canary-20",
+      "metric_canary-21"
+    ],
+    "compatibility_check_refs": [
+      "sha256:a3b87d4a2ba73338d9186c3093517d85a903eb32faf03f261b612bd1606653b3"
+    ]
+  }
+}

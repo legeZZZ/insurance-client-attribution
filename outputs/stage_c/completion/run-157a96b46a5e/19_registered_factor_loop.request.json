@@ -1,0 +1,10 @@
+{
+  "operation": "investigation",
+  "parameters": {
+    "db_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/investigation.db",
+    "action": "run_loop",
+    "parameters": {
+      "loop_id": "sha256:2e3457f3a02ebac5572f5c7904251310bbfd1949abaf6d36060ec821773d7dec"
+    }
+  }
+}

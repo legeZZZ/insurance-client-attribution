@@ -1,0 +1,61 @@
+{
+  "decision": "AUDIT_ONLY",
+  "name": "metric_skill",
+  "version": 1,
+  "spec": {
+    "schema_version": "skill/2",
+    "name": "metric_skill",
+    "version": 1,
+    "rules": [
+      {
+        "when": {
+          "metric_kind": "ratio_of_sums"
+        },
+        "action": "check_metric",
+        "polarity": "reinforce",
+        "evidence": [
+          "sha256:3ffffb7c7ba5aa54f657f8bad897159e9bbf76743d325a311af2a72d24b0d799"
+        ]
+      }
+    ],
+    "applicability": {
+      "metric_kind": "ratio_of_sums"
+    },
+    "claim_ceiling": "DESCRIPTIVE_FACT",
+    "preconditions": [
+      "valid_current_data",
+      "scope_matches"
+    ],
+    "postconditions": [
+      "no_causal_without_identification",
+      "no_traffic_mutation"
+    ],
+    "source_trace_ids": [
+      "sha256:b737b27d0fb4d73e9ad4db303b7262d0b8a96e334f752c076df30952d8b21f9c"
+    ],
+    "source_claim_refs": [],
+    "source_evidence_refs": [
+      "sha256:3ffffb7c7ba5aa54f657f8bad897159e9bbf76743d325a311af2a72d24b0d799"
+    ],
+    "negative_examples": [],
+    "validation_task_refs": [],
+    "compatibility_check_refs": [],
+    "delta": {
+      "base_version": null,
+      "previous_digest": null,
+      "added_rules": [
+        {
+          "when": {
+            "metric_kind": "ratio_of_sums"
+          },
+          "action": "check_metric",
+          "polarity": "reinforce",
+          "evidence": [
+            "sha256:3ffffb7c7ba5aa54f657f8bad897159e9bbf76743d325a311af2a72d24b0d799"
+          ]
+        }
+      ]
+    },
+    "digest": "sha256:f999b2a871fa671e53a4041dbaa0b8f17fb41241617f5409098f2b22ad19bf73"
+  }
+}

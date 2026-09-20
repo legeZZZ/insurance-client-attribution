@@ -1,0 +1,933 @@
+{
+  "schema": "enterprise-result/1",
+  "case_id": "insurance-A",
+  "domain": "insurance",
+  "line": "A",
+  "engine": "track2_v5_shared",
+  "mode": "sandbox_no_production_actions",
+  "provenance": {
+    "manifest_digest": "sha256:8f9fd87b0e81b3b1e34016314bc9ba4c66ca901d58412ba9e6d2cdb9fd903380",
+    "tables": [
+      {
+        "table": "observations",
+        "path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/examples/domains/insurance/observations.json",
+        "sha256": "sha256:451443177eb6f8c290440909e62791c2f01974fb3075ad4bc24b63309388d9a2",
+        "mapped_digest": "sha256:adda07c712445bafed7f29adf65c10e3f1f70b4c04c3c78357fb44f6e6ff9a5f",
+        "rows": 600
+      }
+    ],
+    "source": {
+      "source_uri": "company://insurance/sandbox",
+      "license_ref": "declared-company-authorized",
+      "timezone": "UTC",
+      "available_day": 101
+    },
+    "as_of": 101
+  },
+  "data_ref": "sha256:0cb560108c759013ffc6cfa65ad1eb3e396d3694c9a61cd2cb7a2e3b90486bcb",
+  "result_ref": "sha256:02ed15df1e5e7c58842efe6cef22dfc228f0e9ee5bd17dc6a7617033e6a2b940",
+  "result": {
+    "schema_version": "orchestration/1",
+    "execution_mode": "isolated",
+    "input_digest": "sha256:2b7c7d4ede088e04f1f39b55b5a38818bb6fc3e20ca4bc9f3be37218534a8ba3",
+    "execution_status": "COMPLETED",
+    "records": [
+      {
+        "stage": "L0",
+        "previous_ref": "sha256:2b7c7d4ede088e04f1f39b55b5a38818bb6fc3e20ca4bc9f3be37218534a8ba3",
+        "input_digest": "sha256:9e1feff7a132077c6f7c81d78127933a99667c3e5560a3fa5fca1be529b60df3",
+        "output": {
+          "baseline": null,
+          "claim_type": "DESCRIPTIVE_FACT",
+          "metric_contract": {
+            "name": "policy_conversion",
+            "numerator": "converted",
+            "denominator": "eligible_users",
+            "aggregation": "ratio_of_sums",
+            "unit": "rate",
+            "analysis_unit": "user",
+            "target_population": "eligible_users",
+            "timezone": "UTC",
+            "window": [
+              0,
+              99
+            ],
+            "maturity_days": 2,
+            "deduplication": "unit_id",
+            "schema_version": "1.0",
+            "contract_type": "MetricContract",
+            "digest": "sha256:5036efb638bd50365c820c7d4ff6c53c21aca18626b63caa36f98bd2eedb1f95"
+          },
+          "input_digest": "sha256:2b7c7d4ede088e04f1f39b55b5a38818bb6fc3e20ca4bc9f3be37218534a8ba3"
+        },
+        "pid": 1719,
+        "digest": "sha256:4856f26e04b3c1d967567e5d8efed1f1c932583316b488f783f9fc5727d81836"
+      },
+      {
+        "stage": "L1",
+        "previous_ref": "sha256:4856f26e04b3c1d967567e5d8efed1f1c932583316b488f783f9fc5727d81836",
+        "input_digest": "sha256:fd424acf4656f417172a70b0e4b046b5ba0b23f637deba8c494b839c28368741",
+        "output": {
+          "status": "SKIPPED",
+          "reason": "preregistered_design_direct_path",
+          "causal_eligible": false
+        },
+        "pid": 1720,
+        "digest": "sha256:ac4d73c1b07c3420a2d2afb5822ed17a9fcc981c786fb06b70656ae349a494ef"
+      },
+      {
+        "stage": "identification",
+        "previous_ref": "sha256:ac4d73c1b07c3420a2d2afb5822ed17a9fcc981c786fb06b70656ae349a494ef",
+        "input_digest": "sha256:2b7c7d4ede088e04f1f39b55b5a38818bb6fc3e20ca4bc9f3be37218534a8ba3",
+        "output": {
+          "identification": {
+            "treatment": "assignment",
+            "outcome": "policy_conversion",
+            "design": "RCT",
+            "status": "IDENTIFIED",
+            "assumptions": [
+              {
+                "name": "data_valid",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "outcome_mature",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "support_overlap",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "assignment_traceable",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "declared:sandbox-randomized"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "srm_pass",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "assignment_consistent",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "interference_absent",
+                "status": "assumed",
+                "passed": true,
+                "evidence_refs": [
+                  "declared:independent-units"
+                ],
+                "data_verifiable": false
+              }
+            ],
+            "evidence_refs": [
+              "declared:independent-units",
+              "declared:sandbox-randomized",
+              "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+            ],
+            "adjustment_set": [],
+            "forbidden_adjustments": [
+              "assignment",
+              "policy_conversion"
+            ],
+            "rejected_adjustments": [],
+            "support": {
+              "target_population": "eligible_users",
+              "data_digest": "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498",
+              "overlap_check": {
+                "status": "supported",
+                "evidence_refs": [
+                  "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                ]
+              }
+            },
+            "ambiguities": [],
+            "reason_codes": [],
+            "route": "A",
+            "effect_scope": "individual",
+            "causal_effect_allowed": true,
+            "supplemental_evidence_needed": [],
+            "graph_ref": null,
+            "dag_digest": null,
+            "schema_version": "1.0",
+            "contract_type": "IdentificationReport",
+            "digest": "sha256:7ba4df1538772824ebe01f358641332430a97b60128234f7ef0032dcd0fcf0cb"
+          }
+        },
+        "pid": 1721,
+        "digest": "sha256:5826d6292e4a2f92993cb491d4c361e1af4b3624b51c1eb7142699406fb570d1"
+      },
+      {
+        "stage": "L3",
+        "previous_ref": "sha256:5826d6292e4a2f92993cb491d4c361e1af4b3624b51c1eb7142699406fb570d1",
+        "input_digest": "sha256:2dd1b982a4490f4c09a7e36d06c6f6021855e5385a1e9ac769572a24536cd7bd",
+        "output": {
+          "result": {
+            "track": "A",
+            "status": "ESTIMATED",
+            "contracts": {
+              "MetricContract": {
+                "name": "policy_conversion",
+                "numerator": "converted",
+                "denominator": "eligible_users",
+                "aggregation": "ratio_of_sums",
+                "unit": "rate",
+                "analysis_unit": "user",
+                "target_population": "eligible_users",
+                "timezone": "UTC",
+                "window": [
+                  0,
+                  99
+                ],
+                "maturity_days": 2,
+                "deduplication": "unit_id",
+                "schema_version": "1.0",
+                "contract_type": "MetricContract",
+                "digest": "sha256:5036efb638bd50365c820c7d4ff6c53c21aca18626b63caa36f98bd2eedb1f95"
+              },
+              "IdentificationReport": {
+                "treatment": "assignment",
+                "outcome": "policy_conversion",
+                "design": "RCT",
+                "status": "IDENTIFIED",
+                "assumptions": [
+                  {
+                    "name": "data_valid",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "outcome_mature",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "support_overlap",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "assignment_traceable",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "declared:sandbox-randomized"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "srm_pass",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "assignment_consistent",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "interference_absent",
+                    "status": "assumed",
+                    "passed": true,
+                    "evidence_refs": [
+                      "declared:independent-units"
+                    ],
+                    "data_verifiable": false
+                  }
+                ],
+                "evidence_refs": [
+                  "declared:independent-units",
+                  "declared:sandbox-randomized",
+                  "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                ],
+                "adjustment_set": [],
+                "forbidden_adjustments": [
+                  "assignment",
+                  "policy_conversion"
+                ],
+                "rejected_adjustments": [],
+                "support": {
+                  "target_population": "eligible_users",
+                  "data_digest": "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498",
+                  "overlap_check": {
+                    "status": "supported",
+                    "evidence_refs": [
+                      "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                    ]
+                  }
+                },
+                "ambiguities": [],
+                "reason_codes": [],
+                "route": "A",
+                "effect_scope": "individual",
+                "causal_effect_allowed": true,
+                "supplemental_evidence_needed": [],
+                "graph_ref": null,
+                "dag_digest": null,
+                "schema_version": "1.0",
+                "contract_type": "IdentificationReport",
+                "digest": "sha256:7ba4df1538772824ebe01f358641332430a97b60128234f7ef0032dcd0fcf0cb"
+              },
+              "EffectEstimate": {
+                "estimand": "ITT",
+                "unit": "rate",
+                "estimate": 0.0866666666666667,
+                "interval": [
+                  0.021669499046834878,
+                  0.15166383428649852
+                ],
+                "interval_method": "cluster_influence_t_approximation",
+                "selection_status": "pre_registered",
+                "target_population": "eligible_users",
+                "window": [
+                  0,
+                  99
+                ],
+                "diagnostics": {
+                  "srm_pvalue": 1.0,
+                  "srm_alpha": 0.001,
+                  "randomization_groups": 600,
+                  "treated_groups": 300,
+                  "control_groups": 300,
+                  "data_digest": "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498",
+                  "variance_unit": "unit_id",
+                  "interval_scope": "pointwise; not adjusted for adaptive subgroup selection",
+                  "standard_error": 0.03309542254053737,
+                  "degrees_of_freedom": 599,
+                  "variance_method": "cluster_sum_influence_function"
+                },
+                "identification_ref": "sha256:7ba4df1538772824ebe01f358641332430a97b60128234f7ef0032dcd0fcf0cb",
+                "method": "ITT",
+                "schema_version": "1.0",
+                "contract_type": "EffectEstimate",
+                "digest": "sha256:bb9931b6a93ab4220eaffa9e70d60ff1ba2b8c6e1cf175dfc8f25549381a52aa"
+              }
+            }
+          },
+          "publication": {
+            "schema_version": "publication/1",
+            "execution_status": "COMPLETED",
+            "claim_type": "RANDOMIZED_EFFECT",
+            "interpretation": "PRACTICAL_EFFECT",
+            "statement": "随机实验估计policy_conversion的ITT为0.0866667，区间超过预设实质阈值。",
+            "identification": {
+              "design": "RCT",
+              "estimand": "ITT",
+              "status": "IDENTIFIED",
+              "assumptions": [
+                {
+                  "name": "data_valid",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "outcome_mature",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "support_overlap",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "assignment_traceable",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "declared:sandbox-randomized"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "srm_pass",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "assignment_consistent",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "interference_absent",
+                  "status": "assumed",
+                  "passed": true,
+                  "evidence_refs": [
+                    "declared:independent-units"
+                  ],
+                  "data_verifiable": false
+                }
+              ],
+              "ref": "sha256:7ba4df1538772824ebe01f358641332430a97b60128234f7ef0032dcd0fcf0cb"
+            },
+            "statistical_uncertainty": {
+              "effect": 0.0866666666666667,
+              "interval": [
+                0.021669499046834878,
+                0.15166383428649852
+              ],
+              "interval_method": "cluster_influence_t_approximation",
+              "selection_status": "pre_registered",
+              "pvalue": null,
+              "qvalue": null,
+              "posterior_probability": null,
+              "effect_ref": "sha256:bb9931b6a93ab4220eaffa9e70d60ff1ba2b8c6e1cf175dfc8f25549381a52aa"
+            },
+            "action_policy": {
+              "action": "REVIEW_POLICY",
+              "practical_threshold": 0.0,
+              "requires_approval_before_activation": true
+            },
+            "reason_codes": [],
+            "remedies": [],
+            "contracts": {
+              "MetricContract": {
+                "name": "policy_conversion",
+                "numerator": "converted",
+                "denominator": "eligible_users",
+                "aggregation": "ratio_of_sums",
+                "unit": "rate",
+                "analysis_unit": "user",
+                "target_population": "eligible_users",
+                "timezone": "UTC",
+                "window": [
+                  0,
+                  99
+                ],
+                "maturity_days": 2,
+                "deduplication": "unit_id",
+                "schema_version": "1.0",
+                "contract_type": "MetricContract",
+                "digest": "sha256:5036efb638bd50365c820c7d4ff6c53c21aca18626b63caa36f98bd2eedb1f95"
+              },
+              "IdentificationReport": {
+                "treatment": "assignment",
+                "outcome": "policy_conversion",
+                "design": "RCT",
+                "status": "IDENTIFIED",
+                "assumptions": [
+                  {
+                    "name": "data_valid",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "outcome_mature",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "support_overlap",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "assignment_traceable",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "declared:sandbox-randomized"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "srm_pass",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "assignment_consistent",
+                    "status": "supported",
+                    "passed": true,
+                    "evidence_refs": [
+                      "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                    ],
+                    "data_verifiable": true
+                  },
+                  {
+                    "name": "interference_absent",
+                    "status": "assumed",
+                    "passed": true,
+                    "evidence_refs": [
+                      "declared:independent-units"
+                    ],
+                    "data_verifiable": false
+                  }
+                ],
+                "evidence_refs": [
+                  "declared:independent-units",
+                  "declared:sandbox-randomized",
+                  "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                ],
+                "adjustment_set": [],
+                "forbidden_adjustments": [
+                  "assignment",
+                  "policy_conversion"
+                ],
+                "rejected_adjustments": [],
+                "support": {
+                  "target_population": "eligible_users",
+                  "data_digest": "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498",
+                  "overlap_check": {
+                    "status": "supported",
+                    "evidence_refs": [
+                      "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+                    ]
+                  }
+                },
+                "ambiguities": [],
+                "reason_codes": [],
+                "route": "A",
+                "effect_scope": "individual",
+                "causal_effect_allowed": true,
+                "supplemental_evidence_needed": [],
+                "graph_ref": null,
+                "dag_digest": null,
+                "schema_version": "1.0",
+                "contract_type": "IdentificationReport",
+                "digest": "sha256:7ba4df1538772824ebe01f358641332430a97b60128234f7ef0032dcd0fcf0cb"
+              },
+              "EffectEstimate": {
+                "estimand": "ITT",
+                "unit": "rate",
+                "estimate": 0.0866666666666667,
+                "interval": [
+                  0.021669499046834878,
+                  0.15166383428649852
+                ],
+                "interval_method": "cluster_influence_t_approximation",
+                "selection_status": "pre_registered",
+                "target_population": "eligible_users",
+                "window": [
+                  0,
+                  99
+                ],
+                "diagnostics": {
+                  "srm_pvalue": 1.0,
+                  "srm_alpha": 0.001,
+                  "randomization_groups": 600,
+                  "treated_groups": 300,
+                  "control_groups": 300,
+                  "data_digest": "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498",
+                  "variance_unit": "unit_id",
+                  "interval_scope": "pointwise; not adjusted for adaptive subgroup selection",
+                  "standard_error": 0.03309542254053737,
+                  "degrees_of_freedom": 599,
+                  "variance_method": "cluster_sum_influence_function"
+                },
+                "identification_ref": "sha256:7ba4df1538772824ebe01f358641332430a97b60128234f7ef0032dcd0fcf0cb",
+                "method": "ITT",
+                "schema_version": "1.0",
+                "contract_type": "EffectEstimate",
+                "digest": "sha256:bb9931b6a93ab4220eaffa9e70d60ff1ba2b8c6e1cf175dfc8f25549381a52aa"
+              }
+            },
+            "publication_options": {
+              "practical_threshold": 0.0,
+              "component_design": null,
+              "action_policy": null
+            },
+            "digest": "sha256:3db4864fb766da94d2955d3165492eb40239e38c332b92f801bb8680c48ceb3e"
+          }
+        },
+        "pid": 1725,
+        "digest": "sha256:dc7c5be7a571c6d90486ba1dfb6428e4803d38e6c88176167a5984ba5b23eefc"
+      }
+    ],
+    "cost_ledger": [
+      {
+        "stages": [
+          "L0"
+        ],
+        "input_bytes": 722,
+        "output_bytes": 950,
+        "elapsed_seconds": 0.04301900000001524,
+        "pid": 1719
+      },
+      {
+        "stages": [
+          "L1"
+        ],
+        "input_bytes": 182,
+        "output_bytes": 448,
+        "elapsed_seconds": 0.03662745900004438,
+        "pid": 1720
+      },
+      {
+        "stages": [
+          "identification"
+        ],
+        "input_bytes": 32502,
+        "output_bytes": 2610,
+        "elapsed_seconds": 2.1577186669999833,
+        "pid": 1721
+      },
+      {
+        "stages": [
+          "L3"
+        ],
+        "input_bytes": 34760,
+        "output_bytes": 10202,
+        "elapsed_seconds": 2.130502791999959,
+        "pid": 1725
+      }
+    ],
+    "baseline_bytes": 32329,
+    "cost_unit": "serialized_io_bytes_not_model_tokens",
+    "model_tokens": 0,
+    "worker_execution": "deterministic_processes_without_model_calls",
+    "fallback": false,
+    "publication": {
+      "schema_version": "publication/1",
+      "execution_status": "COMPLETED",
+      "claim_type": "RANDOMIZED_EFFECT",
+      "interpretation": "PRACTICAL_EFFECT",
+      "statement": "随机实验估计policy_conversion的ITT为0.0866667，区间超过预设实质阈值。",
+      "identification": {
+        "design": "RCT",
+        "estimand": "ITT",
+        "status": "IDENTIFIED",
+        "assumptions": [
+          {
+            "name": "data_valid",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "outcome_mature",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "support_overlap",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "assignment_traceable",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "declared:sandbox-randomized"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "srm_pass",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "assignment_consistent",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "interference_absent",
+            "status": "assumed",
+            "passed": true,
+            "evidence_refs": [
+              "declared:independent-units"
+            ],
+            "data_verifiable": false
+          }
+        ],
+        "ref": "sha256:7ba4df1538772824ebe01f358641332430a97b60128234f7ef0032dcd0fcf0cb"
+      },
+      "statistical_uncertainty": {
+        "effect": 0.0866666666666667,
+        "interval": [
+          0.021669499046834878,
+          0.15166383428649852
+        ],
+        "interval_method": "cluster_influence_t_approximation",
+        "selection_status": "pre_registered",
+        "pvalue": null,
+        "qvalue": null,
+        "posterior_probability": null,
+        "effect_ref": "sha256:bb9931b6a93ab4220eaffa9e70d60ff1ba2b8c6e1cf175dfc8f25549381a52aa"
+      },
+      "action_policy": {
+        "action": "REVIEW_POLICY",
+        "practical_threshold": 0.0,
+        "requires_approval_before_activation": true
+      },
+      "reason_codes": [],
+      "remedies": [],
+      "contracts": {
+        "MetricContract": {
+          "name": "policy_conversion",
+          "numerator": "converted",
+          "denominator": "eligible_users",
+          "aggregation": "ratio_of_sums",
+          "unit": "rate",
+          "analysis_unit": "user",
+          "target_population": "eligible_users",
+          "timezone": "UTC",
+          "window": [
+            0,
+            99
+          ],
+          "maturity_days": 2,
+          "deduplication": "unit_id",
+          "schema_version": "1.0",
+          "contract_type": "MetricContract",
+          "digest": "sha256:5036efb638bd50365c820c7d4ff6c53c21aca18626b63caa36f98bd2eedb1f95"
+        },
+        "IdentificationReport": {
+          "treatment": "assignment",
+          "outcome": "policy_conversion",
+          "design": "RCT",
+          "status": "IDENTIFIED",
+          "assumptions": [
+            {
+              "name": "data_valid",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "outcome_mature",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "support_overlap",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "assignment_traceable",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "declared:sandbox-randomized"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "srm_pass",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "assignment_consistent",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "interference_absent",
+              "status": "assumed",
+              "passed": true,
+              "evidence_refs": [
+                "declared:independent-units"
+              ],
+              "data_verifiable": false
+            }
+          ],
+          "evidence_refs": [
+            "declared:independent-units",
+            "declared:sandbox-randomized",
+            "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+          ],
+          "adjustment_set": [],
+          "forbidden_adjustments": [
+            "assignment",
+            "policy_conversion"
+          ],
+          "rejected_adjustments": [],
+          "support": {
+            "target_population": "eligible_users",
+            "data_digest": "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498",
+            "overlap_check": {
+              "status": "supported",
+              "evidence_refs": [
+                "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498"
+              ]
+            }
+          },
+          "ambiguities": [],
+          "reason_codes": [],
+          "route": "A",
+          "effect_scope": "individual",
+          "causal_effect_allowed": true,
+          "supplemental_evidence_needed": [],
+          "graph_ref": null,
+          "dag_digest": null,
+          "schema_version": "1.0",
+          "contract_type": "IdentificationReport",
+          "digest": "sha256:7ba4df1538772824ebe01f358641332430a97b60128234f7ef0032dcd0fcf0cb"
+        },
+        "EffectEstimate": {
+          "estimand": "ITT",
+          "unit": "rate",
+          "estimate": 0.0866666666666667,
+          "interval": [
+            0.021669499046834878,
+            0.15166383428649852
+          ],
+          "interval_method": "cluster_influence_t_approximation",
+          "selection_status": "pre_registered",
+          "target_population": "eligible_users",
+          "window": [
+            0,
+            99
+          ],
+          "diagnostics": {
+            "srm_pvalue": 1.0,
+            "srm_alpha": 0.001,
+            "randomization_groups": 600,
+            "treated_groups": 300,
+            "control_groups": 300,
+            "data_digest": "sha256:d8fdbdd0e7e37bd4c9791d48522915038fd8a2cb60d36d42ecc4975df6c0f498",
+            "variance_unit": "unit_id",
+            "interval_scope": "pointwise; not adjusted for adaptive subgroup selection",
+            "standard_error": 0.03309542254053737,
+            "degrees_of_freedom": 599,
+            "variance_method": "cluster_sum_influence_function"
+          },
+          "identification_ref": "sha256:7ba4df1538772824ebe01f358641332430a97b60128234f7ef0032dcd0fcf0cb",
+          "method": "ITT",
+          "schema_version": "1.0",
+          "contract_type": "EffectEstimate",
+          "digest": "sha256:bb9931b6a93ab4220eaffa9e70d60ff1ba2b8c6e1cf175dfc8f25549381a52aa"
+        }
+      },
+      "publication_options": {
+        "practical_threshold": 0.0,
+        "component_design": null,
+        "action_policy": null
+      },
+      "digest": "sha256:3db4864fb766da94d2955d3165492eb40239e38c332b92f801bb8680c48ceb3e"
+    },
+    "reason_codes": [],
+    "total_io_bytes": 82376,
+    "digest": "sha256:de1c6f135c0b1d521cc4b0b1a9808423bfd6cc780a85620874278d4de11013c2"
+  }
+}

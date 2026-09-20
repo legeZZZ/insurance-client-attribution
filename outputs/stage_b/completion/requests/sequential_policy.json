@@ -1,0 +1,22 @@
+{
+  "operation": "sequential_policy",
+  "parameters": {
+    "metric_names": [
+      "primary",
+      "harm"
+    ],
+    "checkpoints": [
+      7,
+      14
+    ],
+    "minimum_units": 100,
+    "deadline": 14,
+    "stopping_rules": {
+      "primary": "primary",
+      "threshold": 0.01,
+      "guardrail_limits": {
+        "harm": 0.05
+      }
+    }
+  }
+}

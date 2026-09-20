@@ -1,0 +1,128 @@
+{
+  "schema": "enterprise-result/1",
+  "case_id": "ecommerce-C",
+  "domain": "ecommerce",
+  "line": "C",
+  "engine": "track2_v5_shared",
+  "mode": "sandbox_no_production_actions",
+  "provenance": {
+    "manifest_digest": "sha256:3952edec262f514a1304238aed4a79355f95cb8e2efd18cb1dfa55c60826e66d",
+    "tables": [
+      {
+        "table": "panel",
+        "path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/examples/domains/ecommerce/panel.json",
+        "sha256": "sha256:049f3ecf55e0dc086961b7759b2ffc010030fcc36659edcaefd5e23aa499c303",
+        "mapped_digest": "sha256:049f3ecf55e0dc086961b7759b2ffc010030fcc36659edcaefd5e23aa499c303",
+        "rows": 100
+      },
+      {
+        "table": "factors",
+        "path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/examples/domains/ecommerce/factors.json",
+        "sha256": "sha256:1e038d96e415af22ddfef4b24f82b8da179bac72930d6b300fac152f0e63bf23",
+        "mapped_digest": "sha256:1e038d96e415af22ddfef4b24f82b8da179bac72930d6b300fac152f0e63bf23",
+        "rows": 100
+      }
+    ],
+    "source": {
+      "source_uri": "company://ecommerce/sandbox",
+      "license_ref": "declared-company-authorized",
+      "timezone": "UTC",
+      "available_day": 101
+    },
+    "as_of": 101
+  },
+  "data_ref": "sha256:123281c354a0f4edf933cd8842a5675a3c2d3ea1de939a155a2d84619e67ff28",
+  "result_ref": "sha256:d8540d2ebe131a5350a534b383a4971000ccae6ab388cc1a8a0ce7c197c1dcab",
+  "result": {
+    "baseline": null,
+    "scan": {
+      "claim_type": "WATCHLIST",
+      "watchlist": [
+        {
+          "factor_id": "promotion_intensity",
+          "parent_factor_id": "promotion_intensity",
+          "scope_id": "global",
+          "metric_id": "checkout_conversion",
+          "lag": 2,
+          "effect_shape": "persistent",
+          "correlation": 0.9943681384798791,
+          "coverage": 0.98,
+          "n_pairs": 98,
+          "kind": "unknown",
+          "score": 0.9744807757102816,
+          "budget_multiplier": 1.0,
+          "falsification": {
+            "placebo": {
+              "correlation": 0.016107198332388245,
+              "coverage": 0.9767441860465116,
+              "n_pairs": 84,
+              "kill": false,
+              "insufficient_data": false,
+              "applicable": true,
+              "status": "TESTED"
+            },
+            "lead_lag_reversal": {
+              "correlation": 0.03438977346482971,
+              "kill": false,
+              "skipped": false,
+              "applicable": true
+            },
+            "split_half": {
+              "first": 0.9940281957929499,
+              "second": 0.995486354295272,
+              "kill": false,
+              "applicable": true,
+              "status": "TESTED"
+            },
+            "negative_controls": []
+          },
+          "falsification_status": "SURVIVED_EXPLORATORY",
+          "claim_type": "WATCHLIST",
+          "grade": "REVIEW",
+          "alert_id": "sha256:06f5bb512e5eb9a9c4c1902ff9ad5bb08029ad3499aa3de72b20a337236d7271",
+          "window_id": "sha256:38cccf2bebd0b1eccb064f57a44043dbf786926a951a649a18bb3b9513a3ab4e",
+          "discovery_window": [
+            0,
+            99
+          ],
+          "next_step": "仅下一独立窗口确认可晋级；人工标签只进入验证队列"
+        }
+      ],
+      "deferred": [],
+      "killed": [],
+      "killed_count": 0,
+      "manifest": {
+        "M": 1,
+        "S": 1,
+        "K": 1,
+        "L": 1,
+        "grid_size": 1,
+        "tested": 1,
+        "test_budget": 15,
+        "budget": 3,
+        "attempts": [
+          {
+            "factor_id": "promotion_intensity",
+            "parent_factor_id": "promotion_intensity",
+            "scope_id": "global",
+            "metric_id": "checkout_conversion",
+            "lag": 2,
+            "effect_shape": "persistent",
+            "correlation": 0.9943681384798791,
+            "coverage": 0.98,
+            "n_pairs": 98
+          }
+        ],
+        "truncated": false,
+        "selection_policy": "registered_order_with_feedback_priority",
+        "inference": "exploratory_only",
+        "total_tests_spent": 5,
+        "total_test_budget": 30
+      },
+      "policy": "exploratory_only_no_cross_time_error_control_claim",
+      "data_digest": "sha256:96da8f2213b14083980a537e7fb046fe8c81f4ec95dc33e32f9e0e42acea88e9"
+    },
+    "execution_status": "COMPLETED",
+    "causal_eligible": false
+  }
+}

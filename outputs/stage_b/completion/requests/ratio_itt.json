@@ -1,0 +1,3628 @@
+{
+  "operation": "ratio_effect",
+  "parameters": {
+    "rows": [
+      {
+        "unit_id": 0,
+        "cluster": 0,
+        "treatment": 0,
+        "x": 0.345584192064786,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 1,
+        "cluster": 0,
+        "treatment": 0,
+        "x": 0.8216181435011584,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 2,
+        "cluster": 0,
+        "treatment": 0,
+        "x": 0.33043707618338714,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 3,
+        "cluster": 0,
+        "treatment": 0,
+        "x": -1.303157231604361,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 4,
+        "cluster": 1,
+        "treatment": 1,
+        "x": 0.9053558666731177,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 5,
+        "cluster": 1,
+        "treatment": 1,
+        "x": 0.4463745723640113,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 6,
+        "cluster": 1,
+        "treatment": 1,
+        "x": -0.5369532353602852,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 7,
+        "cluster": 1,
+        "treatment": 1,
+        "x": 0.5811181041963531,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 8,
+        "cluster": 2,
+        "treatment": 0,
+        "x": 0.36457239618607573,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 9,
+        "cluster": 2,
+        "treatment": 0,
+        "x": 0.294132496655526,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 10,
+        "cluster": 2,
+        "treatment": 0,
+        "x": 0.02842224131579679,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 11,
+        "cluster": 2,
+        "treatment": 0,
+        "x": 0.5467129866124469,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 12,
+        "cluster": 3,
+        "treatment": 1,
+        "x": -0.7364540870016669,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 13,
+        "cluster": 3,
+        "treatment": 1,
+        "x": -0.16290994799305278,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 14,
+        "cluster": 3,
+        "treatment": 1,
+        "x": -0.48211931267997826,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 15,
+        "cluster": 3,
+        "treatment": 1,
+        "x": 0.5988462126346276,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 16,
+        "cluster": 4,
+        "treatment": 0,
+        "x": 0.03972210748165899,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 17,
+        "cluster": 4,
+        "treatment": 0,
+        "x": -0.2924567509650886,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 18,
+        "cluster": 4,
+        "treatment": 0,
+        "x": -0.7819084623568421,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 19,
+        "cluster": 4,
+        "treatment": 0,
+        "x": -0.2571922406188707,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 20,
+        "cluster": 5,
+        "treatment": 1,
+        "x": 0.008142180518343508,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 21,
+        "cluster": 5,
+        "treatment": 1,
+        "x": -0.2756029052993704,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 22,
+        "cluster": 5,
+        "treatment": 1,
+        "x": 1.2940638143982073,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 23,
+        "cluster": 5,
+        "treatment": 1,
+        "x": 1.0067243153057943,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 24,
+        "cluster": 6,
+        "treatment": 0,
+        "x": -2.7111624789659685,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 25,
+        "cluster": 6,
+        "treatment": 0,
+        "x": -1.8890132459676727,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 26,
+        "cluster": 6,
+        "treatment": 0,
+        "x": -0.17477209205516195,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 27,
+        "cluster": 6,
+        "treatment": 0,
+        "x": -0.42219041157635356,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 28,
+        "cluster": 7,
+        "treatment": 1,
+        "x": 0.2136429974986111,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 29,
+        "cluster": 7,
+        "treatment": 1,
+        "x": 0.21732193102256359,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 30,
+        "cluster": 7,
+        "treatment": 1,
+        "x": 2.1178387550510482,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 31,
+        "cluster": 7,
+        "treatment": 1,
+        "x": -1.1120207626922813,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 32,
+        "cluster": 8,
+        "treatment": 0,
+        "x": -0.37760500712699807,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 33,
+        "cluster": 8,
+        "treatment": 0,
+        "x": 2.0427716074923303,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 34,
+        "cluster": 8,
+        "treatment": 0,
+        "x": 0.6467029962018469,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 35,
+        "cluster": 8,
+        "treatment": 0,
+        "x": 0.6630633723762617,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 36,
+        "cluster": 9,
+        "treatment": 1,
+        "x": -0.5140063716874629,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 37,
+        "cluster": 9,
+        "treatment": 1,
+        "x": -1.6480751708556527,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 38,
+        "cluster": 9,
+        "treatment": 1,
+        "x": 0.16746474422274113,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 39,
+        "cluster": 9,
+        "treatment": 1,
+        "x": 0.10901408782154753,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 40,
+        "cluster": 10,
+        "treatment": 0,
+        "x": -1.2273520542445742,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 41,
+        "cluster": 10,
+        "treatment": 0,
+        "x": -0.6832266617805622,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 42,
+        "cluster": 10,
+        "treatment": 0,
+        "x": -0.07204367972722743,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 43,
+        "cluster": 10,
+        "treatment": 0,
+        "x": -0.9447516230607774,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 44,
+        "cluster": 11,
+        "treatment": 1,
+        "x": -0.09826996785221727,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 45,
+        "cluster": 11,
+        "treatment": 1,
+        "x": 0.09548302746945433,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 46,
+        "cluster": 11,
+        "treatment": 1,
+        "x": 0.03558623705548571,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 47,
+        "cluster": 11,
+        "treatment": 1,
+        "x": -0.5062916583143148,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 48,
+        "cluster": 12,
+        "treatment": 0,
+        "x": 0.5937480717858228,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 49,
+        "cluster": 12,
+        "treatment": 0,
+        "x": 0.8911669542823284,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 50,
+        "cluster": 12,
+        "treatment": 0,
+        "x": 0.3208483045665637,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 51,
+        "cluster": 12,
+        "treatment": 0,
+        "x": -0.818230227390307,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 52,
+        "cluster": 13,
+        "treatment": 1,
+        "x": 0.7316522837854408,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 53,
+        "cluster": 13,
+        "treatment": 1,
+        "x": -0.5014400184670523,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 54,
+        "cluster": 13,
+        "treatment": 1,
+        "x": 0.8791606182879853,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 55,
+        "cluster": 13,
+        "treatment": 1,
+        "x": -1.0717874168774442,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 56,
+        "cluster": 14,
+        "treatment": 0,
+        "x": 0.9144672031287812,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 57,
+        "cluster": 14,
+        "treatment": 0,
+        "x": -0.02006345461548042,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 58,
+        "cluster": 14,
+        "treatment": 0,
+        "x": -1.2487488903344155,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 59,
+        "cluster": 14,
+        "treatment": 0,
+        "x": -0.31389947196684775,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 60,
+        "cluster": 15,
+        "treatment": 1,
+        "x": 0.05410227877154389,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 61,
+        "cluster": 15,
+        "treatment": 1,
+        "x": 0.27279133916445375,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 62,
+        "cluster": 15,
+        "treatment": 1,
+        "x": -0.9821881249409777,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 63,
+        "cluster": 15,
+        "treatment": 1,
+        "x": -1.107373047165193,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 64,
+        "cluster": 16,
+        "treatment": 0,
+        "x": 0.19958453284708083,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 65,
+        "cluster": 16,
+        "treatment": 0,
+        "x": -0.46674961687980204,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 66,
+        "cluster": 16,
+        "treatment": 0,
+        "x": 0.23550561173022522,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 67,
+        "cluster": 16,
+        "treatment": 0,
+        "x": 0.7595195224783792,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 68,
+        "cluster": 17,
+        "treatment": 1,
+        "x": -1.6487873663509485,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 69,
+        "cluster": 17,
+        "treatment": 1,
+        "x": 0.2543881165176173,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 70,
+        "cluster": 17,
+        "treatment": 1,
+        "x": 1.2246469675357323,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 71,
+        "cluster": 17,
+        "treatment": 1,
+        "x": -0.2975268443704732,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 72,
+        "cluster": 18,
+        "treatment": 0,
+        "x": -0.8108145832375699,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 73,
+        "cluster": 18,
+        "treatment": 0,
+        "x": 0.7522438271795928,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 74,
+        "cluster": 18,
+        "treatment": 0,
+        "x": 0.25344651620814146,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 75,
+        "cluster": 18,
+        "treatment": 0,
+        "x": 0.8958830707775604,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 76,
+        "cluster": 19,
+        "treatment": 1,
+        "x": -0.3452157100512797,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 77,
+        "cluster": 19,
+        "treatment": 1,
+        "x": -1.4818182737222112,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 78,
+        "cluster": 19,
+        "treatment": 1,
+        "x": -0.11001076471125099,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 79,
+        "cluster": 19,
+        "treatment": 1,
+        "x": -0.4458281530112322,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 80,
+        "cluster": 20,
+        "treatment": 0,
+        "x": 0.7753238220475741,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 81,
+        "cluster": 20,
+        "treatment": 0,
+        "x": 0.1936328483771538,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 82,
+        "cluster": 20,
+        "treatment": 0,
+        "x": -1.6308492324351012,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 83,
+        "cluster": 20,
+        "treatment": 0,
+        "x": -1.1951630801031998,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 84,
+        "cluster": 21,
+        "treatment": 1,
+        "x": 0.8837890365872553,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 85,
+        "cluster": 21,
+        "treatment": 1,
+        "x": 0.6797650174178466,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 86,
+        "cluster": 21,
+        "treatment": 1,
+        "x": -0.6402433659084887,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 87,
+        "cluster": 21,
+        "treatment": 1,
+        "x": -0.001048796567280681,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 88,
+        "cluster": 22,
+        "treatment": 0,
+        "x": 0.4455735537761861,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 89,
+        "cluster": 22,
+        "treatment": 0,
+        "x": 0.4684043358472779,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 90,
+        "cluster": 22,
+        "treatment": 0,
+        "x": 0.8762421961143501,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 91,
+        "cluster": 22,
+        "treatment": 0,
+        "x": 0.256485627221562,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 92,
+        "cluster": 23,
+        "treatment": 1,
+        "x": -0.09482833896849817,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 93,
+        "cluster": 23,
+        "treatment": 1,
+        "x": -0.25884806478784556,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 94,
+        "cluster": 23,
+        "treatment": 1,
+        "x": 1.0557428005332512,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 95,
+        "cluster": 23,
+        "treatment": 1,
+        "x": -2.2508542750785376,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 96,
+        "cluster": 24,
+        "treatment": 0,
+        "x": -0.13865532509133732,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 97,
+        "cluster": 24,
+        "treatment": 0,
+        "x": 0.03300010398406011,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 98,
+        "cluster": 24,
+        "treatment": 0,
+        "x": -1.4253489608701877,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 99,
+        "cluster": 24,
+        "treatment": 0,
+        "x": 0.33281361313804664,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 100,
+        "cluster": 25,
+        "treatment": 1,
+        "x": -0.651281012443394,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 101,
+        "cluster": 25,
+        "treatment": 1,
+        "x": 0.8624447963157468,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 102,
+        "cluster": 25,
+        "treatment": 1,
+        "x": -0.1255920840343272,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 103,
+        "cluster": 25,
+        "treatment": 1,
+        "x": 0.6691532407894528,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 104,
+        "cluster": 26,
+        "treatment": 0,
+        "x": 1.2188436051712233,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 105,
+        "cluster": 26,
+        "treatment": 0,
+        "x": 0.3829295827134724,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 106,
+        "cluster": 26,
+        "treatment": 0,
+        "x": -0.8757211434228455,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 107,
+        "cluster": 26,
+        "treatment": 0,
+        "x": -1.5143186317046384,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 108,
+        "cluster": 27,
+        "treatment": 1,
+        "x": 1.7533841175163727,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 109,
+        "cluster": 27,
+        "treatment": 1,
+        "x": -0.11129219318751944,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 110,
+        "cluster": 27,
+        "treatment": 1,
+        "x": -0.6885649476343216,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 111,
+        "cluster": 27,
+        "treatment": 1,
+        "x": 0.14425708806082496,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 112,
+        "cluster": 28,
+        "treatment": 0,
+        "x": -0.19141133048264922,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 113,
+        "cluster": 28,
+        "treatment": 0,
+        "x": 0.8521422642126877,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 114,
+        "cluster": 28,
+        "treatment": 0,
+        "x": 0.03392818243710029,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 115,
+        "cluster": 28,
+        "treatment": 0,
+        "x": 0.013749583618419497,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 116,
+        "cluster": 29,
+        "treatment": 1,
+        "x": -0.7145797210329641,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 117,
+        "cluster": 29,
+        "treatment": 1,
+        "x": 0.4695680987474934,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 118,
+        "cluster": 29,
+        "treatment": 1,
+        "x": -1.0338667223549824,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 119,
+        "cluster": 29,
+        "treatment": 1,
+        "x": 0.6658894397639671,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 120,
+        "cluster": 30,
+        "treatment": 0,
+        "x": 1.5239375129901318,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 121,
+        "cluster": 30,
+        "treatment": 0,
+        "x": -1.5246860380991518,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 122,
+        "cluster": 30,
+        "treatment": 0,
+        "x": -2.466229231351318,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 123,
+        "cluster": 30,
+        "treatment": 0,
+        "x": 0.6168787551543194,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 124,
+        "cluster": 31,
+        "treatment": 1,
+        "x": 2.547897815483126,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 125,
+        "cluster": 31,
+        "treatment": 1,
+        "x": -1.0009248488718936,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 126,
+        "cluster": 31,
+        "treatment": 1,
+        "x": -1.2506957588019882,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 127,
+        "cluster": 31,
+        "treatment": 1,
+        "x": 0.5889689337804737,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 128,
+        "cluster": 32,
+        "treatment": 0,
+        "x": -0.8407215900583078,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 129,
+        "cluster": 32,
+        "treatment": 0,
+        "x": -0.5060254839367364,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 130,
+        "cluster": 32,
+        "treatment": 0,
+        "x": -0.34811746668377785,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 131,
+        "cluster": 32,
+        "treatment": 0,
+        "x": 0.5320020862917986,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 132,
+        "cluster": 33,
+        "treatment": 1,
+        "x": -0.40530236139311865,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 133,
+        "cluster": 33,
+        "treatment": 1,
+        "x": 0.2778828400801602,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 134,
+        "cluster": 33,
+        "treatment": 1,
+        "x": -0.17653325889357535,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 135,
+        "cluster": 33,
+        "treatment": 1,
+        "x": -0.8446711036516033,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 136,
+        "cluster": 34,
+        "treatment": 0,
+        "x": -0.31982625774322104,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 137,
+        "cluster": 34,
+        "treatment": 0,
+        "x": -0.9503996651679186,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 138,
+        "cluster": 34,
+        "treatment": 0,
+        "x": 0.006514985869748843,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 139,
+        "cluster": 34,
+        "treatment": 0,
+        "x": -1.1238662275656366,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 140,
+        "cluster": 35,
+        "treatment": 1,
+        "x": -1.092894369295243,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 141,
+        "cluster": 35,
+        "treatment": 1,
+        "x": 1.4569618153052555,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 142,
+        "cluster": 35,
+        "treatment": 1,
+        "x": -0.05318422030534141,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 143,
+        "cluster": 35,
+        "treatment": 1,
+        "x": -0.05390202547204295,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 144,
+        "cluster": 36,
+        "treatment": 0,
+        "x": 0.511536419917619,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 145,
+        "cluster": 36,
+        "treatment": 0,
+        "x": -0.4208570025488712,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 146,
+        "cluster": 36,
+        "treatment": 0,
+        "x": -0.22853536747815809,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 147,
+        "cluster": 36,
+        "treatment": 0,
+        "x": 0.4251487353319089,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 148,
+        "cluster": 37,
+        "treatment": 1,
+        "x": 0.2824158422444015,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 149,
+        "cluster": 37,
+        "treatment": 1,
+        "x": -1.1592967269324297,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 150,
+        "cluster": 37,
+        "treatment": 1,
+        "x": 0.8333425966696618,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 151,
+        "cluster": 37,
+        "treatment": 1,
+        "x": -0.590434943289043,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 152,
+        "cluster": 38,
+        "treatment": 0,
+        "x": -1.0560789503141859,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 153,
+        "cluster": 38,
+        "treatment": 0,
+        "x": -0.9004750699990517,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 154,
+        "cluster": 38,
+        "treatment": 0,
+        "x": -0.3905453443553229,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 155,
+        "cluster": 38,
+        "treatment": 0,
+        "x": 1.6273002546230673,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 156,
+        "cluster": 39,
+        "treatment": 1,
+        "x": -1.1755359049207805,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 157,
+        "cluster": 39,
+        "treatment": 1,
+        "x": 0.16007589253434076,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 158,
+        "cluster": 39,
+        "treatment": 1,
+        "x": -2.1378243580905774,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 159,
+        "cluster": 39,
+        "treatment": 1,
+        "x": -0.0015669331451969059,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 160,
+        "cluster": 40,
+        "treatment": 0,
+        "x": 0.8995664174760071,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 161,
+        "cluster": 40,
+        "treatment": 0,
+        "x": -0.23666332206145513,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 162,
+        "cluster": 40,
+        "treatment": 0,
+        "x": -0.6293549238833419,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 163,
+        "cluster": 40,
+        "treatment": 0,
+        "x": 0.23151106405853766,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 164,
+        "cluster": 41,
+        "treatment": 1,
+        "x": 0.7001517511506504,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 165,
+        "cluster": 41,
+        "treatment": 1,
+        "x": 0.6636575710174066,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 166,
+        "cluster": 41,
+        "treatment": 1,
+        "x": 1.9724738539297917,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 167,
+        "cluster": 41,
+        "treatment": 1,
+        "x": 0.20916747233627678,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 168,
+        "cluster": 42,
+        "treatment": 0,
+        "x": -0.5924100997529326,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 169,
+        "cluster": 42,
+        "treatment": 0,
+        "x": -0.12597918998664273,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 170,
+        "cluster": 42,
+        "treatment": 0,
+        "x": -0.07249854561981205,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 171,
+        "cluster": 42,
+        "treatment": 0,
+        "x": 0.10873738347811868,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 172,
+        "cluster": 43,
+        "treatment": 1,
+        "x": -0.03002781322943489,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 173,
+        "cluster": 43,
+        "treatment": 1,
+        "x": 0.1739659388962034,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 174,
+        "cluster": 43,
+        "treatment": 1,
+        "x": -1.6708500606151127,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 175,
+        "cluster": 43,
+        "treatment": 1,
+        "x": 0.8296289560400428,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 176,
+        "cluster": 44,
+        "treatment": 0,
+        "x": -0.5747392689210323,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 177,
+        "cluster": 44,
+        "treatment": 0,
+        "x": -1.1731586964470246,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 178,
+        "cluster": 44,
+        "treatment": 0,
+        "x": 0.6377511596414357,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 179,
+        "cluster": 44,
+        "treatment": 0,
+        "x": 1.317326007386082,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 180,
+        "cluster": 45,
+        "treatment": 1,
+        "x": 0.4930281494994427,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 181,
+        "cluster": 45,
+        "treatment": 1,
+        "x": 0.16115931384552032,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 182,
+        "cluster": 45,
+        "treatment": 1,
+        "x": -0.9322203053719521,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 183,
+        "cluster": 45,
+        "treatment": 1,
+        "x": 2.8715673378134987,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 184,
+        "cluster": 46,
+        "treatment": 0,
+        "x": 0.8802586206615082,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 185,
+        "cluster": 46,
+        "treatment": 0,
+        "x": -1.1392946703429758,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 186,
+        "cluster": 46,
+        "treatment": 0,
+        "x": -0.7796379162397445,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 187,
+        "cluster": 46,
+        "treatment": 0,
+        "x": 0.08697924857190435,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 188,
+        "cluster": 47,
+        "treatment": 1,
+        "x": -1.5547311319959862,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 189,
+        "cluster": 47,
+        "treatment": 1,
+        "x": 0.16863040701051427,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 190,
+        "cluster": 47,
+        "treatment": 1,
+        "x": -0.4590715557127591,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 191,
+        "cluster": 47,
+        "treatment": 1,
+        "x": 1.2262706003162174,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 192,
+        "cluster": 48,
+        "treatment": 0,
+        "x": 0.9621546636282469,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 193,
+        "cluster": 48,
+        "treatment": 0,
+        "x": -2.7112854374347726,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 194,
+        "cluster": 48,
+        "treatment": 0,
+        "x": 0.04170258602731257,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 195,
+        "cluster": 48,
+        "treatment": 0,
+        "x": -1.6174674995236882,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 196,
+        "cluster": 49,
+        "treatment": 1,
+        "x": 1.109637999248523,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 197,
+        "cluster": 49,
+        "treatment": 1,
+        "x": 0.16810586912782435,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 198,
+        "cluster": 49,
+        "treatment": 1,
+        "x": 0.5484054521869972,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 199,
+        "cluster": 49,
+        "treatment": 1,
+        "x": -1.065124728803299,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 200,
+        "cluster": 50,
+        "treatment": 0,
+        "x": 1.8284302379955002,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 201,
+        "cluster": 50,
+        "treatment": 0,
+        "x": 2.020073367150445,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 202,
+        "cluster": 50,
+        "treatment": 0,
+        "x": -1.0647710426262125,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 203,
+        "cluster": 50,
+        "treatment": 0,
+        "x": 0.37281512186631627,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 204,
+        "cluster": 51,
+        "treatment": 1,
+        "x": -0.6733024283901868,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 205,
+        "cluster": 51,
+        "treatment": 1,
+        "x": -0.0235699368607321,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 206,
+        "cluster": 51,
+        "treatment": 1,
+        "x": -1.2656369792245639,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 207,
+        "cluster": 51,
+        "treatment": 1,
+        "x": 1.8671455145806186,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 208,
+        "cluster": 52,
+        "treatment": 0,
+        "x": -0.969179511082668,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 209,
+        "cluster": 52,
+        "treatment": 0,
+        "x": -0.2960838149974946,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 210,
+        "cluster": 52,
+        "treatment": 0,
+        "x": 0.5014829311105223,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 211,
+        "cluster": 52,
+        "treatment": 0,
+        "x": -0.6475606784161285,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 212,
+        "cluster": 53,
+        "treatment": 1,
+        "x": -0.23931242973230216,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 213,
+        "cluster": 53,
+        "treatment": 1,
+        "x": -0.5636398464269645,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 214,
+        "cluster": 53,
+        "treatment": 1,
+        "x": -0.13346075483629405,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 215,
+        "cluster": 53,
+        "treatment": 1,
+        "x": -1.1705426351003028,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 216,
+        "cluster": 54,
+        "treatment": 0,
+        "x": -0.43798807560230063,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 217,
+        "cluster": 54,
+        "treatment": 0,
+        "x": -0.20689292471224427,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 218,
+        "cluster": 54,
+        "treatment": 0,
+        "x": -0.33372600380413486,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 219,
+        "cluster": 54,
+        "treatment": 0,
+        "x": 0.05668995489379499,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 220,
+        "cluster": 55,
+        "treatment": 1,
+        "x": -0.2931022193567212,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 221,
+        "cluster": 55,
+        "treatment": 1,
+        "x": 0.7532114084393808,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 222,
+        "cluster": 55,
+        "treatment": 1,
+        "x": -0.3231959257858299,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 223,
+        "cluster": 55,
+        "treatment": 1,
+        "x": -0.13664959629588416,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 224,
+        "cluster": 56,
+        "treatment": 0,
+        "x": -0.6647813359958524,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 225,
+        "cluster": 56,
+        "treatment": 0,
+        "x": -0.526514840115237,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 226,
+        "cluster": 56,
+        "treatment": 0,
+        "x": -1.2644927908197123,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 227,
+        "cluster": 56,
+        "treatment": 0,
+        "x": 0.5187849208779641,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 228,
+        "cluster": 57,
+        "treatment": 1,
+        "x": -1.142518017652492,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 229,
+        "cluster": 57,
+        "treatment": 1,
+        "x": -0.7458563981883249,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 230,
+        "cluster": 57,
+        "treatment": 1,
+        "x": 0.35924465201120453,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 231,
+        "cluster": 57,
+        "treatment": 1,
+        "x": 0.40257336594453236,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 232,
+        "cluster": 58,
+        "treatment": 0,
+        "x": -0.400114751005071,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 233,
+        "cluster": 58,
+        "treatment": 0,
+        "x": -2.0192658104888017,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 234,
+        "cluster": 58,
+        "treatment": 0,
+        "x": 0.42051328729557524,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 235,
+        "cluster": 58,
+        "treatment": 0,
+        "x": 0.2595634588920596,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 236,
+        "cluster": 59,
+        "treatment": 1,
+        "x": -1.4123812154717754,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 237,
+        "cluster": 59,
+        "treatment": 1,
+        "x": 0.770322082794496,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 238,
+        "cluster": 59,
+        "treatment": 1,
+        "x": -0.7010998004334262,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 239,
+        "cluster": 59,
+        "treatment": 1,
+        "x": -1.1261881161533005,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 240,
+        "cluster": 60,
+        "treatment": 0,
+        "x": 0.09573071096425678,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 241,
+        "cluster": 60,
+        "treatment": 0,
+        "x": -0.17847043139921506,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 242,
+        "cluster": 60,
+        "treatment": 0,
+        "x": 0.20262400099114752,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 243,
+        "cluster": 60,
+        "treatment": 0,
+        "x": -1.6057480583244386,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 244,
+        "cluster": 61,
+        "treatment": 1,
+        "x": 1.8122301162723733,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 245,
+        "cluster": 61,
+        "treatment": 1,
+        "x": -0.602658614543728,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 246,
+        "cluster": 61,
+        "treatment": 1,
+        "x": -1.539659308496411,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 247,
+        "cluster": 61,
+        "treatment": 1,
+        "x": 0.6188421885671495,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 248,
+        "cluster": 62,
+        "treatment": 0,
+        "x": -0.3548041301011767,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 249,
+        "cluster": 62,
+        "treatment": 0,
+        "x": 0.32485848577290377,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 250,
+        "cluster": 62,
+        "treatment": 0,
+        "x": -0.33960843062503854,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 251,
+        "cluster": 62,
+        "treatment": 0,
+        "x": -0.059740360479920165,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 252,
+        "cluster": 63,
+        "treatment": 1,
+        "x": 0.24577284373863384,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 253,
+        "cluster": 63,
+        "treatment": 1,
+        "x": -0.7466528839828983,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 254,
+        "cluster": 63,
+        "treatment": 1,
+        "x": 0.6787395958595579,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 255,
+        "cluster": 63,
+        "treatment": 1,
+        "x": -0.46990009907954344,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 256,
+        "cluster": 64,
+        "treatment": 0,
+        "x": -0.8696871441704723,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 257,
+        "cluster": 64,
+        "treatment": 0,
+        "x": 0.07703242182250279,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 258,
+        "cluster": 64,
+        "treatment": 0,
+        "x": 0.44504127849104197,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 259,
+        "cluster": 64,
+        "treatment": 0,
+        "x": -0.2290793416186396,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 260,
+        "cluster": 65,
+        "treatment": 1,
+        "x": -0.8625197870795628,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 261,
+        "cluster": 65,
+        "treatment": 1,
+        "x": 0.6197855663086329,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 262,
+        "cluster": 65,
+        "treatment": 1,
+        "x": -1.7603287921227768,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 263,
+        "cluster": 65,
+        "treatment": 1,
+        "x": -1.0308641360355328,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 264,
+        "cluster": 66,
+        "treatment": 0,
+        "x": 0.03952289053338441,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 265,
+        "cluster": 66,
+        "treatment": 0,
+        "x": -1.3610593983050674,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 266,
+        "cluster": 66,
+        "treatment": 0,
+        "x": 0.027994264249169242,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 267,
+        "cluster": 66,
+        "treatment": 0,
+        "x": -0.05486311801846381,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 268,
+        "cluster": 67,
+        "treatment": 1,
+        "x": 0.8987397888581683,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 269,
+        "cluster": 67,
+        "treatment": 1,
+        "x": -0.9147903518132915,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 270,
+        "cluster": 67,
+        "treatment": 1,
+        "x": -0.6259065236416427,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 271,
+        "cluster": 67,
+        "treatment": 1,
+        "x": 0.3331816847010001,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 272,
+        "cluster": 68,
+        "treatment": 0,
+        "x": -2.4575635902058073,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 273,
+        "cluster": 68,
+        "treatment": 0,
+        "x": 3.1000422989145844,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 274,
+        "cluster": 68,
+        "treatment": 0,
+        "x": -0.698650730461769,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 275,
+        "cluster": 68,
+        "treatment": 0,
+        "x": -0.7298350527255578,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 276,
+        "cluster": 69,
+        "treatment": 1,
+        "x": 0.8611275109037129,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 277,
+        "cluster": 69,
+        "treatment": 1,
+        "x": -0.03983184143568413,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 278,
+        "cluster": 69,
+        "treatment": 1,
+        "x": -1.779428618703591,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 279,
+        "cluster": 69,
+        "treatment": 1,
+        "x": 0.6269273800926122,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 280,
+        "cluster": 70,
+        "treatment": 0,
+        "x": 0.8553778339992086,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 281,
+        "cluster": 70,
+        "treatment": 0,
+        "x": -0.4499462734759413,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 282,
+        "cluster": 70,
+        "treatment": 0,
+        "x": -0.2816003582920249,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 283,
+        "cluster": 70,
+        "treatment": 0,
+        "x": 0.48598459725939197,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 284,
+        "cluster": 71,
+        "treatment": 1,
+        "x": -0.9087802499144495,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 285,
+        "cluster": 71,
+        "treatment": 1,
+        "x": 0.4383885642069085,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 286,
+        "cluster": 71,
+        "treatment": 1,
+        "x": 0.199298510444498,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 287,
+        "cluster": 71,
+        "treatment": 1,
+        "x": -0.674932615775918,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 288,
+        "cluster": 72,
+        "treatment": 0,
+        "x": -1.3921018738118445,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 289,
+        "cluster": 72,
+        "treatment": 0,
+        "x": -0.22560583076108617,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 290,
+        "cluster": 72,
+        "treatment": 0,
+        "x": -0.8754222582601685,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 291,
+        "cluster": 72,
+        "treatment": 0,
+        "x": 1.0014102256801642,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 292,
+        "cluster": 73,
+        "treatment": 1,
+        "x": 0.14408536849992318,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 293,
+        "cluster": 73,
+        "treatment": 1,
+        "x": 0.7820845225598966,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 294,
+        "cluster": 73,
+        "treatment": 1,
+        "x": 0.13462193534445818,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 295,
+        "cluster": 73,
+        "treatment": 1,
+        "x": 0.26290111708503067,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 296,
+        "cluster": 74,
+        "treatment": 0,
+        "x": -0.7829989172303806,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 297,
+        "cluster": 74,
+        "treatment": 0,
+        "x": 0.6680474265721447,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 298,
+        "cluster": 74,
+        "treatment": 0,
+        "x": 1.7846982743070243,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 299,
+        "cluster": 74,
+        "treatment": 0,
+        "x": -0.3096875555175417,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 300,
+        "cluster": 75,
+        "treatment": 1,
+        "x": -0.592774527714149,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 301,
+        "cluster": 75,
+        "treatment": 1,
+        "x": -0.15783670219035234,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 302,
+        "cluster": 75,
+        "treatment": 1,
+        "x": -0.48128028360112374,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 303,
+        "cluster": 75,
+        "treatment": 1,
+        "x": -0.7014792986535402,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 304,
+        "cluster": 76,
+        "treatment": 0,
+        "x": 0.13819364396816675,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 305,
+        "cluster": 76,
+        "treatment": 0,
+        "x": -0.29091753305009044,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 306,
+        "cluster": 76,
+        "treatment": 0,
+        "x": 1.4388735938426587,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 307,
+        "cluster": 76,
+        "treatment": 0,
+        "x": 0.00020164295512421895,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 308,
+        "cluster": 77,
+        "treatment": 1,
+        "x": 0.3239119776314283,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 309,
+        "cluster": 77,
+        "treatment": 1,
+        "x": 0.9520218679998016,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 310,
+        "cluster": 77,
+        "treatment": 1,
+        "x": -0.30075585250454295,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 311,
+        "cluster": 77,
+        "treatment": 1,
+        "x": 1.4367365400889385,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 312,
+        "cluster": 78,
+        "treatment": 0,
+        "x": -0.6326942125201124,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 313,
+        "cluster": 78,
+        "treatment": 0,
+        "x": -0.8083277018861249,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 314,
+        "cluster": 78,
+        "treatment": 0,
+        "x": -0.36626701885025204,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 315,
+        "cluster": 78,
+        "treatment": 0,
+        "x": -0.11471739196713679,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 316,
+        "cluster": 79,
+        "treatment": 1,
+        "x": -1.4013182000990516,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 317,
+        "cluster": 79,
+        "treatment": 1,
+        "x": -0.03509478412884679,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 318,
+        "cluster": 79,
+        "treatment": 1,
+        "x": -1.6674865904394212,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 319,
+        "cluster": 79,
+        "treatment": 1,
+        "x": 1.3921384005454986,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 320,
+        "cluster": 80,
+        "treatment": 0,
+        "x": -0.08099695140769417,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 321,
+        "cluster": 80,
+        "treatment": 0,
+        "x": -0.6419577246959741,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 322,
+        "cluster": 80,
+        "treatment": 0,
+        "x": -0.9083381182835725,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 323,
+        "cluster": 80,
+        "treatment": 0,
+        "x": -0.38443047420819676,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 324,
+        "cluster": 81,
+        "treatment": 1,
+        "x": -0.22307946843042645,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 325,
+        "cluster": 81,
+        "treatment": 1,
+        "x": -1.0445109656113605,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 326,
+        "cluster": 81,
+        "treatment": 1,
+        "x": -0.9197950938228345,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 327,
+        "cluster": 81,
+        "treatment": 1,
+        "x": -0.18717500506153661,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 328,
+        "cluster": 82,
+        "treatment": 0,
+        "x": -0.520783747795641,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 329,
+        "cluster": 82,
+        "treatment": 0,
+        "x": 0.9392131036783211,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 330,
+        "cluster": 82,
+        "treatment": 0,
+        "x": 1.137870374245525,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 331,
+        "cluster": 82,
+        "treatment": 0,
+        "x": 0.016021203599889625,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 332,
+        "cluster": 83,
+        "treatment": 1,
+        "x": 0.47359957205452774,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 333,
+        "cluster": 83,
+        "treatment": 1,
+        "x": -1.33518837362512,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 334,
+        "cluster": 83,
+        "treatment": 1,
+        "x": 0.6374177094326149,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 335,
+        "cluster": 83,
+        "treatment": 1,
+        "x": -0.03058346951326358,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 336,
+        "cluster": 84,
+        "treatment": 0,
+        "x": 0.48466831595083715,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 337,
+        "cluster": 84,
+        "treatment": 0,
+        "x": 1.6003561315936594,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 338,
+        "cluster": 84,
+        "treatment": 0,
+        "x": -2.280857756344364,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 339,
+        "cluster": 84,
+        "treatment": 0,
+        "x": 0.26094817905342854,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 340,
+        "cluster": 85,
+        "treatment": 1,
+        "x": -1.0991190631678631,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 341,
+        "cluster": 85,
+        "treatment": 1,
+        "x": 0.592196691404488,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 342,
+        "cluster": 85,
+        "treatment": 1,
+        "x": -1.313313437428466,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 343,
+        "cluster": 85,
+        "treatment": 1,
+        "x": -0.49539956700399346,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 344,
+        "cluster": 86,
+        "treatment": 0,
+        "x": 0.20273375576037383,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 345,
+        "cluster": 86,
+        "treatment": 0,
+        "x": 0.6135093864353722,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 346,
+        "cluster": 86,
+        "treatment": 0,
+        "x": 0.07479408933657207,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 347,
+        "cluster": 86,
+        "treatment": 0,
+        "x": -0.7928309389878114,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 348,
+        "cluster": 87,
+        "treatment": 1,
+        "x": -0.553532217715408,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 349,
+        "cluster": 87,
+        "treatment": 1,
+        "x": 0.8845028912493791,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 350,
+        "cluster": 87,
+        "treatment": 1,
+        "x": -0.005499615686538553,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 351,
+        "cluster": 87,
+        "treatment": 1,
+        "x": -1.6838143968410575,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 352,
+        "cluster": 88,
+        "treatment": 0,
+        "x": 0.8436627082696916,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 353,
+        "cluster": 88,
+        "treatment": 0,
+        "x": 0.41624847971347423,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 354,
+        "cluster": 88,
+        "treatment": 0,
+        "x": 0.8734155452519468,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 355,
+        "cluster": 88,
+        "treatment": 0,
+        "x": -0.3366274663766816,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 356,
+        "cluster": 89,
+        "treatment": 1,
+        "x": 0.8281565184266096,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 357,
+        "cluster": 89,
+        "treatment": 1,
+        "x": -1.0610649200016748,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 358,
+        "cluster": 89,
+        "treatment": 1,
+        "x": 0.5699998108654594,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 359,
+        "cluster": 89,
+        "treatment": 1,
+        "x": -0.49038030962805695,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 360,
+        "cluster": 90,
+        "treatment": 0,
+        "x": 0.6743517049201465,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 361,
+        "cluster": 90,
+        "treatment": 0,
+        "x": 1.00564411641639,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 362,
+        "cluster": 90,
+        "treatment": 0,
+        "x": -0.7359901520085294,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 363,
+        "cluster": 90,
+        "treatment": 0,
+        "x": -0.051229479498743465,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 364,
+        "cluster": 91,
+        "treatment": 1,
+        "x": 0.038954626455999015,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 365,
+        "cluster": 91,
+        "treatment": 1,
+        "x": 1.1896648178406266,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 366,
+        "cluster": 91,
+        "treatment": 1,
+        "x": 0.7105580913697815,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 367,
+        "cluster": 91,
+        "treatment": 1,
+        "x": -1.2192775440104588,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 368,
+        "cluster": 92,
+        "treatment": 0,
+        "x": 0.45760826070855726,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 369,
+        "cluster": 92,
+        "treatment": 0,
+        "x": 0.7450892093791386,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 370,
+        "cluster": 92,
+        "treatment": 0,
+        "x": 2.123805895927743,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 371,
+        "cluster": 92,
+        "treatment": 0,
+        "x": -1.6791490967541916,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 372,
+        "cluster": 93,
+        "treatment": 1,
+        "x": -0.536352299933991,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 373,
+        "cluster": 93,
+        "treatment": 1,
+        "x": 1.333371188087335,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 374,
+        "cluster": 93,
+        "treatment": 1,
+        "x": -1.355070298606693,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 375,
+        "cluster": 93,
+        "treatment": 1,
+        "x": -1.199460583924726,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 376,
+        "cluster": 94,
+        "treatment": 0,
+        "x": 0.5170821953802978,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 377,
+        "cluster": 94,
+        "treatment": 0,
+        "x": 1.0184086608787832,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 378,
+        "cluster": 94,
+        "treatment": 0,
+        "x": -0.6686804873755542,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 379,
+        "cluster": 94,
+        "treatment": 0,
+        "x": 0.5401271722920614,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 380,
+        "cluster": 95,
+        "treatment": 1,
+        "x": 0.11695526942994706,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 381,
+        "cluster": 95,
+        "treatment": 1,
+        "x": 1.518749034018734,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 382,
+        "cluster": 95,
+        "treatment": 1,
+        "x": -0.001518439708736793,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 383,
+        "cluster": 95,
+        "treatment": 1,
+        "x": 0.9902473119680668,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 384,
+        "cluster": 96,
+        "treatment": 0,
+        "x": -0.9031178593142654,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 385,
+        "cluster": 96,
+        "treatment": 0,
+        "x": -0.18487884946202174,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 386,
+        "cluster": 96,
+        "treatment": 0,
+        "x": -0.09670445376181883,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 387,
+        "cluster": 96,
+        "treatment": 0,
+        "x": 1.1391079474852248,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 388,
+        "cluster": 97,
+        "treatment": 1,
+        "x": 0.5796130395204568,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 389,
+        "cluster": 97,
+        "treatment": 1,
+        "x": -0.7517531312935694,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 390,
+        "cluster": 97,
+        "treatment": 1,
+        "x": 0.6819677636799354,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 391,
+        "cluster": 97,
+        "treatment": 1,
+        "x": 0.7706312764276145,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 392,
+        "cluster": 98,
+        "treatment": 0,
+        "x": -0.11164572231944679,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 3
+      },
+      {
+        "unit_id": 393,
+        "cluster": 98,
+        "treatment": 0,
+        "x": -0.25766231503180886,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "unit_id": 394,
+        "cluster": 98,
+        "treatment": 0,
+        "x": -0.19380324542255564,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 2
+      },
+      {
+        "unit_id": 395,
+        "cluster": 98,
+        "treatment": 0,
+        "x": -1.6949924059888835,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 396,
+        "cluster": 99,
+        "treatment": 1,
+        "x": 0.18874300812461753,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "unit_id": 397,
+        "cluster": 99,
+        "treatment": 1,
+        "x": 0.23457792922728007,
+        "outcome": 1,
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "unit_id": 398,
+        "cluster": 99,
+        "treatment": 1,
+        "x": -0.8655285237589894,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 3
+      },
+      {
+        "unit_id": 399,
+        "cluster": 99,
+        "treatment": 1,
+        "x": 0.7424462498750674,
+        "outcome": 0,
+        "numerator": 0,
+        "denominator": 1
+      }
+    ],
+    "metric_contract": {
+      "name": "conversion",
+      "numerator": "converted_users",
+      "denominator": "users",
+      "aggregation": "ratio_of_sums",
+      "unit": "rate",
+      "analysis_unit": "user",
+      "target_population": "eligible_users",
+      "timezone": "UTC",
+      "window": [
+        0,
+        9
+      ],
+      "maturity_days": 2,
+      "deduplication": "unit_id"
+    },
+    "assignment_ref": "fixed randomization",
+    "randomized": true,
+    "observed_through": 11,
+    "no_interference_ref": "independent groups",
+    "cluster_column": "cluster"
+  }
+}

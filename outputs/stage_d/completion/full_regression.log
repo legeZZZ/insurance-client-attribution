@@ -1,0 +1,8 @@
+.........................................................../Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/src/goai_control_tower/experiment_integrity.py:42: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x11790ea70>
+  available = set().union(*(row.keys() for row in rows)) if rows else set()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+...........................................................................................................................................................
+----------------------------------------------------------------------
+Ran 214 tests in 59.413s
+
+OK

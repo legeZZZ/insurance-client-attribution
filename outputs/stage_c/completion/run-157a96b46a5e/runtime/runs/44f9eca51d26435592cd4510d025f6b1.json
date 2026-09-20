@@ -1,0 +1,908 @@
+{
+  "schema_version": "orchestration/1",
+  "input_digest": "sha256:24b9f2aa03fb71c8527dc3a6c32eca53f96b9fd5aaba96466a31c183ee92fe83",
+  "execution_status": "COMPLETED",
+  "records": [
+    {
+      "stage": "L0",
+      "previous_ref": "sha256:24b9f2aa03fb71c8527dc3a6c32eca53f96b9fd5aaba96466a31c183ee92fe83",
+      "input_digest": "sha256:b50e3bb0ecd6c86fc8681efac87ad8bc3b8102d3defc8aaba09a57a555b2c4a0",
+      "output": {
+        "baseline": null,
+        "claim_type": "DESCRIPTIVE_FACT",
+        "metric_contract": {
+          "name": "conversion",
+          "numerator": "converted",
+          "denominator": "users",
+          "aggregation": "ratio_of_sums",
+          "unit": "rate",
+          "analysis_unit": "user",
+          "target_population": "eligible_users",
+          "timezone": "UTC",
+          "window": [
+            0,
+            9
+          ],
+          "maturity_days": 2,
+          "deduplication": "unit_id",
+          "schema_version": "1.0",
+          "contract_type": "MetricContract",
+          "digest": "sha256:a7990ff79959ccf465e0a8e46b2c74d47345ace7fe444d09aced898d5fa38047"
+        },
+        "input_digest": "sha256:24b9f2aa03fb71c8527dc3a6c32eca53f96b9fd5aaba96466a31c183ee92fe83"
+      },
+      "pid": 24137,
+      "digest": "sha256:56dd364520f828dcd23e5052985cb52e3085c8590d3e045ea773c5ac35b4daac"
+    },
+    {
+      "stage": "L1",
+      "previous_ref": "sha256:56dd364520f828dcd23e5052985cb52e3085c8590d3e045ea773c5ac35b4daac",
+      "input_digest": "sha256:fd424acf4656f417172a70b0e4b046b5ba0b23f637deba8c494b839c28368741",
+      "output": {
+        "status": "SKIPPED",
+        "reason": "preregistered_design_direct_path",
+        "causal_eligible": false
+      },
+      "pid": 24138,
+      "digest": "sha256:5286ae04ead1146c4897d5e6a32533c94bc7bb83cf085eac4beee5f96cfabe3b"
+    },
+    {
+      "stage": "identification",
+      "previous_ref": "sha256:5286ae04ead1146c4897d5e6a32533c94bc7bb83cf085eac4beee5f96cfabe3b",
+      "input_digest": "sha256:24b9f2aa03fb71c8527dc3a6c32eca53f96b9fd5aaba96466a31c183ee92fe83",
+      "output": {
+        "identification": {
+          "treatment": "assignment",
+          "outcome": "conversion",
+          "design": "RCT",
+          "status": "IDENTIFIED",
+          "assumptions": [
+            {
+              "name": "data_valid",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "outcome_mature",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "support_overlap",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "assignment_traceable",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "fixture:random_assignment"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "srm_pass",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "assignment_consistent",
+              "status": "supported",
+              "passed": true,
+              "evidence_refs": [
+                "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+              ],
+              "data_verifiable": true
+            },
+            {
+              "name": "interference_absent",
+              "status": "assumed",
+              "passed": true,
+              "evidence_refs": [
+                "fixture:independent_users"
+              ],
+              "data_verifiable": false
+            }
+          ],
+          "evidence_refs": [
+            "fixture:independent_users",
+            "fixture:random_assignment",
+            "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+          ],
+          "adjustment_set": [],
+          "forbidden_adjustments": [
+            "assignment",
+            "conversion"
+          ],
+          "rejected_adjustments": [],
+          "support": {
+            "target_population": "eligible_users",
+            "data_digest": "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9",
+            "overlap_check": {
+              "status": "supported",
+              "evidence_refs": [
+                "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+              ]
+            }
+          },
+          "ambiguities": [],
+          "reason_codes": [],
+          "route": "A",
+          "effect_scope": "individual",
+          "causal_effect_allowed": true,
+          "supplemental_evidence_needed": [],
+          "graph_ref": null,
+          "dag_digest": null,
+          "schema_version": "1.0",
+          "contract_type": "IdentificationReport",
+          "digest": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210"
+        }
+      },
+      "pid": 24139,
+      "digest": "sha256:dc3dd15ac2686171a52b8fc98abec204a1a2a43098d3a8fdfb9aefa7372efc25"
+    },
+    {
+      "stage": "L3",
+      "previous_ref": "sha256:dc3dd15ac2686171a52b8fc98abec204a1a2a43098d3a8fdfb9aefa7372efc25",
+      "input_digest": "sha256:d2a8ae5d07d7b5408ed6c1f3db93629638c535d88e8baa30c579108759851b86",
+      "output": {
+        "result": {
+          "track": "A",
+          "status": "ESTIMATED",
+          "contracts": {
+            "MetricContract": {
+              "name": "conversion",
+              "numerator": "converted",
+              "denominator": "users",
+              "aggregation": "ratio_of_sums",
+              "unit": "rate",
+              "analysis_unit": "user",
+              "target_population": "eligible_users",
+              "timezone": "UTC",
+              "window": [
+                0,
+                9
+              ],
+              "maturity_days": 2,
+              "deduplication": "unit_id",
+              "schema_version": "1.0",
+              "contract_type": "MetricContract",
+              "digest": "sha256:a7990ff79959ccf465e0a8e46b2c74d47345ace7fe444d09aced898d5fa38047"
+            },
+            "IdentificationReport": {
+              "treatment": "assignment",
+              "outcome": "conversion",
+              "design": "RCT",
+              "status": "IDENTIFIED",
+              "assumptions": [
+                {
+                  "name": "data_valid",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "outcome_mature",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "support_overlap",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "assignment_traceable",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "fixture:random_assignment"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "srm_pass",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "assignment_consistent",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "interference_absent",
+                  "status": "assumed",
+                  "passed": true,
+                  "evidence_refs": [
+                    "fixture:independent_users"
+                  ],
+                  "data_verifiable": false
+                }
+              ],
+              "evidence_refs": [
+                "fixture:independent_users",
+                "fixture:random_assignment",
+                "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+              ],
+              "adjustment_set": [],
+              "forbidden_adjustments": [
+                "assignment",
+                "conversion"
+              ],
+              "rejected_adjustments": [],
+              "support": {
+                "target_population": "eligible_users",
+                "data_digest": "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9",
+                "overlap_check": {
+                  "status": "supported",
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ]
+                }
+              },
+              "ambiguities": [],
+              "reason_codes": [],
+              "route": "A",
+              "effect_scope": "individual",
+              "causal_effect_allowed": true,
+              "supplemental_evidence_needed": [],
+              "graph_ref": null,
+              "dag_digest": null,
+              "schema_version": "1.0",
+              "contract_type": "IdentificationReport",
+              "digest": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210"
+            },
+            "EffectEstimate": {
+              "estimand": "ITT",
+              "unit": "rate",
+              "estimate": 0.5,
+              "interval": [
+                0.3892477119442753,
+                0.6107522880557247
+              ],
+              "interval_method": "cluster_influence_t_approximation",
+              "selection_status": "pre_registered",
+              "target_population": "eligible_users",
+              "window": [
+                0,
+                9
+              ],
+              "diagnostics": {
+                "srm_pvalue": 1.0,
+                "srm_alpha": 0.001,
+                "randomization_groups": 160,
+                "treated_groups": 80,
+                "control_groups": 80,
+                "data_digest": "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9",
+                "variance_unit": "unit_id",
+                "interval_scope": "pointwise; not adjusted for adaptive subgroup selection",
+                "standard_error": 0.05607721540920443,
+                "degrees_of_freedom": 159,
+                "variance_method": "cluster_sum_influence_function"
+              },
+              "identification_ref": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210",
+              "method": "ITT",
+              "schema_version": "1.0",
+              "contract_type": "EffectEstimate",
+              "digest": "sha256:daf83c5f467584a7ec956ba2cf91a7a4764209bd562fee9137c28394cdfc4e9f"
+            }
+          }
+        },
+        "publication": {
+          "schema_version": "publication/1",
+          "execution_status": "COMPLETED",
+          "claim_type": "RANDOMIZED_EFFECT",
+          "interpretation": "PRACTICAL_EFFECT",
+          "statement": "随机实验估计conversion的ITT为0.5，区间超过预设实质阈值。",
+          "identification": {
+            "design": "RCT",
+            "estimand": "ITT",
+            "status": "IDENTIFIED",
+            "assumptions": [
+              {
+                "name": "data_valid",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "outcome_mature",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "support_overlap",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "assignment_traceable",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "fixture:random_assignment"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "srm_pass",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "assignment_consistent",
+                "status": "supported",
+                "passed": true,
+                "evidence_refs": [
+                  "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                ],
+                "data_verifiable": true
+              },
+              {
+                "name": "interference_absent",
+                "status": "assumed",
+                "passed": true,
+                "evidence_refs": [
+                  "fixture:independent_users"
+                ],
+                "data_verifiable": false
+              }
+            ],
+            "ref": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210"
+          },
+          "statistical_uncertainty": {
+            "effect": 0.5,
+            "interval": [
+              0.3892477119442753,
+              0.6107522880557247
+            ],
+            "interval_method": "cluster_influence_t_approximation",
+            "selection_status": "pre_registered",
+            "pvalue": null,
+            "qvalue": null,
+            "posterior_probability": null,
+            "effect_ref": "sha256:daf83c5f467584a7ec956ba2cf91a7a4764209bd562fee9137c28394cdfc4e9f"
+          },
+          "action_policy": {
+            "action": "REVIEW_POLICY",
+            "practical_threshold": 0.0,
+            "requires_approval_before_activation": true
+          },
+          "reason_codes": [],
+          "remedies": [],
+          "contracts": {
+            "MetricContract": {
+              "name": "conversion",
+              "numerator": "converted",
+              "denominator": "users",
+              "aggregation": "ratio_of_sums",
+              "unit": "rate",
+              "analysis_unit": "user",
+              "target_population": "eligible_users",
+              "timezone": "UTC",
+              "window": [
+                0,
+                9
+              ],
+              "maturity_days": 2,
+              "deduplication": "unit_id",
+              "schema_version": "1.0",
+              "contract_type": "MetricContract",
+              "digest": "sha256:a7990ff79959ccf465e0a8e46b2c74d47345ace7fe444d09aced898d5fa38047"
+            },
+            "IdentificationReport": {
+              "treatment": "assignment",
+              "outcome": "conversion",
+              "design": "RCT",
+              "status": "IDENTIFIED",
+              "assumptions": [
+                {
+                  "name": "data_valid",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "outcome_mature",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "support_overlap",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "assignment_traceable",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "fixture:random_assignment"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "srm_pass",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "assignment_consistent",
+                  "status": "supported",
+                  "passed": true,
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ],
+                  "data_verifiable": true
+                },
+                {
+                  "name": "interference_absent",
+                  "status": "assumed",
+                  "passed": true,
+                  "evidence_refs": [
+                    "fixture:independent_users"
+                  ],
+                  "data_verifiable": false
+                }
+              ],
+              "evidence_refs": [
+                "fixture:independent_users",
+                "fixture:random_assignment",
+                "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+              ],
+              "adjustment_set": [],
+              "forbidden_adjustments": [
+                "assignment",
+                "conversion"
+              ],
+              "rejected_adjustments": [],
+              "support": {
+                "target_population": "eligible_users",
+                "data_digest": "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9",
+                "overlap_check": {
+                  "status": "supported",
+                  "evidence_refs": [
+                    "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+                  ]
+                }
+              },
+              "ambiguities": [],
+              "reason_codes": [],
+              "route": "A",
+              "effect_scope": "individual",
+              "causal_effect_allowed": true,
+              "supplemental_evidence_needed": [],
+              "graph_ref": null,
+              "dag_digest": null,
+              "schema_version": "1.0",
+              "contract_type": "IdentificationReport",
+              "digest": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210"
+            },
+            "EffectEstimate": {
+              "estimand": "ITT",
+              "unit": "rate",
+              "estimate": 0.5,
+              "interval": [
+                0.3892477119442753,
+                0.6107522880557247
+              ],
+              "interval_method": "cluster_influence_t_approximation",
+              "selection_status": "pre_registered",
+              "target_population": "eligible_users",
+              "window": [
+                0,
+                9
+              ],
+              "diagnostics": {
+                "srm_pvalue": 1.0,
+                "srm_alpha": 0.001,
+                "randomization_groups": 160,
+                "treated_groups": 80,
+                "control_groups": 80,
+                "data_digest": "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9",
+                "variance_unit": "unit_id",
+                "interval_scope": "pointwise; not adjusted for adaptive subgroup selection",
+                "standard_error": 0.05607721540920443,
+                "degrees_of_freedom": 159,
+                "variance_method": "cluster_sum_influence_function"
+              },
+              "identification_ref": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210",
+              "method": "ITT",
+              "schema_version": "1.0",
+              "contract_type": "EffectEstimate",
+              "digest": "sha256:daf83c5f467584a7ec956ba2cf91a7a4764209bd562fee9137c28394cdfc4e9f"
+            }
+          },
+          "publication_options": {
+            "practical_threshold": 0.0,
+            "component_design": null,
+            "action_policy": null
+          },
+          "digest": "sha256:3c3ef3a692a3f23d29cb162d63f77598186eb59bb3ebefe7256a9dbfa8c3c8d8"
+        }
+      },
+      "pid": 24140,
+      "digest": "sha256:a4eb0b903ec6d108d3989b22de97542b8772dbe6f0a8bd4eff124882df3b3190"
+    }
+  ],
+  "cost_ledger": [
+    {
+      "stages": [
+        "L0"
+      ],
+      "input_bytes": 560,
+      "output_bytes": 934,
+      "elapsed_seconds": 0.038700832999893464,
+      "pid": 24137
+    },
+    {
+      "stages": [
+        "L1"
+      ],
+      "input_bytes": 182,
+      "output_bytes": 449,
+      "elapsed_seconds": 0.03611041700060014,
+      "pid": 24138
+    },
+    {
+      "stages": [
+        "identification"
+      ],
+      "input_bytes": 8216,
+      "output_bytes": 2591,
+      "elapsed_seconds": 2.125082459002442,
+      "pid": 24139
+    },
+    {
+      "stages": [
+        "L3"
+      ],
+      "input_bytes": 10454,
+      "output_bytes": 10053,
+      "elapsed_seconds": 2.122102333996736,
+      "pid": 24140
+    }
+  ],
+  "baseline_bytes": 10000000,
+  "cost_unit": "serialized_io_bytes_not_model_tokens",
+  "model_tokens": 0,
+  "worker_execution": "deterministic_processes_without_model_calls",
+  "fallback": false,
+  "publication": {
+    "schema_version": "publication/1",
+    "execution_status": "COMPLETED",
+    "claim_type": "RANDOMIZED_EFFECT",
+    "interpretation": "PRACTICAL_EFFECT",
+    "statement": "随机实验估计conversion的ITT为0.5，区间超过预设实质阈值。",
+    "identification": {
+      "design": "RCT",
+      "estimand": "ITT",
+      "status": "IDENTIFIED",
+      "assumptions": [
+        {
+          "name": "data_valid",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "outcome_mature",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "support_overlap",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "assignment_traceable",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "fixture:random_assignment"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "srm_pass",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "assignment_consistent",
+          "status": "supported",
+          "passed": true,
+          "evidence_refs": [
+            "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+          ],
+          "data_verifiable": true
+        },
+        {
+          "name": "interference_absent",
+          "status": "assumed",
+          "passed": true,
+          "evidence_refs": [
+            "fixture:independent_users"
+          ],
+          "data_verifiable": false
+        }
+      ],
+      "ref": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210"
+    },
+    "statistical_uncertainty": {
+      "effect": 0.5,
+      "interval": [
+        0.3892477119442753,
+        0.6107522880557247
+      ],
+      "interval_method": "cluster_influence_t_approximation",
+      "selection_status": "pre_registered",
+      "pvalue": null,
+      "qvalue": null,
+      "posterior_probability": null,
+      "effect_ref": "sha256:daf83c5f467584a7ec956ba2cf91a7a4764209bd562fee9137c28394cdfc4e9f"
+    },
+    "action_policy": {
+      "action": "REVIEW_POLICY",
+      "practical_threshold": 0.0,
+      "requires_approval_before_activation": true
+    },
+    "reason_codes": [],
+    "remedies": [],
+    "contracts": {
+      "MetricContract": {
+        "name": "conversion",
+        "numerator": "converted",
+        "denominator": "users",
+        "aggregation": "ratio_of_sums",
+        "unit": "rate",
+        "analysis_unit": "user",
+        "target_population": "eligible_users",
+        "timezone": "UTC",
+        "window": [
+          0,
+          9
+        ],
+        "maturity_days": 2,
+        "deduplication": "unit_id",
+        "schema_version": "1.0",
+        "contract_type": "MetricContract",
+        "digest": "sha256:a7990ff79959ccf465e0a8e46b2c74d47345ace7fe444d09aced898d5fa38047"
+      },
+      "IdentificationReport": {
+        "treatment": "assignment",
+        "outcome": "conversion",
+        "design": "RCT",
+        "status": "IDENTIFIED",
+        "assumptions": [
+          {
+            "name": "data_valid",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "outcome_mature",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "support_overlap",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "assignment_traceable",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "fixture:random_assignment"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "srm_pass",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "assignment_consistent",
+            "status": "supported",
+            "passed": true,
+            "evidence_refs": [
+              "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+            ],
+            "data_verifiable": true
+          },
+          {
+            "name": "interference_absent",
+            "status": "assumed",
+            "passed": true,
+            "evidence_refs": [
+              "fixture:independent_users"
+            ],
+            "data_verifiable": false
+          }
+        ],
+        "evidence_refs": [
+          "fixture:independent_users",
+          "fixture:random_assignment",
+          "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+        ],
+        "adjustment_set": [],
+        "forbidden_adjustments": [
+          "assignment",
+          "conversion"
+        ],
+        "rejected_adjustments": [],
+        "support": {
+          "target_population": "eligible_users",
+          "data_digest": "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9",
+          "overlap_check": {
+            "status": "supported",
+            "evidence_refs": [
+              "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9"
+            ]
+          }
+        },
+        "ambiguities": [],
+        "reason_codes": [],
+        "route": "A",
+        "effect_scope": "individual",
+        "causal_effect_allowed": true,
+        "supplemental_evidence_needed": [],
+        "graph_ref": null,
+        "dag_digest": null,
+        "schema_version": "1.0",
+        "contract_type": "IdentificationReport",
+        "digest": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210"
+      },
+      "EffectEstimate": {
+        "estimand": "ITT",
+        "unit": "rate",
+        "estimate": 0.5,
+        "interval": [
+          0.3892477119442753,
+          0.6107522880557247
+        ],
+        "interval_method": "cluster_influence_t_approximation",
+        "selection_status": "pre_registered",
+        "target_population": "eligible_users",
+        "window": [
+          0,
+          9
+        ],
+        "diagnostics": {
+          "srm_pvalue": 1.0,
+          "srm_alpha": 0.001,
+          "randomization_groups": 160,
+          "treated_groups": 80,
+          "control_groups": 80,
+          "data_digest": "sha256:44b4bb755e7f8013cac5b950aa3ea6e38a668a75dcf17d8fed8db7eb3101fac9",
+          "variance_unit": "unit_id",
+          "interval_scope": "pointwise; not adjusted for adaptive subgroup selection",
+          "standard_error": 0.05607721540920443,
+          "degrees_of_freedom": 159,
+          "variance_method": "cluster_sum_influence_function"
+        },
+        "identification_ref": "sha256:ed69922ae3026d151e2dd8e93572e908ee8ad7d1d7cfefa61fc0d0dec8bd4210",
+        "method": "ITT",
+        "schema_version": "1.0",
+        "contract_type": "EffectEstimate",
+        "digest": "sha256:daf83c5f467584a7ec956ba2cf91a7a4764209bd562fee9137c28394cdfc4e9f"
+      }
+    },
+    "publication_options": {
+      "practical_threshold": 0.0,
+      "component_design": null,
+      "action_policy": null
+    },
+    "digest": "sha256:3c3ef3a692a3f23d29cb162d63f77598186eb59bb3ebefe7256a9dbfa8c3c8d8"
+  },
+  "reason_codes": [],
+  "total_io_bytes": 33439,
+  "digest": "sha256:11fcebbd41256bb36ac35d303eafec1bddd3bf19109990c0a4f79947dea668ea",
+  "data_ref": "sha256:71e4beadcbabdf6c8341c7c7504d807f86ac2f27e9374f00ea6da1fa293875ff",
+  "publication_ref": "sha256:5a8cea8ea90525de308bcdb31e9d24c9fd8b888c5f17774e9da375ac0242e116",
+  "publication_status": "VALID",
+  "registry_path": "/Users/chen/Desktop/赛道二-决赛交付包-v13/可执行代码包/outputs/stage_c/completion/run-157a96b46a5e/runtime/hypotheses.sqlite3",
+  "run_id": "44f9eca51d26435592cd4510d025f6b1"
+}
