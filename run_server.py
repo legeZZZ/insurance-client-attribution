@@ -375,6 +375,29 @@ class Handler(BaseHTTPRequestHandler):
         self.send_error(404)
 
 
+def _auto_seed_console(runtime: Path) -> None:
+    """Seed the v2 console workspace on first boot.
+
+    Hosts with ephemeral filesystems (e.g. Render) wipe runtime_data on every
+    deploy, so the demo workspace must be rebuilt at startup. Seeding runs the
+    real track2_v5 pipeline and only needs numpy; failures are non-fatal —
+    the console page then falls back to its bundled replay data.
+    """
+    if (runtime / "console_v2" / "watchlist.json").is_file():
+        return
+    import subprocess
+
+    try:
+        subprocess.run(
+            [sys.executable, str(PROJECT / "tools" / "seed_console_v2.py")],
+            check=True,
+            timeout=300,
+        )
+        print("console_v2 workspace auto-seeded", flush=True)
+    except Exception as exc:  # noqa: BLE001 - best-effort seed, never block boot
+        print(f"console_v2 auto-seed skipped: {exc}", flush=True)
+
+
 def main() -> None:
     global COMPANY_LABEL, RUNTIME
     parser = argparse.ArgumentParser(description="Run the GOAI attribution console")
@@ -390,6 +413,7 @@ def main() -> None:
     args = parser.parse_args()
     config = load_config(args.config)
     RUNTIME = Path(args.runtime or config["runtime"]["output_dir"]).expanduser()
+    _auto_seed_console(RUNTIME)
     if args.data_config:
         from track2_v5.adapters import load_config as load_data_config
 

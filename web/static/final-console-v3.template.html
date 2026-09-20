@@ -287,7 +287,9 @@ async function fetchAll(){
   const res = await Promise.all(ENDPOINTS.map(e=>fetch('/api/v2/'+e,{cache:'no-store'}).then(r=>r.json())));
   const out = {}; keys.forEach((k,i)=>out[k]=res[i]);
   out.bline_candidates = [];
-  try{ const r = await fetch('/api/track2/scenario-run?scenario=line_b',{cache:'no-store'}); const j = await r.json();
+  try{ const ac = new AbortController(); const tm = setTimeout(()=>ac.abort(), 15000);
+       const r = await fetch('/api/track2/scenario-run?scenario=line_b',{cache:'no-store', signal:ac.signal});
+       clearTimeout(tm); const j = await r.json();
        const cands = (((j||{}).key_outputs||{}).association_discovery||{}).candidates || [];
        out.bline_candidates = cands.slice().sort((a,b)=>Math.abs(b.alignment_score||b.association_score||0)-Math.abs(a.alignment_score||a.association_score||0)).slice(0,40)
          .map(c=>({factor_id:c.factor_id, derived_feature_id:c.derived_feature_id||c.factor_id+(c.start_day!=null?'@'+c.start_day:''), derived_layer:c.derived_layer, kind:c.kind==='internal_event'||c.kind==='release_audit'?'internal':'external', claim_type:c.claim_type||'TEMPORAL_ASSOCIATION', association_score:c.alignment_score||c.association_score||0, lag_days:c.distance_days, license_ref:c.license_ref})); }catch(e){}
