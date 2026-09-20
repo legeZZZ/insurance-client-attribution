@@ -10,6 +10,8 @@ outputs/*.png
 *.pptx
 .venv/
 outputs/
-runtime_data/
+# runtime_data/ 不打入 .dockerignore：演示数据需随镜像发布（云端 scipy 缺失时自动 seed 会跳过）
+runtime_data/**/*.db-wal
+runtime_data/**/*.db-shm
 .ruff_cache/
 .local-runtime/
