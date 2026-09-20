@@ -819,14 +819,7 @@ function renderAlerts(){
     <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px">预警两类来源：<b>趋势预警</b>（盯防信号关联强度越阈值：≥55% 高风险 / ≥30% 关注）与 <b>冲突预警</b>（当前配置违背已验证归因结论）。同一信号 24h 冷却不重复刷屏。反馈与标注<b>不自动晋升任何统计结论</b>。</div>
     <div class="filter-bar">${chips.map(c=>`<span class="chip ${ALERT_FILTER===c[0]?'on':''}" onclick="ALERT_FILTER='${c[0]}';renderAlerts()">${c[1]}</span>`).join('')}</div>
   </div>
-  <div id="alert-list">${list.map(renderAlertCard).join('')||'<div class="card" style="color:var(--muted)">该分类下暂无预警</div>'}</div>
-  <div class="card"><h3>盯防区（未到预警阈值，值得瞄一眼）</h3>
-    ${D.wl.filter(w=>Math.abs(w.correlation)<0.3 && w.claim_type!=='FACTOR_CANDIDATE').map(w=>`
-      <div style="display:flex;gap:12px;font-size:12.5px;padding:7px 0;border-bottom:1px dashed var(--line)">
-        <b style="min-width:220px">${esc(w.factor_id)} · lag ${w.lag}</b>
-        <span class="mono" style="color:var(--muted)">相关 ${pct(w.correlation)} · 距关注阈值还差 ${Math.max(0,Math.round((0.3-Math.abs(w.correlation))*100))} pct</span>
-      </div>`).join('')||'<div style="color:var(--muted);font-size:12.5px">无</div>'}
-  </div>`;
+  <div id="alert-list">${list.map(renderAlertCard).join('')||'<div class="card" style="color:var(--muted)">该分类下暂无预警</div>'}</div>`;
   list.forEach(a=>{ if(a.trend) drawSpark('spark-'+a.alert_id, a.trend); });
 }
 
