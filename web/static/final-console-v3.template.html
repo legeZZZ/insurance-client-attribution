@@ -494,7 +494,7 @@ function renderNetwork(){
     <div class="cc-kpis">${kpis.map(k=>`<div class="kpi-card ${k.cls}"><div class="v">${k.v}</div><div class="l">${k.l}</div></div>`).join('')}</div>
     <div class="cc-metrics" id="cc-metrics"></div>
     <div class="cc-main">
-      <div class="cc-panel cc-network"><h3>证据关系图 · 青色环=异动指标 · 边：绿粗=因果已确认 / 青实=关联已验证 / 蓝实=A/B 验证中 / 金虚=算法可疑待确认 / 紫虚=外部时间关联 · 线框小节点=导数派生值（增速/加速度）· 点因子可跳转</h3>
+      <div class="cc-panel cc-network"><h3>证据关系图 · 青色环=异动指标 · 边：绿粗=因果已确认 / 青实=关联已验证 / 蓝实=A/B 验证中 / 金虚=算法可疑待确认 / 紫虚=外部时间关联 · 标签数字=置信度 · 金环✦=人为确认过 · 绿环=历史验证通过 · 线框小节点=导数派生值 · 点因子可跳转</h3>
         <div id="globe-stage"></div><div id="globe-tooltip"></div>
       </div>
       <div class="cc-panel"><h3>待复核清单</h3><div class="sig-list" id="sig-list"></div></div>
@@ -566,6 +566,9 @@ function globeData(){
   const metrics = (D.metrics && D.metrics.length ? D.metrics
     : [{id:'residual', name:'残余异动（未解释成分）', factors:[]}]);
   const alertFids = new Set(D.alerts.filter(a=>a.level==='high'&&a.state.status==='open').map(a=>a.factor_id));
+  /* 人为确认过的因子：治理留痕（服务端反馈 + 本地台账） */
+  const humanOk = new Set((D.recent||[]).map(e=>(e.payload||{}).factor_id).filter(Boolean));
+  ledger().filter(e=>['feedback','experiment_request','investigation_supplement'].includes(e.type)).forEach(e=>{ const f=(e.payload&&e.payload.factor_id)||e.factor_id; if(f) humanOk.add(f); });
   const nodes=[], edges=[], fseen=new Set();
   metrics.forEach((m,i)=> nodes.push({id:'metric:'+m.id, label:m.name, kind:'metric', mi:i}));
   metrics.forEach(m=> (m.factors||[]).forEach(l=>{
@@ -576,7 +579,7 @@ function globeData(){
     if(!fseen.has(l.factor_id+(l.layer||''))){ fseen.add(l.factor_id+(l.layer||''));
       const card = D.cards.find(c=>c.fid===l.factor_id);
       nodes.push({id:l.factor_id, label:zhName(l.factor_id)+(derived?'·'+ZH_LAYER[l.layer]:''),
-        fid:l.factor_id,
+        fid:l.factor_id, conf:l.strength, human:humanOk.has(l.factor_id),
         kind: alertFids.has(l.factor_id)?'alerted':(l.claim==='CAUSAL_CONFIRMED'||l.claim==='FACTOR_CANDIDATE'?'verified':((card&&card.route)||'internal')),
         derived: !!derived, strength:l.strength, lag:l.lag, claim:l.claim, idx:nodes.length});
     }
@@ -643,16 +646,23 @@ function initGlobe3D(stage, nodes, edges){
       const hit = new THREE.Mesh(new THREE.SphereGeometry(.22,8,8), new THREE.MeshBasicMaterial({visible:false}));
       hit.position.copy(pos); scene.add(hit); hit.userData.node=n;
       const pack = {m, hit, base:size, n};
-      if(n.kind==='alerted'||n.kind==='verified'){
+      if(n.kind==='alerted'||n.kind==='verified'||n.human){
         const ring = new THREE.Mesh(new THREE.TorusGeometry(size+.06,.012,8,32),
-          new THREE.MeshBasicMaterial({color:n.kind==='alerted'?0xff7772:0x73ff9f, transparent:true, opacity:.85}));
+          new THREE.MeshBasicMaterial({color:n.human?0xffb765:(n.kind==='alerted'?0xff7772:0x73ff9f), transparent:true, opacity:.85}));
         ring.position.copy(pos); scene.add(ring); pack.ring=ring;
+      }
+      if(n.human){
+        const ring2 = new THREE.Mesh(new THREE.TorusGeometry(size+.11,.008,8,32),
+          new THREE.MeshBasicMaterial({color:0xffb765, transparent:true, opacity:.5}));
+        ring2.position.copy(pos); scene.add(ring2);
       }
       meshes[n.id]=pack;
     }
     const div = document.createElement('div'); div.className='net-label';
     if(n.kind==='metric'){ div.style.color='#57e4d0'; div.style.fontWeight='700'; }
-    div.textContent=n.label; stage.parentElement.appendChild(div); labels.push({div, pack:meshes[n.id]});
+    if(n.human) div.style.color='#ffb765';
+    div.textContent=n.label+(n.kind!=='metric'&&n.conf!=null?' · '+Math.round(Math.abs(n.conf)*100)+'%':'')+(n.human?' ✦':'');
+    stage.parentElement.appendChild(div); labels.push({div, pack:meshes[n.id]});
   });
   /* 边：因子 ↔ 异动指标；线型 = 关联等级，粗细/透明度 = 关联强度 */
   const edgeObjs = [];
@@ -688,8 +698,9 @@ function initGlobe3D(stage, nodes, edges){
       tip.innerHTML = '<b>'+esc(n.label)+'</b>'
         +(n.kind==='metric'?'异动指标 · 点击左侧指标卡可聚焦'
           :esc(CLAIM_ZH[n.claim]||'候选')+(n.derived?' · 导数派生值':' · 因子本体')
+          +(n.human?'<br><span style="color:#ffb765">✦ 人为确认 / 干预过（治理留痕）</span>':'')
           +(n.kind==='alerted'?'<br><span style="color:#ff7772">⚠ 高风险预警中</span>':''))
-        +(n.strength!=null?'<br>与异动指标关联强度：'+pct(n.strength):'')+(n.lag!=null?' · lag '+n.lag:'')
+        +(n.strength!=null?'<br>置信度（关联强度）：'+pct(n.strength):'')+(n.lag!=null?' · lag '+n.lag:'')
         +(n.kind==='metric'?'':n.claim==='WATCHLIST'?'<br><span style="color:var(--cc-cyan)">点击去待办看板确认</span>':n.kind!=='unknown'?'<br><span style="color:var(--cc-cyan)">点击跳转因子库</span>':'');
       stage.style.cursor='pointer';
     } else { tip.style.display='none'; stage.style.cursor='grab'; }
@@ -783,7 +794,7 @@ function initGlobe2D(stage, nodes, edges){
         if(p.n.derived){ ctx.strokeStyle = CSS_COLOR[p.n.kind]||'#5da7ff'; ctx.beginPath(); ctx.arc(p.sx,p.sy,rr,0,7); ctx.stroke(); }
         else { ctx.fillStyle = CSS_COLOR[p.n.kind]||'#5da7ff'; ctx.beginPath(); ctx.arc(p.sx,p.sy,rr,0,7); ctx.fill(); }
         if(p.n.kind==='alerted'||p.n.kind==='verified'){ ctx.strokeStyle=CSS_COLOR[p.n.kind]; ctx.beginPath(); ctx.arc(p.sx,p.sy,rr+4,0,7); ctx.stroke(); } }
-      if(p.depth>0){ ctx.fillStyle=p.n.kind==='metric'?'#57e4d0':'#86a9b3'; ctx.font=(p.n.kind==='metric'?'bold ':'')+'10px Menlo'; ctx.textAlign='center'; ctx.fillText(p.n.label, p.sx, p.sy-r-6); }
+      if(p.depth>0){ ctx.fillStyle=p.n.human?'#ffb765':(p.n.kind==='metric'?'#57e4d0':'#86a9b3'); ctx.font=(p.n.kind==='metric'?'bold ':'')+'10px Menlo'; ctx.textAlign='center'; ctx.fillText(p.n.label+(p.n.kind!=='metric'&&p.n.conf!=null?' '+Math.round(Math.abs(p.n.conf)*100)+'%':'')+(p.n.human?' ✦':''), p.sx, p.sy-r-6); }
       ctx.globalAlpha=1;
     });
   })();

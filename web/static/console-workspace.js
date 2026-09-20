@@ -136,26 +136,32 @@ function bizDrill(key){
   el.scrollIntoView({block:'start',behavior:'smooth'});
 }
 
-/* ---- 异动实验工作台：异动清单 → 切面策略 → 算法链路动画 → 因果球逐渐显现 ---- */
-let EXP = {anomaly:null, mode:'cycle', days:14, running:false, stage:-1, done:false, runId:0, logs:[]};
+/* ---- 异动实验工作台：异动清单 → 实验配置 → 算法链路动画 → 因果球逐渐显现 ---- */
+let EXP = {anomaly:null, mode:'cycle', range:30, direction:'down', lag:7, strict:'strict', includeExempt:false, running:false, stage:-1, done:false, runId:0, logs:[]};
 const EXP_STAGES = ['切面取样 · 固定实验对象','滞后对齐 · 统一时间轴','关联检验 · 逐因子扫描','搜索记账 · 校正门收紧','封存窗验证 · 独立确认'];
 
-/* 切面样本集：周期切面（每周一·近8周）或垂直切面（近N天），演示口径 */
+/* 切面样本集：周期切面（每周一）或垂直切面（逐日），范围 15/30/60 天，演示口径 */
 function expSlices(){
   const k = BIZ_KPIS.concat(BIZ_SLOTS).find(x=>x.key===EXP.anomaly)||{yoy:-6.8};
-  const jit = [-1.3, 2.1, -0.4, 3.2, -2.2, 0.8, -1.7, 1.4, -0.9, 2.6];
+  const jit = [-1.3, 2.1, -0.4, 3.2, -2.2, 0.8, -1.7, 1.4, -0.9, 2.6, 1.1, -2.8, 0.5];
   const out = [];
   if(EXP.mode==='cycle'){
-    const mondays = ['09-14','09-07','08-31','08-24','08-17','08-10','08-03','07-27'];
-    mondays.forEach((d,i)=> out.push({date:'2026-'+d, tag:'每周一 · 近8周', yoy:+(k.yoy+jit[i%jit.length]).toFixed(1)}));
+    const mondays = ['09-14','09-07','08-31','08-24','08-17','08-10','08-03','07-27','07-20','07-13'];
+    mondays.slice(0, Math.max(2, Math.round(EXP.range/7))).forEach((d,i)=> out.push({date:'2026-'+d, tag:`每周一 · 近${EXP.range}天`, yoy:+(k.yoy+jit[i%jit.length]).toFixed(1)}));
   } else {
-    const n = EXP.days;
+    const n = EXP.range;
     for(let i=0;i<n;i++){ const dt=new Date(2026,8,20-i); const mm=String(dt.getMonth()+1).padStart(2,'0'), dd=String(dt.getDate()).padStart(2,'0');
       out.push({date:`2026-${mm}-${dd}`, tag:`近${n}天 · 逐日`, yoy:+(k.yoy+jit[i%jit.length]*0.8).toFixed(1)}); }
   }
   return out;
 }
-function wsExpStart(key){ EXP={anomaly:key, mode:'cycle', days:14, running:false, stage:-1, done:false, runId:EXP.runId}; showView('lab'); renderExpWizard(); setTimeout(()=>{ const el=document.getElementById('exp-workbench'); if(el) el.scrollIntoView({block:'start',behavior:'smooth'}); },60); }
+/* 同形态判定：正向切面只数同向异动，双向切面涨跌都算 */
+function expIsAbnormal(s, k, rules){
+  if(EXP.direction==='both') return Math.abs(s.yoy)>=rules.yoy;
+  return k.yoy<0 ? s.yoy<=-rules.yoy : s.yoy>=rules.yoy;
+}
+function wsExpStart(key){ wsExpReset(key); showView('lab'); setTimeout(()=>{ const el=document.getElementById('exp-workbench'); if(el) el.scrollIntoView({block:'start',behavior:'smooth'}); },60); }
+function wsExpReset(key){ EXP={anomaly:key, mode:'cycle', range:30, direction:'down', lag:7, strict:'strict', includeExempt:false, running:false, stage:-1, done:false, runId:EXP.runId, logs:[]}; window._expReveal=null; renderExpWizard(); if(document.getElementById('globe-stage')) renderNetwork(); const r=document.getElementById('exp-result'); if(r) r.style.display='none'; renderExpPipeline(); }
 function renderExpWorkbench(){
   const host = document.getElementById('view-lab-exp'); if(!host) return;
   host.innerHTML = `
@@ -173,30 +179,35 @@ function renderExpWorkbench(){
 function renderExpWizard(){
   const el = document.getElementById('exp-wizard'); if(!el) return;
   const flagged = BIZ_KPIS.concat(BIZ_SLOTS).filter(k=>['alert','severe'].includes(bizStatus(k,bizRules())));
-  let body = `<p class="ws-muted" style="margin:8px 0 10px"><b>① 选择异动</b>（与总控今日异动清单同源，当前判定策略下共 ${flagged.length} 项）：</p>
-    <div class="filter-bar">${flagged.map(k=>`<span class="chip ${EXP.anomaly===k.key?'on':''}" style="cursor:pointer" onclick="wsExpPick('${k.key}')">${esc(k.name)} · ${fmtDelta(k.yoy)}</span>`).join('')||'<span class="ws-muted">无异动，<a style="color:var(--blue);cursor:pointer" onclick="wsExpPick(\'ctr\')">用演示异动：整体 CTR −6.8%</a></span>'}</div>`;
+  let body = `<p class="ws-muted" style="margin:8px 0 10px"><b>① 选择异动</b>（与总控今日异动清单同源，从总控点「发起实验排查」会自动带到这里；当前判定策略下共 ${flagged.length} 项）：</p>
+    <div class="filter-bar">${flagged.map(k=>`<span class="chip ${EXP.anomaly===k.key?'on':''}" style="cursor:pointer" onclick="wsExpReset('${k.key}')">${esc(k.name)} · ${fmtDelta(k.yoy)}</span>`).join('')||'<span class="ws-muted">无异动，<a style="color:var(--blue);cursor:pointer" onclick="wsExpReset(\'ctr\')">用演示异动：整体 CTR −6.8%</a></span>'}</div>`;
   if(EXP.anomaly){
     const k = BIZ_KPIS.concat(BIZ_SLOTS).find(x=>x.key===EXP.anomaly);
     const slices = expSlices();
     const rulesNow = bizRules();
-    const abnormal = slices.filter(s=>Math.abs(s.yoy)>=rulesNow.yoy);
+    const abnormal = slices.filter(s=>expIsAbnormal(s,k,rulesNow));
     const showRows = slices.slice(0,10);
-    body += `<div style="margin-top:14px"><b>② 切面策略</b> —— 实验对象：<b>${esc(k.name)}</b>（同比 ${fmtDelta(k.yoy)}）</div>
-    <div class="filter-bar" style="margin:8px 0">
-      <span class="chip ${EXP.mode==='cycle'?'on':''}" style="cursor:pointer" onclick="EXP.mode='cycle';EXP.done=false;EXP.stage=-1;renderExpWizard()">周期切面 · 每周一 × 近 8 周</span>
-      <span class="chip ${EXP.mode==='recent'?'on':''}" style="cursor:pointer" onclick="EXP.mode='recent';EXP.done=false;EXP.stage=-1;renderExpWizard()">垂直切面 · 近 N 天</span>
-      ${EXP.mode==='recent'?`<span style="font-size:12px">N =</span><select onchange="EXP.days=Number(this.value);EXP.done=false;EXP.stage=-1;renderExpWizard()">${[7,14,30].map(n=>`<option ${EXP.days===n?'selected':''}>${n}</option>`).join('')}</select>`:''}
-      <span style="font-size:11.5px;color:var(--muted)">周期切面剔除周内效应；垂直切面捕捉近期演化 —— 样本量决定校正门松紧</span>
+    const cfg = (label, inner)=>`<div style="border:1px solid var(--line);border-radius:8px;padding:10px 12px"><div style="font-size:11px;color:var(--muted);margin-bottom:6px">${label}</div>${inner}</div>`;
+    const opt = (cur,val,text,onclick)=>`<span class="chip ${cur===val?'on':''}" style="cursor:pointer" onclick="${onclick}">${text}</span>`;
+    body += `<div style="margin-top:14px"><b>② 实验配置</b> —— 实验对象：<b>${esc(k.name)}</b>（同比 ${fmtDelta(k.yoy)}）</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0">
+      ${cfg('切面时间范围',[15,30,60].map(n=>opt(EXP.range,n,n+' 天',`EXP.range=${n};EXP.done=false;EXP.stage=-1;renderExpWizard()`)).join(' '))}
+      ${cfg('切面方向',opt(EXP.direction,'down','正向切面 · 仅同向异动','EXP.direction=\'down\';EXP.done=false;EXP.stage=-1;renderExpWizard()')+' '+opt(EXP.direction,'both','双向切面 · 涨跌都计','EXP.direction=\'both\';EXP.done=false;EXP.stage=-1;renderExpWizard()'))}
+      ${cfg('切法',opt(EXP.mode,'cycle','周期切面 · 每周一','EXP.mode=\'cycle\';EXP.done=false;EXP.stage=-1;renderExpWizard()')+' '+opt(EXP.mode,'recent','垂直切面 · 逐日','EXP.mode=\'recent\';EXP.done=false;EXP.stage=-1;renderExpWizard()'))}
+      ${cfg('滞后扫描窗口',[3,7,14].map(n=>opt(EXP.lag,n,'lag 0–'+n,`EXP.lag=${n};EXP.done=false;EXP.stage=-1;renderExpWizard()`)).join(' '))}
+      ${cfg('校正强度',opt(EXP.strict,'strict','严格 · max-T + 封存窗','EXP.strict=\'strict\';renderExpWizard()')+' '+opt(EXP.strict,'standard','标准 · 仅 max-T','EXP.strict=\'standard\';renderExpWizard()'))}
+      ${cfg('豁免期样本',opt(EXP.includeExempt,false,'剔除豁免期','EXP.includeExempt=false;EXP.done=false;EXP.stage=-1;renderExpWizard()')+' '+opt(EXP.includeExempt,true,'包含（不推荐）','EXP.includeExempt=true;EXP.done=false;EXP.stage=-1;renderExpWizard()'))}
     </div>
+    <div style="font-size:11.5px;color:var(--muted);margin-bottom:8px">配置即检验契约：范围与切法决定样本量，方向决定"同形态"口径，lag 窗口与校正强度直接进入搜索账本 —— 账本越厚，校正门越严。</div>
     <table class="full"><tr><th>异常切面样本</th><th>切法</th><th>同比</th><th>判定</th></tr>
-    ${showRows.map(s=>`<tr><td><b>${s.date}</b></td><td style="color:var(--muted)">${s.tag}</td><td style="color:${s.yoy<0?'var(--red)':'inherit'}">${fmtDelta(s.yoy)}</td><td>${Math.abs(s.yoy)>=rulesNow.yoy?'<span class="pill red">同形态异动</span>':'<span class="pill green">对照样本</span>'}</td></tr>`).join('')}
+    ${showRows.map(s=>`<tr><td><b>${s.date}</b></td><td style="color:var(--muted)">${s.tag}</td><td style="color:${s.yoy<0?'var(--red)':'inherit'}">${fmtDelta(s.yoy)}</td><td>${expIsAbnormal(s,k,rulesNow)?'<span class="pill red">同形态异动</span>':'<span class="pill green">对照样本</span>'}</td></tr>`).join('')}
     ${slices.length>10?`<tr><td colspan="4" style="color:var(--muted)">… 共 ${slices.length} 个切面</td></tr>`:''}</table>
-    <div style="font-size:12px;margin-top:8px">样本集：<b>${slices.length}</b> 个切面，其中 <b style="color:var(--red)">${abnormal.length}</b> 个同形态异常 —— 扩样后的异常切面集合将作为关联计算的取证范围。</div>
-    <div class="ws-actions" style="margin-top:12px"><button class="btn" onclick="wsExpRun()" ${EXP.running?'disabled':''}>${EXP.running?'算法链路运行中…':'③ 执行算法链路 →'}</button>${EXP.done?'<span class="ws-muted">已完成，可调整切面重跑</span>':''}</div>`;
+    <div style="font-size:12px;margin-top:8px">样本集：<b>${slices.length}</b> 个切面，其中 <b style="color:var(--red)">${abnormal.length}</b> 个同形态异常（${EXP.direction==='both'?'双向口径':'仅同向'}）—— 扩样后的异常切面集合将作为关联计算的取证范围。</div>
+    <div class="ws-actions" style="margin-top:12px"><button class="btn" onclick="wsExpRun()" ${EXP.running?'disabled':''}>${EXP.running?'算法链路运行中…':'③ 开始实验 →'}</button>${EXP.done?'<span class="ws-muted">已完成，可调整配置重跑</span>':''}</div>`;
   }
   el.innerHTML = body;
 }
-function wsExpPick(key){ EXP.anomaly=key; EXP.done=false; EXP.stage=-1; EXP.logs=[]; window._expReveal=null; renderExpWizard(); if(document.getElementById('globe-stage')) renderNetwork(); const r=document.getElementById('exp-result'); if(r) r.style.display='none'; renderExpPipeline(); setTimeout(()=>wsExpRun(), 350); }
+function wsExpPick(key){ wsExpReset(key); }
 function expLog(msg, cls){ const t=((Date.now()-EXP.t0)/1000).toFixed(1); EXP.logs.push({t, msg, cls:cls||''}); const el=document.getElementById('exp-log'); if(el){ el.innerHTML=EXP.logs.map(l=>`<div><span class="t">[+${l.t}s]</span><span class="${l.cls}">${l.msg}</span></div>`).join('')+(EXP.running?'<span class="exp-cursor"></span>':''); el.scrollTop=el.scrollHeight; } }
 function renderExpPipeline(){
   const el = document.getElementById('exp-pipeline'); if(!el) return;
@@ -222,13 +233,13 @@ function wsExpRun(){
   if(document.getElementById('globe-stage')) renderNetwork();
   renderExpWizard(); renderExpPipeline();
   setTimeout(()=>{ const el=document.getElementById('exp-pipeline'); if(el) el.scrollIntoView({block:'start',behavior:'smooth'}); },120);
-  expLog(`实验启动 · 对象「${k.name}」 · ${EXP.mode==='cycle'?'周期切面（每周一×近8周）':'垂直切面（近'+EXP.days+'天）'}`, 'run');
+  expLog(`实验启动 · 对象「${k.name}」 · ${EXP.mode==='cycle'?'周期切面（每周一）':'垂直切面（逐日）'} × 近${EXP.range}天 · ${EXP.direction==='both'?'双向异动口径':'仅同向异动'} · lag 0–${EXP.lag} · ${EXP.strict==='strict'?'严格校正（max-T+封存窗）':'标准校正（max-T）'}${EXP.includeExempt?' · 含豁免期样本':''}`, 'run');
   if(EXP._clk) clearInterval(EXP._clk);
   EXP._clk=setInterval(()=>{ const c=document.getElementById('exp-clock'); if(c) c.textContent='⏱ '+((Date.now()-EXP.t0)/1000).toFixed(1)+'s'; },100);
   const advance = ()=>{
     if(EXP.runId!==runId) return;
     if(EXP.stage===0){ expLog(`切面取样完成 · ${slices.length} 个切面入样，${abnormal} 个同形态异常、${slices.length-abnormal} 个对照`, 'ok'); }
-    if(EXP.stage===1){ expLog('滞后对齐完成 · 统一 lag 0–7 天扫描窗口，切面时间轴已锁定', 'ok'); }
+    if(EXP.stage===1){ expLog(`滞后对齐完成 · 统一 lag 0–${EXP.lag} 天扫描窗口，切面时间轴已锁定`, 'ok'); }
     if(EXP.stage===2){
       const next = fids.filter(f=>!window._expReveal.has(f)).slice(0,2);
       next.forEach(f=>window._expReveal.add(f));
@@ -238,7 +249,7 @@ function wsExpRun(){
       expLog(`关联检验完成 · ${fids.length} 个候选因子全部扫描`, 'ok');
     }
     if(EXP.stage===3){ expLog('搜索记账完成 · 全部比较次数入账，max-T 校正门随样本量收紧', 'warn'); }
-    if(EXP.stage===4){ expLog('封存窗验证完成 · 存活候选进入结论清单，未通过者保留为负结果', 'ok'); }
+    if(EXP.stage===4){ expLog(EXP.strict==='strict'?'封存窗验证完成 · 存活候选进入结论清单，未通过者保留为负结果':'标准模式 · 无封存窗验证，结论上限为关联级', 'ok'); }
     EXP.stage++;
     if(EXP.stage>=EXP_STAGES.length){
       EXP.running=false; EXP.done=true; clearInterval(EXP._clk);
