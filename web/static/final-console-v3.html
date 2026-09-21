@@ -269,6 +269,7 @@ table.full th{background:#f4f8f9;font-weight:600;white-space:nowrap}
       <a data-view="library"><span class="idx">05</span>因子库</a>
       <a data-view="evolution"><span class="idx">06</span>技能版本管理</a>
       <a data-view="syslog"><span class="idx">07</span>系统日志</a>
+      <a data-view="plan"><span class="idx">08</span>详细方案</a>
     </nav>
     <div class="foot" id="rail-foot">本地脱敏数据回放 · 可复现</div>
   </aside>
@@ -297,6 +298,7 @@ table.full th{background:#f4f8f9;font-weight:600;white-space:nowrap}
       <section class="view" id="view-library"></section>
       <section class="view" id="view-evolution"></section>
       <section class="view" id="view-syslog"></section>
+      <section class="view" id="view-plan"></section>
     </main>
   </div>
 </div>
@@ -442,7 +444,7 @@ async function reload(){
 }
 
 /* ================= 导航与全局预警条 ================= */
-const VIEW_NAMES = {overview:'总控', lab:'因子实验室', alerts:'风险预警', todo:'人工审核任务', library:'因子库', evolution:'技能版本管理', syslog:'系统日志'};
+const VIEW_NAMES = {overview:'总控', lab:'因子实验室', alerts:'风险预警', todo:'人工审核任务', library:'因子库', evolution:'技能版本管理', syslog:'系统日志', plan:'详细方案'};
 function showView(name){
   CURRENT = name;
   document.querySelectorAll('main.stage > .view').forEach(v=>v.classList.toggle('active', v.id==='view-'+name));
@@ -1651,8 +1653,16 @@ async function wsSubmitSupplement(form){try{const op=operator(),f=Object.fromEnt
 
 
 /* ================= 启动 ================= */
+function renderPlan(){
+  const el = document.getElementById('view-plan');
+  el.innerHTML = `
+  <div class="card"><h3>详细方案 · 深度方案评审工作台 v17.1</h3>
+    <div style="font-size:12.5px;color:var(--muted)">决赛完整技术方案：整体架构、L0→L1→识别门→L3 四层漏斗、三轨定量（实验 / 准实验 / 观测）、Human-in-the-loop 与发布门、证据包与审计链路。内嵌页面支持逐级下钻与动态演示；也可 <a href="plan-review.html" target="_blank" style="color:var(--blue)">新窗口打开 ↗</a>。</div>
+  </div>
+  <iframe src="plan-review.html" title="深度方案评审工作台 v17.1" style="width:100%;height:80vh;border:1px solid var(--line);border-radius:10px;background:#fff"></iframe>`;
+}
 function renderAll(){
-  renderStrip(); renderOverview(); renderAlerts(); renderTodo(); renderLibrary(); renderManage(); renderEvolution(); renderSyslog(); renderWorkspace();
+  renderStrip(); renderOverview(); renderAlerts(); renderTodo(); renderLibrary(); renderManage(); renderEvolution(); renderSyslog(); renderWorkspace(); renderPlan();
   const off = document.getElementById('offline-strip');
   off.classList.toggle('show', MODE!=='service');
   const badge = document.getElementById('mode-badge');
